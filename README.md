@@ -78,7 +78,6 @@ The third part is common simple keybinding settings about some plugins.
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Super powerful code highlighter         |
 | [neoformat](https://github.com/sbdchd/neoformat)                      | Super powerful code formater            |
 | [vim-gitgutter](https://github.com/airblade/vim-gitgutter)            | Show git status in nvim                 |
-| [any-jump.vim](https://github.com/pechorin/any-jump.vim)              | Jump to any definition and references   |
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)            | Powerful autopairs for Neovim           |
 | [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)          | Faster vim-closetag                     |
 | [accelerated-jk](https://github.com/rhysd/accelerated-jk)             | Accelerated J/K                         |
@@ -155,5 +154,7 @@ The leader key is comma.
 |                                                           |                                                  |
 | toggle one line's comment                                 | `gcc`                                            |
 | toggle selected lines' comment                            | `<Shift-V>`, select area then `gc`               |
+|                                                           |                                                  |
+| toggle MarkdownPreView                                    | `<F12>`                                          |
 
 You can see more keybinds in `init.vim` and other configuration files in `plugin` directory.

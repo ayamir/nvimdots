@@ -78,7 +78,6 @@ set laststatus=2
 set showtabline=2
 set noshowmode
 set nofoldenable
-let g:webdevicons_enable_startify = 1
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -123,7 +122,6 @@ Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'sbdchd/neoformat'
 Plug 'airblade/vim-gitgutter'
-Plug 'pechorin/any-jump.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'rhysd/accelerated-jk'
@@ -135,6 +133,7 @@ Plug 'vimlab/split-term.vim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 Plug 'onsails/lspkind-nvim'
+Plug 'glepnir/lspsaga.nvim'
 
 Plug 'hrsh7th/nvim-compe'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
@@ -145,7 +144,6 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'ap/vim-css-color'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-
 
 call plug#end()
 
@@ -249,17 +247,10 @@ map T <Plug>Sneak_T
 " Split-vim
 noremap <F5> :Term<CR>
 noremap <C-w>t :Term<CR>
-noremap <C-w>T: VTerm<CR>
+noremap <C-w>T :VTerm<CR>
 
-" AnyJump
-" Normal mode: Jump to definition under cursore
-nnoremap <leader>jj :AnyJump<CR>
-" Visual mode: jump to selected text in visual mode
-xnoremap <leader>jv :AnyJumpVisual<CR>
-" Normal mode: open previous opened file (after jump)
-nnoremap <leader>ab :AnyJumpBack<CR>
-" Normal mode: open last closed search window again
-nnoremap <leader>al :AnyJumpLastResults<CR>
+" MarkdownPreview
+noremap <F12> :MarkdownPreviewToggle<CR>
 
 " Sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
