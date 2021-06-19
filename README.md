@@ -104,20 +104,56 @@ The third part is common simple keybinding settings about some plugins.
 
 <a id="usage"></a>
 
-# Usage
+# Keybindings
 
-To make sure Vim-Plug can be downloaded normally, you should add this line to your `/etc/hosts`:
+The leader key is comma.
 
-```shell
-151.101.64.133 	raw.githubusercontent.com
-```
+| 效果                               | 快捷键                                |
+| ---------------------------------- | ------------------------------------- |
+| 安装插件                           | <leader><leader>i                     |
+| 更新插件                           | <leader><leader>u                     |
+| 清理无用插件                       | <leader><leader>c                     |
+| 编辑init.vim                       | <leader><leader>v                     |
+|                                    |                                       |
+| 打开或者关闭nvim-tree              | <Ctrl-N>                              |
+| 打开或者关闭tagbar                 | <leader>t                             |
+|                                    |                                       |
+| 水平分割打开terminal               | <Ctrl-W>t或者F5                       |
+| 垂直分割打开terminal               | <Ctrl-W>T                             |
+| 退出terminal                       | <Ctrl-D>                              |
+| 打开/退出悬浮terminal              | <Alt-D>                               |
+|                                    |                                       |
+| nvim-tree中的操作                  |                                       |
+| 新建文件                           | a                                     |
+| 删除文件与目录                     | d                                     |
+| 重命名文件与目录                   | r                                     |
+| 打开目录                           | o/Enter                               |
+| 关闭目录                           | o/Backspace                           |
+| 拷贝文件名                         | y                                     |
+| 拷贝相对路径                       | Y                                     |
+| 拷贝绝对路径                       | gy                                    |
+| 隐藏或显示以.开头的文件和目录      | H                                     |
+| 隐藏和显示nvim-tree默认隐藏的文件  | I                                     |
+|                                    |                                       |
+| 从最近打开过的文件查找             | <leader>fr                            |
+| 从所有文件查找                     | <leader>ff                            |
+| 从当前打开的buffer查找             | <leader>fb                            |
+|                                    |                                       |
+| 向后查找单个字符                   | f，之后输入你要查找的单个字符并回车   |
+| 向后查找两个字符                   | F，之后输入你要查找的两个字符         |
+| 向前查找单个字符                   | F，之后输入你要查找的单个字符并回车   |
+| 向前查找两个字符                   | F，之后输入你要查找的两个字符         |
+|                                    |                                       |
+| 跳转返回到上次编辑处（支持跨文件） | <Ctrl-O>                              |
+| 跳转到函数定义处                   | gd                                    |
+| 智能批量重命名                     | gr                                    |
+| 查看函数签名帮助                   | gs                                    |
+| 查看当前函数/变量的定义与引用情况  | gh                                    |
+| 查看函数doc                        | K                                     |
+| 智能代码action提示                 | <leader>ca                            |
+| 代码诊断提示                       | <leader>cd                            |
+|                                    |                                       |
+| 单行代码格式化                     | gcc                                   |
+| 多行代码格式化                     | <Shift-V>进入可视模式，选中文本之后gc |
 
-The leader key is space.
-
-`<leader><leader>i` to use Vim-Plug install all of plugins.
-
-`<leader><leader>u` to update all of plugins.
-
-`<leader><leader>c` to clean redundant plugins.
-
-You can see all of keybindings in my `init.vim`.
+You can see more keybinds in `init.vim` and other configuration files in `plugin` directory.
