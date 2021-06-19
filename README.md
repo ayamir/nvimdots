@@ -108,7 +108,7 @@ The third part is common simple keybinding settings about some plugins.
 
 The leader key is comma.
 
-| 效果                                                      | 快捷键                                           |
+| Effect                                                    | shortcut                                         |
 | ----------------------------------                        | -------------------------------------            |
 | install plugins                                           | `<leader><leader>i`                              |
 | update plugins                                            | `<leader><leader>u`                              |
