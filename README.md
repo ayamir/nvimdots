@@ -16,13 +16,13 @@
 
 # Introduction
 
-![nvim-light](../../Pictures/shot/light-nvim.png)
+![nvim-light](shots/light-nvim.png)
 
-![nvim-light-coding](../../Pictures/shot/light-nvim-coding.png)
+![nvim-light-coding](shots/light-nvim-coding.png)
 
-![nvim-nord](../../Pictures/shot/nord-nvim.png)
+![nvim-nord](shots/nord-nvim.png)
 
-![nvim-nord-coding](../../Pictures/shot/nord-nvim-coding.png)
+![nvim-nord-coding](shots/nord-nvim-coding.png)
 
 This is my neovim's configuration.
 
