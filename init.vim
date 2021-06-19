@@ -117,7 +117,6 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
-Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

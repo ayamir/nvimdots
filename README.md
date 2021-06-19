@@ -151,6 +151,7 @@ The leader key is comma.
 | show hover doc                                            | `K`                                              |
 | show code action                                          | `<leader>ca`                                     |
 | show code diagnostics                                     | `<leader>cd`                                     |
+| navigate in vsnip's block                                 | `<Ctrl-l>`                                       |
 |                                                           |                                                  |
 | toggle one line's comment                                 | `gcc`                                            |
 | toggle selected lines' comment                            | `<Shift-V>`, select area then `gc`               |
