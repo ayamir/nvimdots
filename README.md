@@ -87,18 +87,21 @@ The third part is common simple keybinding settings about some plugins.
 | [vim-quickrun](https://github.com/thinca/vim-quickrun)                | Just run code quickly                   |
 
 ## Specific coding tools
-| Name                                                                     | Effect                                |
-| :----:                                                                   | :----:                                |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)               | Neovim native LSP configuration       |
-| [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)          | Manage every LSP engine               |
-| [lspkind-nvim](https://github.com/onsails/lspkind-nvim)                  | Vscode-like pictograms for neovim lsp |
-| [nvim-compe](https://github.com/hrsh7th/nvim-compe)                      | Auto completion plugin for nvim       |
-| [compe-tabnine](https://github.com/tzachar/compe-tabnine)                | Tabnine port for nvim-compe           |
-| [snippets.nvim](https://github.com/norcalli/snippets.nvim)               | Snippets port for nvim-compe          |
-| [vim-go](https://github.com/fatih/vim-go)                                | Most powerful plugin for go           |
-| [rust.vim](https://github.com/rust-lang/rust.vim)                        | Plugin for rust                       |
-| [vim-css-color](https://github.com/ap/vim-css-color)                     | Display detected color                |
-| [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) | Markdown-preview out of box           |
+| Name                                                                            | Effect                                               |
+| :----:                                                                          | :----:                                               |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                      | Neovim native LSP configuration                      |
+| [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)                 | Manage every LSP engine                              |
+| [lspkind-nvim](https://github.com/onsails/lspkind-nvim)                         | Vscode-like pictograms for neovim lsp                |
+| [lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                         | Make Nvim LSP more useful                            |
+| [nvim-compe](https://github.com/hrsh7th/nvim-compe)                             | Auto completion plugin for nvim                      |
+| [compe-tabnine](https://github.com/tzachar/compe-tabnine)                       | Tabnine port for nvim-compe                          |
+| [vim-vsnip](https://github.com/hrsh7th/vim-vsnip)                               | Snippets plugin supports LSP/VSCode's snippet format |
+| [hrsh7th/vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)           | Vsnip integration to nvim's LSP                      |
+| [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Set of preconfigured snippets                        |
+| [vim-go](https://github.com/fatih/vim-go)                                       | Most powerful plugin for go                          |
+| [rust.vim](https://github.com/rust-lang/rust.vim)                               | Plugin for rust                                      |
+| [vim-css-color](https://github.com/ap/vim-css-color)                            | Display detected color                               |
+| [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)        | Markdown-preview out of box                          |
 
 
 <a id="usage"></a>
