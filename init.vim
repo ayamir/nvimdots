@@ -106,7 +106,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'arcticicestudio/nord-vim'
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -117,6 +117,7 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -137,7 +138,8 @@ Plug 'glepnir/lspsaga.nvim'
 
 Plug 'hrsh7th/nvim-compe'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
-Plug 'norcalli/snippets.nvim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'rafamadriz/friendly-snippets'
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'rust-lang/rust.vim'
@@ -147,7 +149,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
-colorscheme onehalflight
+colorscheme nord
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -155,7 +157,7 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 augroup fmt
 	autocmd!
-	autocmd BufWritePre * Neoformat
+	autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 augroup RELOAD
