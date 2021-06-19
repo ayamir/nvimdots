@@ -25,7 +25,7 @@ source = {
 	nvim_lsp = true;
 	nvim_lua = true;
 	treesitter = true;
-	--  vsnip = true;
+	vsnip = true;
 	--  ultisnips = true;
 	tabnine = true;
 	};
