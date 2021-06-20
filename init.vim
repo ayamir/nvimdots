@@ -110,6 +110,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'akinsho/nvim-bufferline.lua'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -149,7 +151,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -214,9 +216,7 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
 " Buffer Navigation
-noremap <A-j> :bn<cr>
-noremap <A-k> :bp<cr>
-noremap <A-q> :bw<cr>
+noremap <A-q> :q<cr>
 noremap <A-S-q> :bw!<cr>
 
 " Keep selection after shift
