@@ -4,7 +4,7 @@
 2. [Introduction](#introduction)
 3. [Structure](#structure)
 4. [Plugins](#plugins)
-5. [Usage](#usage)
+5. [Keybindings](#keybindings)
 
 <a id="prerequisites"></a>
 
@@ -16,19 +16,19 @@
 
 # Introduction
 
-![nvim-light](shots/light-nvim.png)
+![Dashboard](./shots/dashboard.jpg)
 
-![nvim-light-coding](shots/light-nvim-coding.png)
+![Telescope](./shots/telescope.jpg)
 
-![nvim-nord](shots/nord-nvim.png)
-
-![nvim-nord-coding](shots/nord-nvim-coding.png)
+![Coding](./shots/coding.jpg)
 
 This is my neovim's configuration.
 
 I use [Vim-Plug](https://github.com/junegunn/vim-plug) to manage plugins.
 
 I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to realize code complete.
+
+Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 <a id="structure"></a>
 
@@ -104,11 +104,11 @@ The third part is common simple keybinding settings about some plugins.
 | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) | Markdown-preview out of box                          |
 
 
-<a id="usage"></a>
+<a id="keybindings"></a>
 
 # Keybindings
 
-The leader key is comma.
+The leader key is `,`.
 
 | Effect                                                    | shortcut                                         |
 | ----------------------------------                        | -------------------------------------            |
