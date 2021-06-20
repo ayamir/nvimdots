@@ -31,6 +31,12 @@ I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to realize code
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
+**Pros**:
++ Nvim native LSP to complete.
++ Classic but modern configuration.
++ Minimal but powerful configuration.
++ Flexible and fast configuration
+
 <a id="structure"></a>
 
 # Structure
