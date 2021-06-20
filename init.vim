@@ -111,7 +111,6 @@ Plug 'glepnir/galaxyline.nvim'
 Plug 'glepnir/dashboard-nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/nvim-bufferline.lua'
-Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -119,6 +118,7 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

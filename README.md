@@ -57,14 +57,15 @@ The third part is common simple keybinding settings about some plugins.
 
 ## UI
 
-| Name                                                                            | Effect                              |
-| :----:                                                                          | :----:                              |
-| [sonph/onehalf](https://github.com/sonph/onehalf)                               | My light theme                      |
-| [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)         | My dark theme                       |
-| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) | For nvim-tree's icons               |
-| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)           | Minimal, fast but customizable line |
-| [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)             | Dashboard for Neovim                |
-| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)         | Replacement of Nerdtree             |
+| Name                                                                                          | Effect                              |
+| :----:                                                                                        | :----:                              |
+| [sonph/onehalf](https://github.com/sonph/onehalf)                                             | My light theme                      |
+| [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)                       | My dark theme                       |
+| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)               | For nvim-tree's icons               |
+| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                         | Minimal, fast but customizable line |
+| [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)                           | Dashboard for Neovim                |
+| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                       | Replacement of Nerdtree             |
+| [akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)                 | Replacement of nvim's buffer and tab |
 
 ## File jump
 
@@ -76,22 +77,23 @@ The third part is common simple keybinding settings about some plugins.
 
 ## Common coding tools
 
-| Name                                                                                  | Effect                                  |
-| :----:                                                                                | :----:                                  |
-| [godlygeek/tabular](https://github.com/godlygeek/tabular)                             | Line up with regex                      |
-| [Yggdroot/indentLine](https://github.com/Yggdroot/indentLine)                         | Note each indent level                  |
-| [tpope/vim-commentary](https://github.com/tpope/vim-commentary)                       | Comment code quickly                    |
-| [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                             | Display code structure                  |
-| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Super powerful code highlighter         |
-| [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                               | Super powerful code formater            |
-| [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)                   | Show git status in nvim                 |
-| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                     | Powerful autopairs for Neovim           |
-| [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                   | Faster vim-closetag                     |
-| [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                       | Accelerated J/K                         |
-| [justinmk/vim-sneak](https://github.com/justinmk/vim-sneak)                           | Minimal easymotion, powerful vim motion |
-| [junegunn/vim-slash](https://github.com/junegunn/vim-slash)                           | Elegant search in vim                   |
-| [vimlab/split-term](https://github.com/vimlab/split-term.vim)                         | Utilites around neovim's `:terminal`    |
-| [thinca/vim-quickrun](https://github.com/thinca/vim-quickrun)                         | Just run code quickly                   |
+| Name                                                                                          | Effect                                  |
+| :----:                                                                                        | :----:                                  |
+| [godlygeek/tabular](https://github.com/godlygeek/tabular)                                     | Line up with regex                      |
+| [Yggdroot/indentLine](https://github.com/Yggdroot/indentLine)                                 | Note each indent level                  |
+| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | IndentLine's supplement                 |
+| [tpope/vim-commentary](https://github.com/tpope/vim-commentary)                               | Comment code quickly                    |
+| [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                                     | Display code structure                  |
+| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)         | Super powerful code highlighter         |
+| [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                                       | Super powerful code formater            |
+| [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)                           | Show git status in nvim                 |
+| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                             | Powerful autopairs for Neovim           |
+| [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                           | Faster vim-closetag                     |
+| [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                               | Accelerated J/K                         |
+| [justinmk/vim-sneak](https://github.com/justinmk/vim-sneak)                                   | Minimal easymotion, powerful vim motion |
+| [junegunn/vim-slash](https://github.com/junegunn/vim-slash)                                   | Elegant search in vim                   |
+| [vimlab/split-term](https://github.com/vimlab/split-term.vim)                                 | Utilites around neovim's `:terminal`    |
+| [thinca/vim-quickrun](https://github.com/thinca/vim-quickrun)                                 | Just run code quickly                   |
 
 ## Specific coding tools
 | Name                                                                            | Effect                                               |
