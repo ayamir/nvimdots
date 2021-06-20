@@ -50,58 +50,58 @@ The third part is common simple keybinding settings about some plugins.
 
 ## UI
 
-| Name                                                                 | Effect                              |
-| :----:                                                               | :----:                              |
-| [onehalf](https://github.com/sonph/onehalf)                          | My light theme                      |
-| [nord-vim](https://github.com/arcticicestudio/nord-vim)              | My dark theme                       |
-| [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) | For nvim-tree's icons               |
-| [galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)        | Minimal, fast but customizable line |
-| [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)          | Dashboard for Neovim                |
-| [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)         | Replacement of Nerdtree             |
+| Name                                                                            | Effect                              |
+| :----:                                                                          | :----:                              |
+| [sonph/onehalf](https://github.com/sonph/onehalf)                               | My light theme                      |
+| [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)         | My dark theme                       |
+| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) | For nvim-tree's icons               |
+| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)           | Minimal, fast but customizable line |
+| [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)             | Dashboard for Neovim                |
+| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)         | Replacement of Nerdtree             |
 
 ## File jump
 
-| Name                                                               | Effect                      |
-| :----:                                                             | :----:                      |
-| [popup.nvim](https://github.com/nvim-lua/popup.nvim)               | Required by telescope.nvim  |
-| [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)           | Required by telescope.nvim  |
-| [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick |
+| Name                                                                              | Effect                      |
+| :----:                                                                            | :----:                      |
+| [nvim-lua/popup.nvim](https://github.com/nvim-lua/popup.nvim)                     | Required by telescope.nvim  |
+| [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)                 | Required by telescope.nvim  |
+| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick |
 
 ## Common coding tools
 
-| Name                                                                  | Effect                                  |
-| :----:                                                                | :----:                                  |
-| [tabular](https://github.com/godlygeek/tabular)                       | Line up with regex                      |
-| [indentLine](https://github.com/Yggdroot/indentLine)                  | Note each indent level                  |
-| [vim-commentary](https://github.com/tpope/vim-commentary)             | Comment code quickly                    |
-| [tagbar](https://github.com/majutsushi/tagbar)                        | Display code structure                  |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Super powerful code highlighter         |
-| [neoformat](https://github.com/sbdchd/neoformat)                      | Super powerful code formater            |
-| [vim-gitgutter](https://github.com/airblade/vim-gitgutter)            | Show git status in nvim                 |
-| [nvim-autopairs](https://github.com/windwp/nvim-autopairs)            | Powerful autopairs for Neovim           |
-| [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)          | Faster vim-closetag                     |
-| [accelerated-jk](https://github.com/rhysd/accelerated-jk)             | Accelerated J/K                         |
-| [vim-sneak](https://github.com/justinmk/vim-sneak)                    | Minimal easymotion, powerful vim motion |
-| [vim-slash](https://github.com/junegunn/vim-slash)                    | Elegant search in vim                   |
-| [split-term](https://github.com/vimlab/split-term.vim)                | Utilites around neovim's `:terminal`    |
-| [vim-quickrun](https://github.com/thinca/vim-quickrun)                | Just run code quickly                   |
+| Name                                                                                  | Effect                                  |
+| :----:                                                                                | :----:                                  |
+| [godlygeek/tabular](https://github.com/godlygeek/tabular)                             | Line up with regex                      |
+| [Yggdroot/indentLine](https://github.com/Yggdroot/indentLine)                         | Note each indent level                  |
+| [tpope/vim-commentary](https://github.com/tpope/vim-commentary)                       | Comment code quickly                    |
+| [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                             | Display code structure                  |
+| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Super powerful code highlighter         |
+| [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                               | Super powerful code formater            |
+| [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)                   | Show git status in nvim                 |
+| [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                     | Powerful autopairs for Neovim           |
+| [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                   | Faster vim-closetag                     |
+| [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                       | Accelerated J/K                         |
+| [justinmk/vim-sneak](https://github.com/justinmk/vim-sneak)                           | Minimal easymotion, powerful vim motion |
+| [junegunn/vim-slash](https://github.com/junegunn/vim-slash)                           | Elegant search in vim                   |
+| [vimlab/split-term](https://github.com/vimlab/split-term.vim)                         | Utilites around neovim's `:terminal`    |
+| [thinca/vim-quickrun](https://github.com/thinca/vim-quickrun)                         | Just run code quickly                   |
 
 ## Specific coding tools
 | Name                                                                            | Effect                                               |
 | :----:                                                                          | :----:                                               |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)                      | Neovim native LSP configuration                      |
-| [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)                 | Manage every LSP engine                              |
-| [lspkind-nvim](https://github.com/onsails/lspkind-nvim)                         | Vscode-like pictograms for neovim lsp                |
-| [lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                         | Make Nvim LSP more useful                            |
-| [nvim-compe](https://github.com/hrsh7th/nvim-compe)                             | Auto completion plugin for nvim                      |
-| [compe-tabnine](https://github.com/tzachar/compe-tabnine)                       | Tabnine port for nvim-compe                          |
-| [vim-vsnip](https://github.com/hrsh7th/vim-vsnip)                               | Snippets plugin supports LSP/VSCode's snippet format |
+| [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)               | Neovim native LSP configuration                      |
+| [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)       | Manage every LSP engine                              |
+| [onsails/lspkind-nvim](https://github.com/onsails/lspkind-nvim)                 | Vscode-like pictograms for neovim lsp                |
+| [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                 | Make Nvim LSP more useful                            |
+| [hrsh7th/nvim-compe](https://github.com/hrsh7th/nvim-compe)                     | Auto completion plugin for nvim                      |
+| [tzachar/compe-tabnine](https://github.com/tzachar/compe-tabnine)               | Tabnine port for nvim-compe                          |
+| [hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip)                       | Snippets plugin supports LSP/VSCode's snippet format |
 | [hrsh7th/vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)           | Vsnip integration to nvim's LSP                      |
 | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Set of preconfigured snippets                        |
-| [vim-go](https://github.com/fatih/vim-go)                                       | Most powerful plugin for go                          |
-| [rust.vim](https://github.com/rust-lang/rust.vim)                               | Plugin for rust                                      |
-| [vim-css-color](https://github.com/ap/vim-css-color)                            | Display detected color                               |
-| [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)        | Markdown-preview out of box                          |
+| [fatih/vim-go](https://github.com/fatih/vim-go)                                 | Most powerful plugin for go                          |
+| [rust-lang/rust.vim](https://github.com/rust-lang/rust.vim)                     | Plugin for rust                                      |
+| [ap/vim-css-color](https://github.com/ap/vim-css-color)                         | Display detected color                               |
+| [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) | Markdown-preview out of box                          |
 
 
 <a id="usage"></a>
