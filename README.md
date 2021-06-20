@@ -5,6 +5,7 @@
 3. [Structure](#structure)
 4. [Plugins](#plugins)
 5. [Keybindings](#keybindings)
+6. [Credit](#credit)
 
 <a id="prerequisites"></a>
 
@@ -162,3 +163,9 @@ The leader key is `,`.
 | toggle MarkdownPreView                                    | `<F12>`                                          |
 
 You can see more keybinds in `init.vim` and other configuration files in `plugin` directory.
+
+<a id="credit"></a>
+
+# Credit
+
++ [nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
