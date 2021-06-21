@@ -18,9 +18,9 @@ gl.short_line_list = {
 -- VistaPlugin = extension.vista_nearest
 
 local colors = {
-  bg       = '#fafafa',
-  line_bg  = '#f0f0f0',
-  fg       = '#2e3440',
+  bg       = '#2e3440',
+  line_bg  = '#3b4252',
+  fg       = '#eceff4',
   fg_green = '#8fbcbb',
 
   yellow   = '#ebcb8b',
@@ -33,7 +33,7 @@ local colors = {
   blue     = '#81a1c1',
   red      = '#bf616a',
 
-  mode_bg  = '#f0f0f0'
+  mode_bg  = '#3b4252'
   }
 
 local function lsp_status(status)

@@ -20,13 +20,20 @@ source = {
 	buffer = true;
 	calc = true;
 	spell = true;
-	tags = true;
+	tags =  true;
 
 	nvim_lsp = true;
 	nvim_lua = true;
 	treesitter = true;
 	vsnip = true;
-	tabnine = true;
+	tabnine = {
+		max_line = 1000;
+		max_num_results = 6;
+		priority = 5000;
+		show_prediction_strength = true;
+		sort = false;
+		ignore_pattern = '[(]';
+		};
 	};
 }
 
@@ -88,7 +95,4 @@ require'lspconfig'.rust_analyzer.setup {
 	capabilities = capabilities,
 	}
 
-
-
-require'lsp_signature'.on_attach()
 EOF
