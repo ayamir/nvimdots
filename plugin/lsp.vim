@@ -1,5 +1,8 @@
 lua << EOF
 require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.gopls.setup{}
+require'lspconfig'.clangd.setup{}
 
 local nvim_lsp = require('lspconfig')
 
@@ -38,9 +41,14 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
-EOF
 
+local servers = { "pyright", "rust_analyzer", "tsserver", "gopls", "clangd" }
+for _, lsp in ipairs(servers) do
+	nvim_lsp[lsp].setup {
+		on_attach = function()
+		require"lsp_signature".on_attach()
+	end
+	}
+end
+
+EOF

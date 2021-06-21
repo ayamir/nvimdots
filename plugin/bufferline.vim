@@ -1,7 +1,7 @@
 lua << EOF
 require "bufferline".setup {
 	options = {
-		number = "both",
+		number = "none",
 		number_style = "superscript",
 		offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center", padding = 1}},
 		buffer_close_icon = "",
