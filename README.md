@@ -103,6 +103,7 @@ The third part is common simple keybinding settings about some plugins.
 | [onsails/lspkind-nvim](https://github.com/onsails/lspkind-nvim)                 | Vscode-like pictograms for neovim lsp                |
 | [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                 | Make Nvim LSP more useful                            |
 | [hrsh7th/nvim-compe](https://github.com/hrsh7th/nvim-compe)                     | Auto completion plugin for nvim                      |
+| [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)         | Show signature when completing function parameters   |
 | [tzachar/compe-tabnine](https://github.com/tzachar/compe-tabnine)               | Tabnine port for nvim-compe                          |
 | [hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip)                       | Snippets plugin supports LSP/VSCode's snippet format |
 | [hrsh7th/vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)           | Vsnip integration to nvim's LSP                      |

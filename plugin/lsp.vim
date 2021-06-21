@@ -46,9 +46,19 @@ local servers = { "pyright", "rust_analyzer", "tsserver", "gopls", "clangd" }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup {
 		on_attach = function()
-		require"lsp_signature".on_attach()
-	end
-	}
+		require"lsp_signature".on_attach({
+		bind = false,
+		use_lspsaga = true,
+		floating_window = true,
+		fix_pos = true,
+		hint_enable = true,
+		hi_parameter = "Search",
+		handler_opts = {
+			"shadow"
+			}
+		})
+end
+}
 end
 
 EOF
