@@ -109,7 +109,7 @@ The third part is common simple keybinding settings about some plugins.
 | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Set of preconfigured snippets                        |
 | [fatih/vim-go](https://github.com/fatih/vim-go)                                 | Most powerful plugin for go                          |
 | [rust-lang/rust.vim](https://github.com/rust-lang/rust.vim)                     | Plugin for rust                                      |
-| [ap/vim-css-color](https://github.com/ap/vim-css-color)                         | Display detected color                               |
+| [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)   | Display detected color                               |
 | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) | Markdown-preview out of box                          |
 
 
