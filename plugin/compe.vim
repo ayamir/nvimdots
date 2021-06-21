@@ -23,10 +23,10 @@ source = {
 	tags = true;
 
 	nvim_lsp = true;
+	snippets_nvim = true;
 	nvim_lua = true;
 	treesitter = true;
 	vsnip = true;
-	--  ultisnips = true;
 	tabnine = true;
 	};
 }

@@ -32,8 +32,8 @@ nnoremap <silent><mymap> :BufferLineMoveNext<CR>
 nnoremap <silent><mymap> :BufferLineMovePrev<CR>
 
 " These commands will sort buffers by directory, language, or a custom criteria
-nnoremap <silent>be :BufferLineSortByExtension<CR>
-nnoremap <silent>bd :BufferLineSortByDirectory<CR>
+nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
+nnoremap <silent><leader>bd :BufferLineSortByDirectory<CR>
 nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
 
