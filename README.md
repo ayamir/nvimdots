@@ -86,7 +86,7 @@ The third part is common simple keybinding settings about some plugins.
 | [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                                     | Display code structure                  |
 | [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)         | Super powerful code highlighter         |
 | [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                                       | Super powerful code formater            |
-| [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)                           | Show git status in nvim                 |
+| [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                         | Show git status in nvim                 |
 | [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)                             | Powerful autopairs for Neovim           |
 | [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                           | Faster vim-closetag                     |
 | [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                               | Accelerated J/K                         |
