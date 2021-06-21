@@ -122,7 +122,7 @@ Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'sbdchd/neoformat'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'rhysd/accelerated-jk'
