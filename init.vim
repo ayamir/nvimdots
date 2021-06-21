@@ -118,7 +118,7 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'godlygeek/tabular'
 Plug 'Yggdroot/indentLine'
-Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -216,7 +216,7 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
 " Buffer Navigation
-noremap <A-q> :q<cr>
+noremap <A-q> :bw<cr>
 noremap <A-S-q> :bw!<cr>
 
 " Keep selection after shift
@@ -258,7 +258,6 @@ noremap <F12> :MarkdownPreviewToggle<CR>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Languages Settings
-autocmd FileType go nnoremap <buffer> <slient> <C-o> :GoDefPop<cr>
 autocmd FileType go nmap <leader>mbb <Plug>(go-build)
 autocmd FileType go nmap <leader>mbr <Plug>(go-run)
 autocmd FileType go nmap <leader>mds :GoDebugStart<cr>
