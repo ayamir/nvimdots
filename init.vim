@@ -63,7 +63,7 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 " vim-interface
 set t_Co=256
 if has('termguicolors')
-	set termguicolors
+  set termguicolors
 endif
 set noeb
 set mouse=a
@@ -82,9 +82,9 @@ set nofoldenable
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-	set signcolumn=number
+  set signcolumn=number
 else
-	set signcolumn=yes
+  set signcolumn=yes
 endif
 
 " Command Completion
@@ -95,9 +95,9 @@ set completeopt=menuone,noselect
 
 " Vim-Plug init
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ~/.config/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+  echo "Downloading junegunn/vim-plug to manage plugins..."
+  silent !mkdir -p ~/.config/nvim/autoload/
+  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 endif
 
 " Vim-Plug Plugins
@@ -139,6 +139,7 @@ Plug 'onsails/lspkind-nvim'
 Plug 'glepnir/lspsaga.nvim'
 
 Plug 'hrsh7th/nvim-compe'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -152,24 +153,24 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 augroup fmt
-	autocmd!
-	autocmd BufWritePre * undojoin | Neoformat
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 augroup RELOAD
-	autocmd!
-	" Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  autocmd!
+  " Disables automatic commenting on newline:
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-	" Automatically deletes all trailing whitespace on save.
-	autocmd BufWritePre * %s/\s\+$//e
+  " Automatically deletes all trailing whitespace on save.
+  autocmd BufWritePre * %s/\s\+$//e
 augroup END
 
 " Automatically change work directory
@@ -256,6 +257,13 @@ noremap <C-w>T :VTerm<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" compe
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
 
 " MarkdownPreview
 noremap <F12> :MarkdownPreviewToggle<CR>
@@ -275,4 +283,3 @@ autocmd FileType go nmap <leader>mdt :GoDebugStop<cr>
 autocmd FileType rust nmap <leader>mbb :Cbuild<cr>
 autocmd FileType rust nmap <leader>mbt :Ctest<cr>
 autocmd FileType rust nmap <leader>mbr :Crun<cr>
-
