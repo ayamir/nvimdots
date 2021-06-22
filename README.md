@@ -80,8 +80,7 @@ The third part is common simple keybinding settings about some plugins.
 | Name                                                                                          | Effect                                  |
 | :----:                                                                                        | :----:                                  |
 | [godlygeek/tabular](https://github.com/godlygeek/tabular)                                     | Line up with regex                      |
-| [Yggdroot/indentLine](https://github.com/Yggdroot/indentLine)                                 | Note each indent level                  |
-| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | IndentLine's supplement                 |
+| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Show indent with different level        |
 | [tpope/vim-commentary](https://github.com/tpope/vim-commentary)                               | Comment code quickly                    |
 | [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                                     | Display code structure                  |
 | [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)         | Super powerful code highlighter         |
@@ -121,7 +120,7 @@ The third part is common simple keybinding settings about some plugins.
 The leader key is `,`.
 
 | Effect                                                    | shortcut                                         |
-| ----------------------------------                        | -------------------------------------            |
+| :-:                                                       | :-:                                              |
 | install plugins                                           | `<leader><leader>i`                              |
 | update plugins                                            | `<leader><leader>u`                              |
 | clean Plugins                                             | `<leader><leader>c`                              |
@@ -135,13 +134,21 @@ The leader key is `,`.
 | quit terminal                                             | `<Ctrl-D>`                                       |
 | toggle floating terminal                                  | `<Alt-D>`                                        |
 |                                                           |                                                  |
+| split buffer vertically                                   | `<Ctrl-W>v`                                      |
+| split buffer horizontally                                 | `<Ctrl-W>s`                                      |
+|                                                           |                                                  |
+| navigate below                                            | `<Ctrl-J>`                                       |
+| navigate up                                               | `<Ctrl-K>`                                       |
+| navigate left                                             | `<Ctrl-H>`                                       |
+| navigate right                                            | `<Ctrl-L>`                                       |
+|                                                           |                                                  |
 | operaions in nvim-tree                                    |                                                  |
 | new file                                                  | `a`                                              |
 | remove file/directory                                     | `d`                                              |
 | rename file/directory                                     | `r`                                              |
 | open directory                                            | `o`/`Enter`                                      |
 | close directory                                           | `o`/`Backspace`                                  |
-| copy filename                                             | `y`
+| copy filename                                             | `y`                                              |
 | copy relative path                                        | `Y`                                              |
 | copy absolute path                                        | `gy`                                             |
 | toggle file/directory begin with dot                      | `H`                                              |
