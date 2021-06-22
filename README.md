@@ -137,7 +137,7 @@ The leader key is `,`.
 | split buffer vertically                                   | `<Ctrl-W>v`                                      |
 | split buffer horizontally                                 | `<Ctrl-W>s`                                      |
 |                                                           |                                                  |
-| navigate below                                            | `<Ctrl-J>`                                       |
+| navigate down                                             | `<Ctrl-J>`                                       |
 | navigate up                                               | `<Ctrl-K>`                                       |
 | navigate left                                             | `<Ctrl-H>`                                       |
 | navigate right                                            | `<Ctrl-L>`                                       |
