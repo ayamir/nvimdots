@@ -15,8 +15,8 @@ let g:neoformat_run_all_formatters = 1
 
 let g:shfmt_opt="-ci"
 
-let g:neoformat_enabled_c = ['uncrustify']
-let g:neoformat_enabled_cpp = ['uncrustify']
+let g:neoformat_enabled_c = ['clangformat']
+let g:neoformat_enabled_cpp = ['clangformat']
 let g:neoformat_enabled_cmake = ['cmake_format']
 let g:neoformat_enabled_go = ['gofmt', 'goimports']
 let g:neoformat_enabled_python = ['autopep8', 'yapf']
