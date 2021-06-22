@@ -1,10 +1,32 @@
 lua << EOF
-require'lspconfig'.rust_analyzer.setup{}
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.clangd.setup{}
-
 local nvim_lsp = require('lspconfig')
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		'documentation',
+		'detail',
+		'additionalTextEdits',
+		}
+	}
+
+nvim_lsp.rust_analyzer.setup {
+	capabilities = capabilities,
+	}
+nvim_lsp.clangd.setup{
+cmd = {
+	"clangd",
+	"--background-index",
+	"--suggest-missing-includes",
+	"--clang-tidy",
+	"--header-insertion=iwyu",
+	},
+}
+
+nvim_lsp.pyright.setup{}
+nvim_lsp.gopls.setup{}
+
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
