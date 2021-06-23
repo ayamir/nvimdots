@@ -1,4 +1,3 @@
-lua << EOF
 -- Compe setup
 require'compe'.setup {
 enabled = true;
@@ -27,28 +26,28 @@ source = {
 	nvim_lua = true;
 	treesitter = true;
 	vsnip = true;
-	--	tabnine = {
-	--		max_line = 1000;
-	--		max_num_results = 6;
-	--		priority = 5000;
-	--		show_prediction_strength = true;
-	--		sort = false;
-	--		ignore_pattern = '[(]';
-	--		};
-	};
-}
+	tabnine = {
+		max_line = 1000;
+		max_num_results = 6;
+		priority = 5000;
+		show_prediction_strength = true;
+		sort = false;
+		ignore_pattern = '[(]';
+		};
+		};
+		}
 
-local t = function(str)
-return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+		local t = function(str)
+		return vim.api.nvim_replace_termcodes(str, true, true, true)
+	end
 
-local check_back_space = function()
-local col = vim.fn.col('.') - 1
-if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-	return true
-else
-	return false
-end
+	local check_back_space = function()
+	local col = vim.fn.col('.') - 1
+	if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+		return true
+	else
+		return false
+	end
 end
 
 -- Use (s-)tab to:
@@ -82,5 +81,3 @@ remap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 remap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 remap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 remap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
-EOF

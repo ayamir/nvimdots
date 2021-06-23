@@ -1,4 +1,3 @@
-lua << EOF
 require "bufferline".setup {
 	options = {
 		number = "none",
@@ -21,19 +20,5 @@ require "bufferline".setup {
 	separator_style = "thin",
 	mappings = "true"
 	}
-}
-EOF
-
-noremap <A-j> :BufferLineCycleNext<cr>
-noremap <A-k> :BufferLineCyclePrev<cr>
-
-" These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><mymap> :BufferLineMoveNext<CR>
-nnoremap <silent><mymap> :BufferLineMovePrev<CR>
-
-" These commands will sort buffers by directory, language, or a custom criteria
-nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
-nnoremap <silent><leader>bd :BufferLineSortByDirectory<CR>
-nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
-
+	}
 
