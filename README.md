@@ -79,7 +79,8 @@ The third part is common simple keybinding settings about some plugins.
 
 | Name                                                                                          | Effect                                  |
 | :----:                                                                                        | :----:                                  |
-| [godlygeek/tabular](https://github.com/godlygeek/tabular)                                     | Line up with regex                      |
+| [itchyny/vim-cursorword](https://github.com/itchyny/vim-cursorword)                           | Highlight cursor word                   |
+| [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                         | Easy alignment                          |
 | [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Show indent with different level        |
 | [tpope/vim-commentary](https://github.com/tpope/vim-commentary)                               | Comment code quickly                    |
 | [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                                     | Display code structure                  |
