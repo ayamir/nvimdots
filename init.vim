@@ -116,7 +116,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'tpope/vim-commentary'
@@ -153,7 +152,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -190,6 +189,7 @@ nnoremap <leader><leader>c :PlugClean<cr>
 
 " Common Settings
 nnoremap <A-r> :@:<cr>
+nnoremap <A-s> :lua require "lsp_signature".on_attach()<cr>
 
 " Clipboard
 set go=a
@@ -259,7 +259,6 @@ nmap ga <Plug>(EasyAlign)
 
 " compe
 inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
