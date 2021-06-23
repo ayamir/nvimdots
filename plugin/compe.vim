@@ -22,18 +22,19 @@ source = {
 	spell = true;
 	tags =  true;
 
+	snippetSupport = true;
 	nvim_lsp = true;
 	nvim_lua = true;
 	treesitter = true;
 	vsnip = true;
-	tabnine = {
-		max_line = 1000;
-		max_num_results = 6;
-		priority = 5000;
-		show_prediction_strength = true;
-		sort = false;
-		ignore_pattern = '[(]';
-		};
+	--	tabnine = {
+	--		max_line = 1000;
+	--		max_num_results = 6;
+	--		priority = 5000;
+	--		show_prediction_strength = true;
+	--		sort = false;
+	--		ignore_pattern = '[(]';
+	--		};
 	};
 }
 
@@ -64,35 +65,22 @@ else
 	return vim.fn['compe#complete']()
 end
 end
+
 _G.s_tab_complete = function()
 if vim.fn.pumvisible() == 1 then
 	return t "<C-p>"
 elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
 	return t "<Plug>(vsnip-jump-prev)"
 else
-	-- If <S-Tab> is not working in your terminal, change it to <C-h>
 	return t "<S-Tab>"
 end
 end
 
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+local remap = vim.api.nvim_set_keymap
 
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-	properties = {
-		'documentation',
-		'detail',
-		'additionalTextEdits',
-		}
-	}
-
-require'lspconfig'.rust_analyzer.setup {
-	capabilities = capabilities,
-	}
+remap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+remap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+remap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+remap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 EOF
