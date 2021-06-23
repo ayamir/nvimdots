@@ -63,7 +63,7 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 " vim-interface
 set t_Co=256
 if has('termguicolors')
-  set termguicolors
+	set termguicolors
 endif
 set noeb
 set mouse=a
@@ -82,9 +82,9 @@ set nofoldenable
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  set signcolumn=number
+	set signcolumn=number
 else
-  set signcolumn=yes
+	set signcolumn=yes
 endif
 
 " Command Completion
@@ -95,9 +95,9 @@ set completeopt=menuone,noselect
 
 " Vim-Plug init
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-  echo "Downloading junegunn/vim-plug to manage plugins..."
-  silent !mkdir -p ~/.config/nvim/autoload/
-  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ~/.config/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 endif
 
 " Vim-Plug Plugins
@@ -116,6 +116,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+Plug 'itchyny/vim-cursorword'
 Plug 'junegunn/vim-easy-align'
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'tpope/vim-commentary'
@@ -159,17 +160,17 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+	autocmd!
+	autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 augroup RELOAD
-  autocmd!
-  " Disables automatic commenting on newline:
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+	autocmd!
+	" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-  " Automatically deletes all trailing whitespace on save.
-  autocmd BufWritePre * %s/\s\+$//e
+	" Automatically deletes all trailing whitespace on save.
+	autocmd BufWritePre * %s/\s\+$//e
 augroup END
 
 " Automatically change work directory
