@@ -43,8 +43,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gh <Plug>(coc-references)
 nmap <silent> gr <Plug>(coc-rename)
-
-" Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -56,6 +54,14 @@ function! s:show_documentation()
 		execute '!' . &keywordprg . " " . expand('<cword>')
 	endif
 endfunction
+
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+xmap <leader>x  <Plug>(coc-convert-snippet)
+let g:coc_snippet_next = '<tab>'
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')

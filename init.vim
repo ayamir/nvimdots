@@ -75,7 +75,7 @@ set laststatus=2
 set showtabline=2
 set noshowmode
 set nofoldenable
-set signcolumn=number
+set signcolumn=yes
 
 " Command Completion
 set wildmenu
@@ -260,8 +260,9 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Coc extensions
 let g:coc_global_extensions = [
-			\ 'coc-tabnine',
-			\ 'coc-go',
+			\	'coc-tabnine',
+			\	'coc-go',
+			\	'coc-lua',
 			\   'coc-clangd',
 			\   'coc-rust-analyzer',
 			\   'coc-json',
@@ -269,7 +270,7 @@ let g:coc_global_extensions = [
 			\   'coc-yaml',
 			\   'coc-emmet',
 			\   'coc-prettier',
-			\   'coc-ultisnips'
+			\   'coc-snippets'
 			\ ]
 
 " Languages Settings
