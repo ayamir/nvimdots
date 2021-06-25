@@ -1,0 +1,17 @@
+{
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "trace.server": "verbose",
+      "filetypes": [
+        "go"
+      ]
+    }
+  },
+  "clangd.fallbackFlags": [
+    "-std=c++17"
+  ]
+}
