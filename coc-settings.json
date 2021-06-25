@@ -13,5 +13,12 @@
   },
   "clangd.fallbackFlags": [
     "-std=c++17"
-  ]
+  ],
+  "rust-analyzer.enable": true,
+  "rust-analyzer.server.path": "/home/ayamir/.cargo/bin/rust-analyzer",
+  "rust-analyzer.updates.prompt": true,
+  "rust-analyzer.updates.channel": "nightly",
+  "rust-analyzer.cargo.allFeatures": true,
+  "rust-analyzer.checkOnSave.enable": true,
+  "tabnine.priority": 1000
 }
