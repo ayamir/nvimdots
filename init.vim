@@ -75,7 +75,7 @@ set laststatus=2
 set showtabline=2
 set noshowmode
 set nofoldenable
-set signcolumn=yes
+set signcolumn=number
 
 " Command Completion
 set wildmenu
@@ -105,6 +105,7 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
@@ -123,17 +124,7 @@ Plug 'junegunn/vim-slash'
 Plug 'vimlab/split-term.vim'
 " Plug 'thinca/vim-quickrun'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
-Plug 'onsails/lspkind-nvim'
-Plug 'glepnir/lspsaga.nvim'
-
-Plug 'hrsh7th/nvim-compe'
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'rust-lang/rust.vim'
@@ -248,12 +239,6 @@ noremap <C-w>T :VTerm<CR>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" compe
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
 " Bufferline
 noremap <A-j> :BufferLineCycleNext<cr>
 noremap <A-k> :BufferLineCyclePrev<cr>
@@ -267,49 +252,25 @@ nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
 nnoremap <silent><leader>bd :BufferLineSortByDirectory<CR>
 nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
-" lspsaga
-
-
-" LspSagaFinder
-nnoremap <silent> gh :Lspsaga lsp_finder<CR>
-
-" code action
-nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
-
-" show hover doc
-nnoremap <silent>K :Lspsaga hover_doc<CR>
-
-" -- scroll down hover doc or scroll in definition preview
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-" -- scroll up hover doc
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-
-" -- show signature help
-nnoremap <silent> gs :Lspsaga signature_help<CR>
-
-" rename, close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
-nnoremap <silent>gr :Lspsaga rename<CR>
-
-" preview definition
-nnoremap <silent> gd :Lspsaga preview_definition<CR>
-
-" show diagnostics
-nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
-nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
-
-" float terminal also you can pass the cli command in open_float_terminal function
-nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
-tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
-
-highlight link LspSagaFinderSelection Search
-
 " MarkdownPreview
 noremap <F12> :MarkdownPreviewToggle<CR>
 
 " Sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Coc extensions
+let g:coc_global_extensions = [
+			\ 'coc-tabnine',
+			\ 'coc-go',
+			\   'coc-clangd',
+			\   'coc-rust-analyzer',
+			\   'coc-json',
+			\   'coc-pyright',
+			\   'coc-yaml',
+			\   'coc-emmet',
+			\   'coc-prettier',
+			\   'coc-ultisnips'
+			\ ]
 
 " Languages Settings
 autocmd FileType go nmap <leader>mbb <Plug>(go-build)
