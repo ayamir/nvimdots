@@ -125,6 +125,7 @@ Plug 'vimlab/split-term.vim'
 " Plug 'thinca/vim-quickrun'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'onsails/lspkind-nvim'
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'rust-lang/rust.vim'
