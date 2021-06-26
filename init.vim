@@ -134,7 +134,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -261,6 +261,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Coc extensions
 let g:coc_global_extensions = [
 			\	'coc-tabnine',
+			\   'coc-list',
 			\	'coc-go',
 			\	'coc-lua',
 			\   'coc-clangd',
