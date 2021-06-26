@@ -261,7 +261,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " Coc extensions
 let g:coc_global_extensions = [
 			\	'coc-tabnine',
-			\   'coc-list',
+			\   'coc-lists',
 			\	'coc-go',
 			\	'coc-lua',
 			\   'coc-clangd',
