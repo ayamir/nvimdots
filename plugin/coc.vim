@@ -43,6 +43,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gh <Plug>(coc-references)
 nmap <silent> gr <Plug>(coc-rename)
+nmap <silent><leader>ss :CocCommand session.save<CR>
+nmap <silent><leader>sl :CocCommand session.load<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()

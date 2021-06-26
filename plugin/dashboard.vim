@@ -12,8 +12,6 @@ let g:dashboard_preview_file_width = 37
 autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
 
 
-nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
 nnoremap <silent> <Leader>fp :lua require'telescope'.extensions.project.project{}<CR>
 nnoremap <silent> <Leader>fr :DashboardFindHistory<CR>
 nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
