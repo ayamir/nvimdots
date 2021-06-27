@@ -105,6 +105,7 @@ Plug 'akinsho/nvim-bufferline.lua'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
@@ -130,6 +131,7 @@ Plug 'glepnir/lspsaga.nvim'
 
 Plug 'hrsh7th/nvim-compe'
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -320,6 +322,10 @@ autocmd FileType go nmap <leader>mdc :GoDebugContinue<cr>
 autocmd FileType go nmap <leader>mdo :GoDebugStepOut<cr>
 autocmd FileType go nmap <leader>mdt :GoDebugStop<cr>
 
+
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+			\ lua require'lsp_extensions'.inlay_hints{ prefix = ' >> ', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 autocmd FileType rust nmap <leader>mbb :Cbuild<cr>
 autocmd FileType rust nmap <leader>mbt :Ctest<cr>
 autocmd FileType rust nmap <leader>mbr :Crun<cr>
