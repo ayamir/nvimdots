@@ -136,6 +136,8 @@ Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'rust-lang/rust.vim'
@@ -285,6 +287,12 @@ nnoremap <silent> g] :Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 highlight link LspSagaFinderSelection Search
+
+" Ultisnip
+let g:UltiSnipsExpandTrigger="<NUL>"
+let g:UltiSnipsJumpForwardTrigger="<C-l>"
+let g:UltiSnipsJumpBackwardTrigger="<C-h>"
+let g:UltiSnipsEditSplit="vertical"
 
 " MarkdownPreview
 noremap <F12> :MarkdownPreviewToggle<CR>
