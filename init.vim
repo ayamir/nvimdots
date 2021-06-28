@@ -144,6 +144,7 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
@@ -155,7 +156,8 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 augroup fmt
 	autocmd!
-	autocmd BufWritePre * undojoin | Neoformat
+	let blacklist = ['org']
+	autocmd BufWritePre * if index(blacklist, &ft) < 0 | undojoin | Neoformat
 augroup END
 
 augroup RELOAD

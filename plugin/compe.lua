@@ -21,6 +21,7 @@ require'compe'.setup {
         spell = true,
         tags = true,
 
+        orgmode = true,
         snippetSupport = true,
         nvim_lsp = true,
         nvim_lua = true,
