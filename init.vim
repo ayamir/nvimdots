@@ -148,7 +148,7 @@ Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
-colorscheme onehalflight
+colorscheme nord
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
