@@ -111,7 +111,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'tpope/vim-commentary'
-Plug 'majutsushi/tagbar'
+Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'sbdchd/neoformat'
@@ -202,8 +202,8 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-" TagBar
-nmap <leader>t :TagbarToggle<cr>
+" SymbolsOutline
+nmap <leader>t :SymbolsOutline<cr>
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
 nmap <leader>o :setlocal spell! spelllang=en_us<cr>
