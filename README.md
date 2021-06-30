@@ -69,11 +69,12 @@ The third part is common simple keybinding settings about some plugins.
 
 ## File jump
 
-| Name                                                                              | Effect                      |
-| :----:                                                                            | :----:                      |
-| [nvim-lua/popup.nvim](https://github.com/nvim-lua/popup.nvim)                     | Required by telescope.nvim  |
-| [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)                 | Required by telescope.nvim  |
-| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Find, Filter, Preview, Pick |
+| Name                                                                                              | Effect                         |
+| :----:                                                                                            | :----:                         |
+| [nvim-lua/popup.nvim](https://github.com/nvim-lua/popup.nvim)                                     | Required by telescope.nvim     |
+| [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim)                                 | Required by telescope.nvim     |
+| [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)                 | Find, Filter, Preview, Pick    |
+| [nvim-telescope/telescope-project.nvim](https://github.com/nvim-telescope/telescope-project.nvim) | Manage projects with telescope |
 
 ## Common coding tools
 
@@ -83,7 +84,7 @@ The third part is common simple keybinding settings about some plugins.
 | [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                         | Easy alignment                          |
 | [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Show indent with different level        |
 | [tpope/vim-commentary](https://github.com/tpope/vim-commentary)                               | Comment code quickly                    |
-| [majutsushi/tagbar](https://github.com/majutsushi/tagbar)                                     | Display code structure                  |
+| [simrat39/symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)             | Display code structure                  |
 | [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)         | Super powerful code highlighter         |
 | [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                                       | Super powerful code formater            |
 | [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                         | Show git status in nvim                 |
