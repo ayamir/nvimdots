@@ -1,6 +1,7 @@
 " Dashboard
 let g:mapleader=","
-let g:dashboard_session_directory = '~/.nvim/session'
+" You need to change here(use absolute path)
+let g:dashboard_session_directory = '/home/ayamir/.nvim/session'
 let g:dashboard_default_executive ='telescope'
 let g:indentLine_fileTypeExclude = ['dashboard']
 autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
