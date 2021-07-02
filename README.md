@@ -17,11 +17,11 @@
 
 # Introduction
 
-![Dashboard](./shots/dashboard.jpg)
+![Dashboard](./shots/dashboard.png)
 
-![Telescope](./shots/telescope.jpg)
+![Telescope](./shots/telescope.png)
 
-![Coding](./shots/coding.jpg)
+![Coding](./shots/coding.png)
 
 This is my neovim's configuration.
 
