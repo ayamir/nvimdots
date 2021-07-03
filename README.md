@@ -11,7 +11,14 @@
 
 # Prerequisites
 
-**Nvim version > 0.5**
+**Nvim version >= 0.5**
+
+
+```shell
+sudo pacman -S neovim lolcat
+# lolcat to realize colorful output in dashboard
+```
+
 
 <a id="introduction"></a>
 
@@ -100,7 +107,7 @@ The third part is common simple keybinding settings about some plugins.
 | Name                                                                            | Effect                                               |
 | :----:                                                                          | :----:                                               |
 | [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)               | Neovim native LSP configuration                      |
-| [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)       | Manage every LSP engine                              |
+| [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)       | Manage each LSP engine                               |
 | [onsails/lspkind-nvim](https://github.com/onsails/lspkind-nvim)                 | Vscode-like pictograms for neovim lsp                |
 | [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)                 | Make Nvim LSP more useful                            |
 | [hrsh7th/nvim-compe](https://github.com/hrsh7th/nvim-compe)                     | Auto completion plugin for nvim                      |
