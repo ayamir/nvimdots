@@ -116,6 +116,8 @@ The third part is common simple keybinding settings about some plugins.
 | [hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip)                       | Snippets plugin supports LSP/VSCode's snippet format |
 | [hrsh7th/vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)           | Vsnip integration to nvim's LSP                      |
 | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) | Set of preconfigured snippets                        |
+| [SirVer/ultisnips](https://github.com/SirVer/ultisnips)                         | Ultimate snippets completion engine                  |
+| [honza/vim-snippets](https://github.com/honza/vim-snippets)                     | More snippets                                        |
 | [fatih/vim-go](https://github.com/fatih/vim-go)                                 | Most powerful plugin for go                          |
 | [rust-lang/rust.vim](https://github.com/rust-lang/rust.vim)                     | Plugin for rust                                      |
 | [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)   | Display detected color                               |
