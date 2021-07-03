@@ -64,15 +64,15 @@ The third part is common simple keybinding settings about some plugins.
 
 ## UI
 
-| Name                                                                                          | Effect                              |
-| :----:                                                                                        | :----:                              |
-| [sonph/onehalf](https://github.com/sonph/onehalf)                                             | My light theme                      |
-| [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)                       | My dark theme                       |
-| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)               | For nvim-tree's icons               |
-| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)                         | Minimal, fast but customizable line |
-| [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)                           | Dashboard for Neovim                |
-| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)                       | Replacement of Nerdtree             |
-| [akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)                 | Replacement of nvim's buffer and tab |
+| Name                                                                            | Effect                               |
+| :----:                                                                          | :----:                               |
+| [sonph/onehalf](https://github.com/sonph/onehalf)                               | My light theme                       |
+| [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)         | My dark theme                        |
+| [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) | For nvim-tree's icons                |
+| [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)           | Minimal, fast but customizable line  |
+| [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)             | Dashboard for Neovim                 |
+| [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)         | Replacement of Nerdtree              |
+| [akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)   | Replacement of nvim's buffer and tab |
 
 ## File jump
 
@@ -151,7 +151,7 @@ The leader key is `,`.
 | navigate left                                             | `<Ctrl-H>`                                       |
 | navigate right                                            | `<Ctrl-L>`                                       |
 |                                                           |                                                  |
-| operaions in nvim-tree                                    |                                                  |
+| operaions in `nvim-tree`                                  |                                                  |
 | new file                                                  | `a`                                              |
 | remove file/directory                                     | `d`                                              |
 | rename file/directory                                     | `r`                                              |
@@ -166,6 +166,7 @@ The leader key is `,`.
 | find file in recently opened                              | `<leader>fr`                                     |
 | find file in all files                                    | `<leader>ff`                                     |
 | find file in opened buffers                               | `<leader>fb`                                     |
+| find project                                              | `<leader>fp`                                     |
 |                                                           |                                                  |
 | find one character backward                               | `f`, input what you want to search then `return` |
 | find two characters backward                              | `F`, input what you want to search               |
@@ -180,7 +181,7 @@ The leader key is `,`.
 | show hover doc                                            | `K`                                              |
 | show code action                                          | `<leader>ca`                                     |
 | show code diagnostics                                     | `<leader>cd`                                     |
-| navigate in vsnip's block                                 | `<Ctrl-l>`                                       |
+| navigate in snippet's block                               | `<Ctrl-l>`                                       |
 |                                                           |                                                  |
 | toggle one line's comment                                 | `gcc`                                            |
 | toggle selected lines' comment                            | `<Shift-V>`, select area then `gc`               |
