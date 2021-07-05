@@ -1,5 +1,6 @@
 " Dashboard
 let g:mapleader=","
+let g:dashboard_footer_icon = '🐬 '
 " You need to change here(use absolute path)
 let g:dashboard_session_directory = '/home/ayamir/.nvim/session'
 let g:dashboard_default_executive ='telescope'
