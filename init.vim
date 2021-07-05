@@ -142,7 +142,8 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 augroup fmt
 	autocmd!
-	autocmd BufWritePre * undojoin | Neoformat
+	let blacklist = ['org', 'cat']
+	autocmd BufWritePre * if index(blacklist, &ft) < 0 | undojoin | Neoformat
 augroup END
 
 augroup RELOAD
