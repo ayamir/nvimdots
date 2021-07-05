@@ -274,6 +274,19 @@ let g:coc_global_extensions = [
 			\   'coc-snippets'
 			\ ]
 
+" Neovide's config
+set guifont=JetBrainsMono\ Nerd\ Font
+let g:neovide_refresh_rate=60
+let g:neovide_cursor_vfx_mode = "railgun"
+let g:neovide_no_idle=v:true
+let g:neovide_cursor_animation_length=0.03
+let g:neovide_cursor_trail_length=0.05
+let g:neovide_cursor_antialiasing=v:true
+let g:neovide_cursor_vfx_opacity=200.0
+let g:neovide_cursor_vfx_particle_lifetime=1.2
+let g:neovide_cursor_vfx_particle_speed=20.0
+let g:neovide_cursor_vfx_particle_density=5.0
+
 " Languages Settings
 autocmd FileType go nmap <leader>mbb <Plug>(go-build)
 autocmd FileType go nmap <leader>mbr <Plug>(go-run)
