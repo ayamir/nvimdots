@@ -11,12 +11,24 @@
 
 # Prerequisites
 
-**Nvim version >= 0.5**
-
-
+1. Neovim base installation
 ```shell
-sudo pacman -S neovim lolcat
 # lolcat to realize colorful output in dashboard
+sudo pacman -S neovim lolcat
+
+# for neovim python module
+pip install neovim --user
+```
+
+2. Recommended Terminals: [alacritty](https://github.com/alacritty/alacritty), [kitty](https://sw.kovidgoyal.net/kitty)
+```shell
+sudo pacman -S alacritty kitty
+```
+
+3. Recommended GUI applications: [neovide](https://github.com/Kethku/neovide), [goneovim](https://github.com/akiyosi/goneovim)
+```shell
+paru neovide
+paru goneovim
 ```
 
 
