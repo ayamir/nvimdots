@@ -148,7 +148,7 @@ Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -303,7 +303,7 @@ noremap <F12> :MarkdownPreviewToggle<CR>
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Neovide's config
-set guifont=JetBrainsMono\ Nerd\ Font
+set guifont=Operator\ Mono\ Lig\ Book:h15
 let g:neovide_refresh_rate=60
 let g:neovide_cursor_vfx_mode = "railgun"
 let g:neovide_no_idle=v:true
