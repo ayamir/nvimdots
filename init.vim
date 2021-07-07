@@ -134,7 +134,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -276,7 +276,7 @@ let g:coc_global_extensions = [
 			\ ]
 
 " Neovide's config
-set guifont=JetBrainsMono\ Nerd\ Font
+set guifont=Operator\ Mono\ Lig\ Book:h15
 let g:neovide_refresh_rate=60
 let g:neovide_cursor_vfx_mode = "railgun"
 let g:neovide_no_idle=v:true
