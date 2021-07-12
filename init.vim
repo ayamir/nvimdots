@@ -85,9 +85,9 @@ set completeopt=menuone,noselect
 
 " Vim-Plug init
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-  echo "Downloading junegunn/vim-plug to manage plugins..."
-  silent !mkdir -p ~/.config/nvim/autoload/
-  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ~/.config/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 endif
 
 " Vim-Plug Plugins
@@ -148,25 +148,25 @@ Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
-colorscheme onehalflight
+colorscheme nord
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
-"augroup fmt
-" autocmd!
-" let blacklist = ['org', 'cat']
-" autocmd BufWritePre * if index(blacklist, &ft) < 0 | undojoin | Neoformat
-"augroup END
+augroup fmt
+	autocmd!
+	let blacklist = ['org', 'cat']
+	autocmd BufWritePre * if index(blacklist, &ft) < 0 | undojoin | Neoformat
+augroup END
 
 augroup RELOAD
-  autocmd!
-  " Disables automatic commenting on newline:
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+	autocmd!
+	" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-  " Automatically deletes all trailing whitespace on save.
-  autocmd BufWritePre * %s/\s\+$//e
+	" Automatically deletes all trailing whitespace on save.
+	autocmd BufWritePre * %s/\s\+$//e
 augroup END
 
 " Automatically change work directory
@@ -327,7 +327,7 @@ autocmd FileType go nmap <leader>mdt :GoDebugStop<cr>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-      \ lua require'lsp_extensions'.inlay_hints{ prefix = ' >> ', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+			\ lua require'lsp_extensions'.inlay_hints{ prefix = ' >> ', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 autocmd FileType rust nmap <leader>mbb :Cbuild<cr>
 autocmd FileType rust nmap <leader>mbt :Ctest<cr>
 autocmd FileType rust nmap <leader>mbr :Crun<cr>
