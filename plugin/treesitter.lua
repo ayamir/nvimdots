@@ -1,5 +1,7 @@
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = {"c", "cpp", "go", "gomod", "rust", "bash", "lua"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = {
+        "c", "cpp", "go", "gomod", "rust", "bash", "lua", "toml", "yaml", "json"
+    }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {
         "javascript", "beancount", "bibtex", "c_sharp", "clojure", "comment",
         "commonlisp", "cuda", "dart", "devicetree", "elixir", "erlang",
