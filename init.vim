@@ -122,6 +122,8 @@ Plug 'rhysd/accelerated-jk'
 Plug 'justinmk/vim-sneak'
 Plug 'junegunn/vim-slash'
 Plug 'vimlab/split-term.vim'
+Plug 'folke/zen-mode.nvim'
+Plug 'folke/twilight.nvim'
 " Plug 'thinca/vim-quickrun'
 
 Plug 'neovim/nvim-lspconfig'
@@ -299,11 +301,14 @@ let g:UltiSnipsEditSplit="vertical"
 " MarkdownPreview
 noremap <F12> :MarkdownPreviewToggle<CR>
 
+" ZenMode
+nnoremap <leader><leader>z :ZenMode<CR>
+
 " Sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Neovide's config
-set guifont=Operator\ Mono\ Lig\ Book:h15
+set guifont=Operator\ Mono\ Lig\ Book:h12
 let g:neovide_refresh_rate=60
 let g:neovide_cursor_vfx_mode = "railgun"
 let g:neovide_no_idle=v:true
