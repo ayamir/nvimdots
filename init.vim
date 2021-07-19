@@ -106,6 +106,8 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-project.nvim'
+Plug 'tami5/sql.nvim'
+Plug 'nvim-telescope/telescope-frecency.nvim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
