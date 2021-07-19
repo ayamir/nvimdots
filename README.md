@@ -14,7 +14,8 @@
 1. Neovim base installation
 ```shell
 # lolcat to realize colorful output in dashboard
-sudo pacman -S neovim lolcat
+# ripgrep for telescope's search engine
+sudo pacman -S neovim lolcat ripgrep
 
 # for neovim python module
 pip install neovim --user
