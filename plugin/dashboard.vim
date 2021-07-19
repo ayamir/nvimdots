@@ -12,25 +12,34 @@ let g:dashboard_preview_file = '~/.config/nvim/ayanami.cat'
 let g:dashboard_preview_file_height = 17
 let g:dashboard_preview_file_width = 37
 
-
-nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
 nnoremap <silent> <Leader>fp :lua require'telescope'.extensions.project.project{}<CR>
 nnoremap <silent> <Leader>fr :DashboardFindHistory<CR>
+nnoremap <silent> <Leader>fc :Telescope frecency<CR>
 nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
 nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+nnoremap <silent> <Leader>fw :DashboardFindWord<CR>
+nnoremap <silent> <Leader>fn :DashboardNewFile<CR>
 
-let g:dashboard_custom_shortcut={
-			\ 'last_session'       : 'comma s l',
-			\ 'find_history'       : 'comma f r',
-			\ 'find_file'          : 'comma f f',
-			\ 'new_file'           : 'comma c n',
-			\ 'change_colorscheme' : 'comma t c',
-			\ 'find_word'          : 'comma f a',
-			\ 'book_marks'         : 'comma f b',
-			\ }
-
-
+let g:dashboard_custom_section={
+			\ 'change_colorscheme': {
+				\ 'description': [ ' Scheme change              comma t c '],
+				\ 'command': 'Telescope frecency', },
+				\ 'find_history': {
+					\ 'description': [' File history               comma f r'],
+					\ 'command': 'DashboardFindHistory', },
+					\ 'find_frecency': {
+						\ 'description': [ '祥File frecency              comma f c '],
+						\ 'command': 'Telescope frecency', },
+						\ 'find_file': {
+							\ 'description': [ ' File find                  comma f f '],
+							\ 'command': 'DashboardFindFile', },
+							\ 'file_new': {
+								\ 'description': [ ' File new                   comma f n '],
+								\ 'command': 'DashboardNewFile', },
+								\ 'find_word': {
+									\ 'description': [ ' Word find                  comma f w '],
+									\ 'command': 'DashboardFindWord', },
+									\ 'find_project': {
+										\ 'description': [ ' Project find               comma f p '],
+										\ 'command': "lua require'telescope'.extensions.project.project{}", },
+										\}
