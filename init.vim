@@ -152,7 +152,7 @@ Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
-colorscheme onehalflight
+colorscheme nord
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -267,15 +267,12 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 " Bufferline
 noremap <A-j> :BufferLineCycleNext<cr>
 noremap <A-k> :BufferLineCyclePrev<cr>
-
-" These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><mymap> :BufferLineMoveNext<CR>
-nnoremap <silent><mymap> :BufferLineMovePrev<CR>
+nnoremap <silent><A-S-j> :BufferLineMoveNext<CR>
+nnoremap <silent><A-S-k> :BufferLineMovePrev<CR>
 
 " These commands will sort buffers by directory, language, or a custom criteria
 nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
 nnoremap <silent><leader>bd :BufferLineSortByDirectory<CR>
-nnoremap <silent><mymap> :lua require'bufferline'.sort_buffers_by(function (buf_a, buf_b) return buf_a.id < buf_b.id end)<CR>
 
 " lspsaga
 nnoremap <silent> gh :Lspsaga lsp_finder<CR>
