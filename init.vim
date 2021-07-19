@@ -109,7 +109,7 @@ Plug 'nvim-telescope/telescope-project.nvim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
-Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'simrat39/symbols-outline.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -150,7 +150,7 @@ Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
-colorscheme nord
+colorscheme onehalflight
 
 " Edit Setting
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
