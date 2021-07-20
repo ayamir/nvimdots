@@ -13,7 +13,6 @@ local plug_map = {
     ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr()
         :with_silent(),
     ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
-
     ["i|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
     ["s|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
     ["i|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
@@ -91,6 +90,9 @@ local plug_map = {
         :with_silent(),
     ["n|<Leader>fg"] = map_cu('Telescope live_grep'):with_noremap()
         :with_silent(),
+    --  Plugin commentary
+    ["n|gcc"] = map_cu("Commentary"):with_noremap():with_silent(),
+    ["v|gc"] = map_cu("Commentary"):with_noremap():with_silent(),
     -- Plugin accelerate-jk
     ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
     ["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
