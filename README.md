@@ -14,9 +14,10 @@
 1. Neovim base installation
 ```shell
 # lolcat to realize colorful output in dashboard
-# ripgrep for telescope's search engine
 # gitui for tui git operations
-sudo pacman -S git neovim lolcat ripgrep gitui
+# ripgrep for telescope word search engine
+# fd for telescope file search engine
+sudo pacman -S git neovim lolcat gitui ripgrep fd
 
 # for neovim python module
 pip install neovim --user
