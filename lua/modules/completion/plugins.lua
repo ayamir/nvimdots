@@ -22,7 +22,7 @@ completion['glepnir/lspsaga.nvim'] = {
 }
 completion['hrsh7th/nvim-compe'] = {
     opt = true,
-    event = 'InsertEnter',
+    after = 'nvim-autopairs',
     config = conf.compe
 }
 completion['nvim-lua/lsp_extensions.nvim'] = {
@@ -48,7 +48,8 @@ completion['SirVer/ultisnips'] = {
 }
 completion['windwp/nvim-autopairs'] = {
     opt = true,
-    event = 'InsertEnter',
+    event = 'InsertCharPre',
+    after = 'nvim-lspconfig',
     config = conf.autopairs
 }
 return completion
