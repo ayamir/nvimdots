@@ -65,7 +65,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 `init.lua` is the kernel config file. It requires configuration in `lua`
 directory.
 
-`lua` directory contains tree parts.
+`lua` directory contains three parts. 
 
 <a id="plugins"></a>
 
