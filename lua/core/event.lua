@@ -34,7 +34,12 @@ function autocmd.load_autocmds()
             {"BufWritePre", "*.bak", "setlocal noundofile"}, {
                 "BufWritePre", "*",
                 "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
-            }, {"BufEnter", "*", "silent! lcd %:p:h"}
+            }, -- auto change work directory
+            {"BufEnter", "*", "silent! lcd %:p:h"}, -- auto place to last edit
+            {
+                "BufReadPost", "*",
+                [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
+            }
         },
 
         wins = {
