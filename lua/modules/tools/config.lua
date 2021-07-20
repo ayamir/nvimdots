@@ -24,22 +24,15 @@ function config.telescope()
         defaults = {
             prompt_prefix = '🔭 ',
             selection_caret = " ",
+            layout_config = {
+                horizontal = {prompt_position = "bottom", results_width = 0.6},
+                vertical = {mirror = false}
+            },
             file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
             grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep
                 .new,
             qflist_previewer = require'telescope.previewers'.vim_buffer_qflist
                 .new,
-            layout_config = {
-                horizontal = {
-                    prompt_position = "bottom",
-                    preview_width = 0.55,
-                    results_width = 0.8
-                },
-                vertical = {mirror = false},
-                width = 0.88,
-                height = 0.80,
-                preview_cutoff = 120
-            },
             file_sorter = require("telescope.sorters").get_fuzzy_file,
             file_ignore_patterns = {},
             generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
