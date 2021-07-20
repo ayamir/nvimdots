@@ -207,3 +207,4 @@ You can see more keybinds in `init.vim` and other configuration files in `plugin
 # Credit
 
 + [nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
++ [nvim](https://github.com/glepnir/nvim) as my config organization template.
