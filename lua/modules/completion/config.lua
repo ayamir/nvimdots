@@ -112,12 +112,4 @@ function config.autopairs()
     })
 end
 
-function config.ultisnips()
-
-    vim.g.UltiSnipsExpandTrigger = "<NUL>"
-    vim.g.UltiSnipsJumpForwardTrigger = "<C-l>"
-    vim.g.UltiSnipsJumpBackwardTrigger = "<C-h>"
-    vim.g.UltiSnipsEditSplit = "vertical"
-end
-
 return config

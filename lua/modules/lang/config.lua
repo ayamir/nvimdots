@@ -1,7 +1,7 @@
 local config = {}
 local exec = vim.api.nvim_command
 
-function config.go()
+function config.lang_go()
     exec('augroup gosettings')
     exec('autocmd!')
     exec('autocmd FileType go nmap <leader>mbb <Plug>(go-build)')
@@ -14,28 +14,22 @@ function config.go()
     exec('augroup END')
 end
 
-function config.rust()
+function config.lang_rust()
     exec('augroup rustsettings')
     exec('autocmd!')
     exec(
-        "autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * lua require'lsp_extensions'.inlay_hints{ prefix = ' >> ', highlight = 'Comment', enabled = {'TypeHint', 'ChainingHint', 'ParameterHint'} }")
+        "autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs lua require'lsp_extensions'.inlay_hints{ prefix = ' > ', highlight = 'Comment', enabled = {'TypeHint', 'ChainingHint', 'ParameterHint'} }")
     exec('autocmd FileType rust nmap <leader>mbb :Cbuild<cr>')
     exec('autocmd FileType rust nmap <leader>mbt :Ctest<cr>')
     exec('autocmd FileType rust nmap <leader>mbr :Crun<cr>')
     exec('augroup END')
 end
 
-function config.org()
+function config.lang_org()
     require('orgmode').setup({
         org_agenda_files = {'~/Sync/org/*'},
         org_default_notes_file = '~/Sync/org/refile.org'
     })
-end
-
-function config.markdown()
-    vim.g.mkdp_auto_start = 0
-    vim.api.nvim_set_keymap('n', '<F12>', 'MarkdownPreviewToggle',
-                            {noremap = true, silent = false})
 end
 
 return config

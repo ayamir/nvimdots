@@ -59,7 +59,12 @@ local load_core = function()
     require('keymap')
     require('core.event')
     pack.load_compile()
-    vim.cmd[[colorscheme onehalflight]]
+    vim.cmd [[colorscheme onehalflight]]
+
+    vim.g.UltiSnipsExpandTrigger = "<NUL>"
+    vim.g.UltiSnipsJumpForwardTrigger = "<C-l>"
+    vim.g.UltiSnipsJumpBackwardTrigger = "<C-h>"
+    vim.g.UltiSnipsEditSplit = "vertical"
 end
 
 load_core()

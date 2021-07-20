@@ -44,7 +44,6 @@ completion['rafamadriz/friendly-snippets'] = {opt = true, after = 'nvim-compe'}
 completion['SirVer/ultisnips'] = {
     opt = true,
     after = 'nvim-compe',
-    config = conf.ultisnips,
     requires = {'honza/vim-snippets', opt = true}
 }
 completion['windwp/nvim-autopairs'] = {

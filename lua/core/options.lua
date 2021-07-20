@@ -100,7 +100,7 @@ local function load_options()
         textwidth = 80,
         expandtab = true,
         autoindent = true,
-        tabstop = 2,
+        tabstop = 4,
         shiftwidth = 2,
         softtabstop = -1,
         breakindentopt = "shift:2,min:20",

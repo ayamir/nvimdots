@@ -14,10 +14,10 @@ local plug_map = {
         :with_silent(),
     ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
 
-    ["i|<TAB>"] = map_cmd("v:lua.tab_complete()"):with_silent(),
-    ["i|<S-TAB>"] = map_cmd("v:lua.s_tab_complete()"):with_silent(),
-    ["s|<TAB>"] = map_cmd("v:lua.tab_complete()"):with_silent(),
-    ["s|<S-TAB>"] = map_cmd("v:lua.s_tab_complete()"):with_silent(),
+    ["i|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
+    ["s|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
+    ["i|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
+    ["s|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
     -- Bufferline
     ["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
     ["n|<A-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent(),
@@ -119,7 +119,9 @@ local plug_map = {
     -- Plugin split-term
     ["n|<F5>"] = map_cr('Term'):with_noremap():with_silent(),
     ["n|<C-w>t"] = map_cr('Term'):with_noremap():with_silent(),
-    ["n|<C-w>T"] = map_cr('VTerm'):with_noremap():with_silent()
+    ["n|<C-w>T"] = map_cr('VTerm'):with_noremap():with_silent(),
+    -- Plugin MarkdownPreview
+    ["n|<F12>"] = map_cr('MarkdownPreviewToggle'):with_noremap():with_silent()
 };
 
 bind.nvim_load_mapping(plug_map)
