@@ -27,7 +27,7 @@ editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
 editor['p00f/nvim-ts-rainbow'] = {opt = true}
 editor['sbdchd/neoformat'] = {
     opt = true,
-    cmd = 'Neoformat',
+    event = 'BufEnter',
     config = conf.neoformat
 }
 editor['windwp/nvim-ts-autotag'] = {

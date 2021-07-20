@@ -15,7 +15,8 @@
 ```shell
 # lolcat to realize colorful output in dashboard
 # ripgrep for telescope's search engine
-sudo pacman -S neovim lolcat ripgrep
+# gitui for tui git operations
+sudo pacman -S git neovim lolcat ripgrep gitui
 
 # for neovim python module
 pip install neovim --user
@@ -45,7 +46,7 @@ paru goneovim
 
 This is my neovim's configuration.
 
-I use [Vim-Plug](https://github.com/junegunn/vim-plug) to manage plugins.
+I use [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
 I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to realize code complete.
 
@@ -61,15 +62,10 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 # Structure
 
-`init.vim` is the kernel config file.
+`init.lua` is the kernel config file. It requires configuration in `lua`
+directory.
 
-The first part is the common settings of neovim.
-
-The second part is Vim-Plug's settings which consists of all of my plugins.
-
-The third part is common simple keybinding settings about some plugins.
-
-`plugin` directory includes some plugins' specific settings.
+`lua` directory contains tree parts.
 
 <a id="plugins"></a>
 
