@@ -22,7 +22,8 @@ completion['glepnir/lspsaga.nvim'] = {
 }
 completion['hrsh7th/nvim-compe'] = {
     opt = true,
-    after = 'nvim-autopairs',
+    event = 'InsertEnter',
+    after = 'nvim-lspconfig',
     config = conf.compe
 }
 completion['nvim-lua/lsp_extensions.nvim'] = {
