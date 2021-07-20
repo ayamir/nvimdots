@@ -31,7 +31,8 @@ function autocmd.load_autocmds()
             {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
             {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
             {"BufWritePre", "*.tmp", "setlocal noundofile"},
-            {"BufWritePre", "*.bak", "setlocal noundofile"}, {
+            {"BufWritePre", "*.bak", "setlocal noundofile"}, -- neoformat
+            {
                 "BufWritePre", "*",
                 "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
             }, -- auto change work directory
@@ -69,14 +70,14 @@ function autocmd.load_autocmds()
                 "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"
             }, {
                 "FileType", "*",
-                "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
+                [[setlocal formatoptions-=c formatoptions-=r formatoptions-=o]]
             }
         },
 
         yank = {
             {
                 "TextYankPost",
-                [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]
+                [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]]
             }
         }
     }
