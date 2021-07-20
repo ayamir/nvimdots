@@ -93,26 +93,6 @@ function config.nvim_treesitter()
     }
 end
 
-function config.neoformat()
-    vim.g.neoformat_basic_format_align = 1
-    vim.g.neoformat_basic_format_retab = 1
-    vim.g.neoformat_basic_format_trim = 1
-    vim.g.neoformat_try_formatprg = 1
-    vim.g.neoformat_only_msg_on_error = 1
-    vim.g.neoformat_run_all_formatters = 1
-    vim.g.shfmt_opt = "-ci"
-
-    vim.g.neoformat_enabled_c = 'clangformat'
-    vim.g.neoformat_enabled_cpp = 'clangformat'
-    vim.g.neoformat_enabled_cmake = 'cmake_format'
-    vim.g.neoformat_enabled_go = {'gofmt', 'goimports'}
-    vim.g.neoformat_enabled_python = {'autopep8', 'yapf'}
-    vim.g.neoformat_enabled_rust = 'rustfmt'
-    vim.g.neoformat_enabled_shell = 'shfmt'
-    vim.g.neoformat_enabled_markdown = 'prettier'
-    vim.g.neoformat_enabled_html = 'prettier'
-end
-
 function config.autotag()
     require('nvim-ts-autotag').setup({
         filetypes = {

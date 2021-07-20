@@ -25,11 +25,7 @@ editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
     after = 'nvim-treesitter'
 }
 editor['p00f/nvim-ts-rainbow'] = {opt = true}
-editor['sbdchd/neoformat'] = {
-    opt = true,
-    cmd = 'Neoformat',
-    config = conf.neoformat
-}
+editor['sbdchd/neoformat'] = {opt = true, cmd = 'Neoformat'}
 editor['windwp/nvim-ts-autotag'] = {
     opt = true,
     ft = {'html', 'xml'},
