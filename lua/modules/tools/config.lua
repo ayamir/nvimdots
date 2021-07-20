@@ -23,14 +23,35 @@ function config.telescope()
     require('telescope').setup {
         defaults = {
             prompt_prefix = '🔭 ',
-            prompt_position = 'bottom',
             selection_caret = " ",
-            results_width = 0.6,
             file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
             grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep
                 .new,
             qflist_previewer = require'telescope.previewers'.vim_buffer_qflist
-                .new
+                .new,
+            layout_config = {
+                horizontal = {
+                    prompt_position = "bottom",
+                    preview_width = 0.55,
+                    results_width = 0.8
+                },
+                vertical = {mirror = false},
+                width = 0.88,
+                height = 0.80,
+                preview_cutoff = 120
+            },
+            file_sorter = require("telescope.sorters").get_fuzzy_file,
+            file_ignore_patterns = {},
+            generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+            path_display = {"absolute"},
+            winblend = 0,
+            border = {},
+            borderchars = {
+                "─", "│", "─", "│", "╭", "╮", "╯", "╰"
+            },
+            color_devicons = true,
+            use_less = true,
+            set_env = {["COLORTERM"] = "truecolor"}
         },
         extensions = {
             fzy_native = {
