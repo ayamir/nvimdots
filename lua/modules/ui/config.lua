@@ -52,12 +52,8 @@ function config.dashboard()
             command = "lua require'telescope'.extensions.project.project{}"
         },
         find_history = {
-            description = {' File history               comma f r '},
+            description = {'祥File history               comma f r '},
             command = 'DashboardFindHistory'
-        },
-        find_frecency = {
-            description = {'祥File frecency              comma f c '},
-            command = 'Telescope frecency'
         },
         find_file = {
             description = {' File find                  comma f f '},
