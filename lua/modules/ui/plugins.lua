@@ -20,6 +20,11 @@ ui['lewis6991/gitsigns.nvim'] = {
     config = conf.gitsigns,
     requires = {'nvim-lua/plenary.nvim', opt = true}
 }
+ui['lukas-reineke/indent-blankline.nvim'] = {
+    opt = true,
+    event = 'BufRead',
+    config = conf.indent_blankline
+}
 ui['akinsho/nvim-bufferline.lua'] = {
     config = conf.nvim_bufferline,
     requires = 'kyazdani42/nvim-web-devicons'

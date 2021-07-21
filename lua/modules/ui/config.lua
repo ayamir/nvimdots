@@ -141,7 +141,7 @@ function config.gitsigns()
     }
 end
 
-function config.indent_blakline()
+function config.indent_blankline()
     vim.g.indent_blankline_char = "│"
     vim.g.indent_blankline_show_first_indent_level = true
     vim.g.indent_blankline_filetype_exclude = {
