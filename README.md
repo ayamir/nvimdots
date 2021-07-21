@@ -177,65 +177,66 @@ directory.
 
 The leader key is `,`.
 
-|                          Effect                           |                     shortcut                     |
-| :-------------------------------------------------------: | :----------------------------------------------: |
-|                  sync config and compile                  |                   `<leader>ps`                   |
-|                      install plugins                      |                   `<leader>pi`                   |
-|                      update plugins                       |                   `<leader>pu`                   |
-|                      compile config                       |                   `<leader>pc`                   |
-|                                                           |                                                  |
-|                     toggle nvim-tree                      |                    `<Ctrl-N>`                    |
-|                       toggle tagbar                       |                   `<leader>t`                    |
-|                                                           |                                                  |
-|                    open terminal split                    |              `<Ctrl-W>t` or `<F5>`               |
-|               open terminal vertical split                |                   `<Ctrl-W>T`                    |
-|                       quit terminal                       |                    `<Ctrl-D>`                    |
-|                 toggle floating terminal                  |                    `<Alt-D>`                     |
-|                                                           |                                                  |
-|                  split buffer vertically                  |                   `<Ctrl-W>v`                    |
-|                 split buffer horizontally                 |                   `<Ctrl-W>s`                    |
-|                                                           |                                                  |
-|                       navigate down                       |                    `<Ctrl-J>`                    |
-|                        navigate up                        |                    `<Ctrl-K>`                    |
-|                       navigate left                       |                    `<Ctrl-H>`                    |
-|                      navigate right                       |                    `<Ctrl-L>`                    |
-|                                                           |                                                  |
-|                 operaions in `nvim-tree`                  |                                                  |
-|                         new file                          |                       `a`                        |
-|                   remove file/directory                   |                       `d`                        |
-|                   rename file/directory                   |                       `r`                        |
-|                      open directory                       |                   `o`/`Enter`                    |
-|                      close directory                      |                 `o`/`Backspace`                  |
-|                       copy filename                       |                       `y`                        |
-|                    copy relative path                     |                       `Y`                        |
-|                    copy absolute path                     |                       `gy`                       |
-|           toggle file/directory begin with dot            |                       `H`                        |
-|   toggle hidden file/directory configured in nvim-tree    |                       `I`                        |
-|                                                           |                                                  |
-|               find file in recently opened                |                   `<leader>fr`                   |
-|                  find file in all files                   |                   `<leader>ff`                   |
-|                find file in opened buffers                |                   `<leader>fb`                   |
-|                       find project                        |                   `<leader>fp`                   |
-|                                                           |                                                  |
-|                find one character backward                | `f`, input what you want to search then `return` |
-|               find two characters backward                |        `F`, input what you want to search        |
-|                find one character forward                 | `F`, input what you want to search then `return` |
-|                find two characters forward                |        `F`, input what you want to search        |
-|                                                           |                                                  |
-|                back to last cursor's place                |                    `<Ctrl-O>`                    |
-|               jump to function's definition               |                       `gd`                       |
-|                       smart rename                        |                       `gr`                       |
-|                    show signature help                    |                       `gs`                       |
-| show current function/variable's definition or references |                       `gh`                       |
-|                      show hover doc                       |                       `K`                        |
-|                     show code action                      |                   `<leader>ca`                   |
-|                   show code diagnostics                   |                   `<leader>cd`                   |
-|                navigate in snippet's block                |                    `<Ctrl-l>`                    |
-|                                                           |                                                  |
-|                 toggle one line's comment                 |                      `gcc`                       |
-|              toggle selected lines' comment               |        `<Shift-V>`, select area then `gc`        |
-|                                                           |                                                  |
-|                  toggle MarkdownPreView                   |                     `<F12>`                      |
+|                             Effect                             |              shortcut              |
+| :------------------------------------------------------------: | :--------------------------------: |
+|                    sync config and compile                     |            `<leader>ps`            |
+|                        install plugins                         |            `<leader>pi`            |
+|                         update plugins                         |            `<leader>pu`            |
+|                         compile config                         |            `<leader>pc`            |
+|                                                                |                                    |
+|                        toggle nvim-tree                        |             `<Ctrl-N>`             |
+|                         toggle tagbar                          |            `<leader>t`             |
+|                                                                |                                    |
+|                      open terminal split                       |       `<Ctrl-W>t` or `<F5>`        |
+|                  open terminal vertical split                  |            `<Ctrl-W>T`             |
+|                         quit terminal                          |             `<Ctrl-D>`             |
+|                    toggle floating terminal                    |             `<Alt-D>`              |
+| toggle floating terminal and open `gitui` in current directory |            `<leader>g`             |
+|                                                                |                                    |
+|                          close buffer                          |             `<Alt-Q>`              |
+|                       force close buffer                       |          `<Alt-Shift-Q>`           |
+|                    split buffer vertically                     |            `<Ctrl-W>v`             |
+|                   split buffer horizontally                    |            `<Ctrl-W>s`             |
+|                                                                |                                    |
+|                         navigate down                          |             `<Ctrl-J>`             |
+|                          navigate up                           |             `<Ctrl-K>`             |
+|                         navigate left                          |             `<Ctrl-H>`             |
+|                         navigate right                         |             `<Ctrl-L>`             |
+|                                                                |                                    |
+|                    operaions in `nvim-tree`                    |                                    |
+|                            new file                            |                `a`                 |
+|                     remove file/directory                      |                `d`                 |
+|                     rename file/directory                      |                `r`                 |
+|                         open directory                         |            `o`/`Enter`             |
+|                        close directory                         |          `o`/`Backspace`           |
+|                         copy filename                          |                `y`                 |
+|                       copy relative path                       |                `Y`                 |
+|                       copy absolute path                       |                `gy`                |
+|              toggle file/directory begin with dot              |                `H`                 |
+|      toggle hidden file/directory configured in nvim-tree      |                `I`                 |
+|                                                                |                                    |
+|                  find file in recently opened                  |            `<leader>fr`            |
+|                      find file in history                      |            `<leader>fe`            |
+|              find file in current work directory               |            `<leader>ff`            |
+|                          find project                          |            `<leader>fp`            |
+|                                                                |                                    |
+|                       find one character                       |            `<leader>f`             |
+|                         find one word                          |            `<leader>w`             |
+|                                                                |                                    |
+|                  back to last cursor's place                   |             `<Ctrl-O>`             |
+|                 jump to function's definition                  |                `gd`                |
+|                          smart rename                          |                `gr`                |
+|                      show signature help                       |                `gs`                |
+|   show current function/variable's definition or references    |                `gh`                |
+|                         show hover doc                         |                `K`                 |
+|                        show code action                        |            `<leader>ca`            |
+|                     show code diagnostics                      |            `<leader>cd`            |
+|                  navigate in snippet's block                   |             `<Ctrl-l>`             |
+|                                                                |                                    |
+|                   toggle one line's comment                    |               `gcc`                |
+|                 toggle selected lines' comment                 | `<Shift-V>`, select area then `gc` |
+|                                                                |                                    |
+|                     toggle MarkdownPreView                     |              `<F12>`               |
 
 You can see more keybinds in `init.vim` and other configuration files in `plugin` directory.
 
