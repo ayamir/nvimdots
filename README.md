@@ -176,10 +176,10 @@ The leader key is `,`.
 
 |                          Effect                           |                     shortcut                     |
 | :-------------------------------------------------------: | :----------------------------------------------: |
-|                      install plugins                      |               `<leader><leader>i`                |
-|                      update plugins                       |               `<leader><leader>u`                |
-|                       clean Plugins                       |               `<leader><leader>c`                |
-|                       tabe init.vim                       |               `<leader><leader>v`                |
+|                  sync config and compile                  |                   `<leader>ps`                   |
+|                      install plugins                      |                   `<leader>pi`                   |
+|                      update plugins                       |                   `<leader>pu`                   |
+|                      compile config                       |                   `<leader>pc`                   |
 |                                                           |                                                  |
 |                     toggle nvim-tree                      |                    `<Ctrl-N>`                    |
 |                       toggle tagbar                       |                   `<leader>t`                    |
@@ -240,5 +240,10 @@ You can see more keybinds in `init.vim` and other configuration files in `plugin
 
 # Credit
 
-- [nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
-- [nvim](https://github.com/glepnir/nvim) as my config organization template.
+- [Avimitin/nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
+- [glepnir/nvim](https://github.com/glepnir/nvim) as my config organization template.
+
+# TODO
+
+- [ ] More documentation for how to customize.
+- [ ] Backup old compiled configuration when error occurs.
