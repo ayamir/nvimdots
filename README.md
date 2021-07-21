@@ -47,7 +47,7 @@ paru goneovim
 
 This is my neovim's configuration.
 
-I use [Vim-Plug](https://github.com/junegunn/vim-plug) to manage plugins.
+I use [wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
 I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to realize code complete.
 
@@ -63,15 +63,10 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 # Structure
 
-`init.vim` is the kernel config file.
+`init.lua` is the kernel config file. It requires configuration in `lua`
+directory.
 
-The first part is the common settings of neovim.
-
-The second part is Vim-Plug's settings which consists of all of my plugins.
-
-The third part is common simple keybinding settings about some plugins.
-
-`plugin` directory includes some plugins' specific settings.
+`lua` directory contains three parts. 
 
 <a id="plugins"></a>
 
@@ -212,3 +207,4 @@ You can see more keybinds in `init.vim` and other configuration files in `plugin
 # Credit
 
 + [nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
++ [nvim](https://github.com/glepnir/nvim) as my config organization template.
