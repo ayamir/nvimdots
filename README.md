@@ -247,3 +247,4 @@ You can see more keybinds in `init.vim` and other configuration files in `plugin
 
 - [ ] More documentation for how to customize.
 - [ ] Backup old compiled configuration when error occurs.
+- [ ] Install script for different distros.
