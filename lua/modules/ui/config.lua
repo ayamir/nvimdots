@@ -142,6 +142,17 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
+    -- vim.cmd [[highlight IndentOne guifg=#BF616A guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
+    -- vim.g.indent_blankline_char_highlight_list = {
+    --     "IndentOne", "IndentTwo", "IndentThree", "IndentFour", "IndentFive",
+    --     "IndentSix", "IndentSeven"
+    -- }
     vim.g.indent_blankline_char = "│"
     vim.g.indent_blankline_show_first_indent_level = true
     vim.g.indent_blankline_filetype_exclude = {
