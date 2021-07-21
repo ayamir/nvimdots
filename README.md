@@ -6,6 +6,7 @@
 4. [Plugins](#plugins)
 5. [Keybindings](#keybindings)
 6. [Credit](#credit)
+7. [TODO](#todo)
 
 <a id="introduction"></a>
 
@@ -242,6 +243,8 @@ You can see more keybinds in `init.vim` and other configuration files in `plugin
 
 - [Avimitin/nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
 - [glepnir/nvim](https://github.com/glepnir/nvim) as my config organization template.
+
+<a id="todo"></a>
 
 # TODO
 
