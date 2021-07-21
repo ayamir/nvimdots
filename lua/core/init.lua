@@ -47,6 +47,27 @@ local leader_map = function()
     vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
 end
 
+local ultisnips_map = function()
+    vim.g.UltiSnipsExpandTrigger = "<NUL>"
+    vim.g.UltiSnipsJumpForwardTrigger = "<C-l>"
+    vim.g.UltiSnipsJumpBackwardTrigger = "<C-h>"
+    vim.g.UltiSnipsEditSplit = "vertical"
+end
+
+local neovide_config = function()
+    vim.cmd [[set guifont=FiraCode\ Nerd\ Font:h12]]
+    vim.g.neovide_refresh_rate = 60
+    vim.g.neovide_cursor_vfx_mode = "railgun"
+    vim.g.neovide_no_idle = true
+    vim.g.neovide_cursor_animation_length = 0.03
+    vim.g.neovide_cursor_trail_length = 0.05
+    vim.g.neovide_cursor_antialiasing = true
+    vim.g.neovide_cursor_vfx_opacity = 200.0
+    vim.g.neovide_cursor_vfx_particle_lifetime = 1.2
+    vim.g.neovide_cursor_vfx_particle_speed = 20.0
+    vim.g.neovide_cursor_vfx_particle_density = 5.0
+end
+
 local load_core = function()
     local pack = require('core.pack')
     createdir()
@@ -54,17 +75,16 @@ local load_core = function()
     leader_map()
 
     pack.ensure_plugins()
+    ultisnips_map()
+    neovide_config()
+
     require('core.options')
     require('core.mapping')
     require('keymap')
     require('core.event')
     pack.load_compile()
-    vim.cmd [[colorscheme onehalflight]]
 
-    vim.g.UltiSnipsExpandTrigger = "<NUL>"
-    vim.g.UltiSnipsJumpForwardTrigger = "<C-l>"
-    vim.g.UltiSnipsJumpBackwardTrigger = "<C-h>"
-    vim.g.UltiSnipsEditSplit = "vertical"
+    vim.cmd [[colorscheme nord]]
 end
 
 load_core()
