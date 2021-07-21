@@ -62,8 +62,13 @@ function config.vim_cursorwod()
 end
 
 function config.nvim_treesitter()
+    if not packer_plugins['nvim-ts-rainbow'].loaded then
+        vim.cmd [[packadd nvim-ts-rainbow]]
+    end
+
     vim.api.nvim_command('set foldmethod=expr')
     vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+
     require'nvim-treesitter.configs'.setup {
         ensure_installed = {
             "c", "cpp", "go", "gomod", "rust", "bash", "lua", "toml", "yaml",
@@ -89,6 +94,11 @@ function config.nvim_treesitter()
                     ["ic"] = "@class.inner"
                 }
             }
+        },
+        rainbow = {
+            enable = true,
+            extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+            max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
         }
     }
 end
@@ -102,27 +112,7 @@ function config.autotag()
     })
 end
 
-function config.split_term()
-    if packer_plugins['split-term'] and not packer_plugins['split-term'].loaded then
-        vim.cmd [[packadd split-term]]
-    end
-end
-
-function config.nvim_colorizer()
-    require('colorizer').setup {
-        css = {rgb_fn = true},
-        scss = {rgb_fn = true},
-        sass = {rgb_fn = true},
-        stylus = {rgb_fn = true},
-        vim = {names = true},
-        tmux = {names = false},
-        'javascript',
-        'javascriptreact',
-        'typescript',
-        'typescriptreact',
-        html = {mode = 'foreground'}
-    }
-end
+function config.nvim_colorizer() require('colorizer').setup() end
 
 function config.easymotion()
     vim.g.EasyMotion_do_mapping = 0

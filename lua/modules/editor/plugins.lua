@@ -24,7 +24,11 @@ editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
     opt = true,
     after = 'nvim-treesitter'
 }
-editor['p00f/nvim-ts-rainbow'] = {opt = true}
+editor['p00f/nvim-ts-rainbow'] = {
+    opt = true,
+    after = 'nvim-treesitter',
+    event = 'BufRead'
+}
 editor['sbdchd/neoformat'] = {opt = true, cmd = 'Neoformat'}
 editor['windwp/nvim-ts-autotag'] = {
     opt = true,
@@ -35,14 +39,11 @@ editor['rhysd/accelerated-jk'] = {opt = true}
 editor['hrsh7th/vim-eft'] = {opt = true}
 editor['junegunn/vim-slash'] = {opt = true, event = 'BufRead'}
 editor['easymotion/vim-easymotion'] = {opt = true, config = conf.easymotion}
-editor['vimlab/split-term.vim'] = {
-    opt = true,
-    cmd = {'Term', 'VTerm'},
-    config = conf.split_term
-}
+editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
 editor['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 editor['norcalli/nvim-colorizer.lua'] = {
-    ft = {'html', 'css', 'sass', 'vim', 'typescript', 'typescriptreact'},
+    opt = true,
+    event = 'BufRead',
     config = conf.nvim_colorizer
 }
 
