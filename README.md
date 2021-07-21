@@ -18,6 +18,8 @@
 
 ![Coding](./shots/coding.png)
 
+![Gitui](./shots/gitui.png)
+
 This is my neovim's configuration.
 
 I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
