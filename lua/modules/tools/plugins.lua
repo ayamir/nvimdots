@@ -19,5 +19,10 @@ tools['nvim-telescope/telescope-project.nvim'] = {
     opt = true,
     after = 'telescope.nvim'
 }
+tools['nvim-telescope/telescope-frecency.nvim'] = {
+    opt = true,
+    after = 'telescope.nvim',
+    requires = {{'tami5/sql.nvim', opt = true}}
+}
 
 return tools

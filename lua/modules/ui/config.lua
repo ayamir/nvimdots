@@ -44,16 +44,20 @@ function config.dashboard()
 
     vim.g.dashboard_custom_section = {
         change_colorscheme = {
-            description = {' Scheme change              comma t c '},
+            description = {' Scheme change              comma s c '},
             command = 'DashboardChangeColorscheme'
+        },
+        find_frecency = {
+            description = {' File frecency              comma f r '},
+            command = 'Telescope frecency'
+        },
+        find_history = {
+            description = {' File history               comma f e '},
+            command = 'DashboardFindHistory'
         },
         find_project = {
             description = {' Project find               comma f p '},
-            command = "lua require'telescope'.extensions.project.project{}"
-        },
-        find_history = {
-            description = {'祥File history               comma f r '},
-            command = 'DashboardFindHistory'
+            command = 'Telescope project'
         },
         find_file = {
             description = {' File find                  comma f f '},

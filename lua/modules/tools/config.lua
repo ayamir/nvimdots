@@ -1,6 +1,8 @@
 local config = {}
 
 function config.telescope()
+    local home = os.getenv("HOME")
+
     if not packer_plugins['plenary.nvim'].loaded then
         vim.cmd [[packadd plenary.nvim]]
     end
@@ -17,8 +19,13 @@ function config.telescope()
         vim.cmd [[packadd telescope-project.nvim]]
     end
 
-    require('telescope').load_extension('fzy_native')
-    require('telescope').load_extension('project')
+    if not packer_plugins['sql.nvim'].loaded then
+        vim.cmd [[packadd sql.nvim]]
+    end
+
+    if not packer_plugins['telescope-frecency.nvim'].loaded then
+        vim.cmd [[packadd telescope-frecency.nvim]]
+    end
 
     require('telescope').setup {
         defaults = {
@@ -50,9 +57,27 @@ function config.telescope()
             fzy_native = {
                 override_generic_sorter = false,
                 override_file_sorter = true
+            },
+            frecency = {
+                show_scores = true,
+                show_unindexed = true,
+                ignore_patterns = {"*.git/*", "*/tmp/*"},
+                workspaces = {
+                    ["conf"] = home .. "/.config",
+                    ["data"] = home .. "/.local/share",
+                    ["nvim"] = home .. "/.config/nvim",
+                    ["code"] = home .. "/code",
+                    ["c"] = home .. "/code/c",
+                    ["cpp"] = home .. "/code/cpp",
+                    ["go"] = home .. "/go/src",
+                    ["rust"] = home .. "/code/rs"
+                }
             }
         }
     }
+    require('telescope').load_extension('fzy_native')
+    require('telescope').load_extension('project')
+    require('telescope').load_extension('frecency')
 end
 
 return config
