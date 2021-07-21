@@ -51,9 +51,7 @@ function autocmd.load_autocmds()
             }, {
                 "WinLeave,BufLeave,InsertEnter", "*",
                 [[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]]
-            }, -- Equalize window dimensions when resizing vim window
-            {"VimResized", "*", [[tabdo wincmd =]]},
-            -- Force write shada on leaving nvim
+            }, -- Force write shada on leaving nvim
             {
                 "VimLeave", "*",
                 [[if has('nvim') | wshada! | else | wviminfo! | endif]]
