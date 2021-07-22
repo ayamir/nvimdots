@@ -126,9 +126,16 @@ directory.
 
     - `lang` directory contains plugins' configuration about specific language.
 
-    - `tools` directory contains telescope's configuration.
+    - `tools` directory contains telescope and its extensions' configuration.
 
     - `ui` directory contains plugins' configuration about ui.
+
+## Important
+
+You need to execute `PackerSync` to compile the latest config if you modify the
+any config in `lua` directory.
+
+Just press `<leader>ps`.
 
 <a id="plugins"></a>
 
