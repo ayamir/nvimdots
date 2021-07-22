@@ -30,7 +30,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 **Pros**:
 
-- Fast. Less than **50ms** to start.
+- Fast. Less than **100ms** to start.
 - Simple. Run out of the box.
 - Modern. Pure lua to config.
 - Modular. Easy to customize.
@@ -64,6 +64,45 @@ sudo pacman -S alacritty kitty
 ```shell
 paru neovide
 paru goneovim
+```
+
+4. Tools for plugins
+
+- For [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall#usage), you
+  need to install corresponding language server use it.
+
+- For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), you need to install corresponding parser manually.
+
+  You can edit `lua/modules/editor/config.lua`'s `config.nvim_treesitter`
+  function to add what you need.
+
+  ![treesitter](./shots/treesitter.png)
+
+- For [neoformat](https://github.com/sbdchd/neoformat#supported-filetypes), you
+  need to install corresponding formatter manually:
+
+```shell
+# clangformat for c/cpp etc
+sudo pacman -S clang
+# gofmt and goimports for golang
+go get -u golang.org/x/tools/...
+# luaformatter for lua
+sudo pacman -S luarocks
+luarocks install --server=https://luarocks.org/dev luaformatter
+# yapf and autopep8 for python
+pip install autopep8 yapf --user
+# rustfmt
+sudo pacman -S rustup
+# on the stable toolchain
+rustup component add rustfmt
+# on the nightly toolchain
+rustup component add rustfmt --toolchain nightly
+# prettier for markdown/html etc
+sudo pacman -S prettier
+# jq for json
+sudo pacman -S jq
+# shfmt for shell
+sudo pacman -S shfmt
 ```
 
 <a id="structure"></a>
