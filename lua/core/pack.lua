@@ -4,6 +4,7 @@ local data_dir = require('core.global').data_dir
 local modules_dir = vim_path .. '/lua/modules'
 local packer_compiled = data_dir .. 'packer_compiled.vim'
 local compile_to_lua = data_dir .. 'lua/_compiled.lua'
+local bak_compiled = data_dir .. 'lua/bak_compiled.lua'
 local packer = nil
 
 local Packer = {}
@@ -89,7 +90,7 @@ function plugins.convert_compile_file()
     end
 
     if vim.fn.filereadable(compile_to_lua) == 1 then
-        os.remove(compile_to_lua)
+        os.rename(compile_to_lua, bak_compiled)
     end
 
     local file = io.open(compile_to_lua, "w")
