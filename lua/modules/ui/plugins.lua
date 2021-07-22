@@ -1,7 +1,7 @@
 local ui = {}
 local conf = require('modules.ui.config')
 
-ui['sonph/onehalf'] = {rtp = 'vim/'}
+ui['sonph/onehalf'] = {opt = false, rtp = 'vim/'}
 ui['arcticicestudio/nord-vim'] = {opt = false}
 ui['glepnir/galaxyline.nvim'] = {
     config = conf.galaxyline,
