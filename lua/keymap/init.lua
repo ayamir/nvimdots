@@ -121,7 +121,11 @@ local plug_map = {
     ["n|<C-w>t"] = map_cr('Term'):with_noremap():with_silent(),
     ["n|<C-w>T"] = map_cr('VTerm'):with_noremap():with_silent(),
     -- Plugin MarkdownPreview
-    ["n|<F12>"] = map_cr('MarkdownPreviewToggle'):with_noremap():with_silent()
+    ["n|<F12>"] = map_cr('MarkdownPreviewToggle'):with_noremap():with_silent(),
+    -- Plugin auto_session
+    ["n|<leader>ss"] = map_cu('SaveSession'):with_noremap():with_silent(),
+    ["n|<leader>sr"] = map_cu('RestoreSession'):with_noremap():with_silent(),
+    ["n|<leader>sd"] = map_cu('DeleteSession'):with_noremap():with_silent()
 };
 
 bind.nvim_load_mapping(plug_map)
