@@ -130,12 +130,68 @@ directory.
 
     - `ui` directory contains plugins' configuration about ui.
 
+## How to customize
+
+- Add plugin
+
+  1. Determine this plugin belongs to what kind(completion, editor, lang, tools,
+     ui).
+  2. Add a list item in corresponding `plugins.lua`.
+
+     For example, I want to add [rmagatti/auto-session](https://github.com/rmagatti/auto-session) to `editor` category.
+
+     Then I need to modify `lua/modules/editor/plugins.lua`:
+
+     ![add_plugin](./shots/add_plugin.png)
+
+     (You should learn how to use [packer.nvim](https://github.com/wbthomason/packer.nvim) install and configure plugin on
+     your own)
+
+     I also need to modify `lua/modules/editor/config.lua`:
+
+     ![add_config](./shots/add_config.png)
+
+     Then press `<leader>ps`:
+
+     ![packer_sync](./shots/packer_sync.png)
+
+     Then try its command: `SaveSession`
+
+     ![sync_success1](./shots/sync_success1.png)
+
+     Then restart nvim.
+
+     ![sync_success2](./shots/sync_success2.png)
+
+     So this plugin is added successfully!
+
+- Remove plugin
+
+  1. Determine this plugin belongs to what kind(completion, editor, lang, tools,
+     ui).
+
+  2. Remove its config is corresponding `plugins.lua` and `config.lua`.
+
+  3. Press `<leader>ps` to recompile.
+
 ## Important
 
-You need to execute `PackerSync` to compile the latest config if you modify the
+You need to execute `PackerSync` or just press `<leader>ps` to compile the latest config if you modify the
 any config in `lua` directory.
 
-Just press `<leader>ps`.
+Don't worry if you meet any error for your new config.
+
+The old compiled file called `bak_compiled.lua` is located in
+`$HOME/.local/share/nvim/site/lua` directory.
+
+If you just want to restore to old config:
+
+```shell
+cd $HOME/.local/share/nvim/site/lua
+cp ./bak_compiled.lua ./_compiled.lua
+```
+
+Then you can figure out what modification makes error.
 
 <a id="plugins"></a>
 
@@ -298,5 +354,5 @@ You can see more keybinds in `init.vim` and other configuration files in `plugin
 # TODO
 
 - [ ] More documentation for how to customize.
-- [ ] Backup old compiled configuration when error occurs.
+- [x] Backup old compiled configuration when error occurs.
 - [ ] Install script for different distros.

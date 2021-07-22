@@ -46,5 +46,10 @@ editor['norcalli/nvim-colorizer.lua'] = {
     event = 'BufRead',
     config = conf.nvim_colorizer
 }
+editor['rmagatti/auto-session'] = {
+    opt = true,
+    cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
+    config = conf.auto_session
+}
 
 return editor

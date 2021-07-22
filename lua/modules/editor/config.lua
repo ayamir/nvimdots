@@ -1,4 +1,10 @@
 local config = {}
+local global = require('core.global')
+local session_dir = global.data_dir .. '/session'
+
+if vim.fn.isdirectory(session_dir) ~= 1 then
+    os.execute('mkdir -p ' .. session_dir)
+end
 
 function config.symbols_outline()
     vim.g.symbols_outline = {
@@ -118,6 +124,20 @@ function config.easymotion()
     vim.g.EasyMotion_do_mapping = 0
     vim.g.EasyMotion_smartcase = 1
     vim.g.EasyMotion_use_smartsign_us = 1
+end
+
+function config.auto_session()
+    local opts = {
+        log_level = 'info',
+        auto_session_enable_last_session = true,
+        auto_session_root_dir = session_dir,
+        auto_session_enabled = true,
+        auto_save_enabled = nil,
+        auto_restore_enabled = nil,
+        auto_session_suppress_dirs = nil
+    }
+
+    require('auto-session').setup(opts)
 end
 
 return config
