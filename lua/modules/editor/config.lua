@@ -78,7 +78,7 @@ function config.nvim_treesitter()
     require'nvim-treesitter.configs'.setup {
         ensure_installed = {
             "c", "cpp", "go", "gomod", "rust", "bash", "lua", "toml", "yaml",
-            "json"
+            "json", "python"
         },
         ignore_install = {
             "javascript", "beancount", "bibtex", "c_sharp", "clojure",
