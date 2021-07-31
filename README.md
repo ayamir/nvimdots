@@ -377,7 +377,7 @@ The leader key is `,`.
 |                                                           |                                    |
 |                  toggle MarkdownPreView                   |              `<F12>`               |
 
-You can see more keybinds in `init.vim` and other configuration files in `plugin` directory.
+You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`
 
 <a id="credit"></a>
 
