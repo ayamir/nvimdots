@@ -2,7 +2,7 @@ local ui = {}
 local conf = require('modules.ui.config')
 
 ui['sonph/onehalf'] = {opt = false, rtp = 'vim/'}
-ui['arcticicestudio/nord-vim'] = {opt = false}
+ui['maaslalani/nordbuddy'] = {opt = false, config = conf.nordbuddy}
 ui['glepnir/galaxyline.nvim'] = {
     config = conf.galaxyline,
     requires = 'kyazdani42/nvim-web-devicons'

@@ -55,7 +55,7 @@ local ultisnips_map = function()
 end
 
 local neovide_config = function()
-    vim.cmd [[set guifont=FiraCode\ Nerd\ Font:h12]]
+    vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font:h12]]
     vim.g.neovide_refresh_rate = 60
     vim.g.neovide_cursor_vfx_mode = "railgun"
     vim.g.neovide_no_idle = true
@@ -84,7 +84,7 @@ local load_core = function()
     require('core.event')
     pack.load_compile()
 
-    vim.cmd [[colorscheme nord]]
+    vim.cmd [[colorscheme nordbuddy]]
 end
 
 load_core()

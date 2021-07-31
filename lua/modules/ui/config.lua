@@ -2,6 +2,15 @@ local config = {}
 
 function config.galaxyline() require('modules.ui.nerdline') end
 
+function config.nordbuddy()
+    require('nordbuddy').colorscheme({
+        underline_option = 'undercurl',
+        italic = true,
+        italic_comments = true,
+        minimal_mode = true
+    })
+end
+
 function config.nvim_bufferline()
     require('bufferline').setup {
         options = {
