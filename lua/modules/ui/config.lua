@@ -2,7 +2,8 @@ local config = {}
 
 function config.github()
     require("github-theme").setup({
-        themeStyle = "light",
+        -- execute `PackerSync` each time you change it
+        themeStyle = "light", -- light or dark
         functionStyle = "italic",
         sidebars = {"qf", "vista_kind", "terminal", "packer"}
     })
