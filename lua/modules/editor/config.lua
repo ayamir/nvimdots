@@ -78,16 +78,15 @@ function config.nvim_treesitter()
     require'nvim-treesitter.configs'.setup {
         ensure_installed = {
             "c", "cpp", "go", "gomod", "rust", "bash", "lua", "toml", "yaml",
-            "json", "python"
+            "json", "python", "javascript", "typescript"
         },
         ignore_install = {
-            "javascript", "beancount", "bibtex", "c_sharp", "clojure",
-            "comment", "commonlisp", "cuda", "dart", "devicetree", "elixir",
-            "erlang", "fennel", "Godot", "glimmer", "graphql", "java", "jsdoc",
-            "julia", "kotlin", "ledger", "nix", "ocaml", "ocaml_interface",
-            "php", "ql", "query", "r", "rst", "ruby", "scss", "sparql",
-            "supercollider", "svelte", "teal", "tsx", "typescript", "turtle",
-            "verilog", "vue", "zig"
+            "beancount", "bibtex", "c_sharp", "clojure", "comment",
+            "commonlisp", "cuda", "dart", "devicetree", "elixir", "erlang",
+            "fennel", "Godot", "glimmer", "graphql", "java", "jsdoc", "julia",
+            "kotlin", "ledger", "nix", "ocaml", "ocaml_interface", "php", "ql",
+            "query", "r", "rst", "ruby", "scss", "sparql", "supercollider",
+            "svelte", "teal", "tsx", "turtle", "verilog", "vue", "zig"
         },
         highlight = {enable = true, disable = {'vim'}},
         textobjects = {
