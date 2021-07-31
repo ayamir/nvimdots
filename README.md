@@ -36,9 +36,9 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 - Modular. Easy to customize.
 - Powerful. Full functionality to code.
 
-![startup_with_onehalflight](./shots/startup_onehalflight.png)
+![startup_with_light](./shots/startup_light.png)
 
-![startup_with_nord](./shots/startup_nord.png)
+![startup_with_dark](./shots/startup_dark.png)
 
 (Tested with [rhysd/vim-startuptime](https://github.com/rhysd/vim-startuptime))
 
