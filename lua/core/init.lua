@@ -83,8 +83,6 @@ local load_core = function()
     require('keymap')
     require('core.event')
     pack.load_compile()
-
-    vim.cmd [[colorscheme nordbuddy]]
 end
 
 load_core()

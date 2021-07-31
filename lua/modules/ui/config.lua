@@ -1,14 +1,23 @@
 local config = {}
 
-function config.galaxyline() require('modules.ui.nerdline') end
-
-function config.nordbuddy()
-    require('nordbuddy').colorscheme({
-        underline_option = 'undercurl',
-        italic = true,
-        italic_comments = true,
-        minimal_mode = true
+function config.github()
+    require("github-theme").setup({
+        themeStyle = "light",
+        functionStyle = "italic",
+        sidebars = {"qf", "vista_kind", "terminal", "packer"}
     })
+end
+
+function config.lualine()
+    require('lualine').setup {
+        options = {
+            theme = 'github',
+            -- For round icons (require Nerd-Font)
+            section_separators = {"", ""}
+            -- component_separators = {"", ""},
+            -- ... your lualine config
+        }
+    }
 end
 
 function config.nvim_bufferline()
@@ -44,12 +53,27 @@ end
 function config.dashboard()
     local home = os.getenv('HOME')
     vim.g.dashboard_footer_icon = '🐬 '
-    vim.g.dashboard_preview_command = 'cat'
-    vim.g.dashboard_preview_pipeline = 'lolcat -F 0.2 --truecolor -f'
-    vim.g.dashboard_preview_file = home .. '/.config/nvim/ayanami.cat'
-    vim.g.dashboard_preview_file_height = 17
-    vim.g.dashboard_preview_file_width = 37
     vim.g.dashboard_default_executive = 'telescope'
+
+    vim.g.dashboard_custom_header = {
+        [[              ...  .......          ]],
+        [[         ....................       ]],
+        [[    ..'........................     ]],
+        [[ ...,'.......'.., .........'....    ]],
+        [[  .'......,. ;'., '..'.......'.'.   ]],
+        [[ .'.,'.''.;..,'.. .  ...'....','..  ]],
+        [[..''.'.''''.....        .,'....;'.. ]],
+        [[..',.......'. .        ..';'..','...]],
+        [[ ....''..  ..        .....;,..','...]],
+        [[  . .....           ......,..';,....]],
+        [[      .'.         ....  ... ,,'.....]],
+        [[      .,..             .....,'..... ]],
+        [[     .'''.             ...'......   ]],
+        [[     ..'..'.          ... ......    ]],
+        [[       . '.'..             ..       ]],
+        [[         ......           .         ]],
+        [[            ....                    ]]
+    }
 
     vim.g.dashboard_custom_section = {
         change_colorscheme = {

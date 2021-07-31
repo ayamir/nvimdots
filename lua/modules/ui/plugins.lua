@@ -1,12 +1,8 @@
 local ui = {}
 local conf = require('modules.ui.config')
 
-ui['sonph/onehalf'] = {opt = false, rtp = 'vim/'}
-ui['maaslalani/nordbuddy'] = {opt = false, config = conf.nordbuddy}
-ui['glepnir/galaxyline.nvim'] = {
-    config = conf.galaxyline,
-    requires = 'kyazdani42/nvim-web-devicons'
-}
+ui['projekt0n/github-nvim-theme'] = {opt = false, config = conf.github}
+ui['hoob3rt/lualine.nvim'] = {opt = false, config = conf.lualine}
 ui['glepnir/dashboard-nvim'] = {config = conf.dashboard}
 ui['kyazdani42/nvim-tree.lua'] = {
     opt = true,
