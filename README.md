@@ -199,17 +199,9 @@ directory.
 
   modify `lua/core/options.lua`
 
-- Change nerdline's color
+- Switch light/dark theme
 
-```shell
-# For nord colorscheme
-cp $HOME/.config/nvim/lua/modules/ui/nordline.lua
-$HOME/.config/nvim/lua/modules/ui/nerdline.lua
-
-# For onehalflight colorscheme
-cp $HOME/.config/nvim/lua/modules/ui/lightline.lua
-$HOME/.config/nvim/lua/modules/ui/nerdline.lua
-```
+  modify `lua/modules/ui/config.lua`'s `themeStyle`
 
 ## Important
 
@@ -238,8 +230,7 @@ Then you can figure out what modification makes error.
 
 |                                             Name                                              |                 Effect                 |
 | :-------------------------------------------------------------------------------------------: | :------------------------------------: |
-|                       [sonph/onehalf](https://github.com/sonph/onehalf)                       |             My light theme             |
-|            [arcticicestudio/nord-vim](https://github.com/arcticicestudio/nord-vim)            |             My dark theme              |
+|         [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)         |          My light/dark theme           |
 |        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |         For nvim-tree's icons          |
 |             [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)             |  Minimal, fast but customizable line   |
 |              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |          Dashboard for Neovim          |
