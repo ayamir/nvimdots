@@ -23,6 +23,7 @@ local colors = {
     magenta = '#a626a4',
     blue = '#81a1c1',
     red = '#bf616a',
+    violet = '#ee82ee',
 
     mode_bg = '#f0f0f0'
 }
