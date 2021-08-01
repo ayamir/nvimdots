@@ -5,20 +5,51 @@ function config.github()
         -- execute `PackerSync` each time you change it
         themeStyle = "light", -- light or dark
         functionStyle = "italic",
+        keywordStyle = "bold",
+        hideInactiveStatusline = true,
+        transparent = false,
+        darkSidebar = false,
+        darkFloat = false,
         sidebars = {"qf", "vista_kind", "terminal", "packer"}
     })
 end
 
 function config.lualine()
+    local function lsp()
+        local icon = [[ LSP: ]]
+        local msg = 'No Active LSP'
+        local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+        local clients = vim.lsp.get_active_clients()
+        if next(clients) == nil then return icon .. msg end
+        for _, client in ipairs(clients) do
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                return icon .. client.name
+            end
+        end
+        return icon .. msg
+    end
+
     require('lualine').setup {
         options = {
             icons_enabled = true,
             theme = 'github',
             disabled_filetypes = {}
         },
+
         sections = {
             lualine_a = {'mode'},
-            lualine_b = {'branch'},
+            lualine_b = {
+                {'branch'}, {
+                    'diff',
+                    -- Is it me or the symbol for modified us really weird
+                    symbols = {
+                        added = ' ',
+                        modified = '柳 ',
+                        removed = ' '
+                    }
+                }
+            },
             lualine_c = {
                 {'filename'}, {
                     'diagnostics',
@@ -26,7 +57,7 @@ function config.lualine()
                     symbols = {error = ' ', warn = ' ', info = ' '}
                 }
             },
-            lualine_x = {'encoding', 'fileformat', 'filetype'},
+            lualine_x = {{lsp}, {'encoding'}, {'fileformat'}},
             lualine_y = {'progress'},
             lualine_z = {'location'}
         },
