@@ -284,7 +284,6 @@ Then you can figure out what modification makes error.
 |         [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)         |              Make Nvim LSP more useful               |
 |           [hrsh7th/nvim-compe](https://github.com/hrsh7th/nvim-compe)           |           Auto completion plugin for nvim            |
 |     [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)     |  Show signature when completing function parameters  |
-| [nvim-lua/lsp_extensions.nvim](https://github.com/nvim-lua/lsp_extensions.nvim) |             Additional features for lsp              |
 |        [tzachar/compe-tabnine](https://github.com/tzachar/compe-tabnine)        |             Tabnine port for nvim-compe              |
 |            [hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip)            | Snippets plugin supports LSP/VSCode's snippet format |
 |      [hrsh7th/vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)      |           Vsnip integration to nvim's LSP            |
@@ -299,6 +298,7 @@ Then you can figure out what modification makes error.
 | :-----------------------------------------------------------------------------: | :-------------------------: |
 |                 [fatih/vim-go](https://github.com/fatih/vim-go)                 | Most powerful plugin for go |
 |           [rust-lang/rust.vim](https://github.com/rust-lang/rust.vim)           |       Plugin for rust       |
+|     [simrat39/rust-tools.nvim](https://github.com/simrat39/rust-tools.nvim)     |       Plugin for rust       |
 |  [kristijanhusak/orgmode.nvim](https://github.com/kristijanhusak/orgmode.nvim)  |      Org mode in nvim       |
 | [iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) | Markdown-preview out of box |
 
