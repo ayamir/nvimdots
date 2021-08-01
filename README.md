@@ -232,7 +232,7 @@ Then you can figure out what modification makes error.
 | :-------------------------------------------------------------------------------------------: | :------------------------------------: |
 |         [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)         |          My light/dark theme           |
 |        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |         For nvim-tree's icons          |
-|             [glepnir/galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim)             |  Minimal, fast but customizable line   |
+|                [hoob3rt/lualine.nvim](https://github.com/hoob3rt/lualine.nvim)                |  Minimal, fast but customizable line   |
 |              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |          Dashboard for Neovim          |
 |            [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)            |        Replacement of Nerdtree         |
 |             [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)             |        Show git status in nvim         |
