@@ -26,10 +26,6 @@ completion['hrsh7th/nvim-compe'] = {
     after = 'nvim-lspconfig',
     config = conf.compe
 }
-completion['nvim-lua/lsp_extensions.nvim'] = {
-    opt = true,
-    after = 'nvim-lspconfig'
-}
 completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
 completion['tzachar/compe-tabnine'] = {
     opt = true,
