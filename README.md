@@ -269,6 +269,7 @@ Then you can figure out what modification makes error.
 |            [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)            |           Accelerated j/k            |
 |                 [hrsh7th/vim-eft](https://github.com/hrsh7th/vim-eft)                 |             Enhanced f/t             |
 |       [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)       |         Powerful vim motion          |
+|           [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)           |            smooth scroll             |
 |              [junegunn/vim-slash](https://github.com/junegunn/vim-slash)              |        Elegant search in vim         |
 |             [vimlab/split-term](https://github.com/vimlab/split-term.vim)             | Utilites around neovim's `:terminal` |
 |             [thinca/vim-quickrun](https://github.com/thinca/vim-quickrun)             |        Just run code quickly         |
