@@ -1,9 +1,13 @@
 local ui = {}
 local conf = require('modules.ui.config')
 
-ui['projekt0n/github-nvim-theme'] = {opt = false, config = conf.github}
+ui['projekt0n/github-nvim-theme'] = {
+    opt = false,
+    config = conf.github,
+    requires = 'kyazdani42/nvim-web-devicons'
+}
 ui['hoob3rt/lualine.nvim'] = {opt = false, config = conf.lualine}
-ui['glepnir/dashboard-nvim'] = {config = conf.dashboard}
+ui['glepnir/dashboard-nvim'] = {opt = false, config = conf.dashboard}
 ui['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
@@ -22,6 +26,7 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     config = conf.indent_blankline
 }
 ui['akinsho/nvim-bufferline.lua'] = {
+    opt = false,
     config = conf.nvim_bufferline,
     requires = 'kyazdani42/nvim-web-devicons'
 }

@@ -8,9 +8,9 @@ function config.github()
         keywordStyle = "bold",
         hideInactiveStatusline = true,
         transparent = false,
-        darkSidebar = false,
-        darkFloat = false,
-        sidebars = {"qf", "vista_kind", "terminal", "packer"}
+        darkSidebar = true,
+        darkFloat = true,
+        sidebars = {"qf", "vista_kind", "terminal", "packer", "NvimTree"}
     })
 end
 
@@ -77,7 +77,7 @@ end
 function config.nvim_bufferline()
     require('bufferline').setup {
         options = {
-            number = "none",
+            number = "both",
             number_style = "superscript",
             modified_icon = '✥',
             buffer_close_icon = "",
@@ -88,10 +88,11 @@ function config.nvim_bufferline()
             max_prefix_length = 13,
             tab_size = 20,
             show_buffer_close_icons = true,
+            show_buffer_icons = true,
             show_tab_indicators = true,
             separator_style = "thin",
             diagnostics = "nvim_lsp",
-            always_show_bufferline = false,
+            always_show_bufferline = true,
             offsets = {
                 {
                     filetype = "NvimTree",
@@ -175,7 +176,7 @@ function config.nvim_tree()
     vim.g.nvim_tree_indent_markers = 1
     vim.g.nvim_tree_hide_dotfiles = 0
     vim.g.nvim_tree_git_hl = 1
-    vim.g.nvim_tree_highlight_opened_files = 1
+    vim.g.nvim_tree_highdark_opened_files = 1
     vim.g.nvim_tree_tab_open = 1
     vim.g.nvim_tree_lsp_diagnostics = 1
     vim.g.nvim_tree_indent_markers = 1
@@ -233,14 +234,14 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-    -- vim.cmd [[highlight IndentOne guifg=#BF616A guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
-    -- vim.g.indent_blankline_char_highlight_list = {
+    -- vim.cmd [[highdark IndentOne guifg=#BF616A guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highdark IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highdark IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highdark IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highdark IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highdark IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highdark IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
+    -- vim.g.indent_blankline_char_highdark_list = {
     --     "IndentOne", "IndentTwo", "IndentThree", "IndentFour", "IndentFive",
     --     "IndentSix", "IndentSeven"
     -- }
@@ -265,6 +266,6 @@ end
 
 function config.zen_mode() require('zen-mode').setup {} end
 
-function config.twilight() require('twilight').setup {} end
+function config.twidark() require('twidark').setup {} end
 
 return config
