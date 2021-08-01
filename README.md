@@ -374,7 +374,6 @@ You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`
 
 # Credit
 
-- [Avimitin/nerd-galaxyline](https://github.com/Avimitin/nerd-galaxyline) as my galaxyline's template.
 - [glepnir/nvim](https://github.com/glepnir/nvim) as my config organization template.
 
 <a id="todo"></a>
