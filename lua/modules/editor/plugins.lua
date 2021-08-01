@@ -39,6 +39,11 @@ editor['rhysd/accelerated-jk'] = {opt = true}
 editor['hrsh7th/vim-eft'] = {opt = true}
 editor['junegunn/vim-slash'] = {opt = true, event = 'BufRead'}
 editor['easymotion/vim-easymotion'] = {opt = true, config = conf.easymotion}
+editor['karb94/neoscroll.nvim'] = {
+    opt = true,
+    event = "WinScrolled",
+    config = conf.neoscroll
+}
 editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
 editor['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 editor['norcalli/nvim-colorizer.lua'] = {
