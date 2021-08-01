@@ -110,7 +110,7 @@ local function load_options()
         relativenumber = true,
         foldenable = true,
         signcolumn = "yes",
-        conceallevel = 2,
+        conceallevel = 0,
         concealcursor = "niv"
     }
 
