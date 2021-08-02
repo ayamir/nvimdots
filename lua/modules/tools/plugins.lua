@@ -24,5 +24,8 @@ tools['nvim-telescope/telescope-frecency.nvim'] = {
     after = 'telescope.nvim',
     requires = {{'tami5/sql.nvim', opt = true}}
 }
+tools['folke/which-key.nvim'] = {
+    config = function() require("which-key").setup {} end
+}
 
 return tools

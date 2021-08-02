@@ -23,7 +23,7 @@ function config.lspkind()
             Property = '',
             Unit = '',
             Value = '',
-            Enum = '了',
+            Enum = '',
             Keyword = '',
             Snippet = '﬌',
             Color = '',

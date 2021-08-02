@@ -3,14 +3,16 @@ local config = {}
 function config.github()
     require("github-theme").setup({
         -- execute `PackerSync` each time you change it
-        themeStyle = "light", -- light or dark
+        themeStyle = "dark", -- light or dark
         functionStyle = "italic",
         keywordStyle = "bold",
         hideInactiveStatusline = true,
         transparent = false,
         darkSidebar = true,
         darkFloat = true,
-        sidebars = {"qf", "vista_kind", "terminal", "packer", "NvimTree"}
+        sidebars = {
+            "qf", "vista_kind", "terminal", "packer", "NvimTree", "OUTLINE"
+        }
     })
 end
 

@@ -252,6 +252,7 @@ Then you can figure out what modification makes error.
 | [nvim-telescope/telescope-fzy-native.nvim](https://github.com/nvim-telescope/telescope-fzy-native.nvim) |      Fzy search for telescope       |
 |    [nvim-telescope/telescope-project.nvim](https://github.com/nvim-telescope/telescope-project.nvim)    |   Manage projects with telescope    |
 |   [nvim-telescope/telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)   |   Frequent and recent file cache    |
+|                     [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                     |     Help you learn keybindings      |
 
 ## Editor
 
@@ -369,7 +370,7 @@ The leader key is `,`.
 |                                                           |                                    |
 |                  toggle MarkdownPreView                   |              `<F12>`               |
 
-You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`
+You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
 <a id="credit"></a>
 
