@@ -60,10 +60,6 @@ local plug_map = {
     ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),
     ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),
     ["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
-    ["n|<Leader>cw"] = map_cmd("<cmd>lua vim.lsp.buf.workspace_symbol()<CR>"):with_noremap()
-        :with_silent(),
-    ["n|<Leader>ce"] = map_cr('Lspsaga show_line_diagnostics'):with_noremap()
-        :with_silent(),
     ["n|<A-d>"] = map_cu('Lspsaga open_floaterm'):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap()
         :with_silent(),
@@ -71,6 +67,16 @@ local plug_map = {
         :with_silent(),
     -- Plugin trouble
     ["n|gt"] = map_cr('TroubleToggle'):with_noremap():with_silent(),
+    ["n|gR"] = map_cr('TroubleToggle lsp_references'):with_noremap()
+        :with_silent(),
+    ["n|<leader>cd"] = map_cr('TroubleToggle lsp_document_diagnostics'):with_noremap()
+        :with_silent(),
+    ["n|<leader>cw"] = map_cr('TroubleToggle lsp_workspace_diagnostics'):with_noremap()
+        :with_silent(),
+    ["n|<leader>cq"] = map_cr('TroubleToggle quickfix'):with_noremap()
+        :with_silent(),
+    ["n|<leader>cl"] = map_cr('TroubleToggle loclist'):with_noremap()
+        :with_silent(),
     -- Plugin nvim-tree
     ["n|<C-n>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
     ["n|<Leader>nf"] = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),
