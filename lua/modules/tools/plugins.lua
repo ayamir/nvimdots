@@ -27,5 +27,10 @@ tools['nvim-telescope/telescope-frecency.nvim'] = {
 tools['folke/which-key.nvim'] = {
     config = function() require("which-key").setup {} end
 }
+tools['folke/trouble.nvim'] = {
+    opt = true,
+    cmd = {"Trouble", "TroubleToggle", "TroubleRefresh"},
+    config = conf.trouble
+}
 
 return tools

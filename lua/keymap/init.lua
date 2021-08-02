@@ -60,8 +60,6 @@ local plug_map = {
     ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),
     ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),
     ["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
-    ["n|gt"] = map_cmd("<cmd>lua vim.lsp.buf.type_definition()<CR>"):with_noremap()
-        :with_silent(),
     ["n|<Leader>cw"] = map_cmd("<cmd>lua vim.lsp.buf.workspace_symbol()<CR>"):with_noremap()
         :with_silent(),
     ["n|<Leader>ce"] = map_cr('Lspsaga show_line_diagnostics'):with_noremap()
@@ -71,6 +69,8 @@ local plug_map = {
         :with_silent(),
     ["n|<Leader>g"] = map_cu("Lspsaga open_floaterm gitui"):with_noremap()
         :with_silent(),
+    -- Plugin trouble
+    ["n|gt"] = map_cr('TroubleToggle'):with_noremap():with_silent(),
     -- Plugin nvim-tree
     ["n|<C-n>"] = map_cr('NvimTreeToggle'):with_noremap():with_silent(),
     ["n|<Leader>nf"] = map_cr('NvimTreeFindFile'):with_noremap():with_silent(),
