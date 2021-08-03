@@ -356,13 +356,19 @@ The leader key is `,`.
 |                       find one word                       |            `<leader>w`             |
 |                                                           |                                    |
 |                back to last cursor's place                |             `<Ctrl-O>`             |
-|               jump to function's definition               |                `gd`                |
+|                    jump to definition                     |                `gd`                |
+|                    show implementation                    |                `gD`                |
 |                       smart rename                        |                `gr`                |
+|                    toggle diagnostics                     |                `gt`                |
+|                   toggle lsp references                   |                `gR`                |
 |                    show signature help                    |                `gs`                |
 | show current function/variable's definition or references |                `gh`                |
 |                      show hover doc                       |                `K`                 |
 |                     show code action                      |            `<leader>ca`            |
-|                   show code diagnostics                   |            `<leader>cd`            |
+|              toggle lsp document diagnostics              |            `<leader>cd`            |
+|             toggle lsp workspace diagnostics              |            `<leader>cw`            |
+|                   toggle code quickfix                    |            `<leader>cq`            |
+|                    toggle code loclist                    |            `<leader>cl`            |
 |                navigate in snippet's block                |             `<Ctrl-l>`             |
 |                                                           |                                    |
 |                 toggle one line's comment                 |               `gcc`                |
