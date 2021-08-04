@@ -7,7 +7,10 @@ editor['itchyny/vim-cursorword'] = {
     event = {'BufReadPre', 'BufNewFile'},
     config = conf.vim_cursorwod
 }
-editor['tpope/vim-commentary'] = {opt = true, cmd = 'Commentary'}
+editor['terrortylor/nvim-comment'] = {
+    opt = false,
+    config = function() require('nvim_comment').setup() end
+}
 editor['simrat39/symbols-outline.nvim'] = {
     opt = true,
     cmd = {'SymbolsOutline', 'SymbolsOulineOpen'},

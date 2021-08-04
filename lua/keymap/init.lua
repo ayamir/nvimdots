@@ -95,9 +95,6 @@ local plug_map = {
         :with_silent(),
     ["n|<Leader>fg"] = map_cu('Telescope live_grep'):with_noremap()
         :with_silent(),
-    --  Plugin commentary
-    ["n|gcc"] = map_cu("Commentary"):with_noremap():with_silent(),
-    ["v|gc"] = map_cu("Commentary"):with_noremap():with_silent(),
     -- Plugin accelerate-jk
     ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
     ["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
