@@ -23,7 +23,6 @@ ui['lewis6991/gitsigns.nvim'] = {
 ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
     event = 'BufRead',
-    branch = 'bug/lazy-loading',
     config = conf.indent_blankline
 }
 ui['akinsho/nvim-bufferline.lua'] = {

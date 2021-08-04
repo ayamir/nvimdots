@@ -236,16 +236,16 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-    vim.cmd [[highlight IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
-    vim.cmd [[highlight IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
-    vim.cmd [[highlight IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
-    vim.cmd [[highlight IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
-    vim.cmd [[highlight IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
-    vim.cmd [[highlight IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
-    vim.g.indent_blankline_char_highlight_list = {
-        "IndentTwo", "IndentThree", "IndentFour", "IndentFive", "IndentSix",
-        "IndentSeven"
-    }
+    -- vim.cmd [[highlight IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
+    -- vim.cmd [[highlight IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
+    -- vim.g.indent_blankline_char_highlight_list = {
+    --     "IndentTwo", "IndentThree", "IndentFour", "IndentFive", "IndentSix",
+    --     "IndentSeven"
+    -- }
     require("indent_blankline").setup {
         char = "│",
         show_first_indent_level = true,
