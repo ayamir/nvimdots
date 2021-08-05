@@ -32,5 +32,6 @@ tools['folke/trouble.nvim'] = {
     cmd = {"Trouble", "TroubleToggle", "TroubleRefresh"},
     config = conf.trouble
 }
+tools['dstein64/vim-startuptime'] = {opt = true, cmd = "StartupTime"}
 
 return tools
