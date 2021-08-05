@@ -252,7 +252,9 @@ Then you can figure out what modification makes error.
 | [nvim-telescope/telescope-fzy-native.nvim](https://github.com/nvim-telescope/telescope-fzy-native.nvim) |      Fzy search for telescope       |
 |    [nvim-telescope/telescope-project.nvim](https://github.com/nvim-telescope/telescope-project.nvim)    |   Manage projects with telescope    |
 |   [nvim-telescope/telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)   |   Frequent and recent file cache    |
+|                       [folke/trouble.nvim](https://github.com/folke/trouble.nvim)                       |       Show code troubles etc        |
 |                     [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                     |     Help you learn keybindings      |
+|                 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime)                 |    Profiling starup time quickly    |
 
 ## Editor
 
@@ -260,7 +262,7 @@ Then you can figure out what modification makes error.
 | :-----------------------------------------------------------------------------------: | :----------------------------------: |
 |          [itchyny/vim-cursorword](https://github.com/itchyny/vim-cursorword)          |        Highlight cursor word         |
 |         [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)         |            Easy alignment            |
-|            [tpope/vim-commentary](https://github.com/tpope/vim-commentary)            |         Comment code quickly         |
+|        [terrortylor/nvim-comment](https://github.com/terrortylor/nvim-comment)        |         Comment code quickly         |
 |   [simrat39/symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)   |        Display code structure        |
 | [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) |   Super powerful code highlighter    |
 |                [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                |     Super powerful code formater     |
