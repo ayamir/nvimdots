@@ -9,10 +9,9 @@ local def_map = {
     ["n|<C-x>k"] = map_cr('bdelete'):with_noremap():with_silent(),
     ["n|<C-s>"] = map_cu('write'):with_noremap(),
     ["n|Y"] = map_cmd('y$'),
-    ["n|]w"] = map_cu('WhitespaceNext'):with_noremap(),
-    ["n|[w"] = map_cu('WhitespacePrev'):with_noremap(),
-    ["n|<Space>cw"] = map_cu([[silent! keeppatterns %substitute/\s\+$//e]]):with_noremap()
-        :with_silent(),
+    ["n|n"] = map_cmd('nzzzv'):with_noremap(),
+    ["n|N"] = map_cmd('Nzzzv'):with_noremap(),
+    ["n|J"] = map_cmd('mzJ`z'):with_noremap(),
     ["n|<C-h>"] = map_cmd('<C-w>h'):with_noremap(),
     ["n|<C-l>"] = map_cmd('<C-w>l'):with_noremap(),
     ["n|<C-j>"] = map_cmd('<C-w>j'):with_noremap(),
@@ -24,7 +23,6 @@ local def_map = {
     ["n|<A-S-q>"] = map_cmd(':bw!<CR>'),
     ["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
     -- Insert
-    ["i|<C-w>"] = map_cmd('<C-[>diwa'):with_noremap(),
     ["i|<C-h>"] = map_cmd('<BS>'):with_noremap(),
     ["i|<C-u>"] = map_cmd('<C-G>u<C-U>'):with_noremap(),
     ["i|<C-b>"] = map_cmd('<Left>'):with_noremap(),
@@ -42,7 +40,10 @@ local def_map = {
     ["c|<C-h>"] = map_cmd('<BS>'):with_noremap(),
     ["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap(),
     ["c|w!!"] = map_cmd(
-        "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!")
+        "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!"),
+    -- Visual
+    ["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
+    ["v|K"] = map_cmd(":m '<-2<cr>gv=gv")
 }
 
 bind.nvim_load_mapping(def_map)
