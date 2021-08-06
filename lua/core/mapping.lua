@@ -9,6 +9,7 @@ local def_map = {
     ["n|<C-x>k"] = map_cr('bdelete'):with_noremap():with_silent(),
     ["n|<C-s>"] = map_cu('write'):with_noremap(),
     ["n|Y"] = map_cmd('y$'),
+    ["n|D"] = map_cmd('d$'),
     ["n|n"] = map_cmd('nzzzv'):with_noremap(),
     ["n|N"] = map_cmd('Nzzzv'):with_noremap(),
     ["n|J"] = map_cmd('mzJ`z'):with_noremap(),
