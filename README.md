@@ -230,7 +230,7 @@ Then you can figure out what modification makes error.
 
 |                                             Name                                              |                 Effect                 |
 | :-------------------------------------------------------------------------------------------: | :------------------------------------: |
-|         [projekt0n/github-nvim-theme](https://github.com/projekt0n/github-nvim-theme)         |          My light/dark theme           |
+|                        [sainnhe/edge](https://github.com/sainnhe/edge)                        |          My light/dark theme           |
 |        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |         For nvim-tree's icons          |
 |                [hoob3rt/lualine.nvim](https://github.com/hoob3rt/lualine.nvim)                |  Minimal, fast but customizable line   |
 |              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |          Dashboard for Neovim          |
