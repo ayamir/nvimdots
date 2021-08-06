@@ -119,7 +119,7 @@ local plug_map = {
     -- Plugin Twilight
     ["n|<leader><leader>t"] = map_cr('Twilight'):with_noremap():with_silent(),
     -- Plugin SymbolOutline
-    ["n|<leader>t"] = map_cr('SymbolsOutline'):with_noremap():with_silent(),
+    ["n|<A-t>"] = map_cr('SymbolsOutline'):with_noremap():with_silent(),
     -- Plugin split-term
     ["n|<F5>"] = map_cr('Term'):with_noremap():with_silent(),
     ["n|<C-w>t"] = map_cr('Term'):with_noremap():with_silent(),
