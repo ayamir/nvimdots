@@ -49,23 +49,26 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 1. Neovim base installation for archlinux
 
 ```shell
-# lolcat to realize colorful output in dashboard
 # gitui for tui git operations
 # ripgrep for telescope word search engine
 # fd for telescope file search engine
-sudo pacman -S git neovim lolcat gitui ripgrep fd
+sudo pacman -S git neovim gitui ripgrep fd
 
 # for neovim python module
 pip install neovim --user
 ```
 
-2. Recommended Terminals: [alacritty](https://github.com/alacritty/alacritty), [kitty](https://sw.kovidgoyal.net/kitty)
+2. Recommended Terminals:
+
+   [alacritty](https://github.com/alacritty/alacritty), [kitty](https://sw.kovidgoyal.net/kitty), [wezterm](https://wezfurlong.org/wezterm/)
 
 ```shell
-sudo pacman -S alacritty kitty
+sudo pacman -S alacritty kitty wezterm
 ```
 
-3. Recommended GUI applications: [neovide](https://github.com/Kethku/neovide), [goneovim](https://github.com/akiyosi/goneovim)
+3. Recommended GUI applications:
+
+   [neovide](https://github.com/Kethku/neovide), [goneovim](https://github.com/akiyosi/goneovim)
 
 ```shell
 paru neovide
