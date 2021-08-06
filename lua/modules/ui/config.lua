@@ -1,19 +1,12 @@
 local config = {}
 
-function config.github()
-    require("github-theme").setup({
-        -- execute `PackerSync` each time you change it
-        themeStyle = "dark", -- light or dark
-        functionStyle = "italic",
-        keywordStyle = "bold",
-        hideInactiveStatusline = true,
-        transparent = false,
-        darkSidebar = true,
-        darkFloat = true,
-        sidebars = {
-            "qf", "vista_kind", "terminal", "packer", "NvimTree", "OUTLINE"
-        }
-    })
+function config.edge()
+    vim.cmd [[set background=light]]
+    vim.g.edge_style = "aura"
+    vim.g.edge_enable_italic = 1
+    vim.g.edge_disable_italic_comment = 1
+    vim.g.edge_show_eob = 0
+    vim.g.edge_better_performance = 1
 end
 
 function config.lualine()
@@ -35,7 +28,7 @@ function config.lualine()
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'github',
+            theme = 'onelight',
             disabled_filetypes = {}
         },
 
@@ -178,7 +171,7 @@ function config.nvim_tree()
     vim.g.nvim_tree_indent_markers = 1
     vim.g.nvim_tree_hide_dotfiles = 0
     vim.g.nvim_tree_git_hl = 1
-    vim.g.nvim_tree_highdark_opened_files = 1
+    vim.g.nvim_tree_highlight_opened_files = 1
     vim.g.nvim_tree_tab_open = 1
     vim.g.nvim_tree_lsp_diagnostics = 1
     vim.g.nvim_tree_indent_markers = 1
@@ -270,6 +263,6 @@ end
 
 function config.zen_mode() require('zen-mode').setup {} end
 
-function config.twidark() require('twidark').setup {} end
+function config.twilight() require('twilight').setup {} end
 
 return config

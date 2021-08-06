@@ -1,11 +1,7 @@
 local ui = {}
 local conf = require('modules.ui.config')
 
-ui['projekt0n/github-nvim-theme'] = {
-    opt = false,
-    config = conf.github,
-    requires = 'kyazdani42/nvim-web-devicons'
-}
+ui['sainnhe/edge'] = {opt = false, config = conf.edge}
 ui['hoob3rt/lualine.nvim'] = {opt = false, config = conf.lualine}
 ui['glepnir/dashboard-nvim'] = {opt = false, config = conf.dashboard}
 ui['kyazdani42/nvim-tree.lua'] = {

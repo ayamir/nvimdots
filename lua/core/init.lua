@@ -83,6 +83,8 @@ local load_core = function()
     require('keymap')
     require('core.event')
     pack.load_compile()
+
+    vim.cmd [[colorscheme edge]]
 end
 
 load_core()
