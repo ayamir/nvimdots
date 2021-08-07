@@ -1,11 +1,11 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=light]]
+    vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
-    vim.g.edge_show_eob = 0
+    vim.g.edge_show_eob = 1
     vim.g.edge_better_performance = 1
 end
 
@@ -28,7 +28,7 @@ function config.lualine()
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'onelight',
+            theme = 'onedark',
             disabled_filetypes = {}
         },
 
@@ -49,6 +49,10 @@ function config.lualine()
                 {'filename'}, {
                     'diagnostics',
                     sources = {'nvim_lsp'},
+                    color_error = "#BF616A",
+                    color_warn = "#EBCB8B",
+                    color_info = "#81A1AC",
+                    color_hint = "#A3BE8C",
                     symbols = {error = ' ', warn = ' ', info = ' '}
                 }
             },
