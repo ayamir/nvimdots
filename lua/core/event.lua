@@ -40,11 +40,11 @@ function autocmd.load_autocmds()
             {
                 "BufReadPost", "*",
                 [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
-            }, -- Auto toggle fcitx5 
-            {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
-            {"BufCreate", "*", ":silent !fcitx5-remote -c"},
-            {"BufEnter", "*", ":silent !fcitx5-remote -c "},
-            {"BufLeave", "*", ":silent !fcitx5-remote -c "}
+            } -- Auto toggle fcitx5 
+            -- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
+            -- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
+            -- {"BufEnter", "*", ":silent !fcitx5-remote -c "},
+            -- {"BufLeave", "*", ":silent !fcitx5-remote -c "}
         },
 
         wins = {
