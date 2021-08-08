@@ -87,7 +87,7 @@ local plug_map = {
         :with_silent(),
     ["n|<Leader>fr"] = map_cu('Telescope frecency'):with_noremap():with_silent(),
     ["n|<Leader>ff"] = map_cu('DashboardFindFile'):with_noremap():with_silent(),
-    ["n|<Leader>tc"] = map_cu('DashboardChangeColorscheme'):with_noremap()
+    ["n|<Leader>sc"] = map_cu('DashboardChangeColorscheme'):with_noremap()
         :with_silent(),
     ["n|<Leader>fw"] = map_cu('DashboardFindWord'):with_noremap():with_silent(),
     ["n|<Leader>fn"] = map_cu('DashboardNewFile'):with_noremap():with_silent(),
