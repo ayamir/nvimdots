@@ -31,16 +31,20 @@ function autocmd.load_autocmds()
             {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
             {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
             {"BufWritePre", "*.tmp", "setlocal noundofile"},
-            {"BufWritePre", "*.bak", "setlocal noundofile"}, -- neoformat
+            {"BufWritePre", "*.bak", "setlocal noundofile"}, -- Neoformat
             {
                 "BufWritePre", "*",
                 "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
-            }, -- auto change work directory
+            }, -- Auto change work directory
             {"BufEnter", "*", "silent! lcd %:p:h"}, -- auto place to last edit
             {
                 "BufReadPost", "*",
                 [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]]
-            }
+            }, -- Auto toggle fcitx5 
+            {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
+            {"BufCreate", "*", ":silent !fcitx5-remote -c"},
+            {"BufEnter", "*", ":silent !fcitx5-remote -c "},
+            {"BufLeave", "*", ":silent !fcitx5-remote -c "}
         },
 
         wins = {
