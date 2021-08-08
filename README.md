@@ -322,7 +322,7 @@ The leader key is `,`.
 |                      compile config                       |            `<leader>pc`            |
 |                                                           |                                    |
 |                     toggle nvim-tree                      |             `<Ctrl-N>`             |
-|                       toggle tagbar                       |            `<leader>t`             |
+|                       toggle tagbar                       |             `<Alt-t>`              |
 |                                                           |                                    |
 |                    open terminal split                    |       `<Ctrl-W>t` or `<F5>`        |
 |               open terminal vertical split                |            `<Ctrl-W>T`             |
@@ -330,8 +330,13 @@ The leader key is `,`.
 |                 toggle floating terminal                  |             `<Alt-D>`              |
 |             open `gitui` in current directory             |            `<leader>g`             |
 |                                                           |                                    |
-|                       close buffer                        |             `<Alt-Q>`              |
-|                    force close buffer                     |          `<Alt-Shift-Q>`           |
+|                        pick buffer                        |                `gb`                |
+|                       right buffer                        |             `<Alt-J>`              |
+|                        left buffer                        |             `<Alt-K>`              |
+|               move current buffer to right                |          `<Alt-Shift-K>`           |
+|                move current buffer to left                |          `<Alt-Shift-K>`           |
+|                   close current buffer                    |             `<Alt-Q>`              |
+|                force close current buffer                 |          `<Alt-Shift-Q>`           |
 |                  split buffer vertically                  |            `<Ctrl-W>v`             |
 |                 split buffer horizontally                 |            `<Ctrl-W>s`             |
 |                                                           |                                    |
@@ -356,6 +361,8 @@ The leader key is `,`.
 |                   find file in history                    |            `<leader>fe`            |
 |            find file in current work directory            |            `<leader>ff`            |
 |                       find project                        |            `<leader>fp`            |
+|                        add project                        |     `<leader>fp`then`<Ctrl-A>`     |
+|                      delete project                       |     `<leader>fp`then`<Ctrl-D>`     |
 |                                                           |                                    |
 |                    find one character                     |            `<leader>f`             |
 |                       find one word                       |            `<leader>w`             |
@@ -374,12 +381,16 @@ The leader key is `,`.
 |             toggle lsp workspace diagnostics              |            `<leader>cw`            |
 |                   toggle code quickfix                    |            `<leader>cq`            |
 |                    toggle code loclist                    |            `<leader>cl`            |
-|                navigate in snippet's block                |             `<Ctrl-l>`             |
+|                navigate in snippet's block                |             `<Ctrl-L>`             |
 |                                                           |                                    |
 |                 toggle one line's comment                 |               `gcc`                |
 |              toggle selected lines' comment               | `<Shift-V>`, select area then `gc` |
 |                                                           |                                    |
 |                  toggle MarkdownPreView                   |              `<F12>`               |
+|                                                           |                                    |
+|                   Save current session                    |            `<leader>ss`            |
+|                   Restore last session                    |            `<leader>sr`            |
+|                    Delete last session                    |            `<leader>sd`            |
 
 You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
