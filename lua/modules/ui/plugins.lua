@@ -8,7 +8,7 @@ ui['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
     config = conf.nvim_tree,
-    requires = 'kyazdani42/nvim-web-devicons'
+    requires = {'kyazdani42/nvim-web-devicons', opt = false}
 }
 ui['lewis6991/gitsigns.nvim'] = {
     opt = true,
@@ -24,7 +24,7 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
 ui['akinsho/nvim-bufferline.lua'] = {
     opt = false,
     config = conf.nvim_bufferline,
-    requires = 'kyazdani42/nvim-web-devicons'
+    requires = {'kyazdani42/nvim-web-devicons', opt = false}
 }
 ui['folke/zen-mode.nvim'] = {
     opt = true,
