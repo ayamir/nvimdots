@@ -34,17 +34,7 @@ function config.lualine()
 
         sections = {
             lualine_a = {'mode'},
-            lualine_b = {
-                {'branch'}, {
-                    'diff',
-                    -- Is it me or the symbol for modified us really weird
-                    symbols = {
-                        added = ' ',
-                        modified = '柳 ',
-                        removed = ' '
-                    }
-                }
-            },
+            lualine_b = {{'branch'}, {'diff'}},
             lualine_c = {
                 {'filename'}, {
                     'diagnostics',
