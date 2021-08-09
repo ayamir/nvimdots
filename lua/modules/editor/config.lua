@@ -68,10 +68,6 @@ function config.vim_cursorwod()
 end
 
 function config.nvim_treesitter()
-    if not packer_plugins['nvim-ts-rainbow'].loaded then
-        vim.cmd [[packadd nvim-ts-rainbow]]
-    end
-
     vim.api.nvim_command('set foldmethod=expr')
     vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
 
