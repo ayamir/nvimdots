@@ -89,9 +89,9 @@ function config.nvim_treesitter()
             select = {
                 enable = true,
                 keymaps = {
-                    ["af"] = "@function.outer",
+                    ["of"] = "@function.outer",
                     ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
+                    ["oc"] = "@class.outer",
                     ["ic"] = "@class.inner"
                 }
             },
