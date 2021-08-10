@@ -89,9 +89,9 @@ function config.nvim_treesitter()
             select = {
                 enable = true,
                 keymaps = {
-                    ["of"] = "@function.outer",
+                    ["af"] = "@function.outer",
                     ["if"] = "@function.inner",
-                    ["oc"] = "@class.outer",
+                    ["ac"] = "@class.outer",
                     ["ic"] = "@class.inner"
                 }
             },
@@ -99,20 +99,20 @@ function config.nvim_treesitter()
                 enable = true,
                 set_jumps = true, -- whether to set jumps in the jumplist
                 goto_next_start = {
-                    ["]m"] = "@function.outer",
-                    ["]]"] = "@class.outer"
+                    ["]["] = "@function.outer",
+                    ["]m"] = "@class.outer"
                 },
                 goto_next_end = {
-                    ["]M"] = "@function.outer",
-                    ["]["] = "@class.outer"
+                    ["]]"] = "@function.outer",
+                    ["]M"] = "@class.outer"
                 },
                 goto_previous_start = {
-                    ["[m"] = "@function.outer",
-                    ["[["] = "@class.outer"
+                    ["[["] = "@function.outer",
+                    ["[m"] = "@class.outer"
                 },
                 goto_previous_end = {
-                    ["[M"] = "@function.outer",
-                    ["[]"] = "@class.outer"
+                    ["[]"] = "@function.outer",
+                    ["[M"] = "@class.outer"
                 }
             }
         },

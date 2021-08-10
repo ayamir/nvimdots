@@ -381,7 +381,21 @@ The leader key is `,`.
 |             toggle lsp workspace diagnostics              |            `<leader>cw`            |
 |                   toggle code quickfix                    |            `<leader>cq`            |
 |                    toggle code loclist                    |            `<leader>cl`            |
-|                navigate in snippet's block                |             `<Ctrl-L>`             |
+|                                                           |                                    |
+|                   next snippet's block                    |             `<Ctrl-L>`             |
+|                   prev snippet's block                    |             `<Ctrl-H>`             |
+|                                                           |                                    |
+|                 select current `()` block                 |               `vab`                |
+|                 select current `{}` block                 |               `vaB`                |
+|            select current outer function block            |               `vaf`                |
+|             select current outer class block              |               `vac`                |
+|            select current inner function block            |               `vif`                |
+|             select current inner class block              |               `vic`                |
+|                                                           |                                    |
+|                move to next function begin                |                `][`                |
+|                move to prev function begin                |                `[[`                |
+|                 move to next function end                 |                `]]`                |
+|                 move to prev function end                 |                `[]`                |
 |                                                           |                                    |
 |                 toggle one line's comment                 |               `gcc`                |
 |              toggle selected lines' comment               | `<Shift-V>`, select area then `gc` |
