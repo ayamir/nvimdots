@@ -54,6 +54,20 @@ local ultisnips_map = function()
     vim.g.UltiSnipsEditSplit = "vertical"
 end
 
+local vsnip_map = function()
+    vim.cmd [[imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
+    vim.cmd [[smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
+
+    vim.cmd [[imap <expr> <C-k>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-k>']]
+    vim.cmd [[smap <expr> <C-k>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-k>']]
+
+    vim.cmd [[imap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
+    vim.cmd [[smap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
+
+    vim.cmd [[imap <expr> <C-h> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
+    vim.cmd [[smap <expr> <C-h> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
+end
+
 local neovide_config = function()
     vim.cmd [[set guifont=JetBrainsMono\ Nerd\ Font:h12]]
     vim.g.neovide_refresh_rate = 60
@@ -78,6 +92,7 @@ local load_core = function()
 
     pack.ensure_plugins()
     ultisnips_map()
+    vsnip_map()
     neovide_config()
     slash_config()
 

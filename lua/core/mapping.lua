@@ -24,12 +24,9 @@ local def_map = {
     ["n|<A-S-q>"] = map_cmd(':bw!<CR>'),
     ["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
     -- Insert
-    ["i|<C-h>"] = map_cmd('<BS>'):with_noremap(),
     ["i|<C-u>"] = map_cmd('<C-G>u<C-U>'):with_noremap(),
     ["i|<C-b>"] = map_cmd('<Left>'):with_noremap(),
     ["i|<C-a>"] = map_cmd('<ESC>^i'):with_noremap(),
-    ["i|<C-j>"] = map_cmd('<Esc>o'):with_noremap(),
-    ["i|<C-k>"] = map_cmd('<Esc>O'):with_noremap(),
     ["i|<C-s>"] = map_cmd('<Esc>:w<CR>'),
     ["i|<C-q>"] = map_cmd('<Esc>:wq<CR>'),
     -- command line
