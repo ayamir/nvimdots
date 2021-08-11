@@ -256,6 +256,8 @@ Then you can figure out what modification makes error.
 | [nvim-telescope/telescope-fzy-native.nvim](https://github.com/nvim-telescope/telescope-fzy-native.nvim) |      Fzy search for telescope       |
 |    [nvim-telescope/telescope-project.nvim](https://github.com/nvim-telescope/telescope-project.nvim)    |   Manage projects with telescope    |
 |   [nvim-telescope/telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)   |   Frequent and recent file cache    |
+|                      [thinca/vim-quickrun](https://github.com/thinca/vim-quickrun)                      |          Run code quickly           |
+|                         [michaelb/sniprun](https://github.com/michaelb/sniprun)                         |      Run code snippet quickly       |
 |                       [folke/trouble.nvim](https://github.com/folke/trouble.nvim)                       |       Show code troubles etc        |
 |                     [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                     |     Help you learn keybindings      |
 |                 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime)                 |    Profiling starup time quickly    |
@@ -278,7 +280,6 @@ Then you can figure out what modification makes error.
 |       [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)       |         Powerful vim motion          |
 |           [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)           |            smooth scroll             |
 |             [vimlab/split-term](https://github.com/vimlab/split-term.vim)             | Utilites around neovim's `:terminal` |
-|             [thinca/vim-quickrun](https://github.com/thinca/vim-quickrun)             |        Just run code quickly         |
 
 ## Completion
 

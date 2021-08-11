@@ -24,6 +24,12 @@ tools['nvim-telescope/telescope-frecency.nvim'] = {
     after = 'telescope.nvim',
     requires = {{'tami5/sql.nvim', opt = true}}
 }
+tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
+tools['michaelb/sniprun'] = {
+    opt = true,
+    run = 'bash ./install.sh',
+    cmd = {"SnipRun", "'<,'>SnipRun"}
+}
 tools['folke/which-key.nvim'] = {
     config = function() require("which-key").setup {} end
 }
