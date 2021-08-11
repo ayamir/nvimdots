@@ -52,7 +52,8 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # gitui for tui git operations
 # ripgrep for telescope word search engine
 # fd for telescope file search engine
-sudo pacman -S git neovim gitui ripgrep fd
+# yarn for markdown preview
+sudo pacman -S git neovim gitui ripgrep fd yarn
 
 # for neovim python module
 pip install neovim --user
