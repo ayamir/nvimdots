@@ -51,7 +51,6 @@ editor['karb94/neoscroll.nvim'] = {
     config = conf.neoscroll
 }
 editor['vimlab/split-term.vim'] = {opt = true, cmd = {'Term', 'VTerm'}}
-editor['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 editor['norcalli/nvim-colorizer.lua'] = {
     opt = true,
     event = 'BufRead',
