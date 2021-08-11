@@ -370,7 +370,7 @@ The leader key is `,`.
 |                    jump to definition                     |                `gd`                |
 |                    show implementation                    |                `gD`                |
 |                       smart rename                        |                `gr`                |
-|                    toggle diagnostics                     |                `gt`                |
+|                  toggle last diagnostics                  |                `gt`                |
 |                   toggle lsp references                   |                `gR`                |
 |                    show signature help                    |                `gs`                |
 | show current function/variable's definition or references |                `gh`                |
