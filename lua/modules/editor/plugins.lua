@@ -44,7 +44,6 @@ editor['windwp/nvim-ts-autotag'] = {
 }
 editor['rhysd/accelerated-jk'] = {opt = true}
 editor['hrsh7th/vim-eft'] = {opt = true}
-editor['junegunn/vim-slash'] = {opt = true, event = 'BufRead'}
 editor['easymotion/vim-easymotion'] = {opt = true, config = conf.easymotion}
 editor['karb94/neoscroll.nvim'] = {
     opt = true,

@@ -39,12 +39,6 @@ local plug_map = {
         :with_nowait(),
     ["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent()
         :with_nowait(),
-    ["n|<C-f>"] = map_cmd(
-        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>"):with_silent()
-        :with_noremap():with_nowait(),
-    ["n|<C-b>"] = map_cmd(
-        "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>"):with_silent()
-        :with_noremap():with_nowait(),
     ["n|g["] = map_cr('Lspsaga diagnostic_jump_next'):with_noremap()
         :with_silent(),
     ["n|g]"] = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap()
@@ -54,7 +48,8 @@ local plug_map = {
         :with_silent(),
     ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
         :with_silent(),
-    ["n|gd"] = map_cr('Lspsaga preview_definition'):with_noremap():with_silent(),
+    ["n|gd"] = map_cmd('<cmd>lua vim.lsp.buf.definition()<CR>'):with_noremap()
+        :with_silent(),
     ["n|gD"] = map_cmd("<cmd>lua vim.lsp.buf.implementation()<CR>"):with_noremap()
         :with_silent(),
     ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),

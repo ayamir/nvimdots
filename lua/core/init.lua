@@ -82,8 +82,6 @@ local neovide_config = function()
     vim.g.neovide_cursor_vfx_particle_density = 5.0
 end
 
-local slash_config = function() vim.cmd [[noremap <plug>(slash-after) zzzv]] end
-
 local load_core = function()
     local pack = require('core.pack')
     createdir()
@@ -94,7 +92,6 @@ local load_core = function()
     ultisnips_map()
     vsnip_map()
     neovide_config()
-    slash_config()
 
     require('core.options')
     require('core.mapping')
