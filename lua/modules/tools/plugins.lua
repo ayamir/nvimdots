@@ -39,5 +39,9 @@ tools['folke/trouble.nvim'] = {
     config = conf.trouble
 }
 tools['dstein64/vim-startuptime'] = {opt = true, cmd = "StartupTime"}
-
+tools['gelguy/wilder.nvim'] = {
+    event = "CmdlineEnter",
+    run = ":UpdateRemotePlugins",
+    config = conf.wilder
+}
 return tools
