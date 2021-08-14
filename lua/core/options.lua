@@ -19,7 +19,7 @@ local function load_options()
         hidden = true,
         fileformats = "unix,mac,dos",
         magic = true,
-        virtualedit = "block,onemore",
+        virtualedit = "block",
         encoding = "utf-8",
         viewoptions = "folds,cursor,curdir,slash,unix",
         sessionoptions = "curdir,help,tabpages,winsize",
