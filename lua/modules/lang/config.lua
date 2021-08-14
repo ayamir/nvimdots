@@ -1,28 +1,6 @@
 local config = {}
 local exec = vim.api.nvim_command
 
-function config.lang_go()
-    exec('augroup gosettings')
-    exec('autocmd!')
-    exec('autocmd FileType go nmap <leader>mbb <Plug>(go-build)')
-    exec('autocmd FileType go nmap <leader>mbr <Plug>(go-run)')
-    exec('autocmd FileType go nmap <leader>mds :GoDebugStart<cr>')
-    exec('autocmd FileType go nmap <leader>mdb :GoDebugBreakpoint<cr>')
-    exec('autocmd FileType go nmap <leader>mdc :GoDebugContinue<cr>')
-    exec('autocmd FileType go nmap <leader>mdo :GoDebugStepOut<cr>')
-    exec('autocmd FileType go nmap <leader>mdt :GoDebugStop<cr>')
-    exec('augroup END')
-end
-
-function config.lang_rust()
-    exec('augroup rustsettings')
-    exec('autocmd!')
-    exec('autocmd FileType rust nmap <leader>mbb :Cbuild<cr>')
-    exec('autocmd FileType rust nmap <leader>mbt :Ctest<cr>')
-    exec('autocmd FileType rust nmap <leader>mbr :Crun<cr>')
-    exec('augroup END')
-end
-
 function config.rust_tools()
     local opts = {
         tools = { -- rust-tools options
