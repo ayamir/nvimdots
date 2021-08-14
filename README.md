@@ -261,6 +261,7 @@ Then you can figure out what modification makes error.
 |                       [folke/trouble.nvim](https://github.com/folke/trouble.nvim)                       |       Show code troubles etc        |
 |                     [folke/which-key.nvim](https://github.com/folke/which-key.nvim)                     |     Help you learn keybindings      |
 |                 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime)                 |    Profiling starup time quickly    |
+|                       [gelguy/wilder.nvim](https://github.com/gelguy/wilder.nvim)                       |        More useful wild menu        |
 
 ## Editor
 
