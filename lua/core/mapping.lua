@@ -42,7 +42,9 @@ local def_map = {
         "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!"),
     -- Visual
     ["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
-    ["v|K"] = map_cmd(":m '<-2<cr>gv=gv")
+    ["v|K"] = map_cmd(":m '<-2<cr>gv=gv"),
+    ["v|<"] = map_cmd("<gv"),
+    ["v|>"] = map_cmd(">gv")
 }
 
 bind.nvim_load_mapping(def_map)
