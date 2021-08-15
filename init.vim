@@ -34,7 +34,7 @@ set smarttab
 set wrap linebreak nolist
 set shortmess+=c
 set whichwrap+=<,>,h,l
-set virtualedit=block,onemore
+set virtualedit=block
 set backspace=2
 set sidescroll=10
 
@@ -109,7 +109,7 @@ Plug 'nvim-telescope/telescope-project.nvim'
 
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
-Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'majutsushi/tagbar'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -243,10 +243,8 @@ nmap ga <Plug>(EasyAlign)
 " Bufferline
 noremap <A-j> :BufferLineCycleNext<cr>
 noremap <A-k> :BufferLineCyclePrev<cr>
-
-" These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><mymap> :BufferLineMoveNext<CR>
-nnoremap <silent><mymap> :BufferLineMovePrev<CR>
+nnoremap <A-S-j> :BufferLineMoveNext<CR>
+nnoremap <A-S-k> :BufferLineMovePrev<CR>
 
 " These commands will sort buffers by directory, language, or a custom criteria
 nnoremap <silent><leader>be :BufferLineSortByExtension<CR>
@@ -261,10 +259,10 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Coc extensions
 let g:coc_global_extensions = [
-			\	'coc-tabnine',
+			\ 'coc-tabnine',
 			\   'coc-lists',
-			\	'coc-go',
-			\	'coc-lua',
+			\ 'coc-go',
+			\ 'coc-lua',
 			\   'coc-clangd',
 			\   'coc-rust-analyzer',
 			\   'coc-json',
