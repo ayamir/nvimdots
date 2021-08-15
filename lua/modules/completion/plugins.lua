@@ -46,7 +46,8 @@ completion['SirVer/ultisnips'] = {
 completion['windwp/nvim-autopairs'] = {
     opt = true,
     event = 'InsertCharPre',
-    after = 'nvim-lspconfig',
+    after = 'nvim-compe',
     config = conf.autopairs
 }
+
 return completion

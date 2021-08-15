@@ -102,10 +102,6 @@ function config.autopairs()
         check_ts = true
     })
 
-    if not packer_plugins['nvim-compe'].loaded then
-        vim.cmd [[packadd nvim-compe]]
-    end
-
     require("nvim-autopairs.completion.compe").setup({
         map_cr = true,
         map_complete = true
