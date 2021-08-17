@@ -84,6 +84,8 @@ function config.rust_tools()
     require('rust-tools').setup(opts)
 end
 
+function config.lang_go() vim.g.go_doc_keywordprg_enabled = false end
+
 function config.lang_org()
     require('orgmode').setup({
         org_agenda_files = {'~/Sync/org/*'},
