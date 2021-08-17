@@ -11,7 +11,6 @@ ui['hoob3rt/lualine.nvim'] = {
 ui['glepnir/dashboard-nvim'] = {
     opt = true,
     event = "BufWinEnter",
-    config = conf.dashboard
 }
 ui['kyazdani42/nvim-tree.lua'] = {
     opt = true,
