@@ -407,6 +407,18 @@ The leader key is `,`.
 |                   Save current session                    |            `<leader>ss`            |
 |                   Restore last session                    |            `<leader>sr`            |
 |                    Delete last session                    |            `<leader>sd`            |
+|        Debug mode only supports golang&python now         |                                    |
+|                    Debug continue(run)                    |         `<leader>dr`/`F6`          |
+|                      Debug run last                       |           `<leader>drl`            |
+|                    Debug run to cursor                    |           `<leader>drc`            |
+|                  Debug toggle breakpoint                  |            `<leader>db`            |
+|            Debug set breakpoint with condition            |            `<leader>dB`            |
+|                   Debug list breakpoint                   |           `<leader>dbl`            |
+|                      Debug open repl                      |            `<leader>dl`            |
+|                      Debug step over                      |         `<leader>dv`/`F9`          |
+|                      Debug step into                      |         `<leader>di`/`F10`         |
+|                      Debug step out                       |         `<leader>do`/`F11`         |
+|                     Debug disconnect                      |            `<leader>dd`            |
 
 You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
