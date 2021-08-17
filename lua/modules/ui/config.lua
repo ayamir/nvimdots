@@ -1,7 +1,7 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=light]]
+    vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
@@ -28,7 +28,7 @@ function config.lualine()
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'onelight',
+            theme = 'onedark',
             disabled_filetypes = {}
         },
 
@@ -90,62 +90,6 @@ function config.nvim_bufferline()
                     padding = 1
                 }
             }
-        }
-    }
-end
-
-function config.dashboard()
-    vim.g.dashboard_footer_icon = '🐬 '
-    vim.g.dashboard_default_executive = 'telescope'
-
-    vim.g.dashboard_custom_header = {
-        [[              ...  .......          ]],
-        [[         ....................       ]],
-        [[    ..'........................     ]],
-        [[ ...,'.......'.., .........'....    ]],
-        [[  .'......,. ;'., '..'.......'.'.   ]],
-        [[ .'.,'.''.;..,'.. .  ...'....','..  ]],
-        [[..''.'.''''.....        .,'....;'.. ]],
-        [[..',.......'. .        ..';'..','...]],
-        [[ ....''..  ..        .....;,..','...]],
-        [[  . .....           ......,..';,....]],
-        [[      .'.         ....  ... ,,'.....]],
-        [[      .,..             .....,'..... ]],
-        [[     .'''.             ...'......   ]],
-        [[     ..'..'.          ... ......    ]],
-        [[       . '.'..             ..       ]],
-        [[         ......           .         ]],
-        [[            ....                    ]]
-    }
-
-    vim.g.dashboard_custom_section = {
-        change_colorscheme = {
-            description = {' Scheme change              comma s c '},
-            command = 'DashboardChangeColorscheme'
-        },
-        find_frecency = {
-            description = {' File frecency              comma f r '},
-            command = 'Telescope frecency'
-        },
-        find_history = {
-            description = {' File history               comma f e '},
-            command = 'DashboardFindHistory'
-        },
-        find_project = {
-            description = {' Project find               comma f p '},
-            command = 'Telescope project'
-        },
-        find_file = {
-            description = {' File find                  comma f f '},
-            command = 'DashboardFindFile'
-        },
-        file_new = {
-            description = {' File new                   comma f n '},
-            command = 'DashboardNewFile'
-        },
-        find_word = {
-            description = {' Word find                  comma f w '},
-            command = 'DashboardFindWord'
         }
     }
 end
