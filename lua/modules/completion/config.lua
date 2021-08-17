@@ -77,15 +77,15 @@ function config.compe()
             nvim_lua = true,
             treesitter = true,
             vsnip = true,
-            ultisnips = true,
-            tabnine = {
-                max_line = 1000,
-                max_num_results = 6,
-                priority = 5000,
-                show_prediction_strength = true,
-                sort = false,
-                ignore_pattern = '[(]'
-            }
+            ultisnips = true
+            -- tabnine = {
+            --     max_line = 1000,
+            --     max_num_results = 6,
+            --     priority = 5000,
+            --     show_prediction_strength = true,
+            --     sort = false,
+            --     ignore_pattern = '[(]'
+            -- }
         }
     }
 end
