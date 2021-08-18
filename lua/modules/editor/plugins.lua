@@ -36,6 +36,10 @@ editor['p00f/nvim-ts-rainbow'] = {
     after = 'nvim-treesitter',
     event = 'BufRead'
 }
+editor['JoosepAlviste/nvim-ts-context-commentstring'] = {
+    opt = true,
+    after = 'nvim-treesitter'
+}
 editor['sbdchd/neoformat'] = {opt = true, cmd = 'Neoformat'}
 editor['windwp/nvim-ts-autotag'] = {
     opt = true,
