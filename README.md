@@ -265,22 +265,25 @@ Then you can figure out what modification makes error.
 
 ## Editor
 
-|                                         Name                                          |                Effect                |
-| :-----------------------------------------------------------------------------------: | :----------------------------------: |
-|          [itchyny/vim-cursorword](https://github.com/itchyny/vim-cursorword)          |        Highlight cursor word         |
-|         [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)         |            Easy alignment            |
-|        [terrortylor/nvim-comment](https://github.com/terrortylor/nvim-comment)        |         Comment code quickly         |
-|   [simrat39/symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)   |        Display code structure        |
-| [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) |   Super powerful code highlighter    |
-|                [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                |     Super powerful code formater     |
-|          [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)          |         Faster vim-closetag          |
-|     [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)     |        Display detected color        |
-|            [p00f/nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)            |           Rainbow brackets           |
-|            [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)            |           Accelerated j/k            |
-|                 [hrsh7th/vim-eft](https://github.com/hrsh7th/vim-eft)                 |             Enhanced f/t             |
-|       [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)       |         Powerful vim motion          |
-|           [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)           |            smooth scroll             |
-|             [vimlab/split-term](https://github.com/vimlab/split-term.vim)             | Utilites around neovim's `:terminal` |
+|                                                     Name                                                      |                Effect                |
+| :-----------------------------------------------------------------------------------------------------------: | :----------------------------------: |
+|                      [itchyny/vim-cursorword](https://github.com/itchyny/vim-cursorword)                      |        Highlight cursor word         |
+|                     [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)                     |            Easy alignment            |
+|                    [terrortylor/nvim-comment](https://github.com/terrortylor/nvim-comment)                    |         Comment code quickly         |
+|               [simrat39/symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim)               |        Display code structure        |
+|             [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)             |   Super powerful code highlighter    |
+| [nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) |     Select text objects quickly      |
+|              [romgrk/nvim-treesitter-context](https://github.com/romgrk/nvim-treesitter-context)              |         Show current context         |
+|                        [p00f/nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                        |           Rainbow brackets           |
+| [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |       Comment base on context        |
+|                            [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                            |     Super powerful code formater     |
+|                      [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                      |         Faster vim-closetag          |
+|                 [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                 |        Display detected color        |
+|                        [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                        |           Accelerated j/k            |
+|                             [hrsh7th/vim-eft](https://github.com/hrsh7th/vim-eft)                             |             Enhanced f/t             |
+|                   [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)                   |         Powerful vim motion          |
+|                       [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)                       |            smooth scroll             |
+|                         [vimlab/split-term](https://github.com/vimlab/split-term.vim)                         | Utilites around neovim's `:terminal` |
 
 ## Completion
 
