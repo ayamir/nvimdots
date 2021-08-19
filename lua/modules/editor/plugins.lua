@@ -60,11 +60,7 @@ editor['norcalli/nvim-colorizer.lua'] = {
     event = 'BufRead',
     config = conf.nvim_colorizer
 }
-editor['rmagatti/auto-session'] = {
-    opt = true,
-    cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
-    config = conf.auto_session
-}
+editor['rmagatti/auto-session'] = {opt = false, config = conf.auto_session}
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
     config = conf.dapui,
