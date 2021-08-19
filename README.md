@@ -53,7 +53,8 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # ripgrep for telescope word search engine
 # fd for telescope file search engine
 # yarn for markdown preview
-sudo pacman -S git neovim gitui ripgrep fd yarn
+# nerd-fonts-ibm-plex-mono for devicons
+sudo pacman -S git neovim gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
 
 # for neovim python module
 pip install neovim --user
