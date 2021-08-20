@@ -8,10 +8,7 @@ ui['hoob3rt/lualine.nvim'] = {
     event = "BufWinEnter",
     config = conf.lualine
 }
-ui['glepnir/dashboard-nvim'] = {
-    opt = true,
-    event = "BufWinEnter",
-}
+ui['glepnir/dashboard-nvim'] = {opt = true, event = "BufWinEnter"}
 ui['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     cmd = {'NvimTreeToggle', 'NvimTreeOpen'},

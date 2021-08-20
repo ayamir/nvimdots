@@ -64,13 +64,21 @@ editor['norcalli/nvim-colorizer.lua'] = {
     event = 'BufRead',
     config = conf.nvim_colorizer
 }
-editor['rmagatti/auto-session'] = {opt = false, config = conf.auto_session}
+editor['rmagatti/auto-session'] = {
+    opt = true,
+    cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
+    config = conf.auto_session
+}
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
     config = conf.dapui,
     requires = {
-        {'mfussenegger/nvim-dap', config = conf.dap},
-        {'Pocco81/DAPInstall.nvim', config = conf.dapinstall}
+        {'mfussenegger/nvim-dap', config = conf.dap}, {
+            'Pocco81/DAPInstall.nvim',
+            opt = true,
+            cmd = {'DIInstall', 'DIUninstall', 'DIList'},
+            config = conf.dapinstall
+        }
     }
 }
 

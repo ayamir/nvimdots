@@ -31,6 +31,8 @@ tools['michaelb/sniprun'] = {
     cmd = {"SnipRun", "'<,'>SnipRun"}
 }
 tools['folke/which-key.nvim'] = {
+    opt = true,
+    keys = ",",
     config = function() require("which-key").setup {} end
 }
 tools['folke/trouble.nvim'] = {
