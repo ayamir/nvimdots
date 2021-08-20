@@ -204,6 +204,7 @@ directory.
 - Switch light/dark theme
 
   `set background=dark`
+
   `set background=light`
 
 ## Important
