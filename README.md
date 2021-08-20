@@ -82,12 +82,7 @@ paru goneovim
 - For [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall#usage), you
   need to install corresponding language server use it.
 
-- For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), you need to install corresponding parser manually.
-
-  You can edit `lua/modules/editor/config.lua`'s `config.nvim_treesitter`
-  function to add what you need.
-
-  ![treesitter](./shots/treesitter.png)
+- For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), all maintained parser will be installed by default.
 
 - For [neoformat](https://github.com/sbdchd/neoformat#supported-filetypes), you
   need to install corresponding formatter manually:
@@ -184,7 +179,9 @@ directory.
 
   2. Remove its config located in corresponding `plugins.lua` and `config.lua`.
 
-  3. Press `<leader>ps` to recompile.
+  3. Remove corresponding keymap if exists.
+
+  4. Press `<leader>ps` to recompile.
 
 - Modify keymap
 
@@ -206,7 +203,8 @@ directory.
 
 - Switch light/dark theme
 
-  modify `lua/modules/ui/config.lua`'s `themeStyle`
+  `set background=dark`
+  `set background=light`
 
 ## Important
 
