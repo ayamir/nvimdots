@@ -1,7 +1,7 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=dark]]
+    vim.cmd [[set background=light]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
@@ -28,7 +28,7 @@ function config.lualine()
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'onedark',
+            theme = 'onelight',
             disabled_filetypes = {}
         },
 
@@ -69,8 +69,8 @@ function config.nvim_bufferline()
             number = "both",
             number_style = "superscript",
             modified_icon = '✥',
-            buffer_close_icon = "",
-            mappings = true,
+            buffer_close_icon = '',
+            mappings = false,
             left_trunc_marker = "",
             right_trunc_marker = "",
             max_name_length = 14,
