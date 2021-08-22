@@ -41,6 +41,10 @@ function config.saga()
 end
 
 function config.compe()
+    if not packer_plugins['vim-vsnip'].loaded then
+        vim.cmd [[packadd vim-vsnip]]
+    end
+
     if not packer_plugins['ultisnips'].loaded then
         vim.cmd [[packadd ultisnips]]
     end
@@ -72,6 +76,7 @@ function config.compe()
             nvim_lsp = true,
             nvim_lua = true,
             treesitter = true,
+            vsnip = true,
             ultisnips = true,
             tabnine = {
                 max_line = 1000,

@@ -47,6 +47,20 @@ local leader_map = function()
     vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
 end
 
+local vsnip_map = function()
+    vim.cmd [[imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
+    vim.cmd [[smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>']]
+
+    vim.cmd [[imap <expr> <C-k>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-k>']]
+    vim.cmd [[smap <expr> <C-k>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-k>']]
+
+    vim.cmd [[imap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
+    vim.cmd [[smap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>']]
+
+    vim.cmd [[imap <expr> <C-h> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
+    vim.cmd [[smap <expr> <C-h> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>']]
+end
+
 local ultisnips_map = function()
     vim.g.UltiSnipsExpandTrigger = "<NUL>"
     vim.g.UltiSnipsJumpForwardTrigger = "<C-l>"
@@ -131,6 +145,7 @@ local load_core = function()
     leader_map()
 
     pack.ensure_plugins()
+    vsnip_map()
     ultisnips_map()
     neovide_config()
     dashboard_config()
