@@ -433,7 +433,7 @@ You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 1. tabnine doesn't install automatically
 
 ```shell
-cd .local/share/nvim/site/pack/packer/opt/compe-tabnine
+cd ~/.local/share/nvim/site/pack/packer/opt/compe-tabnine
 ./install.sh
 ```
 
