@@ -242,7 +242,7 @@ Then you can figure out what modification makes error.
 |            [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)            |        Replacement of Nerdtree         |
 |             [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)             |        Show git status in nvim         |
 | [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) |    Show indent with different level    |
-|         [akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)         |  Replacement of nvim's buffer and tab  |
+|                  [romgrk/barbar.nvim](https://github.com/romgrk/barbar.nvim)                  |             Tab management             |
 |                 [folke/zen-mode.nvim](https://github.com/folke/zen-mode.nvim)                 |           Focus on code only           |
 |                 [folke/twilight.nvim](https://github.com/folke/twilight.nvim)                 | Highlight current block and dim others |
 
