@@ -5,7 +5,7 @@ ui['kyazdani42/nvim-web-devicons'] = {opt = false}
 ui['sainnhe/edge'] = {opt = false, config = conf.edge}
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
-    event = "BufWinEnter",
+    event = "BufRead",
     config = conf.lualine
 }
 ui['glepnir/dashboard-nvim'] = {opt = true, event = "BufWinEnter"}
@@ -25,7 +25,11 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     event = 'BufRead',
     config = conf.indent_blankline
 }
-ui['akinsho/nvim-bufferline.lua'] = {opt = false, config = conf.nvim_bufferline}
+ui['akinsho/nvim-bufferline.lua'] = {
+    opt = true,
+    event = 'BufRead',
+    config = conf.nvim_bufferline
+}
 ui['folke/zen-mode.nvim'] = {
     opt = true,
     cmd = 'ZenMode',

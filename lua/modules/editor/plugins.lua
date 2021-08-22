@@ -20,7 +20,6 @@ editor['nvim-treesitter/nvim-treesitter'] = {
     opt = true,
     run = ':TSUpdate',
     event = 'BufRead',
-    after = 'telescope.nvim',
     config = conf.nvim_treesitter
 }
 editor['nvim-treesitter/nvim-treesitter-textobjects'] = {
@@ -39,6 +38,11 @@ editor['p00f/nvim-ts-rainbow'] = {
 editor['JoosepAlviste/nvim-ts-context-commentstring'] = {
     opt = true,
     after = 'nvim-treesitter'
+}
+editor['SmiteshP/nvim-gps'] = {
+    opt = true,
+    after = 'nvim-treesitter',
+    config = conf.nvim_gps
 }
 editor['sbdchd/neoformat'] = {opt = true, cmd = 'Neoformat'}
 editor['windwp/nvim-ts-autotag'] = {

@@ -1,7 +1,7 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=light]]
+    vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
@@ -25,10 +25,16 @@ function config.lualine()
         return icon .. msg
     end
 
+    if not packer_plugins['nvim-gps'].loaded then
+        vim.cmd [[packadd nvim-gps]]
+    end
+
+    local gps = require("nvim-gps")
+
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'onelight',
+            theme = 'onedark',
             disabled_filetypes = {}
         },
 
@@ -36,7 +42,10 @@ function config.lualine()
             lualine_a = {'mode'},
             lualine_b = {{'branch'}, {'diff'}},
             lualine_c = {
-                {'filename'}, {
+                {'filename'}, {gps.get_location, condition = gps.is_available}
+            },
+            lualine_x = {
+                {
                     'diagnostics',
                     sources = {'nvim_lsp'},
                     color_error = "#BF616A",
@@ -44,9 +53,8 @@ function config.lualine()
                     color_info = "#81A1AC",
                     color_hint = "#88C0D0",
                     symbols = {error = ' ', warn = ' ', info = ' '}
-                }
+                }, {lsp}, {'encoding'}, {'fileformat'}
             },
-            lualine_x = {{lsp}, {'encoding'}, {'fileformat'}},
             lualine_y = {'progress'},
             lualine_z = {'location'}
         },
