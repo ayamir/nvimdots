@@ -32,12 +32,6 @@ completion['tzachar/compe-tabnine'] = {
     after = 'nvim-compe',
     run = './install.sh'
 }
-completion['hrsh7th/vim-vsnip-integ'] = {
-    opt = true,
-    after = 'nvim-compe',
-    requires = {'hrsh7th/vim-vsnip', opt = true, event = 'InsertCharPre'}
-}
-completion['rafamadriz/friendly-snippets'] = {opt = true, after = 'nvim-compe'}
 completion['SirVer/ultisnips'] = {
     opt = true,
     after = 'nvim-compe',
