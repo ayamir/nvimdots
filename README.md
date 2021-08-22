@@ -287,18 +287,21 @@ Then you can figure out what modification makes error.
 
 ## Completion
 
-|                                   Name                                    |                       Effect                       |
-| :-----------------------------------------------------------------------: | :------------------------------------------------: |
-|     [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)     |          Neovim native LSP configuration           |
-| [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall) |               Manage each LSP engine               |
-|      [onsails/lspkind-nvim](https://github.com/onsails/lspkind-nvim)      |       Vscode-like pictograms for neovim lsp        |
-|      [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)      |             Make Nvim LSP more useful              |
-|        [hrsh7th/nvim-compe](https://github.com/hrsh7th/nvim-compe)        |          Auto completion plugin for nvim           |
-|  [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)  | Show signature when completing function parameters |
-|     [tzachar/compe-tabnine](https://github.com/tzachar/compe-tabnine)     |            Tabnine port for nvim-compe             |
-|          [SirVer/ultisnips](https://github.com/SirVer/ultisnips)          |        Ultimate snippets completion engine         |
-|        [honza/vim-snippets](https://github.com/honza/vim-snippets)        |                   More snippets                    |
-|     [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)     |                  Completion pairs                  |
+|                                      Name                                       |                        Effect                        |
+| :-----------------------------------------------------------------------------: | :--------------------------------------------------: |
+|        [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)        |           Neovim native LSP configuration            |
+|    [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)    |                Manage each LSP engine                |
+|         [onsails/lspkind-nvim](https://github.com/onsails/lspkind-nvim)         |        Vscode-like pictograms for neovim lsp         |
+|         [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)         |              Make Nvim LSP more useful               |
+|           [hrsh7th/nvim-compe](https://github.com/hrsh7th/nvim-compe)           |           Auto completion plugin for nvim            |
+|     [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)     |  Show signature when completing function parameters  |
+|        [tzachar/compe-tabnine](https://github.com/tzachar/compe-tabnine)        |             Tabnine port for nvim-compe              |
+|            [hrsh7th/vim-vsnip](https://github.com/hrsh7th/vim-vsnip)            | Snippets plugin supports LSP/VSCode's snippet format |
+|      [hrsh7th/vim-vsnip-integ](https://github.com/hrsh7th/vim-vsnip-integ)      |           Vsnip integration to nvim's LSP            |
+| [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) |            Set of preconfigured snippets             |
+|             [SirVer/ultisnips](https://github.com/SirVer/ultisnips)             |         Ultimate snippets completion engine          |
+|           [honza/vim-snippets](https://github.com/honza/vim-snippets)           |                    More snippets                     |
+|        [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)        |                   Completion pairs                   |
 
 ## Lang
 
