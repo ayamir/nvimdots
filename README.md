@@ -319,109 +319,109 @@ Then you can figure out what modification makes error.
 
 The leader key is `,`.
 
-|                          Effect                           |              shortcut              |
-| :-------------------------------------------------------: | :--------------------------------: |
-|                  sync config and compile                  |            `<leader>ps`            |
-|                      install plugins                      |            `<leader>pi`            |
-|                      update plugins                       |            `<leader>pu`            |
-|                      compile config                       |            `<leader>pc`            |
-|                                                           |                                    |
-|                     toggle nvim-tree                      |             `<Ctrl-N>`             |
-|                       toggle tagbar                       |             `<Alt-t>`              |
-|                                                           |                                    |
-|                 open horizontal terminal                  |       `<Ctrl-W>t` or `<F5>`        |
-|                 toggle vertical terminal                  |             `<Ctrl-\>`             |
-|                       quit terminal                       |             `<Ctrl-D>`             |
-|                 toggle floating terminal                  |             `<Alt-D>`              |
-|             open `gitui` in current directory             |            `<leader>g`             |
-|                                                           |                                    |
-|                        pick buffer                        |                `gb`                |
-|                       right buffer                        |             `<Alt-J>`              |
-|                        left buffer                        |             `<Alt-K>`              |
-|               move current buffer to right                |          `<Alt-Shift-K>`           |
-|                move current buffer to left                |          `<Alt-Shift-K>`           |
-|                   close current buffer                    |             `<Alt-Q>`              |
-|                force close current buffer                 |          `<Alt-Shift-Q>`           |
-|                  split buffer vertically                  |            `<Ctrl-W>v`             |
-|                 split buffer horizontally                 |            `<Ctrl-W>s`             |
-|                                                           |                                    |
-|                       navigate down                       |             `<Ctrl-J>`             |
-|                        navigate up                        |             `<Ctrl-K>`             |
-|                       navigate left                       |             `<Ctrl-H>`             |
-|                      navigate right                       |             `<Ctrl-L>`             |
-|                                                           |                                    |
-|                 operaions in `nvim-tree`                  |                                    |
-|                         new file                          |                `a`                 |
-|                   remove file/directory                   |                `d`                 |
-|                   rename file/directory                   |                `r`                 |
-|                      open directory                       |            `o`/`Enter`             |
-|                      close directory                      |          `o`/`Backspace`           |
-|                       copy filename                       |                `y`                 |
-|                    copy relative path                     |                `Y`                 |
-|                    copy absolute path                     |                `gy`                |
-|           toggle file/directory begin with dot            |                `H`                 |
-|   toggle hidden file/directory configured in nvim-tree    |                `I`                 |
-|                                                           |                                    |
-|               find file in recently opened                |            `<leader>fr`            |
-|                   find file in history                    |            `<leader>fe`            |
-|            find file in current work directory            |            `<leader>ff`            |
-|                       find project                        |            `<leader>fp`            |
-|                        add project                        |     `<leader>fp`then`<Ctrl-A>`     |
-|                      delete project                       |     `<leader>fp`then`<Ctrl-D>`     |
-|                                                           |                                    |
-|                    find one character                     |            `<leader>f`             |
-|                       find one word                       |            `<leader>w`             |
-|                                                           |                                    |
-|                back to last cursor's place                |             `<Ctrl-O>`             |
-|                    jump to definition                     |                `gd`                |
-|                    show implementation                    |                `gD`                |
-|                       smart rename                        |                `gr`                |
-|                  toggle last diagnostics                  |                `gt`                |
-|                   toggle lsp references                   |                `gR`                |
-|                    show signature help                    |                `gs`                |
-| show current function/variable's definition or references |                `gh`                |
-|                      show hover doc                       |                `K`                 |
-|                     show code action                      |            `<leader>ca`            |
-|              toggle lsp document diagnostics              |            `<leader>cd`            |
-|             toggle lsp workspace diagnostics              |            `<leader>cw`            |
-|                   toggle code quickfix                    |            `<leader>cq`            |
-|                    toggle code loclist                    |            `<leader>cl`            |
-|                                                           |                                    |
-|                   next snippet's block                    |             `<Ctrl-L>`             |
-|                   prev snippet's block                    |             `<Ctrl-H>`             |
-|                                                           |                                    |
-|                 select current `()` block                 |               `vab`                |
-|                 select current `{}` block                 |               `vaB`                |
-|            select current outer function block            |               `vaf`                |
-|             select current outer class block              |               `vac`                |
-|            select current inner function block            |               `vif`                |
-|             select current inner class block              |               `vic`                |
-|                                                           |                                    |
-|                move to next function begin                |                `][`                |
-|                move to prev function begin                |                `[[`                |
-|                 move to next function end                 |                `]]`                |
-|                 move to prev function end                 |                `[]`                |
-|                                                           |                                    |
-|                 toggle one line's comment                 |               `gcc`                |
-|              toggle selected lines' comment               | `<Shift-V>`, select area then `gc` |
-|                                                           |                                    |
-|                  toggle MarkdownPreView                   |              `<F12>`               |
-|                                                           |                                    |
-|                   Save current session                    |            `<leader>ss`            |
-|                   Restore last session                    |            `<leader>sr`            |
-|                    Delete last session                    |            `<leader>sd`            |
-|        Debug mode only supports golang&python now         |                                    |
-|                    Debug continue(run)                    |         `<leader>dr`/`F6`          |
-|                      Debug run last                       |           `<leader>drl`            |
-|                    Debug run to cursor                    |           `<leader>drc`            |
-|                  Debug toggle breakpoint                  |            `<leader>db`            |
-|            Debug set breakpoint with condition            |            `<leader>dB`            |
-|                   Debug list breakpoint                   |           `<leader>dbl`            |
-|                      Debug open repl                      |            `<leader>dl`            |
-|                      Debug step over                      |         `<leader>dv`/`F9`          |
-|                      Debug step into                      |         `<leader>di`/`F10`         |
-|                      Debug step out                       |         `<leader>do`/`F11`         |
-|                     Debug disconnect                      |            `<leader>dd`            |
+|                          Effect                           |            shortcut            |
+| :-------------------------------------------------------: | :----------------------------: |
+|                  sync config and compile                  |          `<leader>ps`          |
+|                      install plugins                      |          `<leader>pi`          |
+|                      update plugins                       |          `<leader>pu`          |
+|                      compile config                       |          `<leader>pc`          |
+|                                                           |                                |
+|                     toggle nvim-tree                      |            `<C-n>`             |
+|                       toggle tagbar                       |            `<A-t>`             |
+|                                                           |                                |
+|                 open horizontal terminal                  |       `<C-w>t` or `<F5>`       |
+|                 toggle vertical terminal                  |            `<C-\>`             |
+|                       quit terminal                       |            `<C-d>`             |
+|                 toggle floating terminal                  |            `<A-d>`             |
+|             open `gitui` in current directory             |          `<leader>g`           |
+|                                                           |                                |
+|               pick buffer `n`(`n`means No)                |            `<A-n>`             |
+|                       right buffer                        |            `<A-j>`             |
+|                        left buffer                        |            `<A-k>`             |
+|               move current buffer to right                |           `<A-S-k>`            |
+|                move current buffer to left                |           `<A-S-k>`            |
+|                   close current buffer                    |            `<A-q>`             |
+|                force close current buffer                 |           `<A-S-q>`            |
+|                  split buffer vertically                  |            `<C-w>v`            |
+|                 split buffer horizontally                 |            `<C-w>s`            |
+|                                                           |                                |
+|                       navigate down                       |            `<C-j>`             |
+|                        navigate up                        |            `<C-k>`             |
+|                       navigate left                       |            `<C-h>`             |
+|                      navigate right                       |            `<C-l>`             |
+|                                                           |                                |
+|                 operaions in `nvim-tree`                  |                                |
+|                         new file                          |              `a`               |
+|                   remove file/directory                   |              `d`               |
+|                   rename file/directory                   |              `r`               |
+|                      open directory                       |          `o`/`Enter`           |
+|                      close directory                      |        `o`/`Backspace`         |
+|                       copy filename                       |              `y`               |
+|                    copy relative path                     |              `Y`               |
+|                    copy absolute path                     |              `gy`              |
+|           toggle file/directory begin with dot            |              `H`               |
+|   toggle hidden file/directory configured in nvim-tree    |              `I`               |
+|                                                           |                                |
+|               find file in recently opened                |          `<leader>fr`          |
+|                   find file in history                    |          `<leader>fe`          |
+|            find file in current work directory            |          `<leader>ff`          |
+|                       find project                        |          `<leader>fp`          |
+|                        add project                        |    `<leader>fp`then`<C-A>`     |
+|                      delete project                       |    `<leader>fp`then`<C-D>`     |
+|                                                           |                                |
+|                    find one character                     |          `<leader>f`           |
+|                       find one word                       |          `<leader>w`           |
+|                                                           |                                |
+|                back to last cursor's place                |            `<C-O>`             |
+|                    jump to definition                     |              `gd`              |
+|                    show implementation                    |              `gD`              |
+|                       smart rename                        |              `gr`              |
+|                  toggle last diagnostics                  |              `gt`              |
+|                   toggle lsp references                   |              `gR`              |
+|                    show signature help                    |              `gs`              |
+| show current function/variable's definition or references |              `gh`              |
+|                      show hover doc                       |              `K`               |
+|                     show code action                      |          `<leader>ca`          |
+|              toggle lsp document diagnostics              |          `<leader>cd`          |
+|             toggle lsp workspace diagnostics              |          `<leader>cw`          |
+|                   toggle code quickfix                    |          `<leader>cq`          |
+|                    toggle code loclist                    |          `<leader>cl`          |
+|                                                           |                                |
+|                   next snippet's block                    |            `<C-l>`             |
+|                   prev snippet's block                    |            `<C-h>`             |
+|                                                           |                                |
+|                 select current `()` block                 |             `vab`              |
+|                 select current `{}` block                 |             `vaB`              |
+|            select current outer function block            |             `vaf`              |
+|             select current outer class block              |             `vac`              |
+|            select current inner function block            |             `vif`              |
+|             select current inner class block              |             `vic`              |
+|                                                           |                                |
+|                move to next function begin                |              `][`              |
+|                move to prev function begin                |              `[[`              |
+|                 move to next function end                 |              `]]`              |
+|                 move to prev function end                 |              `[]`              |
+|                                                           |                                |
+|                 toggle one line's comment                 |             `gcc`              |
+|              toggle selected lines' comment               | `<S-V>`, select area then `gc` |
+|                                                           |                                |
+|                  toggle MarkdownPreView                   |            `<F12>`             |
+|                                                           |                                |
+|                   Save current session                    |          `<leader>ss`          |
+|                   Restore last session                    |          `<leader>sr`          |
+|                    Delete last session                    |          `<leader>sd`          |
+|        Debug mode only supports golang&python now         |                                |
+|                    Debug continue(run)                    |       `<leader>dr`/`F6`        |
+|                      Debug run last                       |         `<leader>drl`          |
+|                    Debug run to cursor                    |         `<leader>drc`          |
+|                  Debug toggle breakpoint                  |          `<leader>db`          |
+|            Debug set breakpoint with condition            |          `<leader>dB`          |
+|                   Debug list breakpoint                   |         `<leader>dbl`          |
+|                      Debug open repl                      |          `<leader>dl`          |
+|                      Debug step over                      |       `<leader>dv`/`F9`        |
+|                      Debug step into                      |       `<leader>di`/`F10`       |
+|                      Debug step out                       |       `<leader>do`/`F11`       |
+|                     Debug disconnect                      |          `<leader>dd`          |
 
 You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
