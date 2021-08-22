@@ -326,8 +326,8 @@ The leader key is `,`.
 |                     toggle nvim-tree                      |             `<Ctrl-N>`             |
 |                       toggle tagbar                       |             `<Alt-t>`              |
 |                                                           |                                    |
-|                    open terminal split                    |       `<Ctrl-W>t` or `<F5>`        |
-|               open terminal vertical split                |            `<Ctrl-W>T`             |
+|                 open horizontal terminal                  |       `<Ctrl-W>t` or `<F5>`        |
+|                 toggle vertical terminal                  |             `<Ctrl-\>`             |
 |                       quit terminal                       |             `<Ctrl-D>`             |
 |                 toggle floating terminal                  |             `<Alt-D>`              |
 |             open `gitui` in current directory             |            `<leader>g`             |
