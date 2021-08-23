@@ -137,6 +137,37 @@ function config.nvim_tree()
     }
 end
 
+function config.nvim_bufferline()
+    require('bufferline').setup {
+        options = {
+            number = "both",
+            number_style = "superscript",
+            modified_icon = '✥',
+            buffer_close_icon = '',
+            mappings = false,
+            left_trunc_marker = "",
+            right_trunc_marker = "",
+            max_name_length = 14,
+            max_prefix_length = 13,
+            tab_size = 20,
+            show_buffer_close_icons = true,
+            show_buffer_icons = true,
+            show_tab_indicators = true,
+            separator_style = "thin",
+            diagnostics = "nvim_lsp",
+            always_show_bufferline = true,
+            offsets = {
+                {
+                    filetype = "NvimTree",
+                    text = "File Explorer",
+                    text_align = "center",
+                    padding = 1
+                }
+            }
+        }
+    }
+end
+
 function config.gitsigns()
     if not packer_plugins['plenary.nvim'].loaded then
         vim.cmd [[packadd plenary.nvim]]

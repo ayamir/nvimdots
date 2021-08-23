@@ -25,7 +25,11 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     event = 'BufRead',
     config = conf.indent_blankline
 }
-ui['romgrk/barbar.nvim'] = {opt = true, event = 'BufRead'}
+ui['akinsho/nvim-bufferline.lua'] = {
+    opt = true,
+    event = 'BufRead',
+    config = conf.nvim_bufferline
+}
 ui['folke/zen-mode.nvim'] = {
     opt = true,
     cmd = 'ZenMode',
