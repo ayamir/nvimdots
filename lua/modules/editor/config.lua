@@ -185,7 +185,7 @@ function config.toggleterm()
         -- size can be a number or function which is passed the current terminal
         size = function(term)
             if term.direction == "horizontal" then
-                return 25
+                return 20
             elseif term.direction == "vertical" then
                 return vim.o.columns * 0.45
             end
@@ -198,7 +198,7 @@ function config.toggleterm()
         start_in_insert = true,
         insert_mappings = true, -- whether or not the open mapping applies in insert mode
         persist_size = true,
-        direction = 'vertical',
+        direction = 'horizontal',
         close_on_exit = true, -- close the terminal window when the process exits
         shell = vim.o.shell -- change the default shell
     }
