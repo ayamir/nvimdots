@@ -59,6 +59,9 @@ sudo pacman -S git neovim gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
 
 # for neovim python module
 pip install neovim --user
+
+# clone
+git clone https://github.com/ayamir/nvimdots ~/.config/nvim
 ```
 
 2. Recommended Terminals:
@@ -204,11 +207,14 @@ directory.
 
 - Switch light/dark theme
 
-  `set background=dark`
-
-  `set background=light`
-
-## Important
+```shell
+# To light
+    sed -i "s/\=dark/\=light/g" ~/.config/nvim/lua/modules/ui/config.lua
+    sed -i "s/onedark/onelight/g" ~/.config/nvim/lua/modules/ui/config.lua
+# To Dark
+    sed -i "s/\=light/\=dark/g" ~/.config/nvim/lua/modules/ui/config.lua
+    sed -i "s/onelight/onedark/g" ~/.config/nvim/lua/modules/ui/config.lua
+```
 
 You need to execute `PackerSync` or just press `<leader>ps` to compile the latest config if you modify the
 any config in `lua` directory.
