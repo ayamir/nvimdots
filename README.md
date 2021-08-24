@@ -248,7 +248,7 @@ Then you can figure out what modification makes error.
 |            [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)            |        Replacement of Nerdtree         |
 |             [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)             |        Show git status in nvim         |
 | [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) |    Show indent with different level    |
-|                  [romgrk/barbar.nvim](https://github.com/romgrk/barbar.nvim)                  |             Tab management             |
+|             [akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim)             |       Tab and buffer management        |
 |                 [folke/zen-mode.nvim](https://github.com/folke/zen-mode.nvim)                 |           Focus on code only           |
 |                 [folke/twilight.nvim](https://github.com/folke/twilight.nvim)                 | Highlight current block and dim others |
 
@@ -429,6 +429,15 @@ The leader key is `,`.
 |                      Debug step into                      |       `<leader>di`/`F10`       |
 |                      Debug step out                       |       `<leader>do`/`F11`       |
 |                     Debug disconnect                      |          `<leader>dd`          |
+|                      Git management                       |                                |
+|                         Prev hunk                         |              `[g`              |
+|                         Next hunk                         |              `]g`              |
+|                        Stage hunk                         | `<leader>hs`(`n` and `v` mode) |
+|                        Reset hunk                         | `<leader>hr`(`n` and `v` mode) |
+|                      Undo stage hunk                      |          `<leader>hu`          |
+|                       Reset buffer                        |          `<leader>hR`          |
+|                       Preview hunk                        |          `<leader>hp`          |
+|                        Blame hunk                         |          `<leader>hb`          |
 
 You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
