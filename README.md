@@ -379,6 +379,7 @@ The leader key is `,`.
 |                    find one character                     |          `<leader>f`           |
 |                       find one word                       |          `<leader>w`           |
 |                                                           |                                |
+|                         neoformat                         |           `<C-A-l>`            |
 |                back to last cursor's place                |            `<C-O>`             |
 |                    jump to definition                     |              `gd`              |
 |                    show implementation                    |              `gD`              |

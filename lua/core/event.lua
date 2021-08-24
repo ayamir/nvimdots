@@ -31,11 +31,13 @@ function autocmd.load_autocmds()
             {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
             {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
             {"BufWritePre", "*.tmp", "setlocal noundofile"},
-            {"BufWritePre", "*.bak", "setlocal noundofile"}, -- Neoformat
-            {
-                "BufWritePre", "*",
-                "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
-            }, -- Auto change work directory
+            {"BufWritePre", "*.bak", "setlocal noundofile"}, 
+            -- Neoformat
+            -- {
+            --     "BufWritePre", "*",
+            --     "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
+            -- }, 
+            -- Auto change work directory
             {"BufEnter", "*", "silent! lcd %:p:h"}, -- auto place to last edit
             {
                 "BufReadPost", "*",
