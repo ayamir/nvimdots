@@ -475,6 +475,10 @@ nvim_lsp.pylsp.setup{}
 
 Don't forget to remove the old server installed before.
 
+3. Wrong configuration may invoke the dialog asking for deleting all plugins
+
+Input `n` and `<CR>`
+
 <a id="credit"></a>
 
 # Credit
