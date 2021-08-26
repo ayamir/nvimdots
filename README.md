@@ -25,7 +25,10 @@ This is my neovim's configuration.
 
 I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
-I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) to realize code complete.
+I use [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) and [nvim-compe](https://github.com/hrsh7th/nvim-compe) to realize code complete.
+
+([nvim-cmp](https://github.com/hrsh7th/nvim-cmp) is the next version working in
+progress)
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
@@ -446,12 +449,31 @@ You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
 # Issues
 
-1. tabnine doesn't install automatically
+1. Tabnine doesn't install automatically
 
 ```shell
 cd ~/.local/share/nvim/site/pack/packer/opt/compe-tabnine
 ./install.sh
 ```
+
+2. Install and configure different lsp server
+
+You can find all of the servers available in
+[here](https://microsoft.github.io/language-server-protocol/implementors/servers/).
+
+For example (python-lsp-server):
+
+```shell
+pip install python-lsp-server --user
+```
+
+Add this line to `lua/modules/completion/lspconfig.lua`'s end.
+
+```lua
+nvim_lsp.pylsp.setup{}
+```
+
+Don't forget to remove the old server installed before.
 
 <a id="credit"></a>
 
