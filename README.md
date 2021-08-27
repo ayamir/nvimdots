@@ -334,7 +334,7 @@ The leader key is `,`.
 |                  sync config and compile                  |          `<leader>ps`          |
 |                      install plugins                      |          `<leader>pi`          |
 |                      update plugins                       |          `<leader>pu`          |
-|                      clean plugins                       |          `<leader>pc`          |
+|                       clean plugins                       |          `<leader>pc`          |
 |                                                           |                                |
 |                     toggle nvim-tree                      |            `<C-n>`             |
 |                       toggle tagbar                       |            `<A-t>`             |
