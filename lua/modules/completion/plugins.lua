@@ -20,33 +20,38 @@ completion['glepnir/lspsaga.nvim'] = {
     cmd = 'Lspsaga',
     config = conf.saga
 }
-completion['hrsh7th/nvim-compe'] = {
-    opt = true,
-    event = 'InsertEnter',
-    after = 'nvim-lspconfig',
-    config = conf.compe
-}
 completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
-completion['tzachar/compe-tabnine'] = {
-    opt = true,
-    after = 'nvim-compe',
-    run = './install.sh'
+completion['hrsh7th/nvim-cmp'] = {
+    opt = false,
+    config = conf.cmp,
+    after = 'nvim-lspconfig',
+    requires = {
+        {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},
+        {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
+        {'andersevenrud/compe-tmux', after = 'nvim-cmp'},
+        {'hrsh7th/cmp-path', after = 'nvim-cmp'},
+        {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'},
+        {'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp'},
+        {'quangnguyen30192/cmp-nvim-tags', after = 'nvim-cmp'},
+        {'f3fora/cmp-spell', after = 'nvim-cmp'},
+        {'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp'}
+    }
 }
 completion['hrsh7th/vim-vsnip-integ'] = {
     opt = true,
-    after = 'nvim-compe',
+    after = 'nvim-cmp',
     requires = {'hrsh7th/vim-vsnip', opt = true, event = 'InsertCharPre'}
 }
-completion['rafamadriz/friendly-snippets'] = {opt = true, after = 'nvim-compe'}
+completion['rafamadriz/friendly-snippets'] = {opt = true, after = 'nvim-cmp'}
 completion['SirVer/ultisnips'] = {
     opt = true,
-    after = 'nvim-compe',
+    after = 'nvim-cmp',
     requires = {'honza/vim-snippets', opt = true}
 }
 completion['windwp/nvim-autopairs'] = {
     opt = true,
     event = 'InsertCharPre',
-    after = 'nvim-compe',
+    after = 'nvim-cmp',
     config = conf.autopairs
 }
 

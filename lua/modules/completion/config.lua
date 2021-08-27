@@ -40,52 +40,57 @@ function config.saga()
     vim.api.nvim_command("autocmd CursorHold * Lspsaga show_line_diagnostics")
 end
 
-function config.compe()
-    if not packer_plugins['vim-vsnip'].loaded then
-        vim.cmd [[packadd vim-vsnip]]
+function config.cmp()
+    local t = function(str)
+        return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
-    if not packer_plugins['ultisnips'].loaded then
-        vim.cmd [[packadd ultisnips]]
+    local check_back_space = function()
+        local col = vim.fn.col(".") - 1
+        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
     end
 
-    require('compe').setup {
-        enabled = true,
-        autocomplete = true,
-        debug = false,
-        min_length = 1,
-        preselect = 'enable',
-        throttle_time = 80,
-        source_timeout = 200,
-        resolve_timeout = 800,
-        incomplete_delay = 400,
-        max_abbr_width = 100,
-        max_kind_width = 100,
-        max_menu_width = 100,
-        documentation = true,
+    local cmp = require('cmp')
+    cmp.setup {
+        snippet = {
+            expand = function(args)
+                vim.fn["UltiSnips#Anon"](args.body)
+            end
+        },
+        -- You can set mappings if you want
+        mapping = {
+            ['<C-p>'] = cmp.mapping.select_prev_item(),
+            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm({
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true
+            }),
+            ["<Tab>"] = cmp.mapping(function(fallback)
+                if vim.fn.pumvisible() == 1 then
+                    if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or
+                        vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                        return vim.fn.feedkeys(t(
+                                                   "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
+                    end
 
-        source = {
-            path = true,
-            buffer = true,
-            calc = true,
-            spell = true,
-            tags = true,
+                    vim.fn.feedkeys(t("<C-n>"), "n")
+                elseif check_back_space() then
+                    vim.fn.feedkeys(t("<tab>"), "n")
+                else
+                    fallback()
+                end
+            end, {"i", "s"})
+        },
 
-            orgmode = true,
-            snippetSupport = true,
-            nvim_lsp = true,
-            nvim_lua = true,
-            treesitter = true,
-            vsnip = true,
-            ultisnips = true,
-            tabnine = {
-                max_line = 1000,
-                max_num_results = 6,
-                priority = 5000,
-                show_prediction_strength = true,
-                sort = false,
-                ignore_pattern = '[(]'
-            }
+        -- You should specify your *installed* sources.
+        sources = {
+            {name = 'buffer'}, {name = 'path'}, {name = 'tags'},
+            {name = 'ultisnips'}, {name = 'nvim_lua'}, {name = 'cmp_tabnine'},
+            {name = 'spell'}, {name = 'tmux'}
         }
     }
 end
@@ -102,9 +107,10 @@ function config.autopairs()
         check_ts = true
     })
 
-    require("nvim-autopairs.completion.compe").setup({
-        map_cr = true,
-        map_complete = true
+    require("nvim-autopairs.completion.cmp").setup({
+        map_cr = true, --  map <CR> on insert mode
+        map_complete = true, -- it will auto insert `(` after select function or method item
+        auto_select = true -- automatically select the first item
     })
 end
 
