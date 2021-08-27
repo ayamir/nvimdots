@@ -42,7 +42,7 @@ local plug_map = {
         :with_nowait(),
     ["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap()
         :with_nowait(),
-    ["n|<leader>pc"] = map_cr("PackerCompile"):with_silent():with_noremap()
+    ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap()
         :with_nowait(),
     -- Lsp mapp work when insertenter and lsp start
     ["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent()
