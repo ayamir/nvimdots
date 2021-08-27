@@ -141,10 +141,12 @@ function config.nvim_bufferline()
     require('bufferline').setup {
         options = {
             number = "both",
-            number_style = "superscript",
+            numbers = function(opts)
+                return string.format('%s·%s', opts.raise(opts.ordinal),
+                                     opts.lower(opts.id))
+            end,
             modified_icon = '✥',
             buffer_close_icon = '',
-            mappings = false,
             left_trunc_marker = "",
             right_trunc_marker = "",
             max_name_length = 14,
@@ -153,9 +155,9 @@ function config.nvim_bufferline()
             show_buffer_close_icons = true,
             show_buffer_icons = true,
             show_tab_indicators = true,
-            separator_style = "thin",
             diagnostics = "nvim_lsp",
             always_show_bufferline = true,
+            separator_style = "slant",
             offsets = {
                 {
                     filetype = "NvimTree",
