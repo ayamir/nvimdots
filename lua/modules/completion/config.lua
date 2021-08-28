@@ -2,40 +2,6 @@ local config = {}
 
 function config.nvim_lsp() require('modules.completion.lspconfig') end
 
-function config.lspkind()
-    require('lspkind').init({
-        -- enables text annotations
-        with_text = true,
-        -- can be either 'default' or
-        -- 'codicons' for codicon preset (requires vscode-codicons font installed)
-        -- default: 'default'
-        preset = 'codicons',
-        -- override preset symbols
-        symbol_map = {
-            Text = '',
-            Method = 'ƒ',
-            Function = '',
-            Constructor = '',
-            Variable = '',
-            Class = '',
-            Interface = 'ﰮ',
-            Module = '',
-            Property = '',
-            Unit = '',
-            Value = '',
-            Enum = '',
-            Keyword = '',
-            Snippet = '﬌',
-            Color = '',
-            File = '',
-            Folder = '',
-            EnumMember = '',
-            Constant = '',
-            Struct = ''
-        }
-    })
-end
-
 function config.saga()
     vim.api.nvim_command("autocmd CursorHold * Lspsaga show_line_diagnostics")
 end
@@ -45,16 +11,55 @@ function config.cmp()
         return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
-    local check_back_space = function()
-        local col = vim.fn.col(".") - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-    end
-
     local cmp = require('cmp')
     cmp.setup {
-        snippet = {
-            expand = function(args)
-                vim.fn["UltiSnips#Anon"](args.body)
+        formatting = {
+            format = function(entry, vim_item)
+                local lspkind_icons = {
+                    Text = "",
+                    Method = "",
+                    Function = "",
+                    Constructor = "",
+                    Field = "ﰠ",
+                    Variable = "",
+                    Class = "ﴯ",
+                    Interface = "",
+                    Module = "",
+                    Property = "ﰠ",
+                    Unit = "塞",
+                    Value = "",
+                    Enum = "",
+                    Keyword = "",
+                    Snippet = "",
+                    Color = "",
+                    File = "",
+                    Reference = "",
+                    Folder = "",
+                    EnumMember = "",
+                    Constant = "",
+                    Struct = "פּ",
+                    Event = "",
+                    Operator = "",
+                    TypeParameter = ""
+                }
+                -- load lspkind icons
+                vim_item.kind = string.format("%s %s",
+                                              lspkind_icons[vim_item.kind],
+                                              vim_item.kind)
+
+                vim_item.menu = ({
+                    cmp_tabnine = "[TN]",
+                    nvim_lsp = "[LSP]",
+                    nvim_lua = "[Lua]",
+                    buffer = "[BUF]",
+                    tags = "[TAG]",
+                    path = "[PATH]",
+                    tmux = "[TMUX]",
+                    luasnip = "[SNIP]",
+                    spell = "[SPELL]"
+                })[entry.source.name]
+
+                return vim_item
             end
         },
         -- You can set mappings if you want
@@ -69,30 +74,62 @@ function config.cmp()
                 behavior = cmp.ConfirmBehavior.Insert,
                 select = true
             }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
+            ["<Tab>"] = function(fallback)
                 if vim.fn.pumvisible() == 1 then
-                    if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or
-                        vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                        return vim.fn.feedkeys(t(
-                                                   "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
-                    end
-
                     vim.fn.feedkeys(t("<C-n>"), "n")
-                elseif check_back_space() then
-                    vim.fn.feedkeys(t("<tab>"), "n")
                 else
                     fallback()
                 end
-            end, {"i", "s"})
+            end,
+            ["<S-Tab>"] = function(fallback)
+                if vim.fn.pumvisible() == 1 then
+                    vim.fn.feedkeys(t("<C-p>"), "n")
+                else
+                    fallback()
+                end
+            end,
+            ["<C-h>"] = function(fallback)
+                if require("luasnip").jumpable(-1) then
+                    vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+                else
+                    fallback()
+                end
+            end,
+            ["<C-l>"] = function(fallback)
+                if require("luasnip").expand_or_jumpable() then
+                    vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+                else
+                    fallback()
+                end
+            end
+        },
+
+        snippet = {
+            expand = function(args)
+                require("luasnip").lsp_expand(args.body)
+            end
         },
 
         -- You should specify your *installed* sources.
         sources = {
             {name = 'buffer'}, {name = 'path'}, {name = 'tags'},
-            {name = 'ultisnips'}, {name = 'nvim_lua'}, {name = 'cmp_tabnine'},
-            {name = 'spell'}, {name = 'tmux'}
+            {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'},
+            {name = 'spell'}, {name = 'tmux'}, {name = 'luasnip'}
         }
     }
+end
+
+function config.luasnip()
+    require('luasnip').config.set_config {
+        history = true,
+        updateevents = "TextChanged,TextChangedI"
+    }
+    require("luasnip/loaders/from_vscode").load()
+end
+
+function config.tabnine()
+    local tabnine = require('cmp_tabnine.config')
+    tabnine:setup({max_lines = 1000, max_num_results = 20, sort = true})
 end
 
 function config.autopairs()
@@ -108,9 +145,8 @@ function config.autopairs()
     })
 
     require("nvim-autopairs.completion.cmp").setup({
-        map_cr = true, --  map <CR> on insert mode
-        map_complete = true, -- it will auto insert `(` after select function or method item
-        auto_select = true -- automatically select the first item
+        map_cr = true,
+        map_complete = true
     })
 end
 

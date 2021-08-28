@@ -38,24 +38,49 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {'documentation', 'detail', 'additionalTextEdits'}
 }
 
+local function lsp_signature()
+    require('lsp_signature').on_attach({
+        bind = true,
+        use_lspsaga = false,
+        floating_window = true,
+        fix_pos = true,
+        hint_enable = true,
+        hi_parameter = "Search",
+        handler_opts = {"double"}
+    })
+end
+
 local function setup_servers()
     lsp_install.setup()
     local servers = lsp_install.installed_servers()
-    for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup {
-            capabilities = capabilities,
-            on_attach = function()
-                require('lsp_signature').on_attach({
-                    bind = true,
-                    use_lspsaga = false,
-                    floating_window = true,
-                    fix_pos = true,
-                    hint_enable = true,
-                    hi_parameter = "Search",
-                    handler_opts = {"double"}
-                })
-            end
-        }
+    for _, lsp in pairs(servers) do
+        if lsp == "lua" then
+            nvim_lsp[lsp].setup {
+                capabilities = capabilities,
+                flags = {debounce_text_changes = 500},
+                settings = {
+                    Lua = {
+                        diagnostics = {globals = {"vim", "packer_plugins"}},
+                        workspace = {
+                            library = {
+                                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
+                            },
+                            maxPreload = 100000,
+                            preloadFileSize = 10000
+                        },
+                        telemetry = {enable = false}
+                    }
+                },
+                on_attach = lsp_signature()
+            }
+        else
+            nvim_lsp[lsp].setup {
+                capabilities = capabilities,
+                flags = {debounce_text_changes = 500},
+                on_attach = lsp_signature()
+            }
+        end
     end
 end
 
