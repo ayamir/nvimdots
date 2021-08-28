@@ -10,43 +10,38 @@ completion['kabouzeid/nvim-lspinstall'] = {
     opt = true,
     cmd = {'LspInstall', 'LspUninstall'}
 }
-completion['onsails/lspkind-nvim'] = {
-    opt = true,
-    event = 'BufRead',
-    config = conf.lspkind
-}
 completion['glepnir/lspsaga.nvim'] = {
     opt = true,
     cmd = 'Lspsaga',
     config = conf.saga
 }
-completion['hrsh7th/nvim-compe'] = {
-    opt = true,
-    event = 'InsertEnter',
-    after = 'nvim-lspconfig',
-    config = conf.compe
-}
 completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
-completion['tzachar/compe-tabnine'] = {
-    opt = true,
-    after = 'nvim-compe',
-    run = './install.sh'
+completion['hrsh7th/nvim-cmp'] = {
+    config = conf.cmp,
+    event = 'InsertEnter',
+    requires = {
+        {'saadparwaiz1/cmp_luasnip', after = 'LuaSnip'},
+        {'hrsh7th/cmp-buffer', after = 'cmp_luasnip'},
+        {'hrsh7th/cmp-nvim-lsp', after = 'cmp-buffer'},
+        {'hrsh7th/cmp-nvim-lua', after = 'cmp-nvim-lsp'},
+        {'andersevenrud/compe-tmux', branch = 'cmp', after = 'cmp-nvim-lua'},
+        {'hrsh7th/cmp-path', after = 'compe-tmux'},
+        {'quangnguyen30192/cmp-nvim-tags', after = 'cmp-path'},
+        {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}, {
+            'tzachar/cmp-tabnine',
+            run = './install.sh',
+            after = 'cmp-spell',
+            config = conf.tabnine
+        }
+    }
 }
-completion['hrsh7th/vim-vsnip-integ'] = {
-    opt = true,
-    after = 'nvim-compe',
-    requires = {'hrsh7th/vim-vsnip', opt = true, event = 'InsertCharPre'}
-}
-completion['rafamadriz/friendly-snippets'] = {opt = true, after = 'nvim-compe'}
-completion['SirVer/ultisnips'] = {
-    opt = true,
-    after = 'nvim-compe',
-    requires = {'honza/vim-snippets', opt = true}
+completion['L3MON4D3/LuaSnip'] = {
+    after = 'nvim-cmp',
+    config = conf.luasnip,
+    requires = 'rafamadriz/friendly-snippets'
 }
 completion['windwp/nvim-autopairs'] = {
-    opt = true,
-    event = 'InsertCharPre',
-    after = 'nvim-compe',
+    after = 'nvim-cmp',
     config = conf.autopairs
 }
 

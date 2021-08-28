@@ -142,6 +142,7 @@ function config.nvim_bufferline()
         options = {
             number = "both",
             numbers = function(opts)
+
                 return string.format('%s·%s', opts.raise(opts.ordinal),
                                      opts.lower(opts.id))
             end,

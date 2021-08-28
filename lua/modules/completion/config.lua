@@ -2,109 +2,149 @@ local config = {}
 
 function config.nvim_lsp() require('modules.completion.lspconfig') end
 
-function config.lspkind()
-    require('lspkind').init({
-        -- enables text annotations
-        with_text = true,
-        -- can be either 'default' or
-        -- 'codicons' for codicon preset (requires vscode-codicons font installed)
-        -- default: 'default'
-        preset = 'codicons',
-        -- override preset symbols
-        symbol_map = {
-            Text = '',
-            Method = 'ƒ',
-            Function = '',
-            Constructor = '',
-            Variable = '',
-            Class = '',
-            Interface = 'ﰮ',
-            Module = '',
-            Property = '',
-            Unit = '',
-            Value = '',
-            Enum = '',
-            Keyword = '',
-            Snippet = '﬌',
-            Color = '',
-            File = '',
-            Folder = '',
-            EnumMember = '',
-            Constant = '',
-            Struct = ''
-        }
-    })
-end
-
 function config.saga()
     vim.api.nvim_command("autocmd CursorHold * Lspsaga show_line_diagnostics")
 end
 
-function config.compe()
-    if not packer_plugins['vim-vsnip'].loaded then
-        vim.cmd [[packadd vim-vsnip]]
+function config.cmp()
+    local t = function(str)
+        return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
-    if not packer_plugins['ultisnips'].loaded then
-        vim.cmd [[packadd ultisnips]]
-    end
+    local cmp = require('cmp')
+    cmp.setup {
+        formatting = {
+            format = function(entry, vim_item)
+                local lspkind_icons = {
+                    Text = "",
+                    Method = "",
+                    Function = "",
+                    Constructor = "",
+                    Field = "ﰠ",
+                    Variable = "",
+                    Class = "ﴯ",
+                    Interface = "",
+                    Module = "",
+                    Property = "ﰠ",
+                    Unit = "塞",
+                    Value = "",
+                    Enum = "",
+                    Keyword = "",
+                    Snippet = "",
+                    Color = "",
+                    File = "",
+                    Reference = "",
+                    Folder = "",
+                    EnumMember = "",
+                    Constant = "",
+                    Struct = "פּ",
+                    Event = "",
+                    Operator = "",
+                    TypeParameter = ""
+                }
+                -- load lspkind icons
+                vim_item.kind = string.format("%s %s",
+                                              lspkind_icons[vim_item.kind],
+                                              vim_item.kind)
 
-    require('compe').setup {
-        enabled = true,
-        autocomplete = true,
-        debug = false,
-        min_length = 1,
-        preselect = 'enable',
-        throttle_time = 80,
-        source_timeout = 200,
-        resolve_timeout = 800,
-        incomplete_delay = 400,
-        max_abbr_width = 100,
-        max_kind_width = 100,
-        max_menu_width = 100,
-        documentation = true,
+                vim_item.menu = ({
+                    cmp_tabnine = "[TN]",
+                    nvim_lsp = "[LSP]",
+                    nvim_lua = "[Lua]",
+                    buffer = "[BUF]",
+                    tags = "[TAG]",
+                    path = "[PATH]",
+                    tmux = "[TMUX]",
+                    luasnip = "[SNIP]",
+                    spell = "[SPELL]"
+                })[entry.source.name]
 
-        source = {
-            path = true,
-            buffer = true,
-            calc = true,
-            spell = true,
-            tags = true,
+                return vim_item
+            end
+        },
+        -- You can set mappings if you want
+        mapping = {
+            ['<C-p>'] = cmp.mapping.select_prev_item(),
+            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm({
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true
+            }),
+            ["<Tab>"] = function(fallback)
+                if vim.fn.pumvisible() == 1 then
+                    vim.fn.feedkeys(t("<C-n>"), "n")
+                else
+                    fallback()
+                end
+            end,
+            ["<S-Tab>"] = function(fallback)
+                if vim.fn.pumvisible() == 1 then
+                    vim.fn.feedkeys(t("<C-p>"), "n")
+                else
+                    fallback()
+                end
+            end,
+            ["<C-h>"] = function(fallback)
+                if require("luasnip").jumpable(-1) then
+                    vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+                else
+                    fallback()
+                end
+            end,
+            ["<C-l>"] = function(fallback)
+                if require("luasnip").expand_or_jumpable() then
+                    vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+                else
+                    fallback()
+                end
+            end
+        },
 
-            orgmode = true,
-            snippetSupport = true,
-            nvim_lsp = true,
-            nvim_lua = true,
-            treesitter = true,
-            vsnip = true,
-            ultisnips = true,
-            tabnine = {
-                max_line = 1000,
-                max_num_results = 6,
-                priority = 5000,
-                show_prediction_strength = true,
-                sort = false,
-                ignore_pattern = '[(]'
-            }
+        snippet = {
+            expand = function(args)
+                require("luasnip").lsp_expand(args.body)
+            end
+        },
+
+        -- You should specify your *installed* sources.
+        sources = {
+            {name = 'buffer'}, {name = 'path'}, {name = 'tags'},
+            {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'},
+            {name = 'spell'}, {name = 'tmux'}, {name = 'luasnip'}
         }
     }
 end
 
-function config.autopairs()
-    require('nvim-autopairs').setup({
-        disable_filetype = {"TelescopePrompt"},
-        ignored_next_char = string.gsub([[ [%w%%%'%[%"%.] ]], "%s+", ""),
-        enable_moveright = true,
-        -- add bracket pairs after quote
-        enable_afterquote = true,
-        -- check bracket in same line
-        enable_check_bracket_line = true,
-        check_ts = true
-    })
+function config.luasnip()
+    require('luasnip').config.set_config {
+        history = true,
+        updateevents = "TextChanged,TextChangedI"
+    }
+    require("luasnip/loaders/from_vscode").load()
+end
 
-    require("nvim-autopairs.completion.compe").setup({
+function config.tabnine()
+    local tabnine = require('cmp_tabnine.config')
+    tabnine:setup({
+        max_line = 1000,
+        max_num_results = 6,
+        priority = 3000,
+        show_prediction_strength = true,
+        sort = true,
+        ignore_pattern = '[(]'
+    })
+end
+
+function config.autopairs()
+    require('nvim-autopairs').setup {}
+    require("nvim-autopairs.completion.cmp").setup({
         map_cr = true,
-        map_complete = true
+        map_complete = true,
+        auto_select = true
     })
 end
 

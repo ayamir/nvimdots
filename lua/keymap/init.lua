@@ -7,17 +7,6 @@ require('keymap.config')
 local plug_map = {
     -- Neoformat
     ["n|<C-A-l>"] = map_cr("Neoformat"):with_noremap():with_silent(),
-    -- Complete
-    ["i|<C-e>"] = map_cmd([[compe#close('<C-e>')]]):with_expr():with_silent(),
-    ["i|<C-f>"] = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr()
-        :with_silent(),
-    ["i|<C-d>"] = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr()
-        :with_silent(),
-    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent(),
-    ["i|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
-    ["s|<Tab>"] = map_cmd("v:lua.tab_complete()"):with_expr():with_silent(),
-    ["i|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
-    ["s|<S-Tab>"] = map_cmd("v:lua.s_tab_complete()"):with_expr():with_silent(),
     -- Bufferline
     ["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent(),
     ["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
