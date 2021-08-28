@@ -129,11 +129,19 @@ end
 
 function config.tabnine()
     local tabnine = require('cmp_tabnine.config')
-    tabnine:setup({max_lines = 1000, max_num_results = 20, sort = true})
+    tabnine:setup({
+        max_line = 1000,
+        max_num_results = 6,
+        priority = 3000,
+        show_prediction_strength = true,
+        sort = true,
+        ignore_pattern = '[(]'
+    })
 end
 
 function config.autopairs()
-    require("nvim-autopairs.completion.compe").setup({
+    require('nvim-autopairs').setup {}
+    require("nvim-autopairs.completion.cmp").setup({
         map_cr = true,
         map_complete = true,
         auto_select = true
