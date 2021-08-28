@@ -25,9 +25,11 @@ completion['hrsh7th/nvim-cmp'] = {
         {'hrsh7th/cmp-nvim-lsp', after = 'cmp-buffer'},
         {'hrsh7th/cmp-nvim-lua', after = 'cmp-nvim-lsp'},
         {'andersevenrud/compe-tmux', branch = 'cmp', after = 'cmp-nvim-lua'},
-        {'hrsh7th/cmp-path', after = 'compe-tmux'},
-        {'quangnguyen30192/cmp-nvim-tags', after = 'cmp-path'},
-        {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}, {
+        {'hrsh7th/cmp-path', after = 'compe-tmux'}, {
+            'quangnguyen30192/cmp-nvim-tags',
+            after = 'cmp-path',
+            ft = {'go', 'python', 'rust', 'lua'}
+        }, {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}, {
             'tzachar/cmp-tabnine',
             run = './install.sh',
             after = 'cmp-spell',
