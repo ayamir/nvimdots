@@ -52,7 +52,6 @@ function config.cmp()
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
                     buffer = "[BUF]",
-                    tags = "[TAG]",
                     path = "[PATH]",
                     tmux = "[TMUX]",
                     luasnip = "[SNIP]",
