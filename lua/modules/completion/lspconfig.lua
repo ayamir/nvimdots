@@ -38,18 +38,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {'documentation', 'detail', 'additionalTextEdits'}
 }
 
-local function lsp_signature()
-    require('lsp_signature').on_attach({
-        bind = true,
-        use_lspsaga = false,
-        floating_window = true,
-        fix_pos = true,
-        hint_enable = true,
-        hi_parameter = "Search",
-        handler_opts = {"double"}
-    })
-end
-
 local function setup_servers()
     lsp_install.setup()
     local servers = lsp_install.installed_servers()
@@ -72,13 +60,33 @@ local function setup_servers()
                         telemetry = {enable = false}
                     }
                 },
-                on_attach = lsp_signature()
+                on_attach = function()
+                    require('lsp_signature').on_attach({
+                        bind = true,
+                        use_lspsaga = false,
+                        floating_window = true,
+                        fix_pos = true,
+                        hint_enable = true,
+                        hi_parameter = "Search",
+                        handler_opts = {"double"}
+                    })
+                end
             }
         else
             nvim_lsp[lsp].setup {
                 capabilities = capabilities,
                 flags = {debounce_text_changes = 500},
-                on_attach = lsp_signature()
+                on_attach = function()
+                    require('lsp_signature').on_attach({
+                        bind = true,
+                        use_lspsaga = false,
+                        floating_window = true,
+                        fix_pos = true,
+                        hint_enable = true,
+                        hi_parameter = "Search",
+                        handler_opts = {"double"}
+                    })
+                end
             }
         end
     end
