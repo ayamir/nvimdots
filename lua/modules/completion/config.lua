@@ -68,12 +68,7 @@ function config.cmp()
             ['<C-n>'] = cmp.mapping.select_next_item(),
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.close(),
-            ['<CR>'] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true
-            }),
             ["<Tab>"] = function(fallback)
                 if vim.fn.pumvisible() == 1 then
                     vim.fn.feedkeys(t("<C-n>"), "n")
@@ -112,9 +107,9 @@ function config.cmp()
 
         -- You should specify your *installed* sources.
         sources = {
+            {name = 'nvim_lsp'}, {name = 'nvim_lua'}, {name = 'luasnip'},
             {name = 'buffer'}, {name = 'path'}, {name = 'tags'},
-            {name = 'nvim_lua'}, {name = 'nvim_lsp'}, {name = 'cmp_tabnine'},
-            {name = 'spell'}, {name = 'tmux'}, {name = 'luasnip'}
+            {name = 'cmp_tabnine'}, {name = 'spell'}, {name = 'tmux'}
         }
     }
 end
@@ -129,14 +124,7 @@ end
 
 function config.tabnine()
     local tabnine = require('cmp_tabnine.config')
-    tabnine:setup({
-        max_line = 1000,
-        max_num_results = 6,
-        priority = 3000,
-        show_prediction_strength = true,
-        sort = true,
-        ignore_pattern = '[(]'
-    })
+    tabnine:setup({max_line = 1000, max_num_results = 20, sort = true})
 end
 
 function config.autopairs()
