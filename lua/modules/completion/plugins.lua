@@ -3,7 +3,7 @@ local conf = require('modules.completion.config')
 
 completion['neovim/nvim-lspconfig'] = {
     opt = true,
-    event = 'BufRead',
+    event = 'BufReadPre',
     config = conf.nvim_lsp
 }
 completion['kabouzeid/nvim-lspinstall'] = {opt = true, after = 'nvim-lspconfig'}
@@ -22,11 +22,8 @@ completion['hrsh7th/nvim-cmp'] = {
         {'hrsh7th/cmp-nvim-lsp', after = 'cmp-buffer'},
         {'hrsh7th/cmp-nvim-lua', after = 'cmp-nvim-lsp'},
         {'andersevenrud/compe-tmux', branch = 'cmp', after = 'cmp-nvim-lua'},
-        {'hrsh7th/cmp-path', after = 'compe-tmux'}, {
-            'quangnguyen30192/cmp-nvim-tags',
-            after = 'cmp-path',
-            ft = {'go', 'python', 'rust', 'lua'}
-        }, {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}
+        {'hrsh7th/cmp-path', after = 'compe-tmux'},
+        {'f3fora/cmp-spell', after = 'cmp-path'}
         -- {
         --     'tzachar/cmp-tabnine',
         --     run = './install.sh',
