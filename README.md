@@ -309,7 +309,6 @@ Then you can figure out what modification makes error.
 |           [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)           |              lua source for nvim-cmp               |
 |           [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)           |              lsp source for nvim-cmp               |
 |               [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)               |             spell source for nvim-cmp              |
-| [quangnguyen30192/cmp-nvim-tags](https://github.com/quangnguyen30192/cmp-nvim-tags) |              tags source for nvim-cmp              |
 |       [andersevenrud/compe-tmux](https://github.com/andersevenrud/compe-tmux)       |              tmux source for nvim-cmp              |
 |       [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)       |            luasnip source for nvim-cmp             |
 |               [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)               |      snippets completion engine for nvim-cmp       |
