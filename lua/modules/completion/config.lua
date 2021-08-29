@@ -108,8 +108,8 @@ function config.cmp()
         -- You should specify your *installed* sources.
         sources = {
             {name = 'nvim_lsp'}, {name = 'nvim_lua'}, {name = 'luasnip'},
-            {name = 'buffer'}, {name = 'path'}, {name = 'tags'},
-            {name = 'spell'}, {name = 'tmux'}
+            {name = 'buffer'}, {name = 'path'}, {name = 'spell'},
+            {name = 'tmux'}
             -- {name = 'cmp_tabnine'},
         }
     }
