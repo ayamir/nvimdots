@@ -5,7 +5,7 @@ ui['kyazdani42/nvim-web-devicons'] = {opt = false}
 ui['sainnhe/edge'] = {opt = false, config = conf.edge}
 ui['hoob3rt/lualine.nvim'] = {
     opt = true,
-    event = "BufRead",
+    after = 'nvim-gps',
     config = conf.lualine
 }
 ui['glepnir/dashboard-nvim'] = {opt = true, event = "BufWinEnter"}
