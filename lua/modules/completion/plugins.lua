@@ -29,12 +29,13 @@ completion['hrsh7th/nvim-cmp'] = {
             'quangnguyen30192/cmp-nvim-tags',
             after = 'cmp-path',
             ft = {'go', 'python', 'rust', 'lua'}
-        }, {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}, {
-            'tzachar/cmp-tabnine',
-            run = './install.sh',
-            after = 'cmp-spell',
-            config = conf.tabnine
-        }
+        }, {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}, 
+        -- {
+        --     'tzachar/cmp-tabnine',
+        --     run = './install.sh',
+        --     after = 'cmp-spell',
+        --     config = conf.tabnine
+        -- }
     }
 }
 completion['L3MON4D3/LuaSnip'] = {
