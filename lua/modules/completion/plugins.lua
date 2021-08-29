@@ -6,13 +6,10 @@ completion['neovim/nvim-lspconfig'] = {
     event = 'BufRead',
     config = conf.nvim_lsp
 }
-completion['kabouzeid/nvim-lspinstall'] = {
-    opt = true,
-    cmd = {'LspInstall', 'LspUninstall'}
-}
+completion['kabouzeid/nvim-lspinstall'] = {opt = true, after = 'nvim-lspconfig'}
 completion['glepnir/lspsaga.nvim'] = {
     opt = true,
-    cmd = 'Lspsaga',
+    after = 'nvim-lspconfig',
     config = conf.saga
 }
 completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
@@ -29,7 +26,7 @@ completion['hrsh7th/nvim-cmp'] = {
             'quangnguyen30192/cmp-nvim-tags',
             after = 'cmp-path',
             ft = {'go', 'python', 'rust', 'lua'}
-        }, {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}, 
+        }, {'f3fora/cmp-spell', after = 'cmp-nvim-tags'}
         -- {
         --     'tzachar/cmp-tabnine',
         --     run = './install.sh',
