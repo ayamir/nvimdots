@@ -1,7 +1,7 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=dark]]
+    vim.cmd [[set background=light]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
@@ -25,16 +25,12 @@ function config.lualine()
         return icon .. msg
     end
 
-    if not packer_plugins['nvim-gps'].loaded then
-        vim.cmd [[packadd nvim-gps]]
-    end
-
     local gps = require("nvim-gps")
 
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'onedark',
+            theme = 'onelight',
             disabled_filetypes = {}
         },
 
