@@ -50,6 +50,10 @@ editor['windwp/nvim-ts-autotag'] = {
     ft = {'html', 'xml'},
     config = conf.autotag
 }
+editor['andymass/vim-matchup'] = {
+    opt = true,
+    after = 'nvim-treesitter'
+}
 editor['rhysd/accelerated-jk'] = {opt = true}
 editor['hrsh7th/vim-eft'] = {opt = true}
 editor['romainl/vim-cool'] = {
@@ -77,6 +81,10 @@ editor['rmagatti/auto-session'] = {
     opt = true,
     cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
     config = conf.auto_session
+}
+editor['jdhao/better-escape.vim'] = {
+    opt = true,
+    event = 'InsertEnter'
 }
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
