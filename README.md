@@ -283,6 +283,7 @@ Then you can figure out what modification makes error.
 |              [romgrk/nvim-treesitter-context](https://github.com/romgrk/nvim-treesitter-context)              |         Show current context         |
 |                        [p00f/nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                        |           Rainbow brackets           |
 | [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |       Comment base on context        |
+|                           [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)                           |           Show current context in lualine           |
 |                        [andymass/vim-matchup](https://github.com/andymass/vim-matchup)                        |        Better matchup for `%`        |
 |                     [jdhao/better-escape.vim](https://github.com/jdhao/better-escape.vim)                     |       Replace `esc` with `jk`        |
 |                            [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                            |     Super powerful code formater     |
@@ -296,24 +297,24 @@ Then you can figure out what modification makes error.
 
 ## Completion
 
-|                                        Name                                         |                       Effect                       |
-| :---------------------------------------------------------------------------------: | :------------------------------------------------: |
-|          [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)          |          Neovim native LSP configuration           |
-|      [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)      |               Manage each LSP engine               |
-|           [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)           |             Make Nvim LSP more useful              |
-|       [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)       | Show signature when completing function parameters |
-|               [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)               |          Auto completion plugin for nvim           |
-|             [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)             |             buffer source for nvim-cmp             |
-|               [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)               |              path source for nvim-cmp              |
-|            [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)            |            tabnine source for nvim-cmp             |
-|           [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)           |              lua source for nvim-cmp               |
-|           [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)           |              lsp source for nvim-cmp               |
-|               [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)               |             spell source for nvim-cmp              |
-|       [andersevenrud/compe-tmux](https://github.com/andersevenrud/compe-tmux)       |              tmux source for nvim-cmp              |
-|       [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)       |            luasnip source for nvim-cmp             |
-|               [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)               |      snippets completion engine for nvim-cmp       |
-|   [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)   |            snippets source for LusSnip             |
-|          [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)          |                  Completion pairs                  |
+|                                      Name                                       |                       Effect                       |
+| :-----------------------------------------------------------------------------: | :------------------------------------------------: |
+|        [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)        |          Neovim native LSP configuration           |
+|    [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)    |               Manage each LSP engine               |
+|         [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)         |             Make Nvim LSP more useful              |
+|     [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)     | Show signature when completing function parameters |
+|             [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)             |          Auto completion plugin for nvim           |
+|           [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)           |             buffer source for nvim-cmp             |
+|             [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)             |              path source for nvim-cmp              |
+|          [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)          |            tabnine source for nvim-cmp             |
+|         [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)         |              lua source for nvim-cmp               |
+|         [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)         |              lsp source for nvim-cmp               |
+|             [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)             |             spell source for nvim-cmp              |
+|     [andersevenrud/compe-tmux](https://github.com/andersevenrud/compe-tmux)     |              tmux source for nvim-cmp              |
+|     [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)     |            luasnip source for nvim-cmp             |
+|             [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)             |      snippets completion engine for nvim-cmp       |
+| [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) |            snippets source for LusSnip             |
+|        [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)        |                  Completion pairs                  |
 
 ## Lang
 
