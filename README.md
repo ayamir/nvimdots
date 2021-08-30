@@ -490,7 +490,7 @@ Please check [this](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.
 For example (gopls):
 
 Your root directory need a `go.mod` and your `.go` file need to be created
-first. Then LSP will autostart when you edit '.go' file next time.
+first. Then LSP will autostart when you edit `.go` file next time.
 
 <a id="credit"></a>
 
