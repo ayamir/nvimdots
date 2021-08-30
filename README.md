@@ -283,7 +283,7 @@ Then you can figure out what modification makes error.
 |              [romgrk/nvim-treesitter-context](https://github.com/romgrk/nvim-treesitter-context)              |         Show current context         |
 |                        [p00f/nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                        |           Rainbow brackets           |
 | [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |       Comment base on context        |
-|                           [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)                           |           Show current context in lualine           |
+|                           [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)                           |   Show current context in lualine    |
 |                        [andymass/vim-matchup](https://github.com/andymass/vim-matchup)                        |        Better matchup for `%`        |
 |                     [jdhao/better-escape.vim](https://github.com/jdhao/better-escape.vim)                     |       Replace `esc` with `jk`        |
 |                            [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                            |     Super powerful code formater     |
@@ -482,6 +482,10 @@ Don't forget to remove the old server installed before.
 3. Wrong configuration may invoke the dialog asking for deleting all plugins
 
 Input `n` and `<CR>`
+
+4. LSP servers don't autostart.
+
+Please check [this](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) to make sure your directory can be detected as a working directory.
 
 <a id="credit"></a>
 
