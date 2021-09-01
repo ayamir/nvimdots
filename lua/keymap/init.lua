@@ -159,6 +159,12 @@ local plug_map = {
     ["n|<leader>do"] = map_cr("lua require('dap').step_out()"):with_noremap()
         :with_silent(),
     ["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap()
+        :with_silent(),
+    -- Friendly registers
+    -- let backespace just delete word not put in register
+    ["v|<BS>"] = map_cmd('"_d'):with_noremap()
+        :with_silent(),
+    ["n|<BS>"] = map_cmd('"_ciw'):with_noremap()
         :with_silent()
 };
 
