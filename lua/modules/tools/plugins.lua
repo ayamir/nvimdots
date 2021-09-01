@@ -43,7 +43,7 @@ tools['folke/trouble.nvim'] = {
 tools['dstein64/vim-startuptime'] = {opt = true, cmd = "StartupTime"}
 tools['gelguy/wilder.nvim'] = {
     event = "CmdlineEnter",
-    run = ":UpdateRemotePlugins",
-    config = conf.wilder
+    config = conf.wilder,
+    requires = {{'romgrk/fzy-lua-native', after = 'wilder.nvim'}}
 }
 return tools
