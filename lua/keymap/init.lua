@@ -89,6 +89,8 @@ local plug_map = {
         :with_silent(),
     ["n|<Leader>fg"] = map_cu('Telescope git_files'):with_noremap()
         :with_silent(),
+    ["n|<Leader>fc"] = map_cu('Telescope neoclip'):with_noremap()
+        :with_silent(),
     -- Plugin accelerate-jk
     ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
     ["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),

@@ -27,6 +27,10 @@ function config.telescope()
         vim.cmd [[packadd telescope-frecency.nvim]]
     end
 
+    if not packer_plugins['nvim-neoclip.lua'].loaded then
+        vim.cmd [[packadd nvim-neoclip.lua]]
+    end
+
     require('telescope').setup {
         defaults = {
             prompt_prefix = '🔭 ',
@@ -72,12 +76,35 @@ function config.telescope()
                     ["go"] = home .. "/go/src",
                     ["rust"] = home .. "/code/rs"
                 }
+            },
+            neoclip = {
+                history = 1000,
+                filter = nil,
+                preview = true,
+                default_register = '"',
+                content_spec_column = false,
+                on_paste = {
+                    set_reg = false,
+                },
+                keys = {
+                    i = {
+                    select = '<cr>',
+                    paste = '<c-p>',
+                    paste_behind = '<c-k>',
+                    },
+                    n = {
+                    select = '<cr>',
+                    paste = 'p',
+                    paste_behind = 'P',
+                    },
+                },
             }
         }
     }
     require('telescope').load_extension('fzy_native')
     require('telescope').load_extension('project')
     require('telescope').load_extension('frecency')
+    require('telescope').load_extension('neoclip')
 end
 
 function config.trouble()
