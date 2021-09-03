@@ -84,7 +84,9 @@ local function setup_servers()
                         fix_pos = true,
                         hint_enable = true,
                         hi_parameter = "Search",
-                        handler_opts = {"double"}
+                        handler_opts = {"double"},
+                        zindex = 50,
+                        transpancy = 20
                     })
                 end
             }
