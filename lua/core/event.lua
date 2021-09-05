@@ -31,8 +31,7 @@ function autocmd.load_autocmds()
             {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
             {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
             {"BufWritePre", "*.tmp", "setlocal noundofile"},
-            {"BufWritePre", "*.bak", "setlocal noundofile"}, 
-            -- Neoformat
+            {"BufWritePre", "*.bak", "setlocal noundofile"}, -- Neoformat
             -- {
             --     "BufWritePre", "*",
             --     "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
@@ -77,6 +76,10 @@ function autocmd.load_autocmds()
             }, {
                 "FileType", "*",
                 [[setlocal formatoptions-=c formatoptions-=r formatoptions-=o]]
+            },
+            {
+                "FileType", "c,cpp",
+                "nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>"
             }
         },
 
