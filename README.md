@@ -465,6 +465,9 @@ cd ~/.local/share/nvim/site/pack/packer/opt/compe-tabnine
 You can find all of the servers available in
 [here](https://microsoft.github.io/language-server-protocol/implementors/servers/).
 
+You can install servers manually by different means. LSP will look your path for
+it and start it.
+
 For example (python-lsp-server):
 
 ```shell
