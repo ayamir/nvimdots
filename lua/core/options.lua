@@ -2,8 +2,10 @@ local global = require('core.global')
 
 local function bind_option(options)
     for k, v in pairs(options) do
-        if v == true or v == false then
+        if v == true then
             vim.cmd('set ' .. k)
+        elseif v == false then
+            vim.cmd('set no' .. k)
         else
             vim.cmd('set ' .. k .. '=' .. v)
         end
@@ -104,7 +106,7 @@ local function load_options()
         shiftwidth = 4,
         softtabstop = -1,
         breakindentopt = "shift:2,min:20",
-        wrap = false,
+        wrap = true,
         linebreak = true,
         number = true,
         relativenumber = true,
