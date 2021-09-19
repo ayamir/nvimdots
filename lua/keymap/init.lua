@@ -5,6 +5,9 @@ local map_cmd = bind.map_cmd
 require('keymap.config')
 
 local plug_map = {
+    -- Completion
+    ["i|<Tab>"] = map_cmd("v:lua.smart_tab()"):with_noremap():with_expr(),
+    ["i|<S-Tab>"] = map_cmd("v:lua.smart_stab()"):with_noremap():with_expr(),
     -- Neoformat
     ["n|<C-A-l>"] = map_cr("Neoformat"):with_noremap():with_silent(),
     -- Bufferline
@@ -92,6 +95,7 @@ local plug_map = {
     -- Plugin accelerate-jk
     ["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
     ["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
+    --
     -- Plugin vim-eft
     ["n|f"] = map_cmd("v:lua.enhance_ft_move('f')"):with_expr(),
     ["n|F"] = map_cmd("v:lua.enhance_ft_move('F')"):with_expr(),
