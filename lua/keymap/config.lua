@@ -4,14 +4,6 @@ local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-_G.smart_tab = function()
-    return vim.fn.pumvisible() == 1 and t '<C-n>' or t '<Tab>'
-end
-
-_G.smart_stab = function()
-    return vim.fn.pumvisible() == 1 and t '<C-p>' or t '<S-Tab>'
-end
-
 _G.enhance_jk_move = function(key)
     if packer_plugins['accelerated-jk'] and
         not packer_plugins['accelerated-jk'].loaded then

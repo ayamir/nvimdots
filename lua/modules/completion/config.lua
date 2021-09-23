@@ -51,7 +51,7 @@ function config.cmp()
                     -- cmp_tabnine = "[TN]",
                     orgmode = "[ORG]",
                     nvim_lsp = "[LSP]",
-                    nvim_lua = "[LUA]",
+                    nvim_lua = "[Lua]",
                     buffer = "[BUF]",
                     path = "[PATH]",
                     tmux = "[TMUX]",
@@ -69,6 +69,20 @@ function config.cmp()
             ['<C-d>'] = cmp.mapping.scroll_docs(-4),
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.close(),
+            ["<Tab>"] = function(fallback)
+                if vim.fn.pumvisible() == 1 then
+                    vim.fn.feedkeys(t("<C-n>"), "n")
+                else
+                    fallback()
+                end
+            end,
+            ["<S-Tab>"] = function(fallback)
+                if vim.fn.pumvisible() == 1 then
+                    vim.fn.feedkeys(t("<C-p>"), "n")
+                else
+                    fallback()
+                end
+            end,
             ["<C-h>"] = function(fallback)
                 if require("luasnip").jumpable(-1) then
                     vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
