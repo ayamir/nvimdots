@@ -206,7 +206,7 @@ function config.gitsigns()
             ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
             ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
         },
-        watch_index = {interval = 1000, follow_files = true},
+        watch_gitdir = {interval = 1000, follow_files = true},
         current_line_blame = true,
         current_line_blame_opts = {delay = 1000, virtual_text_pos = 'eol'},
         sign_priority = 6,
