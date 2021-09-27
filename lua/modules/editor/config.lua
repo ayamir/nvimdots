@@ -211,6 +211,17 @@ function config.toggleterm()
 end
 
 function config.dapui()
+    local dap, dapui = require('dap'), require('dapui')
+    dap.listeners.after.event_initialized['dapui_config'] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated['dapui_config'] = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited['dapui_config'] = function()
+        dapui.close()
+    end
+
     require("dapui").setup({
         icons = {expanded = "▾", collapsed = "▸"},
         mappings = {
@@ -222,7 +233,6 @@ function config.dapui()
             repl = "r"
         },
         sidebar = {
-            open_on_start = true,
             elements = {
                 -- Provide as ID strings or tables with "id" and "size" keys
                 {
@@ -235,7 +245,6 @@ function config.dapui()
             position = "left"
         },
         tray = {
-            open_on_start = true,
             elements = {"repl"},
             size = 10,
             position = "bottom"
