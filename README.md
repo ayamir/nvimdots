@@ -453,12 +453,9 @@ You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
 # Issues
 
-1. Tabnine doesn't install automatically
+1. Clipboard for WSL2 users
 
-```shell
-cd ~/.local/share/nvim/site/pack/packer/opt/compe-tabnine
-./install.sh
-```
+Please refer to [it](https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl) and add `win32yank.exe` to your path.
 
 2. Install and configure different lsp server
 
@@ -507,4 +504,3 @@ first. Then LSP will autostart when you edit `.go` file next time.
 
 - [x] More documentation for how to customize.
 - [x] Backup old compiled configuration when error occurs.
-- [ ] Install script for different distros.
