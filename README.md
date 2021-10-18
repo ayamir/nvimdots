@@ -457,6 +457,8 @@ You can see more keybinds in `lua/core/mapping.lua` and `lua/keymap/init.lua`.
 
 Please refer to [it](https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl) and add `win32yank.exe` to your path.
 
+Then uncomment [this line](https://github.com/ayamir/nvimdots/blob/4ed10ccc71937cc86460f23da5ec646eec32125f/lua/core/init.lua#L147).
+
 2. Install and configure different lsp server
 
 You can find all of the servers available in
