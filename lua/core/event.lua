@@ -31,11 +31,7 @@ function autocmd.load_autocmds()
             {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
             {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
             {"BufWritePre", "*.tmp", "setlocal noundofile"},
-            {"BufWritePre", "*.bak", "setlocal noundofile"}, -- Neoformat
-            -- {
-            --     "BufWritePre", "*",
-            --     "if index(['org', 'cat'], &ft) < 0 | undojoin | Neoformat"
-            -- }, 
+            {"BufWritePre", "*.bak", "setlocal noundofile"},
             -- Auto change work directory
             {"BufEnter", "*", "silent! lcd %:p:h"}, -- auto place to last edit
             {
@@ -70,7 +66,8 @@ function autocmd.load_autocmds()
         ft = {
             {"BufNewFile,BufRead", "*.toml", " setf toml"},
             {"FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0"},
-            {"FileType", "c,cpp,go,rust", "setlocal tabstop=4"}, {
+            {"FileType", "go,rust", "setlocal tabstop=4"},
+            {"FileType", "c,cpp", "setlocal tabstop=2"}, {
                 "FileType", "dashboard",
                 "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"
             }, {
