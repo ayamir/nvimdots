@@ -10,7 +10,6 @@ completion['kabouzeid/nvim-lspinstall'] = {opt = true, after = 'nvim-lspconfig'}
 completion['glepnir/lspsaga.nvim'] = {
     opt = true,
     after = 'nvim-lspconfig',
-    config = conf.saga
 }
 completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
 completion['hrsh7th/nvim-cmp'] = {
@@ -40,6 +39,10 @@ completion['L3MON4D3/LuaSnip'] = {
 completion['windwp/nvim-autopairs'] = {
     after = 'nvim-cmp',
     config = conf.autopairs
+}
+completion['github/copilot.vim'] = {
+    opt = true,
+    cmd = "Copilot"
 }
 
 return completion

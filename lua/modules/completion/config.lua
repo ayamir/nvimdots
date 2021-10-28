@@ -2,10 +2,6 @@ local config = {}
 
 function config.nvim_lsp() require('modules.completion.lspconfig') end
 
-function config.saga()
-    vim.api.nvim_command("autocmd CursorHold * Lspsaga show_line_diagnostics")
-end
-
 function config.cmp()
     local t = function(str)
         return vim.api.nvim_replace_termcodes(str, true, true, true)
