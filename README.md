@@ -50,12 +50,15 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 1. Neovim base installation for archlinux
 
 ```shell
-# gitui for tui git operations
-# ripgrep for telescope word search engine
-# fd for telescope file search engine
-# yarn for markdown preview
-# nerd-fonts-ibm-plex-mono for devicons
-sudo pacman -S git neovim gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
+# gitui required by tui git operations
+# ripgrep required by telescope word search engine
+# fd required by telescope file search engine
+# yarn required by markdown preview
+# nerd-fonts-ibm-plex-mono required by devicons
+sudo pacman -S git gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
+
+# nodejs, neovim-git required by copilot.
+yay -S nodejs neovim-git
 
 # for neovim python module
 pip install neovim --user
@@ -315,6 +318,7 @@ Then you can figure out what modification makes error.
 |             [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)             |      snippets completion engine for nvim-cmp       |
 | [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) |            snippets source for LusSnip             |
 |        [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)        |                  Completion pairs                  |
+|             [github/copilot](https://github.com/github/copilot.vim)             |                Copilot neovim port                 |
 
 ## Lang
 
@@ -493,6 +497,12 @@ For example (gopls):
 
 Your root directory need a `go.mod` and your `.go` file need to be created
 first. Then LSP will autostart when you edit `.go` file next time.
+
+5. Copilot setup
+
+Make sure your github account is signed up for [copilot](https://copilot.github.com/).
+
+Then use `Copilot setup` command to setup.
 
 <a id="credit"></a>
 
