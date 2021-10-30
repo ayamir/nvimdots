@@ -19,8 +19,6 @@ local lsp_install = require('lspinstall')
 local saga = require('lspsaga')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-saga.init_lsp_saga({code_action_icon = '💡'})
-
 capabilities.textDocument.completion.completionItem.documentationFormat = {
     'markdown', 'plaintext'
 }
