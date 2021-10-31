@@ -27,6 +27,15 @@ function config.telescope()
         vim.cmd [[packadd telescope-frecency.nvim]]
     end
 
+    if not packer_plugins['telescope-media-files.nvim'].loaded then
+        vim.cmd [[packadd telescope-media-files.nvim]]
+    end
+
+    require('telescope').load_extension('fzy_native')
+    require('telescope').load_extension('project')
+    require('telescope').load_extension('frecency')
+    require('telescope').load_extension('media_files')
+
     require('telescope').setup {
         defaults = {
             prompt_prefix = '🔭 ',
@@ -72,12 +81,13 @@ function config.telescope()
                     ["go"] = home .. "/go/src",
                     ["rust"] = home .. "/code/rs"
                 }
+            },
+            media_files = {
+                filetypes = {"png", "webp", "jpg", "jpeg", "pdf"},
+                find_cmd = "fd"
             }
         }
     }
-    require('telescope').load_extension('fzy_native')
-    require('telescope').load_extension('project')
-    require('telescope').load_extension('frecency')
 end
 
 function config.trouble()

@@ -24,6 +24,10 @@ tools['nvim-telescope/telescope-frecency.nvim'] = {
     after = 'telescope.nvim',
     requires = {{'tami5/sql.nvim', opt = true}}
 }
+tools['nvim-telescope/telescope-media-files.nvim'] = {
+    opt = true,
+    after = 'telescope.nvim'
+}
 tools['thinca/vim-quickrun'] = {opt = true, cmd = {'QuickRun', 'Q'}}
 tools['michaelb/sniprun'] = {
     opt = true,
