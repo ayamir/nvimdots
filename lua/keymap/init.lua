@@ -53,7 +53,7 @@ local plug_map = {
         :with_silent(),
     ["n|gs"] = map_cr('lua vim.lsp.buf.signature_help()'):with_noremap():with_silent(),
     ["n|gr"] = map_cr('lua vim.lsp.buf.rename()'):with_noremap():with_silent(),
-    ["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
+    ["n|gh"] = map_cr('lua vim.lsp.buf.references()'):with_noremap():with_silent(),
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap()
         :with_silent(),
