@@ -57,6 +57,8 @@ local plug_map = {
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap()
         :with_silent(),
+    ["t|<A-S-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").close()]]):with_noremap()
+        :with_silent(),
     ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap()
         :with_silent(),
     -- Plugin trouble
