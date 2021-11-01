@@ -31,10 +31,15 @@ function config.telescope()
         vim.cmd [[packadd telescope-media-files.nvim]]
     end
 
+    if not packer_plugins['telescope-zoxide'].loaded then
+        vim.cmd [[packadd telescope-zoxide]]
+    end
+
     require('telescope').load_extension('fzy_native')
     require('telescope').load_extension('project')
     require('telescope').load_extension('frecency')
     require('telescope').load_extension('media_files')
+    require('telescope').load_extension('zoxide')
 
     require('telescope').setup {
         defaults = {
