@@ -7,9 +7,11 @@ completion['neovim/nvim-lspconfig'] = {
     config = conf.nvim_lsp
 }
 completion['kabouzeid/nvim-lspinstall'] = {opt = true, after = 'nvim-lspconfig'}
-completion['glepnir/lspsaga.nvim'] = {
+completion['glepnir/lspsaga.nvim'] = {opt = true, after = 'nvim-lspconfig'}
+completion['kosayoda/nvim-lightbulb'] = {
     opt = true,
     after = 'nvim-lspconfig',
+    config = conf.lightbulb
 }
 completion['ray-x/lsp_signature.nvim'] = {opt = true, after = 'nvim-lspconfig'}
 completion['hrsh7th/nvim-cmp'] = {
@@ -40,9 +42,6 @@ completion['windwp/nvim-autopairs'] = {
     after = 'nvim-cmp',
     config = conf.autopairs
 }
-completion['github/copilot.vim'] = {
-    opt = true,
-    cmd = "Copilot"
-}
+completion['github/copilot.vim'] = {opt = true, cmd = "Copilot"}
 
 return completion

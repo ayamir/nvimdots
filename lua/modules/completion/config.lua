@@ -2,6 +2,10 @@ local config = {}
 
 function config.nvim_lsp() require('modules.completion.lspconfig') end
 
+function config.lightbulb()
+    vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+end
+
 function config.cmp()
     local t = function(str)
         return vim.api.nvim_replace_termcodes(str, true, true, true)
