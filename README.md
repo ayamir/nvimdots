@@ -307,7 +307,6 @@ Then you can figure out what modification makes error.
 | :-----------------------------------------------------------------------------: | :------------------------------------------------: |
 |        [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)        |          Neovim native LSP configuration           |
 |    [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)    |               Manage each LSP engine               |
-|         [glepnir/lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)         |             Make Nvim LSP more useful              |
 |     [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)     | Show signature when completing function parameters |
 |             [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)             |          Auto completion plugin for nvim           |
 |           [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)           |             buffer source for nvim-cmp             |
