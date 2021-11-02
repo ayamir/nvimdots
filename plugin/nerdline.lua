@@ -13,7 +13,6 @@ local colors = {
     line_bg = '#f0f0f0',
     fg = '#2e3440',
     fg_green = '#8fbcbb',
-
     yellow = '#ebcb8b',
     cyan = '#88c0d0',
     darkblue = '#5e81ac',
@@ -23,8 +22,8 @@ local colors = {
     magenta = '#a626a4',
     blue = '#81a1c1',
     red = '#bf616a',
-
-    mode_bg = '#f0f0f0'
+    mode_bg = '#f0f0f0',
+    violet = '#ee82ee'
 }
 
 local function lsp_status(status)
