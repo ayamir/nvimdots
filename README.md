@@ -52,10 +52,11 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 ```shell
 # gitui required by tui git operations
 # ripgrep required by telescope word search engine
+# ripgrep required by telescope-zoxide
 # fd required by telescope file search engine
 # yarn required by markdown preview
 # nerd-fonts-ibm-plex-mono required by devicons
-sudo pacman -S git gitui ripgrep fd yarn nerd-fonts-ibm-plex-mono
+sudo pacman -S git gitui zoxide ripgrep fd yarn nerd-fonts-ibm-plex-mono
 
 # nodejs, neovim-git required by copilot.
 yay -S nodejs neovim-git
@@ -297,6 +298,8 @@ Then you can figure out what modification makes error.
 |                   [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)                   |         Powerful vim motion          |
 |                       [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)                       |            smooth scroll             |
 |                         [vimlab/split-term](https://github.com/vimlab/split-term.vim)                         | Utilites around neovim's `:terminal` |
+|                 [akinsho/nvim-toggleterm.lua](https://github.com/akinsho/nvim-toggleterm.lua)                 |           Toggled terminal           |
+|                         [numtostr/FTerm.nvim](https://github.com/numtostr/FTerm.nvim)                         |            Float terminal            |
 
 ## Completion
 
@@ -350,6 +353,7 @@ The leader key is `,`.
 |                 toggle vertical terminal                  |            `<C-\>`             |
 |                       quit terminal                       |            `<C-d>`             |
 |                 toggle floating terminal                  |            `<A-d>`             |
+|               force quit floating terminal                |           `<A-S-d>`            |
 |             open `gitui` in current directory             |          `<leader>g`           |
 |                                                           |                                |
 |               pick buffer `n`(`n`means No)                |            `<A-n>`             |
@@ -382,6 +386,7 @@ The leader key is `,`.
 |               find file in recently opened                |          `<leader>fr`          |
 |                   find file in history                    |          `<leader>fe`          |
 |            find file in current work directory            |          `<leader>ff`          |
+|            find directory recorded by `zoxide`            |          `<leader>fz`          |
 |                       find project                        |          `<leader>fp`          |
 |                        add project                        |    `<leader>fp`then`<C-A>`     |
 |                      delete project                       |    `<leader>fp`then`<C-D>`     |
