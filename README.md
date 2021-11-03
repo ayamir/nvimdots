@@ -295,7 +295,7 @@ Then you can figure out what modification makes error.
 |                 [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                 |        Display detected color        |
 |                        [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                        |           Accelerated j/k            |
 |                             [hrsh7th/vim-eft](https://github.com/hrsh7th/vim-eft)                             |             Enhanced f/t             |
-|                   [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)                   |         Powerful vim motion          |
+|                            [phaazon/hop.nvim](https://github.com/phaazon/hop.nvim)                            |      `easymotion`'s replacement      |
 |                       [karb94/neoscroll.nvim](https://github.com/karb94/neoscroll.nvim)                       |            smooth scroll             |
 |                         [vimlab/split-term](https://github.com/vimlab/split-term.vim)                         | Utilites around neovim's `:terminal` |
 |                 [akinsho/nvim-toggleterm.lua](https://github.com/akinsho/nvim-toggleterm.lua)                 |           Toggled terminal           |
@@ -390,8 +390,10 @@ The leader key is `,`.
 |                        add project                        |    `<leader>fp`then`<C-A>`     |
 |                      delete project                       |    `<leader>fp`then`<C-D>`     |
 |                                                           |                                |
-|                    find one character                     |          `<leader>f`           |
 |                       find one word                       |          `<leader>w`           |
+|                    find one character                     |          `<leader>c`           |
+|                    find two characters                    |          `<leader>cc`          |
+|                     jump to one line                      |    `<leader>j`/`<leader>k`     |
 |                                                           |                                |
 |                    escape insert mode                     |              `jk`              |
 |                         neoformat                         |           `<C-A-l>`            |

@@ -102,7 +102,7 @@ local plug_map = {
     ["n|t"] = map_cmd("v:lua.enhance_ft_move('t')"):with_expr(),
     ["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
     ["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
-    -- Plugin Easymotion
+    -- Plugin Hop
     ["n|<leader>w"] = map_cu("HopWord"):with_noremap(),
     ["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
     ["n|<leader>k"] = map_cu("HopLine"):with_noremap(),
