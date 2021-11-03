@@ -148,12 +148,6 @@ end
 
 function config.nvim_colorizer() require('colorizer').setup() end
 
-function config.easymotion()
-    vim.g.EasyMotion_do_mapping = 0
-    vim.g.EasyMotion_smartcase = 1
-    vim.g.EasyMotion_use_smartsign_us = 1
-end
-
 function config.neoscroll()
     require('neoscroll').setup({
         -- All these keys will be mapped to their corresponding default scrolling animation

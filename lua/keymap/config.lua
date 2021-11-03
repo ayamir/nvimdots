@@ -26,23 +26,6 @@ _G.enhance_ft_move = function(key)
     return t(map[key])
 end
 
-_G.enhance_move = function(key)
-    if not packer_plugins['vim-easymotion'].loaded then
-        vim.cmd [[packadd vim-easymotion]]
-    end
-    local map = {
-        ['lnj'] = '<Plug>(easymotion-j)',
-        ['lnk'] = '<Plug>(easymotion-k)',
-
-        ['lf'] = '<Plug>(easymotion-bd-f)',
-        ['lw'] = '<Plug>(easymotion-bd-w)',
-
-        ['lnf'] = '<Plug>(easymotion-overwin-f)',
-        ['lnw'] = '<Plug>(easymotion-overwin-w)'
-    }
-    return t(map[key])
-end
-
 _G.enhance_align = function(key)
     if not packer_plugins['vim-easy-align'].loaded then
         vim.cmd [[packadd vim-easy-align]]

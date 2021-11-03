@@ -9,11 +9,13 @@ editor['itchyny/vim-cursorword'] = {
 }
 editor['terrortylor/nvim-comment'] = {
     opt = false,
-    config = function() require('nvim_comment').setup({
-        hook = function()
-            require("ts_context_commentstring.internal").update_commentstring()
-        end,
-    }) end
+    config = function()
+        require('nvim_comment').setup({
+            hook = function()
+                require("ts_context_commentstring.internal").update_commentstring()
+            end
+        })
+    end
 }
 editor['simrat39/symbols-outline.nvim'] = {
     opt = true,
@@ -65,7 +67,17 @@ editor['romainl/vim-cool'] = {
     opt = true,
     event = {'CursorMoved', 'InsertEnter'}
 }
-editor['easymotion/vim-easymotion'] = {opt = true, config = conf.easymotion}
+editor['phaazon/hop.nvim'] = {
+    opt = true,
+    branch = "v1",
+    cmd = {
+        "HopLine", "HopLineStart", "HopWord", "HopPattern", "HopChar1",
+        "HopChar2"
+    },
+    config = function()
+        require('hop').setup {keys = 'etovxqpdygfblzhckisuran'}
+    end
+}
 editor['karb94/neoscroll.nvim'] = {
     opt = true,
     event = "WinScrolled",
@@ -88,10 +100,7 @@ editor['rmagatti/auto-session'] = {
     cmd = {'SaveSession', 'RestoreSession', 'DeleteSession'},
     config = conf.auto_session
 }
-editor['jdhao/better-escape.vim'] = {
-    opt = true,
-    event = 'InsertEnter'
-}
+editor['jdhao/better-escape.vim'] = {opt = true, event = 'InsertEnter'}
 editor['rcarriga/nvim-dap-ui'] = {
     opt = false,
     config = conf.dapui,

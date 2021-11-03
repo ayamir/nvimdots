@@ -103,12 +103,11 @@ local plug_map = {
     ["n|T"] = map_cmd("v:lua.enhance_ft_move('T')"):with_expr(),
     ["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
     -- Plugin Easymotion
-    ["n|<leader>j"] = map_cmd("v:lua.enhance_move('lnj')"):with_expr(),
-    ["n|<leader>k"] = map_cmd("v:lua.enhance_move('lnk')"):with_expr(),
-    ["n|<leader>f"] = map_cmd("v:lua.enhance_move('lnf')"):with_expr(),
-    ["n|<leader>w"] = map_cmd("v:lua.enhance_move('lnw')"):with_expr(),
-    ["|<leader>f"] = map_cmd("v:lua.enhance_move('lf')"):with_expr(),
-    ["|<leader>w"] = map_cmd("v:lua.enhance_move('lw')"):with_expr(),
+    ["n|<leader>w"] = map_cu("HopWord"):with_noremap(),
+    ["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
+    ["n|<leader>k"] = map_cu("HopLine"):with_noremap(),
+    ["n|<leader>c"] = map_cu("HopChar1"):with_noremap(),
+    ["n|<leader>cc"] = map_cu("HopChar2"):with_noremap(),
     -- Plugin EasyAlign
     ["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
     ["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
