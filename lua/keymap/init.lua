@@ -54,7 +54,7 @@ local plug_map = {
     ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
         :with_silent(),
     ["n|gd"] = map_cr('Lspsaga preview_definition'):with_noremap():with_silent(),
-    ["n|gD"] = map_cr("lua vim.lsp.buf.implementation()"):with_noremap()
+    ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
         :with_silent(),
     ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),
     ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),

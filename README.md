@@ -398,8 +398,8 @@ The leader key is `,`.
 |                    escape insert mode                     |              `jk`              |
 |                         neoformat                         |           `<C-A-l>`            |
 |                back to last cursor's place                |            `<C-O>`             |
-|                    jump to definition                     |              `gd`              |
-|                    show implementation                    |              `gD`              |
+|                    preview definition                     |              `gd`              |
+|                    jump to definition                     |              `gD`              |
 |                       smart rename                        |              `gr`              |
 |                  toggle last diagnostics                  |              `gt`              |
 |                   toggle lsp references                   |              `gR`              |
