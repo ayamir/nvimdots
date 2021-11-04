@@ -42,17 +42,17 @@ local plug_map = {
         :with_silent(),
     ["n|g]"] = map_cr('lua vim.lsp.diagnostic.goto_prev()'):with_noremap()
         :with_silent(),
-    ["n|K"] = map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent(),
-    ["n|<leader>ca"] = map_cr("lua vim.lsp.buf.code_action()"):with_noremap()
+    ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
+    ["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap()
         :with_silent(),
-    ["v|<leader>ca"] = map_cu("lua vim.lsp.buf.range_code_action()"):with_noremap()
+    ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
         :with_silent(),
     ["n|gd"] = map_cr('lua vim.lsp.buf.definition()'):with_noremap()
         :with_silent(),
     ["n|gD"] = map_cr("lua vim.lsp.buf.implementation()"):with_noremap()
         :with_silent(),
     ["n|gs"] = map_cr('lua vim.lsp.buf.signature_help()'):with_noremap():with_silent(),
-    ["n|gr"] = map_cr('lua vim.lsp.buf.rename()'):with_noremap():with_silent(),
+    ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),
     ["n|gh"] = map_cr('lua vim.lsp.buf.references()'):with_noremap():with_silent(),
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap()

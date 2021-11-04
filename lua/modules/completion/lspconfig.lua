@@ -10,6 +10,10 @@ if not packer_plugins['lsp_signature.nvim'].loaded then
     vim.cmd [[packadd lsp_signature.nvim]]
 end
 
+if not packer_plugins['lspsaga.nvim'].loaded then
+    vim.cmd [[packadd lspsaga.nvim]]
+end
+
 local nvim_lsp = require('lspconfig')
 local lsp_install = require('lspinstall')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
