@@ -38,23 +38,29 @@ local plug_map = {
         :with_nowait(),
     ["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent()
         :with_nowait(),
-    ["n|g["] = map_cr('lua vim.lsp.diagnostic.goto_next()'):with_noremap()
+    ["n|g["] = map_cr('Lspsaga diagnostic_jump_next'):with_noremap()
         :with_silent(),
-    ["n|g]"] = map_cr('lua vim.lsp.diagnostic.goto_prev()'):with_noremap()
+    ["n|g]"] = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap()
         :with_silent(),
     ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
+    ["n|<C-Up>"] = map_cr(
+        "lua require('lspsaga.action').smart_scroll_with_saga(-1)"):with_noremap()
+        :with_silent(),
+    ["n|<C-Down>"] = map_cr(
+        "lua require('lspsaga.action').smart_scroll_with_saga(1)"):with_noremap()
+        :with_silent(),
     ["n|<leader>ca"] = map_cr("Lspsaga code_action"):with_noremap()
         :with_silent(),
     ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
         :with_silent(),
-    ["n|gd"] = map_cr('lua vim.lsp.buf.definition()'):with_noremap()
-        :with_silent(),
+    ["n|gd"] = map_cr('Lspsaga preview_definition'):with_noremap():with_silent(),
     ["n|gD"] = map_cr("lua vim.lsp.buf.implementation()"):with_noremap()
         :with_silent(),
-    ["n|gs"] = map_cr('lua vim.lsp.buf.signature_help()'):with_noremap():with_silent(),
+    ["n|gs"] = map_cr('Lspsaga signature_help'):with_noremap():with_silent(),
     ["n|gr"] = map_cr('Lspsaga rename'):with_noremap():with_silent(),
-    ["n|gh"] = map_cr('lua vim.lsp.buf.references()'):with_noremap():with_silent(),
-    ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(),
+    ["n|gh"] = map_cr('Lspsaga lsp_finder'):with_noremap():with_silent(),
+    ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap()
+        :with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap()
         :with_silent(),
     ["t|<A-S-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").exit()]]):with_noremap()
