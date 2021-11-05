@@ -59,6 +59,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 sudo pacman -S git gitui zoxide ripgrep fd yarn nerd-fonts-ibm-plex-mono
 
 # nodejs, neovim-git required by copilot.
+# neovim version >= 0.6
 yay -S nodejs neovim-git
 
 # for neovim python module
