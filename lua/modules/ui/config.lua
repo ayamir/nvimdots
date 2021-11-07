@@ -25,7 +25,7 @@ function config.lualine()
             lualine_a = {'mode'},
             lualine_b = {{'branch'}, {'diff'}},
             lualine_c = {
-                {'filename'}, {gps.get_location, condition = gps.is_available}, {'lsp_progress'}
+                {gps.get_location, condition = gps.is_available}, {'lsp_progress'}
             },
             lualine_x = {
                 {
