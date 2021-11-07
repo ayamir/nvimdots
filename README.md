@@ -88,7 +88,7 @@ paru goneovim
 
 4. Tools for plugins
 
-- For [nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall#usage), you
+- For [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer#available-lsps), you
   need to install corresponding language server use it.
 
 - For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), all maintained parser will be installed by default.
@@ -304,24 +304,24 @@ Then you can figure out what modification makes error.
 
 ## Completion
 
-|                                      Name                                       |                       Effect                       |
-| :-----------------------------------------------------------------------------: | :------------------------------------------------: |
-|        [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)        |          Neovim native LSP configuration           |
-|    [kabouzeid/nvim-lspinstall](https://github.com/kabouzeid/nvim-lspinstall)    |               Manage each LSP engine               |
-|     [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)     | Show signature when completing function parameters |
-|             [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)             |          Auto completion plugin for nvim           |
-|           [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)           |             buffer source for nvim-cmp             |
-|             [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)             |              path source for nvim-cmp              |
-|          [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)          |            tabnine source for nvim-cmp             |
-|         [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)         |              lua source for nvim-cmp               |
-|         [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)         |              lsp source for nvim-cmp               |
-|             [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)             |             spell source for nvim-cmp              |
-|     [andersevenrud/compe-tmux](https://github.com/andersevenrud/compe-tmux)     |              tmux source for nvim-cmp              |
-|     [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)     |            luasnip source for nvim-cmp             |
-|             [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)             |      snippets completion engine for nvim-cmp       |
-| [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) |            snippets source for LusSnip             |
-|        [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)        |                  Completion pairs                  |
-|             [github/copilot](https://github.com/github/copilot.vim)             |                Copilot neovim port                 |
+|                                         Name                                          |                       Effect                       |
+| :-----------------------------------------------------------------------------------: | :------------------------------------------------: |
+|           [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)           |          Neovim native LSP configuration           |
+| [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) |               Manage each LSP engine               |
+|        [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)        | Show signature when completing function parameters |
+|                [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                |          Auto completion plugin for nvim           |
+|              [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)              |             buffer source for nvim-cmp             |
+|                [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)                |              path source for nvim-cmp              |
+|             [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)             |            tabnine source for nvim-cmp             |
+|            [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)            |              lua source for nvim-cmp               |
+|            [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)            |              lsp source for nvim-cmp               |
+|                [f3fora/cmp-spell](https://github.com/f3fora/cmp-spell)                |             spell source for nvim-cmp              |
+|        [andersevenrud/compe-tmux](https://github.com/andersevenrud/compe-tmux)        |              tmux source for nvim-cmp              |
+|        [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)        |            luasnip source for nvim-cmp             |
+|                [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip)                |      snippets completion engine for nvim-cmp       |
+|    [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets)    |            snippets source for LusSnip             |
+|           [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs)           |                  Completion pairs                  |
+|                [github/copilot](https://github.com/github/copilot.vim)                |                Copilot neovim port                 |
 
 ## Lang
 
@@ -470,33 +470,11 @@ Please refer to [it](https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-wi
 
 Then uncomment [this line](https://github.com/ayamir/nvimdots/blob/4ed10ccc71937cc86460f23da5ec646eec32125f/lua/core/init.lua#L147).
 
-2. Install and configure different lsp server
-
-You can find all of the servers available in
-[here](https://microsoft.github.io/language-server-protocol/implementors/servers/).
-
-You can install servers manually by different means. LSP will look your path for
-it and start it.
-
-For example (python-lsp-server):
-
-```shell
-pip install python-lsp-server --user
-```
-
-Add this line to `lua/modules/completion/lspconfig.lua`'s end.
-
-```lua
-nvim_lsp.pylsp.setup{}
-```
-
-Don't forget to remove the old server installed before.
-
-3. Wrong configuration may invoke the dialog asking for deleting all plugins
+2. Wrong configuration may invoke the dialog asking for deleting all plugins
 
 Input `n` and `<CR>`
 
-4. LSP servers don't autostart.
+3. LSP servers don't autostart.
 
 Please check [this](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) to make sure your directory can be detected as a working directory.
 
@@ -505,7 +483,7 @@ For example (gopls):
 Your root directory need a `go.mod` and your `.go` file need to be created
 first. Then LSP will autostart when you edit `.go` file next time.
 
-5. Copilot setup
+4. Copilot setup
 
 Make sure your github account is signed up for [copilot](https://copilot.github.com/).
 
