@@ -38,7 +38,7 @@ function config.lualine()
                     symbols = {error = ' ', warn = ' ', info = ' '}
                 },
             },
-            lualine_y = {'encoding', 'fileformat'},
+            lualine_y = {'filetype', 'encoding', 'fileformat'},
             lualine_z = {'progress', 'location'}
         },
         inactive_sections = {
