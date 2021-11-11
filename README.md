@@ -476,7 +476,7 @@ Input `n` and `<CR>`
 
 3. LSP servers don't autostart.
 
-Please check [this](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md) to make sure your directory can be detected as a working directory.
+Please check [this](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) to make sure your directory can be detected as a working directory.
 
 For example (gopls):
 
