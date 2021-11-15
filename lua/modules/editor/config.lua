@@ -222,18 +222,47 @@ function config.format()
         },
         c = {
             {
-                cmd = {"clangformat"}
+                cmd = {
+                    function(file)
+                        return string.format("clang-format -i %s", file)
+                    end
+                }
             }
         },
         cpp = {
             {
-                cmd = {"clangformat"}
+                cmd = {
+                    function(file)
+                        return string.format("clang-format -i %s", file)
+                    end
+                }
             }
         },
         go = {
             {
                 cmd = {"gofmt -w", "goimports -w"},
                 tempfile_postfix = ".tmp"
+            }
+        },
+        python = {
+            {
+                cmd = {
+                    "python3 -m autopep8 --in-place --aggressive --aggressive"
+                }
+            }
+        },
+        sh = {
+            {
+                cmd = {
+                    function(file)
+                        return string.format("shfmt -w %s", file)
+                    end
+                }
+            }
+        },
+        rust = {
+            {
+                cmd = {"rustfmt --emit=stdout"}
             }
         },
         javascript = {
