@@ -1,13 +1,13 @@
-local global = require('core.global')
+local global = require("core.global")
 
 local function bind_option(options)
     for k, v in pairs(options) do
         if v == true then
-            vim.cmd('set ' .. k)
+            vim.cmd("set " .. k)
         elseif v == false then
-            vim.cmd('set no' .. k)
+            vim.cmd("set no" .. k)
         else
-            vim.cmd('set ' .. k .. '=' .. v)
+            vim.cmd("set " .. k .. "=" .. v)
         end
     end
 end
@@ -55,7 +55,7 @@ local function load_options()
         complete = ".,w,b,k",
         inccommand = "nosplit",
         grepformat = "%f:%l:%c:%m",
-        grepprg = 'rg --hidden --vimgrep --smart-case --',
+        grepprg = "rg --hidden --vimgrep --smart-case --",
         breakat = [[\ \	;:,!?]],
         startofline = false,
         whichwrap = "h,l,<,>,[,],~",
@@ -123,10 +123,12 @@ local function load_options()
             paste = {["+"] = "pbpaste", ["*"] = "pbpaste"},
             cache_enabled = 0
         }
-        vim.g.python_host_prog = '/usr/bin/python'
-        vim.g.python3_host_prog = '/usr/local/bin/python3'
+        vim.g.python_host_prog = "/usr/bin/python"
+        vim.g.python3_host_prog = "/usr/local/bin/python3"
     end
-    for name, value in pairs(global_local) do vim.o[name] = value end
+    for name, value in pairs(global_local) do
+        vim.o[name] = value
+    end
     bind_option(bw_local)
 end
 

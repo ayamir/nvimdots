@@ -1,12 +1,14 @@
-local global = require 'core.global'
+local global = require "core.global"
 local vim = vim
 
 -- Create cache dir and subs dir
 local createdir = function()
     local data_dir = {
-        global.cache_dir .. 'backup', global.cache_dir .. 'session',
-        global.cache_dir .. 'swap', global.cache_dir .. 'tags',
-        global.cache_dir .. 'undo'
+        global.cache_dir .. "backup",
+        global.cache_dir .. "session",
+        global.cache_dir .. "swap",
+        global.cache_dir .. "tags",
+        global.cache_dir .. "undo"
     }
     -- There only check once that If cache_dir exists
     -- Then I don't want to check subs dir exists
@@ -44,8 +46,8 @@ end
 
 local leader_map = function()
     vim.g.mapleader = ","
-    vim.api.nvim_set_keymap('n', ' ', '', {noremap = true})
-    vim.api.nvim_set_keymap('x', ' ', '', {noremap = true})
+    vim.api.nvim_set_keymap("n", " ", "", {noremap = true})
+    vim.api.nvim_set_keymap("x", " ", "", {noremap = true})
 end
 
 local neovide_config = function()
@@ -63,8 +65,8 @@ local neovide_config = function()
 end
 
 local dashboard_config = function()
-    vim.g.dashboard_footer_icon = '🐬 '
-    vim.g.dashboard_default_executive = 'telescope'
+    vim.g.dashboard_footer_icon = "🐬 "
+    vim.g.dashboard_default_executive = "telescope"
 
     vim.g.dashboard_custom_header = {
         [[              ...  .......          ]],
@@ -88,38 +90,38 @@ local dashboard_config = function()
 
     vim.g.dashboard_custom_section = {
         change_colorscheme = {
-            description = {' Scheme change              comma s c '},
-            command = 'DashboardChangeColorscheme'
+            description = {" Scheme change              comma s c "},
+            command = "DashboardChangeColorscheme"
         },
         find_frecency = {
-            description = {' File frecency              comma f r '},
-            command = 'Telescope frecency'
+            description = {" File frecency              comma f r "},
+            command = "Telescope frecency"
         },
         find_history = {
-            description = {' File history               comma f e '},
-            command = 'DashboardFindHistory'
+            description = {" File history               comma f e "},
+            command = "DashboardFindHistory"
         },
         find_project = {
-            description = {' Project find               comma f p '},
-            command = 'Telescope project'
+            description = {" Project find               comma f p "},
+            command = "Telescope project"
         },
         find_file = {
-            description = {' File find                  comma f f '},
-            command = 'DashboardFindFile'
+            description = {" File find                  comma f f "},
+            command = "DashboardFindFile"
         },
         file_new = {
-            description = {' File new                   comma f n '},
-            command = 'DashboardNewFile'
+            description = {" File new                   comma f n "},
+            command = "DashboardNewFile"
         },
         find_word = {
-            description = {' Word find                  comma f w '},
-            command = 'DashboardFindWord'
+            description = {" Word find                  comma f w "},
+            command = "DashboardFindWord"
         }
     }
 end
 
 local clipboard_settings = function()
-    vim.cmd[[
+    vim.cmd [[
     let g:clipboard = {
           \   'name': 'win32yank-wsl',
           \   'copy': {
@@ -137,7 +139,7 @@ local clipboard_settings = function()
 end
 
 local load_core = function()
-    local pack = require('core.pack')
+    local pack = require("core.pack")
     createdir()
     disable_distribution_plugins()
     leader_map()
@@ -147,10 +149,10 @@ local load_core = function()
     dashboard_config()
     -- clipboard_settings()
 
-    require('core.options')
-    require('core.mapping')
-    require('keymap')
-    require('core.event')
+    require("core.options")
+    require("core.mapping")
+    require("keymap")
+    require("core.event")
     pack.load_compile()
 
     vim.cmd [[colorscheme edge]]

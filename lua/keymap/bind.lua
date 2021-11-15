@@ -2,7 +2,7 @@ local rhs_options = {}
 
 function rhs_options:new()
     local instance = {
-        cmd = '',
+        cmd = "",
         options = {
             noremap = false,
             silent = false,
@@ -80,7 +80,7 @@ end
 function pbind.nvim_load_mapping(mapping)
     for key, value in pairs(mapping) do
         local mode, keymap = key:match("([^|]*)|?(.*)")
-        if type(value) == 'table' then
+        if type(value) == "table" then
             local rhs = value.cmd
             local options = value.options
             vim.api.nvim_set_keymap(mode, keymap, rhs, options)
