@@ -93,7 +93,7 @@ paru goneovim
 
 - For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), all maintained parser will be installed by default.
 
-- For [neoformat](https://github.com/sbdchd/neoformat#supported-filetypes), you
+- For [format.nvim](https://github.com/sbdchd/neoformat#supported-filetypes), you
   need to install corresponding formatter manually:
 
 ```shell
@@ -101,9 +101,8 @@ paru goneovim
 sudo pacman -S clang
 # gofmt and goimports for golang
 go get -u golang.org/x/tools/...
-# luaformatter for lua
-sudo pacman -S luarocks
-luarocks install --server=https://luarocks.org/dev luaformatter
+# luafmt for lua
+npm install -g lua-fmt
 # yapf and autopep8 for python
 pip install autopep8 yapf --user
 # rustfmt
@@ -291,7 +290,7 @@ Then you can figure out what modification makes error.
 |                           [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)                           |   Show current context in lualine    |
 |                        [andymass/vim-matchup](https://github.com/andymass/vim-matchup)                        |        Better matchup for `%`        |
 |                     [jdhao/better-escape.vim](https://github.com/jdhao/better-escape.vim)                     |       Replace `esc` with `jk`        |
-|                            [sbdchd/neoformat](https://github.com/sbdchd/neoformat)                            |     Super powerful code formater     |
+|                   [lukas-reineke/format.nvim](https://github.com/lukas-reineke/format.nvim)                   |      Format code asynchronously      |
 |                      [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)                      |         Faster vim-closetag          |
 |                 [norcalli/nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)                 |        Display detected color        |
 |                        [rhysd/accelerated-jk](https://github.com/rhysd/accelerated-jk)                        |           Accelerated j/k            |
