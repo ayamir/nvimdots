@@ -262,7 +262,11 @@ function config.format()
         },
         rust = {
             {
-                cmd = {"rustfmt --emit=stdout"}
+                cmd = {
+                    function(file)
+                        return string.format("rustfmt %s", file)
+                    end
+                }
             }
         },
         javascript = {
