@@ -269,6 +269,9 @@ function config.format()
                 }
             }
         },
+        html = {
+            {cmd = {"prettier -w"}}
+        },
         javascript = {
             {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
         },
