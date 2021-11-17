@@ -73,7 +73,11 @@ function autocmd.load_autocmds()
             {"FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0"},
             {"FileType", "go,rust", "setlocal tabstop=4 shiftwidth=4"},
             {"FileType", "c,cpp", "setlocal tabstop=2 shiftwidth=2"},
-            {"FileType", "html", "setlocal tabstop=2 shiftwidth=2"},
+            {
+                "FileType",
+                "javascript,typescript,html",
+                "setlocal tabstop=2 shiftwidth=2"
+            },
             {
                 "FileType",
                 "dashboard",
