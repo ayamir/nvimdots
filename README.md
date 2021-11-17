@@ -53,10 +53,11 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # gitui required by tui git operations
 # ripgrep required by telescope word search engine
 # ripgrep required by telescope-zoxide
+# sqlite required by telescope-frecency
 # fd required by telescope file search engine
 # yarn required by markdown preview
 # nerd-fonts-ibm-plex-mono required by devicons
-sudo pacman -S git gitui zoxide ripgrep fd yarn nerd-fonts-ibm-plex-mono
+sudo pacman -S git gitui zoxide ripgrep sqlite fd yarn nerd-fonts-ibm-plex-mono
 
 # nodejs, neovim-git required by copilot.
 # neovim version >= 0.6
