@@ -244,18 +244,16 @@ Then you can figure out what modification makes error.
 
 ## UI
 
-|                                             Name                                              |                 Effect                 |
-| :-------------------------------------------------------------------------------------------: | :------------------------------------: |
-|                        [sainnhe/edge](https://github.com/sainnhe/edge)                        |          My light/dark theme           |
-|        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |         For nvim-tree's icons          |
-|                [hoob3rt/lualine.nvim](https://github.com/hoob3rt/lualine.nvim)                |  Minimal, fast but customizable line   |
-|              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |          Dashboard for Neovim          |
-|            [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)            |        Replacement of Nerdtree         |
-|             [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)             |        Show git status in nvim         |
-| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) |    Show indent with different level    |
-|             [akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim)             |       Tab and buffer management        |
-|                 [folke/zen-mode.nvim](https://github.com/folke/zen-mode.nvim)                 |           Focus on code only           |
-|                 [folke/twilight.nvim](https://github.com/folke/twilight.nvim)                 | Highlight current block and dim others |
+|                                             Name                                              |               Effect                |
+| :-------------------------------------------------------------------------------------------: | :---------------------------------: |
+|                        [sainnhe/edge](https://github.com/sainnhe/edge)                        |         My light/dark theme         |
+|        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |        For nvim-tree's icons        |
+|                [hoob3rt/lualine.nvim](https://github.com/hoob3rt/lualine.nvim)                | Minimal, fast but customizable line |
+|              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |        Dashboard for Neovim         |
+|            [kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)            |       Replacement of Nerdtree       |
+|             [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)             |       Show git status in nvim       |
+| [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) |  Show indent with different level   |
+|             [akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim)             |      Tab and buffer management      |
 
 ## Tools
 

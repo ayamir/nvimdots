@@ -257,12 +257,4 @@ function config.indent_blankline()
     vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
 end
 
-function config.zen_mode()
-    require("zen-mode").setup {}
-end
-
-function config.twilight()
-    require("twilight").setup {}
-end
-
 return config

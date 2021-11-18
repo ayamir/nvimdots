@@ -34,15 +34,5 @@ ui["akinsho/nvim-bufferline.lua"] = {
     event = "BufRead",
     config = conf.nvim_bufferline
 }
-ui["folke/zen-mode.nvim"] = {
-    opt = true,
-    cmd = "ZenMode",
-    config = conf.zen_mode
-}
-ui["folke/twilight.nvim"] = {
-    opt = true,
-    cmd = {"Twilight", "TwilightEnable"},
-    config = conf.twilight
-}
 
 return ui
