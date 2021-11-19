@@ -68,6 +68,9 @@ pip install neovim --user
 
 # clone
 git clone https://github.com/ayamir/nvimdots ~/.config/nvim
+
+# sync plugins(maybe need multiple times)
+nvim +PackerSync
 ```
 
 2. Recommended Terminals:
