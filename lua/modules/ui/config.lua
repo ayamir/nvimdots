@@ -12,6 +12,14 @@ end
 function config.lualine()
     local gps = require("nvim-gps")
 
+    local function gps_content()
+        if gps.is_available() then
+            return gps.get_location()
+        else
+            return ""
+        end
+    end
+
     require("lualine").setup {
         options = {
             icons_enabled = true,
@@ -24,8 +32,8 @@ function config.lualine()
             lualine_a = {"mode"},
             lualine_b = {{"branch"}, {"diff"}},
             lualine_c = {
-                {gps.get_location, condition = gps.is_available},
-                {"lsp_progress"}
+                {"lsp_progress"},
+                {gps_content, cond = gps.is_available}
             },
             lualine_x = {
                 {
