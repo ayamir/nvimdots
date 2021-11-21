@@ -19,8 +19,8 @@ function config.telescope()
         vim.cmd [[packadd telescope-project.nvim]]
     end
 
-    if not packer_plugins["sql.nvim"].loaded then
-        vim.cmd [[packadd sql.nvim]]
+    if not packer_plugins["sqlite.lua"].loaded then
+        vim.cmd [[packadd sqlite.lua]]
     end
 
     if not packer_plugins["telescope-frecency.nvim"].loaded then
