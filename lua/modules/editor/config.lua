@@ -55,11 +55,9 @@ function config.vim_cursorwod()
     vim.api.nvim_command("augroup user_plugin_cursorword")
     vim.api.nvim_command("autocmd!")
     vim.api.nvim_command(
-        "autocmd FileType NvimTree,lspsagafinder,dashboard let b:cursorword = 0"
-    )
+        "autocmd FileType NvimTree,lspsagafinder,dashboard let b:cursorword = 0")
     vim.api.nvim_command(
-        "autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif"
-    )
+        "autocmd WinEnter * if &diff || &pvw | let b:cursorword = 0 | endif")
     vim.api.nvim_command("autocmd InsertEnter * let b:cursorword = 0")
     vim.api.nvim_command("autocmd InsertLeave * let b:cursorword = 1")
     vim.api.nvim_command("augroup END")
@@ -69,7 +67,7 @@ function config.nvim_treesitter()
     vim.api.nvim_command("set foldmethod=expr")
     vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
 
-    require "nvim-treesitter.configs".setup {
+    require"nvim-treesitter.configs".setup {
         ensure_installed = "maintained",
         highlight = {enable = true, disable = {"vim"}},
         textobjects = {
@@ -119,73 +117,54 @@ function config.matchup()
 end
 
 function config.nvim_gps()
-    require("nvim-gps").setup(
-        {
-            icons = {
-                ["class-name"] = " ", -- Classes and class-like objects
-                ["function-name"] = " ", -- Functions
-                ["method-name"] = " " -- Methods (functions inside class-like objects)
-            },
-            languages = {
-                -- You can disable any language individually here
-                ["c"] = true,
-                ["cpp"] = true,
-                ["go"] = true,
-                ["java"] = true,
-                ["javascript"] = true,
-                ["lua"] = true,
-                ["python"] = true,
-                ["rust"] = true
-            },
-            separator = " > "
-        }
-    )
+    require("nvim-gps").setup({
+        icons = {
+            ["class-name"] = " ", -- Classes and class-like objects
+            ["function-name"] = " ", -- Functions
+            ["method-name"] = " " -- Methods (functions inside class-like objects)
+        },
+        languages = {
+            -- You can disable any language individually here
+            ["c"] = true,
+            ["cpp"] = true,
+            ["go"] = true,
+            ["java"] = true,
+            ["javascript"] = true,
+            ["lua"] = true,
+            ["python"] = true,
+            ["rust"] = true
+        },
+        separator = " > "
+    })
 end
 
 function config.autotag()
-    require("nvim-ts-autotag").setup(
-        {
-            filetypes = {
-                "html",
-                "xml",
-                "javascript",
-                "typescriptreact",
-                "javascriptreact",
-                "vue"
-            }
+    require("nvim-ts-autotag").setup({
+        filetypes = {
+            "html", "xml", "javascript", "typescriptreact", "javascriptreact",
+            "vue"
         }
-    )
+    })
 end
 
-function config.nvim_colorizer()
-    require("colorizer").setup()
-end
+function config.nvim_colorizer() require("colorizer").setup() end
 
 function config.neoscroll()
-    require("neoscroll").setup(
-        {
-            -- All these keys will be mapped to their corresponding default scrolling animation
-            mappings = {
-                "<C-u>",
-                "<C-d>",
-                "<C-b>",
-                "<C-f>",
-                "<C-y>",
-                "<C-e>",
-                "zt",
-                "zz",
-                "zb"
-            },
-            hide_cursor = true, -- Hide cursor while scrolling
-            stop_eof = true, -- Stop at <EOF> when scrolling downwards
-            use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-            respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-            cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-            easing_function = nil, -- Default easing function
-            pre_hook = nil, -- Function to run before the scrolling animation starts
-            post_hook = nil -- Function to run after the scrolling animation ends
-        }
-    )
+    require("neoscroll").setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = {
+            "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz",
+            "zb"
+        },
+        hide_cursor = true, -- Hide cursor while scrolling
+        stop_eof = true, -- Stop at <EOF> when scrolling downwards
+        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+        respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil, -- Default easing function
+        pre_hook = nil, -- Function to run before the scrolling animation starts
+        post_hook = nil -- Function to run after the scrolling animation ends
+    })
 end
 
 function config.format()
@@ -234,18 +213,9 @@ function config.format()
                 }
             }
         },
-        go = {
-            {
-                cmd = {"gofmt -w", "goimports -w"},
-                tempfile_postfix = ".tmp"
-            }
-        },
+        go = {{cmd = {"gofmt -w", "goimports -w"}, tempfile_postfix = ".tmp"}},
         python = {
-            {
-                cmd = {
-                    "python3 -m autopep8 --in-place --aggressive --aggressive"
-                }
-            }
+            {cmd = {"python3 -m autopep8 --in-place --aggressive --aggressive"}}
         },
         sh = {
             {
@@ -265,18 +235,13 @@ function config.format()
                 }
             }
         },
-        html = {
-            {cmd = {"prettier -w"}}
-        },
+        html = {{cmd = {"prettier -w"}}},
         javascript = {
             {cmd = {"prettier -w", "./node_modules/.bin/eslint --fix"}}
         },
-        json = {
-            {cmd = {"prettier -w"}}
-        },
+        json = {{cmd = {"prettier -w"}}},
         markdown = {
-            {cmd = {"prettier -w"}},
-            {
+            {cmd = {"prettier -w"}}, {
                 cmd = {"black"},
                 start_pattern = "^```python$",
                 end_pattern = "^```$",
@@ -336,44 +301,36 @@ function config.dapui()
         dapui.close()
     end
 
-    require("dapui").setup(
-        {
-            icons = {expanded = "▾", collapsed = "▸"},
-            mappings = {
-                -- Use a table to apply multiple mappings
-                expand = {"<CR>", "<2-LeftMouse>"},
-                open = "o",
-                remove = "d",
-                edit = "e",
-                repl = "r"
+    require("dapui").setup({
+        icons = {expanded = "▾", collapsed = "▸"},
+        mappings = {
+            -- Use a table to apply multiple mappings
+            expand = {"<CR>", "<2-LeftMouse>"},
+            open = "o",
+            remove = "d",
+            edit = "e",
+            repl = "r"
+        },
+        sidebar = {
+            elements = {
+                -- Provide as ID strings or tables with "id" and "size" keys
+                {
+                    id = "scopes",
+                    size = 0.25 -- Can be float or integer > 1
+                }, {id = "breakpoints", size = 0.25},
+                {id = "stacks", size = 0.25}, {id = "watches", size = 00.25}
             },
-            sidebar = {
-                elements = {
-                    -- Provide as ID strings or tables with "id" and "size" keys
-                    {
-                        id = "scopes",
-                        size = 0.25 -- Can be float or integer > 1
-                    },
-                    {id = "breakpoints", size = 0.25},
-                    {id = "stacks", size = 0.25},
-                    {id = "watches", size = 00.25}
-                },
-                size = 40,
-                position = "left"
-            },
-            tray = {
-                elements = {"repl"},
-                size = 10,
-                position = "bottom"
-            },
-            floating = {
-                max_height = nil,
-                max_width = nil,
-                mappings = {close = {"q", "<Esc>"}}
-            },
-            windows = {indent = 1}
-        }
-    )
+            size = 40,
+            position = "left"
+        },
+        tray = {elements = {"repl"}, size = 10, position = "bottom"},
+        floating = {
+            max_height = nil,
+            max_width = nil,
+            mappings = {close = {"q", "<Esc>"}}
+        },
+        windows = {indent = 1}
+    })
 end
 
 function config.dap()
@@ -389,38 +346,24 @@ function config.dap()
             args = {"dap", "-l", "127.0.0.1:" .. port},
             detached = true
         }
-        handle, pid_or_err =
-            vim.loop.spawn(
-            "dlv",
-            opts,
-            function(code)
-                stdout:close()
-                handle:close()
-                if code ~= 0 then
-                    print("dlv exited with code", code)
-                end
-            end
-        )
+        handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
+            stdout:close()
+            handle:close()
+            if code ~= 0 then print("dlv exited with code", code) end
+        end)
         assert(handle, "Error running dlv: " .. tostring(pid_or_err))
-        stdout:read_start(
-            function(err, chunk)
-                assert(not err, err)
-                if chunk then
-                    vim.schedule(
-                        function()
-                            require("dap.repl").append(chunk)
-                        end
-                    )
-                end
+        stdout:read_start(function(err, chunk)
+            assert(not err, err)
+            if chunk then
+                vim.schedule(function()
+                    require("dap.repl").append(chunk)
+                end)
             end
-        )
+        end)
         -- Wait for delve to start
-        vim.defer_fn(
-            function()
-                callback({type = "server", host = "127.0.0.1", port = port})
-            end,
-            100
-        )
+        vim.defer_fn(function()
+            callback({type = "server", host = "127.0.0.1", port = port})
+        end, 100)
     end
     -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
     dap.configurations.go = {
