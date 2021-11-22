@@ -23,7 +23,7 @@ editor["terrortylor/nvim-comment"] = {
 }
 editor["simrat39/symbols-outline.nvim"] = {
     opt = true,
-    cmd = {"SymbolsOutline", "SymbolsOulineOpen"},
+    cmd = {"SymbolsOutline", "SymbolsOutlineOpen"},
     config = conf.symbols_outline
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
