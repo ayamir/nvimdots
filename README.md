@@ -105,8 +105,8 @@ paru goneovim
 sudo pacman -S clang
 # gofmt and goimports for golang
 go get -u golang.org/x/tools/...
-# luafmt for lua
-npm install -g lua-fmt
+# lua-format for lua
+paru -S lua-format-git
 # yapf and autopep8 for python
 pip install autopep8 yapf --user
 # rustfmt
@@ -289,6 +289,7 @@ Then you can figure out what modification makes error.
 |              [romgrk/nvim-treesitter-context](https://github.com/romgrk/nvim-treesitter-context)              |         Show current context         |
 |                        [p00f/nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                        |           Rainbow brackets           |
 | [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) |       Comment base on context        |
+|        [mfussenegger/nvim-ts-hint-textobject](https://github.com/mfussenegger/nvim-ts-hint-textobject)        |     Select region like hop.nvim      |
 |                           [SmiteshP/nvim-gps](https://github.com/SmiteshP/nvim-gps)                           |   Show current context in lualine    |
 |                        [andymass/vim-matchup](https://github.com/andymass/vim-matchup)                        |        Better matchup for `%`        |
 |                     [jdhao/better-escape.vim](https://github.com/jdhao/better-escape.vim)                     |       Replace `esc` with `jk`        |
