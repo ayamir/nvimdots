@@ -51,14 +51,10 @@ function config.rust_tools()
                 -- the border that is used for the hover window
                 -- see vim.api.nvim_open_win()
                 border = {
-                    {"╭", "FloatBorder"},
-                    {"─", "FloatBorder"},
-                    {"╮", "FloatBorder"},
-                    {"│", "FloatBorder"},
-                    {"╯", "FloatBorder"},
-                    {"─", "FloatBorder"},
-                    {"╰", "FloatBorder"},
-                    {"│", "FloatBorder"}
+                    {"╭", "FloatBorder"}, {"─", "FloatBorder"},
+                    {"╮", "FloatBorder"}, {"│", "FloatBorder"},
+                    {"╯", "FloatBorder"}, {"─", "FloatBorder"},
+                    {"╰", "FloatBorder"}, {"│", "FloatBorder"}
                 },
                 -- whether the hover action window gets automatically focused
                 auto_focus = false
@@ -76,12 +72,10 @@ end
 -- function config.lang_go() vim.g.go_doc_keywordprg_enabled = false end
 
 function config.lang_org()
-    require("orgmode").setup(
-        {
-            org_agenda_files = {"~/Sync/org/*"},
-            org_default_notes_file = "~/Sync/org/refile.org"
-        }
-    )
+    require("orgmode").setup({
+        org_agenda_files = {"~/Sync/org/*"},
+        org_default_notes_file = "~/Sync/org/refile.org"
+    })
 end
 
 return config

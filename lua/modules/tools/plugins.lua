@@ -1,9 +1,7 @@
 local tools = {}
 local conf = require("modules.tools.config")
 
-tools["nvim-lua/plenary.nvim"] = {
-    opt = false
-}
+tools["nvim-lua/plenary.nvim"] = {opt = false}
 tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
     cmd = "Telescope",
@@ -41,9 +39,7 @@ tools["michaelb/sniprun"] = {
 tools["folke/which-key.nvim"] = {
     opt = true,
     keys = ",",
-    config = function()
-        require("which-key").setup {}
-    end
+    config = function() require("which-key").setup {} end
 }
 tools["folke/trouble.nvim"] = {
     opt = true,

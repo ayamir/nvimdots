@@ -30,8 +30,7 @@ lsp_installer.settings {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.completion.completionItem.documentationFormat = {
-    "markdown",
-    "plaintext"
+    "markdown", "plaintext"
 }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
@@ -48,84 +47,74 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local function custom_attach()
-    require("lsp_signature").on_attach(
-        {
-            bind = true,
-            use_lspsaga = false,
-            floating_window = true,
-            fix_pos = true,
-            hint_enable = true,
-            hi_parameter = "Search",
-            handler_opts = {"double"}
-        }
-    )
+    require("lsp_signature").on_attach({
+        bind = true,
+        use_lspsaga = false,
+        floating_window = true,
+        fix_pos = true,
+        hint_enable = true,
+        hi_parameter = "Search",
+        handler_opts = {"double"}
+    })
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
     bufnr = nvim_lsp.util.validate_bufnr(bufnr)
     local params = {uri = vim.uri_from_bufnr(bufnr)}
-    vim.lsp.buf_request(
-        bufnr,
-        "textDocument/switchSourceHeader",
-        params,
-        function(err, result)
-            if err then
-                error(tostring(err))
-            end
-            if not result then
-                print("Corresponding file can’t be determined")
-                return
-            end
-            vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+    vim.lsp.buf_request(bufnr, "textDocument/switchSourceHeader", params,
+                        function(err, result)
+        if err then error(tostring(err)) end
+        if not result then
+            print("Corresponding file can’t be determined")
+            return
         end
-    )
+        vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+    end)
 end
 
-lsp_installer.on_server_ready(
-    function(server)
-        local opts = {}
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
 
-        if (server.name == "sumneko_lua") then
-            opts.settings = {
-                Lua = {
-                    diagnostics = {globals = {"vim", "packer_plugins"}},
-                    workspace = {
-                        library = {
-                            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
-                        },
-                        maxPreload = 100000,
-                        preloadFileSize = 10000
+    if (server.name == "sumneko_lua") then
+        opts.settings = {
+            Lua = {
+                diagnostics = {globals = {"vim", "packer_plugins"}},
+                workspace = {
+                    library = {
+                        [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
                     },
-                    telemetry = {enable = false}
-                }
-            }
-        elseif (server.name == "clangd") then
-            opts.commands = {
-                ClangdSwitchSourceHeader = {
-                    function()
-                        switch_source_header_splitcmd(0, "edit")
-                    end,
-                    description = "Open source/header in current buffer"
+                    maxPreload = 100000,
+                    preloadFileSize = 10000
                 },
-                ClangdSwitchSourceHeaderVSplit = {
-                    function()
-                        switch_source_header_splitcmd(0, "vsplit")
-                    end,
-                    description = "Open source/header in a new vsplit"
-                },
-                ClangdSwitchSourceHeaderSplit = {
-                    function()
-                        switch_source_header_splitcmd(0, "split")
-                    end,
-                    description = "Open source/header in a new split"
-                }
+                telemetry = {enable = false}
             }
-        end
-        opts.capabilities = capabilities
-        opts.flags = {debounce_text_changes = 500}
-        opts.on_attach = custom_attach
-
-        server:setup(opts)
+        }
+    elseif (server.name == "clangd") then
+        opts.commands = {
+            ClangdSwitchSourceHeader = {
+                function()
+                    switch_source_header_splitcmd(0, "edit")
+                end,
+                description = "Open source/header in current buffer"
+            },
+            ClangdSwitchSourceHeaderVSplit = {
+                function()
+                    switch_source_header_splitcmd(0, "vsplit")
+                end,
+                description = "Open source/header in a new vsplit"
+            },
+            ClangdSwitchSourceHeaderSplit = {
+                function()
+                    switch_source_header_splitcmd(0, "split")
+                end,
+                description = "Open source/header in a new split"
+            }
+        }
     end
-)
+    opts.capabilities = capabilities
+    opts.flags = {debounce_text_changes = 500}
+    opts.on_attach = custom_attach
+
+    server:setup(opts)
+end)

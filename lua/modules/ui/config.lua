@@ -32,8 +32,7 @@ function config.lualine()
             lualine_a = {"mode"},
             lualine_b = {{"branch"}, {"diff"}},
             lualine_c = {
-                {"lsp_progress"},
-                {gps_content, cond = gps.is_available}
+                {"lsp_progress"}, {gps_content, cond = gps.is_available}
             },
             lualine_x = {
                 {
@@ -63,7 +62,7 @@ function config.lualine()
 end
 
 function config.nvim_tree()
-    local tree_cb = require "nvim-tree.config".nvim_tree_callback
+    local tree_cb = require"nvim-tree.config".nvim_tree_callback
     require("nvim-tree").setup {
         gitignore = true,
         ignore = {".git", "node_modules", ".cache"},
@@ -90,8 +89,7 @@ function config.nvim_tree()
                     {
                         key = {"<CR>", "o", "<2-LeftMouse>"},
                         cb = tree_cb("tabnew")
-                    },
-                    {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
+                    }, {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
                     {key = "<C-v>", cb = tree_cb("vsplit")},
                     {key = "<C-x>", cb = tree_cb("split")},
                     {key = "<C-t>", cb = tree_cb("tabnew")},
@@ -219,45 +217,17 @@ function config.indent_blankline()
         char = "│",
         show_first_indent_level = true,
         filetype_exclude = {
-            "startify",
-            "dashboard",
-            "dotooagenda",
-            "log",
-            "fugitive",
-            "gitcommit",
-            "packer",
-            "vimwiki",
-            "markdown",
-            "json",
-            "txt",
-            "vista",
-            "help",
-            "todoist",
-            "NvimTree",
-            "peekaboo",
-            "git",
-            "TelescopePrompt",
-            "undotree",
-            "flutterToolsOutline",
-            "" -- for all buffers without a file type
+            "startify", "dashboard", "dotooagenda", "log", "fugitive",
+            "gitcommit", "packer", "vimwiki", "markdown", "json", "txt",
+            "vista", "help", "todoist", "NvimTree", "peekaboo", "git",
+            "TelescopePrompt", "undotree", "flutterToolsOutline", "" -- for all buffers without a file type
         },
         buftype_exclude = {"terminal", "nofile"},
         show_trailing_blankline_indent = false,
         show_current_context = true,
         context_patterns = {
-            "class",
-            "function",
-            "method",
-            "block",
-            "list_literal",
-            "selector",
-            "^if",
-            "^table",
-            "if_statement",
-            "while",
-            "for",
-            "type",
-            "var",
+            "class", "function", "method", "block", "list_literal", "selector",
+            "^if", "^table", "if_statement", "while", "for", "type", "var",
             "import"
         }
     }

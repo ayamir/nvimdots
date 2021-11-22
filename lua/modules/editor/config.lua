@@ -211,11 +211,7 @@ function config.format()
             {
                 cmd = {
                     function(file)
-                        return string.format(
-                            "luafmt -l %s -w replace %s",
-                            vim.bo.textwidth,
-                            file
-                        )
+                        return string.format("lua-format -i %s", file)
                     end
                 }
             }

@@ -4,10 +4,8 @@ local vim = vim
 -- Create cache dir and subs dir
 local createdir = function()
     local data_dir = {
-        global.cache_dir .. "backup",
-        global.cache_dir .. "session",
-        global.cache_dir .. "swap",
-        global.cache_dir .. "tags",
+        global.cache_dir .. "backup", global.cache_dir .. "session",
+        global.cache_dir .. "swap", global.cache_dir .. "tags",
         global.cache_dir .. "undo"
     }
     -- There only check once that If cache_dir exists
