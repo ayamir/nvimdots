@@ -126,11 +126,5 @@ editor["rcarriga/nvim-dap-ui"] = {
         }
     }
 }
-editor["VonHeikemen/fine-cmdline.nvim"] = {
-    opt = true,
-    event = "BufWinEnter",
-    config = conf.cmdline,
-    requires = {"MunifTanjim/nui.nvim", opt = true}
-}
 
 return editor

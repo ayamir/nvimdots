@@ -477,13 +477,4 @@ function config.dap()
     }
 end
 
-function config.dapinstal()
-    require("dap-install").setup(
-        {
-            installation_path = dap_dir,
-            verbosely_call_debuggers = false
-        }
-    )
-end
-
 return config
