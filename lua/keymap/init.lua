@@ -203,11 +203,7 @@ local plug_map = {
     ),
     ["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(
 
-    ),
-    -- fine-cmdline
-    ["n|:"] = map_cr("lua require('fine-cmdline').open()"):with_noremap():with_nowait(
-
-    ):with_silent()
+    )
 }
 
 bind.nvim_load_mapping(plug_map)
