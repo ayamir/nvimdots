@@ -5,6 +5,8 @@ local map_cmd = bind.map_cmd
 require("keymap.config")
 
 local plug_map = {
+    -- Format
+    ["n|<C-A-l>"] = map_cu("FormatWrite"):with_noremap():with_silent(),
     -- Bufferline
     ["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent(),
     ["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),

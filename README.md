@@ -403,7 +403,7 @@ The leader key is `,`.
 |                     jump to one line                      |    `<leader>j`/`<leader>k`     |
 |                                                           |                                |
 |                    escape insert mode                     |              `jk`              |
-|                         neoformat                         |           `<C-A-l>`            |
+|                      format manually                      |           `<C-A-l>`            |
 |                back to last cursor's place                |            `<C-O>`             |
 |                    preview definition                     |              `gd`              |
 |                    jump to definition                     |              `gD`              |
