@@ -121,5 +121,6 @@ editor["rcarriga/nvim-dap-ui"] = {
         }
     }
 }
+editor["tpope/vim-fugitive"] = {opt = true, cmd = {"Git", "G"}}
 
 return editor
