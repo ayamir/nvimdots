@@ -63,9 +63,10 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # nerd-fonts-ibm-plex-mono required by devicons
 sudo pacman -S git gitui zoxide ripgrep sqlite fd yarn nerd-fonts-ibm-plex-mono
 
+# code-minimap required by minimap.vim
 # nodejs, neovim-git required by copilot.
 # neovim version >= 0.6
-yay -S nodejs neovim-git
+yay -S nodejs neovim-git code-minimap
 
 # for neovim python module
 pip install neovim --user
@@ -261,6 +262,7 @@ Then you can figure out what modification makes error.
 |             [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)             |       Show git status in nvim       |
 | [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) |  Show indent with different level   |
 |             [akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim)             |      Tab and buffer management      |
+|                    [wfxr/minimap.vim](https://github.com/wfxr/minimap.vim)                    |          Show code minimap          |
 
 ## Tools
 
