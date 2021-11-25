@@ -307,6 +307,7 @@ Then you can figure out what modification makes error.
 |                         [vimlab/split-term](https://github.com/vimlab/split-term.vim)                         | Utilites around neovim's `:terminal` |
 |                 [akinsho/nvim-toggleterm.lua](https://github.com/akinsho/nvim-toggleterm.lua)                 |           Toggled terminal           |
 |                         [numtostr/FTerm.nvim](https://github.com/numtostr/FTerm.nvim)                         |            Float terminal            |
+|                          [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                          |     Git operations inside neovim     |
 
 ## Completion
 
