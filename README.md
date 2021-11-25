@@ -358,8 +358,8 @@ The leader key is `,`.
 |                     toggle nvim-tree                      |            `<C-n>`             |
 |                       toggle tagbar                       |            `<A-t>`             |
 |                                                           |                                |
-|                 open horizontal terminal                  |       `<C-w>t` or `<F5>`       |
-|                 toggle vertical terminal                  |            `<C-\>`             |
+|                  open vertical terminal                   |       `<C-w>t` or `<F5>`       |
+|                toggle horizontal terminal                 |            `<C-\>`             |
 |                       quit terminal                       |            `<C-d>`             |
 |                 toggle floating terminal                  |            `<A-d>`             |
 |               force quit floating terminal                |           `<A-S-d>`            |
