@@ -124,9 +124,8 @@ local plug_map = {
     -- Plugin SymbolOutline
     ["n|<A-t>"] = map_cr("SymbolsOutline"):with_noremap():with_silent(),
     -- Plugin split-term
-    ["n|<F5>"] = map_cr("Term"):with_noremap():with_silent(),
-    ["n|<C-w>t"] = map_cr("Term"):with_noremap():with_silent(),
-    ["n|<C-w>T"] = map_cr("VTerm"):with_noremap():with_silent(),
+    ["n|<F5>"] = map_cr("VTerm"):with_noremap():with_silent(),
+    ["n|<C-w>t"] = map_cr("VTerm"):with_noremap():with_silent(),
     -- Plugin MarkdownPreview
     ["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),
     -- Plugin auto_session
