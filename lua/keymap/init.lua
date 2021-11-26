@@ -67,6 +67,7 @@ local plug_map = {
         :with_silent(),
     ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap()
         :with_silent(),
+    ["n|<Leader>G"] = map_cu("Git"):with_noremap():with_silent(),
     -- Plugin trouble
     ["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
     ["n|gR"] = map_cr("TroubleToggle lsp_references"):with_noremap()
