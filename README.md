@@ -310,6 +310,7 @@ Then you can figure out what modification makes error.
 |                 [akinsho/nvim-toggleterm.lua](https://github.com/akinsho/nvim-toggleterm.lua)                 |           Toggled terminal           |
 |                         [numtostr/FTerm.nvim](https://github.com/numtostr/FTerm.nvim)                         |            Float terminal            |
 |                          [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)                          |     Git operations inside neovim     |
+|                          [chentau/marks.nvim](https://github.com/chentau/marks.nvim)                          |         Manage marks easier          |
 
 ## Completion
 
