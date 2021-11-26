@@ -3,11 +3,11 @@ local dap_dir = vim.fn.stdpath("data") .. "/dapinstall/"
 local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
 
 function config.symbols_outline()
-    vim.g.symbols_outline = {
+    require"symbols-outline".setup({
         highlight_hovered_item = true,
         show_guides = true,
         auto_preview = true,
-        position = "right",
+        position = "left",
         show_numbers = false,
         show_relative_numbers = false,
         show_symbol_details = true,
@@ -48,7 +48,7 @@ function config.symbols_outline()
             Operator = {icon = "+", hl = "TSOperator"},
             TypeParameter = {icon = "𝙏", hl = "TSParameter"}
         }
-    }
+    })
 end
 
 function config.vim_cursorwod()
