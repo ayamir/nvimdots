@@ -82,8 +82,23 @@ function autocmd.load_autocmds()
         },
         yank = {
             {
-                "TextYankPost",
-                [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]]
+                "TextYankPost", "*",
+                [[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]]
+            }
+        },
+        ScrollbarInit = {
+            {
+                "WinScrolled,VimResized,QuitPre", "*",
+                [[silent! lua require('scrollbar').show()]]
+            },
+            {
+
+                "WinEnter,FocusGained", "*",
+                [[silent! lua require('scrollbar').show()]]
+            }, {
+
+                "WinLeave,BufLeave,BufWinLeave,FocusLost", "*",
+                [[silent! lua require('scrollbar').clear()]]
             }
         }
     }

@@ -31,6 +31,6 @@ ui["akinsho/nvim-bufferline.lua"] = {
     event = "BufRead",
     config = conf.nvim_bufferline
 }
-ui["wfxr/minimap.vim"] = {opt = true, event = "BufReadPost"}
+ui["Xuyuanp/scrollbar.nvim"] = {opt = true, event = "BufRead"}
 
 return ui

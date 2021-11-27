@@ -118,8 +118,6 @@ local dashboard_config = function()
     }
 end
 
-local function minimap_config() vim.g.minimap_auto_start = 1 end
-
 local clipboard_settings = function()
     vim.cmd [[
     let g:clipboard = {
@@ -138,6 +136,14 @@ local clipboard_settings = function()
     ]]
 end
 
+local function scrollbar()
+    vim.g.scrollbar_max_size = 10
+    vim.g.scrollbar_mni_size = 3
+    vim.g.scrollbar_excluded_filetypes = {"NvimTree", "SymbolsOutline"}
+    vim.g.scrollbar_width = 1
+    vim.g.scrollbar_winblend = 0
+end
+
 local load_core = function()
     local pack = require("core.pack")
     createdir()
@@ -146,7 +152,6 @@ local load_core = function()
 
     pack.ensure_plugins()
     neovide_config()
-    minimap_config()
     dashboard_config()
     -- clipboard_settings()
 
