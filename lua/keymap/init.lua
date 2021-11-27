@@ -118,11 +118,7 @@ local plug_map = {
     -- Plugin EasyAlign
     ["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
     ["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
-    -- Plugin ZenMode
-    ["n|<leader><leader>z"] = map_cr("ZenMode"):with_noremap():with_silent(),
-    -- Plugin Twilight
-    ["n|<leader><leader>t"] = map_cr("Twilight"):with_noremap():with_silent(),
-    -- Plugin SymbolOutline
+    -- Plugin SymbolsOutline
     ["n|<A-t>"] = map_cr("SymbolsOutline"):with_noremap():with_silent(),
     -- Plugin split-term
     ["n|<F5>"] = map_cr("VTerm"):with_noremap():with_silent(),
