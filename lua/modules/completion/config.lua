@@ -55,9 +55,10 @@ function config.cmp()
 
                 vim_item.menu = ({
                     -- cmp_tabnine = "[TN]",
+                    rg = "[RG]",
                     orgmode = "[ORG]",
                     nvim_lsp = "[LSP]",
-                    nvim_lua = "[Lua]",
+                    nvim_lua = "[LUA]",
                     buffer = "[BUF]",
                     path = "[PATH]",
                     tmux = "[TMUX]",
@@ -116,7 +117,7 @@ function config.cmp()
         sources = {
             {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "luasnip"},
             {name = "buffer"}, {name = "path"}, {name = "spell"},
-            {name = "tmux"}, {name = "orgmode"}
+            {name = "tmux"}, {name = "orgmode"}, {name = "rg"}
             -- {name = 'cmp_tabnine'},
         }
     }
