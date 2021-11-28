@@ -22,8 +22,7 @@ completion["hrsh7th/nvim-cmp"] = {
     event = "InsertEnter",
     requires = {
         {"saadparwaiz1/cmp_luasnip", after = "LuaSnip"},
-        {"hrsh7th/cmp-buffer", after = "cmp_luasnip"},
-        {"hrsh7th/cmp-nvim-lsp", after = "cmp-buffer"},
+        {"hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip"},
         {"hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp"},
         {"andersevenrud/compe-tmux", branch = "cmp", after = "cmp-nvim-lua"},
         {"hrsh7th/cmp-path", after = "compe-tmux"},
