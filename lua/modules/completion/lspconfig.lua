@@ -15,6 +15,7 @@ if not packer_plugins["lspsaga.nvim"].loaded then
 end
 
 local nvim_lsp = require("lspconfig")
+local util = require("lspconfig/util")
 local lsp_installer = require("nvim-lsp-installer")
 
 lsp_installer.settings {
@@ -28,6 +29,15 @@ lsp_installer.settings {
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+nvim_lsp.ccls.setup{
+    cmd = { "ccls" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+    root_dir = function (name)
+        return util.root_pattern("compile_commands.json", ".ccls", "compile_flags.txt", ".git")(name)
+            or util.path.dirname(name)
+    end
+}
 
 capabilities.textDocument.completion.completionItem.documentationFormat = {
     "markdown", "plaintext"
