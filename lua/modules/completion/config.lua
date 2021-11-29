@@ -7,6 +7,19 @@ function config.lightbulb()
 end
 
 function config.cmp()
+    vim.cmd [[highlight CmpItemAbbrDeprecated guifg=#D8DEE9 guibg=NONE gui=strikethrough]]
+    vim.cmd [[highlight CmpItemKindSnippet guifg=#BF616A guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindUnit guifg=#D08770 guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindProperty guifg=#A3BE8C guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindKeyword guifg=#EBCB8B guibg=NONE]]
+    vim.cmd [[highlight CmpItemAbbrMatch guifg=#5E81AC guibg=NONE]]
+    vim.cmd [[highlight CmpItemAbbrMatchFuzzy guifg=#5E81AC guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindVariable guifg=#8FBCBB guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindInterface guifg=#88C0D0 guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindText guifg=#81A1C1 guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindFunction guifg=#B48EAD guibg=NONE]]
+    vim.cmd [[highlight CmpItemKindMethod guifg=#B48EAD guibg=NONE]]
+
     local t = function(str)
         return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
@@ -22,31 +35,31 @@ function config.cmp()
         formatting = {
             format = function(entry, vim_item)
                 local lspkind_icons = {
-                    Text = "",
+                    Text = "",
                     Method = "",
                     Function = "",
                     Constructor = "",
-                    Field = "ﰠ",
-                    Variable = "",
+                    Field = "",
+                    Variable = "",
                     Class = "ﴯ",
                     Interface = "",
                     Module = "",
                     Property = "ﰠ",
-                    Unit = "塞",
+                    Unit = "",
                     Value = "",
                     Enum = "",
                     Keyword = "",
                     Snippet = "",
                     Color = "",
                     File = "",
-                    Reference = "",
+                    Reference = "",
                     Folder = "",
                     EnumMember = "",
                     Constant = "",
-                    Struct = "פּ",
+                    Struct = "",
                     Event = "",
                     Operator = "",
-                    TypeParameter = ""
+                    TypeParameter = ""
                 }
                 -- load lspkind icons
                 vim_item.kind = string.format("%s %s",
