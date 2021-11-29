@@ -91,6 +91,7 @@ lsp_installer.on_server_ready(function(server)
             }
         }
     elseif (server.name == "clangd") then
+        opts.args = {"--background-index", "-std=c++20"}
         opts.commands = {
             ClangdSwitchSourceHeader = {
                 function()
