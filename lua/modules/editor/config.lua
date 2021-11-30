@@ -129,6 +129,7 @@ function config.nvim_gps()
             -- You can disable any language individually here
             ["c"] = true,
             ["cpp"] = true,
+            ["cuda"] = true,
             ["go"] = true,
             ["java"] = true,
             ["javascript"] = true,
