@@ -499,11 +499,17 @@ For example (gopls):
 Your root directory need a `go.mod` and your `.go` file need to be created
 first. Then LSP will autostart when you edit `.go` file next time.
 
-4. Copilot setup
+4. Copilot setup.
 
 Make sure your github account is signed up for [copilot](https://copilot.github.com/).
 
 Then use `Copilot setup` command to setup.
+
+5. `cmp-rg` search directory unwanted.
+
+Create a config file manually like [this](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file).
+
+Or create a `.ignore` file in your work directory refer to [this](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#automatic-filtering).
 
 <a id="credit"></a>
 
