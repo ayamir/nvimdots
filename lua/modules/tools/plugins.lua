@@ -11,11 +11,11 @@ tools["nvim-telescope/telescope.nvim"] = {
         {"nvim-lua/popup.nvim", opt = true}
     }
 }
-tools["nvim-telescope/telescope-fzy-native.nvim"] = {
+tools["nvim-telescope/telescope-fzf-native.nvim"] = {
     opt = true,
+    run = "make",
     after = "telescope.nvim"
 }
-
 tools["nvim-telescope/telescope-project.nvim"] = {
     opt = true,
     after = "telescope.nvim"
