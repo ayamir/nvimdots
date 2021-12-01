@@ -68,6 +68,8 @@ local plug_map = {
     ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap()
         :with_silent(),
     ["n|<Leader>G"] = map_cu("Git"):with_noremap():with_silent(),
+    ["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
+    ["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
     -- Plugin trouble
     ["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
     ["n|gR"] = map_cr("TroubleToggle lsp_references"):with_noremap()
@@ -163,9 +165,7 @@ local plug_map = {
         :with_silent(),
     ["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap()
         :with_silent(),
-    ["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
-    ["v|m"] = map_cr([[lua require('tsht').nodes()]]):with_noremap()
-        :with_silent()
+    ["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent()
 }
 
 bind.nvim_load_mapping(plug_map)

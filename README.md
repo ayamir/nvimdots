@@ -319,7 +319,7 @@ Then you can figure out what modification makes error.
 | [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) |               Manage each LSP engine               |
 |        [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)        | Show signature when completing function parameters |
 |                [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                |          Auto completion plugin for nvim           |
-|              [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)              |             buffer source for nvim-cmp             |
+|            [lukas-reineke/cmp-rg](https://github.com/lukas-reineke/cmp-rg)            |            ripgrep source for nvim-cmp             |
 |                [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)                |              path source for nvim-cmp              |
 |             [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)             |            tabnine source for nvim-cmp             |
 |            [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)            |              lua source for nvim-cmp               |
@@ -499,11 +499,17 @@ For example (gopls):
 Your root directory need a `go.mod` and your `.go` file need to be created
 first. Then LSP will autostart when you edit `.go` file next time.
 
-4. Copilot setup
+4. Copilot setup.
 
 Make sure your github account is signed up for [copilot](https://copilot.github.com/).
 
 Then use `Copilot setup` command to setup.
+
+5. `cmp-rg` search directory unwanted.
+
+Create a config file manually like [this](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file).
+
+Or create a `.ignore` file in your work directory refer to [this](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#automatic-filtering).
 
 <a id="credit"></a>
 
