@@ -3,16 +3,12 @@ local config = {}
 function config.telescope()
     local home = os.getenv("HOME")
 
-    if not packer_plugins["plenary.nvim"].loaded then
-        vim.cmd [[packadd plenary.nvim]]
-    end
-
     if not packer_plugins["popup.nvim"].loaded then
         vim.cmd [[packadd popup.nvim]]
     end
 
-    if not packer_plugins["telescope-fzy-native.nvim"].loaded then
-        vim.cmd [[packadd telescope-fzy-native.nvim]]
+    if not packer_plugins["telescope-fzf-native.nvim"].loaded then
+        vim.cmd [[packadd telescope-fzf-native.nvim]]
     end
 
     if not packer_plugins["telescope-project.nvim"].loaded then
@@ -34,12 +30,6 @@ function config.telescope()
     if not packer_plugins["telescope-zoxide"].loaded then
         vim.cmd [[packadd telescope-zoxide]]
     end
-
-    require("telescope").load_extension("fzy_native")
-    require("telescope").load_extension("project")
-    require("telescope").load_extension("frecency")
-    require("telescope").load_extension("media_files")
-    require("telescope").load_extension("zoxide")
 
     require("telescope").setup {
         defaults = {
@@ -68,9 +58,11 @@ function config.telescope()
             set_env = {["COLORTERM"] = "truecolor"}
         },
         extensions = {
-            fzy_native = {
+            fzf = {
+                fuzzy = false,
                 override_generic_sorter = false,
-                override_file_sorter = true
+                override_file_sorter = true,
+                case_mode = "smart_case"
             },
             frecency = {
                 show_scores = true,
@@ -93,6 +85,12 @@ function config.telescope()
             }
         }
     }
+
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("project")
+    require("telescope").load_extension("frecency")
+    require("telescope").load_extension("media_files")
+    require("telescope").load_extension("zoxide")
 end
 
 function config.trouble()
