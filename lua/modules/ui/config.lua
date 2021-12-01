@@ -1,7 +1,7 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=light]]
+    vim.cmd [[set background=dark]]
     vim.g.edge_style = "aura"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
@@ -35,7 +35,7 @@ function config.lualine()
     require("lualine").setup {
         options = {
             icons_enabled = true,
-            theme = "onelight",
+            theme = "onedark",
             disabled_filetypes = {},
             component_separators = "|",
             section_separators = {left = "", right = ""}
@@ -83,6 +83,7 @@ function config.nvim_tree()
         open_on_tab = false,
         disable_netrw = true,
         hijack_netrw = true,
+        hijack_cursor = true,
         auto_close = true,
         update_cwd = true,
         highlight_opened_files = true,
