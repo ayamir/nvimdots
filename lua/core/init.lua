@@ -41,7 +41,6 @@ local disable_distribution_plugins = function()
     vim.g.loaded_netrwPlugin = 1
     vim.g.loaded_netrwSettings = 1
     vim.g.loaded_netrwFileHandlers = 1
-    vim.g.did_load_filetypes = 1
 end
 
 local leader_map = function()
@@ -160,14 +159,6 @@ local clipboard_settings = function()
           \ }
 
     ]]
-end
-
-local function scrollbar()
-    vim.g.scrollbar_max_size = 10
-    vim.g.scrollbar_mni_size = 3
-    vim.g.scrollbar_excluded_filetypes = {"NvimTree", "SymbolsOutline"}
-    vim.g.scrollbar_width = 1
-    vim.g.scrollbar_winblend = 0
 end
 
 local load_core = function()

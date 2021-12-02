@@ -99,6 +99,13 @@ paru goneovim
 - For [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer#available-lsps), you
   need to install corresponding language server use it.
 
+The default html server has bug which does not support embeded
+javascript completion. So you need to install another server manually.
+
+```
+npm i -g vscode-html-languageserver-bin
+```
+
 - For [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages), all maintained parser will be installed by default.
 
 - For [format.nvim](https://github.com/sbdchd/neoformat#supported-filetypes), you
