@@ -138,14 +138,6 @@ local clipboard_settings = function()
     ]]
 end
 
-local function scrollbar()
-    vim.g.scrollbar_max_size = 10
-    vim.g.scrollbar_mni_size = 3
-    vim.g.scrollbar_excluded_filetypes = {"NvimTree", "SymbolsOutline"}
-    vim.g.scrollbar_width = 1
-    vim.g.scrollbar_winblend = 0
-end
-
 local load_core = function()
     local pack = require("core.pack")
     createdir()
