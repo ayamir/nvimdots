@@ -83,6 +83,7 @@ function config.nvim_tree()
         open_on_tab = false,
         disable_netrw = true,
         hijack_netrw = true,
+        hijack_cursor = true,
         auto_close = true,
         update_cwd = true,
         highlight_opened_files = true,
