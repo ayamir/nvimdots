@@ -1,13 +1,13 @@
 local config = {}
 
 function config.edge()
-    vim.cmd [[set background=dark]]
-    vim.g.edge_style = "aura"
+    vim.cmd [[set background=light]]
+    vim.g.edge_style = "neon"
     vim.g.edge_enable_italic = 1
     vim.g.edge_disable_italic_comment = 1
     vim.g.edge_show_eob = 1
     vim.g.edge_better_performance = 1
-    vim.g.edge_transparent_background = 1
+    vim.g.edge_transparent_background = 0
 end
 
 function config.lualine()
@@ -35,7 +35,7 @@ function config.lualine()
     require("lualine").setup {
         options = {
             icons_enabled = true,
-            theme = "onedark",
+            theme = "onelight",
             disabled_filetypes = {},
             component_separators = "|",
             section_separators = {left = "", right = ""}

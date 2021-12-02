@@ -24,4 +24,8 @@ lang["iamcco/markdown-preview.nvim"] = {
     ft = "markdown",
     run = "cd app && yarn install"
 }
+lang["lervag/vimtex"] = {
+    opt = true,
+    ft = "tex"
+}
 return lang
