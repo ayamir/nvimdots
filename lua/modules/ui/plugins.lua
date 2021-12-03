@@ -31,6 +31,6 @@ ui["akinsho/nvim-bufferline.lua"] = {
     event = "BufRead",
     config = conf.nvim_bufferline
 }
-ui["Xuyuanp/scrollbar.nvim"] = {opt = true, event = "BufRead"}
+ui["dstein64/nvim-scrollview"] = {opt = true, event = "BufRead"}
 
 return ui

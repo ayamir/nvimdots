@@ -92,7 +92,10 @@ local function load_options()
         pumblend = 10,
         winblend = 10,
         autoread = true,
-        autowrite = true
+        autowrite = true,
+        spell = true,
+        spelllang = "en,cjk",
+        spellsuggest = "best,9"
     }
 
     local bw_local = {
