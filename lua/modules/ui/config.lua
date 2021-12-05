@@ -10,6 +10,56 @@ function config.edge()
     vim.g.edge_transparent_background = 1
 end
 
+function config.catppuccin()
+    require('catppuccin').setup({
+        transparent_background = false,
+        term_colors = true,
+        styles = {
+            comments = "italic",
+            functions = "italic",
+            keywords = "italic",
+            strings = "NONE",
+            variables = "NONE"
+        },
+        integrations = {
+            treesitter = true,
+            native_lsp = {
+                enabled = true,
+                virtual_text = {
+                    errors = "italic",
+                    hints = "italic",
+                    warnings = "italic",
+                    information = "italic"
+                },
+                underlines = {
+                    errors = "underline",
+                    hints = "underline",
+                    warnings = "underline",
+                    information = "underline"
+                }
+            },
+            lsp_trouble = true,
+            lsp_saga = true,
+            gitgutter = false,
+            gitsigns = true,
+            telescope = true,
+            nvimtree = {enabled = true, show_root = true},
+            which_key = true,
+            indent_blankline = {enabled = true, colored_indent_levels = false},
+            dashboard = true,
+            neogit = false,
+            vim_sneak = false,
+            fern = false,
+            barbar = false,
+            bufferline = true,
+            markdown = true,
+            lightspeed = false,
+            ts_rainbow = true,
+            hop = true
+        }
+    })
+end
+
 function config.lualine()
     local gps = require("nvim-gps")
 
@@ -35,7 +85,7 @@ function config.lualine()
     require("lualine").setup {
         options = {
             icons_enabled = true,
-            theme = "onedark",
+            theme = "catppuccin",
             disabled_filetypes = {},
             component_separators = "|",
             section_separators = {left = "", right = ""}
@@ -218,16 +268,9 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-    -- vim.cmd [[highlight IndentTwo guifg=#D08770 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentThree guifg=#EBCB8B guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentFour guifg=#A3BE8C guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentFive guifg=#5E81AC guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentSix guifg=#88C0D0 guibg=NONE gui=nocombine]]
-    -- vim.cmd [[highlight IndentSeven guifg=#B48EAD guibg=NONE gui=nocombine]]
-    -- vim.g.indent_blankline_char_highlight_list = {
-    --     "IndentTwo", "IndentThree", "IndentFour", "IndentFive", "IndentSix",
-    --     "IndentSeven"
-    -- }
+    vim.opt.termguicolors = true
+    vim.opt.list = true
+    vim.opt.listchars:append("space:⋅")
     require("indent_blankline").setup {
         char = "│",
         show_first_indent_level = true,
@@ -244,7 +287,8 @@ function config.indent_blankline()
             "class", "function", "method", "block", "list_literal", "selector",
             "^if", "^table", "if_statement", "while", "for", "type", "var",
             "import"
-        }
+        },
+        space_char_blankline = " "
     }
     -- because lazy load indent-blankline so need readd this autocmd
     vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")

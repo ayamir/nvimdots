@@ -27,7 +27,7 @@ completion["hrsh7th/nvim-cmp"] = {
         {"andersevenrud/compe-tmux", branch = "cmp", after = "cmp-nvim-lua"},
         {"hrsh7th/cmp-path", after = "compe-tmux"},
         {"f3fora/cmp-spell", after = "cmp-path"},
-        {"lukas-reineke/cmp-rg", after = "cmp-spell"}, {
+        {"hrsh7th/cmp-buffer", after = "cmp-spell"}, {
             'tzachar/cmp-tabnine',
             run = './install.sh',
             after = 'cmp-spell',

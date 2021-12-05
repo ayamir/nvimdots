@@ -224,7 +224,7 @@ directory.
 
   modify `lua/core/options.lua`
 
-- Switch light/dark theme
+- Switch light/dark theme(if you use edge theme)
 
 ```shell
 # To light
@@ -261,6 +261,7 @@ Then you can figure out what modification makes error.
 |                                             Name                                              |               Effect                |
 | :-------------------------------------------------------------------------------------------: | :---------------------------------: |
 |                        [sainnhe/edge](https://github.com/sainnhe/edge)                        |         My light/dark theme         |
+|                     [catppuccin/nvim](https://github.com/catppuccin/nvim)                     |      A low contrast dark theme      |
 |        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |        For nvim-tree's icons        |
 |                [hoob3rt/lualine.nvim](https://github.com/hoob3rt/lualine.nvim)                | Minimal, fast but customizable line |
 |              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |        Dashboard for Neovim         |
@@ -326,7 +327,7 @@ Then you can figure out what modification makes error.
 | [williamboman/nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) |               Manage each LSP engine               |
 |        [ray-x/lsp_signature.nvim](https://github.com/ray-x/lsp_signature.nvim)        | Show signature when completing function parameters |
 |                [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)                |          Auto completion plugin for nvim           |
-|            [lukas-reineke/cmp-rg](https://github.com/lukas-reineke/cmp-rg)            |            ripgrep source for nvim-cmp             |
+|              [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer)              |             buffer source for nvim-cmp             |
 |                [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path)                |              path source for nvim-cmp              |
 |             [tzachar/cmp-tabnine](https://github.com/tzachar/cmp-tabnine)             |            tabnine source for nvim-cmp             |
 |            [hrsh7th/cmp-nvim-lua](https://github.com/hrsh7th/cmp-nvim-lua)            |              lua source for nvim-cmp               |
@@ -511,12 +512,6 @@ first. Then LSP will autostart when you edit `.go` file next time.
 Make sure your github account is signed up for [copilot](https://copilot.github.com/).
 
 Then use `Copilot setup` command to setup.
-
-5. `cmp-rg` search directory unwanted.
-
-Create a config file manually like [this](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file).
-
-Or create a `.ignore` file in your work directory refer to [this](https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#automatic-filtering).
 
 <a id="credit"></a>
 
