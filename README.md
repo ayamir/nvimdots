@@ -224,7 +224,7 @@ directory.
 
   modify `lua/core/options.lua`
 
-- Switch light/dark theme
+- Switch light/dark theme(if you use edge theme)
 
 ```shell
 # To light
@@ -261,6 +261,7 @@ Then you can figure out what modification makes error.
 |                                             Name                                              |               Effect                |
 | :-------------------------------------------------------------------------------------------: | :---------------------------------: |
 |                        [sainnhe/edge](https://github.com/sainnhe/edge)                        |         My light/dark theme         |
+|                     [catppuccin/nvim](https://github.com/catppuccin/nvim)                     |      A low contrast dark theme      |
 |        [kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)        |        For nvim-tree's icons        |
 |                [hoob3rt/lualine.nvim](https://github.com/hoob3rt/lualine.nvim)                | Minimal, fast but customizable line |
 |              [glepnir/dashboard-nvim](https://github.com/glepnir/dashboard-nvim)              |        Dashboard for Neovim         |
