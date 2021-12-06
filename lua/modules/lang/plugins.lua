@@ -24,8 +24,9 @@ lang["iamcco/markdown-preview.nvim"] = {
     ft = "markdown",
     run = "cd app && yarn install"
 }
-lang["lervag/vimtex"] = {
-    opt = true,
-    ft = "tex"
-}
+-- lang["lervag/vimtex"] = {
+--    opt = true,
+--    ft = "tex"
+-- }
+lang["chrisbra/csv.vim"] = {opt = true, ft = "csv"}
 return lang
