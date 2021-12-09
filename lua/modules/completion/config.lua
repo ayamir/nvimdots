@@ -67,7 +67,7 @@ function config.cmp()
                                               vim_item.kind)
 
                 vim_item.menu = ({
-                    cmp_tabnine = "[TN]",
+                    -- cmp_tabnine = "[TN]",
                     buffer = "[BUF]",
                     orgmode = "[ORG]",
                     nvim_lsp = "[LSP]",
@@ -129,7 +129,8 @@ function config.cmp()
         sources = {
             {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "luasnip"},
             {name = "path"}, {name = "spell"}, {name = "tmux"},
-            {name = "orgmode"}, {name = "buffer"}, {name = 'cmp_tabnine'}
+            {name = "orgmode"}, {name = "buffer"}
+            -- {name = 'cmp_tabnine'}
         }
     }
 end
@@ -142,10 +143,10 @@ function config.luasnip()
     require("luasnip/loaders/from_vscode").load()
 end
 
-function config.tabnine()
-    local tabnine = require('cmp_tabnine.config')
-    tabnine:setup({max_line = 1000, max_num_results = 20, sort = true})
-end
+-- function config.tabnine()
+--     local tabnine = require('cmp_tabnine.config')
+--     tabnine:setup({max_line = 1000, max_num_results = 20, sort = true})
+-- end
 
 function config.autopairs()
     require("nvim-autopairs").setup {}
