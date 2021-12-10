@@ -100,10 +100,6 @@ function config.lualine()
                 {
                     "diagnostics",
                     sources = {'nvim_diagnostic'},
-                    color_error = "#BF616A",
-                    color_warn = "#EBCB8B",
-                    color_info = "#81A1AC",
-                    color_hint = "#88C0D0",
                     symbols = {error = " ", warn = " ", info = " "}
                 }
             },
