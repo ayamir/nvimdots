@@ -99,7 +99,7 @@ function config.lualine()
             lualine_x = {
                 {
                     "diagnostics",
-                    sources = {"nvim_lsp"},
+                    sources = {'nvim_diagnostic'},
                     color_error = "#BF616A",
                     color_warn = "#EBCB8B",
                     color_info = "#81A1AC",
