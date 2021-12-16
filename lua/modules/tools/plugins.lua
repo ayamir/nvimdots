@@ -52,6 +52,6 @@ tools["gelguy/wilder.nvim"] = {
     config = conf.wilder,
     requires = {{"romgrk/fzy-lua-native", after = "wilder.nvim"}}
 }
-tools["mhinz/vim-sayonara"] = {opt = true, cmd = {"Sayonara", "Sayonara!"}}
+tools["famiu/bufdelete.nvim"] = {opt = true, cmd = {"Bdelete", "Bwipeout"}}
 
 return tools
