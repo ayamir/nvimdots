@@ -224,15 +224,17 @@ directory.
 
   modify `lua/core/options.lua`
 
-- Switch light/dark theme(if you use edge theme)
+- Switch light/dark theme(if you use `edge` theme)
 
 ```shell
 # To light
     sed -i "s/\=dark/\=light/g" ~/.config/nvim/lua/modules/ui/config.lua
     sed -i "s/onedark/onelight/g" ~/.config/nvim/lua/modules/ui/config.lua
+    nvim +PackerSync
 # To Dark
     sed -i "s/\=light/\=dark/g" ~/.config/nvim/lua/modules/ui/config.lua
     sed -i "s/onelight/onedark/g" ~/.config/nvim/lua/modules/ui/config.lua
+    nvim +PackerSync
 ```
 
 You need to execute `PackerSync` or just press `<leader>ps` to compile the latest config if you modify the
