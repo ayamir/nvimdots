@@ -21,6 +21,7 @@ completion["hrsh7th/nvim-cmp"] = {
     config = conf.cmp,
     event = "InsertEnter",
     requires = {
+        {"lukas-reineke/cmp-under-comparator"},
         {"saadparwaiz1/cmp_luasnip", after = "LuaSnip"},
         {"hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip"},
         {"hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp"},
@@ -28,6 +29,8 @@ completion["hrsh7th/nvim-cmp"] = {
         {"hrsh7th/cmp-path", after = "compe-tmux"},
         {"f3fora/cmp-spell", after = "cmp-path"},
         {"hrsh7th/cmp-buffer", after = "cmp-spell"},
+        {"kdheepak/cmp-latex-symbols", after = "cmp-buffer"},
+        {"hrsh7th/cmp-cmdline", after = "cmp-latex-symbols"}
         -- {
         --     'tzachar/cmp-tabnine',
         --     run = './install.sh',

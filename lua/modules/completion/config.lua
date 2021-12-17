@@ -32,6 +32,14 @@ function config.cmp()
 
     local cmp = require("cmp")
     cmp.setup {
+        sorting = {
+            comparators = {
+                cmp.config.compare.offset, cmp.config.compare.exact,
+                cmp.config.compare.score, require("cmp-under-comparator").under,
+                cmp.config.compare.kind, cmp.config.compare.sort_text,
+                cmp.config.compare.length, cmp.config.compare.order
+            }
+        },
         formatting = {
             format = function(entry, vim_item)
                 local lspkind_icons = {
@@ -129,10 +137,17 @@ function config.cmp()
         sources = {
             {name = "nvim_lsp"}, {name = "nvim_lua"}, {name = "luasnip"},
             {name = "path"}, {name = "spell"}, {name = "tmux"},
-            {name = "orgmode"}, {name = "buffer"}
+            {name = "orgmode"}, {name = "buffer"}, {name = "latex_symbols"}
             -- {name = 'cmp_tabnine'}
         }
     }
+    -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline('/', {sources = {{name = 'buffer'}}})
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({{name = 'path'}}, {{name = 'cmdline'}})
+    })
 end
 
 function config.luasnip()
