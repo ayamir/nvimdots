@@ -1,4 +1,4 @@
-local home = require('core.global').global.home
+local home = require('core.global').home
 local config = {}
 
 function config.telescope()
