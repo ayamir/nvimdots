@@ -1,12 +1,14 @@
 # Introduction
 
-![Dashboard](./shots/dashboard.png)
+![image-20211222145429108](https://s2.loli.net/2021/12/22/MhrEQGVLgStN8IR.png)
 
-![Telescope](./shots/telescope.png)
+![Telescope](https://s2.loli.net/2021/12/22/a3MrbwpL5oCHFgv.png)
 
-![Coding](./shots/coding.png)
+![Coding](https://s2.loli.net/2021/12/22/5fik2zBWth39w6a.png)
 
-![Gitui](./shots/gitui.png)
+![Packer](../Typora/typora-user-images/image-20211222151528637.png)
+
+![Gitui](https://s2.loli.net/2021/12/22/GPVWJ84yBC1jTbk.png)
 
 This is my neovim's configuration, which contains four branch.
 
@@ -28,9 +30,9 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 - Modular. Easy to customize.
 - Powerful. Full functionality to code.
 
-![startup_with_light](./shots/startup_light.png)
+![startup time](../Typora/typora-user-images/image-20211222152150324.png)
 
-![startup_with_dark](./shots/startup_dark.png)
+![vim-startuptime](https://s2.loli.net/2021/12/22/4bJRA9XMmWnIVsH.png)
 
 (Tested with [rhysd/vim-startuptime](https://github.com/rhysd/vim-startuptime))
 
