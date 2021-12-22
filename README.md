@@ -6,7 +6,7 @@
 
 ![Coding](https://s2.loli.net/2021/12/22/5fik2zBWth39w6a.png)
 
-![Packer](../Typora/typora-user-images/image-20211222151528637.png)
+![Packer](https://s2.loli.net/2021/12/22/TewXn6JShz2bCLy.png)
 
 ![Gitui](https://s2.loli.net/2021/12/22/GPVWJ84yBC1jTbk.png)
 
