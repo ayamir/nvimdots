@@ -30,7 +30,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 - Modular. Easy to customize.
 - Powerful. Full functionality to code.
 
-![startup time](../Typora/typora-user-images/image-20211222152150324.png)
+![startup time](https://s2.loli.net/2021/12/22/joMs914gIOv3ql8.png)
 
 ![vim-startuptime](https://s2.loli.net/2021/12/22/4bJRA9XMmWnIVsH.png)
 
