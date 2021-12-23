@@ -1,0 +1,270 @@
+{
+  "name": "my-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": ["plaintext", "markdown", "tex", "html", "global"],
+        "path": "./snippets/global.json"
+      },
+      {
+        "language": "c",
+        "path": "./snippets/c.json"
+      },
+      {
+        "language": "cpp",
+        "path": "./snippets/cpp.json"
+      },
+      {
+        "language": ["csharp", "cs"],
+        "path": "./snippets/csharp.json"
+      },
+      {
+        "language": ["gitcommit", "NeogitCommitMessage"],
+        "path": "./snippets/gitcommit.json"
+      },
+      {
+        "language": "ejs",
+        "path": "./snippets/frameworks/ejs.json"
+      },
+      {
+        "language": "eruby",
+        "path": "./snippets/erb.json"
+      },
+      {
+        "language": "elixir",
+        "path": "./snippets/elixir.json"
+      },
+      {
+        "language": "eelixir",
+        "path": "./snippets/eelixir.json"
+      },
+      {
+        "language": "fortran",
+        "path": "./snippets/fortran.json"
+      },
+      {
+        "language": "glsl",
+        "path": "./snippets/glsl.json"
+      },
+      {
+        "language": "liquid",
+        "path": "./snippets/liquid.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua.json"
+      },
+      {
+        "language": "go",
+        "path": "./snippets/go.json"
+      },
+      {
+        "language": "fennel",
+        "path": "./snippets/fennel.json"
+      },
+      {
+        "language": "php",
+        "path": "./snippets/php.json"
+      },
+      {
+        "language": "rescript",
+        "path": "./snippets/rescript.json"
+      },
+      {
+        "language": "ruby",
+        "path": "./snippets/ruby.json"
+      },
+      {
+        "language": "rails",
+        "path": "./snippets/frameworks/rails.json"
+      },
+      {
+        "language": "rust",
+        "path": "./snippets/rust.json"
+      },
+      {
+        "language": "haskell",
+        "path": "./snippets/haskell.json"
+      },
+      {
+        "language": "scala",
+        "path": "./snippets/scala.json"
+      },
+      {
+        "language": "solidity",
+        "path": "./snippets/solidity.json"
+      },
+      {
+        "language": "swift",
+        "path": "./snippets/swift.json"
+      },
+      {
+        "language": "sql",
+        "path": "./snippets/sql.json"
+      },
+      {
+        "language": ["shellscript", "shell", "sh"],
+        "path": "./snippets/shell.json"
+      },
+      {
+        "language": ["markdown", "rmd"],
+        "path": "./snippets/markdown.json"
+      },
+      {
+        "language": ["plaintex", "tex"],
+        "path": "./snippets/latex.json"
+      },
+      {
+        "language": "java",
+        "path": "./snippets/java.json"
+      },
+      {
+        "language": ["html", "jade", "pug", "eruby"],
+        "path": "./snippets/html.json"
+      },
+      {
+        "language": ["css", "scss", "sass", "less", "stylus"],
+        "path": "./snippets/css.json"
+      },
+      {
+        "language": ["javascript", "javascriptreact", "vue"],
+        "path": "./snippets/javascript/javascript.json"
+      },
+      {
+        "language": ["typescript", "typescriptreact"],
+        "path": "./snippets/javascript/typescript.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/javascript/react.json"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/javascript/react-ts.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/frameworks/vue/html.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/frameworks/vue/pug.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/frameworks/vue/javascript.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/frameworks/vue/vue.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/base.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/comprehension.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/debug.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/python.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/unittest.json"
+      },
+      {
+        "language": "django",
+        "path": "./snippets/frameworks/django/imports.json"
+      },
+      {
+        "language": "django",
+        "path": "./snippets/frameworks/django/forms.json"
+      },
+      {
+        "language": "django",
+        "path": "./snippets/frameworks/django/models.json"
+      },
+      {
+        "language": "django",
+        "path": "./snippets/frameworks/django/views.json"
+      },
+      {
+        "language": "django",
+        "path": "./snippets/frameworks/django/filetemplates.json"
+      },
+      {
+        "language": "flutter",
+        "path": "./snippets/frameworks/flutter.json"
+      },
+      {
+        "language": "jekyll",
+        "path": "./snippets/frameworks/jekyll.json"
+      },
+      {
+        "language": "cobol",
+        "path": "./snippets/cobol/vscode_cobol.json"
+      },
+      {
+        "language": "cobol",
+        "path": "./snippets/cobol/vscode_cobol-compound.json"
+      },
+      {
+        "language": "cobol",
+        "path": "./snippets/cobol/vscode_cobol_dir.json"
+      },
+      {
+        "language": "cobol",
+        "path": "./snippets/cobol/vscode_cobol_jcl.json"
+      },
+      {
+        "language": "kotlin",
+        "path": "./snippets/kotlin.json"
+      },
+      {
+        "language": ["plaintex", "tex"],
+        "path": "./snippets/latex/latex-snippets.json"
+      },
+      {
+        "language": ["plaintex", "tex"],
+        "path": "./snippets/latex/vscode-latex-snippets.json"
+      },
+      {
+        "language": "twig",
+        "path": "./snippets/frameworks/twig.json"
+      },
+      {
+        "language": ["r", "rmd"],
+        "path": "./snippets/r.json"
+      },
+      {
+        "language": "rmd",
+        "path": "./snippets/rmarkdown.json"
+      },
+      {
+        "language": "org",
+        "path": "./snippets/org.json"
+      },
+      {
+        "language": "norg",
+        "path": "./snippets/norg.json"
+      },
+      {
+        "language": "mint",
+        "path": "./snippets/mint.json"
+      },
+      {
+        "language": "gdscript",
+        "path": "./snippets/gdscript.json"
+      }
+    ]
+  }
+}
