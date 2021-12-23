@@ -14,13 +14,11 @@ tools["nvim-telescope/telescope.nvim"] = {
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
     opt = true,
     run = "make",
-    after = "telescope.nvim",
-    config = function() require("telescope").load_extension("fzf") end
+    after = "telescope.nvim"
 }
 tools["nvim-telescope/telescope-project.nvim"] = {
     opt = true,
-    after = "telescope.nvim",
-    config = function() require("telescope").load_extension("project") end
+    after = "telescope.nvim"
 }
 tools["nvim-telescope/telescope-frecency.nvim"] = {
     opt = true,
@@ -28,11 +26,7 @@ tools["nvim-telescope/telescope-frecency.nvim"] = {
     requires = {{"tami5/sqlite.lua", opt = true}},
     config = function() require("telescope").load_extension("frecency") end
 }
-tools["jvgrootveld/telescope-zoxide"] = {
-    opt = true,
-    after = "telescope.nvim",
-    config = function() require("telescope").load_extension("zoxide") end
-}
+tools["jvgrootveld/telescope-zoxide"] = {opt = true, after = "telescope.nvim"}
 tools["thinca/vim-quickrun"] = {opt = true, cmd = {"QuickRun", "Q"}}
 tools["michaelb/sniprun"] = {
     opt = true,

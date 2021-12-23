@@ -2,10 +2,6 @@ local home = require('core.global').home
 local config = {}
 
 function config.telescope()
-    if not packer_plugins["popup.nvim"].loaded then
-        vim.cmd [[packadd popup.nvim]]
-    end
-
     if not packer_plugins["sqlite.lua"].loaded then
         vim.cmd [[packadd sqlite.lua]]
     end
@@ -18,10 +14,10 @@ function config.telescope()
                 horizontal = {prompt_position = "bottom", results_width = 0.6},
                 vertical = {mirror = false}
             },
-            file_previewer = require"telescope.previewers".vim_buffer_cat.new,
-            grep_previewer = require"telescope.previewers".vim_buffer_vimgrep
+            file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+            grep_previewer = require("telescope.previewers").vim_buffer_vimgrep
                 .new,
-            qflist_previewer = require"telescope.previewers".vim_buffer_qflist
+            qflist_previewer = require("telescope.previewers").vim_buffer_qflist
                 .new,
             file_sorter = require("telescope.sorters").get_fuzzy_file,
             file_ignore_patterns = {},
@@ -57,9 +53,13 @@ function config.telescope()
                     ["go"] = home .. "/go/src",
                     ["rust"] = home .. "/code/rs"
                 }
-            },
+            }
         }
     }
+
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("project")
+    require("telescope").load_extension("zoxide")
 end
 
 function config.trouble()
