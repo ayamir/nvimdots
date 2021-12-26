@@ -11,53 +11,55 @@ function config.edge()
 end
 
 function config.catppuccin()
-    require('catppuccin').setup({
-        transparent_background = false,
-        term_colors = true,
-        styles = {
-            comments = "italic",
-            functions = "italic,bold",
-            keywords = "italic",
-            strings = "NONE",
-            variables = "NONE"
-        },
-        integrations = {
-            treesitter = true,
-            native_lsp = {
-                enabled = true,
-                virtual_text = {
-                    errors = "italic",
-                    hints = "italic",
-                    warnings = "italic",
-                    information = "italic"
-                },
-                underlines = {
-                    errors = "underline",
-                    hints = "underline",
-                    warnings = "underline",
-                    information = "underline"
-                }
+    require("catppuccin").setup(
+        {
+            transparent_background = false,
+            term_colors = true,
+            styles = {
+                comments = "italic",
+                functions = "italic,bold",
+                keywords = "italic",
+                strings = "NONE",
+                variables = "NONE"
             },
-            lsp_trouble = true,
-            lsp_saga = true,
-            gitgutter = false,
-            gitsigns = true,
-            telescope = true,
-            nvimtree = {enabled = true, show_root = true},
-            which_key = true,
-            indent_blankline = {enabled = true, colored_indent_levels = false},
-            dashboard = true,
-            neogit = false,
-            vim_sneak = false,
-            fern = false,
-            barbar = false,
-            bufferline = true,
-            markdown = true,
-            lightspeed = false,
-            ts_rainbow = true,
-            hop = true
+            integrations = {
+                treesitter = true,
+                native_lsp = {
+                    enabled = true,
+                    virtual_text = {
+                        errors = "italic",
+                        hints = "italic",
+                        warnings = "italic",
+                        information = "italic"
+                    },
+                    underlines = {
+                        errors = "underline",
+                        hints = "underline",
+                        warnings = "underline",
+                        information = "underline"
+                    }
+                },
+                lsp_trouble = true,
+                lsp_saga = true,
+                gitgutter = false,
+                gitsigns = true,
+                telescope = true,
+                nvimtree = {enabled = true, show_root = true},
+                which_key = true,
+                indent_blankline = {enabled = true, colored_indent_levels = false},
+                dashboard = true,
+                neogit = false,
+                vim_sneak = false,
+                fern = false,
+                barbar = false,
+                bufferline = true,
+                markdown = true,
+                lightspeed = false,
+                ts_rainbow = true,
+                hop = true
+            }
         }
-    })
+    )
 end
 
 function config.lualine()
@@ -72,14 +74,14 @@ function config.lualine()
     end
     local symbols_outline = {
         sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'filetype'},
+            lualine_a = {"mode"},
+            lualine_b = {"filetype"},
             lualine_c = {},
             lualine_x = {},
             lualine_y = {},
-            lualine_z = {'location'}
+            lualine_z = {"location"}
         },
-        filetypes = {'Outline'}
+        filetypes = {"Outline"}
     }
 
     require("lualine").setup {
@@ -94,12 +96,13 @@ function config.lualine()
             lualine_a = {"mode"},
             lualine_b = {{"branch"}, {"diff"}},
             lualine_c = {
-                {"lsp_progress"}, {gps_content, cond = gps.is_available}
+                {"lsp_progress"},
+                {gps_content, cond = gps.is_available}
             },
             lualine_x = {
                 {
                     "diagnostics",
-                    sources = {'nvim_diagnostic'},
+                    sources = {"nvim_diagnostic"},
                     symbols = {error = " ", warn = " ", info = " "}
                 }
             },
@@ -116,13 +119,17 @@ function config.lualine()
         },
         tabline = {},
         extensions = {
-            "quickfix", "nvim-tree", "toggleterm", "fugitive", symbols_outline
+            "quickfix",
+            "nvim-tree",
+            "toggleterm",
+            "fugitive",
+            symbols_outline
         }
     }
 end
 
 function config.nvim_tree()
-    local tree_cb = require"nvim-tree.config".nvim_tree_callback
+    local tree_cb = require "nvim-tree.config".nvim_tree_callback
     require("nvim-tree").setup {
         git = {enable = true, ignore = false, timeout = 500},
         ignore = {".git", "node_modules", ".cache"},
@@ -131,12 +138,12 @@ function config.nvim_tree()
         hijack_netrw = true,
         hijack_cursor = true,
         auto_close = true,
-        update_cwd = true,
+        update_cwd = false,
         highlight_opened_files = true,
         auto_ignore_ft = {"startify", "dashboard"},
         update_focused_file = {
-            enable = true,
-            update_cwd = true,
+            enable = false,
+            update_cwd = false,
             ignore_list = {}
         },
         view = {
@@ -149,13 +156,15 @@ function config.nvim_tree()
                 list = {
                     {
                         key = {"<CR>", "o", "<2-LeftMouse>"},
-                        cb = tree_cb("tabnew")
-                    }, {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
+                        -- cb = tree_cb("tabnew")
+                        cb = tree_cb("edit")
+                    },
+                    -- {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
                     {key = "<C-v>", cb = tree_cb("vsplit")},
                     {key = "<C-x>", cb = tree_cb("split")},
-                    {key = "<C-t>", cb = tree_cb("tabnew")},
-                    {key = "<", cb = tree_cb("prev_sibling")},
-                    {key = ">", cb = tree_cb("next_sibling")},
+                    -- {key = "<C-t>", cb = tree_cb("tabnew")},
+                    -- {key = "<", cb = tree_cb("prev_sibling")},
+                    -- {key = ">", cb = tree_cb("next_sibling")},
                     {key = "P", cb = tree_cb("parent_node")},
                     {key = "<BS>", cb = tree_cb("close_node")},
                     {key = "<S-CR>", cb = tree_cb("close_node")},
@@ -220,34 +229,34 @@ function config.gitsigns()
     require("gitsigns").setup {
         signs = {
             add = {
-                hl = 'GitSignsAdd',
-                text = '│',
-                numhl = 'GitSignsAddNr',
-                linehl = 'GitSignsAddLn'
+                hl = "GitSignsAdd",
+                text = "│",
+                numhl = "GitSignsAddNr",
+                linehl = "GitSignsAddLn"
             },
             change = {
-                hl = 'GitSignsChange',
-                text = '│',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn'
+                hl = "GitSignsChange",
+                text = "│",
+                numhl = "GitSignsChangeNr",
+                linehl = "GitSignsChangeLn"
             },
             delete = {
-                hl = 'GitSignsDelete',
-                text = '_',
-                numhl = 'GitSignsDeleteNr',
-                linehl = 'GitSignsDeleteLn'
+                hl = "GitSignsDelete",
+                text = "_",
+                numhl = "GitSignsDeleteNr",
+                linehl = "GitSignsDeleteLn"
             },
             topdelete = {
-                hl = 'GitSignsDelete',
-                text = '‾',
-                numhl = 'GitSignsDeleteNr',
-                linehl = 'GitSignsDeleteLn'
+                hl = "GitSignsDelete",
+                text = "‾",
+                numhl = "GitSignsDeleteNr",
+                linehl = "GitSignsDeleteLn"
             },
             changedelete = {
-                hl = 'GitSignsChange',
-                text = '~',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn'
+                hl = "GitSignsChange",
+                text = "~",
+                numhl = "GitSignsChangeNr",
+                linehl = "GitSignsChangeLn"
             }
         },
         keymaps = {
@@ -292,17 +301,45 @@ function config.indent_blankline()
         char = "│",
         show_first_indent_level = true,
         filetype_exclude = {
-            "startify", "dashboard", "dotooagenda", "log", "fugitive",
-            "gitcommit", "packer", "vimwiki", "markdown", "json", "txt",
-            "vista", "help", "todoist", "NvimTree", "peekaboo", "git",
-            "TelescopePrompt", "undotree", "flutterToolsOutline", "" -- for all buffers without a file type
+            "startify",
+            "dashboard",
+            "dotooagenda",
+            "log",
+            "fugitive",
+            "gitcommit",
+            "packer",
+            "vimwiki",
+            "markdown",
+            "json",
+            "txt",
+            "vista",
+            "help",
+            "todoist",
+            "NvimTree",
+            "peekaboo",
+            "git",
+            "TelescopePrompt",
+            "undotree",
+            "flutterToolsOutline",
+            "" -- for all buffers without a file type
         },
         buftype_exclude = {"terminal", "nofile"},
         show_trailing_blankline_indent = false,
         show_current_context = true,
         context_patterns = {
-            "class", "function", "method", "block", "list_literal", "selector",
-            "^if", "^table", "if_statement", "while", "for", "type", "var",
+            "class",
+            "function",
+            "method",
+            "block",
+            "list_literal",
+            "selector",
+            "^if",
+            "^table",
+            "if_statement",
+            "while",
+            "for",
+            "type",
+            "var",
             "import"
         },
         space_char_blankline = " "

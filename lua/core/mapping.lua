@@ -6,17 +6,21 @@ local map_cmd = bind.map_cmd
 -- default map
 local def_map = {
     -- Vim map
+    ["n|<F1>"] = map_cmd("<C-z>"):with_noremap():with_silent(),
+    ["n|<F2>"] = map_cu("noh"):with_noremap():with_silent(),
     ["n|<C-x>k"] = map_cr("bdelete"):with_noremap():with_silent(),
     ["n|<C-s>"] = map_cu("write"):with_noremap(),
-    ["n|Y"] = map_cmd("y$"),
-    ["n|D"] = map_cmd("d$"),
+    ["n|<C-s>"] = map_cu("write"):with_noremap(),
+    -- ["n|Y"] = map_cmd("y$"),
+    -- ["n|D"] = map_cmd("d$"),
     ["n|n"] = map_cmd("nzzzv"):with_noremap(),
-    ["n|N"] = map_cmd("Nzzzv"):with_noremap(),
     ["n|J"] = map_cmd("mzJ`z"):with_noremap(),
-    ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
-    ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
+    ["n|N"] = map_cmd("Nzzzv"):with_noremap(),
     ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
     ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
+    ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
+    ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap(),
+    ["n|<C-c>"] = map_cmd("<C-w>c"):with_noremap(),
     ["n|<A-[>"] = map_cr("vertical resize -5"):with_silent(),
     ["n|<A-]>"] = map_cr("vertical resize +5"):with_silent(),
     ["n|<A-;>"] = map_cr("resize -2"):with_silent(),
@@ -42,8 +46,8 @@ local def_map = {
     ["c|w!!"] = map_cmd(
         "execute 'silent! write !sudo tee % >/dev/null' <bar> edit!"),
     -- Visual
-    ["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
-    ["v|K"] = map_cmd(":m '<-2<cr>gv=gv"),
+    -- ["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
+    -- ["v|K"] = map_cmd(":m '<-2<cr>gv=gv"),
     ["v|<"] = map_cmd("<gv"),
     ["v|>"] = map_cmd(">gv")
 }

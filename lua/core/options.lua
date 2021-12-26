@@ -16,8 +16,8 @@ local function load_options()
     local global_local = {
         termguicolors = true,
         mouse = "a",
-        errorbells = true,
-        visualbell = true,
+        errorbells = false,
+        visualbell = false,
         hidden = true,
         fileformats = "unix,mac,dos",
         magic = true,
@@ -59,7 +59,7 @@ local function load_options()
         breakat = [[\ \	;:,!?]],
         startofline = false,
         whichwrap = "h,l,<,>,[,],~",
-        splitbelow = true,
+        splitbelow = false,
         splitright = true,
         switchbuf = "useopen",
         backspace = "indent,eol,start",
@@ -92,7 +92,8 @@ local function load_options()
         pumblend = 10,
         winblend = 10,
         autoread = true,
-        autowrite = true
+        autowrite = true,
+        spelllang = "en_us"
     }
 
     local bw_local = {
@@ -106,14 +107,14 @@ local function load_options()
         shiftwidth = 4,
         softtabstop = -1,
         breakindentopt = "shift:2,min:20",
-        wrap = false,
+        wrap = true,
         linebreak = true,
         number = true,
         relativenumber = true,
         foldenable = true,
         signcolumn = "yes",
         conceallevel = 0,
-        concealcursor = "niv"
+        concealcursor = "n"
     }
 
     if global.is_mac then
@@ -126,7 +127,9 @@ local function load_options()
         vim.g.python_host_prog = "/usr/bin/python"
         vim.g.python3_host_prog = "/usr/local/bin/python3"
     end
-    for name, value in pairs(global_local) do vim.o[name] = value end
+    for name, value in pairs(global_local) do
+        vim.o[name] = value
+    end
     bind_option(bw_local)
 end
 
