@@ -39,3 +39,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 # Details
 
 Please refer to [wiki](https://github.com/ayamir/nvimdots/wiki).
+
+# Acknowledgement
+
+- [glepnir/nvim](https://github.com/glepnir/nvim)
