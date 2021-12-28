@@ -1,9 +1,24 @@
-local home = require('core.global').home
 local config = {}
 
 function config.telescope()
     if not packer_plugins["sqlite.lua"].loaded then
         vim.cmd [[packadd sqlite.lua]]
+    end
+
+    if not packer_plugins["telescope-fzf-native.nvim"].loaded then
+        vim.cmd [[packadd telescope-fzf-native.nvim]]
+    end
+
+    if not packer_plugins["telescope-project.nvim"].loaded then
+        vim.cmd [[packadd telescope-project.nvim]]
+    end
+
+    if not packer_plugins["telescope-frecency.nvim"].loaded then
+        vim.cmd [[packadd telescope-frecency.nvim]]
+    end
+
+    if not packer_plugins["telescope-zoxide"].loaded then
+        vim.cmd [[packadd telescope-zoxide]]
     end
 
     require("telescope").setup {
@@ -34,25 +49,16 @@ function config.telescope()
         },
         extensions = {
             fzf = {
-                fuzzy = false,
-                override_generic_sorter = true,
-                override_file_sorter = true,
-                case_mode = "smart_case"
+                fuzzy = false, -- false will only do exact matching
+                override_generic_sorter = true, -- override the generic sorter
+                override_file_sorter = true, -- override the file sorter
+                case_mode = "smart_case" -- or "ignore_case" or "respect_case"
+                -- the default case_mode is "smart_case"
             },
             frecency = {
                 show_scores = true,
                 show_unindexed = true,
-                ignore_patterns = {"*.git/*", "*/tmp/*"},
-                workspaces = {
-                    ["conf"] = home .. "/.config",
-                    ["data"] = home .. "/.local/share",
-                    ["nvim"] = home .. "/.config/nvim",
-                    ["code"] = home .. "/code",
-                    ["c"] = home .. "/code/c",
-                    ["cpp"] = home .. "/code/cpp",
-                    ["go"] = home .. "/go/src",
-                    ["rust"] = home .. "/code/rs"
-                }
+                ignore_patterns = {"*.git/*", "*/tmp/*"}
             }
         }
     }
@@ -60,6 +66,7 @@ function config.telescope()
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("project")
     require("telescope").load_extension("zoxide")
+    require("telescope").load_extension("frecency")
 end
 
 function config.trouble()

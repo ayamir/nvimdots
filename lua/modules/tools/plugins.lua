@@ -4,7 +4,7 @@ local conf = require("modules.tools.config")
 tools["nvim-lua/plenary.nvim"] = {opt = false}
 tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
-    cmd = "Telescope",
+    module = "telescope",
     config = conf.telescope,
     requires = {
         {"nvim-lua/plenary.nvim", opt = false},
@@ -23,8 +23,7 @@ tools["nvim-telescope/telescope-project.nvim"] = {
 tools["nvim-telescope/telescope-frecency.nvim"] = {
     opt = true,
     after = "telescope.nvim",
-    requires = {{"tami5/sqlite.lua", opt = true}},
-    config = function() require("telescope").load_extension("frecency") end
+    requires = {{"tami5/sqlite.lua", opt = true}}
 }
 tools["jvgrootveld/telescope-zoxide"] = {opt = true, after = "telescope.nvim"}
 tools["thinca/vim-quickrun"] = {opt = true, cmd = {"QuickRun", "Q"}}

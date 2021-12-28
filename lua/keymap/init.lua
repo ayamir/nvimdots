@@ -88,10 +88,14 @@ local plug_map = {
     ["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
     ["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
     -- Plugin Telescope
-    ["n|<Leader>fp"] = map_cu("Telescope project"):with_noremap():with_silent(),
+    ["n|<Leader>fp"] = map_cu(
+        "lua require('telescope').extensions.project.project{}"):with_noremap()
+        :with_silent(),
+    ["n|<Leader>fr"] = map_cu(
+        "lua require('telescope').extensions.frecency.frecency{}"):with_noremap()
+        :with_silent(),
     ["n|<Leader>fe"] = map_cu("DashboardFindHistory"):with_noremap()
         :with_silent(),
-    ["n|<Leader>fr"] = map_cu("Telescope frecency"):with_noremap():with_silent(),
     ["n|<Leader>ff"] = map_cu("DashboardFindFile"):with_noremap():with_silent(),
     ["n|<Leader>sc"] = map_cu("DashboardChangeColorscheme"):with_noremap()
         :with_silent(),
