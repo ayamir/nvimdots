@@ -122,6 +122,10 @@ editor["rcarriga/nvim-dap-ui"] = {
     }
 }
 editor["tpope/vim-fugitive"] = {opt = true, cmd = {"Git", "G"}}
+editor["famiu/bufdelete.nvim"] = {
+    opt = true,
+    cmd = {"Bdelete", "Bwipeout", "Bdelete!", "Bwipeout!"}
+}
 editor["edluffy/specs.nvim"] = {
     opt = true,
     event = "CursorMoved",
