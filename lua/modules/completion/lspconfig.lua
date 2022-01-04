@@ -1,7 +1,3 @@
-if not packer_plugins["nvim-lspconfig"].loaded then
-    vim.cmd [[packadd nvim-lspconfig]]
-end
-
 if not packer_plugins["nvim-lsp-installer"].loaded then
     vim.cmd [[packadd nvim-lsp-installer]]
 end
@@ -12,10 +8,6 @@ end
 
 if not packer_plugins["lspsaga.nvim"].loaded then
     vim.cmd [[packadd lspsaga.nvim]]
-end
-
-if not packer_plugins["goto-preview"].loaded then
-    vim.cmd [[packadd goto-preview]]
 end
 
 local nvim_lsp = require("lspconfig")

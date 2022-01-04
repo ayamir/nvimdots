@@ -55,11 +55,10 @@ local plug_map = {
         :with_silent(),
     ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
         :with_silent(),
-    ["n|gd"] = map_cr("lua require('goto-preview').goto_preview_definition()"):with_noremap()
-        :with_silent(),
-    ["n|gh"] = map_cr("lua require('goto-preview').goto_preview_references()"):with_noremap()
-        :with_silent(),
+    ["n|gd"] = map_cr("Lspsaga preview_definition"):with_noremap():with_silent(),
     ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
+        :with_silent(),
+    ["n|gh"] = map_cr("lua vim.lsp.buf.references()"):with_noremap()
         :with_silent(),
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap()
         :with_silent(),
