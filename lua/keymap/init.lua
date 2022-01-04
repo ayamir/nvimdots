@@ -42,6 +42,8 @@ local plug_map = {
         :with_silent(),
     ["n|g]"] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap()
         :with_silent(),
+    ["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
+    ["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
     ["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
     ["n|<C-Up>"] = map_cr(
         "lua require('lspsaga.action').smart_scroll_with_saga(-1)"):with_noremap()
@@ -53,12 +55,11 @@ local plug_map = {
         :with_silent(),
     ["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap()
         :with_silent(),
-    ["n|gd"] = map_cr("Lspsaga preview_definition"):with_noremap():with_silent(),
-    ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
+    ["n|gd"] = map_cr("lua require('goto-preview').goto_preview_definition()"):with_noremap()
         :with_silent(),
-    ["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
-    ["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
-    ["n|gh"] = map_cr("lua vim.lsp.buf.references()"):with_noremap()
+    ["n|gh"] = map_cr("lua require('goto-preview').goto_preview_references()"):with_noremap()
+        :with_silent(),
+    ["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap()
         :with_silent(),
     ["n|<A-d>"] = map_cu('lua require("FTerm").toggle()'):with_noremap()
         :with_silent(),

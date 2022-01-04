@@ -11,6 +11,11 @@ completion["williamboman/nvim-lsp-installer"] = {
     after = "nvim-lspconfig"
 }
 completion["tami5/lspsaga.nvim"] = {opt = true, after = "nvim-lspconfig"}
+completion["rmagatti/goto-preview"] = {
+    opt = true,
+    after = "nvim-lspconfig",
+    config = conf.goto_preview
+}
 completion["kosayoda/nvim-lightbulb"] = {
     opt = true,
     after = "nvim-lspconfig",
