@@ -239,8 +239,9 @@ nvim_lsp.html.setup {
     on_attach = custom_attach
 }
 
-local stylua = require("modules/completion/efm/stylua")
-local golint = require("modules/completion/efm/golint")
+local vint = require("modules.completion.efm.vint")
+local luafmt = require("modules/completion/efm/luafmt")
+local staticcheck = require("modules/completion/efm/staticcheck")
 local goimports = require("modules/completion/efm/goimports")
 local black = require("modules/completion/efm/black")
 local isort = require("modules/completion/efm/isort")
@@ -263,8 +264,9 @@ nvim_lsp.efm.setup {
         lintDebounce = 100,
         languages = {
             ["="] = {misspell},
-            lua = {stylua},
-            go = {golint, goimports},
+            vim = {vint},
+            lua = {luafmt},
+            go = {staticcheck, goimports},
             python = {black, isort, flake8, mypy},
             typescript = {prettier, eslint},
             javascript = {prettier, eslint},
