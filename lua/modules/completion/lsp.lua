@@ -186,6 +186,12 @@ local enhance_server_opts = {
             custom_attach(client)
         end
     end,
+    ["rust_analyzer"] = function(opts)
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            custom_attach(client)
+        end
+    end,
     ["tsserver"] = function(opts)
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
@@ -208,7 +214,7 @@ local enhance_server_opts = {
                 }
             }
         }
-    end
+    end,
 }
 
 lsp_installer.on_server_ready(function(server)
@@ -252,6 +258,7 @@ local eslint = require("modules.completion.efm.eslint")
 local shellcheck = require("modules.completion.efm.shellcheck")
 local shfmt = require("modules.completion.efm.shfmt")
 local misspell = require("modules.completion.efm.misspell")
+local rustfmt = require("modules.completion.efm.rustfmt")
 
 -- https:./github.com/mattn/efm-langserver
 nvim_lsp.efm.setup {
@@ -278,7 +285,8 @@ nvim_lsp.efm.setup {
             scss = {prettier},
             css = {prettier},
             markdown = {prettier},
-            sh = {shellcheck, shfmt}
+            sh = {shellcheck, shfmt},
+            rust = {rustfmt}
         }
     }
 }
