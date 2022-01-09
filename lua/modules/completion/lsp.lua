@@ -240,20 +240,20 @@ nvim_lsp.html.setup {
 }
 
 local vint = require("modules.completion.efm.vint")
-local luafmt = require("modules/completion/efm/luafmt")
-local staticcheck = require("modules/completion/efm/staticcheck")
-local goimports = require("modules/completion/efm/goimports")
-local black = require("modules/completion/efm/black")
-local isort = require("modules/completion/efm/isort")
-local flake8 = require("modules/completion/efm/flake8")
-local mypy = require("modules/completion/efm/mypy")
-local prettier = require("modules/completion/efm/prettier")
-local eslint = require("modules/completion/efm/eslint")
-local shellcheck = require("modules/completion/efm/shellcheck")
-local shfmt = require("modules/completion/efm/shfmt")
-local misspell = require("modules/completion/efm/misspell")
+local luafmt = require("modules.completion.efm.luafmt")
+local staticcheck = require("modules.completion.efm.staticcheck")
+local goimports = require("modules.completion.efm.goimports")
+local black = require("modules.completion.efm.black")
+local isort = require("modules.completion.efm.isort")
+local flake8 = require("modules.completion.efm.flake8")
+local mypy = require("modules.completion.efm.mypy")
+local prettier = require("modules.completion.efm.prettier")
+local eslint = require("modules.completion.efm.eslint")
+local shellcheck = require("modules.completion.efm.shellcheck")
+local shfmt = require("modules.completion.efm.shfmt")
+local misspell = require("modules.completion.efm.misspell")
 
--- https://github.com/mattn/efm-langserver
+-- https:./github.com/mattn/efm-langserver
 nvim_lsp.efm.setup {
     capabilities = capabilities,
     on_attach = custom_attach,

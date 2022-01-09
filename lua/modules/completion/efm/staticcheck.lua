@@ -3,5 +3,5 @@ return {
     lintIgnoreExitCode = true,
     lintFormats = {"%f:%l:%c: %m"},
     lintSource = "staticcheck",
-lintSeverity = 2
+    lintSeverity = 2
 }

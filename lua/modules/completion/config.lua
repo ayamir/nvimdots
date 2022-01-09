@@ -1,6 +1,6 @@
 local config = {}
 
-function config.nvim_lsp() require("modules.completion.lspconfig") end
+function config.nvim_lsp() require("modules.completion.lsp") end
 
 function config.lightbulb()
     vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
