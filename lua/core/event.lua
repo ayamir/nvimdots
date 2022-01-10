@@ -30,6 +30,8 @@ function autocmd.load_autocmds()
             {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
             {"BufWritePre", "*.tmp", "setlocal noundofile"},
             {"BufWritePre", "*.bak", "setlocal noundofile"},
+            -- Auto format when save
+            {"BufWritePost", "*", "FormatWrite"},
             {"BufEnter", "*", "silent! lcd %:p:h"}, -- auto place to last edit
             {
                 "BufReadPost", "*",
