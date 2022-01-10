@@ -108,9 +108,18 @@ local enhance_server_opts = {
                 telemetry = {enable = false}
             }
         }
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            custom_attach(client)
+        end
     end,
     ["clangd"] = function(opts)
-        opts.args = {"--background-index", "-std=c++20"}
+        opts.args = {
+            "--background-index", "-std=c++20", "--pch-storage=memory",
+            "--clang-tidy", "--suggest-missing-includes"
+        }
+        opts.single_file_support = true
+        opts.capabilities.offsetEncoding = {"utf-16"}
         opts.commands = {
             ClangdSwitchSourceHeader = {
                 function()
@@ -214,7 +223,7 @@ local enhance_server_opts = {
                 }
             }
         }
-    end,
+    end
 }
 
 lsp_installer.on_server_ready(function(server)
@@ -242,51 +251,57 @@ nvim_lsp.html.setup {
     single_file_support = true,
     flags = {debounce_text_changes = 500},
     capabilities = capabilities,
-    on_attach = custom_attach
+    on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        custom_attach(client)
+    end
 }
 
-local vint = require("modules.completion.efm.vint")
-local luafmt = require("modules.completion.efm.luafmt")
-local staticcheck = require("modules.completion.efm.staticcheck")
-local goimports = require("modules.completion.efm.goimports")
-local black = require("modules.completion.efm.black")
-local isort = require("modules.completion.efm.isort")
-local flake8 = require("modules.completion.efm.flake8")
-local mypy = require("modules.completion.efm.mypy")
-local prettier = require("modules.completion.efm.prettier")
-local eslint = require("modules.completion.efm.eslint")
-local shellcheck = require("modules.completion.efm.shellcheck")
-local shfmt = require("modules.completion.efm.shfmt")
-local misspell = require("modules.completion.efm.misspell")
-local rustfmt = require("modules.completion.efm.rustfmt")
+local efmls = require("efmls-configs")
 
--- https:./github.com/mattn/efm-langserver
-nvim_lsp.efm.setup {
+efmls.init {
     capabilities = capabilities,
     on_attach = custom_attach,
     init_options = {documentFormatting = true},
-    root_dir = vim.loop.cwd,
-    settings = {
-        rootMarkers = {".git/"},
-        lintDebounce = 100,
-        languages = {
-            ["="] = {misspell},
-            vim = {vint},
-            lua = {luafmt},
-            go = {staticcheck, goimports},
-            python = {black, isort, flake8, mypy},
-            typescript = {prettier, eslint},
-            javascript = {prettier, eslint},
-            typescriptreact = {prettier, eslint},
-            javascriptreact = {prettier, eslint},
-            yaml = {prettier},
-            json = {prettier},
-            html = {prettier},
-            scss = {prettier},
-            css = {prettier},
-            markdown = {prettier},
-            sh = {shellcheck, shfmt},
-            rust = {rustfmt}
-        }
-    }
+    root_dir = vim.loop.cwd
+}
+
+local vint = require("efmls-configs.linters.vint")
+local clangtidy = require("efmls-configs.linters.clang_tidy")
+local staticcheck = require("efmls-configs.linters.staticcheck")
+local flake8 = require("efmls-configs.linters.flake8")
+local eslint = require("efmls-configs.linters.eslint")
+local shellcheck = require("efmls-configs.linters.shellcheck")
+
+local luafmt = require("efmls-configs.formatters.lua_format")
+local clangfmt = require("efmls-configs.formatters.clang_format")
+local goimports = require("efmls-configs.formatters.goimports")
+local prettier = require("efmls-configs.formatters.prettier")
+local shfmt = require("efmls-configs.formatters.shfmt")
+
+local black = require("modules.completion.efm.black")
+local rustfmt = require("modules.completion.efm.rustfmt")
+local misspell = require("modules.completion.efm.misspell")
+
+efmls.setup {
+    ["="] = {formatter = misspell},
+        vim = {formatter = vint},
+        lua = {formatter = luafmt},
+        c = {formatter = clangfmt, linter = clangtidy},
+        cpp = {formatter = clangfmt, linter = clangtidy},
+        go = {formatter = goimports, linter = staticcheck},
+        python = {formatter = black, linter = flake8},
+        vue = {formatter = prettier},
+        typescript = {formatter = prettier, linter = eslint},
+        javascript = {formatter = prettier, linter = eslint},
+        typescriptreact = {formatter = prettier, linter = eslint},
+        javascriptreact = {formatter = prettier, linter = eslint},
+        yaml = {formatter = prettier},
+        json = {formatter = prettier, linter = eslint},
+        html = {formatter = prettier},
+        scss = {formatter = prettier},
+        css = {formatter = prettier},
+        markdown = {formatter = prettier},
+        sh = {formatter = shfmt, linter = shellcheck},
+        rust = {formatter = rustfmt}
 }
