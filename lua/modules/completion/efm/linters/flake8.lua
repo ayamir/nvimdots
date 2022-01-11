@@ -1,10 +1,7 @@
-local linter = 'flake8-too-many'
-local command = string.format('%s -', linter)
-
 return {
-    prefix = linter,
-    lintCommand = command,
+    lintCommand = "flake8 --max-line-length 160 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
     lintStdin = true,
-    lintFormats = {'%.%#:%l:%c: %t%.%# %m'},
-    rootMarkers = {'setup.cfg', 'tox.ini', '.flake8'}
+    lintIgnoreExitCode = true,
+    lintFormats = {"%f:%l:%c: %t%n%n%n %m"},
+    lintSource = "flake8"
 }
