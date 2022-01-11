@@ -13,7 +13,15 @@ if not packer_plugins["lspsaga.nvim"].loaded then
 end
 
 local nvim_lsp = require("lspconfig")
+local saga = require("lspsaga")
 local lsp_installer = require("nvim-lsp-installer")
+
+saga.init_lsp_saga {
+    error_sign = '',
+    warn_sign = '',
+    hint_sign = '',
+    infor_sign = ''
+}
 
 lsp_installer.settings {
     ui = {
