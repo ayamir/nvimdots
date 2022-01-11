@@ -1,3 +1,5 @@
+require("modules.completion.formatting")
+
 if not packer_plugins["nvim-lsp-installer"].loaded then
     vim.cmd [[packadd nvim-lsp-installer]]
 end
@@ -42,7 +44,23 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
-local function custom_attach()
+vim.lsp.handlers["textDocument/formatting"] =
+    function(err, result, ctx)
+        if err ~= nil or result == nil then return end
+        if vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") ==
+            vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick") then
+            local view = vim.fn.winsaveview()
+            vim.lsp.util.apply_text_edits(result, ctx.bufnr)
+            vim.fn.winrestview(view)
+            if ctx.bufnr == vim.api.nvim_get_current_buf() then
+                vim.b.saving_format = true
+                vim.cmd [[update]]
+                vim.b.saving_format = false
+            end
+        end
+    end
+
+local function custom_attach(client)
     require("lsp_signature").on_attach({
         bind = true,
         use_lspsaga = false,
@@ -52,6 +70,13 @@ local function custom_attach()
         hi_parameter = "Search",
         handler_opts = {"double"}
     })
+
+    if client.resolved_capabilities.document_formatting then
+        vim.cmd [[augroup Format]]
+        vim.cmd [[autocmd! * <buffer>]]
+        vim.cmd [[autocmd BufWritePost <buffer> lua require'modules.completion.formatting'.format()]]
+        vim.cmd [[augroup END]]
+    end
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
@@ -90,6 +115,7 @@ local enhance_server_opts = {
             "--background-index", "-std=c++20", "--pch-storage=memory",
             "--clang-tidy", "--suggest-missing-includes"
         }
+        opts.capabilities.offsetEncoding = {"utf-16"}
         opts.single_file_support = true
         opts.commands = {
             ClangdSwitchSourceHeader = {
@@ -111,9 +137,12 @@ local enhance_server_opts = {
                 description = "Open source/header in a new split"
             }
         }
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            custom_attach(client)
+        end
     end,
     ["jsonls"] = function(opts)
-        opts.cmd = {"json-languageserver", "--stdio"}
         opts.settings = {
             json = {
                 -- Schemas https://www.schemastore.org
@@ -156,6 +185,18 @@ local enhance_server_opts = {
             }
         }
     end,
+    ["tsserver"] = function(opts)
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            custom_attach(client)
+        end
+    end,
+    ["dockerls"] = function(opts)
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            custom_attach(client)
+        end
+    end,
     ["gopls"] = function(opts)
         opts.settings = {
             gopls = {
@@ -168,6 +209,10 @@ local enhance_server_opts = {
                 }
             }
         }
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            custom_attach(client)
+        end
     end
 }
 
@@ -197,4 +242,49 @@ nvim_lsp.html.setup {
     flags = {debounce_text_changes = 500},
     capabilities = capabilities,
     on_attach = custom_attach
+}
+
+local efmls = require("efmls-configs")
+
+efmls.init {
+    on_attach = custom_attach,
+    capabilities = capabilities,
+    init_options = {documentFormatting = true, codeAction = true}
+}
+
+local vint = require("efmls-configs.linters.vint")
+local clangtidy = require("efmls-configs.linters.clang_tidy")
+local eslint = require("efmls-configs.linters.eslint")
+local shellcheck = require("efmls-configs.linters.shellcheck")
+
+local luafmt = require("efmls-configs.formatters.lua_format")
+local clangfmt = require("efmls-configs.formatters.clang_format")
+local goimports = require("efmls-configs.formatters.goimports")
+local prettier = require("efmls-configs.formatters.prettier")
+local shfmt = require("efmls-configs.formatters.shfmt")
+
+local flake8 = require("modules.completion.efm.linters.flake8")
+local black = require("modules.completion.efm.formatters.black")
+local rustfmt = require("modules.completion.efm.formatters.rustfmt")
+
+efmls.setup {
+    vim = {formatter = vint},
+    lua = {formatter = luafmt},
+    c = {formatter = clangfmt, linter = clangtidy},
+    cpp = {formatter = clangfmt, linter = clangtidy},
+    go = {formatter = goimports},
+    python = {formatter = black, linter = flake8},
+    vue = {formatter = prettier},
+    typescript = {formatter = prettier, linter = eslint},
+    javascript = {formatter = prettier, linter = eslint},
+    typescriptreact = {formatter = prettier, linter = eslint},
+    javascriptreact = {formatter = prettier, linter = eslint},
+    yaml = {formatter = prettier},
+    json = {formatter = prettier, linter = eslint},
+    html = {formatter = prettier},
+    css = {formatter = prettier},
+    scss = {formatter = prettier},
+    sh = {formatter = shfmt, linter = shellcheck},
+    rust = {formatter = rustfmt},
+    markdown = {formatter = prettier}
 }
