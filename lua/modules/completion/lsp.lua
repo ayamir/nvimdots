@@ -264,6 +264,7 @@ local vint = require("efmls-configs.linters.vint")
 local clangtidy = require("efmls-configs.linters.clang_tidy")
 local eslint = require("efmls-configs.linters.eslint")
 local shellcheck = require("efmls-configs.linters.shellcheck")
+local staticcheck = require("efmls-configs.linters.staticcheck")
 
 local luafmt = require("efmls-configs.formatters.lua_format")
 local clangfmt = require("efmls-configs.formatters.clang_format")
@@ -280,7 +281,7 @@ efmls.setup {
     lua = {formatter = luafmt},
     c = {formatter = clangfmt, linter = clangtidy},
     cpp = {formatter = clangfmt, linter = clangtidy},
-    go = {formatter = goimports},
+    go = {formatter = goimports, linter = staticcheck},
     python = {formatter = black, linter = flake8},
     vue = {formatter = prettier},
     typescript = {formatter = prettier, linter = eslint},
