@@ -16,6 +16,8 @@ local nvim_lsp = require("lspconfig")
 local saga = require("lspsaga")
 local lsp_installer = require("nvim-lsp-installer")
 
+-- Override diagnostics symbol
+
 saga.init_lsp_saga {
     error_sign = '',
     warn_sign = '',
@@ -51,6 +53,8 @@ capabilities.textDocument.completion.completionItem.tagSupport = {
 capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
+
+-- Override default format setting
 
 vim.lsp.handlers["textDocument/formatting"] =
     function(err, result, ctx)
@@ -101,6 +105,8 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
     end)
 end
 
+-- Override server settings here
+
 local enhance_server_opts = {
     ["sumneko_lua"] = function(opts)
         opts.settings = {
@@ -145,6 +151,7 @@ local enhance_server_opts = {
                 description = "Open source/header in a new split"
             }
         }
+        -- Disable `clangd`'s format
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
             custom_attach(client)
@@ -194,12 +201,14 @@ local enhance_server_opts = {
         }
     end,
     ["tsserver"] = function(opts)
+        -- Disable `tsserver`'s format
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
             custom_attach(client)
         end
     end,
     ["dockerls"] = function(opts)
+        -- Disable `dockerls`'s format
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
             custom_attach(client)
@@ -217,6 +226,7 @@ local enhance_server_opts = {
                 }
             }
         }
+        -- Disable `gopls`'s format
         opts.on_attach = function(client)
             client.resolved_capabilities.document_formatting = false
             custom_attach(client)
@@ -238,6 +248,8 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
+-- https://github.com/vscode-langservers/vscode-html-languageserver-bin
+
 nvim_lsp.html.setup {
     cmd = {"html-languageserver", "--stdio"},
     filetypes = {"html"},
@@ -254,27 +266,45 @@ nvim_lsp.html.setup {
 
 local efmls = require("efmls-configs")
 
+-- Init `efm-langserver` here.
+
 efmls.init {
     on_attach = custom_attach,
     capabilities = capabilities,
     init_options = {documentFormatting = true, codeAction = true}
 }
 
+-- Require `efmls-configs-nvim`'s config here
+
 local vint = require("efmls-configs.linters.vint")
 local clangtidy = require("efmls-configs.linters.clang_tidy")
 local eslint = require("efmls-configs.linters.eslint")
+local flake8 = require("efmls-configs.linters.flake8")
 local shellcheck = require("efmls-configs.linters.shellcheck")
 local staticcheck = require("efmls-configs.linters.staticcheck")
 
+local black = require("efmls-configs.formatters.black")
 local luafmt = require("efmls-configs.formatters.lua_format")
 local clangfmt = require("efmls-configs.formatters.clang_format")
 local goimports = require("efmls-configs.formatters.goimports")
 local prettier = require("efmls-configs.formatters.prettier")
 local shfmt = require("efmls-configs.formatters.shfmt")
 
-local flake8 = require("modules.completion.efm.linters.flake8")
-local black = require("modules.completion.efm.formatters.black")
-local rustfmt = require("modules.completion.efm.formatters.rustfmt")
+-- Add your own config for formatter and linter here
+
+-- local rustfmt = require("modules.completion.efm.formatters.rustfmt")
+
+-- Override default config here
+
+flake8 = vim.tbl_extend('force', flake8, {
+    prefix = "flake8: max-line-length=160, ignore F403 and F405",
+    lintStdin = true,
+    lintIgnoreExitCode = true,
+    lintFormats = {"%f:%l:%c: %t%n%n%n %m"},
+    lintCommand = "flake8 --max-line-length 160 --extend-ignore F403,F405 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -"
+})
+
+-- Setup formatter and linter for efmls here
 
 efmls.setup {
     vim = {formatter = vint},
@@ -294,6 +324,6 @@ efmls.setup {
     css = {formatter = prettier},
     scss = {formatter = prettier},
     sh = {formatter = shfmt, linter = shellcheck},
-    rust = {formatter = rustfmt},
     markdown = {formatter = prettier}
+    -- rust = {formatter = rustfmt},
 }
