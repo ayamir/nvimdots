@@ -93,16 +93,23 @@ end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
     bufnr = nvim_lsp.util.validate_bufnr(bufnr)
+    local clangd_client = nvim_lsp.util.get_active_client_by_name(bufnr,
+                                                                  'clangd')
     local params = {uri = vim.uri_from_bufnr(bufnr)}
-    vim.lsp.buf_request(bufnr, "textDocument/switchSourceHeader", params,
-                        function(err, result)
-        if err then error(tostring(err)) end
-        if not result then
-            print("Corresponding file can’t be determined")
-            return
-        end
-        vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
-    end)
+    if clangd_client then
+        clangd_client.request("textDocument/switchSourceHeader", params,
+                              function(err, result)
+            if err then error(tostring(err)) end
+            if not result then
+                print("Corresponding file can’t be determined")
+                return
+            end
+            vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
+        end)
+    else
+        print(
+            "method textDocument/switchSourceHeader is not supported by any servers active on the current buffer")
+    end
 end
 
 -- Override server settings here
