@@ -3,6 +3,7 @@ local conf = require("modules.ui.config")
 
 ui["kyazdani42/nvim-web-devicons"] = {opt = false}
 ui["sainnhe/edge"] = {opt = false, config = conf.edge}
+ui["rebelot/kanagawa.nvim"] = {opt = false, config = conf.kanagawa}
 ui["catppuccin/nvim"] = {
     opt = false,
     as = "catppuccin",
