@@ -8,6 +8,7 @@ local def_map = {
     -- Vim map
     ["n|<F1>"] = map_cmd("<C-z>"):with_noremap():with_silent(),
     ["n|<F2>"] = map_cu("noh"):with_noremap():with_silent(),
+    ["n|<F4>"] = map_cr("echo @%"):with_noremap():with_silent(),
     ["n|<C-x>k"] = map_cr("bdelete"):with_noremap():with_silent(),
     ["n|<C-s>"] = map_cu("write"):with_noremap(),
     ["n|<C-s>"] = map_cu("write"):with_noremap(),
