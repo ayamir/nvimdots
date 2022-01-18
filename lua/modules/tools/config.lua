@@ -6,6 +6,22 @@ function config.telescope()
     vim.cmd [[packadd sqlite.lua]]
   end
 
+  if not packer_plugins["telescope-fzf-native.nvim"].loaded then
+      vim.cmd [[packadd telescope-fzf-native.nvim]]
+  end
+
+  if not packer_plugins["telescope-project.nvim"].loaded then
+      vim.cmd [[packadd telescope-project.nvim]]
+  end
+
+  if not packer_plugins["telescope-frecency.nvim"].loaded then
+      vim.cmd [[packadd telescope-frecency.nvim]]
+  end
+
+  if not packer_plugins["telescope-zoxide"].loaded then
+      vim.cmd [[packadd telescope-zoxide]]
+  end
+
   local actions = require "telescope.actions"
 
   require("telescope").setup {
@@ -51,12 +67,12 @@ function config.telescope()
       set_env = {["COLORTERM"] = "truecolor"}
     },
     extensions = {
-      -- fzf = {
-      --   fuzzy = false,
-      --   override_generic_sorter = true,
-      --   override_file_sorter = true,
-      --   case_mode = "smart_case"
-      -- },
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case"
+      },
       frecency = {
         show_scores = true,
         show_unindexed = true,
@@ -66,7 +82,7 @@ function config.telescope()
     }
   }
 
-  -- require("telescope").load_extension("fzf")
+  require("telescope").load_extension("fzf")
   -- require("telescope").load_extension("project")
   -- require("telescope").load_extension("zoxide")
 end

@@ -1,0 +1,41 @@
+{
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".git/"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  },
+
+  "rust-analyzer.enable": true,
+  "rust-analyzer.updates.channel": "nightly",
+  "rust-analyzer.server.path": "~/.local/bin/rust-analyzer",
+  "rust-analyzer.updates.checkOnStartup": true,
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.inlayHints.typeHints": true,
+
+  "clangd.enabled": true,
+  "clangd.checkUpdates": false,
+  "clangd.fallbackFlags": ["-std=c++17", "--clang-tidy", "--background-index"],
+
+  "coc.source.around.enable": true,
+  "coc.source.buffer.enable": true,
+  "coc.source.file.enable": true,
+  "coc.source.db.enable": true,
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "json",
+    "html",
+    "javascript",
+    "typescript"
+  ],
+
+  "diagnostic.enable": false,
+  "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
+  "diagnostic.errorSign": "❗️",
+  "diagnostic.warningSign": "⚠️"
+}
