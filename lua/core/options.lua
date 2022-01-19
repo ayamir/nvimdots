@@ -25,7 +25,7 @@ local function load_options()
         encoding = "utf-8",
         viewoptions = "folds,cursor,curdir,slash,unix",
         sessionoptions = "curdir,help,tabpages,winsize",
-        clipboard = "unnamedplus",
+        -- clipboard = "unnamedplus",
         wildignorecase = true,
         wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
         backup = false,

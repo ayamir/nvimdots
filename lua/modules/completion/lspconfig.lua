@@ -33,6 +33,7 @@ capabilities.textDocument.completion.completionItem.documentationFormat = {
     "markdown",
     "plaintext"
 }
+capabilities.textDocument.completion.editNearCursor = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
 capabilities.textDocument.completion.completionItem.insertReplaceSupport = true

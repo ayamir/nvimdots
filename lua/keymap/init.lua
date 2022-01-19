@@ -50,7 +50,7 @@ local plug_map = {
     -- Plugin trouble
     -- ["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
     ["n|gr"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
-    -- ["n|<leader>cd"] = map_cr("TroubleToggle document_diagnostics"):with_noremap():with_silent(),
+    ["n|<leader>cd"] = map_cr("TroubleToggle document_diagnostics"):with_noremap():with_silent(),
     ["n|<leader>cw"] = map_cr("TroubleToggle workspace_diagnostics"):with_noremap():with_silent(),
     ["n|<leader>cq"] = map_cr("TroubleToggle quickfix"):with_noremap():with_silent(),
     ["n|<leader>cl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent(),
@@ -59,6 +59,7 @@ local plug_map = {
     ["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
     ["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
     -- Plugin Telescope
+    ["n|<leader>lg"] = map_cu("Telescope live_grep sort_mru=true"):with_noremap():with_silent(),
     ["n|<C-p>"] = map_cu("Telescope find_files ignore_current_buffer=true sort_mru=true"):with_noremap():with_silent(),
     ["n|<C-n>"] = map_cu("Telescope buffers ignore_current_buffer=true sort_mru=true"):with_noremap():with_silent(),
     ["n|<Leader>fp"] = map_cu("Telescope project"):with_noremap():with_silent(),
