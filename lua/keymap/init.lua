@@ -42,7 +42,7 @@ local plug_map = {
     ["n|<leader>ft"] = map_cu('lua require("FTerm").toggle()'):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").toggle()]]):with_noremap():with_silent(),
     ["t|<A-S-d>"] = map_cu([[<C-\><C-n><CMD>lua require("FTerm").exit()]]):with_noremap():with_silent(),
-    ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap():with_silent(),
+    -- ["n|<Leader>g"] = map_cu("lua require('FTerm').run('gitui')"):with_noremap():with_silent(),
     -- ["n|<Leader>G"] = map_cu("Git"):with_noremap():with_silent(),
     -- ["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
     -- ["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
@@ -59,7 +59,10 @@ local plug_map = {
     ["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
     ["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
     -- Plugin Telescope
-    ["n|<leader>lg"] = map_cu("Telescope live_grep sort_mru=true"):with_noremap():with_silent(),
+    -- grep string
+    ["n|<leader>lg"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
+    -- grep word
+    ["n|<leader>wg"] = map_cu("Telescope grep_string use_regex=true"):with_noremap():with_silent(),
     ["n|<C-p>"] = map_cu("Telescope find_files ignore_current_buffer=true sort_mru=true"):with_noremap():with_silent(),
     ["n|<C-n>"] = map_cu("Telescope buffers ignore_current_buffer=true sort_mru=true"):with_noremap():with_silent(),
     ["n|<Leader>fp"] = map_cu("Telescope project"):with_noremap():with_silent(),
