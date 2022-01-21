@@ -326,7 +326,6 @@ efmls.setup {
     typescriptreact = {formatter = prettier, linter = eslint},
     javascriptreact = {formatter = prettier, linter = eslint},
     yaml = {formatter = prettier},
-    json = {formatter = prettier, linter = eslint},
     html = {formatter = prettier},
     css = {formatter = prettier},
     scss = {formatter = prettier},
