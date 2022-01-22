@@ -103,7 +103,7 @@ function config.lualine()
     require("lualine").setup {
         options = {
             icons_enabled = true,
-            theme = "catppuccin",
+            theme = "kanagawa",
             disabled_filetypes = {},
             component_separators = "|",
             section_separators = {left = "", right = ""}

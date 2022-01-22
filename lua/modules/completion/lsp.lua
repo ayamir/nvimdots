@@ -12,6 +12,10 @@ if not packer_plugins["lspsaga.nvim"].loaded then
     vim.cmd [[packadd lspsaga.nvim]]
 end
 
+if not packer_plugins["cmp-nvim-lsp"].loaded then
+    vim.cmd [[packadd cmp-nvim-lsp]]
+end
+
 local nvim_lsp = require("lspconfig")
 local saga = require("lspsaga")
 local lsp_installer = require("nvim-lsp-installer")
@@ -36,41 +40,25 @@ lsp_installer.settings {
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities.textDocument.completion.completionItem.documentationFormat = {
-    "markdown", "plaintext"
-}
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport =
-    true
-capabilities.textDocument.completion.completionItem.tagSupport = {
-    valueSet = {1}
-}
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {"documentation", "detail", "additionalTextEdits"}
-}
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Override default format setting
 
--- vim.lsp.handlers["textDocument/formatting"] =
---     function(err, result, ctx)
---         if err ~= nil or result == nil then return end
---         if vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") ==
---             vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick") then
---             local view = vim.fn.winsaveview()
---             vim.lsp.util.apply_text_edits(result, ctx.bufnr)
---             vim.fn.winrestview(view)
---             if ctx.bufnr == vim.api.nvim_get_current_buf() then
---                 vim.b.saving_format = true
---                 vim.cmd [[update]]
---                 vim.b.saving_format = false
---             end
---         end
---     end
+vim.lsp.handlers["textDocument/formatting"] =
+    function(err, result, ctx)
+        if err ~= nil or result == nil then return end
+        if vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") ==
+            vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick") then
+            local view = vim.fn.winsaveview()
+            vim.lsp.util.apply_text_edits(result, ctx.bufnr)
+            vim.fn.winrestview(view)
+            if ctx.bufnr == vim.api.nvim_get_current_buf() then
+                vim.b.saving_format = true
+                vim.cmd [[update]]
+                vim.b.saving_format = false
+            end
+        end
+    end
 
 local function custom_attach(client)
     require("lsp_signature").on_attach({
