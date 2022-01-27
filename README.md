@@ -1,6 +1,6 @@
 # Introduction
 
-![image-20211222145429108](https://s2.loli.net/2021/12/22/MhrEQGVLgStN8IR.png)
+![Dashboard](https://s2.loli.net/2022/01/28/OAXIV7bCGMHUSzj.png)
 
 ![Telescope](https://s2.loli.net/2021/12/22/a3MrbwpL5oCHFgv.png)
 
