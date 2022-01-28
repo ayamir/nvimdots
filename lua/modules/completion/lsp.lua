@@ -1,20 +1,9 @@
 require("modules.completion.formatting")
 
-if not packer_plugins["nvim-lsp-installer"].loaded then
-	vim.cmd([[packadd nvim-lsp-installer]])
-end
-
-if not packer_plugins["lsp_signature.nvim"].loaded then
-	vim.cmd([[packadd lsp_signature.nvim]])
-end
-
-if not packer_plugins["lspsaga.nvim"].loaded then
-	vim.cmd([[packadd lspsaga.nvim]])
-end
-
-if not packer_plugins["cmp-nvim-lsp"].loaded then
-	vim.cmd([[packadd cmp-nvim-lsp]])
-end
+vim.cmd([[packadd nvim-lsp-installer]])
+vim.cmd([[packadd lsp_signature.nvim]])
+vim.cmd([[packadd lspsaga.nvim]])
+vim.cmd([[packadd cmp-nvim-lsp]])
 
 local nvim_lsp = require("lspconfig")
 local saga = require("lspsaga")
@@ -107,7 +96,7 @@ local enhance_server_opts = {
 	["sumneko_lua"] = function(opts)
 		opts.settings = {
 			Lua = {
-				diagnostics = { globals = { "vim", "packer_plugins" } },
+				diagnostics = { globals = { "vim" } },
 				workspace = {
 					library = {
 						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -321,7 +310,7 @@ efmls.setup({
 	c = { formatter = clangfmt, linter = clangtidy },
 	cpp = { formatter = clangfmt, linter = clangtidy },
 	go = { formatter = goimports, linter = staticcheck },
-	python = { formatter = black, linter = flake8 },
+	python = { formatter = black },
 	vue = { formatter = prettier },
 	typescript = { formatter = prettier, linter = eslint },
 	javascript = { formatter = prettier, linter = eslint },
