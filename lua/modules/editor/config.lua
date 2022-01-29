@@ -366,4 +366,24 @@ function config.specs()
 	})
 end
 
+function config.tabout()
+	require("tabout").setup({
+		tabkey = "<A-f>",
+		backwards_tabkey = "<A-b>",
+		ignore_beginning = false,
+		act_as_tab = true,
+		enable_backward = true,
+		completion = true,
+		tabouts = {
+			{ open = "'", close = "'" },
+			{ open = '"', close = '"' },
+			{ open = "`", close = "`" },
+			{ open = "(", close = ")" },
+			{ open = "[", close = "]" },
+			{ open = "{", close = "}" },
+		},
+		exclude = {},
+	})
+end
+
 return config
