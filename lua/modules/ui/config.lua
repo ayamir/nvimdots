@@ -122,7 +122,21 @@ function config.lualine()
 					symbols = { error = " ", warn = " ", info = " " },
 				},
 			},
-			lualine_y = { "filetype", "encoding", "fileformat" },
+			lualine_y = {
+				{
+					"filetype",
+					"encoding",
+				},
+				{
+					"fileformat",
+					icons_enabled = true,
+					symbols = {
+						unix = "LF",
+						dos = "CRLF",
+						mac = "CR",
+					},
+				},
+			},
 			lualine_z = { "progress", "location" },
 		},
 		inactive_sections = {
