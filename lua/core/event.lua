@@ -68,6 +68,7 @@ function autocmd.load_autocmds()
 		ft = {
 			{ "BufNewFile,BufRead", "*.toml", " setf toml" },
 			{ "FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0" },
+			{ "FileType", "c,cpp", "set expandtab tabstop=2 shiftwidth=2" },
 			{
 				"FileType",
 				"dashboard",
