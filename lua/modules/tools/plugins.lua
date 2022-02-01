@@ -28,7 +28,6 @@ tools["nvim-telescope/telescope-frecency.nvim"] = {
 	requires = { { "tami5/sqlite.lua", opt = true } },
 }
 tools["jvgrootveld/telescope-zoxide"] = { opt = true, after = "telescope.nvim" }
-tools["thinca/vim-quickrun"] = { opt = true, cmd = { "QuickRun", "Q" } }
 tools["michaelb/sniprun"] = {
 	opt = true,
 	run = "bash ./install.sh",

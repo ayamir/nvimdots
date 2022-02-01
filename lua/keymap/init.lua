@@ -123,6 +123,7 @@ local plug_map = {
 	["n|<leader>do"] = map_cr("lua require('dap').step_out()"):with_noremap():with_silent(),
 	["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(),
 	["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
+	["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
 }
 
 bind.nvim_load_mapping(plug_map)
