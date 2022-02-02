@@ -99,6 +99,53 @@ function config.lualine()
 		},
 		filetypes = { "Outline" },
 	}
+	local dapui_scopes = {
+		sections = {
+			lualine_a = {},
+			lualine_b = { "filetype" },
+			lualine_c = {},
+			lualine_x = {},
+			lualine_y = {},
+			lualine_z = { "location" },
+		},
+		filetypes = { "dapui_scopes" },
+	}
+
+	local dapui_breakpoints = {
+		sections = {
+			lualine_a = {},
+			lualine_b = { "filetype" },
+			lualine_c = {},
+			lualine_x = {},
+			lualine_y = {},
+			lualine_z = { "location" },
+		},
+		filetypes = { "dapui_breakpoints" },
+	}
+
+	local dapui_stacks = {
+		sections = {
+			lualine_a = {},
+			lualine_b = { "filetype" },
+			lualine_c = {},
+			lualine_x = {},
+			lualine_y = {},
+			lualine_z = { "location" },
+		},
+		filetypes = { "dapui_stacks" },
+	}
+
+	local dapui_watches = {
+		sections = {
+			lualine_a = {},
+			lualine_b = { "filetype" },
+			lualine_c = {},
+			lualine_x = {},
+			lualine_y = {},
+			lualine_z = { "location" },
+		},
+		filetypes = { "dapui_watches" },
+	}
 
 	require("lualine").setup({
 		options = {
@@ -154,6 +201,10 @@ function config.lualine()
 			"toggleterm",
 			"fugitive",
 			symbols_outline,
+			dapui_scopes,
+			dapui_breakpoints,
+			dapui_stacks,
+			dapui_watches,
 		},
 	})
 end
