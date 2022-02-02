@@ -88,62 +88,35 @@ function config.lualine()
 			return ""
 		end
 	end
+	local simple_sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filetype" },
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
 	local symbols_outline = {
-		sections = {
-			lualine_a = { "mode" },
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "Outline" },
 	}
 	local dapui_scopes = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_scopes" },
 	}
 
 	local dapui_breakpoints = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_breakpoints" },
 	}
 
 	local dapui_stacks = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_stacks" },
 	}
 
 	local dapui_watches = {
-		sections = {
-			lualine_a = {},
-			lualine_b = { "filetype" },
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = { "location" },
-		},
+		sections = simple_sections,
 		filetypes = { "dapui_watches" },
 	}
 

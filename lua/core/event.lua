@@ -84,6 +84,7 @@ function autocmd.load_autocmds()
 				"c,cpp",
 				"nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>",
 			},
+			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
 		},
 		yank = {
 			{
