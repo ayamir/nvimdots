@@ -5,13 +5,11 @@ local t = function(str)
 end
 
 _G.enhance_jk_move = function(key)
-	vim.cmd([[packadd accelerated-jk]])
 	local map = key == "j" and "<Plug>(accelerated_jk_gj)" or "<Plug>(accelerated_jk_gk)"
 	return t(map)
 end
 
 _G.enhance_ft_move = function(key)
-	vim.cmd([[packadd vim-eft]])
 	local map = {
 		f = "<Plug>(eft-f)",
 		F = "<Plug>(eft-F)",
