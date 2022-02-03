@@ -23,26 +23,27 @@ local createdir = function()
 end
 
 local disable_distribution_plugins = function()
-	vim.g.loaded_fzf = 1
-	vim.g.loaded_gtags = 1
-	vim.g.loaded_gzip = 1
-	vim.g.loaded_tar = 1
-	vim.g.loaded_tarPlugin = 1
-	vim.g.loaded_zip = 1
-	vim.g.loaded_zipPlugin = 1
-	vim.g.loaded_getscript = 1
-	vim.g.loaded_getscriptPlugin = 1
-	vim.g.loaded_vimball = 1
-	vim.g.loaded_vimballPlugin = 1
-	vim.g.loaded_matchit = 1
-	vim.g.loaded_matchparen = 1
-	vim.g.loaded_2html_plugin = 1
-	vim.g.loaded_logiPat = 1
-	vim.g.loaded_rrhelper = 1
-	vim.g.loaded_netrw = 1
-	vim.g.loaded_netrwPlugin = 1
-	vim.g.loaded_netrwSettings = 1
-	vim.g.loaded_netrwFileHandlers = 1
+	vim.g.did_load_filetypes = 1
+	vim.g.did_load_fzf = 1
+	vim.g.did_load_gtags = 1
+	vim.g.did_load_gzip = 1
+	vim.g.did_load_tar = 1
+	vim.g.did_load_tarPlugin = 1
+	vim.g.did_load_zip = 1
+	vim.g.did_load_zipPlugin = 1
+	vim.g.did_load_getscript = 1
+	vim.g.did_load_getscriptPlugin = 1
+	vim.g.did_load_vimball = 1
+	vim.g.did_load_vimballPlugin = 1
+	vim.g.did_load_matchit = 1
+	vim.g.did_load_matchparen = 1
+	vim.g.did_load_2html_plugin = 1
+	vim.g.did_load_logiPat = 1
+	vim.g.did_load_rrhelper = 1
+	vim.g.did_load_netrw = 1
+	vim.g.did_load_netrwPlugin = 1
+	vim.g.did_load_netrwSettings = 1
+	vim.g.did_load_netrwFileHandlers = 1
 end
 
 local leader_map = function()
@@ -137,7 +138,6 @@ local clipboard_settings = function()
           \   },
           \   'cache_enabled': 0,
           \ }
-
     ]])
 end
 

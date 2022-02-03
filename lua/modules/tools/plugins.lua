@@ -20,14 +20,14 @@ tools["nvim-telescope/telescope-fzf-native.nvim"] = {
 }
 tools["nvim-telescope/telescope-project.nvim"] = {
 	opt = true,
-	after = "telescope.nvim",
+	after = "telescope-fzf-native.nvim",
 }
 tools["nvim-telescope/telescope-frecency.nvim"] = {
 	opt = true,
-	after = "telescope.nvim",
+	after = "telescope-project.nvim",
 	requires = { { "tami5/sqlite.lua", opt = true } },
 }
-tools["jvgrootveld/telescope-zoxide"] = { opt = true, after = "telescope.nvim" }
+tools["jvgrootveld/telescope-zoxide"] = { opt = true, after = "telescope-frecency.nvim" }
 tools["michaelb/sniprun"] = {
 	opt = true,
 	run = "bash ./install.sh",
@@ -50,6 +50,10 @@ tools["gelguy/wilder.nvim"] = {
 	event = "CmdlineEnter",
 	config = conf.wilder,
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
+}
+tools["nathom/filetype.nvim"] = {
+	opt = false,
+	config = conf.filetype,
 }
 
 return tools
