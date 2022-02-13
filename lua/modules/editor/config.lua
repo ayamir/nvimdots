@@ -110,6 +110,11 @@ function config.nvim_treesitter()
 		matchup = { enable = true },
 		context = { enable = true, throttle = true },
 	})
+	require("nvim-treesitter.install").prefer_git = true
+	local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+	for _, p in pairs(parsers) do
+		p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
+	end
 end
 
 function config.matchup()
