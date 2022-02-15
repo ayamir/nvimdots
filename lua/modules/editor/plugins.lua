@@ -17,11 +17,6 @@ editor["terrortylor/nvim-comment"] = {
 		})
 	end,
 }
-editor["simrat39/symbols-outline.nvim"] = {
-	opt = true,
-	cmd = { "SymbolsOutline", "SymbolsOutlineOpen" },
-	config = conf.symbols_outline,
-}
 editor["nvim-treesitter/nvim-treesitter"] = {
 	opt = true,
 	run = ":TSUpdate",

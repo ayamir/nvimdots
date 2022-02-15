@@ -4,6 +4,7 @@ vim.cmd([[packadd nvim-lsp-installer]])
 vim.cmd([[packadd lsp_signature.nvim]])
 vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
+vim.cmd([[packadd aerial.nvim]])
 
 local nvim_lsp = require("lspconfig")
 local saga = require("lspsaga")
@@ -61,6 +62,7 @@ local function custom_attach(client)
 		hi_parameter = "Search",
 		handler_opts = { "double" },
 	})
+	require("aerial").on_attach(client)
 
 	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[augroup Format]])
