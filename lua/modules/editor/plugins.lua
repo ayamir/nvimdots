@@ -59,7 +59,7 @@ editor["andymass/vim-matchup"] = {
 	after = "nvim-treesitter",
 	config = conf.matchup,
 }
-editor["rhysd/accelerated-jk"] = { opt = true, event = "CursorMoved" }
+editor["rhysd/accelerated-jk"] = { opt = true, event = "BufReadPost" }
 editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor["romainl/vim-cool"] = {
 	opt = true,
