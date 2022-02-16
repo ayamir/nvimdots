@@ -37,6 +37,12 @@ ui["akinsho/nvim-bufferline.lua"] = {
 	event = "BufRead",
 	config = conf.nvim_bufferline,
 }
-ui["dstein64/nvim-scrollview"] = { opt = true, event = "BufRead" }
+ui["petertriho/nvim-scrollbar"] = {
+	opt = true,
+	event = "BufRead",
+	config = function()
+		require("scrollbar").setup()
+	end,
+}
 
 return ui
