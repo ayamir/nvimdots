@@ -96,9 +96,9 @@ function config.lualine()
 		lualine_y = {},
 		lualine_z = { "location" },
 	}
-	local symbols_outline = {
+	local aerial = {
 		sections = simple_sections,
-		filetypes = { "Outline" },
+		filetypes = { "aerial" },
 	}
 	local dapui_scopes = {
 		sections = simple_sections,
@@ -173,7 +173,7 @@ function config.lualine()
 			"nvim-tree",
 			"toggleterm",
 			"fugitive",
-			symbols_outline,
+			aerial,
 			dapui_scopes,
 			dapui_breakpoints,
 			dapui_stacks,
