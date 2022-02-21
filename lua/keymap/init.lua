@@ -62,6 +62,11 @@ local plug_map = {
 	["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
 	["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
 	["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
+	-- Plugin Aerial
+	["n|<A-t>"] = map_cr("AerialToggle! right"):with_noremap():with_silent(),
+	-- Plugin Minimap
+	["n|<A-n>"] = map_cr("MinimapToggle"):with_noremap():with_silent(),
+	["n|<A-r>"] = map_cr("MinimapRefresh"):with_noremap():with_silent(),
 	-- Plugin Telescope
 	["n|<Leader>fp"] = map_cu("lua require('telescope').extensions.project.project{}"):with_noremap():with_silent(),
 	["n|<Leader>fr"] = map_cu("lua require('telescope').extensions.frecency.frecency{}"):with_noremap():with_silent(),
@@ -91,8 +96,6 @@ local plug_map = {
 	-- Plugin EasyAlign
 	["n|ga"] = map_cmd("v:lua.enhance_align('nga')"):with_expr(),
 	["x|ga"] = map_cmd("v:lua.enhance_align('xga')"):with_expr(),
-	-- Plugin Aerial
-	["n|<A-t>"] = map_cr("AerialToggle! right"):with_noremap():with_silent(),
 	-- Plugin split-term
 	["n|<F5>"] = map_cr("VTerm"):with_noremap():with_silent(),
 	["n|<C-w>t"] = map_cr("VTerm"):with_noremap():with_silent(),

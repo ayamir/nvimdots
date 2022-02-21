@@ -88,6 +88,14 @@ function config.lualine()
 			return ""
 		end
 	end
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "location" },
+	}
 	local simple_sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "filetype" },
@@ -96,8 +104,12 @@ function config.lualine()
 		lualine_y = {},
 		lualine_z = { "location" },
 	}
+	local minimap = {
+		sections = mini_sections,
+		filetypes = { "minimap" },
+	}
 	local aerial = {
-		sections = simple_sections,
+		sections = mini_sections,
 		filetypes = { "aerial" },
 	}
 	local dapui_scopes = {
@@ -173,6 +185,7 @@ function config.lualine()
 			"nvim-tree",
 			"toggleterm",
 			"fugitive",
+			minimap,
 			aerial,
 			dapui_scopes,
 			dapui_breakpoints,
