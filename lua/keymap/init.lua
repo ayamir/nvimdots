@@ -127,6 +127,11 @@ local plug_map = {
 	["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(),
 	["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
 	["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
+	-- Plugin Tabout
+	["i|<A-l>"] = map_cmd([[<Plug>(Tabout)]]):with_silent(),
+	["i|<A-h>"] = map_cmd([[<Plug>(TaboutBack)]]):with_silent(),
+	["i|<A-o>"] = map_cmd([[<Plug>(TaboutMulti)]]):with_silent(),
+	["i|<A-i>"] = map_cmd([[<Plug>(TaboutBackMulti)]]):with_silent(),
 }
 
 bind.nvim_load_mapping(plug_map)
