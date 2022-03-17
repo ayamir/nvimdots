@@ -14,6 +14,11 @@ ui["hoob3rt/lualine.nvim"] = {
 	after = "lualine-lsp-progress",
 	config = conf.lualine,
 }
+ui["SmiteshP/nvim-gps"] = {
+	opt = true,
+	after = "nvim-treesitter",
+	config = conf.nvim_gps,
+}
 ui["arkav/lualine-lsp-progress"] = { opt = true, after = "nvim-gps" }
 ui["glepnir/dashboard-nvim"] = { opt = true, event = "BufWinEnter" }
 ui["kyazdani42/nvim-tree.lua"] = {
@@ -32,7 +37,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 	event = "BufRead",
 	config = conf.indent_blankline,
 }
-ui["akinsho/nvim-bufferline.lua"] = {
+ui["akinsho/bufferline.nvim"] = {
 	opt = true,
 	event = "BufRead",
 	config = conf.nvim_bufferline,
@@ -47,6 +52,10 @@ ui["petertriho/nvim-scrollbar"] = {
 ui["wfxr/minimap.vim"] = {
 	opt = true,
 	event = "BufRead",
+}
+ui["mbbill/undotree"] = {
+	opt = true,
+	cmd = "UndotreeToggle",
 }
 
 return ui
