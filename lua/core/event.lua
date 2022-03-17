@@ -21,7 +21,8 @@ function autocmd.load_autocmds()
 			{
 				"BufWritePost",
 				[[$VIM_PATH/{*.vim,*.yaml,vimrc} nested source $MYVIMRC | redraw]],
-			}, -- Reload Vim script automatically if setlocal autoread
+			},
+			-- Reload Vim script automatically if setlocal autoread
 			{
 				"BufWritePost,FileWritePost",
 				"*.vim",
@@ -32,12 +33,15 @@ function autocmd.load_autocmds()
 			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
 			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
 			{ "BufWritePre", "*.bak", "setlocal noundofile" },
-			{ "BufEnter", "*", "silent! lcd %:p:h" }, -- auto place to last edit
+			-- auto change directory
+			{ "BufEnter", "*", "silent! lcd %:p:h" },
+			-- auto place to last edit
 			{
 				"BufReadPost",
 				"*",
 				[[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
-			}, -- Auto toggle fcitx5
+			},
+			-- Auto toggle fcitx5
 			-- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
 			-- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
 			-- {"BufEnter", "*", ":silent !fcitx5-remote -c "},
@@ -54,7 +58,8 @@ function autocmd.load_autocmds()
 				"WinLeave,BufLeave,InsertEnter",
 				"*",
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
-			}, -- Force write shada on leaving nvim
+			},
+			-- Force write shada on leaving nvim
 			{
 				"VimLeave",
 				"*",
@@ -66,9 +71,11 @@ function autocmd.load_autocmds()
 			{ "VimResized", "*", [[tabdo wincmd =]] },
 		},
 		ft = {
-			{ "BufNewFile,BufRead", "*.toml", " setf toml" },
+			{ "FileType", "markdown", "set wrap" },
 			{ "FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0" },
+			-- Google tab style
 			{ "FileType", "c,cpp", "set expandtab tabstop=2 shiftwidth=2" },
+			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
 			{
 				"FileType",
 				"dashboard",
@@ -84,8 +91,6 @@ function autocmd.load_autocmds()
 				"c,cpp",
 				"nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>",
 			},
-			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
-			{ "FileType", "markdown", "set wrap" },
 		},
 		yank = {
 			{
