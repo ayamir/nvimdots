@@ -65,6 +65,8 @@ local plug_map = {
 	-- Plugin Minimap
 	["n|<A-n>"] = map_cr("MinimapToggle"):with_noremap():with_silent(),
 	["n|<A-r>"] = map_cr("MinimapRefresh"):with_noremap():with_silent(),
+	-- Plugin Undotree
+	["n|<Leader>u"] = map_cr("UndotreeToggle"):with_noremap():with_silent(),
 	-- Plugin Telescope
 	["n|<Leader>fp"] = map_cu("lua require('telescope').extensions.project.project{}"):with_noremap():with_silent(),
 	["n|<Leader>fr"] = map_cu("lua require('telescope').extensions.frecency.frecency{}"):with_noremap():with_silent(),

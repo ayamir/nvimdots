@@ -133,5 +133,9 @@ editor["abecodes/tabout.nvim"] = {
 	after = "nvim-cmp",
 	config = conf.tabout,
 }
+editor["mbbill/undotree"] = {
+	opt = true,
+	cmd = "UndotreeToggle",
+}
 
 return editor
