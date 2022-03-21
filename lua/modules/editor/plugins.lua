@@ -128,5 +128,9 @@ editor["abecodes/tabout.nvim"] = {
 	after = "nvim-cmp",
 	config = conf.tabout,
 }
+editor["sindrets/diffview.nvim"] = {
+	opt = true,
+	cmd = { "DiffviewOpen" },
+}
 
 return editor
