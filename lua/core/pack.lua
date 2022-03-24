@@ -3,7 +3,7 @@ local is_mac = require("core.global").is_mac
 local vim_path = require("core.global").vim_path
 local data_dir = require("core.global").data_dir
 local modules_dir = vim_path .. "/lua/modules"
-local packer_compiled = data_dir .. "lua/packer_compiled.lua"
+local packer_compiled = data_dir .. "lua/_compiled.lua"
 local bak_compiled = data_dir .. "lua/bak_compiled.lua"
 local packer = nil
 
@@ -113,7 +113,7 @@ end
 
 function plugins.load_compile()
 	if vim.fn.filereadable(packer_compiled) == 1 then
-		require("packer_compiled")
+		require("_compiled")
 	else
 		assert("Missing packer compile file Run PackerCompile Or PackerInstall to fix")
 	end
