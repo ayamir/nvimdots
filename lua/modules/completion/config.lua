@@ -256,7 +256,7 @@ function config.cmp()
 		},
 		-- You can set mappings if you want
 		mapping = {
-			["<CR>"] = cmp.mapping.confirm({ select = true }),
+			["<CR>"] = cmp.mapping.confirm({ select = false }),
 			["<C-p>"] = cmp.mapping.select_prev_item(),
 			["<C-n>"] = cmp.mapping.select_next_item(),
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
