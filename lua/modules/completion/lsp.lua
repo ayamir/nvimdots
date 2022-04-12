@@ -110,6 +110,10 @@ local enhance_server_opts = {
 				telemetry = { enable = false },
 			},
 		}
+		opts.on_attach = function(client)
+			client.resolved_capabilities.document_formatting = false
+			custom_attach(client)
+		end
 	end,
 	["clangd"] = function(opts)
 		opts.args = {
