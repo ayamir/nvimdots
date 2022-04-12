@@ -16,7 +16,7 @@ function config.nvim_treesitter()
 	vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
 
 	require("nvim-treesitter.configs").setup({
-		ensure_installed = "maintained",
+		ensure_installed = "all",
 		highlight = { enable = true, disable = { "vim" } },
 		textobjects = {
 			select = {
