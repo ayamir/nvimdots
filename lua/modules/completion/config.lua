@@ -255,7 +255,7 @@ function config.cmp()
 			end,
 		},
 		-- You can set mappings if you want
-		mapping = {
+		mapping = cmp.mapping.preset.insert({
 			["<CR>"] = cmp.mapping.confirm({ select = true }),
 			["<C-p>"] = cmp.mapping.select_prev_item(),
 			["<C-n>"] = cmp.mapping.select_next_item(),
@@ -292,7 +292,7 @@ function config.cmp()
 					fallback()
 				end
 			end,
-		},
+		}),
 		snippet = {
 			expand = function(args)
 				require("luasnip").lsp_expand(args.body)
