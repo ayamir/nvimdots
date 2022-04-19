@@ -10,22 +10,13 @@ function config.edge()
 	vim.g.edge_transparent_background = 1
 end
 
-function config.kanagawa()
-	require("kanagawa").setup({
-		undercurl = true, -- enable undercurls
-		commentStyle = "italic",
-		functionStyle = "bold,italic",
-		keywordStyle = "italic",
-		statementStyle = "bold",
-		typeStyle = "NONE",
-		variablebuiltinStyle = "italic",
-		specialReturn = true, -- special highlight for the return keyword
-		specialException = true, -- special highlight for exception handling keywords
-		transparent = false, -- do not set background color
-		dimInactive = true, -- dim inactive window `:h hl-NormalNC`
-		colors = {},
-		overrides = {},
-	})
+function config.nord()
+	vim.g.nord_contrast = true
+	vim.g.nord_borders = false
+	vim.g.nord_cursorline_transparent = true
+	vim.g.nord_disable_background = false
+	vim.g.nord_enable_sidebar_background = true
+	vim.g.nord_italic = false
 end
 
 function config.catppuccin()
