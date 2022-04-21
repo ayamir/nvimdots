@@ -23,7 +23,7 @@ ui["arkav/lualine-lsp-progress"] = { opt = true, after = "nvim-gps" }
 ui["glepnir/dashboard-nvim"] = { opt = true, event = "BufWinEnter" }
 ui["kyazdani42/nvim-tree.lua"] = {
 	opt = true,
-	event = "BufRead",
+	cmd = { "NvimTreeToggle" },
 	config = conf.nvim_tree,
 }
 ui["lewis6991/gitsigns.nvim"] = {
