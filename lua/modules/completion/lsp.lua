@@ -265,7 +265,10 @@ nvim_lsp.html.setup({
 	single_file_support = true,
 	flags = { debounce_text_changes = 500 },
 	capabilities = capabilities,
-	on_attach = custom_attach,
+	on_attach = function(client)
+		client.resolved_capabilities.document_formatting = false
+		custom_attach(client)
+	end,
 })
 
 local efmls = require("efmls-configs")
