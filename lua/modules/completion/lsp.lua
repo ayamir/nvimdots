@@ -64,7 +64,7 @@ local function custom_attach(client)
 		handler_opts = { "double" },
 	})
 	require("aerial").on_attach(client)
-    require("illuminate").on_attach(client)
+	require("illuminate").on_attach(client)
 
 	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[augroup Format]])

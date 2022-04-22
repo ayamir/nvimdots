@@ -3,14 +3,21 @@ local conf = require("modules.editor.config")
 
 editor["junegunn/vim-easy-align"] = { opt = true, cmd = "EasyAlign" }
 editor["RRethy/vim-illuminate"] = {
-    event = "BufRead",
-    config = function()
-        vim.g.Illuminate_highlightUnderCursor = 0
-        vim.g.Illuminate_ftblacklist = {
-            "help", "dashboard", "alpha", "packer", "norg", "DoomInfo",
-            "NvimTree", "Outline", "toggleterm",
-        }
-    end
+	event = "BufRead",
+	config = function()
+		vim.g.Illuminate_highlightUnderCursor = 0
+		vim.g.Illuminate_ftblacklist = {
+			"help",
+			"dashboard",
+			"alpha",
+			"packer",
+			"norg",
+			"DoomInfo",
+			"NvimTree",
+			"Outline",
+			"toggleterm",
+		}
+	end,
 }
 editor["terrortylor/nvim-comment"] = {
 	opt = false,
