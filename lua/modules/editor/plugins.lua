@@ -112,7 +112,7 @@ editor["rcarriga/nvim-dap-ui"] = {
 	requires = {
 		{ "mfussenegger/nvim-dap", config = conf.dap },
 		{
-			"Pocco81/DAPInstall.nvim",
+			"Pocco81/dap-buddy.nvim",
 			opt = true,
 			cmd = { "DIInstall", "DIUninstall", "DIList" },
 			commit = "24923c3819a450a772bb8f675926d530e829665f",
