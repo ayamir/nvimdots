@@ -103,6 +103,7 @@ editor["rcarriga/nvim-dap-ui"] = {
 			"Pocco81/DAPInstall.nvim",
 			opt = true,
 			cmd = { "DIInstall", "DIUninstall", "DIList" },
+			commit = "24923c3819a450a772bb8f675926d530e829665f",
 			config = conf.dapinstall,
 		},
 	},
