@@ -77,7 +77,7 @@ editor["karb94/neoscroll.nvim"] = {
 	config = conf.neoscroll,
 }
 editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
-editor["akinsho/nvim-toggleterm.lua"] = {
+editor["akinsho/toggleterm.nvim"] = {
 	opt = true,
 	event = "BufRead",
 	config = conf.toggleterm,
