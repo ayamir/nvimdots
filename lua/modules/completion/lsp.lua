@@ -232,11 +232,6 @@ local enhance_server_opts = {
 				},
 			},
 		}
-		-- Disable `gopls`'s format
-		opts.on_attach = function(client)
-			client.resolved_capabilities.document_formatting = false
-			custom_attach(client)
-		end
 	end,
 }
 
@@ -290,12 +285,10 @@ local clangtidy = require("efmls-configs.linters.clang_tidy")
 local eslint = require("efmls-configs.linters.eslint")
 local flake8 = require("efmls-configs.linters.flake8")
 local shellcheck = require("efmls-configs.linters.shellcheck")
-local staticcheck = require("efmls-configs.linters.staticcheck")
 
 local black = require("efmls-configs.formatters.black")
 local luafmt = require("efmls-configs.formatters.stylua")
 local clangfmt = require("efmls-configs.formatters.clang_format")
-local goimports = require("efmls-configs.formatters.goimports")
 local prettier = require("efmls-configs.formatters.prettier")
 local shfmt = require("efmls-configs.formatters.shfmt")
 
@@ -320,7 +313,6 @@ efmls.setup({
 	lua = { formatter = luafmt },
 	c = { formatter = clangfmt, linter = clangtidy },
 	cpp = { formatter = clangfmt, linter = clangtidy },
-	go = { formatter = goimports, linter = staticcheck },
 	python = { formatter = black },
 	vue = { formatter = prettier },
 	typescript = { formatter = prettier, linter = eslint },
