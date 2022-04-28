@@ -15,7 +15,6 @@ I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins
 | Branch |   Completion Solution   |
 | :----: | :---------------------: |
 |  main  | nvim-lspconfig+nvim-cmp |
-|  coq   | nvim-lspconfig+coq_nvim |
 |  coc   |        coc.nvim         |
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
