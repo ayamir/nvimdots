@@ -13,7 +13,7 @@ function config.aerial()
 	require("aerial").setup({
 		-- Priority list of preferred backends for aerial.
 		-- This can be a filetype map (see :help aerial-filetype-map)
-		backends = { "lsp", "treesitter", "markdown" },
+		backends = { "treesitter", "lsp", "markdown" },
 
 		-- Enum: persist, close, auto, global
 		--   persist - aerial window will stay open until closed
@@ -34,6 +34,9 @@ function config.aerial()
 
 		-- Disable aerial on files with this many lines
 		disable_max_lines = 10000,
+
+		-- Disable aerial on files this size or larger (in bytes)
+		disable_max_size = 10000000,
 
 		-- A list of all symbols to display. Set to false to display all symbols.
 		-- This can be a filetype map (see :help aerial-filetype-map)
@@ -64,6 +67,9 @@ function config.aerial()
 		-- Highlight the closest symbol if the cursor is not exactly on one.
 		highlight_closest = true,
 
+		-- Highlight the symbol in the source buffer when cursor is in the aerial win
+		highlight_on_hover = false,
+
 		-- When jumping to a symbol, highlight the line for this many ms.
 		-- Set to false to disable
 		highlight_on_jump = 300,
@@ -74,6 +80,44 @@ function config.aerial()
 		-- "nerd_font" option below.
 		-- If you have lspkind-nvim installed, aerial will use it for icons.
 		icons = {},
+
+		-- Control which windows and buffers aerial should ignore.
+		-- If close_behavior is "global", focusing an ignored window/buffer will
+		-- not cause the aerial window to update.
+		-- If open_automatic is true, focusing an ignored window/buffer will not
+		-- cause an aerial window to open.
+		-- If open_automatic is a function, ignore rules have no effect on aerial
+		-- window opening behavior; it's entirely handled by the open_automatic
+		-- function.
+		ignore = {
+			-- Ignore unlisted buffers. See :help buflisted
+			unlisted_buffers = true,
+
+			-- List of filetypes to ignore.
+			filetypes = {},
+
+			-- Ignored buftypes.
+			-- Can be one of the following:
+			-- false or nil - No buftypes are ignored.
+			-- "special"    - All buffers other than normal buffers are ignored.
+			-- table        - A list of buftypes to ignore. See :help buftype for the
+			--                possible values.
+			-- function     - A function that returns true if the buffer should be
+			--                ignored or false if it should not be ignored.
+			--                Takes two arguments, `bufnr` and `buftype`.
+			buftypes = "special",
+
+			-- Ignored wintypes.
+			-- Can be one of the following:
+			-- false or nil - No wintypes are ignored.
+			-- "special"    - All windows other than normal windows are ignored.
+			-- table        - A list of wintypes to ignore. See :help win_gettype() for the
+			--                possible values.
+			-- function     - A function that returns true if the window should be
+			--                ignored or false if it should not be ignored.
+			--                Takes two arguments, `winid` and `wintype`.
+			wintypes = "special",
+		},
 
 		-- When you fold code with za, zo, or zc, update the aerial tree as well.
 		-- Only works when manage_folds = true
@@ -87,11 +131,12 @@ function config.aerial()
 		-- 'auto' will manage folds if your previous foldmethod was 'manual'
 		manage_folds = false,
 
-		-- The maximum width of the aerial window
-		max_width = 40,
-
-		-- The minimum width of the aerial window.
-		-- To disable dynamic resizing, set this to be equal to max_width
+		-- These control the width of the aerial window.
+		-- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+		-- min_width and max_width can be a list of mixed types.
+		-- max_width = {40, 0.2} means "the lesser of 40 columns or 20% of total"
+		max_width = { 40, 0.2 },
+		width = nil,
 		min_width = 10,
 
 		-- Set default symbol icons to use patched font icons (see https://www.nerdfonts.com/)
@@ -119,6 +164,9 @@ function config.aerial()
 		-- Show box drawing characters for the tree hierarchy
 		show_guides = false,
 
+		-- The autocmds that trigger symbols update (not used for LSP backend)
+		update_events = "TextChanged,InsertLeave",
+
 		-- Customize the characters used when show_guides = true
 		guides = {
 			-- When the child item has a sibling below it
@@ -136,18 +184,25 @@ function config.aerial()
 			-- Controls border appearance. Passed to nvim_open_win
 			border = "rounded",
 
-			-- Controls row offset from cursor. Passed to nvim_open_win
-			row = 1,
+			-- Enum: cursor, editor, win
+			--   cursor - Opens float on top of the cursor
+			--   editor - Opens float centered in the editor
+			--   win    - Opens float centered in the window
+			relative = "cursor",
 
-			-- Controls col offset from cursor. Passed to nvim_open_win
-			col = 0,
+			-- These control the height of the floating window.
+			-- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+			-- min_height and max_height can be a list of mixed types.
+			-- min_height = {8, 0.1} means "the greater of 8 rows or 10% of total"
+			max_height = 0.9,
+			height = nil,
+			min_height = { 8, 0.1 },
 
-			-- The maximum height of the floating aerial window
-			max_height = 100,
-
-			-- The minimum height of the floating aerial window
-			-- To disable dynamic resizing, set this to be equal to max_height
-			min_height = 4,
+			override = function(conf)
+				-- This is the config that will be passed to nvim_open_win.
+				-- Change values here to customize the layout
+				return conf
+			end,
 		},
 
 		lsp = {
@@ -157,6 +212,10 @@ function config.aerial()
 
 			-- Set to false to not update the symbols when there are LSP errors
 			update_when_errors = true,
+
+			-- How long to wait (in ms) after a buffer change before updating
+			-- Only used when diagnostics_trigger_update = false
+			update_delay = 300,
 		},
 
 		treesitter = {
