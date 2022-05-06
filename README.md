@@ -10,7 +10,7 @@
 
 ![Gitui](https://raw.githubusercontent.com/ayamir/blog-imgs/main/gitui.png)
 
-This is my neovim's configuration, which contains four branch.
+This is my neovim's configuration, which contains two branches.
 
 I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
