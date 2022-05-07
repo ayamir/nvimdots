@@ -78,7 +78,7 @@ editor["phaazon/hop.nvim"] = {
 }
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
-	event = "WinScrolled",
+	event = "BufReadPost",
 	config = conf.neoscroll,
 }
 editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
