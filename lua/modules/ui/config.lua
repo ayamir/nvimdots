@@ -88,6 +88,7 @@ function config.lualine()
 			return ""
 		end
 	end
+
 	local mini_sections = {
 		lualine_a = {},
 		lualine_b = {},
@@ -226,7 +227,7 @@ function config.nvim_tree()
 		open_on_tab = false,
 		hijack_cursor = true,
 		update_cwd = true,
-		update_to_buf_dir = { enable =true, auto_open =true},
+		--update_to_buf_dir = { enable = true, auto_open = true },
 		diagnostics = {
 			enable = false,
 			icons = { hint = "", info = "", warning = "", error = "" },
@@ -244,7 +245,7 @@ function config.nvim_tree()
 			height = 30,
 			hide_root_folder = false,
 			side = "left",
-			auto_resize = false,
+			--auto_resize = false,
 			mappings = { custom_only = false, list = {} },
 			number = false,
 			relativenumber = false,
