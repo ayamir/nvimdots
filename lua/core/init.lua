@@ -130,6 +130,13 @@ local minimap_config = function()
 	vim.g.minimap_git_colors = 1
 end
 
+local function check_conda()
+	local venv = os.getenv("CONDA_PREFIX")
+	if venv then
+		vim.g.python3_host_prog = venv .. "/bin/python"
+	end
+end
+
 local clipboard_config = function()
 	vim.cmd([[
     let g:clipboard = {
@@ -157,6 +164,7 @@ local load_core = function()
 	neovide_config()
 	dashboard_config()
 	minimap_config()
+	check_conda()
 	-- clipboard_config()
 
 	require("core.options")
