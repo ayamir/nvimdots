@@ -138,11 +138,11 @@ function config.lualine()
 		if vim.bo.filetype == "python" then
 			local venv = os.getenv("CONDA_DEFAULT_ENV")
 			if venv then
-				return string.format("  (%s)", env_cleanup(venv))
+				return string.format("%s", env_cleanup(venv))
 			end
 			venv = os.getenv("VIRTUAL_ENV")
 			if venv then
-				return string.format("  (%s)", env_cleanup(venv))
+				return string.format("%s", env_cleanup(venv))
 			end
 		end
 		return ""
@@ -171,11 +171,9 @@ function config.lualine()
 				},
 			},
 			lualine_y = {
-				{
-					python_venv,
-					cond = is_python,
-				},
-				{ "filetype", "encoding" },
+				{ "filetype", colored = true, icon_only = true },
+				{ python_venv },
+				{ "encoding" },
 				{
 					"fileformat",
 					icons_enabled = true,
