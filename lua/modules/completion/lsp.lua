@@ -30,6 +30,8 @@ lsp_installer.settings({
 	},
 })
 
+lsp_installer.setup({})
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
@@ -96,158 +98,151 @@ end
 
 -- Override server settings here
 
-local enhance_server_opts = {
-	["sumneko_lua"] = function(opts)
-		opts.settings = {
-			Lua = {
-				diagnostics = { globals = { "vim" } },
-				workspace = {
-					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-					},
-					maxPreload = 100000,
-					preloadFileSize = 10000,
-				},
-				telemetry = { enable = false },
-			},
-		}
-		opts.on_attach = function(client)
-			client.resolved_capabilities.document_formatting = false
-			custom_attach(client)
-		end
-	end,
-	["clangd"] = function(opts)
-		opts.args = {
-			"--background-index",
-			"-std=c++20",
-			"--pch-storage=memory",
-			"--clang-tidy",
-			"--suggest-missing-includes",
-		}
-		opts.capabilities.offsetEncoding = { "utf-16" }
-		opts.single_file_support = true
-		opts.commands = {
-			ClangdSwitchSourceHeader = {
-				function()
-					switch_source_header_splitcmd(0, "edit")
-				end,
-				description = "Open source/header in current buffer",
-			},
-			ClangdSwitchSourceHeaderVSplit = {
-				function()
-					switch_source_header_splitcmd(0, "vsplit")
-				end,
-				description = "Open source/header in a new vsplit",
-			},
-			ClangdSwitchSourceHeaderSplit = {
-				function()
-					switch_source_header_splitcmd(0, "split")
-				end,
-				description = "Open source/header in a new split",
-			},
-		}
-		-- Disable `clangd`'s format
-		opts.on_attach = function(client)
-			client.resolved_capabilities.document_formatting = false
-			custom_attach(client)
-		end
-	end,
-	["jsonls"] = function(opts)
-		opts.settings = {
-			json = {
-				-- Schemas https://www.schemastore.org
-				schemas = {
-					{
-						fileMatch = { "package.json" },
-						url = "https://json.schemastore.org/package.json",
-					},
-					{
-						fileMatch = { "tsconfig*.json" },
-						url = "https://json.schemastore.org/tsconfig.json",
-					},
-					{
-						fileMatch = {
-							".prettierrc",
-							".prettierrc.json",
-							"prettier.config.json",
-						},
-						url = "https://json.schemastore.org/prettierrc.json",
-					},
-					{
-						fileMatch = { ".eslintrc", ".eslintrc.json" },
-						url = "https://json.schemastore.org/eslintrc.json",
-					},
-					{
-						fileMatch = {
-							".babelrc",
-							".babelrc.json",
-							"babel.config.json",
-						},
-						url = "https://json.schemastore.org/babelrc.json",
-					},
-					{
-						fileMatch = { "lerna.json" },
-						url = "https://json.schemastore.org/lerna.json",
-					},
-					{
-						fileMatch = {
-							".stylelintrc",
-							".stylelintrc.json",
-							"stylelint.config.json",
-						},
-						url = "http://json.schemastore.org/stylelintrc.json",
-					},
-					{
-						fileMatch = { "/.github/workflows/*" },
-						url = "https://json.schemastore.org/github-workflow.json",
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+	if server.name == "gopls" then
+		nvim_lsp.gopls.setup({
+			on_attach = custom_attach,
+			flags = { debounce_text_changes = 500 },
+			capabilities = capabilities,
+			settings = {
+				gopls = {
+					usePlaceholders = true,
+					analyses = {
+						nilness = true,
+						shadow = true,
+						unusedparams = true,
+						unusewrites = true,
 					},
 				},
 			},
-		}
-	end,
-	["tsserver"] = function(opts)
-		-- Disable `tsserver`'s format
-		opts.on_attach = function(client)
-			client.resolved_capabilities.document_formatting = false
-			custom_attach(client)
-		end
-	end,
-	["dockerls"] = function(opts)
-		-- Disable `dockerls`'s format
-		opts.on_attach = function(client)
-			client.resolved_capabilities.document_formatting = false
-			custom_attach(client)
-		end
-	end,
-	["gopls"] = function(opts)
-		opts.settings = {
-			gopls = {
-				usePlaceholders = true,
-				analyses = {
-					nilness = true,
-					shadow = true,
-					unusedparams = true,
-					unusewrites = true,
+		})
+	elseif server.name == "sumneko_lua" then
+		nvim_lsp.sumneko_lua.setup({
+			capabilities = capabilities,
+			on_attach = function(client)
+				client.resolved_capabilities.document_formatting = false
+				custom_attach(client)
+			end,
+			setttings = {
+				Lua = {
+					diagnostics = { globals = { "vim" } },
+					workspace = {
+						library = {
+							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+							[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+						},
+						maxPreload = 100000,
+						preloadFileSize = 10000,
+					},
+					telemetry = { enable = false },
 				},
 			},
-		}
-	end,
-}
-
-lsp_installer.on_server_ready(function(server)
-	local opts = {
-		capabilities = capabilities,
-		flags = { debounce_text_changes = 500 },
-		on_attach = custom_attach,
-	}
-
-	if enhance_server_opts[server.name] then
-		enhance_server_opts[server.name](opts)
+		})
+	elseif server.name == "clangd" then
+		local copy_capabilities = capabilities
+		copy_capabilities.offsetEncoding = { "utf-16" }
+		nvim_lsp.clangd.setup({
+			capabilities = copy_capabilities,
+			single_file_support = true,
+			on_attach = function(client)
+				client.resolved_capabilities.document_formatting = false
+				custom_attach(client)
+			end,
+			args = {
+				"--background-index",
+				"-std=c++20",
+				"--pch-storage=memory",
+				"--clang-tidy",
+				"--suggest-missing-includes",
+			},
+			commands = {
+				ClangdSwitchSourceHeader = {
+					function()
+						switch_source_header_splitcmd(0, "edit")
+					end,
+					description = "Open source/header in current buffer",
+				},
+				ClangdSwitchSourceHeaderVSplit = {
+					function()
+						switch_source_header_splitcmd(0, "vsplit")
+					end,
+					description = "Open source/header in a new vsplit",
+				},
+				ClangdSwitchSourceHeaderSplit = {
+					function()
+						switch_source_header_splitcmd(0, "split")
+					end,
+					description = "Open source/header in a new split",
+				},
+			},
+		})
+	elseif server.name == "jsonls" then
+		nvim_lsp.jsonls.setup({
+			flags = { debounce_text_changes = 500 },
+			capabilities = capabilities,
+			on_attach = custom_attach,
+			settings = {
+				json = {
+					-- Schemas https://www.schemastore.org
+					schemas = {
+						{
+							fileMatch = { "package.json" },
+							url = "https://json.schemastore.org/package.json",
+						},
+						{
+							fileMatch = { "tsconfig*.json" },
+							url = "https://json.schemastore.org/tsconfig.json",
+						},
+						{
+							fileMatch = {
+								".prettierrc",
+								".prettierrc.json",
+								"prettier.config.json",
+							},
+							url = "https://json.schemastore.org/prettierrc.json",
+						},
+						{
+							fileMatch = { ".eslintrc", ".eslintrc.json" },
+							url = "https://json.schemastore.org/eslintrc.json",
+						},
+						{
+							fileMatch = {
+								".babelrc",
+								".babelrc.json",
+								"babel.config.json",
+							},
+							url = "https://json.schemastore.org/babelrc.json",
+						},
+						{
+							fileMatch = { "lerna.json" },
+							url = "https://json.schemastore.org/lerna.json",
+						},
+						{
+							fileMatch = {
+								".stylelintrc",
+								".stylelintrc.json",
+								"stylelint.config.json",
+							},
+							url = "http://json.schemastore.org/stylelintrc.json",
+						},
+						{
+							fileMatch = { "/.github/workflows/*" },
+							url = "https://json.schemastore.org/github-workflow.json",
+						},
+					},
+				},
+			},
+		})
+	else
+		nvim_lsp[server.name].setup({
+			capabilities = capabilities,
+			on_attach = function(client)
+				client.resolved_capabilities.document_formatting = false
+				custom_attach(client)
+			end,
+		})
 	end
-
-	server:setup(opts)
-end)
+end
 
 -- https://github.com/vscode-langservers/vscode-html-languageserver-bin
 
