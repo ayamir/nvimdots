@@ -20,7 +20,11 @@ ui["SmiteshP/nvim-gps"] = {
 	config = conf.nvim_gps,
 }
 ui["arkav/lualine-lsp-progress"] = { opt = true, after = "nvim-gps" }
-ui["glepnir/dashboard-nvim"] = { opt = true, event = "BufWinEnter" }
+ui["goolord/alpha-nvim"] = {
+	opt = true,
+	event = "BufWinEnter",
+	config = conf.alpha,
+}
 ui["kyazdani42/nvim-tree.lua"] = {
 	opt = true,
 	cmd = { "NvimTreeToggle" },
