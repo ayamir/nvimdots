@@ -125,7 +125,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 			end,
 			setttings = {
 				Lua = {
-					diagnostics = { globals = { "vim" } },
+					diagnostics = { globals = { "vim", "packer_plugins" } },
 					workspace = {
 						library = {
 							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
