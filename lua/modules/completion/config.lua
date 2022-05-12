@@ -239,8 +239,35 @@ function config.cmp()
 		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 	end
 
+	local border = function(hl)
+		return {
+			{ "╭", hl },
+			{ "─", hl },
+			{ "╮", hl },
+			{ "│", hl },
+			{ "╯", hl },
+			{ "─", hl },
+			{ "╰", hl },
+			{ "│", hl },
+		}
+	end
+
+	local cmp_window = require("cmp.utils.window")
+
+	function cmp_window:has_scrollbar()
+		return false
+	end
+
 	local cmp = require("cmp")
 	cmp.setup({
+		window = {
+			completion = {
+				border = border("CmpBorder"),
+			},
+			documentation = {
+				border = border("CmpDocBorder"),
+			},
+		},
 		sorting = {
 			comparators = {
 				cmp.config.compare.offset,
