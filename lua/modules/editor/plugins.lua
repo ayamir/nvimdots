@@ -2,10 +2,22 @@ local editor = {}
 local conf = require("modules.editor.config")
 
 editor["junegunn/vim-easy-align"] = { opt = true, cmd = "EasyAlign" }
-editor["itchyny/vim-cursorword"] = {
-	opt = true,
-	event = { "BufReadPre", "BufNewFile" },
-	config = conf.vim_cursorwod,
+editor["RRethy/vim-illuminate"] = {
+	event = "BufRead",
+	config = function()
+		vim.g.Illuminate_highlightUnderCursor = 0
+		vim.g.Illuminate_ftblacklist = {
+			"help",
+			"dashboard",
+			"alpha",
+			"packer",
+			"norg",
+			"DoomInfo",
+			"NvimTree",
+			"Outline",
+			"toggleterm",
+		}
+	end,
 }
 editor["terrortylor/nvim-comment"] = {
 	opt = false,
@@ -24,10 +36,6 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	config = conf.nvim_treesitter,
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
-	opt = true,
-	after = "nvim-treesitter",
-}
-editor["romgrk/nvim-treesitter-context"] = {
 	opt = true,
 	after = "nvim-treesitter",
 }
@@ -54,7 +62,7 @@ editor["andymass/vim-matchup"] = {
 	after = "nvim-treesitter",
 	config = conf.matchup,
 }
-editor["rhysd/accelerated-jk"] = { opt = true, event = "BufReadPost" }
+editor["rhysd/accelerated-jk"] = { opt = true, event = "BufWinEnter" }
 editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor["romainl/vim-cool"] = {
 	opt = true,
@@ -63,25 +71,18 @@ editor["romainl/vim-cool"] = {
 editor["phaazon/hop.nvim"] = {
 	opt = true,
 	branch = "v1",
-	cmd = {
-		"HopLine",
-		"HopLineStart",
-		"HopWord",
-		"HopPattern",
-		"HopChar1",
-		"HopChar2",
-	},
+	event = "BufReadPost",
 	config = function()
 		require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 	end,
 }
 editor["karb94/neoscroll.nvim"] = {
 	opt = true,
-	event = "WinScrolled",
+	event = "BufReadPost",
 	config = conf.neoscroll,
 }
 editor["vimlab/split-term.vim"] = { opt = true, cmd = { "Term", "VTerm" } }
-editor["akinsho/nvim-toggleterm.lua"] = {
+editor["akinsho/toggleterm.nvim"] = {
 	opt = true,
 	event = "BufRead",
 	config = conf.toggleterm,
@@ -104,9 +105,10 @@ editor["rcarriga/nvim-dap-ui"] = {
 	requires = {
 		{ "mfussenegger/nvim-dap", config = conf.dap },
 		{
-			"Pocco81/DAPInstall.nvim",
+			"Pocco81/dap-buddy.nvim",
 			opt = true,
 			cmd = { "DIInstall", "DIUninstall", "DIList" },
+			commit = "24923c3819a450a772bb8f675926d530e829665f",
 			config = conf.dapinstall,
 		},
 	},
