@@ -123,7 +123,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 				client.resolved_capabilities.document_formatting = false
 				custom_attach(client)
 			end,
-			setttings = {
+			settings = {
 				Lua = {
 					diagnostics = { globals = { "vim", "packer_plugins" } },
 					workspace = {
