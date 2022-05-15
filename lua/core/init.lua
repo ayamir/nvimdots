@@ -66,12 +66,6 @@ local neovide_config = function()
 	vim.g.neovide_cursor_vfx_particle_density = 5.0
 end
 
-local minimap_config = function()
-	vim.g.minimap_auto_start = 0
-	vim.g.minimap_block_filetypes = { "aerial", "NvimTree" }
-	vim.g.minimap_git_colors = 1
-end
-
 local function check_conda()
 	local venv = os.getenv("CONDA_PREFIX")
 	if venv then
@@ -104,7 +98,6 @@ local load_core = function()
 
 	pack.ensure_plugins()
 	neovide_config()
-	minimap_config()
 	check_conda()
 	-- clipboard_config()
 
