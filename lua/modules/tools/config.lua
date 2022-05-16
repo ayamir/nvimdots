@@ -7,6 +7,19 @@ function config.telescope()
 	vim.cmd([[packadd telescope-frecency.nvim]])
 	vim.cmd([[packadd telescope-zoxide]])
 
+	local telescope_actions = require("telescope.actions.set")
+	local fixfolds = {
+		hidden = true,
+		attach_mappings = function(_)
+			telescope_actions.select:enhance({
+				post = function()
+					vim.cmd(":normal! zx")
+				end,
+			})
+			return true
+		end,
+	}
+
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
@@ -43,6 +56,14 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+		},
+		pickers = {
+			buffers = fixfolds,
+			find_files = fixfolds,
+			git_files = fixfolds,
+			grep_string = fixfolds,
+			live_grep = fixfolds,
+			oldfiles = fixfolds,
 		},
 	})
 
