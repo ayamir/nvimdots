@@ -9,6 +9,10 @@ ui["catppuccin/nvim"] = {
 	as = "catppuccin",
 	config = conf.catppuccin,
 }
+ui["rcarriga/nvim-notify"] = {
+	opt = false,
+	config = conf.notify,
+}
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
 	after = "lualine-lsp-progress",
