@@ -1,31 +1,103 @@
 local M = {}
 
-local xor = function(bool, a, b)
-	if bool then
-		return a
-	else
-		return b
+local format_on_save = true
+
+vim.cmd([[command! FormatToggle lua require'modules.completion.formatting'.toggle_format_on_save()]])
+
+function M.enable_format_on_save(is_configure)
+	local opts = { pattern = "*", timeout = 1000 }
+	vim.api.nvim_create_augroup("format_on_save", {})
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = "format_on_save",
+		pattern = opts.pattern,
+		callback = function()
+			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = opts.filter })
+		end,
+	})
+	if not is_configure then
+		vim.notify("Enabled format-on-save", vim.log.levels.INFO)
 	end
 end
 
-local format_disabled_var = function()
-	return string.format("format_disabled_%s", vim.bo.filetype)
-end
-local format_options_var = function()
-	return string.format("format_options_%s", vim.bo.filetype)
+function M.disable_format_on_save()
+	pcall(vim.api.nvim_del_augroup_by_name, "format_on_save")
+	vim.notify("Disabled format-on-save", vim.log.levels.INFO)
 end
 
-M.formatToggle = function(value)
-	local var = format_disabled_var()
-	vim.g[var] = xor(value ~= nil, value, not vim.g[var])
+function M.configure_format_on_save()
+	if format_on_save then
+		M.enable_format_on_save(true)
+	else
+		M.disable_format_on_save()
+	end
 end
-vim.cmd([[command! FormatDisable lua require'modules.completion.formatting'.formatToggle(true)]])
-vim.cmd([[command! FormatEnable lua require'modules.completion.formatting'.formatToggle(false)]])
 
-M.format = function()
-	if not vim.b.saving_format and not vim.g[format_disabled_var()] then
-		vim.b.init_changedtick = vim.b.changedtick
-		vim.lsp.buf.formatting(vim.g[format_options_var()] or {})
+function M.toggle_format_on_save()
+	local status, _ = pcall(vim.api.nvim_get_autocmds, {
+		group = "format_on_save",
+		event = "BufWritePre",
+	})
+	if not status then
+		M.enable_format_on_save(false)
+	else
+		M.disable_format_on_save()
+	end
+end
+
+function M.format_filter(clients)
+	return vim.tbl_filter(function(client)
+		local status_ok, formatting_supported = pcall(function()
+			return client.supports_method("textDocument/formatting")
+		end)
+		if status_ok and formatting_supported and client.name == "efm" then
+			return "efm"
+		else
+			return status_ok and formatting_supported and client.name
+		end
+	end, clients)
+end
+
+function M.format(opts)
+	opts = opts or { filter = M.format_filter }
+
+	if vim.lsp.buf.format then
+		vim.lsp.buf.format(opts)
+		vim.notify("Format successfully!", vim.log.levels.INFO)
+		return
+	end
+
+	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
+	local clients = vim.lsp.buf_get_clients(bufnr)
+
+	if opts.filter then
+		clients = opts.filter(clients)
+	elseif opts.id then
+		clients = vim.tbl_filter(function(client)
+			return client.id == opts.id
+		end, clients)
+	elseif opts.name then
+		clients = vim.tbl_filter(function(client)
+			return client.name == opts.name
+		end, clients)
+	end
+
+	clients = vim.tbl_filter(function(client)
+		return client.supports_method("textDocument/formatting")
+	end, clients)
+
+	if #clients == 0 then
+		vim.notify("[LSP] Format request failed, no matching language servers.")
+	end
+
+	local timeout_ms = opts.timeout_ms
+	for _, client in pairs(clients) do
+		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
+		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
+		if result and result.result then
+			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
+		elseif err then
+			vim.notify(string.format("[LSP][%s] %s", client.name, err), vim.log.levels.WARN)
+		end
 	end
 end
 

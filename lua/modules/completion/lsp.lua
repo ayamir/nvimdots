@@ -1,4 +1,4 @@
-require("modules.completion.formatting")
+local formatting = require("modules.completion.formatting")
 
 vim.cmd([[packadd nvim-lsp-installer]])
 vim.cmd([[packadd lsp_signature.nvim]])
@@ -20,40 +20,10 @@ saga.init_lsp_saga({
 	infor_sign = "",
 })
 
-lsp_installer.settings({
-	ui = {
-		icons = {
-			server_installed = "✓",
-			server_pending = "➜",
-			server_uninstalled = "✗",
-		},
-	},
-})
-
 lsp_installer.setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-
--- Override default format setting
-
-vim.lsp.handlers["textDocument/formatting"] = function(err, result, ctx)
-	if err ~= nil or result == nil then
-		return
-	end
-	if
-		vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") == vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick")
-	then
-		local view = vim.fn.winsaveview()
-		vim.lsp.util.apply_text_edits(result, ctx.bufnr, "utf-16")
-		vim.fn.winrestview(view)
-		if ctx.bufnr == vim.api.nvim_get_current_buf() then
-			vim.b.saving_format = true
-			vim.cmd([[update]])
-			vim.b.saving_format = false
-		end
-	end
-end
 
 local function custom_attach(client)
 	require("lsp_signature").on_attach({
@@ -67,13 +37,6 @@ local function custom_attach(client)
 	})
 	require("aerial").on_attach(client)
 	require("illuminate").on_attach(client)
-
-	if client.resolved_capabilities.document_formatting then
-		vim.cmd([[augroup Format]])
-		vim.cmd([[autocmd! * <buffer>]])
-		vim.cmd([[autocmd BufWritePost <buffer> lua require'modules.completion.formatting'.format()]])
-		vim.cmd([[augroup END]])
-	end
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
@@ -119,10 +82,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 	elseif server.name == "sumneko_lua" then
 		nvim_lsp.sumneko_lua.setup({
 			capabilities = capabilities,
-			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				custom_attach(client)
-			end,
+			on_attach = custom_attach,
 			settings = {
 				Lua = {
 					diagnostics = { globals = { "vim", "packer_plugins" } },
@@ -144,10 +104,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 		nvim_lsp.clangd.setup({
 			capabilities = copy_capabilities,
 			single_file_support = true,
-			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				custom_attach(client)
-			end,
+			on_attach = custom_attach,
 			args = {
 				"--background-index",
 				"-std=c++20",
@@ -236,10 +193,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 	else
 		nvim_lsp[server.name].setup({
 			capabilities = capabilities,
-			on_attach = function(client)
-				client.resolved_capabilities.document_formatting = false
-				custom_attach(client)
-			end,
+			on_attach = custom_attach,
 		})
 	end
 end
@@ -257,10 +211,7 @@ nvim_lsp.html.setup({
 	single_file_support = true,
 	flags = { debounce_text_changes = 500 },
 	capabilities = capabilities,
-	on_attach = function(client)
-		client.resolved_capabilities.document_formatting = false
-		custom_attach(client)
-	end,
+	on_attach = custom_attach,
 })
 
 local efmls = require("efmls-configs")
@@ -322,3 +273,5 @@ efmls.setup({
 	markdown = { formatter = prettier },
 	-- rust = {formatter = rustfmt},
 })
+
+formatting.configure_format_on_save()
