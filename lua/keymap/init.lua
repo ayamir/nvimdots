@@ -72,7 +72,6 @@ local plug_map = {
 	["n|<Leader>sc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
 	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
 	["n|<Leader>fw"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
-	["n|<Leader>fb"] = map_cu("Telescope file_browser"):with_noremap():with_silent(),
 	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
 	["n|<Leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
 	-- Plugin accelerate-jk
