@@ -11,7 +11,7 @@ function M.enable_format_on_save(is_configure)
 		group = "format_on_save",
 		pattern = opts.pattern,
 		callback = function()
-			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = opts.filter })
+			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
 		end,
 	})
 	if not is_configure then
@@ -51,15 +51,13 @@ function M.format_filter(clients)
 		end)
 		if status_ok and formatting_supported and client.name == "efm" then
 			return "efm"
-		else
+		elseif client.name ~= "sumneko_lua" and client.name ~= "clangd" and client.name ~= "tsserver" then
 			return status_ok and formatting_supported and client.name
 		end
 	end, clients)
 end
 
 function M.format(opts)
-	opts = opts or { filter = M.format_filter }
-
 	if vim.lsp.buf.format then
 		vim.lsp.buf.format(opts)
 		vim.notify("Format successfully!", vim.log.levels.INFO)
@@ -95,6 +93,7 @@ function M.format(opts)
 		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
 		if result and result.result then
 			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
+			vim.notify(string.format("Format successfully with %s!", client.name), vim.log.levels.INFO)
 		elseif err then
 			vim.notify(string.format("[LSP][%s] %s", client.name, err), vim.log.levels.WARN)
 		end
