@@ -134,10 +134,5 @@ editor["sindrets/diffview.nvim"] = {
 	opt = true,
 	cmd = { "DiffviewOpen" },
 }
-editor["brglng/vim-im-select"] = {
-	opt = false,
-	event = "BufReadPost",
-	config = conf.imselect,
-}
 
 return editor
