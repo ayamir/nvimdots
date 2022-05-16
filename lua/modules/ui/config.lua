@@ -57,7 +57,6 @@ function config.alpha()
 			opts = opts,
 		}
 	end
-
 	local leader = "comma"
 	dashboard.section.buttons.val = {
 		button("comma s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
@@ -83,7 +82,6 @@ function config.alpha()
 			.. total_plugins
 			.. " plugins"
 	end
-
 	dashboard.section.footer.val = footer()
 	dashboard.section.footer.opts.hl = "Function"
 
@@ -105,7 +103,7 @@ function config.alpha()
 end
 
 function config.edge()
-	vim.cmd([[set background=light]])
+	-- vim.cmd([[set background=light]])
 	vim.g.edge_style = "aura"
 	vim.g.edge_enable_italic = 1
 	vim.g.edge_disable_italic_comment = 1
@@ -120,7 +118,8 @@ function config.nord()
 	vim.g.nord_cursorline_transparent = true
 	vim.g.nord_disable_background = false
 	vim.g.nord_enable_sidebar_background = true
-	vim.g.nord_italic = false
+	vim.g.nord_italic = true
+	require("nord").set()
 end
 
 function config.catppuccin()
@@ -213,7 +212,6 @@ function config.lualine()
 			return ""
 		end
 	end
-
 	local mini_sections = {
 		lualine_a = {},
 		lualine_b = {},
@@ -562,8 +560,6 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-	vim.opt.termguicolors = true
-	vim.opt.list = true
 	require("indent_blankline").setup({
 		char = "│",
 		show_first_indent_level = true,
