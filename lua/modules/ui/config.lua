@@ -105,7 +105,6 @@ function config.alpha()
 end
 
 function config.edge()
-	vim.cmd([[set background=light]])
 	vim.g.edge_style = "aura"
 	vim.g.edge_enable_italic = 1
 	vim.g.edge_disable_italic_comment = 1
@@ -120,7 +119,7 @@ function config.nord()
 	vim.g.nord_cursorline_transparent = true
 	vim.g.nord_disable_background = false
 	vim.g.nord_enable_sidebar_background = true
-	vim.g.nord_italic = false
+	vim.g.nord_italic = true
 end
 
 function config.catppuccin()
@@ -562,8 +561,6 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-	vim.opt.termguicolors = true
-	vim.opt.list = true
 	require("indent_blankline").setup({
 		char = "│",
 		show_first_indent_level = true,
