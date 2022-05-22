@@ -85,7 +85,7 @@ function autocmd.load_autocmds()
 			{
 				"FileType",
 				"*",
-				[[setlocal formatoptions-=c formatoptions-=r formatoptions-=o]],
+				[[setlocal formatoptions-=cro]],
 			},
 			{
 				"FileType",

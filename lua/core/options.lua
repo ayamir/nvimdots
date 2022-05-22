@@ -1,17 +1,5 @@
 local global = require("core.global")
 
-local function bind_option(options)
-	for k, v in pairs(options) do
-		if v == true then
-			vim.cmd("set " .. k)
-		elseif v == false then
-			vim.cmd("set no" .. k)
-		else
-			vim.cmd("set " .. k .. "=" .. v)
-		end
-	end
-end
-
 local function load_options()
 	local global_local = {
 		termguicolors = true,
@@ -93,18 +81,15 @@ local function load_options()
 		winblend = 10,
 		autoread = true,
 		autowrite = true,
-	}
 
-	local bw_local = {
 		undofile = true,
 		synmaxcol = 2500,
 		formatoptions = "1jcroql",
-		textwidth = 80,
-		expandtab = false,
+		expandtab = true,
 		autoindent = true,
 		tabstop = 4,
 		shiftwidth = 4,
-		softtabstop = -1,
+		softtabstop = 4,
 		breakindentopt = "shift:2,min:20",
 		wrap = false,
 		linebreak = true,
@@ -129,7 +114,6 @@ local function load_options()
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
-	bind_option(bw_local)
 end
 
 load_options()
