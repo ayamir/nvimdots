@@ -54,7 +54,7 @@ editor["mfussenegger/nvim-ts-hint-textobject"] = {
 }
 editor["windwp/nvim-ts-autotag"] = {
 	opt = true,
-	ft = { "html", "xml" },
+	after = "nvim-treesitter",
 	config = conf.autotag,
 }
 editor["andymass/vim-matchup"] = {
@@ -133,6 +133,11 @@ editor["abecodes/tabout.nvim"] = {
 editor["sindrets/diffview.nvim"] = {
 	opt = true,
 	cmd = { "DiffviewOpen" },
+}
+editor["brglng/vim-im-select"] = {
+	opt = false,
+	event = "BufReadPost",
+	config = conf.imselect,
 }
 
 return editor

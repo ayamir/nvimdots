@@ -57,6 +57,7 @@ function config.alpha()
 			opts = opts,
 		}
 	end
+
 	local leader = "comma"
 	dashboard.section.buttons.val = {
 		button("comma s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
@@ -82,6 +83,7 @@ function config.alpha()
 			.. total_plugins
 			.. " plugins"
 	end
+
 	dashboard.section.footer.val = footer()
 	dashboard.section.footer.opts.hl = "Function"
 
@@ -103,7 +105,6 @@ function config.alpha()
 end
 
 function config.edge()
-	vim.cmd([[set background=light]])
 	vim.g.edge_style = "aura"
 	vim.g.edge_enable_italic = 1
 	vim.g.edge_disable_italic_comment = 1
@@ -118,12 +119,12 @@ function config.nord()
 	vim.g.nord_cursorline_transparent = true
 	vim.g.nord_disable_background = false
 	vim.g.nord_enable_sidebar_background = true
-	vim.g.nord_italic = false
+	vim.g.nord_italic = true
 end
 
 function config.catppuccin()
 	require("catppuccin").setup({
-		transparent_background = true,
+		transparent_background = false,
 		term_colors = true,
 		styles = {
 			comments = "italic",
@@ -171,6 +172,36 @@ function config.catppuccin()
 	})
 end
 
+function config.notify()
+	local notify = require("notify")
+	notify.setup({
+		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
+		stages = "slide",
+		---@usage Function called when a new window is opened, use for changing win settings/config
+		on_open = nil,
+		---@usage Function called when a window is closed
+		on_close = nil,
+		---@usage timeout for notifications in ms, default 5000
+		timeout = 2000,
+		-- Render function for notifications. See notify-render()
+		render = "default",
+		---@usage highlight behind the window for stages that change opacity
+		background_colour = "Normal",
+		---@usage minimum width for notification windows
+		minimum_width = 50,
+		---@usage Icons for the different levels
+		icons = {
+			ERROR = "",
+			WARN = "",
+			INFO = "",
+			DEBUG = "",
+			TRACE = "✎",
+		},
+	})
+
+	vim.notify = notify
+end
+
 function config.lualine()
 	local gps = require("nvim-gps")
 
@@ -197,10 +228,6 @@ function config.lualine()
 		lualine_x = {},
 		lualine_y = {},
 		lualine_z = { "location" },
-	}
-	local minimap = {
-		sections = mini_sections,
-		filetypes = { "minimap" },
 	}
 	local aerial = {
 		sections = mini_sections,
@@ -303,7 +330,6 @@ function config.lualine()
 			"nvim-tree",
 			"toggleterm",
 			"fugitive",
-			minimap,
 			aerial,
 			dapui_scopes,
 			dapui_breakpoints,
@@ -535,8 +561,6 @@ function config.gitsigns()
 end
 
 function config.indent_blankline()
-	vim.opt.termguicolors = true
-	vim.opt.list = true
 	require("indent_blankline").setup({
 		char = "│",
 		show_first_indent_level = true,

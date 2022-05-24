@@ -9,6 +9,10 @@ ui["catppuccin/nvim"] = {
 	as = "catppuccin",
 	config = conf.catppuccin,
 }
+ui["rcarriga/nvim-notify"] = {
+	opt = false,
+	config = conf.notify,
+}
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
 	after = "lualine-lsp-progress",
@@ -47,16 +51,12 @@ ui["akinsho/bufferline.nvim"] = {
 	event = "BufRead",
 	config = conf.nvim_bufferline,
 }
-ui["petertriho/nvim-scrollbar"] = {
+ui["dstein64/nvim-scrollview"] = {
 	opt = true,
-	event = "BufRead",
+	event = { "BufRead" },
 	config = function()
-		require("scrollbar").setup()
+		require("scrollview").setup({})
 	end,
-}
-ui["wfxr/minimap.vim"] = {
-	opt = true,
-	event = "BufRead",
 }
 ui["mbbill/undotree"] = {
 	opt = true,

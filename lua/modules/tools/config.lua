@@ -7,6 +7,19 @@ function config.telescope()
 	vim.cmd([[packadd telescope-frecency.nvim]])
 	vim.cmd([[packadd telescope-zoxide]])
 
+	local telescope_actions = require("telescope.actions.set")
+	local fixfolds = {
+		hidden = true,
+		attach_mappings = function(_)
+			telescope_actions.select:enhance({
+				post = function()
+					vim.cmd(":normal! zx")
+				end,
+			})
+			return true
+		end,
+	}
+
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
@@ -43,6 +56,14 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+		},
+		pickers = {
+			buffers = fixfolds,
+			find_files = fixfolds,
+			git_files = fixfolds,
+			grep_string = fixfolds,
+			live_grep = fixfolds,
+			oldfiles = fixfolds,
 		},
 	})
 
@@ -145,7 +166,7 @@ function config.which_key()
 		},
 
 		window = {
-			border = "none", 
+			border = "none",
 			position = "bottom",
 			margin = { 1, 0, 1, 0 },
 			padding = { 1, 1, 1, 1 },
@@ -158,8 +179,22 @@ function config.wilder()
 	vim.cmd([[
 call wilder#setup({'modes': [':', '/', '?']})
 call wilder#set_option('use_python_remote_plugin', 0)
-call wilder#set_option('pipeline', [wilder#branch(wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),wilder#vim_search_pipeline(), [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})])])
-call wilder#set_option('renderer', wilder#renderer_mux({':': wilder#popupmenu_renderer({'highlighter': wilder#lua_fzy_highlighter(), 'left': [wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]}), '/': wilder#wildmenu_renderer({'highlighter': wilder#lua_fzy_highlighter()})}))
+call wilder#set_option('pipeline', [wilder#branch(
+	\ wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),
+	\ wilder#vim_search_pipeline(),
+	\ [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})]
+	\ )])
+call wilder#set_option('renderer', wilder#renderer_mux({
+	\ ':': wilder#popupmenu_renderer({
+		\ 'highlighter': wilder#lua_fzy_highlighter(),
+		\ 'left': [wilder#popupmenu_devicons()],
+		\ 'right': [' ', wilder#popupmenu_scrollbar()]
+		\ }),
+	\ '/': wilder#wildmenu_renderer({
+		\ 'highlighter': wilder#lua_fzy_highlighter(),
+		\ 'apply_incsearch_fix': v:true,
+		\})
+	\ }))
 ]])
 end
 
