@@ -58,12 +58,6 @@ function M.format_filter(clients)
 end
 
 function M.format(opts)
-	if vim.lsp.buf.format then
-		vim.lsp.buf.format(opts)
-		vim.notify("Format successfully!", vim.log.levels.INFO)
-		return
-	end
-
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.buf_get_clients(bufnr)
 
