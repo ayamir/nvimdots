@@ -361,12 +361,12 @@ function config.nvim_gps()
 end
 
 function config.nvim_tree()
-	vim.g.nvim_tree_root_folder_modifier = ":e"
-	vim.g.nvim_tree_icon_padding = " "
-	vim.g.nvim_tree_symlink_arror = "  "
-	vim.g.nvim_tree_respect_buf_cwd = 1
+	vim.g.root_folder_modifier = ":e"
+	vim.g.icon_padding = " "
+	vim.g.symlink_arror = "  "
+	vim.g.respect_buf_cwd = 1
 
-	vim.g.nvim_tree_icons = {
+	vim.g.icons = {
 		["default"] = "", --
 		["symlink"] = "",
 		["git"] = {
