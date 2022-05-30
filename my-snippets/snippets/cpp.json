@@ -5,7 +5,9 @@
             "class ${1:Solution}",
             "{",
             "public:",
-            "\tint algorithm() {}",
+            "\t$2 $3($4) {",
+            "\t\t$5",
+            "\t}",
             "};"
         ],
         "description": "leetcode solution template"
