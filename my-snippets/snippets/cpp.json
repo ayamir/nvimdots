@@ -1,0 +1,13 @@
+{
+    "solu": {
+        "prefix": "solu",
+        "body": [
+            "class ${1:Solution}",
+            "{",
+            "public:",
+            "\tint algorithm() {}",
+            "};"
+        ],
+        "description": "leetcode solution template"
+    }
+}
