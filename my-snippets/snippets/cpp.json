@@ -1,0 +1,40 @@
+{
+    "solu": {
+        "prefix": "solu",
+        "body": [
+            "class ${1:Solution}",
+            "{",
+            "public:",
+            "\t$2 $3($4) {",
+            "\t\t$5",
+            "\t}",
+            "};"
+        ],
+        "description": "leetcode class Solution template"
+    },
+    "lc": {
+        "prefix": "lc",
+        "body": [
+            "#include <iostream>",
+            "#include <string>",
+            "#include <vector>",
+            "",
+            "using namespace std;",
+            "",
+            "class ${1:Solution}",
+            "{",
+            "public:",
+            "\t$2 $3($4) {",
+            "\t\t$5",
+            "\t}",
+            "};",
+            "",
+            "int main(int argc, char *argv[]) {",
+            "\tSolution s;",
+            "\ts.$3();",
+            "\treturn 0;",
+            "}"
+        ],
+        "description": "leetcode template"
+    }
+}

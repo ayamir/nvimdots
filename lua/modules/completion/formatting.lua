@@ -51,19 +51,13 @@ function M.format_filter(clients)
 		end)
 		if status_ok and formatting_supported and client.name == "efm" then
 			return "efm"
-		elseif client.name ~= "sumneko_lua" and client.name ~= "tsserver" then
+		elseif client.name ~= "sumneko_lua" and client.name ~= "tsserver" and client.name ~= "clangd" then
 			return status_ok and formatting_supported and client.name
 		end
 	end, clients)
 end
 
 function M.format(opts)
-	if vim.lsp.buf.format then
-		vim.lsp.buf.format(opts)
-		vim.notify("Format successfully!", vim.log.levels.INFO)
-		return
-	end
-
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.buf_get_clients(bufnr)
 
