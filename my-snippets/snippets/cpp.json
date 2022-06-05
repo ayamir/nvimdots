@@ -2,11 +2,11 @@
     "solu": {
         "prefix": "solu",
         "body": [
-            "class ${1:Solution}",
+            "class Solution",
             "{",
             "public:",
-            "\t$2 $3($4) {",
-            "\t\t$5",
+            "\t$1 $2($3) {",
+            "\t\t$4",
             "\t}",
             "};"
         ],
@@ -15,23 +15,24 @@
     "lc": {
         "prefix": "lc",
         "body": [
+            "#include <algorithm>",
             "#include <iostream>",
             "#include <string>",
             "#include <vector>",
             "",
             "using namespace std;",
             "",
-            "class ${1:Solution}",
+            "class Solution",
             "{",
             "public:",
-            "\t$2 $3($4) {",
-            "\t\t$5",
+            "\t$1 $2($3) {",
+            "\t\t$4",
             "\t}",
             "};",
             "",
             "int main(int argc, char *argv[]) {",
             "\tSolution s;",
-            "\ts.$3();",
+            "\ts.$2();",
             "\treturn 0;",
             "}"
         ],
