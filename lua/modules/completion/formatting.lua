@@ -1,8 +1,29 @@
 local M = {}
 
 local format_on_save = true
+local enable_list = {}
+enable_list["efm"] = true
+enable_list["clangd"] = true
+enable_list["sumneko_lua"] = true
+enable_list["tsserver"] = true
+enable_list["rust_analyzer"] = true
 
-vim.cmd([[command! FormatToggle lua require'modules.completion.formatting'.toggle_format_on_save()]])
+vim.api.nvim_create_user_command("FormatToggle", function()
+	M.toggle_format_on_save()
+end, {})
+
+vim.api.nvim_create_user_command("SelectedFormatToggle", function(opts)
+	if enable_list[opts.args] == nil then
+		print("Current select language is " .. opts.args .. " not support")
+		return
+	end
+	enable_list[opts.args] = not enable_list[opts.args]
+end, {
+	nargs = 1,
+	complete = function(_, _, _)
+		return { "efm", "clangd", "sumneko_lua", "tsserver", "rust_analyzer" }
+	end,
+})
 
 function M.enable_format_on_save(is_configure)
 	local opts = { pattern = "*", timeout = 1000 }
@@ -83,6 +104,11 @@ function M.format(opts)
 
 	local timeout_ms = opts.timeout_ms
 	for _, client in pairs(clients) do
+		print("client name is " .. client.name)
+		if enable_list[client.name] == false then
+			vim.notify(string.format("[LSP][%s] has disable", client.name))
+			return
+		end
 		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
 		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
 		if result and result.result then
