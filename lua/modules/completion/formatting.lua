@@ -14,12 +14,6 @@ if disabled_worksapce_file ~= nil then
 end
 
 local format_on_save = true
-local enable_list = {}
-enable_list["efm"] = true
-enable_list["clangd"] = true
-enable_list["sumneko_lua"] = true
-enable_list["tsserver"] = true
-enable_list["rust_analyzer"] = true
 
 vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
