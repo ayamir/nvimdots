@@ -14,10 +14,47 @@ if disabled_worksapce_file ~= nil then
 end
 
 local format_on_save = true
+local enable_list = {}
+enable_list["efm"] = true
+enable_list["clangd"] = true
+enable_list["sumneko_lua"] = true
+enable_list["tsserver"] = true
+enable_list["rust_analyzer"] = true
 
 vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
 end, {})
+
+local block_list = {}
+vim.api.nvim_create_user_command("SelectedFormatToggle", function(opts)
+	if block_list[opts.args] == nil then
+		print("Select disable format file type is " .. opts.args)
+		block_list[opts.args] = true
+		return
+	end
+	block_list[opts.args] = not block_list[opts.args]
+end, {
+	nargs = 1,
+	complete = function(_, _, _)
+		return {
+			"markdown",
+			"vim",
+			"lua",
+			"c",
+			"cpp",
+			"python",
+			"vue",
+			"typescript",
+			"javascript",
+			"yaml",
+			"html",
+			"css",
+			"scss",
+			"sh",
+			"rust",
+		}
+	end,
+})
 
 function M.enable_format_on_save(is_configured)
 	local opts = { pattern = "*", timeout = 1000 }
@@ -105,6 +142,10 @@ function M.format(opts)
 
 	local timeout_ms = opts.timeout_ms
 	for _, client in pairs(clients) do
+		if block_list[vim.bo.filetype] == true then
+			vim.notify(string.format("[LSP][%s] format [%s] has disable", client.name, vim.bo.filetype))
+			return
+		end
 		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
 		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
 		if result and result.result then
