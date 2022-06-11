@@ -1,10 +1,25 @@
 local M = {}
 
+local home = os.getenv("HOME")
+
+local disabled_worksapce_path = home .. "/.config/nvim/format_disabled_dirs.txt"
+local disabled_worksapce_file = io.open(disabled_worksapce_path, "r")
+local disabled_worksapce = {}
+
+if disabled_worksapce_file ~= nil then
+	for line in disabled_worksapce_file:lines() do
+		local str = line:gsub("%s+", "")
+		table.insert(disabled_worksapce, str)
+	end
+end
+
 local format_on_save = true
 
-vim.cmd([[command! FormatToggle lua require'modules.completion.formatting'.toggle_format_on_save()]])
+vim.api.nvim_create_user_command("FormatToggle", function()
+	M.toggle_format_on_save()
+end, {})
 
-function M.enable_format_on_save(is_configure)
+function M.enable_format_on_save(is_configured)
 	local opts = { pattern = "*", timeout = 1000 }
 	vim.api.nvim_create_augroup("format_on_save", {})
 	vim.api.nvim_create_autocmd("BufWritePre", {
@@ -14,7 +29,7 @@ function M.enable_format_on_save(is_configure)
 			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
 		end,
 	})
-	if not is_configure then
+	if not is_configured then
 		vim.notify("Enabled format-on-save", vim.log.levels.INFO)
 	end
 end
@@ -58,6 +73,13 @@ function M.format_filter(clients)
 end
 
 function M.format(opts)
+	local cwd = vim.fn.getcwd()
+	for i = 1, #disabled_worksapce do
+		if cwd.find(cwd, disabled_worksapce[i]) ~= nil then
+			return
+		end
+	end
+
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.buf_get_clients(bufnr)
 
