@@ -1,10 +1,56 @@
 local M = {}
 
+local home = os.getenv("HOME")
+
+local disabled_worksapce_path = home .. "/.config/nvim/format_disabled_dirs.txt"
+local disabled_worksapce_file = io.open(disabled_worksapce_path, "r")
+local disabled_worksapce = {}
+
+if disabled_worksapce_file ~= nil then
+	for line in disabled_worksapce_file:lines() do
+		local str = line:gsub("%s+", "")
+		table.insert(disabled_worksapce, str)
+	end
+end
+
 local format_on_save = true
 
-vim.cmd([[command! FormatToggle lua require'modules.completion.formatting'.toggle_format_on_save()]])
+vim.api.nvim_create_user_command("FormatToggle", function()
+	M.toggle_format_on_save()
+end, {})
 
-function M.enable_format_on_save(is_configure)
+local block_list = {}
+vim.api.nvim_create_user_command("SelectedFormatToggle", function(opts)
+	if block_list[opts.args] == nil then
+		print("Select disable format file type is " .. opts.args)
+		block_list[opts.args] = true
+		return
+	end
+	block_list[opts.args] = not block_list[opts.args]
+end, {
+	nargs = 1,
+	complete = function(_, _, _)
+		return {
+			"markdown",
+			"vim",
+			"lua",
+			"c",
+			"cpp",
+			"python",
+			"vue",
+			"typescript",
+			"javascript",
+			"yaml",
+			"html",
+			"css",
+			"scss",
+			"sh",
+			"rust",
+		}
+	end,
+})
+
+function M.enable_format_on_save(is_configured)
 	local opts = { pattern = "*", timeout = 1000 }
 	vim.api.nvim_create_augroup("format_on_save", {})
 	vim.api.nvim_create_autocmd("BufWritePre", {
@@ -14,7 +60,7 @@ function M.enable_format_on_save(is_configure)
 			require("modules.completion.formatting").format({ timeout_ms = opts.timeout, filter = M.format_filter })
 		end,
 	})
-	if not is_configure then
+	if not is_configured then
 		vim.notify("Enabled format-on-save", vim.log.levels.INFO)
 	end
 end
@@ -58,6 +104,13 @@ function M.format_filter(clients)
 end
 
 function M.format(opts)
+	local cwd = vim.fn.getcwd()
+	for i = 1, #disabled_worksapce do
+		if cwd.find(cwd, disabled_worksapce[i]) ~= nil then
+			return
+		end
+	end
+
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.buf_get_clients(bufnr)
 
@@ -83,6 +136,10 @@ function M.format(opts)
 
 	local timeout_ms = opts.timeout_ms
 	for _, client in pairs(clients) do
+		if block_list[vim.bo.filetype] == true then
+			vim.notify(string.format("[LSP][%s] format [%s] has disable", client.name, vim.bo.filetype))
+			return
+		end
 		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
 		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
 		if result and result.result then
