@@ -200,7 +200,7 @@ function config.autopairs()
 		"confirm_done",
 		cmp_autopairs.on_confirm_done({
 			filetypes = {
-				-- "*" is a alias to all filetypes
+				-- "*" is an alias to all filetypes
 				["*"] = {
 					["("] = {
 						kind = {
