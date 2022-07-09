@@ -205,6 +205,11 @@ end
 function config.lualine()
 	local gps = require("nvim-gps")
 
+	local function escape_status()
+		local ok, m = pcall(require, "better_escape")
+		return ok and m.waiting and "✺ " or ""
+	end
+
 	local function gps_content()
 		if gps.is_available() then
 			return gps.get_location()
@@ -293,6 +298,7 @@ function config.lualine()
 				{ gps_content, cond = gps.is_available },
 			},
 			lualine_x = {
+				{ escape_status },
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
