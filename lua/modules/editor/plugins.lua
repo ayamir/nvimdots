@@ -139,5 +139,9 @@ editor["brglng/vim-im-select"] = {
 	event = "BufReadPost",
 	config = conf.imselect,
 }
+editor["luukvbaal/stabilize.nvim"] = {
+	opt = true,
+	event = "BufRead",
+}
 
 return editor
