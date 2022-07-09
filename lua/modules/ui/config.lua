@@ -617,4 +617,12 @@ function config.indent_blankline()
 	vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
 end
 
+function config.scrollview()
+	require("scrollview").setup({})
+end
+
+function config.fidget()
+	require("fidget").setup({})
+end
+
 return config
