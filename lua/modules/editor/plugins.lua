@@ -51,7 +51,7 @@ editor["romainl/vim-cool"] = {
 }
 editor["phaazon/hop.nvim"] = {
 	opt = true,
-	branch = "v1",
+	branch = "v2",
 	event = "BufReadPost",
 	config = conf.hop,
 }
