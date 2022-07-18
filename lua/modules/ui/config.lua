@@ -492,6 +492,9 @@ function config.nvim_bufferline()
 					padding = 1,
 				},
 			},
+			diagnostics_indicator = function(count, level, diagnostics_dict, context)
+				return "(" .. count .. ")"
+			end,
 		},
 	})
 end
