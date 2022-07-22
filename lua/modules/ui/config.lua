@@ -178,12 +178,17 @@ function config.catppuccin()
 			ts_rainbow = true,
 			hop = true,
 			cmp = true,
-			dap = {
-				enabled = true,
-				enable_ui = true,
-			},
+			dap = { enabled = true, enable_ui = true },
 			notify = true,
 			symbols_outline = true,
+			coc_nvim = false,
+			leap = false,
+			neotree = { enabled = false, show_root = true, transparent_panel = false },
+			telekasten = true,
+			mini = false,
+			aerial = false,
+			vimwiki = true,
+			beacon = false,
 		},
 		color_overrides = {
 			mocha = {
