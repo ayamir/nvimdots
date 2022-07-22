@@ -206,6 +206,15 @@ function config.catppuccin()
 			},
 		},
 		custom_highlights = {
+			Comment = { fg = cp.overlay1 },
+			LineNr = { fg = cp.overlay1 },
+			CursorLine = { bg = cp.none },
+			CursorLineNr = { fg = cp.green },
+			DiagnosticVirtualTextError = { bg = cp.none },
+			DiagnosticVirtualTextWarn = { bg = cp.none },
+			DiagnosticVirtualTextInfo = { bg = cp.none },
+			DiagnosticVirtualTextHint = { bg = cp.none },
+
 			TSField = { fg = cp.rosewater },
 			TSProperty = { fg = cp.yellow },
 
