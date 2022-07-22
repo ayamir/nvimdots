@@ -205,7 +205,13 @@ function config.catppuccin()
 				sky = "#89DCEB",
 				teal = "#B5E8E0",
 				lavender = "#C9CBFF",
+
 				text = "#D9E0EE",
+				overlay2 = "#C3BAC6",
+				overlay1 = "#988BA2",
+				overlay0 = "#6E6C7E",
+				surface2 = "#575268",
+				surface0 = "#302D41",
 				mantle = "#1A1826",
 				crust = "#161320",
 			},
