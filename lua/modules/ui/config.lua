@@ -183,6 +183,26 @@ function config.catppuccin()
 			notify = true,
 			symbols_outline = true,
 		},
+		color_overrides = {
+			mocha = {
+				rosewater = "#F5E0DC",
+				flamingo = "#F2CDCD",
+				mauve = "#DDB6F2",
+				pink = "#F5C2E7",
+				red = "#F28FAD",
+				maroon = "#E8A2AF",
+				peach = "#F8BD96",
+				yellow = "#FAE3B0",
+				green = "#ABE9B3",
+				blue = "#96CDFB",
+				sky = "#89DCEB",
+				teal = "#B5E8E0",
+				lavender = "#C9CBFF",
+				text = "#D9E0EE",
+				mantle = "#1A1826",
+				crust = "#161320",
+			},
+		},
 	})
 end
 
