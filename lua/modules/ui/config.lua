@@ -123,31 +123,38 @@ function config.nord()
 end
 
 function config.catppuccin()
+	vim.g.catppuccin_flavour = "mocha"
 	require("catppuccin").setup({
 		transparent_background = false,
 		term_colors = true,
 		styles = {
-			comments = "italic",
-			functions = "italic,bold",
-			keywords = "italic",
-			strings = "NONE",
-			variables = "NONE",
+			comments = { "italic" },
+			properties = { "italic" },
+			functions = { "italic", "bold" },
+			keywords = { "italic" },
+			operators = { "bold" },
+			conditionals = { "bold" },
+			loops = { "bold" },
+			booleans = { "bold", "italic" },
+			numbers = {},
+			strings = {},
+			variables = {},
 		},
 		integrations = {
 			treesitter = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
-					errors = "italic",
-					hints = "italic",
-					warnings = "italic",
-					information = "italic",
+					errors = { "italic" },
+					hints = { "italic" },
+					warnings = { "italic" },
+					information = { "italic" },
 				},
 				underlines = {
-					errors = "underline",
-					hints = "underline",
-					warnings = "underline",
-					information = "underline",
+					errors = { "underline" },
+					hints = { "underline" },
+					warnings = { "underline" },
+					information = { "underline" },
 				},
 			},
 			lsp_trouble = true,
@@ -168,6 +175,13 @@ function config.catppuccin()
 			lightspeed = false,
 			ts_rainbow = true,
 			hop = true,
+			cmp = true,
+			dap = {
+				enabled = true,
+				enable_ui = true,
+			},
+			notify = true,
+			symbols_outline = true,
 		},
 	})
 end
