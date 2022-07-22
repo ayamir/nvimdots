@@ -124,6 +124,8 @@ end
 
 function config.catppuccin()
 	vim.g.catppuccin_flavour = "mocha"
+
+	local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
 	require("catppuccin").setup({
 		transparent_background = false,
 		term_colors = true,
@@ -202,6 +204,54 @@ function config.catppuccin()
 				mantle = "#1A1826",
 				crust = "#161320",
 			},
+		},
+		custom_highlights = {
+			TSField = { fg = cp.rosewater },
+			TSProperty = { fg = cp.yellow },
+
+			TSInclude = { fg = cp.teal },
+			TSOperator = { fg = cp.sky },
+			TSKeywordOperator = { fg = cp.mauve },
+			TSPunctSpecial = { fg = cp.maroon },
+
+			TSConstructor = { fg = cp.lavender },
+			TSException = { fg = cp.peach },
+
+			TSConstBuiltin = { fg = cp.lavender },
+			TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
+
+			TSFuncMacro = { fg = cp.red, style = {} },
+			TSParameter = { fg = cp.rosewater },
+			TSKeywordFunction = { fg = cp.maroon },
+			TSKeywordReturn = { fg = cp.pink, style = {} },
+
+			TSMethod = { style = { "italic" } },
+			TSNamespace = { fg = cp.rosewater },
+
+			TSPunctDelimiter = { fg = cp.teal },
+			TSPunctBracket = { fg = cp.overlay2 },
+
+			TSType = { fg = cp.yellow },
+			TSVariable = { fg = cp.text },
+			TSTagAttribute = { fg = cp.mauve },
+			TSTag = { fg = cp.peach },
+			TSTagDelimiter = { fg = cp.maroon },
+			TSText = { fg = cp.text },
+
+			bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
+			bashTSParameter = { fg = cp.yellow, style = { "italic" } },
+
+			luaTSField = { fg = cp.lavender },
+			luaTSConstructor = { fg = cp.flamingo },
+
+			javaTSConstant = { fg = cp.teal },
+
+			typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
+
+			cssTSType = { fg = cp.lavender },
+			cssTSProperty = { fg = cp.yellow, style = { "italic" } },
+
+			cppTSProperty = { fg = cp.text },
 		},
 	})
 end
