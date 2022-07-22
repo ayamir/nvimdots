@@ -221,11 +221,19 @@ function config.catppuccin()
 			Comment = { fg = cp.overlay1 },
 			LineNr = { fg = cp.overlay1 },
 			CursorLineNr = { fg = cp.green },
-			DiagnosticVirtualTextError = { bg = cp.none },
-			DiagnosticVirtualTextWarn = { bg = cp.none },
-			DiagnosticVirtualTextInfo = { bg = cp.none },
-			DiagnosticVirtualTextHint = { bg = cp.none },
 
+			-- For native lsp configs.
+			DiagnosticVirtualTextError = { bg = "NONE" },
+			DiagnosticVirtualTextWarn = { bg = "NONE" },
+			DiagnosticVirtualTextInfo = { bg = "NONE" },
+			DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = "NONE" },
+
+			DiagnosticHint = { fg = cp.rosewater },
+			DiagnosticUnderlineInfo = { sp = cp.rosewater },
+			LspDiagnosticsDefaultHint = { fg = cp.rosewater },
+			LspDiagnosticsHint = { fg = cp.rosewater },
+			LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
+			LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
 			-- For treesitter.
 			TSField = { fg = cp.rosewater },
