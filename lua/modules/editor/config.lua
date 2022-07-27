@@ -221,6 +221,7 @@ function config.dapui()
 end
 
 function config.dap()
+	local dapui = require("dapui")
 	local dap = require("dap")
 	local dapui = require("dapui")
 
