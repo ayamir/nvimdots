@@ -98,7 +98,7 @@ local load_core = function()
 
 	pack.ensure_plugins()
 	neovide_config()
-	check_conda()
+	-- check_conda()
 	-- clipboard_config()
 
 	require("core.options")
