@@ -221,7 +221,7 @@ function config.dapui()
 end
 
 function config.dap()
-	local dapui = require("dapui")
+	vim.cmd([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 
