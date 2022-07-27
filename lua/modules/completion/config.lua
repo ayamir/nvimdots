@@ -274,6 +274,7 @@ function config.mason_install()
 
 			"lua-language-server",
 			"stylua",
+
 			"black",
 
 			"prettier",

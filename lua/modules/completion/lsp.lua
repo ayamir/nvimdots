@@ -14,7 +14,11 @@ local mason_lsp = require("mason-lspconfig")
 mason.setup()
 mason_lsp.setup({
 	ensure_installed = {
+		"efm",
 		"sumneko_lua",
+		"clangd",
+		"gopls",
+		"pyright",
 	},
 })
 
