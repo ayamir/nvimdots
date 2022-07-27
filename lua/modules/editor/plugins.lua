@@ -83,18 +83,13 @@ editor["max397574/better-escape.nvim"] = {
 	config = conf.better_escape,
 }
 editor["rcarriga/nvim-dap-ui"] = {
-	opt = false,
+	opt = true,
 	config = conf.dapui,
-	requires = {
-		{ "mfussenegger/nvim-dap", config = conf.dap },
-		{
-			"Pocco81/dap-buddy.nvim",
-			opt = true,
-			cmd = { "DIInstall", "DIUninstall", "DIList" },
-			commit = "24923c3819a450a772bb8f675926d530e829665f",
-			config = conf.dapinstall,
-		},
-	},
+}
+editor["mfussenegger/nvim-dap"] = {
+	opt = true,
+	cmd = "DapToggleBreakpoint",
+	config = conf.dap,
 }
 editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 editor["famiu/bufdelete.nvim"] = {
