@@ -15,7 +15,7 @@ completion["williamboman/mason.nvim"] = {
 		{
 			"williamboman/mason-lspconfig.nvim",
 		},
-		{ "WhoIsSethDaniel/mason-tool-installer.nvim", config = conf.mason_installer },
+		{ "WhoIsSethDaniel/mason-tool-installer.nvim", config = conf.mason_install },
 	},
 }
 completion["kevinhwang91/nvim-bqf"] = {
