@@ -235,7 +235,14 @@ function config.dap()
 		dapui.close()
 	end
 
-	vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+	-- We need to override nvim-dap's default highlight groups, AFTER requiring nvim-dap for catppuccin.
+	vim.cmd([[au VimEnter * highlight DapStopped guifg = #98c379]])
+
+	vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointCondition", { text = "ﳁ", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
 
 	dap.adapters.lldb = {
 		type = "executable",
