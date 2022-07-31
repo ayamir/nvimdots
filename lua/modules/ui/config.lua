@@ -214,7 +214,7 @@ function config.catppuccin()
 				blue = "#96CDFB",
 				sky = "#89DCEB",
 				teal = "#B5E8E0",
-				lavender = "#C9CBFF",
+				lavender = "#CDCFFF",
 
 				text = "#D9E0EE",
 				overlay2 = "#C3BAC6",
