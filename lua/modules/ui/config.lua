@@ -226,72 +226,74 @@ function config.catppuccin()
 				crust = "#161320",
 			},
 		},
-		custom_highlights = {
-			-- For base configs.
-			Comment = { fg = cp.overlay1 },
-			LineNr = { fg = cp.overlay1 },
-			CursorLineNr = { fg = cp.green },
+		highlight_overrides = {
+			all = {
+				-- For base configs.
+				Comment = { fg = cp.overlay1 },
+				LineNr = { fg = cp.overlay1 },
+				CursorLineNr = { fg = cp.green },
 
-			-- For native lsp configs.
-			DiagnosticVirtualTextError = { bg = "NONE" },
-			DiagnosticVirtualTextWarn = { bg = "NONE" },
-			DiagnosticVirtualTextInfo = { bg = "NONE" },
-			DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = "NONE" },
+				-- For native lsp configs.
+				DiagnosticVirtualTextError = { bg = "NONE" },
+				DiagnosticVirtualTextWarn = { bg = "NONE" },
+				DiagnosticVirtualTextInfo = { bg = "NONE" },
+				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = "NONE" },
 
-			DiagnosticHint = { fg = cp.rosewater },
-			DiagnosticUnderlineInfo = { sp = cp.rosewater },
-			LspDiagnosticsDefaultHint = { fg = cp.rosewater },
-			LspDiagnosticsHint = { fg = cp.rosewater },
-			LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
-			LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
+				DiagnosticHint = { fg = cp.rosewater },
+				DiagnosticUnderlineInfo = { sp = cp.rosewater },
+				LspDiagnosticsDefaultHint = { fg = cp.rosewater },
+				LspDiagnosticsHint = { fg = cp.rosewater },
+				LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
+				LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
-			-- For treesitter.
-			TSField = { fg = cp.rosewater },
-			TSProperty = { fg = cp.yellow },
+				-- For treesitter.
+				TSField = { fg = cp.rosewater },
+				TSProperty = { fg = cp.yellow },
 
-			TSInclude = { fg = cp.teal },
-			TSOperator = { fg = cp.sky },
-			TSKeywordOperator = { fg = cp.mauve },
-			TSPunctSpecial = { fg = cp.maroon },
+				TSInclude = { fg = cp.teal },
+				TSOperator = { fg = cp.sky },
+				TSKeywordOperator = { fg = cp.mauve },
+				TSPunctSpecial = { fg = cp.maroon },
 
-			TSConstructor = { fg = cp.lavender },
-			TSException = { fg = cp.peach },
+				TSConstructor = { fg = cp.lavender },
+				TSException = { fg = cp.peach },
 
-			TSConstBuiltin = { fg = cp.lavender },
-			TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
+				TSConstBuiltin = { fg = cp.lavender },
+				TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
 
-			TSFuncMacro = { fg = cp.red, style = {} },
-			TSParameter = { fg = cp.rosewater },
-			TSKeywordFunction = { fg = cp.maroon },
-			TSKeywordReturn = { fg = cp.pink, style = {} },
+				TSFuncMacro = { fg = cp.red, style = {} },
+				TSParameter = { fg = cp.rosewater },
+				TSKeywordFunction = { fg = cp.maroon },
+				TSKeywordReturn = { fg = cp.pink, style = {} },
 
-			TSMethod = { style = { "italic" } },
-			TSNamespace = { fg = cp.rosewater },
+				TSMethod = { style = { "italic" } },
+				TSNamespace = { fg = cp.rosewater },
 
-			TSPunctDelimiter = { fg = cp.teal },
-			TSPunctBracket = { fg = cp.overlay2 },
+				TSPunctDelimiter = { fg = cp.teal },
+				TSPunctBracket = { fg = cp.overlay2 },
 
-			TSType = { fg = cp.yellow },
-			TSVariable = { fg = cp.text },
-			TSTagAttribute = { fg = cp.mauve },
-			TSTag = { fg = cp.peach },
-			TSTagDelimiter = { fg = cp.maroon },
-			TSText = { fg = cp.text },
+				TSType = { fg = cp.yellow },
+				TSVariable = { fg = cp.text },
+				TSTagAttribute = { fg = cp.mauve },
+				TSTag = { fg = cp.peach },
+				TSTagDelimiter = { fg = cp.maroon },
+				TSText = { fg = cp.text },
 
-			bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
-			bashTSParameter = { fg = cp.yellow, style = { "italic" } },
+				bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
+				bashTSParameter = { fg = cp.yellow, style = { "italic" } },
 
-			luaTSField = { fg = cp.lavender },
-			luaTSConstructor = { fg = cp.flamingo },
+				luaTSField = { fg = cp.lavender },
+				luaTSConstructor = { fg = cp.flamingo },
 
-			javaTSConstant = { fg = cp.teal },
+				javaTSConstant = { fg = cp.teal },
 
-			typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
+				typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
 
-			cssTSType = { fg = cp.lavender },
-			cssTSProperty = { fg = cp.yellow, style = { "italic" } },
+				cssTSType = { fg = cp.lavender },
+				cssTSProperty = { fg = cp.yellow, style = { "italic" } },
 
-			cppTSProperty = { fg = cp.text },
+				cppTSProperty = { fg = cp.text },
+			},
 		},
 	})
 end
