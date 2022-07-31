@@ -127,8 +127,17 @@ function config.catppuccin()
 
 	local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
 	require("catppuccin").setup({
+		dim_inactive = {
+			enabled = false, -- Dim the inactive splits/windows/buffers displayed.
+			shade = "dark",
+			percentage = 0.15,
+		},
 		transparent_background = false,
 		term_colors = true,
+		compile = {
+			enabled = true, -- Experimental Feat, testing...
+			path = vim.fn.stdpath("cache") .. "/catppuccin",
+		},
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
@@ -139,6 +148,7 @@ function config.catppuccin()
 			loops = { "bold" },
 			booleans = { "bold", "italic" },
 			numbers = {},
+			types = {},
 			strings = {},
 			variables = {},
 		},
