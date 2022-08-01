@@ -123,31 +123,50 @@ function config.nord()
 end
 
 function config.catppuccin()
+	vim.g.catppuccin_flavour = "mocha"
+
+	local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
 	require("catppuccin").setup({
+		dim_inactive = {
+			enabled = false, -- Dim the inactive splits/windows/buffers displayed.
+			shade = "dark",
+			percentage = 0.15,
+		},
 		transparent_background = false,
 		term_colors = true,
+		compile = {
+			enabled = true, -- Experimental Feat, testing...
+			path = vim.fn.stdpath("cache") .. "/catppuccin",
+		},
 		styles = {
-			comments = "italic",
-			functions = "italic,bold",
-			keywords = "italic",
-			strings = "NONE",
-			variables = "NONE",
+			comments = { "italic" },
+			properties = { "italic" },
+			functions = { "italic", "bold" },
+			keywords = { "italic" },
+			operators = { "bold" },
+			conditionals = { "bold" },
+			loops = { "bold" },
+			booleans = { "bold", "italic" },
+			numbers = {},
+			types = {},
+			strings = {},
+			variables = {},
 		},
 		integrations = {
 			treesitter = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
-					errors = "italic",
-					hints = "italic",
-					warnings = "italic",
-					information = "italic",
+					errors = { "italic" },
+					hints = { "italic" },
+					warnings = { "italic" },
+					information = { "italic" },
 				},
 				underlines = {
-					errors = "underline",
-					hints = "underline",
-					warnings = "underline",
-					information = "underline",
+					errors = { "underline" },
+					hints = { "underline" },
+					warnings = { "underline" },
+					information = { "underline" },
 				},
 			},
 			lsp_trouble = true,
@@ -168,6 +187,113 @@ function config.catppuccin()
 			lightspeed = false,
 			ts_rainbow = true,
 			hop = true,
+			cmp = true,
+			dap = { enabled = true, enable_ui = true },
+			notify = true,
+			symbols_outline = true,
+			coc_nvim = false,
+			leap = false,
+			neotree = { enabled = false, show_root = true, transparent_panel = false },
+			telekasten = true,
+			mini = false,
+			aerial = false,
+			vimwiki = true,
+			beacon = false,
+		},
+		color_overrides = {
+			mocha = {
+				rosewater = "#F5E0DC",
+				flamingo = "#F2CDCD",
+				mauve = "#DDB6F2",
+				pink = "#F5C2E7",
+				red = "#F28FAD",
+				maroon = "#E8A2AF",
+				peach = "#F8BD96",
+				yellow = "#FAE3B0",
+				green = "#ABE9B3",
+				blue = "#96CDFB",
+				sky = "#89DCEB",
+				teal = "#B5E8E0",
+				lavender = "#CDCFFF",
+
+				text = "#D9E0EE",
+				overlay2 = "#C3BAC6",
+				overlay1 = "#988BA2",
+				overlay0 = "#6E6C7E",
+				surface2 = "#575268",
+				surface0 = "#302D41",
+				mantle = "#1A1826",
+				crust = "#161320",
+			},
+		},
+		highlight_overrides = {
+			all = {
+				-- For base configs.
+				Comment = { fg = cp.overlay1 },
+				LineNr = { fg = cp.overlay1 },
+				CursorLineNr = { fg = cp.green },
+
+				-- For native lsp configs.
+				DiagnosticVirtualTextError = { bg = "NONE" },
+				DiagnosticVirtualTextWarn = { bg = "NONE" },
+				DiagnosticVirtualTextInfo = { bg = "NONE" },
+				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = "NONE" },
+
+				DiagnosticHint = { fg = cp.rosewater },
+				DiagnosticUnderlineInfo = { sp = cp.rosewater },
+				LspDiagnosticsDefaultHint = { fg = cp.rosewater },
+				LspDiagnosticsHint = { fg = cp.rosewater },
+				LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
+				LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
+
+				-- For treesitter.
+				TSField = { fg = cp.rosewater },
+				TSProperty = { fg = cp.yellow },
+
+				TSInclude = { fg = cp.teal },
+				TSOperator = { fg = cp.sky },
+				TSKeywordOperator = { fg = cp.mauve },
+				TSPunctSpecial = { fg = cp.maroon },
+
+				TSConstructor = { fg = cp.lavender },
+				TSException = { fg = cp.peach },
+
+				TSConstBuiltin = { fg = cp.lavender },
+				TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
+
+				TSFuncMacro = { fg = cp.red, style = {} },
+				TSParameter = { fg = cp.rosewater },
+				TSKeywordFunction = { fg = cp.maroon },
+				TSKeywordReturn = { fg = cp.pink, style = {} },
+
+				TSMethod = { style = { "italic" } },
+				TSNamespace = { fg = cp.rosewater },
+
+				TSPunctDelimiter = { fg = cp.teal },
+				TSPunctBracket = { fg = cp.overlay2 },
+
+				TSType = { fg = cp.yellow },
+				TSVariable = { fg = cp.text },
+				TSTagAttribute = { fg = cp.mauve },
+				TSTag = { fg = cp.peach },
+				TSTagDelimiter = { fg = cp.maroon },
+				TSText = { fg = cp.text },
+
+				bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
+				bashTSParameter = { fg = cp.yellow, style = { "italic" } },
+
+				luaTSField = { fg = cp.lavender },
+				luaTSConstructor = { fg = cp.flamingo },
+
+				javaTSConstant = { fg = cp.teal },
+
+				typescriptTSProperty = { fg = cp.lavender, style = { "italic" } },
+
+				cssTSType = { fg = cp.lavender },
+				cssTSProperty = { fg = cp.yellow, style = { "italic" } },
+
+				cppTSProperty = { fg = cp.text },
+			},
 		},
 	})
 end
