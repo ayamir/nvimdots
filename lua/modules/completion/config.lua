@@ -272,15 +272,12 @@ function config.mason_install()
 			-- you can turn off/on auto_update per tool
 			"editorconfig-checker",
 
-			"lua-language-server",
 			"stylua",
 
 			"black",
 
 			"prettier",
-			"eslint-lsp",
 
-			"bash-language-server",
 			"shellcheck",
 			"shfmt",
 
