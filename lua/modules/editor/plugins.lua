@@ -84,10 +84,9 @@ editor["max397574/better-escape.nvim"] = {
 }
 editor["mfussenegger/nvim-dap"] = {
 	opt = false,
-	config = conf.dap,
 }
 editor["rcarriga/nvim-dap-ui"] = {
-	opt = true,
+	opt = false,
 	config = conf.dapui,
 }
 editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
