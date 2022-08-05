@@ -84,6 +84,7 @@ editor["max397574/better-escape.nvim"] = {
 }
 editor["mfussenegger/nvim-dap"] = {
 	opt = false,
+	config = conf.dap,
 }
 editor["rcarriga/nvim-dap-ui"] = {
 	opt = false,
