@@ -82,14 +82,13 @@ editor["max397574/better-escape.nvim"] = {
 	event = "BufReadPost",
 	config = conf.better_escape,
 }
+editor["mfussenegger/nvim-dap"] = {
+	opt = false,
+	config = conf.dap,
+}
 editor["rcarriga/nvim-dap-ui"] = {
 	opt = true,
 	config = conf.dapui,
-}
-editor["mfussenegger/nvim-dap"] = {
-	opt = true,
-	cmd = "DapToggleBreakpoint",
-	config = conf.dap,
 }
 editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 editor["famiu/bufdelete.nvim"] = {
