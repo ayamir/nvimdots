@@ -272,17 +272,15 @@ function config.catppuccin()
 			},
 		},
 		highlight_overrides = {
-			all = {
+			mocha = {
 				-- For base configs.
-				Comment = { fg = cp.overlay1 },
-				LineNr = { fg = cp.overlay1 },
 				CursorLineNr = { fg = cp.green },
 
 				-- For native lsp configs.
-				DiagnosticVirtualTextError = { bg = "NONE" },
-				DiagnosticVirtualTextWarn = { bg = "NONE" },
-				DiagnosticVirtualTextInfo = { bg = "NONE" },
-				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = "NONE" },
+				DiagnosticVirtualTextError = { bg = cp.none },
+				DiagnosticVirtualTextWarn = { bg = cp.none },
+				DiagnosticVirtualTextInfo = { bg = cp.none },
+				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
 
 				DiagnosticHint = { fg = cp.rosewater },
 				DiagnosticUnderlineInfo = { sp = cp.rosewater },
