@@ -168,7 +168,7 @@ function config.catppuccin()
 
 	require("catppuccin").setup({
 		dim_inactive = {
-			enabled = false, -- Dim inactive splits/windows/buffers.
+			enabled = false, -- Dim inactive splits/windows/buffers (not recommended).
 			shade = "dark",
 			percentage = 0.15,
 		},
@@ -275,6 +275,8 @@ function config.catppuccin()
 			mocha = {
 				-- For base configs.
 				CursorLineNr = { fg = cp.green },
+				Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
+				IncSearch = { bg = cp.pink, fg = cp.surface1 },
 
 				-- For native lsp configs.
 				DiagnosticVirtualTextError = { bg = cp.none },
