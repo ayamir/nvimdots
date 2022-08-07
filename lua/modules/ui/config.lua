@@ -123,9 +123,49 @@ function config.nord()
 end
 
 function config.catppuccin()
-	vim.g.catppuccin_flavour = "mocha"
+	local function getModifiedPalette()
+		-- We will need to explicitly declare our new color.
+		-- (Because colors haven't been set yet when we pass them to the setup function.)
 
-	local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
+		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
+		cp.none = "NONE" -- Special setting for complete transparent fg/bg.
+
+		if vim.g.catppuccin_flavour == "mocha" then -- We only modify the "mocha" palette.
+			cp.rosewater = "#F5E0DC"
+			cp.flamingo = "#F2CDCD"
+			cp.mauve = "#DDB6F2"
+			cp.pink = "#F5C2E7"
+			cp.red = "#F28FAD"
+			cp.maroon = "#E8A2AF"
+			cp.peach = "#F8BD96"
+			cp.yellow = "#FAE3B0"
+			cp.green = "#ABE9B3"
+			cp.blue = "#96CDFB"
+			cp.sky = "#89DCEB"
+			cp.teal = "#B5E8E0"
+			cp.lavender = "#C9CBFF"
+
+			cp.text = "#D9E0EE"
+			cp.subtext1 = "#BAC2DE"
+			cp.subtext0 = "#A6ADC8"
+			cp.overlay2 = "#C3BAC6"
+			cp.overlay1 = "#988BA2"
+			cp.overlay0 = "#6E6C7E"
+			cp.surface2 = "#6E6C7E"
+			cp.surface1 = "#575268"
+			cp.surface0 = "#302D41"
+
+			cp.base = "#1E1E2E"
+			cp.mantle = "#1A1826"
+			cp.crust = "#161320"
+		end
+
+		return cp
+	end
+
+	vim.g.catppuccin_flavour = "mocha"
+	local cp = getModifiedPalette()
+
 	require("catppuccin").setup({
 		dim_inactive = {
 			enabled = false, -- Dim the inactive splits/windows/buffers displayed.
