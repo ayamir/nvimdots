@@ -168,7 +168,7 @@ function config.catppuccin()
 
 	require("catppuccin").setup({
 		dim_inactive = {
-			enabled = false, -- Dim the inactive splits/windows/buffers displayed.
+			enabled = false, -- Dim inactive splits/windows/buffers.
 			shade = "dark",
 			percentage = 0.15,
 		},
