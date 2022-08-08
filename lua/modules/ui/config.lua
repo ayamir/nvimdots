@@ -336,7 +336,7 @@ function config.catppuccin()
 				-- TSPunctDelimiter = { fg = cp.teal },
 				TSPunctBracket = { fg = cp.overlay2 },
 				-- TSString = { fg = cp.green },
-				-- TSStringRegex = { fg = cp.peach, style = cnf.styles.strings },
+				-- TSStringRegex = { fg = cp.peach },
 				-- TSType = { fg = cp.yellow },
 				TSVariable = { fg = cp.text },
 				TSTagAttribute = { fg = cp.mauve, style = { "italic" } },
