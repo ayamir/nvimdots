@@ -123,7 +123,7 @@ function config.nord()
 end
 
 function config.catppuccin()
-	local function getModifiedPalette()
+	local function get_modified_palette()
 		-- We need to explicitly declare our new color.
 		-- (Because colors haven't been set yet when we pass them to the setup function.)
 
@@ -182,7 +182,7 @@ function config.catppuccin()
 	end
 
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
-	local cp = getModifiedPalette()
+	local cp = get_modified_palette()
 
 	local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
 	set_auto_compile(enable_compile)
