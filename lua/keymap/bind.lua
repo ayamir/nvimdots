@@ -9,6 +9,7 @@ function rhs_options:new()
 			expr = false,
 			nowait = false,
 		},
+		buffer = false,
 	}
 	setmetatable(instance, self)
 	self.__index = self
@@ -31,6 +32,7 @@ function rhs_options:map_args(cmd_string)
 end
 
 function rhs_options:map_cu(cmd_string)
+	-- <C-u> to eliminate the automatically inserted range in visual mode
 	self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
 	return self
 end
@@ -52,6 +54,11 @@ end
 
 function rhs_options:with_nowait()
 	self.options.nowait = true
+	return self
+end
+
+function rhs_options:with_buffer(num)
+	self.buffer = num
 	return self
 end
 
@@ -83,7 +90,12 @@ function pbind.nvim_load_mapping(mapping)
 		if type(value) == "table" then
 			local rhs = value.cmd
 			local options = value.options
-			vim.api.nvim_set_keymap(mode, keymap, rhs, options)
+			local buf = value.buffer
+			if buf then
+				vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
+			else
+				vim.api.nvim_set_keymap(mode, keymap, rhs, options)
+			end
 		end
 	end
 end
