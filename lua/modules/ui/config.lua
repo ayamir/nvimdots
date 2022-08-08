@@ -166,10 +166,10 @@ function config.catppuccin()
 	local function set_auto_compile(enable_compile)
 		-- Setting auto-compile for catppuccin.
 		if enable_compile then
-			local packer = vim.api.nvim_create_augroup("Catppuccin", { clear = true })
+			vim.api.nvim_create_augroup("_catppuccin", { clear = true })
 
 			vim.api.nvim_create_autocmd("User", {
-				group = packer,
+				group = "_catppuccin",
 				pattern = "PackerCompileDone",
 				callback = function()
 					require("catppuccin").compile()
