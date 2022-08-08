@@ -168,14 +168,16 @@ function config.catppuccin()
 
 	require("catppuccin").setup({
 		dim_inactive = {
-			enabled = false, -- Dim inactive splits/windows/buffers (not recommended).
+			enabled = false,
+			-- Dim inactive splits/windows/buffers.
+			-- NOT recommended if you use old palette (a.k.a., mocha).
 			shade = "dark",
 			percentage = 0.15,
 		},
 		transparent_background = false,
 		term_colors = true,
 		compile = {
-			enabled = true, -- Experimental Feat, testing...
+			enabled = true, -- RECOMMENDED
 			path = vim.fn.stdpath("cache") .. "/catppuccin",
 		},
 		styles = {
