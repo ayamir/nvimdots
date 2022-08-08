@@ -174,7 +174,7 @@ function config.catppuccin()
 				callback = function()
 					require("catppuccin").compile()
 					vim.defer_fn(function()
-						vim.cmd("colorscheme catppuccin")
+						vim.cmd([[colorscheme catppuccin]])
 					end, 0)
 				end,
 			})
