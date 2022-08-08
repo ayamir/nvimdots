@@ -90,20 +90,6 @@ local clipboard_config = function()
     ]])
 end
 
-local set_catppuccin_autocompile = function()
-	if vim.g.colors_name == "catppuccin" and vim.g.enable_catppuccin_compile then
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "PackerCompileDone",
-			callback = function()
-				vim.cmd([[CatppuccinCompile]])
-				vim.defer_fn(function()
-					vim.cmd([[colorscheme catppuccin]])
-				end, 0) -- Deferred for live reloading
-			end,
-		})
-	end
-end
-
 local load_core = function()
 	local pack = require("core.pack")
 	createdir()
@@ -123,7 +109,6 @@ local load_core = function()
 
 	-- vim.cmd([[set background=light]])
 	vim.cmd([[colorscheme catppuccin]])
-	set_catppuccin_autocompile()
 end
 
 load_core()

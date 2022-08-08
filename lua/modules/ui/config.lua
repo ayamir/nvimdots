@@ -164,8 +164,24 @@ function config.catppuccin()
 	end
 
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
-	vim.g.enable_catppuccin_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
 	local cp = getModifiedPalette()
+
+	-- Setting auto-compile for catppuccin.
+	local enable_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
+	if enable_compile then
+		local packer = vim.api.nvim_create_augroup("Catppuccin", { clear = true })
+
+		vim.api.nvim_create_autocmd("User", {
+			group = packer,
+			pattern = "PackerCompileDone",
+			callback = function()
+				require("catppuccin").compile()
+				vim.defer_fn(function()
+					vim.cmd("colorscheme catppuccin")
+				end, 0)
+			end,
+		})
+	end
 
 	require("catppuccin").setup({
 		dim_inactive = {
@@ -178,7 +194,7 @@ function config.catppuccin()
 		transparent_background = false,
 		term_colors = true,
 		compile = {
-			enabled = vim.g.enable_catppuccin_compile, -- RECOMMENDED
+			enabled = enable_compile,
 			path = vim.fn.stdpath("cache") .. "/catppuccin",
 		},
 		styles = {
