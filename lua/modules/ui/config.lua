@@ -333,7 +333,7 @@ function config.catppuccin()
 				TSMethod = { style = { "italic" } },
 				TSNamespace = { fg = cp.rosewater },
 
-				-- TSPunctDelimiter = { fg = cp.teal },
+				TSPunctDelimiter = { fg = cp.teal },
 				TSPunctBracket = { fg = cp.overlay2 },
 				-- TSString = { fg = cp.green },
 				-- TSStringRegex = { fg = cp.peach },
