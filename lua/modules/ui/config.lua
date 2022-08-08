@@ -124,7 +124,7 @@ end
 
 function config.catppuccin()
 	local function getModifiedPalette()
-		-- We will need to explicitly declare our new color.
+		-- We need to explicitly declare our new color.
 		-- (Because colors haven't been set yet when we pass them to the setup function.)
 
 		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
@@ -299,32 +299,58 @@ function config.catppuccin()
 
 				TSInclude = { fg = cp.teal },
 				TSOperator = { fg = cp.sky },
-				TSKeywordOperator = { fg = cp.mauve },
+				TSKeywordOperator = { fg = cp.sky },
 				TSPunctSpecial = { fg = cp.maroon },
 
+				-- TSFloat = { fg = cp.peach },
+				-- TSNumber = { fg = cp.peach },
+				-- TSBoolean = { fg = cp.peach },
+
 				TSConstructor = { fg = cp.lavender },
+				-- TSConstant = { fg = cp.peach },
+				-- TSConditional = { fg = cp.mauve },
+				-- TSRepeat = { fg = cp.mauve },
 				TSException = { fg = cp.peach },
 
 				TSConstBuiltin = { fg = cp.lavender },
+				-- TSFuncBuiltin = { fg = cp.peach, style = { "italic" } },
+				-- TSTypeBuiltin = { fg = cp.yellow, style = { "italic" } },
 				TSVariableBuiltin = { fg = cp.red, style = { "italic" } },
 
+				-- TSFunction = { fg = cp.blue },
 				TSFuncMacro = { fg = cp.red, style = {} },
 				TSParameter = { fg = cp.rosewater },
 				TSKeywordFunction = { fg = cp.maroon },
+				-- TSKeyword = { fg = cp.red },
 				TSKeywordReturn = { fg = cp.pink, style = {} },
 
+				-- TSNote = { fg = cp.base, bg = cp.blue },
+				-- TSWarning = { fg = cp.base, bg = cp.yellow },
+				-- TSDanger = { fg = cp.base, bg = cp.red },
+				-- TSConstMacro = { fg = cp.mauve },
+
+				-- TSLabel = { fg = cp.blue },
 				TSMethod = { style = { "italic" } },
 				TSNamespace = { fg = cp.rosewater },
 
-				TSPunctDelimiter = { fg = cp.teal },
+				-- TSPunctDelimiter = { fg = cp.teal },
 				TSPunctBracket = { fg = cp.overlay2 },
-
-				TSType = { fg = cp.yellow },
+				-- TSString = { fg = cp.green },
+				-- TSStringRegex = { fg = cp.peach, style = cnf.styles.strings },
+				-- TSType = { fg = cp.yellow },
 				TSVariable = { fg = cp.text },
-				TSTagAttribute = { fg = cp.mauve },
+				TSTagAttribute = { fg = cp.mauve, style = { "italic" } },
 				TSTag = { fg = cp.peach },
 				TSTagDelimiter = { fg = cp.maroon },
 				TSText = { fg = cp.text },
+
+				-- TSURI = { fg = cp.rosewater, style = { "italic", "underline" } },
+				-- TSLiteral = { fg = cp.teal, style = { "italic" } },
+				-- TSTextReference = { fg = cp.lavender, style = { "bold" } },
+				-- TSTitle = { fg = cp.blue, style = { "bold" } },
+				-- TSEmphasis = { fg = cp.maroon, style = { "italic" } },
+				-- TSStrong = { fg = cp.maroon, style = { "bold" } },
+				-- TSStringEscape = { fg = cp.pink },
 
 				bashTSFuncBuiltin = { fg = cp.red, style = { "italic" } },
 				bashTSParameter = { fg = cp.yellow, style = { "italic" } },
