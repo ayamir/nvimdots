@@ -164,9 +164,8 @@ function config.catppuccin()
 	end
 
 	vim.g.catppuccin_flavour = "mocha" -- Set flavour here
-	local cp = getModifiedPalette()
-
 	vim.g.enable_catppuccin_compile = true -- Set to false if you would like to disable catppuccin cache. (Not recommended)
+	local cp = getModifiedPalette()
 
 	require("catppuccin").setup({
 		dim_inactive = {
