@@ -321,7 +321,7 @@ function config.catppuccin()
 				TSFuncMacro = { fg = cp.red, style = {} },
 				TSParameter = { fg = cp.rosewater },
 				TSKeywordFunction = { fg = cp.maroon },
-				-- TSKeyword = { fg = cp.red },
+				TSKeyword = { fg = cp.red },
 				TSKeywordReturn = { fg = cp.pink, style = {} },
 
 				-- TSNote = { fg = cp.base, bg = cp.blue },
