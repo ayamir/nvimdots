@@ -169,6 +169,10 @@ function config.toggleterm()
 				return vim.o.columns * 0.40
 			end
 		end,
+		on_open = function()
+			vim.cmd([[setlocal foldmethod=manual]])
+			vim.cmd([[setlocal foldexpr=0]])
+		end,
 		open_mapping = false, -- [[<c-\>]],
 		hide_numbers = true, -- hide the number column in toggleterm buffers
 		shade_filetypes = {},
