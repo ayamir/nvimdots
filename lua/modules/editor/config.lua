@@ -2,8 +2,8 @@ local config = {}
 local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
 
 function config.nvim_treesitter()
-	vim.api.nvim_command("set foldmethod=expr")
-	vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
+	vim.api.nvim_set_option_value("foldmethod", "expr", {})
+	vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
 
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = {
@@ -170,8 +170,10 @@ function config.toggleterm()
 			end
 		end,
 		on_open = function()
-			vim.cmd([[setlocal foldmethod=manual]])
-			vim.cmd([[setlocal foldexpr=0]])
+			-- Prevent infinite calls from freezing neovim.
+			-- Only set these options specific to this terminal buffer.
+			vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
+			vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
 		end,
 		open_mapping = false, -- [[<c-\>]],
 		hide_numbers = true, -- hide the number column in toggleterm buffers
