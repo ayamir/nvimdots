@@ -30,6 +30,7 @@ local plug_map = {
 	-- Lsp mapp work when insertenter and lsp start
 	["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(),
 	["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
+	["n|<A-t>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
 	["n|g["] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
 	["n|g]"] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
 	["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
@@ -41,7 +42,7 @@ local plug_map = {
 	["v|<leader>ca"] = map_cu("Lspsaga range_code_action"):with_noremap():with_silent(),
 	["n|gd"] = map_cr("Lspsaga preview_definition"):with_noremap():with_silent(),
 	["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(),
-	["n|gh"] = map_cr("lua vim.lsp.buf.references()"):with_noremap():with_silent(),
+	["n|gh"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent(),
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
 	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
 	-- toggleterm
@@ -72,8 +73,6 @@ local plug_map = {
 	["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
 	["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
 	["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
-	-- Plugin Aerial
-	["n|<A-t>"] = map_cr("AerialToggle! right"):with_noremap():with_silent(),
 	-- Plugin Undotree
 	["n|<Leader>u"] = map_cr("UndotreeToggle"):with_noremap():with_silent(),
 	-- Plugin Telescope
