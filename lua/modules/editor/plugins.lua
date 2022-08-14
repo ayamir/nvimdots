@@ -43,7 +43,7 @@ editor["andymass/vim-matchup"] = {
 	after = "nvim-treesitter",
 	config = conf.matchup,
 }
-editor["rhysd/accelerated-jk"] = { opt = true, event = "BufWinEnter" }
+editor["rainbowhxch/accelerated-jk.nvim"] = { opt = true, event = "BufWinEnter", config = conf.accelerated_jk }
 editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
 editor["romainl/vim-cool"] = {
 	opt = true,
