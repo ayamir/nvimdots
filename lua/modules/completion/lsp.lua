@@ -4,9 +4,9 @@ vim.cmd([[packadd lsp_signature.nvim]])
 vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
 vim.cmd([[packadd vim-illuminate]])
+vim.cmd([[packadd nvim-navic]])
 
 local nvim_lsp = require("lspconfig")
-local saga = require("lspsaga")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
 
@@ -25,7 +25,7 @@ mason_lsp.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local function custom_attach(client)
+local function custom_attach(client, bufnr)
 	require("lsp_signature").on_attach({
 		bind = true,
 		use_lspsaga = false,
@@ -36,6 +36,7 @@ local function custom_attach(client)
 		handler_opts = { "double" },
 	})
 	require("illuminate").on_attach(client)
+	require("nvim-navic").attach(client, bufnr)
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)

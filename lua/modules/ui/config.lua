@@ -435,19 +435,28 @@ end
 
 function config.lualine()
 	local gps = require("nvim-gps")
+	local navic = require("nvim-navic")
 
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
 		return ok and m.waiting and "✺ " or ""
 	end
 
-	local function gps_content()
-		if gps.is_available() then
+	local function code_context()
+		if navic.is_available() and navic.get_location() ~= "" then
+			return navic.get_location()
+		elseif gps.is_available() then
 			return gps.get_location()
 		else
 			return ""
 		end
 	end
+
+	local conditions = {
+		check_code_context = function()
+			return gps.is_available() or navic.is_available()
+		end,
+	}
 
 	local mini_sections = {
 		lualine_a = {},
@@ -526,7 +535,7 @@ function config.lualine()
 			lualine_a = { "mode" },
 			lualine_b = { { "branch" }, { "diff" } },
 			lualine_c = {
-				{ gps_content, cond = gps.is_available },
+				{ code_context, cond = conditions.check_code_context },
 			},
 			lualine_x = {
 				{ escape_status },
@@ -594,6 +603,45 @@ function config.nvim_gps()
 			["rust"] = true,
 		},
 		separator = " > ",
+	})
+end
+
+function config.nvim_navic()
+	vim.g.navic_silence = true
+
+	require("nvim-navic").setup({
+		icons = {
+			Method = " ",
+			Function = " ",
+			Constructor = " ",
+			Field = " ",
+			Variable = " ",
+			Class = "ﴯ ",
+			Interface = " ",
+			Module = " ",
+			Property = "ﰠ ",
+			Enum = " ",
+			File = " ",
+			EnumMember = " ",
+			Constant = " ",
+			Struct = " ",
+			Event = " ",
+			Operator = " ",
+			TypeParameter = " ",
+			Namespace = " ",
+			Object = " ",
+			Array = "[] ",
+			Boolean = " ",
+			Number = " ",
+			Null = "ﳠ ",
+			Key = " ",
+			String = " ",
+			Package = " ",
+		},
+		highlight = false,
+		separator = " > ",
+		depth_limit = 0,
+		depth_limit_indicator = "..",
 	})
 end
 
