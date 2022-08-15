@@ -262,7 +262,7 @@ function config.catppuccin()
 			aerial = true,
 			vimwiki = true,
 			beacon = false,
-			navic = false,
+			navic = true,
 			overseer = false,
 		},
 		color_overrides = {
@@ -638,7 +638,7 @@ function config.nvim_navic()
 			String = " ",
 			Package = " ",
 		},
-		highlight = false,
+		highlight = true,
 		separator = " > ",
 		depth_limit = 0,
 		depth_limit_indicator = "..",
