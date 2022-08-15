@@ -259,7 +259,7 @@ function config.catppuccin()
 			neotree = { enabled = false, show_root = true, transparent_panel = false },
 			telekasten = false,
 			mini = false,
-			aerial = true,
+			aerial = false,
 			vimwiki = true,
 			beacon = false,
 			navic = true,
