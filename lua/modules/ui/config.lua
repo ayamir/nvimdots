@@ -630,7 +630,7 @@ function config.nvim_navic()
 			TypeParameter = " ",
 			Namespace = " ",
 			Object = " ",
-			Array = "[] ",
+			Array = " ",
 			Boolean = " ",
 			Number = " ",
 			Null = "ﳠ ",
