@@ -106,12 +106,18 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 			capabilities = copy_capabilities,
 			single_file_support = true,
 			on_attach = custom_attach,
-			args = {
+			cmd = {
+				"clangd",
 				"--background-index",
-				"-std=c++20",
 				"--pch-storage=memory",
+				-- You MUST set this arg ↓ to your clangd executable location (if not included)!
+				"--query-driver=/usr/bin/clang++,/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
 				"--clang-tidy",
-				"--suggest-missing-includes",
+				"--all-scopes-completion",
+				"--cross-file-rename",
+				"--completion-style=detailed",
+				"--header-insertion-decorators",
+				"--header-insertion=iwyu",
 			},
 			commands = {
 				ClangdSwitchSourceHeader = {
