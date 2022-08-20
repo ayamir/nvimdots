@@ -3,7 +3,6 @@ local formatting = require("modules.completion.formatting")
 vim.cmd([[packadd lsp_signature.nvim]])
 vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
-vim.cmd([[packadd vim-illuminate]])
 vim.cmd([[packadd nvim-navic]])
 
 local nvim_lsp = require("lspconfig")
@@ -35,7 +34,6 @@ local function custom_attach(client, bufnr)
 		hi_parameter = "Search",
 		handler_opts = { "double" },
 	})
-	require("illuminate").on_attach(client)
 	require("nvim-navic").attach(client, bufnr)
 end
 
