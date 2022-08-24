@@ -237,7 +237,7 @@ function config.catppuccin()
 			gitgutter = false,
 			gitsigns = true,
 			telescope = true,
-			nvimtree = { enabled = true, show_root = true },
+			nvimtree = true,
 			which_key = true,
 			indent_blankline = { enabled = true, colored_indent_levels = false },
 			dashboard = true,
@@ -245,7 +245,11 @@ function config.catppuccin()
 			vim_sneak = false,
 			fern = false,
 			barbar = false,
-			bufferline = true,
+			bufferline = {
+				enabled = true,
+				italics = true,
+				bolds = true,
+			},
 			markdown = true,
 			lightspeed = false,
 			ts_rainbow = true,
@@ -310,7 +314,6 @@ function config.catppuccin()
 				DiagnosticVirtualTextHint = { fg = cp.rosewater, bg = cp.none },
 
 				DiagnosticHint = { fg = cp.rosewater },
-				DiagnosticUnderlineInfo = { sp = cp.rosewater },
 				LspDiagnosticsDefaultHint = { fg = cp.rosewater },
 				LspDiagnosticsHint = { fg = cp.rosewater },
 				LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
@@ -324,6 +327,21 @@ function config.catppuccin()
 				rainbowcol5 = { bg = cp.none },
 				rainbowcol6 = { bg = cp.none },
 				rainbowcol7 = { bg = cp.none },
+
+				-- For bufferline
+				BufferLineInfo = { fg = cp.sky },
+				BufferLineInfoVisible = { fg = cp.sky },
+				BufferLineInfoDiagnostic = { fg = cp.sky },
+				BufferLineInfoDiagnosticVisible = { fg = cp.sky },
+				BufferLineInfoDiagnosticSelected = { fg = cp.sky },
+				BufferLineInfoSelected = { fg = cp.sky },
+
+				BufferLineHint = { fg = cp.rosewater },
+				BufferLineHintVisible = { fg = cp.rosewater },
+				BufferLineHintDiagnostic = { fg = cp.rosewater },
+				BufferLineHintDiagnosticVisible = { fg = cp.rosewater },
+				BufferLineHintSelected = { fg = cp.rosewater },
+				BufferLineHintDiagnosticSelected = { fg = cp.rosewater },
 
 				-- For treesitter.
 				TSField = { fg = cp.rosewater },
