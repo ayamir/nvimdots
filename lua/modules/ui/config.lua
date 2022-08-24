@@ -329,6 +329,13 @@ function config.catppuccin()
 				rainbowcol7 = { bg = cp.none },
 
 				-- For bufferline
+				BufferLineWarning = { fg = cp.yellow },
+				BufferLineWarningVisible = { fg = cp.yellow },
+				BufferLineWarningDiagnostic = { fg = cp.yellow },
+				BufferLineWarningDiagnosticVisible = { fg = cp.yellow },
+				BufferLineWarningSelected = { fg = cp.yellow },
+				BufferLineWarningDiagnosticSelected = { fg = cp.yellow },
+
 				BufferLineInfo = { fg = cp.sky },
 				BufferLineInfoVisible = { fg = cp.sky },
 				BufferLineInfoDiagnostic = { fg = cp.sky },
