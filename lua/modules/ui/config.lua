@@ -849,7 +849,7 @@ function config.nvim_bufferline()
 					padding = 1,
 				},
 			},
-			diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
 			end,
 		},
