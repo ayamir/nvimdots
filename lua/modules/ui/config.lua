@@ -441,6 +441,17 @@ function config.lualine()
 		return ok and m.waiting and "✺ " or ""
 	end
 
+	local function diff_source()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns then
+			return {
+				added = gitsigns.added,
+				modified = gitsigns.changed,
+				removed = gitsigns.removed,
+			}
+		end
+	end
+
 	local mini_sections = {
 		lualine_a = {},
 		lualine_b = {},
@@ -516,7 +527,7 @@ function config.lualine()
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { { "branch" }, { "diff" } },
+			lualine_b = { { "branch" }, { "diff", source = diff_source } },
 			lualine_c = {
 				{ navic.get_location, cond = navic.is_available },
 			},
