@@ -21,7 +21,6 @@ completion["williamboman/mason.nvim"] = {
 completion["glepnir/lspsaga.nvim"] = {
 	opt = true,
 	after = "nvim-lspconfig",
-	requires = { { "antoinemadec/FixCursorHold.nvim", opt = true } },
 	config = conf.lspsaga,
 }
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }
