@@ -859,7 +859,7 @@ function config.nvim_bufferline()
 			highlights = require("catppuccin.groups.integrations.bufferline").get({
 				styles = { "italic", "bold" },
 				custom = {
-					all = {
+					mocha = {
 						-- Warnings
 						warning = { fg = cp.yellow },
 						warning_visible = { fg = cp.yellow },
