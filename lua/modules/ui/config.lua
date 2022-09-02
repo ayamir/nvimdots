@@ -263,6 +263,7 @@ function config.catppuccin()
 			beacon = false,
 			navic = { enabled = true, custom_bg = "NONE" },
 			overseer = false,
+			fidget = true,
 		},
 		color_overrides = {
 			mocha = {
@@ -314,14 +315,9 @@ function config.catppuccin()
 				LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
 				LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
-				-- For Ts-Rainbow
-				rainbowcol1 = { bg = cp.none },
-				rainbowcol2 = { bg = cp.none },
-				rainbowcol3 = { bg = cp.none },
-				rainbowcol4 = { bg = cp.none },
-				rainbowcol5 = { bg = cp.none },
-				rainbowcol6 = { bg = cp.none },
-				rainbowcol7 = { bg = cp.none },
+				-- For fidget.
+				FidgetTask = { bg = cp.none, fg = cp.surface2 },
+				FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
 				-- For treesitter.
 				TSField = { fg = cp.rosewater },
@@ -1018,7 +1014,9 @@ function config.scrollview()
 end
 
 function config.fidget()
-	require("fidget").setup({})
+	require("fidget").setup({
+		window = { blend = 0 },
+	})
 end
 
 return config
