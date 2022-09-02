@@ -31,7 +31,7 @@ function config.telescope()
 			borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
-			file_ignore_patterns = {},
+			file_ignore_patterns = { ".git" },
 			layout_config = {
 				prompt_position = "bottom",
 				horizontal = {
