@@ -47,13 +47,17 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 				error(tostring(err))
 			end
 			if not result then
-				print("Corresponding file can’t be determined")
+				vim.notify("Corresponding file can’t be determined", vim.log.levels.ERROR, { title = "LSP Error!" })
 				return
 			end
 			vim.api.nvim_command(splitcmd .. " " .. vim.uri_to_fname(result))
 		end)
 	else
-		print("method textDocument/switchSourceHeader is not supported by any servers active on the current buffer")
+		vim.notify(
+			"Method textDocument/switchSourceHeader is not supported by any active server on this buffer",
+			vim.log.levels.ERROR,
+			{ title = "LSP Error!" }
+		)
 	end
 end
 

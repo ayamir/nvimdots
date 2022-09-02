@@ -316,7 +316,11 @@ function config.dap()
 			stdout:close()
 			handle:close()
 			if code ~= 0 then
-				print("dlv exited with code", code)
+				vim.notify(
+					string.format('"dlv" exited with code: %d, please check your configs for correctness.', code),
+					vim.log.levels.WARN,
+					{ title = "[go] DAP Warning!" }
+				)
 			end
 		end)
 		assert(handle, "Error running dlv: " .. tostring(pid_or_err))
