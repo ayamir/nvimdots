@@ -77,8 +77,8 @@ local function load_options()
 		display = "lastline",
 		showbreak = "↳  ",
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
-		pumblend = 10,
-		winblend = 10,
+		-- pumblend = 10,
+		-- winblend = 10,
 		autoread = true,
 		autowrite = true,
 
@@ -110,7 +110,7 @@ local function load_options()
 		}
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/local/bin/python3"
-	else 
+	else
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/bin/python3"
 	end
