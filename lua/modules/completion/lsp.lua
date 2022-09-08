@@ -242,16 +242,13 @@ local shellcheck = require("efmls-configs.linters.shellcheck")
 
 local black = require("efmls-configs.formatters.black")
 local luafmt = require("efmls-configs.formatters.stylua")
-local clangfmt = {
-	formatCommand = "clang-format -style='{BasedOnStyle: LLVM, IndentWidth: 4}'",
-	formatStdin = true,
-}
 local prettier = require("efmls-configs.formatters.prettier")
 local shfmt = require("efmls-configs.formatters.shfmt")
 
 -- Add your own config for formatter and linter here
 
 -- local rustfmt = require("modules.completion.efm.formatters.rustfmt")
+local clangfmt = require("modules.completion.efm.formatters.clangfmt")
 
 -- Override default config here
 
