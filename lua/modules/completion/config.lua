@@ -41,8 +41,7 @@ function config.lspsaga()
 
 	local colors = get_palette()
 
-	local saga = require("lspsaga")
-	saga.init_lsp_saga({
+	require("lspsaga").init_lsp_saga({
 		diagnostic_header = { " ", " ", "  ", " " },
 		custom_kind = {
 			File = { " ", colors.rosewater },
