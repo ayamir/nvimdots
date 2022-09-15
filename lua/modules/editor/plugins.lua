@@ -122,14 +122,16 @@ editor["sindrets/diffview.nvim"] = {
 	opt = true,
 	cmd = { "DiffviewOpen" },
 }
-editor["brglng/vim-im-select"] = {
-	opt = true,
-	event = "BufReadPost",
-	config = conf.imselect,
-}
 editor["luukvbaal/stabilize.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
 }
+
+-- only for fcitx5 user who uses non-English language during coding
+-- editor["brglng/vim-im-select"] = {
+-- 	opt = true,
+-- 	event = "BufReadPost",
+-- 	config = conf.imselect,
+-- }
 
 return editor
