@@ -24,7 +24,7 @@ tools["nvim-telescope/telescope-project.nvim"] = {
 tools["nvim-telescope/telescope-frecency.nvim"] = {
 	opt = true,
 	after = "telescope-project.nvim",
-	requires = { { "tami5/sqlite.lua", opt = true } },
+	requires = { { "kkharji/sqlite.lua", opt = true } },
 }
 tools["jvgrootveld/telescope-zoxide"] = { opt = true, after = "telescope-frecency.nvim" }
 tools["michaelb/sniprun"] = {
