@@ -249,6 +249,7 @@ function config.catppuccin()
 			lightspeed = false,
 			ts_rainbow = true,
 			hop = true,
+			illuminate = true,
 			cmp = true,
 			dap = { enabled = true, enable_ui = true },
 			notify = true,
