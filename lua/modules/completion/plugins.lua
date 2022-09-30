@@ -28,6 +28,7 @@ completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
 	event = "InsertEnter",
 	requires = {
+		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
 		{ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" },
