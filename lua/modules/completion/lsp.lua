@@ -3,7 +3,6 @@ local formatting = require("modules.completion.formatting")
 vim.cmd([[packadd lsp_signature.nvim]])
 vim.cmd([[packadd lspsaga.nvim]])
 vim.cmd([[packadd cmp-nvim-lsp]])
-vim.cmd([[packadd nvim-navic]])
 
 local nvim_lsp = require("lspconfig")
 local mason = require("mason")
@@ -34,7 +33,6 @@ local function custom_attach(client, bufnr)
 		hi_parameter = "Search",
 		handler_opts = { "double" },
 	})
-	require("nvim-navic").attach(client, bufnr)
 end
 
 local function switch_source_header_splitcmd(bufnr, splitcmd)
