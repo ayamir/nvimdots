@@ -144,8 +144,6 @@ function config.lspsaga()
 				win_val = win_val .. sym
 			end
 			vim.wo.winbar = win_val
-			-- if work in statusline
-			vim.wo.stl = win_val
 		end
 	end
 
