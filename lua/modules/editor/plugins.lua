@@ -41,7 +41,6 @@ editor["windwp/nvim-ts-autotag"] = {
 editor["andymass/vim-matchup"] = {
 	opt = true,
 	after = "nvim-treesitter",
-	config = conf.matchup,
 }
 editor["rainbowhxch/accelerated-jk.nvim"] = { opt = true, event = "BufWinEnter", config = conf.accelerated_jk }
 editor["hrsh7th/vim-eft"] = { opt = true, event = "BufReadPost" }
