@@ -856,20 +856,6 @@ function config.nvim_bufferline()
 				styles = { "italic", "bold" },
 				custom = {
 					mocha = {
-						-- Warnings
-						warning = { fg = cp.yellow },
-						warning_visible = { fg = cp.yellow },
-						warning_selected = { fg = cp.yellow },
-						warning_diagnostic = { fg = cp.yellow },
-						warning_diagnostic_visible = { fg = cp.yellow },
-						warning_diagnostic_selected = { fg = cp.yellow },
-						-- Infos
-						info = { fg = cp.sky },
-						info_visible = { fg = cp.sky },
-						info_selected = { fg = cp.sky },
-						info_diagnostic = { fg = cp.sky },
-						info_diagnostic_visible = { fg = cp.sky },
-						info_diagnostic_selected = { fg = cp.sky },
 						-- Hint
 						hint = { fg = cp.rosewater },
 						hint_visible = { fg = cp.rosewater },
