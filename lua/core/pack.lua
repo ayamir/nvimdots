@@ -116,6 +116,7 @@ function plugins.load_compile()
 	if vim.fn.filereadable(packer_compiled) == 1 then
 		require("_compiled")
 	else
+		require("core.pack").back_compile()
 		assert(nil, "Missing packer compiled file! Run `PackerCompile` or `PackerInstall` to fix this.")
 	end
 
