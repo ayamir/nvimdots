@@ -76,7 +76,7 @@ function Packer:init_ensure_plugins()
 		local cmd = "!git clone git@github.com:wbthomason/packer.nvim.git " .. packer_dir
 		api.nvim_command(cmd)
 		uv.fs_mkdir(data_dir .. "lua", 511, function()
-			assert("make compile path dir failed")
+			assert(nil, "Failed to make packer compile dir. Please restart Nvim and we'll try it again!")
 		end)
 		self:load_packer()
 		packer.install()
@@ -116,15 +116,22 @@ function plugins.load_compile()
 	if vim.fn.filereadable(packer_compiled) == 1 then
 		require("_compiled")
 	else
-		assert("Missing packer compile file Run PackerCompile Or PackerInstall to fix")
+		assert(nil, "Missing packer compiled file! Run `PackerCompile` or `PackerInstall` to fix this.")
 	end
-	vim.cmd([[command! PackerCompile lua require('core.pack').back_compile()]])
-	vim.cmd([[command! PackerInstall lua require('core.pack').install()]])
-	vim.cmd([[command! PackerUpdate lua require('core.pack').update()]])
-	vim.cmd([[command! PackerSync lua require('core.pack').sync()]])
-	vim.cmd([[command! PackerClean lua require('core.pack').clean()]])
-	vim.cmd([[autocmd User PackerComplete lua require('core.pack').back_compile()]])
-	vim.cmd([[command! PackerStatus lua require('core.pack').compile() require('packer').status()]])
+
+	local cmds = { "Compile", "Install", "Update", "Sync", "Clean", "Status" }
+	for _, cmd in ipairs(cmds) do
+		api.nvim_create_user_command("Packer" .. cmd, function()
+			require("core.pack")[cmd == "Compile" and "back_compile" or string.lower(cmd)]()
+		end, { force = true })
+	end
+
+	api.nvim_create_autocmd("User", {
+		pattern = "PackerComplete",
+		callback = function()
+			require("core.pack").back_compile()
+		end,
+	})
 end
 
 return plugins

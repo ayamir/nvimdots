@@ -973,8 +973,11 @@ function config.indent_blankline()
 		},
 		space_char_blankline = " ",
 	})
-	-- because lazy load indent-blankline so need readd this autocmd
-	vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
+	-- Because we've lazy loaded indent-blankline so we need to "re"add this autocmd
+	vim.api.nvim_create_autocmd("CursorMoved", {
+		pattern = "*",
+		command = "IndentBlanklineRefresh",
+	})
 end
 
 function config.scrollview()
