@@ -27,7 +27,7 @@ function config.nvim_treesitter()
 		},
 		highlight = {
 			enable = true,
-			disable = { "vim" },
+			disable = { "vim", "help" },
 			additional_vim_regex_highlighting = false,
 		},
 		textobjects = {
