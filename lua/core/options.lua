@@ -114,7 +114,7 @@ local function load_options()
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/bin/python3"
 	end
-	
+
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
