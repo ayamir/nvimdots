@@ -66,13 +66,6 @@ local neovide_config = function()
 	vim.g.neovide_cursor_vfx_particle_density = 5.0
 end
 
-local function check_conda()
-	local venv = os.getenv("CONDA_PREFIX")
-	if venv then
-		vim.g.python3_host_prog = venv .. "/bin/python"
-	end
-end
-
 local clipboard_config = function()
 	if global.is_mac then
 		vim.g.clipboard = {
@@ -105,7 +98,6 @@ local load_core = function()
 
 	pack.ensure_plugins()
 	neovide_config()
-	-- check_conda()
 	clipboard_config()
 
 	require("core.options")
