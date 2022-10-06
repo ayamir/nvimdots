@@ -101,13 +101,20 @@ local function load_options()
 		concealcursor = "niv",
 	}
 
-	if global.is_mac then
+	local function isempty(s)
+		return s == nil or s == ""
+	end
+
+	if not isempty(vim.env.CONDA_PREFIX) then
+		vim.g.python3_host_prog = vim.env.CONDA_PREFIX .. "/bin/python"
+	elseif global.is_mac then
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/local/bin/python3"
 	else
 		vim.g.python_host_prog = "/usr/bin/python"
 		vim.g.python3_host_prog = "/usr/bin/python3"
 	end
+	
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
