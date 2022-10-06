@@ -2,6 +2,7 @@ local config = {}
 
 function config.rust_tools()
 	vim.cmd([[packadd nvim-lspconfig]])
+	vim.cmd([[packadd lsp_signature.nvim]])
 
 	local opts = {
 		tools = { -- rust-tools options
@@ -12,7 +13,17 @@ function config.rust_tools()
 
 			-- callback to execute once rust-analyzer is done initializing the workspace
 			-- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
-			on_initialized = nil,
+			on_initialized = function(_)
+				require("lsp_signature").on_attach({
+					bind = true,
+					use_lspsaga = false,
+					floating_window = true,
+					fix_pos = true,
+					hint_enable = true,
+					hi_parameter = "Search",
+					handler_opts = { "double" },
+				})
+			end,
 
 			-- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
 			reload_workspace_from_cargo_toml = true,
@@ -160,6 +171,9 @@ function config.rust_tools()
 			-- standalone file support
 			-- setting it to false may improve startup time
 			standalone = true,
+			on_attach = function(client, bufnr)
+				require("nvim-navic").attach(client, bufnr)
+			end,
 		}, -- rust-analyer options
 
 		-- debugging stuff
