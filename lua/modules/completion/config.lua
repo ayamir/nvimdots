@@ -287,7 +287,11 @@ function config.cmp()
 end
 
 function config.luasnip()
-	vim.o.runtimepath = vim.o.runtimepath .. "," .. os.getenv("HOME") .. "/.config/nvim/my-snippets/,"
+	local snippet_path = os.getenv("HOME") .. "/.config/nvim/my-snippets/"
+	if not vim.tbl_contains(vim.opt.rtp:get(), snippet_path) then
+		vim.opt.rtp:append(snippet_path)
+	end
+
 	require("luasnip").config.set_config({
 		history = true,
 		updateevents = "TextChanged,TextChangedI",
