@@ -252,7 +252,7 @@ function config.dapui()
 end
 
 function config.dap()
-	vim.cmd([[packadd nvim-dap-ui]])
+	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 
@@ -435,7 +435,7 @@ end
 function config.imselect()
 	-- fcitx5 need a manual config
 	if vim.fn.executable("fcitx5-remote") == 1 then
-		vim.cmd([[
+		vim.api.nvim_command([[
 		let g:im_select_get_im_cmd = ["fcitx5-remote"]
 		let g:im_select_default = '1'
 		let g:ImSelectSetImCmd = {

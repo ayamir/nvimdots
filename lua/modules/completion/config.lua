@@ -95,7 +95,7 @@ function config.lspsaga()
 				elseif button == "m" then
 					-- middle click to visual select node
 					vim.fn.cursor(st.line + 1, st.character + 1)
-					vim.cmd("normal v")
+					vim.api.nvim_command([[normal v]])
 					vim.fn.cursor(en.line + 1, en.character + 1)
 				end
 			end,
@@ -165,7 +165,7 @@ function config.lspsaga()
 end
 
 function config.cmp()
-	-- vim.cmd([[packadd cmp-tabnine]])
+	-- vim.api.nvim_command([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
 	end
