@@ -104,8 +104,8 @@ local load_core = function()
 	require("core.event")
 	pack.load_compile()
 
-	-- vim.cmd([[set background=light]])
-	vim.cmd([[colorscheme catppuccin]])
+	-- vim.api.nvim_command([[set background=light]])
+	vim.api.nvim_command([[colorscheme catppuccin]])
 end
 
 load_core()

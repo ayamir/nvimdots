@@ -1,11 +1,11 @@
 local config = {}
 
 function config.telescope()
-	vim.cmd([[packadd sqlite.lua]])
-	vim.cmd([[packadd telescope-fzf-native.nvim]])
-	vim.cmd([[packadd telescope-project.nvim]])
-	vim.cmd([[packadd telescope-frecency.nvim]])
-	vim.cmd([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd sqlite.lua]])
+	vim.api.nvim_command([[packadd telescope-fzf-native.nvim]])
+	vim.api.nvim_command([[packadd telescope-project.nvim]])
+	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
+	vim.api.nvim_command([[packadd telescope-zoxide]])
 
 	local telescope_actions = require("telescope.actions.set")
 	local fixfolds = {
@@ -13,7 +13,7 @@ function config.telescope()
 		attach_mappings = function(_)
 			telescope_actions.select:enhance({
 				post = function()
-					vim.cmd(":normal! zx")
+					vim.api.nvim_command([[:normal! zx"]])
 				end,
 			})
 			return true
