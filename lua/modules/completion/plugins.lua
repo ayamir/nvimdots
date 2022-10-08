@@ -11,6 +11,7 @@ completion["creativenull/efmls-configs-nvim"] = {
 	requires = "neovim/nvim-lspconfig",
 }
 completion["williamboman/mason.nvim"] = {
+	opt = false,
 	requires = {
 		{
 			"williamboman/mason-lspconfig.nvim",
@@ -20,7 +21,7 @@ completion["williamboman/mason.nvim"] = {
 }
 completion["glepnir/lspsaga.nvim"] = {
 	opt = true,
-	after = "nvim-lspconfig",
+	event = "LspAttach",
 	config = conf.lspsaga,
 }
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }

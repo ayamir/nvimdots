@@ -69,7 +69,7 @@ local function load_options()
 		helpheight = 12,
 		previewheight = 12,
 		showcmd = false,
-		cmdheight = 2,
+		cmdheight = 2, -- 0, 1, 2
 		cmdwinheight = 5,
 		equalalways = false,
 		laststatus = 2,
@@ -99,7 +99,6 @@ local function load_options()
 		conceallevel = 0,
 		concealcursor = "niv",
 	}
-
 	local function isempty(s)
 		return s == nil or s == ""
 	end
