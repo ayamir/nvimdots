@@ -3,7 +3,6 @@ local global = require("core.global")
 local function load_options()
 	local global_local = {
 		termguicolors = true,
-		mouse = "a",
 		errorbells = true,
 		visualbell = true,
 		hidden = true,
