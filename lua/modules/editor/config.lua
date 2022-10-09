@@ -70,6 +70,11 @@ function config.nvim_treesitter()
 	for _, p in pairs(parsers) do
 		p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
 	end
+	
+	local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+	parser_config.bash.filetype_to_parsername = {
+		"sh", --[["zsh"--]]
+	}
 end
 
 function config.illuminate()
