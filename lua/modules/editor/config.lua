@@ -72,9 +72,7 @@ function config.nvim_treesitter()
 	end
 	
 	local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-	parser_config.bash.filetype_to_parsername = {
-		"sh", --[["zsh"--]]
-	}
+	parser_config.bash.filetype_to_parsername = { "sh", "zsh" }
 end
 
 function config.illuminate()
