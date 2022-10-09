@@ -4,7 +4,7 @@ local conf = require("modules.completion.config")
 completion["neovim/nvim-lspconfig"] = {
 	opt = true,
 	event = "BufReadPre",
-	-- config = conf.nvim_lsp,
+	config = conf.nvim_lsp,
 }
 completion["creativenull/efmls-configs-nvim"] = {
 	opt = false,
@@ -14,7 +14,6 @@ completion["williamboman/mason.nvim"] = {
 	requires = {
 		{
 			"williamboman/mason-lspconfig.nvim",
-			config = conf.nvim_lsp,
 		},
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim", config = conf.mason_install },
 	},
@@ -72,4 +71,3 @@ completion["zbirenbaum/copilot-cmp"] = {
 }
 
 return completion
-
