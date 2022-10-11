@@ -197,7 +197,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 				},
 			},
 		})
-	else
+	elseif server ~= "efm" then
 		nvim_lsp[server].setup({
 			capabilities = capabilities,
 			on_attach = custom_attach,
