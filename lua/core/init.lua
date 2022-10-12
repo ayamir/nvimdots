@@ -22,7 +22,7 @@ local createdir = function()
 end
 
 local disable_distribution_plugins = function()
-	-- Do not load menu
+	-- disable menu loading
 	vim.g.did_install_default_menus = 1
 	vim.g.did_install_syntax_menu = 1
 
