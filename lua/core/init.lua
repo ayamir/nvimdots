@@ -1,7 +1,7 @@
 local global = require("core.global")
 local vim = vim
 
--- Create cache dir and subs dir
+-- Create cache dir and data dirs
 local createdir = function()
 	local data_dir = {
 		global.cache_dir .. "backup",
@@ -10,8 +10,7 @@ local createdir = function()
 		global.cache_dir .. "tags",
 		global.cache_dir .. "undo",
 	}
-	-- There only check once that If cache_dir exists
-	-- Then I don't want to check subs dir exists
+	-- Only check whether cache_dir exists, this would be enough.
 	if vim.fn.isdirectory(global.cache_dir) == 0 then
 		os.execute("mkdir -p " .. global.cache_dir)
 		for _, v in pairs(data_dir) do
@@ -23,27 +22,51 @@ local createdir = function()
 end
 
 local disable_distribution_plugins = function()
-	vim.g.did_load_filetypes = 1
-	vim.g.did_load_fzf = 1
-	vim.g.did_load_gtags = 1
-	vim.g.did_load_gzip = 1
-	vim.g.did_load_tar = 1
-	vim.g.did_load_tarPlugin = 1
-	vim.g.did_load_zip = 1
-	vim.g.did_load_zipPlugin = 1
-	vim.g.did_load_getscript = 1
-	vim.g.did_load_getscriptPlugin = 1
-	vim.g.did_load_vimball = 1
-	vim.g.did_load_vimballPlugin = 1
-	vim.g.did_load_matchit = 1
-	vim.g.did_load_matchparen = 1
-	vim.g.did_load_2html_plugin = 1
-	vim.g.did_load_logiPat = 1
-	vim.g.did_load_rrhelper = 1
-	vim.g.did_load_netrw = 1
-	vim.g.did_load_netrwPlugin = 1
-	vim.g.did_load_netrwSettings = 1
-	vim.g.did_load_netrwFileHandlers = 1
+	-- disable menu loading
+	vim.g.did_install_default_menus = 1
+	vim.g.did_install_syntax_menu = 1
+
+	-- Uncomment this if you define your own filetypes in `after/ftplugin`
+	-- vim.g.did_load_filetypes = 1
+
+	-- Do not load native syntax completion
+	vim.g.loaded_syntax_completion = 1
+
+	-- Do not load spell files
+	vim.g.loaded_spellfile_plugin = 1
+
+	-- Whether to load netrw by default
+	-- vim.g.loaded_netrw = 1
+	-- vim.g.loaded_netrwFileHandlers = 1
+	-- vim.g.loaded_netrwPlugin = 1
+	-- vim.g.loaded_netrwSettings = 1
+	-- newtrw liststyle: https://medium.com/usevim/the-netrw-style-options-3ebe91d42456
+	vim.g.netrw_liststyle = 3
+
+	-- Do not load tohtml.vim
+	vim.g.loaded_2html_plugin = 1
+
+	-- Do not load zipPlugin.vim, gzip.vim and tarPlugin.vim (all these plugins are
+	-- related to checking files inside compressed files)
+	vim.g.loaded_gzip = 1
+	vim.g.loaded_tar = 1
+	vim.g.loaded_tarPlugin = 1
+	vim.g.loaded_vimball = 1
+	vim.g.loaded_vimballPlugin = 1
+	vim.g.loaded_zip = 1
+	vim.g.loaded_zipPlugin = 1
+
+	-- Do not use builtin matchit.vim and matchparen.vim since the use of vim-matchup
+	vim.g.loaded_matchit = 1
+	vim.g.loaded_matchparen = 1
+
+	-- Disable sql omni completion.
+	vim.g.loaded_sql_completion = 1
+
+	-- Disable remote plugins
+	-- NOTE: Disabling rplugin.vim will show error for `wilder.nvim` in :checkhealth,
+	-- NOTE:  but since it's config doesn't require python rtp, it's fine to ignore.
+	-- vim.g.loaded_remote_plugins = 1
 end
 
 local leader_map = function()
@@ -53,7 +76,7 @@ local leader_map = function()
 end
 
 local neovide_config = function()
-	vim.cmd([[set guifont=JetBrainsMono\ Nerd\ Font:h15]])
+	vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font:h15", {})
 	vim.g.neovide_refresh_rate = 120
 	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_no_idle = true
@@ -66,28 +89,28 @@ local neovide_config = function()
 	vim.g.neovide_cursor_vfx_particle_density = 5.0
 end
 
-local function check_conda()
-	local venv = os.getenv("CONDA_PREFIX")
-	if venv then
-		vim.g.python3_host_prog = venv .. "/bin/python"
-	end
-end
-
 local clipboard_config = function()
-	vim.cmd([[
-    let g:clipboard = {
-          \   'name': 'win32yank-wsl',
-          \   'copy': {
-          \      '+': 'win32yank.exe -i --crlf',
-          \      '*': 'win32yank.exe -i --crlf',
-          \    },
-          \   'paste': {
-          \      '+': 'win32yank.exe -o --lf',
-          \      '*': 'win32yank.exe -o --lf',
-          \   },
-          \   'cache_enabled': 0,
-          \ }
-    ]])
+	if global.is_mac then
+		vim.g.clipboard = {
+			name = "macOS-clipboard",
+			copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+			paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+			cache_enabled = 0,
+		}
+	elseif global.is_wsl then
+		vim.g.clipboard = {
+			name = "win32yank-wsl",
+			copy = {
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
+			},
+			paste = {
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
+			},
+			cache_enabled = 0,
+		}
+	end
 end
 
 local load_core = function()
@@ -98,8 +121,7 @@ local load_core = function()
 
 	pack.ensure_plugins()
 	neovide_config()
-	-- check_conda()
-	-- clipboard_config()
+	clipboard_config()
 
 	require("core.options")
 	require("core.mapping")
@@ -107,8 +129,8 @@ local load_core = function()
 	require("core.event")
 	pack.load_compile()
 
-	-- vim.cmd([[set background=light]])
-	vim.cmd([[colorscheme catppuccin]])
+	-- vim.api.nvim_command([[set background=light]])
+	vim.api.nvim_command([[colorscheme catppuccin]])
 end
 
 load_core()

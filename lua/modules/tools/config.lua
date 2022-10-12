@@ -1,11 +1,11 @@
 local config = {}
 
 function config.telescope()
-	vim.cmd([[packadd sqlite.lua]])
-	vim.cmd([[packadd telescope-fzf-native.nvim]])
-	vim.cmd([[packadd telescope-project.nvim]])
-	vim.cmd([[packadd telescope-frecency.nvim]])
-	vim.cmd([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd sqlite.lua]])
+	vim.api.nvim_command([[packadd telescope-fzf-native.nvim]])
+	vim.api.nvim_command([[packadd telescope-project.nvim]])
+	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
+	vim.api.nvim_command([[packadd telescope-zoxide]])
 
 	local telescope_actions = require("telescope.actions.set")
 	local fixfolds = {
@@ -13,7 +13,7 @@ function config.telescope()
 		attach_mappings = function(_)
 			telescope_actions.select:enhance({
 				post = function()
-					vim.cmd(":normal! zx")
+					vim.api.nvim_command([[:normal! zx"]])
 				end,
 			})
 			return true
@@ -176,38 +176,58 @@ function config.which_key()
 end
 
 function config.wilder()
-	vim.cmd([[
-call wilder#setup({'modes': [':', '/', '?']})
-call wilder#set_option('use_python_remote_plugin', 0)
-call wilder#set_option('pipeline', [wilder#branch(
-	\ wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),
-	\ wilder#vim_search_pipeline(),
-	\ [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})]
-	\ )])
-call wilder#set_option('renderer', wilder#renderer_mux({
-	\ ':': wilder#popupmenu_renderer({
-		\ 'highlighter': wilder#lua_fzy_highlighter(),
-		\ 'left': [wilder#popupmenu_devicons()],
-		\ 'right': [' ', wilder#popupmenu_scrollbar()]
-		\ }),
-	\ '/': wilder#wildmenu_renderer({
-		\ 'highlighter': wilder#lua_fzy_highlighter(),
-		\ 'apply_incsearch_fix': v:true,
-		\})
-	\ }))
-]])
-end
-
-function config.filetype()
-	-- In init.lua or filetype.nvim's config file
-	require("filetype").setup({
-		overrides = {
-			shebang = {
-				-- Set the filetype of files with a dash shebang to sh
-				dash = "sh",
-			},
-		},
+	local wilder = require("wilder")
+	wilder.setup({ modes = { ":", "/", "?" } })
+	wilder.set_option("use_python_remote_plugin", 0)
+	wilder.set_option("pipeline", {
+		wilder.branch(
+			wilder.cmdline_pipeline({ use_python = 0, fuzzy = 1, fuzzy_filter = wilder.lua_fzy_filter() }),
+			wilder.vim_search_pipeline(),
+			{
+				wilder.check(function(_, x)
+					return x == ""
+				end),
+				wilder.history(),
+				wilder.result({
+					draw = {
+						function(_, x)
+							return " " .. x
+						end,
+					},
+				}),
+			}
+		),
 	})
+
+	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+		border = "rounded",
+		empty_message = wilder.popupmenu_empty_message_with_spinner(),
+		highlighter = wilder.lua_fzy_highlighter(),
+		left = {
+			" ",
+			wilder.popupmenu_devicons(),
+			wilder.popupmenu_buffer_flags({
+				flags = " a + ",
+				icons = { ["+"] = "", a = "", h = "" },
+			}),
+		},
+		right = {
+			" ",
+			wilder.popupmenu_scrollbar(),
+		},
+	}))
+	local wildmenu_renderer = wilder.wildmenu_renderer({
+		highlighter = wilder.lua_fzy_highlighter(),
+		apply_incsearch_fix = true,
+	})
+	wilder.set_option(
+		"renderer",
+		wilder.renderer_mux({
+			[":"] = popupmenu_renderer,
+			["/"] = wildmenu_renderer,
+			substitute = wildmenu_renderer,
+		})
+	)
 end
 
 return config

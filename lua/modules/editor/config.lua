@@ -25,7 +25,11 @@ function config.nvim_treesitter()
 			"vue",
 			"css",
 		},
-		highlight = { enable = true, disable = { "vim" } },
+		highlight = {
+			enable = true,
+			disable = { "vim", "help" },
+			additional_vim_regex_highlighting = false,
+		},
 		textobjects = {
 			select = {
 				enable = true,
@@ -222,6 +226,22 @@ function config.dapui()
 			},
 			{ elements = { "repl" }, size = 10, position = "bottom" },
 		},
+		-- Requires Nvim version >= 0.8
+		controls = {
+			enabled = true,
+			-- Display controls in this session
+			element = "repl",
+			icons = {
+				pause = "",
+				play = "",
+				step_into = "",
+				step_over = "",
+				step_out = "",
+				step_back = "",
+				run_last = "↻",
+				terminate = "ﱢ",
+			},
+		},
 		floating = {
 			max_height = nil,
 			max_width = nil,
@@ -232,7 +252,7 @@ function config.dapui()
 end
 
 function config.dap()
-	vim.cmd([[packadd nvim-dap-ui]])
+	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 
@@ -415,17 +435,18 @@ end
 function config.imselect()
 	-- fcitx5 need a manual config
 	if vim.fn.executable("fcitx5-remote") == 1 then
-		vim.cmd([[
-		let g:im_select_get_im_cmd = ["fcitx5-remote"]
-		let g:im_select_default = '1'
-		let g:ImSelectSetImCmd = {
+		vim.api.nvim_cmd({
+			[[ let g:im_select_get_im_cmd = ["fcitx5-remote"] ]],
+			[[ let g:im_select_default = '1' ]],
+			[[ let g:ImSelectSetImCmd = {
 			\ key ->
 			\ key == 1 ? ['fcitx5-remote', '-c'] :
 			\ key == 2 ? ['fcitx5-remote', '-o'] :
 			\ key == 0 ? ['fcitx5-remote', '-c'] :
 			\ execute("throw 'invalid im key'")
 			\ }
-			]])
+			]],
+		}, { true, true, true })
 	end
 end
 

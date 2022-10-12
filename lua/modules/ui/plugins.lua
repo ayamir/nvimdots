@@ -15,13 +15,8 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
-	after = { "nvim-navic" },
-	config = conf.lualine,
-}
-ui["SmiteshP/nvim-navic"] = {
-	opt = true,
 	after = "nvim-lspconfig",
-	config = conf.nvim_navic,
+	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {
 	opt = true,
