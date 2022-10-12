@@ -14,9 +14,10 @@ This is my neovim's configuration, which contains two branches.
 
 I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
 
-| Branch |   Completion Solution   |
-| :----: | :---------------------: |
-|  main  | nvim-lspconfig+nvim-cmp |
+| Branch |    Completion Solution     |
+| :----: | :------------------------: |
+|  main  | config for nvim 0.8 stable |
+|  0.7   | config for nvim 0.7 stable |
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
@@ -36,7 +37,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 # Details
 
-Please make sure to follow [wiki](https://github.com/ayamir/nvimdots/wiki) to install.
+Please **make sure** to follow [wiki](https://github.com/ayamir/nvimdots/wiki) to install.
 
 # Acknowledgement
 
