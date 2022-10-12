@@ -22,7 +22,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 **Pros**:
 
--   Fast. Less than **30** to start(Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
+-   Fast. Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
 -   Simple. Run out of the box.
 -   Modern. Pure lua to config.
 -   Modular. Easy to customize.

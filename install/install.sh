@@ -135,7 +135,7 @@ ssh -T git@github.com &>/dev/null
 if ! [ $? -eq 1 ]; then
 	abort "$(
 		cat <<EOABORT
-You must have SSH key prepared and registered at GitHub before
+You must have SSH key prepared and registered on GitHub before
 installing this Nvim config. See:
   ${tty_underline}https://github.com/ayamir/nvimdots/wiki/Prerequisites${tty_reset}
 EOABORT
