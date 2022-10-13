@@ -9,6 +9,7 @@ set -u
 # global vars
 DEST_DIR="${HOME}/.config/nvim"
 REQUIRED_NVIM_VERSION=0.8
+USE_SSH=1
 
 abort() {
 	printf "%s\n" "$@" >&2
@@ -103,6 +104,23 @@ version_ge() {
 	[[ "${1%.*}" -gt "${2%.*}" ]] || [[ "${1%.*}" -eq "${2%.*}" && "${1#*.}" -ge "${2#*.}" ]]
 }
 
+check_ssh() {
+	prompt "Validating SSH connection..."
+	ssh -T git@github.com &>/dev/null
+	if ! [ $? -eq 1 ]; then
+		cat <<EOS
+Oops, it looks like SSH key hasn't been prepared and registered at GitHub (recommended). See:
+  ${tty_underline}https://docs.github.com/en/authentication/connecting-to-github-with-ssh${tty_reset}
+
+However, the installation can still proceed - we'll use HTTPS instead for fetching and later use. Continue?
+EOS
+		ring_bell
+		return 0
+	else
+		return 1
+	fi
+}
+
 is_latest() {
 	local nvim_version
 	nvim_version=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
@@ -131,17 +149,6 @@ EOABORT
 	)"
 fi
 
-ssh -T git@github.com &>/dev/null
-if ! [ $? -eq 1 ]; then
-	abort "$(
-		cat <<EOABORT
-You must have SSH key prepared and registered on GitHub before
-installing this Nvim config. See:
-  ${tty_underline}https://github.com/ayamir/nvimdots/wiki/Prerequisites${tty_reset}
-EOABORT
-	)"
-fi
-
 prompt "This script will install ayamir/nvimdots to:"
 echo "${DEST_DIR}"
 
@@ -152,20 +159,41 @@ fi
 ring_bell
 wait_for_user
 
+if check_ssh; then
+	wait_for_user
+	USE_SSH=0
+fi
+
 if [[ -d "${DEST_DIR}" ]]; then
-	mv -f "${DEST_DIR}" "${DEST_DIR}_$(date +%Y%m%dT%H%M%S)"
+	execute "mv" "-f" "${DEST_DIR}" "${DEST_DIR}_$(date +%Y%m%dT%H%M%S)"
 fi
 
 prompt "Fetching in progress..."
-if is_latest; then
-	execute "git" "clone" "-b" "main" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+if [ "$USE_SSH" -eq "1" ]; then
+	if is_latest; then
+		execute "git" "clone" "-b" "main" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+	else
+		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
+		prompt "Automatically redirecting you to legacy version..."
+		execute "git" "clone" "-b" "0.7" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+	fi
 else
-	warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
-	prompt "Automatically redirecting you to legacy version..."
-	execute "git" "clone" "-b" "0.7" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+	if is_latest; then
+		execute "git" "clone" "-b" "main" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
+	else
+		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
+		prompt "Automatically redirecting you to legacy version..."
+		execute "git" "clone" "-b" "0.7" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
+	fi
 fi
 
 cd "${DEST_DIR}" || return
+
+if [ "$USE_SSH" -eq "0" ]; then
+	prompt "Changing default fetching method to HTTPS..."
+	find ./lua/core -type f -exec sed -i '' -e "s/git@\(.*\):\/*\(.*\)/https:\/\/\1\/\2/" {} \;
+	# The -i argument for sed command is a GNU extension. Compatibility issues need to be addressed in the future.
+fi
 
 prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
 prompt "If packer failed to fetch any plugin(s), maunally execute \`nvim +PackerSync\` until everything is up-to-date."
@@ -174,7 +202,7 @@ cat <<EOS
 Thank you for using this set of configuration!
 - Project Homepage:
     ${tty_underline}https://github.com/ayamir/nvimdots${tty_reset}
-- Further documentation (including executables you ${tty_bold}must${tty_reset} install for Nvim to work correctly):
+- Further documentation (including executables you ${tty_bold}may${tty_reset} install for full functionality):
     ${tty_underline}https://github.com/ayamir/nvimdots/wiki/Prerequisites${tty_reset}
 EOS
 wait_for_user
