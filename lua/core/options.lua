@@ -57,6 +57,7 @@ local function load_options()
 		shortmess = "aoOTIcF",
 		scrolloff = 2,
 		sidescrolloff = 5,
+		mousescroll = "ver:3,hor:6",
 		foldlevelstart = 99,
 		ruler = true,
 		cursorline = true,
