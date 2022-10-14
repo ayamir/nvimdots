@@ -583,7 +583,7 @@ end
 function config.nvim_tree()
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
-		respect_buf_cwd = true,
+		respect_buf_cwd = false,
 		auto_reload_on_write = true,
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -594,7 +594,7 @@ function config.nvim_tree()
 		open_on_setup_file = false,
 		open_on_tab = false,
 		sort_by = "name",
-		update_cwd = true,
+		sync_root_with_cwd = true,
 		view = {
 			adaptive_size = false,
 			centralize_selection = false,
@@ -680,7 +680,7 @@ function config.nvim_tree()
 		},
 		update_focused_file = {
 			enable = true,
-			update_cwd = true,
+			update_root = false,
 			ignore_list = {},
 		},
 		ignore_ft_on_setup = {},
