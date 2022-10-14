@@ -1,4 +1,5 @@
 local config = {}
+local icon = require("modules.ui.icons")
 
 function config.telescope()
 	vim.api.nvim_command([[packadd sqlite.lua]])
@@ -23,8 +24,8 @@ function config.telescope()
 	require("telescope").setup({
 		defaults = {
 			initial_mode = "insert",
-			prompt_prefix = "  ",
-			selection_caret = " ",
+			prompt_prefix = icon.ui.Telescope .. " ",
+			selection_caret = icon.ui.ChevronRight .. " ",
 			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
@@ -80,8 +81,8 @@ function config.trouble()
 		width = 50, -- width of the list when position is left or right
 		icons = true, -- use devicons for filenames
 		mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-		fold_open = "", -- icon used for open folds
-		fold_closed = "", -- icon used for closed folds
+		fold_open = icon.ui.ArrowOpen, -- icon used for open folds
+		fold_closed = icon.ui.ArrowClosed, -- icon used for closed folds
 		action_keys = {
 			-- key mappings for actions in the trouble list
 			-- map to {} to remove a mapping, for example:
@@ -111,11 +112,11 @@ function config.trouble()
 		auto_fold = false, -- automatically fold a file trouble list at creation
 		signs = {
 			-- icons / text used for a diagnostic
-			error = "",
-			warning = "",
-			hint = "",
-			information = "",
-			other = "﫠",
+			error = icon.diagnostics.Error_alt,
+			warning = icon.diagnostics.Warning_alt,
+			hint = icon.diagnostics.Hint_alt,
+			information = icon.diagnostics.Information_alt,
+			other = icon.diagnostics.Question_alt,
 		},
 		use_lsp_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 	})
@@ -160,8 +161,8 @@ function config.which_key()
 		},
 
 		icons = {
-			breadcrumb = "»",
-			separator = "│",
+			breadcrumb = icon.ui.Separator,
+			separator = icon.misc.Vbar,
 			group = "+",
 		},
 
@@ -191,7 +192,7 @@ function config.wilder()
 				wilder.result({
 					draw = {
 						function(_, x)
-							return " " .. x
+							return icon.ui.Calendar .. x
 						end,
 					},
 				}),
@@ -208,7 +209,7 @@ function config.wilder()
 			wilder.popupmenu_devicons(),
 			wilder.popupmenu_buffer_flags({
 				flags = " a + ",
-				icons = { ["+"] = "", a = "", h = "" },
+				icons = { ["+"] = icon.ui.Pencil, a = icon.ui.Indicator, h = icon.ui.File },
 			}),
 		},
 		right = {

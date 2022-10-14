@@ -1,4 +1,5 @@
 local config = {}
+local icon = require("modules.ui.icons")
 
 function config.alpha()
 	local alpha = require("alpha")
@@ -406,11 +407,11 @@ function config.notify()
 		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
-			ERROR = "",
-			WARN = "",
-			INFO = "",
-			DEBUG = "",
-			TRACE = "✎",
+			ERROR = icon.diagnostics.Error,
+			WARN = icon.diagnostics.Warning,
+			INFO = icon.diagnostics.Information,
+			DEBUG = icon.ui.Bug,
+			TRACE = icon.ui.Pencil,
 		},
 	})
 
@@ -420,7 +421,7 @@ end
 function config.lualine()
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
-		return ok and m.waiting and "✺ " or ""
+		return ok and m.waiting and icon.misc.EscapeST or ""
 	end
 
 	local function diff_source()
@@ -516,7 +517,11 @@ function config.lualine()
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
-					symbols = { error = " ", warn = " ", info = " " },
+					symbols = {
+						error = icon.diagnostics.Error .. " ",
+						warn = icon.diagnostics.Warning .. " ",
+						info = icon.diagnostics.Information .. " ",
+					},
 				},
 			},
 			lualine_y = {
@@ -647,29 +652,29 @@ function config.nvim_tree()
 				padding = " ",
 				symlink_arrow = "  ",
 				glyphs = {
-					default = "", --
-					symlink = "",
-					bookmark = "",
+					default = icon.documents.Default, --
+					symlink = icon.documents.Symlink, --
+					bookmark = icon.ui.Bookmark,
 					git = {
-						unstaged = "",
-						staged = "", --
-						unmerged = "שׂ",
-						renamed = "", --
-						untracked = "ﲉ",
-						deleted = "",
-						ignored = "", --◌
+						unstaged = icon.git.Mod_alt,
+						staged = icon.git.Add, --
+						unmerged = icon.git.Unmerged,
+						renamed = icon.git.Rename, --
+						untracked = icon.git.Untracked, -- "ﲉ"
+						deleted = icon.git.Remove, --
+						ignored = icon.git.Ignore, --◌
 					},
 					folder = {
 						-- arrow_open = "",
 						-- arrow_closed = "",
 						arrow_open = "",
 						arrow_closed = "",
-						default = "",
-						open = "",
-						empty = "",
-						empty_open = "",
-						symlink = "",
-						symlink_open = "",
+						default = icon.ui.Folder,
+						open = icon.ui.FolderOpen,
+						empty = icon.ui.EmptyFolder,
+						empty_open = icon.ui.EmptyFolderOpen,
+						symlink = icon.ui.SymlinkFolder,
+						symlink_open = icon.ui.FolderOpen,
 					},
 				},
 			},
@@ -716,10 +721,10 @@ function config.nvim_tree()
 			show_on_dirs = false,
 			debounce_delay = 50,
 			icons = {
-				hint = "",
-				info = "",
-				warning = "",
-				error = "",
+				hint = icon.diagnostics.Hint_alt,
+				info = icon.diagnostics.Information_alt,
+				warning = icon.diagnostics.Warning_alt,
+				error = icon.diagnostics.Error_alt,
 			},
 		},
 		filesystem_watchers = {
@@ -761,10 +766,10 @@ function config.nvim_bufferline()
 	local opts = {
 		options = {
 			number = nil,
-			modified_icon = "✥",
-			buffer_close_icon = "",
-			left_trunc_marker = "",
-			right_trunc_marker = "",
+			modified_icon = icon.ui.Modified,
+			buffer_close_icon = icon.ui.Close,
+			left_trunc_marker = icon.ui.Left,
+			right_trunc_marker = icon.ui.Right,
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 20,
@@ -780,6 +785,13 @@ function config.nvim_bufferline()
 					text = "File Explorer",
 					text_align = "center",
 					padding = 1,
+				},
+				{
+					filetype = "undotree",
+					text = "Undo Tree",
+					text_align = "center",
+					highlight = "Directory",
+					separator = true,
 				},
 			},
 			diagnostics_indicator = function(count)
