@@ -16,6 +16,10 @@ function Packer:load_plugins()
 	local get_plugins_list = function()
 		local list = {}
 		local tmp = vim.split(fn.globpath(modules_dir, "*/plugins.lua"), "\n")
+		local subtmp = vim.split(fn.globpath(modules_dir, "*/user/plugins.lua"), "\n")
+		for _, v in ipairs(subtmp) do
+			table.insert(tmp, v)
+		end
 		for _, f in ipairs(tmp) do
 			list[#list + 1] = f:sub(#modules_dir - 6, -1)
 		end
