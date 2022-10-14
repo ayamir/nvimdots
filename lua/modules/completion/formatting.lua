@@ -1,17 +1,7 @@
 local M = {}
 
-local home = os.getenv("HOME")
-
-local disabled_worksapce_path = home .. "/.config/nvim/format_disabled_dirs.txt"
-local disabled_worksapce_file = io.open(disabled_worksapce_path, "r")
-local disabled_worksapce = {}
-
-if disabled_worksapce_file ~= nil then
-	for line in disabled_worksapce_file:lines() do
-		local str = line:gsub("%s+", "")
-		table.insert(disabled_worksapce, str)
-	end
-end
+local settings = require("core.settings")
+local disabled_worksapces = settings.format_disabled_dirs
 
 local format_on_save = true
 
@@ -122,8 +112,8 @@ end
 
 function M.format(opts)
 	local cwd = vim.fn.getcwd()
-	for i = 1, #disabled_worksapce do
-		if cwd.find(cwd, disabled_worksapce[i]) ~= nil then
+	for i = 1, #disabled_worksapces do
+		if cwd.find(cwd, disabled_worksapces[i]) ~= nil then
 			return
 		end
 	end
