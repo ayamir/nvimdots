@@ -108,16 +108,16 @@ check_ssh() {
 	prompt "Validating SSH connection..."
 	ssh -T git@github.com &>/dev/null
 	if ! [ $? -eq 1 ]; then
-		cat <<EOS
-Oops, it looks like SSH key hasn't been prepared and registered at GitHub (recommended). See:
-  ${tty_underline}https://docs.github.com/en/authentication/connecting-to-github-with-ssh${tty_reset}
-
-However, the installation can still proceed - we'll use HTTPS instead for fetching and later use. Continue?
-EOS
-		ring_bell
+		prompt "We'll use HTTPS to fetch and update plugins."
 		return 0
 	else
-		return 1
+		printf "Do you prefer to use SSH to fetch and update plugins? (otherwise HTTPS) [Y/n] "
+		read -r USR_CHOICE
+		if [[ $USR_CHOICE == [nN] || $USR_CHOICE == [Nn][Oo] ]]; then
+			return 0
+		else
+			return 1
+		fi
 	fi
 }
 
@@ -160,7 +160,6 @@ ring_bell
 wait_for_user
 
 if check_ssh; then
-	wait_for_user
 	USE_SSH=0
 fi
 
@@ -191,7 +190,7 @@ cd "${DEST_DIR}" || return
 
 if [ "$USE_SSH" -eq "0" ]; then
 	prompt "Changing default fetching method to HTTPS..."
-	find ./lua/core -type f -exec sed -i '' -e "s/git@\(.*\):\/*\(.*\)/https:\/\/\1\/\2/" {} \;
+	sed -i '' -e 's/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g' "./lua/core/settings.lua"
 	# The -i argument for sed command is a GNU extension. Compatibility issues need to be addressed in the future.
 fi
 
