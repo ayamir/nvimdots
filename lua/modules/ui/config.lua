@@ -1,5 +1,4 @@
 local config = {}
-local icon = require("modules.ui.icons")
 
 function config.alpha()
 	local alpha = require("alpha")
@@ -388,6 +387,7 @@ end
 
 function config.notify()
 	local notify = require("notify")
+	local icon = require("modules.ui.icons")
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
 		stages = "slide",
@@ -419,6 +419,8 @@ function config.notify()
 end
 
 function config.lualine()
+	local icon = require("modules.ui.icons")
+
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
 		return ok and m.waiting and icon.misc.EscapeST or ""
@@ -586,6 +588,8 @@ function config.nvim_gps()
 end
 
 function config.nvim_tree()
+	local icon = require("modules.ui.icons")
+
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
 		respect_buf_cwd = true,
@@ -763,6 +767,8 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
+	local icon = require("modules.ui.icons")
+
 	local opts = {
 		options = {
 			number = nil,

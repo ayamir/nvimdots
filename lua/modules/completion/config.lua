@@ -1,11 +1,12 @@
 local config = {}
-local icon = require("modules.ui.icons")
 
 function config.nvim_lsp()
 	require("modules.completion.lsp")
 end
 
 function config.lspsaga()
+	local icon = require("modules.ui.icons")
+
 	local function set_sidebar_icons()
 		-- Set icons for sidebar.
 		local diagnostic_icons = {
@@ -120,6 +121,8 @@ function config.lspsaga()
 end
 
 function config.cmp()
+	local icon = require("modules.ui.icons")
+
 	-- vim.api.nvim_command([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)

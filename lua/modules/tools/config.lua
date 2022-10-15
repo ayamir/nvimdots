@@ -1,5 +1,4 @@
 local config = {}
-local icon = require("modules.ui.icons")
 
 function config.telescope()
 	vim.api.nvim_command([[packadd sqlite.lua]])
@@ -8,6 +7,7 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
 
+	local icon = require("modules.ui.icons")
 	local telescope_actions = require("telescope.actions.set")
 	local fixfolds = {
 		hidden = true,
@@ -75,6 +75,8 @@ function config.telescope()
 end
 
 function config.trouble()
+	local icon = require("modules.ui.icons")
+
 	require("trouble").setup({
 		position = "bottom", -- position of the list can be: bottom, top, left, right
 		height = 10, -- height of the trouble list when position is top or bottom
@@ -147,6 +149,8 @@ function config.sniprun()
 end
 
 function config.which_key()
+	local icon = require("modules.ui.icons")
+
 	require("which-key").setup({
 		plugins = {
 			presets = {
@@ -177,6 +181,7 @@ function config.which_key()
 end
 
 function config.wilder()
+	local icon = require("modules.ui.icons")
 	local wilder = require("wilder")
 	wilder.setup({ modes = { ":", "/", "?" } })
 	wilder.set_option("use_python_remote_plugin", 0)
