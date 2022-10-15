@@ -1,6 +1,5 @@
 local config = {}
 local sessions_dir = vim.fn.stdpath("data") .. "/sessions/"
-local icon = require("modules.ui.icons")
 
 function config.nvim_treesitter()
 	vim.api.nvim_set_option_value("foldmethod", "expr", {})
@@ -200,6 +199,8 @@ function config.toggleterm()
 end
 
 function config.dapui()
+	local icon = require("modules.ui.icons")
+
 	require("dapui").setup({
 		icons = { expanded = icon.ui.ArrowOpen, collapsed = icon.ui.ArrowClosed, current_frame = icon.ui.Indicator },
 		mappings = {
@@ -253,6 +254,8 @@ function config.dapui()
 end
 
 function config.dap()
+	local icon = require("modules.ui.icons")
+
 	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
