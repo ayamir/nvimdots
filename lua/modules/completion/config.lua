@@ -5,19 +5,24 @@ function config.nvim_lsp()
 end
 
 function config.lspsaga()
-	local icon = require("modules.ui.icons")
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		kind = require("modules.ui.icons").get("kind", true),
+		type = require("modules.ui.icons").get("type", true),
+		ui = require("modules.ui.icons").get("ui", true),
+	}
 
 	local function set_sidebar_icons()
 		-- Set icons for sidebar.
 		local diagnostic_icons = {
-			Error = icon.diagnostics.Error_alt,
-			Warn = icon.diagnostics.Warning_alt,
-			Info = icon.diagnostics.Information_alt,
-			Hint = icon.diagnostics.Hint_alt,
+			Error = icons.diagnostics.Error_alt,
+			Warn = icons.diagnostics.Warning_alt,
+			Info = icons.diagnostics.Information_alt,
+			Hint = icons.diagnostics.Hint_alt,
 		}
-		for type, diag_icon in pairs(diagnostic_icons) do
+		for type, icon in pairs(diagnostic_icons) do
 			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = diag_icon, texthl = hl })
+			vim.fn.sign_define(hl, { text = icon, texthl = hl })
 		end
 	end
 
@@ -45,49 +50,49 @@ function config.lspsaga()
 
 	require("lspsaga").init_lsp_saga({
 		diagnostic_header = {
-			icon.diagnostics.Error_alt .. " ",
-			icon.diagnostics.Warning_alt .. " ",
-			icon.diagnostics.Information_alt .. " ",
-			icon.diagnostics.Hint_alt .. " ",
+			icons.diagnostics.Error_alt,
+			icons.diagnostics.Warning_alt,
+			icons.diagnostics.Information_alt,
+			icons.diagnostics.Hint_alt,
 		},
 		custom_kind = {
-			Class = { icon.kind.Class .. " ", colors.yellow },
-			Constant = { icon.kind.Constant .. " ", colors.peach },
-			Constructor = { icon.kind.Constructor .. " ", colors.sapphire },
-			Enum = { icon.kind.Enum .. " ", colors.yellow },
-			EnumMember = { icon.kind.EnumMember .. " ", colors.teal },
-			Event = { icon.kind.Event .. " ", colors.yellow },
-			Field = { icon.kind.Field .. " ", colors.teal },
-			File = { icon.kind.File .. " ", colors.rosewater },
-			Function = { icon.kind.Function .. " ", colors.blue },
-			Interface = { icon.kind.Interface .. " ", colors.yellow },
-			Key = { icon.kind.Keyword .. " ", colors.red },
-			Method = { icon.kind.Method .. " ", colors.blue },
-			Module = { icon.kind.Module .. " ", colors.blue },
-			Namespace = { icon.kind.Namespace .. " ", colors.blue },
-			Number = { icon.kind.Number .. " ", colors.peach },
-			Operator = { icon.kind.Operator .. " ", colors.sky },
-			Package = { icon.kind.Package .. " ", colors.blue },
-			Property = { icon.kind.Property .. " ", colors.teal },
-			Struct = { icon.kind.Struct .. " ", colors.yellow },
-			TypeParameter = { icon.kind.TypeParameter .. " ", colors.maroon },
-			Variable = { icon.kind.Variable .. " ", colors.peach },
+			-- Kind
+			Class = { icons.kind.Class, colors.yellow },
+			Constant = { icons.kind.Constant, colors.peach },
+			Constructor = { icons.kind.Constructor, colors.sapphire },
+			Enum = { icons.kind.Enum, colors.yellow },
+			EnumMember = { icons.kind.EnumMember, colors.teal },
+			Event = { icons.kind.Event, colors.yellow },
+			Field = { icons.kind.Field, colors.teal },
+			File = { icons.kind.File, colors.rosewater },
+			Function = { icons.kind.Function, colors.blue },
+			Interface = { icons.kind.Interface, colors.yellow },
+			Key = { icons.kind.Keyword, colors.red },
+			Method = { icons.kind.Method, colors.blue },
+			Module = { icons.kind.Module, colors.blue },
+			Namespace = { icons.kind.Namespace, colors.blue },
+			Number = { icons.kind.Number, colors.peach },
+			Operator = { icons.kind.Operator, colors.sky },
+			Package = { icons.kind.Package, colors.blue },
+			Property = { icons.kind.Property, colors.teal },
+			Struct = { icons.kind.Struct, colors.yellow },
+			TypeParameter = { icons.kind.TypeParameter, colors.maroon },
+			Variable = { icons.kind.Variable, colors.peach },
 			-- Type
-			Array = { icon.type.Array .. " ", colors.peach },
-			Boolean = { icon.type.Boolean .. " ", colors.peach },
-			Null = { icon.type.Null .. " ", colors.yellow },
-			Object = { icon.type.Object .. " ", colors.yellow },
-			String = { icon.type.String .. " ", colors.green },
-			-- ccls-specific icons.
-			TypeAlias = { icon.kind.TypeAlias .. " ", colors.green },
-			Parameter = { icon.kind.Parameter .. " ", colors.blue },
-			StaticMethod = { icon.kind.StaticMethod .. " ", colors.peach },
-			Macro = { icon.kind.Macro .. " ", colors.red },
+			Array = { icons.type.Array, colors.peach },
+			Boolean = { icons.type.Boolean, colors.peach },
+			Null = { icons.type.Null, colors.yellow },
+			Object = { icons.type.Object, colors.yellow },
+			String = { icons.type.String, colors.green },
+			-- ccls-specific iconss.
+			TypeAlias = { icons.kind.TypeAlias, colors.green },
+			Parameter = { icons.kind.Parameter, colors.blue },
+			StaticMethod = { icons.kind.StaticMethod, colors.peach },
 		},
 		symbol_in_winbar = {
 			enable = true,
 			in_custom = false,
-			separator = " " .. icon.ui.Separator .. " ",
+			separator = " " .. icons.ui.Separator,
 			show_file = false,
 			-- define how to customize filename, eg: %:., %
 			-- if not set, use default value `%:t`
@@ -121,7 +126,11 @@ function config.lspsaga()
 end
 
 function config.cmp()
-	local icon = require("modules.ui.icons")
+	local icons = {
+		kind = require("modules.ui.icons").get("kind", true),
+		type = require("modules.ui.icons").get("type", true),
+		cmp = require("modules.ui.icons").get("cmp", true),
+	}
 
 	-- vim.api.nvim_command([[packadd cmp-tabnine]])
 	local t = function(str)
@@ -191,7 +200,7 @@ function config.cmp()
 				maxwidth = 50,
 				ellipsis_char = "...",
 				-- symbol_map = { Copilot = "" },
-				symbol_map = vim.tbl_deep_extend("force", icon.kind, icon.cmp, icon.type),
+				symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.cmp, icons.type),
 			}),
 		},
 		-- You can set mappings if you want
