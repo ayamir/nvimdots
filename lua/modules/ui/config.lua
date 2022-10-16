@@ -387,7 +387,11 @@ end
 
 function config.notify()
 	local notify = require("notify")
-	local icon = require("modules.ui.icons")
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		ui = require("modules.ui.icons").get("ui"),
+	}
+
 	notify.setup({
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
 		stages = "slide",
@@ -407,11 +411,11 @@ function config.notify()
 		level = "TRACE",
 		---@usage Icons for the different levels
 		icons = {
-			ERROR = icon.diagnostics.Error,
-			WARN = icon.diagnostics.Warning,
-			INFO = icon.diagnostics.Information,
-			DEBUG = icon.ui.Bug,
-			TRACE = icon.ui.Pencil,
+			ERROR = icons.diagnostics.Error,
+			WARN = icons.diagnostics.Warning,
+			INFO = icons.diagnostics.Information,
+			DEBUG = icons.ui.Bug,
+			TRACE = icons.ui.Pencil,
 		},
 	})
 
@@ -419,11 +423,14 @@ function config.notify()
 end
 
 function config.lualine()
-	local icon = require("modules.ui.icons")
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		misc = require("modules.ui.icons").get("misc", true),
+	}
 
 	local function escape_status()
 		local ok, m = pcall(require, "better_escape")
-		return ok and m.waiting and icon.misc.EscapeST or ""
+		return ok and m.waiting and icons.misc.EscapeST or ""
 	end
 
 	local function diff_source()
@@ -520,9 +527,9 @@ function config.lualine()
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
 					symbols = {
-						error = icon.diagnostics.Error .. " ",
-						warn = icon.diagnostics.Warning .. " ",
-						info = icon.diagnostics.Information .. " ",
+						error = icons.diagnostics.Error,
+						warn = icons.diagnostics.Warning,
+						info = icons.diagnostics.Information,
 					},
 				},
 			},
@@ -566,7 +573,12 @@ function config.lualine()
 end
 
 function config.nvim_tree()
-	local icon = require("modules.ui.icons")
+	local icons = {
+		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		documents = require("modules.ui.icons").get("documents"),
+		git = require("modules.ui.icons").get("git"),
+		ui = require("modules.ui.icons").get("ui"),
+	}
 
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,
@@ -634,29 +646,29 @@ function config.nvim_tree()
 				padding = " ",
 				symlink_arrow = "  ",
 				glyphs = {
-					default = icon.documents.Default, --
-					symlink = icon.documents.Symlink, --
-					bookmark = icon.ui.Bookmark,
+					default = icons.documents.Default, --
+					symlink = icons.documents.Symlink, --
+					bookmark = icons.ui.Bookmark,
 					git = {
-						unstaged = icon.git.Mod_alt,
-						staged = icon.git.Add, --
-						unmerged = icon.git.Unmerged,
-						renamed = icon.git.Rename, --
-						untracked = icon.git.Untracked, -- "ﲉ"
-						deleted = icon.git.Remove, --
-						ignored = icon.git.Ignore, --◌
+						unstaged = icons.git.Mod_alt,
+						staged = icons.git.Add, --
+						unmerged = icons.git.Unmerged,
+						renamed = icons.git.Rename, --
+						untracked = icons.git.Untracked, -- "ﲉ"
+						deleted = icons.git.Remove, --
+						ignored = icons.git.Ignore, --◌
 					},
 					folder = {
 						-- arrow_open = "",
 						-- arrow_closed = "",
 						arrow_open = "",
 						arrow_closed = "",
-						default = icon.ui.Folder,
-						open = icon.ui.FolderOpen,
-						empty = icon.ui.EmptyFolder,
-						empty_open = icon.ui.EmptyFolderOpen,
-						symlink = icon.ui.SymlinkFolder,
-						symlink_open = icon.ui.FolderOpen,
+						default = icons.ui.Folder,
+						open = icons.ui.FolderOpen,
+						empty = icons.ui.EmptyFolder,
+						empty_open = icons.ui.EmptyFolderOpen,
+						symlink = icons.ui.SymlinkFolder,
+						symlink_open = icons.ui.FolderOpen,
 					},
 				},
 			},
@@ -703,10 +715,10 @@ function config.nvim_tree()
 			show_on_dirs = false,
 			debounce_delay = 50,
 			icons = {
-				hint = icon.diagnostics.Hint_alt,
-				info = icon.diagnostics.Information_alt,
-				warning = icon.diagnostics.Warning_alt,
-				error = icon.diagnostics.Error_alt,
+				hint = icons.diagnostics.Hint_alt,
+				info = icons.diagnostics.Information_alt,
+				warning = icons.diagnostics.Warning_alt,
+				error = icons.diagnostics.Error_alt,
 			},
 		},
 		filesystem_watchers = {
@@ -745,15 +757,15 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
-	local icon = require("modules.ui.icons")
+	local icons = { ui = require("modules.ui.icons").get("ui") }
 
 	local opts = {
 		options = {
 			number = nil,
-			modified_icon = icon.ui.Modified,
-			buffer_close_icon = icon.ui.Close,
-			left_trunc_marker = icon.ui.Left,
-			right_trunc_marker = icon.ui.Right,
+			modified_icon = icons.ui.Modified,
+			buffer_close_icon = icons.ui.Close,
+			left_trunc_marker = icons.ui.Left,
+			right_trunc_marker = icons.ui.Right,
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 20,
