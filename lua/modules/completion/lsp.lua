@@ -11,9 +11,9 @@ local mason_lsp = require("mason-lspconfig")
 mason.setup()
 mason_lsp.setup({
 	ensure_installed = {
-		"bash-language-server",
+		"bashls",
 		"efm",
-		"lua-language-server",
+		"sumneko_lua",
 		"clangd",
 		"gopls",
 		"pyright",
