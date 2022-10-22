@@ -127,11 +127,10 @@ end
 
 function config.cmp()
 	local icons = {
-		kind = require("modules.ui.icons").get("kind", true),
-		type = require("modules.ui.icons").get("type", true),
-		cmp = require("modules.ui.icons").get("cmp", true),
+		kind = require("modules.ui.icons").get("kind", false),
+		type = require("modules.ui.icons").get("type", false),
+		cmp = require("modules.ui.icons").get("cmp", false),
 	}
-
 	-- vim.api.nvim_command([[packadd cmp-tabnine]])
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
