@@ -449,20 +449,12 @@ function config.lualine()
 	end
 
 	local mini_sections = {
-		lualine_a = {},
+		lualine_a = { "filetype" },
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
-		lualine_z = { "location" },
-	}
-	local simple_sections = {
-		lualine_a = { "mode" },
-		lualine_b = { "filetype" },
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = { "location" },
+		lualine_z = {},
 	}
 	local outline = {
 		sections = mini_sections,
