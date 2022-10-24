@@ -8,6 +8,8 @@ local nvim_lsp = require("lspconfig")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
 
+require("lspconfig.ui.windows").default_options.border = "single"
+
 mason.setup()
 mason_lsp.setup({
 	ensure_installed = {
