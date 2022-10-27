@@ -241,7 +241,7 @@ local flake8 = require("efmls-configs.linters.flake8")
 local shellcheck = require("efmls-configs.linters.shellcheck")
 
 local black = require("efmls-configs.formatters.black")
-local luafmt = require("efmls-configs.formatters.stylua")
+local stylua = require("efmls-configs.formatters.stylua")
 local prettier = require("efmls-configs.formatters.prettier")
 local shfmt = require("efmls-configs.formatters.shfmt")
 
@@ -264,7 +264,7 @@ flake8 = vim.tbl_extend("force", flake8, {
 
 efmls.setup({
 	vim = { formatter = vint },
-	lua = { formatter = luafmt },
+	lua = { formatter = stylua },
 	c = { formatter = clangfmt },
 	cpp = { formatter = clangfmt },
 	python = { formatter = black },
