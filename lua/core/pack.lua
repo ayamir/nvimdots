@@ -87,7 +87,7 @@ function Packer:init_ensure_plugins()
 		local cmd = (
 			(
 				use_ssh and "!git clone git@github.com:wbthomason/packer.nvim.git "
-				or "!git clone https://github.com/wbthomason/packer.nvim"
+				or "!git clone https://github.com/wbthomason/packer.nvim "
 			) .. packer_dir
 		)
 		api.nvim_command(cmd)
