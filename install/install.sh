@@ -201,7 +201,7 @@ cat <<EOS
 Thank you for using this set of configuration!
 - Project Homepage:
     ${tty_underline}https://github.com/ayamir/nvimdots${tty_reset}
-- Further documentation (including executables you ${tty_bold}may${tty_reset} install for full functionality):
+- Further documentation (including executables you ${tty_bold}must${tty_reset} install for full functionality):
     ${tty_underline}https://github.com/ayamir/nvimdots/wiki/Prerequisites${tty_reset}
 EOS
 wait_for_user
