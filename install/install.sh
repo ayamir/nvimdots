@@ -123,13 +123,22 @@ check_ssh() {
 
 is_latest() {
 	local nvim_version
-	nvim_version=$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')
+	nvim_version="$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')"
 	if version_ge "$(major_minor "${nvim_version##* }")" "$(major_minor "${REQUIRED_NVIM_VERSION}")"; then
 		return 0
 	else
 		return 1
 	fi
 }
+
+if ! command -v perl >/dev/null; then
+	abort "$(
+		cat <<EOABORT
+Perl is required to interpret this script. See:
+  ${tty_underline}https://www.perl.org/get.html${tty_reset}
+EOABORT
+	)"
+fi
 
 if ! command -v nvim >/dev/null; then
 	abort "$(
@@ -190,8 +199,7 @@ cd "${DEST_DIR}" || return
 
 if [ "$USE_SSH" -eq "0" ]; then
 	prompt "Changing default fetching method to HTTPS..."
-	sed -i '' -e 's/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g' "./lua/core/settings.lua"
-	# The -i argument for sed command is a GNU extension. Compatibility issues need to be addressed in the future.
+	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/core/settings.lua"
 fi
 
 prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
