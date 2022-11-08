@@ -39,7 +39,7 @@ body:
   - type: dropdown
     id: branch
     attributes:
-      label: "Branch Info"
+      label: "Branch info"
       description: "Which branch are you currently on? If you are not sure, check the output of `git rev-parse --abbrev-ref HEAD`"
       options:
         - main (Default/Latest)
