@@ -10,7 +10,11 @@ local mason_lsp = require("mason-lspconfig")
 
 require("lspconfig.ui.windows").default_options.border = "single"
 
-mason.setup()
+mason.setup({
+	ui = {
+		border = "single",
+	},
+})
 mason_lsp.setup({
 	ensure_installed = {
 		"bashls",
