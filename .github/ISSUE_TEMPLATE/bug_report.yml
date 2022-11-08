@@ -1,0 +1,83 @@
+name: Bug Report
+description: File a bug report
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        _Before reporting:_ Search [existing issues](https://github.com/ayamir/nvimdots/issues) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+
+  - type: input
+    id: nvim-version
+    attributes:
+      label: "Neovim version"
+      description: "Paste the output of `nvim --version` here"
+      placeholder: "NVIM v0.8.0-dev+199-g2875d45e7"
+    validations:
+      required: true
+  - type: input
+    id: system-version
+    attributes:
+      label: "Operating system/version"
+      placeholder: "macOS 12.6.1"
+    validations:
+      required: true
+  - type: input
+    id: terminal-version
+    attributes:
+      label: "Terminal name/version"
+      placeholder: "iTerm2 Build 3.4.17"
+    validations:
+      required: true
+  - type: input
+    id: term-env
+    attributes:
+      label: "$TERM environment variable"
+      placeholder: "xterm-256color"
+    validations:
+      required: false
+  - type: dropdown
+    id: branch
+    attributes:
+      label: "Branch info"
+      description: "Which branch are you currently on? If you are not sure, check the output of `git rev-parse --abbrev-ref HEAD`"
+      options:
+        - main (Default/Latest)
+        - 0.7 (Legacy)
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: "How to reproduce the issue"
+      description: "Note: Issues without any information will be closed directly"
+      placeholder: |
+        Steps to reproduce the behavior:
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Expected behavior"
+      description: "Describe the behavior you expect"
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: "Actual behavior"
+    validations:
+      required: false
+  - type: textarea
+    id: extras
+    attributes:
+      label: Additional information
+      description: If applicable, you may include logs, images, or videos to help explain your problem
+    validations:
+      required: false
