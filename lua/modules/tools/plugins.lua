@@ -48,5 +48,10 @@ tools["gelguy/wilder.nvim"] = {
 	config = conf.wilder,
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
 }
+tools["ibhagwan/smartyank.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.smartyank,
+}
 
 return tools
