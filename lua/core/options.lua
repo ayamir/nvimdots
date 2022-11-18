@@ -48,6 +48,7 @@ local function load_options()
 		whichwrap = "h,l,<,>,[,],~",
 		splitbelow = true,
 		splitright = true,
+		splitkeep = "screen",
 		switchbuf = "useopen",
 		backspace = "indent,eol,start",
 		diffopt = "filler,iwhite,internal,algorithm:patience",

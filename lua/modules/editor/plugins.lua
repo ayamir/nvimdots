@@ -121,10 +121,11 @@ editor["sindrets/diffview.nvim"] = {
 	opt = true,
 	cmd = { "DiffviewOpen" },
 }
-editor["luukvbaal/stabilize.nvim"] = {
-	opt = true,
-	event = "BufReadPost",
-}
+-- deprecated see: https://github.com/neovim/neovim/pull/19243
+-- editor["luukvbaal/stabilize.nvim"] = {
+-- 	opt = true,
+-- 	event = "BufReadPost",
+-- }
 editor["ibhagwan/smartyank.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
