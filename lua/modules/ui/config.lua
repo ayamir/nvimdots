@@ -567,7 +567,7 @@ function config.nvim_tree()
 					none = "  ",
 				},
 			},
-			root_folder_modifier = ":e",
+			root_folder_label = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
 				git_placement = "before",
