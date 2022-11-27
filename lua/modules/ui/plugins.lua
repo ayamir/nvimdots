@@ -58,9 +58,5 @@ ui["j-hui/fidget.nvim"] = {
 	event = "BufReadPost",
 	config = conf.fidget,
 }
-ui["stevearc/dressing.nvim"] = {
-	opt = true,
-	event = "BufReadPost",
-}
 
 return ui

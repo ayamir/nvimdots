@@ -6,6 +6,7 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-project.nvim]])
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd telescope-ui-select.nvim]])
 
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
@@ -57,6 +58,9 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+			["ui-select"] = {
+				require("telescope.themes").get_dropdown({}),
+			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -73,6 +77,7 @@ function config.telescope()
 	require("telescope").load_extension("project")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
+	require("telescope").load_extension("ui-select")
 end
 
 function config.trouble()
@@ -249,6 +254,11 @@ function config.legendary()
 		which_key = {
 			auto_register = true,
 			do_binding = false,
+		},
+		scratchpad = {
+			view = "float",
+			results_view = "float",
+			keep_contents = true,
 		},
 	})
 
