@@ -46,6 +46,16 @@ body:
         - 0.7 (Legacy)
     validations:
       required: true
+  - type: dropdown
+    id: fetch-pref
+    attributes:
+      label: "Fetch Preferences"
+      description: "In what way do you fetch resources? If you are not sure, check the value of `use_ssh` in `lua/core/settings.lua`"
+      options:
+        - SSH (use_ssh = true)
+        - HTTPS (use_ssh = false)
+    validations:
+      required: true
   - type: input
     id: servers
     attributes:
