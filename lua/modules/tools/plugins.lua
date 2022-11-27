@@ -32,11 +32,6 @@ tools["michaelb/sniprun"] = {
 	run = "bash ./install.sh",
 	cmd = { "SnipRun", "'<,'>SnipRun" },
 }
-tools["folke/which-key.nvim"] = {
-	opt = true,
-	keys = "<leader>",
-	config = conf.which_key,
-}
 tools["folke/trouble.nvim"] = {
 	opt = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
@@ -47,6 +42,15 @@ tools["gelguy/wilder.nvim"] = {
 	event = "CmdlineEnter",
 	config = conf.wilder,
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
+}
+tools["folke/which-key.nvim"] = {
+	opt = false,
+	config = conf.which_key,
+}
+tools["mrjones2014/legendary.nvim"] = {
+	opt = true,
+	event = "BufReadPost",
+	config = conf.legendary,
 }
 
 return tools

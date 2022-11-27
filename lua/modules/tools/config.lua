@@ -152,41 +152,6 @@ function config.sniprun()
 	})
 end
 
-function config.which_key()
-	local icons = {
-		ui = require("modules.ui.icons").get("ui"),
-		misc = require("modules.ui.icons").get("misc"),
-	}
-
-	require("which-key").setup({
-		plugins = {
-			presets = {
-				operators = false,
-				motions = false,
-				text_objects = false,
-				windows = false,
-				nav = false,
-				z = true,
-				g = true,
-			},
-		},
-
-		icons = {
-			breadcrumb = icons.ui.Separator,
-			separator = icons.misc.Vbar,
-			group = icons.misc.Add,
-		},
-
-		window = {
-			border = "none",
-			position = "bottom",
-			margin = { 1, 0, 1, 0 },
-			padding = { 1, 1, 1, 1 },
-			winblend = 0,
-		},
-	})
-end
-
 function config.wilder()
 	local wilder = require("wilder")
 	local icons = { ui = require("modules.ui.icons").get("ui") }
@@ -242,6 +207,149 @@ function config.wilder()
 			substitute = wildmenu_renderer,
 		})
 	)
+end
+
+function config.which_key()
+	local icons = {
+		ui = require("modules.ui.icons").get("ui"),
+		misc = require("modules.ui.icons").get("misc"),
+	}
+
+	require("which-key").setup({
+		plugins = {
+			presets = {
+				operators = false,
+				motions = false,
+				text_objects = false,
+				windows = false,
+				nav = false,
+				z = true,
+				g = true,
+			},
+		},
+
+		icons = {
+			breadcrumb = icons.ui.Separator,
+			separator = icons.misc.Vbar,
+			group = icons.misc.Add,
+		},
+
+		window = {
+			border = "none",
+			position = "bottom",
+			margin = { 1, 0, 1, 0 },
+			padding = { 1, 1, 1, 1 },
+			winblend = 0,
+		},
+	})
+end
+
+function config.legendary()
+	require("legendary").setup({
+		which_key = {
+			auto_register = true,
+			do_binding = false,
+		},
+	})
+
+	require("which-key").register({
+		["<leader>"] = {
+			b = {
+				name = "Bufferline commands",
+				d = "Sort buffer by directory",
+				e = "Sort buffer by extension",
+			},
+
+			d = {
+				name = "Dap commands",
+				b = "Toggle breakpoint",
+				d = "Terminate debug session",
+				r = "Debug continue",
+				l = "Debug repl open",
+				i = "Step in",
+				o = "Step out",
+				v = "Step over",
+			},
+			f = {
+				name = "Telescope commands",
+				p = { "Find project" },
+				w = { "Find word" },
+				r = { "Find file by frecency" },
+				e = { "Find file by history" },
+				c = { "Change color scheme" },
+				z = { "Change current directory by zoxide" },
+				f = { "Find file under current work directory" },
+				g = { "Find file under current git directory" },
+				n = { "File new" },
+			},
+			h = {
+				name = "Gitsigns commands",
+				b = "Blame line",
+				p = "Preview hunk",
+				s = "Stage hunk",
+				u = "Undo stage hunk",
+				r = "Reset hunk",
+				R = "Reset buffer",
+			},
+			l = {
+				name = "LSP commands",
+				i = "Lsp Info",
+				r = "Lsp Restart",
+			},
+			n = {
+				name = "NvimTree commands",
+				f = "NvimTree find file",
+				r = "NvimTree refresh",
+			},
+			p = {
+				name = "Packer commands",
+				s = "PackerSync",
+				i = "PackerInstall",
+				c = "PackerClean",
+				u = "PackerUpdate",
+			},
+			s = {
+				name = "Session commands",
+				s = "Save session",
+				r = "Restore session",
+				d = "Delete session",
+			},
+			t = {
+				name = "Trouble commands",
+				d = "show document diagnostics",
+				w = "show workspace diagnostics",
+				q = "show quickfix list",
+				l = "show loclist",
+			},
+		},
+		["g"] = {
+			c = "Code action",
+			d = "Preview definition",
+			D = "Goto definition",
+			h = "Show reference",
+			r = "Rename",
+			s = "Signature help",
+			t = "Toggle trouble list",
+			b = "Buffer pick",
+			p = {
+				name = "Git commands",
+				s = "Git push",
+				l = "Git pull",
+			},
+		},
+		["<leader>G"] = "Show fugitive",
+		["<leader>g"] = "Show lazygit",
+		["<leader>o"] = "Check spell",
+		["g["] = "Goto prev diagnostic",
+		["g]"] = "Goto next diagnostic",
+		["<leader>w"] = "Goto word",
+		["<leader>j"] = "Goto line",
+		["<leader>k"] = "Goto line",
+		["<leader>c"] = "Goto one char",
+		["<leader>cc"] = "Goto two chars",
+		["<leader>D"] = "Show diff",
+		["<leader><leader>D"] = "Close diff",
+	})
 end
 
 return config
