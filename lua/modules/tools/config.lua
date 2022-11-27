@@ -30,12 +30,10 @@ function config.telescope()
 			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
-			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
 			file_ignore_patterns = { ".git/", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
-				prompt_position = "bottom",
 				horizontal = {
 					preview_width = 0.5,
 				},

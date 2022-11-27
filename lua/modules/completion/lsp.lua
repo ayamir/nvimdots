@@ -12,7 +12,7 @@ require("lspconfig.ui.windows").default_options.border = "single"
 
 mason.setup({
 	ui = {
-		border = "single",
+		border = "rounded",
 	},
 })
 mason_lsp.setup({
