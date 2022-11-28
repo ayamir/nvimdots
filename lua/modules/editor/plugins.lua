@@ -119,7 +119,7 @@ editor["abecodes/tabout.nvim"] = {
 }
 editor["sindrets/diffview.nvim"] = {
 	opt = true,
-	cmd = { "DiffviewOpen" },
+	cmd = { "DiffviewOpen", "DiffviewClose" },
 }
 editor["luukvbaal/stabilize.nvim"] = {
 	opt = true,
