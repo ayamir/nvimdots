@@ -245,7 +245,7 @@ function config.catppuccin()
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
 					Keyword = { fg = cp.pink },
 					Type = { fg = cp.blue },
-					Typedef = { fg = cp.yellow, link = "" },
+					Typedef = { fg = cp.yellow },
 
 					-- For native lsp configs.
 					DiagnosticVirtualTextError = { bg = cp.none },
@@ -290,7 +290,7 @@ function config.catppuccin()
 					-- ["@function"] = { fg = cp.blue },
 					["@function.macro"] = { fg = cp.red, style = {} },
 					["@parameter"] = { fg = cp.rosewater },
-					["@keyword"] = { fg = cp.red, style = { "italic" }, link = "" },
+					["@keyword"] = { fg = cp.red, style = { "italic" } },
 					["@keyword.function"] = { fg = cp.maroon },
 					["@keyword.return"] = { fg = cp.pink, style = {} },
 
@@ -307,7 +307,7 @@ function config.catppuccin()
 					["@punctuation.bracket"] = { fg = cp.overlay2 },
 					-- ["@string"] = { fg = cp.green },
 					-- ["@string.regex"] = { fg = cp.peach },
-					["@type"] = { fg = cp.yellow, link = "" },
+					["@type"] = { fg = cp.yellow },
 					["@variable"] = { fg = cp.text },
 					["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
 					["@tag"] = { fg = cp.peach },
