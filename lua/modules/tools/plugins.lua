@@ -35,10 +35,6 @@ tools["michaelb/sniprun"] = {
 	run = "bash ./install.sh",
 	cmd = { "SnipRun", "'<,'>SnipRun" },
 }
-tools["nvim-telescope/telescope-ui-select.nvim"] = {
-	opt = true,
-	after = "telescope-zoxide",
-}
 tools["folke/trouble.nvim"] = {
 	opt = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
@@ -56,8 +52,11 @@ tools["folke/which-key.nvim"] = {
 }
 tools["mrjones2014/legendary.nvim"] = {
 	opt = true,
-	event = "BufReadPost",
+	cmd = "Legendary",
 	config = conf.legendary,
+	requires = {
+		{ "stevearc/dressing.nvim", opt = false, config = conf.dressing },
+	},
 }
 
 return tools

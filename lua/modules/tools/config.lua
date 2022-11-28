@@ -56,9 +56,6 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
-			["ui-select"] = {
-				require("telescope.themes").get_dropdown({}),
-			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -75,7 +72,6 @@ function config.telescope()
 	require("telescope").load_extension("project")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
-	require("telescope").load_extension("ui-select")
 end
 
 function config.trouble()
@@ -357,6 +353,19 @@ function config.legendary()
 		["<leader>cc"] = "Goto two chars",
 		["<leader>D"] = "Show diff",
 		["<leader><leader>D"] = "Close diff",
+	})
+end
+
+function config.dressing()
+	require("dressing").setup({
+		input = {
+			enabled = true,
+		},
+		select = {
+			enabled = true,
+			backend = "telescope",
+			trim_prompt = true,
+		},
 	})
 end
 
