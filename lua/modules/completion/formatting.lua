@@ -1,7 +1,7 @@
 local M = {}
 
 local settings = require("core.settings")
-local disabled_worksapces = settings.format_disabled_dirs
+local disabled_workspaces = settings.format_disabled_dirs
 
 local format_on_save = true
 
@@ -112,8 +112,8 @@ end
 
 function M.format(opts)
 	local cwd = vim.fn.getcwd()
-	for i = 1, #disabled_worksapces do
-		if cwd.find(cwd, disabled_worksapces[i]) ~= nil then
+	for i = 1, #disabled_workspaces do
+		if cwd.find(cwd, disabled_workspaces[i]) ~= nil then
 			return
 		end
 	end
