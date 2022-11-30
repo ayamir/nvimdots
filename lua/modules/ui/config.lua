@@ -61,7 +61,7 @@ function config.alpha()
 
 	local leader = " "
 	dashboard.section.buttons.val = {
-		button("space s c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
+		button("space f c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
 		button("space f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
 		button("space f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
 		button("space f p", " Project find", leader, "<cmd>Telescope project<cr>"),

@@ -25,7 +25,13 @@ ui["goolord/alpha-nvim"] = {
 }
 ui["kyazdani42/nvim-tree.lua"] = {
 	opt = true,
-	cmd = { "NvimTreeToggle" },
+	cmd = {
+		"NvimTreeToggle",
+		"NvimTreeOpen",
+		"NvimTreeFindFile",
+		"NvimTreeFindFileToggle",
+		"NvimTreeRefresh",
+	},
 	config = conf.nvim_tree,
 }
 ui["lewis6991/gitsigns.nvim"] = {
