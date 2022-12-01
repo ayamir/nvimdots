@@ -30,6 +30,7 @@ local function load_options()
 		shiftround = true,
 		timeout = true,
 		ttimeout = true,
+		-- You will feel delay when you input <Space> at lazygit interface if you set it a positive value like 300(ms).
 		timeoutlen = 0,
 		ttimeoutlen = 0,
 		updatetime = 100,

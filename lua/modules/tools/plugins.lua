@@ -46,6 +46,7 @@ tools["gelguy/wilder.nvim"] = {
 	config = conf.wilder,
 	requires = { { "romgrk/fzy-lua-native", after = "wilder.nvim" } },
 }
+-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tools["folke/which-key.nvim"] = {
 	opt = false,
 	config = conf.which_key,
