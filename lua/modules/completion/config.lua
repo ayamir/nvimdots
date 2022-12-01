@@ -143,13 +143,13 @@ function config.cmp()
 
 	local border = function(hl)
 		return {
-			{ "┌", hl },
+			{ "╭", hl },
 			{ "─", hl },
-			{ "┐", hl },
+			{ "╮", hl },
 			{ "│", hl },
-			{ "┘", hl },
+			{ "╯", hl },
 			{ "─", hl },
-			{ "└", hl },
+			{ "╰", hl },
 			{ "│", hl },
 		}
 	end
@@ -169,6 +169,11 @@ function config.cmp()
 
 	cmp.setup({
 		window = {
+			completion = {
+				border = border("Normal"),
+				max_width = 80,
+				max_height = 20,
+			},
 			documentation = {
 				border = border("CmpDocBorder"),
 			},
