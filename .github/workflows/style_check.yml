@@ -9,4 +9,5 @@ jobs:
       - uses: JohnnyMorganz/stylua-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
           args: --check --config-path=stylua.toml .
