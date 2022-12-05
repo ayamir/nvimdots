@@ -96,8 +96,8 @@ local plug_map = {
 	["n|<leader>c"] = map_cu("HopChar1"):with_noremap(),
 	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap(),
 	-- Plugin EasyAlign
-	["n|ea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
-	["x|ea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
+	["n|gea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
+	["x|gea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
 	-- Plugin MarkdownPreview
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),
 	-- Plugin auto_session
