@@ -43,8 +43,8 @@ local plug_map = {
 	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
 	["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(),
 	["n|gh"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent(),
-	["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
-	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
+	-- ["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
+	-- ["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
 	-- toggleterm
 	-- ["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]), -- switch to normal mode in terminal.
 	["n|<C-\\>"] = map_cr([[execute v:count . "ToggleTerm direction=horizontal"]]):with_noremap():with_silent(),
@@ -84,6 +84,7 @@ local plug_map = {
 	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
 	["n|<Leader>fw"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
 	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
+	["n|<Leader>fa"] = map_cu("Telescope grep_string"):with_noremap():with_silent(),
 	["n|<Leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
 	-- Plugin accelerate-jk
 	["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
