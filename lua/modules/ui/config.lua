@@ -424,6 +424,10 @@ function config.lualine()
 		sections = mini_sections,
 		filetypes = { "lspsagaoutline" },
 	}
+	local diffview = {
+		sections = mini_sections,
+		filetypes = { "DiffviewFiles" },
+	}
 
 	local function python_venv()
 		local function env_cleanup(venv)
@@ -506,6 +510,7 @@ function config.lualine()
 			"toggleterm",
 			"fugitive",
 			outline,
+			diffview,
 		},
 	})
 end
