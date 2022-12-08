@@ -6,6 +6,7 @@ function config.telescope()
 	vim.api.nvim_command([[packadd telescope-project.nvim]])
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
+	vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
 
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
@@ -20,6 +21,7 @@ function config.telescope()
 			return true
 		end,
 	}
+	local lga_actions = require("telescope-live-grep-args.actions")
 
 	require("telescope").setup({
 		defaults = {
@@ -55,6 +57,16 @@ function config.telescope()
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
 			},
+			live_grep_args = {
+				auto_quoting = true, -- enable/disable auto-quoting
+				-- define mappings, e.g.
+				mappings = { -- extend mappings
+					i = {
+						["<C-k>"] = lga_actions.quote_prompt(),
+						["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+					},
+				},
+			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -71,6 +83,7 @@ function config.telescope()
 	require("telescope").load_extension("project")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
+	require("telescope").load_extension("live_grep_args")
 end
 
 function config.trouble()
