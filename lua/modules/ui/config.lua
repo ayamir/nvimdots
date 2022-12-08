@@ -394,6 +394,7 @@ function config.lualine()
 	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics", true),
 		misc = require("modules.ui.icons").get("misc", true),
+		ui = require("modules.ui.icons").get("ui", true),
 	}
 
 	local function escape_status()
@@ -410,6 +411,15 @@ function config.lualine()
 				removed = gitsigns.removed,
 			}
 		end
+	end
+
+	local function get_cwd()
+		local cwd = vim.fn.getcwd()
+		local home = os.getenv("HOME")
+		if cwd:find(home, 1, true) == 1 then
+			cwd = "~" .. cwd:sub(#home + 1)
+		end
+		return icons.ui.RootFolderOpened .. cwd
 	end
 
 	local mini_sections = {
@@ -463,9 +473,9 @@ function config.lualine()
 			section_separators = { left = "", right = "" },
 		},
 		sections = {
-			lualine_a = { "mode" },
+			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = {},
+			lualine_c = { { get_cwd } },
 			lualine_x = {
 				{ escape_status },
 				{
