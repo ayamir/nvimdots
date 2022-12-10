@@ -355,6 +355,22 @@ function config.catppuccin()
 	})
 end
 
+function config.neodim()
+	require("neodim").setup({
+		alpha = 0.45,
+		blend_color = string.format("#%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
+		update_in_insert = {
+			enable = true,
+			delay = 100,
+		},
+		hide = {
+			virtual_text = true,
+			signs = false,
+			underline = false,
+		},
+	})
+end
+
 function config.notify()
 	local notify = require("notify")
 	local icons = {
