@@ -356,6 +356,7 @@ function config.catppuccin()
 end
 
 function config.neodim()
+	vim.api.nvim_command([[packadd nvim-treesitter]])
 	require("neodim").setup({
 		alpha = 0.45,
 		blend_color = string.format("#%06x", vim.api.nvim_get_hl_by_name("Normal", true).background),
