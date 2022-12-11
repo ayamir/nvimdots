@@ -25,14 +25,14 @@ local plug_map = {
 	["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent(),
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent(),
 	-- Packer
-	["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap():with_nowait(),
+	-- ["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_noremap():with_nowait(),
+	-- ["n|<leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait(),
+	-- ["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait(),
+	-- ["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap():with_nowait(),
 	-- Lsp mapp work when insertenter and lsp start
 	["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(),
 	["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
-	["n|<A-t>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
+	["n|<F3>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
 	["n|g["] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
 	["n|g]"] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
 	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent(),
@@ -40,8 +40,8 @@ local plug_map = {
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 	["n|ga"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(),
 	["v|ga"] = map_cu("Lspsaga code_action"):with_noremap():with_silent(),
-	["n|gd"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
-	["n|gD"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(),
+	["n|gD"] = map_cr("Lspsaga peek_definition"):with_noremap():with_silent(),
+	["n|gd"] = map_cr("lua vim.lsp.buf.definition()"):with_noremap():with_silent(),
 	["n|gh"] = map_cr("Lspsaga lsp_finder"):with_noremap():with_silent(),
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
 	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
@@ -53,9 +53,9 @@ local plug_map = {
 	["n|<C-w>t"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]]):with_noremap():with_silent(),
 	["i|<C-w>t"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>"):with_noremap():with_silent(),
 	["t|<C-w>t"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>"):with_noremap():with_silent(),
-	["n|<F5>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]]):with_noremap():with_silent(),
-	["i|<F5>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>"):with_noremap():with_silent(),
-	["t|<F5>"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>"):with_noremap():with_silent(),
+	["n|<F4>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]]):with_noremap():with_silent(),
+	["i|<F4>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>"):with_noremap():with_silent(),
+	["t|<F4>"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>"):with_noremap():with_silent(),
 	["n|<A-d>"] = map_cr([[execute v:count . "ToggleTerm direction=float"]]):with_noremap():with_silent(),
 	["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>"):with_noremap():with_silent(),
 	["t|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>"):with_noremap():with_silent(),
@@ -70,7 +70,7 @@ local plug_map = {
 	["n|<leader>tq"] = map_cr("TroubleToggle quickfix"):with_noremap():with_silent(),
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent(),
 	-- Plugin nvim-tree
-	["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
+	["n|<F2>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
 	["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
 	["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
 	-- Plugin Undotree
@@ -82,8 +82,10 @@ local plug_map = {
 		:with_noremap()
 		:with_silent(),
 	["n|<Leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent(),
-	["n|<Leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
-	["n|<Leader>fc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
+	["n|<F5>"] = map_cu("Telescope grep_string"):with_noremap():with_silent(),
+	["n|<F6>"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
+	["n|<F7>"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
+	--["n|<Leader>fc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
 	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
 	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
 	["n|<Leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
@@ -111,7 +113,7 @@ local plug_map = {
 	-- Plugin SnipRun
 	["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent(),
 	-- Plugin dap
-	["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
+	["n|<F8>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dd"] = map_cr("lua require('dap').terminate() require('dapui').close()"):with_noremap():with_silent(),
 	["n|<leader>db"] = map_cr("lua require('dap').toggle_breakpoint()"):with_noremap():with_silent(),
@@ -137,7 +139,7 @@ local plug_map = {
 	["n|<leader>D"] = map_cr("DiffviewOpen"):with_silent():with_noremap(),
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
 	-- Plugin Legendary
-	["n|<C-p>"] = map_cr("Legendary"):with_silent():with_noremap(),
+	["n|<A-p>"] = map_cr("Legendary"):with_silent():with_noremap(),
 }
 
 bind.nvim_load_mapping(plug_map)

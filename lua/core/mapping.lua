@@ -6,11 +6,11 @@ local map_cmd = bind.map_cmd
 -- default map
 local def_map = {
 	-- Vim map
-	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent(),
+	--["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent(),
 	["n|<C-x>k"] = map_cr("bdelete"):with_noremap():with_silent(),
-	["n|<C-s>"] = map_cu("write"):with_noremap(),
-	["n|Y"] = map_cmd("y$"),
-	["n|D"] = map_cmd("d$"),
+	--["n|<C-s>"] = map_cu("write"):with_noremap(),
+	--["n|Y"] = map_cmd("y$"),
+	--["n|D"] = map_cmd("d$"),
 	["n|n"] = map_cmd("nzzzv"):with_noremap(),
 	["n|N"] = map_cmd("Nzzzv"):with_noremap(),
 	["n|J"] = map_cmd("mzJ`z"):with_noremap(),
@@ -22,15 +22,15 @@ local def_map = {
 	["n|<A-]>"] = map_cr("vertical resize +5"):with_silent(),
 	["n|<A-;>"] = map_cr("resize -2"):with_silent(),
 	["n|<A-'>"] = map_cr("resize +2"):with_silent(),
-	["n|<C-q>"] = map_cmd(":wq<CR>"),
-	["n|<A-S-q>"] = map_cmd(":q!<CR>"),
+	-- ["n|<C-q>"] = map_cmd(":wq<CR>"),
+	-- ["n|<A-S-q>"] = map_cmd(":q!<CR>"),
 	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
 	-- Insert
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap(),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap(),
 	["i|<C-a>"] = map_cmd("<ESC>^i"):with_noremap(),
-	["i|<C-s>"] = map_cmd("<Esc>:w<CR>"),
-	["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"),
+	--["i|<C-s>"] = map_cmd("<Esc>:w<CR>"),
+	--["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"),
 	-- command line
 	["c|<C-b>"] = map_cmd("<Left>"):with_noremap(),
 	["c|<C-f>"] = map_cmd("<Right>"):with_noremap(),

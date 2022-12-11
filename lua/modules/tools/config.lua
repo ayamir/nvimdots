@@ -30,6 +30,7 @@ function config.telescope()
 			selection_caret = icons.ui.ChevronRight,
 			entry_prefix = " ",
 			scroll_strategy = "limit",
+			set_env = { ["COLORTERM"] = "truecolor" },
 			results_title = false,
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
@@ -37,6 +38,30 @@ function config.telescope()
 			layout_config = {
 				horizontal = {
 					preview_width = 0.5,
+				},
+			},
+			mappings = {
+				i = {
+					["<C-x>"] = false,
+					["<C-u>"] = false,
+					["<C-d>"] = false,
+					["<Esc>"] = require("telescope.actions").close,
+					["<C-c>"] = require("telescope.actions").close,
+					["<C-s>"] = require("telescope.actions").select_horizontal,
+					["<C-v>"] = require("telescope.actions").select_vertical,
+					["<C-t>"] = require("telescope.actions").select_tab,
+					["<C-j>"] = require("telescope.actions").move_selection_next,
+					["<C-k>"] = require("telescope.actions").move_selection_previous,
+					["<C-/>"] = "which_key",
+				},
+				n = {
+					["<Esc>"] = require("telescope.actions").close,
+					["j"] = require("telescope.actions").move_selection_next,
+					["k"] = require("telescope.actions").move_selection_previous,
+					["H"] = require("telescope.actions").move_to_top,
+					["M"] = require("telescope.actions").move_to_middle,
+					["L"] = require("telescope.actions").move_to_bottom,
+					["?"] = require("telescope.actions").which_key,
 				},
 			},
 			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
@@ -47,7 +72,7 @@ function config.telescope()
 		},
 		extensions = {
 			fzf = {
-				fuzzy = false,
+				fuzzy = true,
 				override_generic_sorter = true,
 				override_file_sorter = true,
 				case_mode = "smart_case",

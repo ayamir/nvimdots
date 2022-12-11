@@ -1,1 +1,4 @@
-return { formatCommand = "rustfmt", formatStdin = true }
+return {
+	formatCommand = "rustfmt",
+	formatStdin = true,
+}

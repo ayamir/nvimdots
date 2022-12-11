@@ -76,8 +76,8 @@ local leader_map = function()
 end
 
 local neovide_config = function()
-	vim.api.nvim_set_option_value("guifont", "JetBrainsMono Nerd Font:h15", {})
-	vim.g.neovide_refresh_rate = 120
+	vim.api.nvim_set_option_value("guifont", "Operator Mono Lig:h16,Hack Nerd Font:h16", {})
+	vim.g.neovide_refresh_rate = 60
 	vim.g.neovide_cursor_vfx_mode = "railgun"
 	vim.g.neovide_no_idle = true
 	vim.g.neovide_cursor_animation_length = 0.03
@@ -129,8 +129,9 @@ local load_core = function()
 	require("core.event")
 	pack.load_compile()
 
-	-- vim.api.nvim_command([[set background=light]])
-	vim.api.nvim_command([[colorscheme catppuccin]])
+	--vim.api.nvim_command([[set background=dark]])
+	vim.api.nvim_command([[colorscheme gruvbox-material]])
+	-- vim.api.nvim_command([[colorscheme catppuccin]])
 end
 
 load_core()
