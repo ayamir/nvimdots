@@ -2,8 +2,7 @@ local M = {}
 
 local settings = require("core.settings")
 local disabled_workspaces = settings.format_disabled_dirs
-
-local format_on_save = true
+local format_on_save = settings.format_on_save
 
 vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
@@ -74,7 +73,9 @@ end
 
 function M.disable_format_on_save()
 	pcall(vim.api.nvim_del_augroup_by_name, "format_on_save")
-	vim.notify("Disabled format-on-save", vim.log.levels.INFO, { title = "Settings modification success!" })
+	if format_on_save then
+		vim.notify("Disabled format-on-save", vim.log.levels.INFO, { title = "Settings modification success!" })
+	end
 end
 
 function M.configure_format_on_save()
