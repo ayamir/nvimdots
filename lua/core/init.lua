@@ -130,7 +130,7 @@ local load_core = function()
 	pack.load_compile()
 
 	-- vim.api.nvim_command([[set background=light]])
-	vim.api.nvim_command([[colorscheme catppuccin]])
+	vim.api.nvim_command([[colorscheme catppuccin-macchiato]])
 end
 
 load_core()
