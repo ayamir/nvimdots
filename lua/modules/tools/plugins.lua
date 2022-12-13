@@ -66,6 +66,8 @@ tools["mrjones2014/legendary.nvim"] = {
 	config = conf.legendary,
 	requires = {
 		{ "stevearc/dressing.nvim", opt = false, config = conf.dressing },
+		"kkharji/sqlite.lua",
+		"folke/which-key.nvim",
 	},
 }
 
