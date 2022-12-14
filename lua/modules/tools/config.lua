@@ -377,6 +377,7 @@ function config.legendary()
 			d = "lsp: Preview definition",
 			D = "lsp: Goto definition",
 			h = "lsp: Show reference",
+			o = "lsp: Toggle outline",
 			r = "lsp: Rename",
 			s = "lsp: Signature help",
 			t = "lsp: Toggle trouble list",
