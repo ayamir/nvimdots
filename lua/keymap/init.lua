@@ -32,10 +32,10 @@ local plug_map = {
 	-- Lsp mapp work when insertenter and lsp start
 	["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(),
 	["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
-	["n|<A-t>"] = map_cr("LSoutlineToggle"):with_noremap():with_silent(),
+	["n|go"] = map_cr("Lspsaga outline"):with_noremap():with_silent(),
 	["n|g["] = map_cr("Lspsaga diagnostic_jump_prev"):with_noremap():with_silent(),
 	["n|g]"] = map_cr("Lspsaga diagnostic_jump_next"):with_noremap():with_silent(),
-	["n|gs"] = map_cr("Lspsaga signature_help"):with_noremap():with_silent(),
+	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent(),
 	["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 	["n|ga"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(),
@@ -78,11 +78,13 @@ local plug_map = {
 	-- Plugin Telescope
 	["n|<Leader>fp"] = map_cu("lua require('telescope').extensions.project.project{}"):with_noremap():with_silent(),
 	["n|<Leader>fr"] = map_cu("lua require('telescope').extensions.frecency.frecency{}"):with_noremap():with_silent(),
+	["n|<Leader>fw"] = map_cu("lua require('telescope').extensions.live_grep_args.live_grep_args{}")
+		:with_noremap()
+		:with_silent(),
 	["n|<Leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent(),
 	["n|<Leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
 	["n|<Leader>fc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
 	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
-	["n|<Leader>fw"] = map_cu("Telescope live_grep"):with_noremap():with_silent(),
 	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
 	["n|<Leader>fa"] = map_cu("Telescope grep_string"):with_noremap():with_silent(),
 	["n|<Leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
