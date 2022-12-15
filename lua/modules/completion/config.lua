@@ -342,4 +342,14 @@ function config.mason_install()
 	})
 end
 
+function config.copilot()
+	vim.defer_fn(function()
+		require("copilot").setup({
+			filetypes = {
+				["dap-repl"] = false,
+			},
+		})
+	end, 100)
+end
+
 return config
