@@ -23,6 +23,8 @@ mason_lsp.setup({
 		"clangd",
 		"gopls",
 		"pyright",
+		"tsserver",
+		"denols",
 	},
 })
 
@@ -85,6 +87,18 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 					},
 				},
 			},
+		})
+	elseif server == "denols" then
+		nvim_lsp.denols.setup({
+			capabilities = capabilities,
+			on_attach = custom_attach,
+			root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+		})
+	elseif server == "tsserver" then
+		nvim_lsp.tsserver.setup({
+			capabilities = capabilities,
+			on_attach = custom_attach,
+			root_dir = nvim_lsp.util.root_pattern("package.json"),
 		})
 	elseif server == "sumneko_lua" then
 		nvim_lsp.sumneko_lua.setup({
