@@ -74,7 +74,7 @@ editor["akinsho/toggleterm.nvim"] = {
 }
 editor["NvChad/nvim-colorizer.lua"] = {
 	opt = true,
-	event = "BufReadPost",
+	after = "nvim-treesitter",
 	config = conf.nvim_colorizer,
 }
 editor["rmagatti/auto-session"] = {
