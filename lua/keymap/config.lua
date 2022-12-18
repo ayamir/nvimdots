@@ -45,9 +45,9 @@ _G.toggle_nvimtree = function()
 		if is_nvimtree ~= nil then
 			vim.api.nvim_win_close(win_list[1], true)
 		else
-			vim.api.nvim_command("NvimTreeFindFileToggle")
+			vim.api.nvim_command([[NvimTreeFindFileToggle]])
 		end
 	else
-		vim.api.nvim_command("NvimTreeFindFileToggle")
+		vim.api.nvim_command([[NvimTreeFindFileToggle]])
 	end
 end
