@@ -112,15 +112,12 @@ function plugins.ensure_plugins()
 	Packer:init_ensure_plugins()
 end
 
----@param disable_notify? any @If this parameter is passed in, prevent the user from being notified
-function plugins.back_compile(disable_notify)
+function plugins.back_compile()
 	if vim.fn.filereadable(packer_compiled) == 1 then
 		os.rename(packer_compiled, bak_compiled)
 	end
 	plugins.compile()
-	if disable_notify == nil then
-		vim.notify("Packer Compile Success!", vim.log.levels.INFO, { title = "Success!" })
-	end
+	vim.notify("Packer Compile Success!", vim.log.levels.INFO, { title = "Success!" })
 end
 
 function plugins.auto_compile()

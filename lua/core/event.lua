@@ -17,11 +17,10 @@ function autocmd.load_autocmds()
 	local definitions = {
 		packer = {},
 		bufs = {
-			-- Hot reload nvim core config
+			-- Reload vim config automatically
 			{
-				"BufWritePost,FileWritePost",
-				"~/.config/nvim/*.lua",
-				[[source % | source $MYVIMRC | redraw! | lua require("core.pack").back_compile(true)]],
+				"BufWritePost",
+				[[$VIM_PATH/{*.vim,*.yaml,vimrc} nested source $MYVIMRC | redraw]],
 			},
 			-- Reload Vim script automatically if setlocal autoread
 			{
