@@ -108,16 +108,8 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 			},
 		})
 	elseif server == "clangd" then
-		local clangd_capabilities = {
-			textDocument = {
-				completion = {
-					editsNearCursor = true,
-				},
-			},
-			offsetEncoding = { "utf-16", "utf-8" },
-		}
 		nvim_lsp.clangd.setup({
-			capabilities = clangd_capabilities,
+			capabilities = vim.tbl_deep_extend("keep", { offsetEncoding = { "utf-16", "utf-8" } }, capabilities),
 			single_file_support = true,
 			on_attach = custom_attach,
 			cmd = {
