@@ -21,7 +21,13 @@ function autocmd.load_autocmds()
 			{
 				"BufWritePost,FileWritePost",
 				"~/.config/nvim/*.lua",
-				[[source % | source $MYVIMRC | redraw! | PackerCompile]],
+				[[source % | source $MYVIMRC | redraw! | lua require("core.pack").back_compile(true)]],
+			},
+			-- Reload Vim script automatically if setlocal autoread
+			{
+				"BufWritePost,FileWritePost",
+				"*.vim",
+				[[nested if &l:autoread > 0 | source <afile> | echo 'source ' . bufname('%') | endif]],
 			},
 			{ "BufWritePre", "/tmp/*", "setlocal noundofile" },
 			{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
