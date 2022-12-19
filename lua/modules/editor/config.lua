@@ -328,7 +328,7 @@ function config.dap()
 	dap.configurations.c = dap.configurations.cpp
 	dap.configurations.rust = dap.configurations.cpp
 
-	dap.adapters.go = function(callback, _)
+	dap.adapters.go = function(callback)
 		local stdout = vim.loop.new_pipe(false)
 		local handle
 		local pid_or_err
