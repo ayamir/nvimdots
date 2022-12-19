@@ -69,6 +69,13 @@ local disable_distribution_plugins = function()
 	-- vim.g.loaded_remote_plugins = 1
 end
 
+local set_hot_reload = function()
+	vim.api.nvim_create_user_command("HotReload", function()
+		require("core.pack").back_compile(true)
+		vim.api.nvim_command([[source $MYVIMRC | redraw! | echom "Hot-reload success!"]])
+	end, { force = true })
+end
+
 local leader_map = function()
 	vim.g.mapleader = " "
 	vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
@@ -117,6 +124,7 @@ local load_core = function()
 	local pack = require("core.pack")
 	createdir()
 	disable_distribution_plugins()
+	set_hot_reload()
 	leader_map()
 
 	pack.ensure_plugins()

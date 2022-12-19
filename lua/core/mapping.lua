@@ -25,6 +25,8 @@ local def_map = {
 	["n|<C-q>"] = map_cmd(":wq<CR>"),
 	["n|<A-S-q>"] = map_cmd(":q!<CR>"),
 	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"),
+	-- Hot-reload support
+	["n|<leader>R"] = map_cu("HotReload"):with_noremap():with_silent(),
 	-- Insert
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap(),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap(),
