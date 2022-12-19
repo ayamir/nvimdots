@@ -72,7 +72,7 @@ end
 local set_hot_reload = function()
 	vim.api.nvim_create_user_command("HotReload", function()
 		require("core.pack").back_compile(true)
-		vim.api.nvim_command([[source $MYVIMRC | redraw! | echom "Hot-reload success!"]])
+		vim.api.nvim_command([[source %| source $MYVIMRC | redraw! | echom "Hot-reload success!"]])
 	end, { force = true })
 end
 
