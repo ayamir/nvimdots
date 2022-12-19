@@ -102,6 +102,8 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 						preloadFileSize = 10000,
 					},
 					telemetry = { enable = false },
+					-- Do not override treesitter lua highlighting with sumneko lua highlighting
+					semantic = { enable = false },
 				},
 			},
 		})
