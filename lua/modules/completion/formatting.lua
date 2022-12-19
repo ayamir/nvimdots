@@ -31,7 +31,7 @@ vim.api.nvim_create_user_command("FormatterToggle", function(opts)
 	end
 end, {
 	nargs = 1,
-	complete = function(_, _, _)
+	complete = function()
 		return {
 			"markdown",
 			"vim",
@@ -87,7 +87,7 @@ function M.configure_format_on_save()
 end
 
 function M.toggle_format_on_save()
-	local status, _ = pcall(vim.api.nvim_get_autocmds, {
+	local status = pcall(vim.api.nvim_get_autocmds, {
 		group = "format_on_save",
 		event = "BufWritePre",
 	})
