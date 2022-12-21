@@ -385,10 +385,10 @@ function config.legendary()
 			},
 			t = {
 				name = "Trouble commands",
-				d = "lsp: show document diagnostics",
-				w = "lsp: show workspace diagnostics",
-				q = "lsp: show quickfix list",
-				l = "lsp: show loclist",
+				d = "lsp: Show document diagnostics",
+				w = "lsp: Show workspace diagnostics",
+				q = "lsp: Show quickfix list",
+				l = "lsp: Show loclist",
 			},
 		},
 		["g"] = {
@@ -403,14 +403,16 @@ function config.legendary()
 			b = "buffer: Buffer pick",
 			p = {
 				name = "git commands",
-				s = "git: push",
-				l = "git: pull",
+				s = "git: Push",
+				l = "git: Pull",
 			},
 		},
 		["<leader>G"] = "git: Show fugitive",
 		["<leader>g"] = "git: Show lazygit",
 		["<leader>D"] = "git: Show diff",
 		["<leader><leader>D"] = "git: Close diff",
+		["]g"] = "git: Goto next hunk",
+		["[g"] = "git: Goto prev hunk",
 		["g["] = "lsp: Goto prev diagnostic",
 		["g]"] = "lsp: Goto next diagnostic",
 		["<leader>w"] = "jump: Goto word",
@@ -419,6 +421,9 @@ function config.legendary()
 		["<leader>c"] = "jump: Goto one char",
 		["<leader>cc"] = "jump: Goto two chars",
 		["<leader>o"] = "edit: Check spell",
+		["<leader>u"] = "edit: Show undo history",
+		["<leader>r"] = "tool: Code snip run",
+		["<F12>"] = "tool: Markdown preview",
 	})
 end
 
