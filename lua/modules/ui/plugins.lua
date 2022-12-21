@@ -61,10 +61,6 @@ ui["dstein64/nvim-scrollview"] = {
 	event = { "BufReadPost" },
 	config = conf.scrollview,
 }
-ui["mbbill/undotree"] = {
-	opt = true,
-	cmd = "UndotreeToggle",
-}
 ui["j-hui/fidget.nvim"] = {
 	opt = true,
 	event = "BufReadPost",
