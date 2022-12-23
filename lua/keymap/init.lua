@@ -70,7 +70,7 @@ local plug_map = {
 	["n|<leader>tq"] = map_cr("TroubleToggle quickfix"):with_noremap():with_silent(),
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent(),
 	-- Plugin nvim-tree
-	["n|<C-n>"] = map_cr("lua toggle_nvimtree()"):with_noremap():with_silent(),
+	["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
 	["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
 	["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
 	-- Plugin Telescope

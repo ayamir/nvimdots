@@ -35,19 +35,3 @@ _G.toggle_lazygit = function()
 	end
 	_lazygit:toggle()
 end
-
-_G.toggle_nvimtree = function()
-	local win_list = vim.api.nvim_list_wins()
-	if win_list[1] ~= 1000 then
-		local first_win_buf_num = vim.api.nvim_win_get_buf(win_list[1])
-		local first_win_buf_name = vim.api.nvim_buf_get_name(first_win_buf_num)
-		local is_nvimtree = string.find(first_win_buf_name, "NvimTree_1")
-		if is_nvimtree ~= nil then
-			vim.api.nvim_win_close(win_list[1], true)
-		else
-			vim.api.nvim_command([[NvimTreeFindFileToggle]])
-		end
-	else
-		vim.api.nvim_command([[NvimTreeFindFileToggle]])
-	end
-end
