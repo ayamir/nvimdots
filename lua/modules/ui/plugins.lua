@@ -29,7 +29,7 @@ ui["goolord/alpha-nvim"] = {
 	event = "BufWinEnter",
 	config = conf.alpha,
 }
-ui["kyazdani42/nvim-tree.lua"] = {
+ui["nvim-tree/nvim-tree.lua"] = {
 	opt = true,
 	cmd = {
 		"NvimTreeToggle",
