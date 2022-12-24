@@ -225,7 +225,8 @@ function config.wilder()
 		),
 	})
 
-	local match_hl = require("utils").hlToRgb("String", false)
+	local string_fg = vim.api.nvim_get_hl_by_name("String", true).foreground
+	local match_hl = string_fg ~= nil and string.format("#%06x", string_fg) or "#ABE9B3"
 
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
