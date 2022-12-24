@@ -8,19 +8,6 @@ local nvim_lsp = require("lspconfig")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")
 
--- Custom vertual text highlight groups to make error hint looks cool
-local util = require("utils")
-local bg = util.hlToRgb("Normal", true)
-local error_fg = util.hlToRgb("DiagnosticVirtualTextError", false)
-local warn_fg = util.hlToRgb("DiagnosticVirtualTextWarn", false)
-local info_fg = util.hlToRgb("DiagnosticVirtualTextInfo", false)
-local hint_fg = util.hlToRgb("DiagnosticVirtualTextHint", false)
-local alpha = 0.4
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = error_fg, bg = util.blend(error_fg, bg, alpha) })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = warn_fg, bg = util.blend(warn_fg, bg, alpha) })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = info_fg, bg = util.blend(info_fg, bg, alpha) })
-vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = hint_fg, bg = util.blend(hint_fg, bg, alpha) })
-
 require("lspconfig.ui.windows").default_options.border = "single"
 
 mason.setup({
