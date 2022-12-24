@@ -225,8 +225,15 @@ function config.wilder()
 		),
 	})
 
+	local string_fg = vim.api.nvim_get_hl_by_name("String", true).foreground
+	local match_hl = string_fg ~= nil and string.format("#%06x", string_fg) or "#ABE9B3"
+
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
+		highlights = {
+			border = "Title", -- highlight to use for the border
+			accent = wilder.make_hl("WilderAccent", "Pmenu", { { a = 0 }, { a = 0 }, { foreground = match_hl } }),
+		},
 		empty_message = wilder.popupmenu_empty_message_with_spinner(),
 		highlighter = wilder.lua_fzy_highlighter(),
 		left = {
