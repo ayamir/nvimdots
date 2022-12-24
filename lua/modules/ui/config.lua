@@ -360,8 +360,8 @@ function config.catppuccin()
 end
 
 function config.neodim()
-	local util = require("utils")
-	local blend_color = util.hlToRgb("Normal", true)
+	local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
+	local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
 
 	require("neodim").setup({
 		alpha = 0.45,
@@ -915,13 +915,6 @@ function config.indent_blankline()
 		},
 		space_char_blankline = " ",
 	})
-
-	-- Custom vertual text highlight groups for indent_blankline
-	local util = require("utils")
-	local bg = util.hlToRgb("Normal", true)
-	local indent_hl = "#FFA066" -- only for current scoop
-	local alpha = 0.3
-	vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { fg = indent_hl, bg = util.blend(indent_hl, bg, alpha) })
 end
 
 function config.scrollview()
