@@ -2,11 +2,12 @@ local config = {}
 
 function config.telescope()
 	vim.api.nvim_command([[packadd sqlite.lua]])
+	vim.api.nvim_command([[packadd project.nvim]])
 	vim.api.nvim_command([[packadd telescope-fzf-native.nvim]])
-	vim.api.nvim_command([[packadd telescope-project.nvim]])
 	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
 	vim.api.nvim_command([[packadd telescope-zoxide]])
 	vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
+	vim.api.nvim_command([[packadd telescope-undo.nvim]])
 
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
@@ -67,6 +68,23 @@ function config.telescope()
 					},
 				},
 			},
+			undo = {
+				side_by_side = true,
+				layout_config = {
+					preview_height = 0.8,
+				},
+				mappings = { -- this whole table is the default
+					i = {
+						-- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
+						-- you want to use the following actions. This means installing as a dependency of
+						-- telescope in it's `requirements` and loading this extension from there instead of
+						-- having the separate plugin definition as outlined above. See issue #6.
+						["<cr>"] = require("telescope-undo.actions").yank_additions,
+						["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+						["<C-cr>"] = require("telescope-undo.actions").restore,
+					},
+				},
+			},
 		},
 		pickers = {
 			buffers = fixfolds,
@@ -80,10 +98,11 @@ function config.telescope()
 
 	require("telescope").load_extension("notify")
 	require("telescope").load_extension("fzf")
-	require("telescope").load_extension("project")
+	require("telescope").load_extension("projects")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("frecency")
 	require("telescope").load_extension("live_grep_args")
+	require("telescope").load_extension("undo")
 end
 
 function config.project()
@@ -366,10 +385,10 @@ function config.legendary()
 			},
 			t = {
 				name = "Trouble commands",
-				d = "lsp: show document diagnostics",
-				w = "lsp: show workspace diagnostics",
-				q = "lsp: show quickfix list",
-				l = "lsp: show loclist",
+				d = "lsp: Show document diagnostics",
+				w = "lsp: Show workspace diagnostics",
+				q = "lsp: Show quickfix list",
+				l = "lsp: Show loclist",
 			},
 		},
 		["g"] = {
@@ -384,14 +403,16 @@ function config.legendary()
 			b = "buffer: Buffer pick",
 			p = {
 				name = "git commands",
-				s = "git: push",
-				l = "git: pull",
+				s = "git: Push",
+				l = "git: Pull",
 			},
 		},
 		["<leader>G"] = "git: Show fugitive",
 		["<leader>g"] = "git: Show lazygit",
 		["<leader>D"] = "git: Show diff",
 		["<leader><leader>D"] = "git: Close diff",
+		["]g"] = "git: Goto next hunk",
+		["[g"] = "git: Goto prev hunk",
 		["g["] = "lsp: Goto prev diagnostic",
 		["g]"] = "lsp: Goto next diagnostic",
 		["<leader>w"] = "jump: Goto word",
@@ -400,6 +421,9 @@ function config.legendary()
 		["<leader>c"] = "jump: Goto one char",
 		["<leader>cc"] = "jump: Goto two chars",
 		["<leader>o"] = "edit: Check spell",
+		["<leader>u"] = "edit: Show undo history",
+		["<leader>r"] = "tool: Code snip run",
+		["<F12>"] = "tool: Markdown preview",
 	})
 end
 

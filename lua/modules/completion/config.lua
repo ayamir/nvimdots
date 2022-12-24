@@ -89,6 +89,15 @@ function config.lspsaga()
 			Parameter = { icons.kind.Parameter, colors.blue },
 			StaticMethod = { icons.kind.StaticMethod, colors.peach },
 		},
+		code_action_lightbulb = {
+			enable = false,
+			enable_in_insert = true,
+			cache_code_action = true,
+			sign = true,
+			update_time = 150,
+			sign_priority = 20,
+			virtual_text = true,
+		},
 		symbol_in_winbar = {
 			enable = true,
 			in_custom = false,
@@ -340,6 +349,16 @@ function config.mason_install()
 		-- Default: true
 		run_on_start = true,
 	})
+end
+
+function config.copilot()
+	vim.defer_fn(function()
+		require("copilot").setup({
+			filetypes = {
+				["dap-repl"] = false,
+			},
+		})
+	end, 100)
 end
 
 return config

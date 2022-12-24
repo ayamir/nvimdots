@@ -356,7 +356,6 @@ function config.catppuccin()
 end
 
 function config.neodim()
-	vim.api.nvim_command([[packadd nvim-treesitter]])
 	local normal_background = vim.api.nvim_get_hl_by_name("Normal", true).background
 	local blend_color = normal_background ~= nil and string.format("#%06x", normal_background) or "#000000"
 	require("neodim").setup({
@@ -390,6 +389,8 @@ function config.notify()
 		on_close = nil,
 		---@usage timeout for notifications in ms, default 5000
 		timeout = 2000,
+		-- @usage User render fps value
+		fps = 30,
 		-- Render function for notifications. See notify-render()
 		render = "default",
 		---@usage highlight behind the window for stages that change opacity
@@ -756,13 +757,6 @@ function config.nvim_bufferline()
 					text_align = "center",
 					padding = 1,
 				},
-				{
-					filetype = "undotree",
-					text = "Undo Tree",
-					text_align = "center",
-					highlight = "Directory",
-					separator = true,
-				},
 			},
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
@@ -892,7 +886,6 @@ function config.indent_blankline()
 			"peekaboo",
 			"git",
 			"TelescopePrompt",
-			"undotree",
 			"flutterToolsOutline",
 			"", -- for all buffers without a file type
 		},
