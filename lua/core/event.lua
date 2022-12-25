@@ -75,7 +75,7 @@ function autocmd.load_autocmds()
 			-- Equalize window dimensions when resizing vim window
 			{ "VimResized", "*", [[tabdo wincmd =]] },
 			-- Silent quit, also quicker
-			{ "VimLeavePre", "*", "silent wall" },
+			{ "VimLeavePre", "*", "silent noh" },
 		},
 		ft = {
 			{ "FileType", "alpha", "set showtabline=0" },
