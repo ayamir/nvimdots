@@ -71,21 +71,22 @@ local plug_map = {
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent(),
 	-- Plugin nvim-tree
 	["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
-	["n|<Leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
-	["n|<Leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
+	["n|<leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent(),
+	["n|<leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent(),
 	-- Plugin Telescope
-	["n|<Leader>u"] = map_cr("lua require('telescope').extensions.undo.undo()"):with_noremap():with_silent(),
-	["n|<Leader>fp"] = map_cu("lua require('telescope').extensions.projects.projects{}"):with_noremap():with_silent(),
-	["n|<Leader>fr"] = map_cu("lua require('telescope').extensions.frecency.frecency{}"):with_noremap():with_silent(),
-	["n|<Leader>fw"] = map_cu("lua require('telescope').extensions.live_grep_args.live_grep_args{}")
+	["n|<leader>u"] = map_cr("lua require('telescope').extensions.undo.undo()"):with_noremap():with_silent(),
+	["n|<leader>fp"] = map_cu("lua require('telescope').extensions.projects.projects{}"):with_noremap():with_silent(),
+	["n|<leader>fr"] = map_cu("lua require('telescope').extensions.frecency.frecency{}"):with_noremap():with_silent(),
+	["n|<leader>fw"] = map_cu("lua require('telescope').extensions.live_grep_args.live_grep_args{}")
 		:with_noremap()
 		:with_silent(),
-	["n|<Leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent(),
-	["n|<Leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
-	["n|<Leader>fc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
-	["n|<Leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
-	["n|<Leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
-	["n|<Leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
+	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent(),
+	["n|<leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent(),
+	["n|<leader>fc"] = map_cu("Telescope colorscheme"):with_noremap():with_silent(),
+	["n|<leader>fn"] = map_cu(":enew"):with_noremap():with_silent(),
+	["n|<leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent(),
+	["n|<leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
+	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent(),
 	-- Plugin accelerate-jk
 	["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
 	["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),

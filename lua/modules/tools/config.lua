@@ -357,6 +357,7 @@ function config.legendary()
 				f = "find: File under current work directory",
 				g = "find: File under current git directory",
 				n = "edit: New file",
+				b = "find: Buffer opened",
 			},
 			h = {
 				name = "Gitsigns commands",
