@@ -6,7 +6,7 @@ require("keymap.config")
 
 local plug_map = {
 	-- bufdelete.nvim
-	["n|<A-q>"] = map_cmd(":Bwipeout<CR>"),
+	["n|<A-q>"] = map_cmd(":Bwipeout<CR>"):with_noremap():with_silent(),
 	-- Bufferline
 	["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent(),
 	["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
@@ -110,6 +110,7 @@ local plug_map = {
 	["n|<leader>sd"] = map_cu("DeleteSession"):with_noremap():with_silent(),
 	-- Plugin SnipRun
 	["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent(),
+	["n|<leader>r"] = map_cu([[%SnipRun]]):with_noremap():with_silent(),
 	-- Plugin dap
 	["n|<F6>"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
 	["n|<leader>dr"] = map_cr("lua require('dap').continue()"):with_noremap():with_silent(),
@@ -129,7 +130,6 @@ local plug_map = {
 	["n|<leader>do"] = map_cr("lua require('dap').step_out()"):with_noremap():with_silent(),
 	["n|<leader>dl"] = map_cr("lua require('dap').repl.open()"):with_noremap():with_silent(),
 	["o|m"] = map_cu([[lua require('tsht').nodes()]]):with_silent(),
-	["c|Q"] = map_cu([[%SnipRun]]):with_silent(),
 	-- Plugin Tabout
 	["i|<A-l>"] = map_cmd([[<Plug>(TaboutMulti)]]):with_silent(),
 	["i|<A-h>"] = map_cmd([[<Plug>(TaboutBackMulti)]]):with_silent(),
