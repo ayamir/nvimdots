@@ -27,7 +27,7 @@ completion["glepnir/lspsaga.nvim"] = {
 completion["ray-x/lsp_signature.nvim"] = { opt = true, after = "nvim-lspconfig" }
 completion["hrsh7th/nvim-cmp"] = {
 	config = conf.cmp,
-	event = "InsertEnter",
+	event = "BufReadPost",
 	requires = {
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
