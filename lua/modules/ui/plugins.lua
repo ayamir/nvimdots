@@ -21,7 +21,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
-	after = "nvim-lspconfig",
+	after = { "nvim-lspconfig", "lspsaga.nvim" },
 	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {

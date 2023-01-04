@@ -99,12 +99,11 @@ function config.lspsaga()
 			virtual_text = true,
 		},
 		symbol_in_winbar = {
+			in_custom = true,
 			enable = true,
-			in_custom = false,
 			separator = " " .. icons.ui.Separator,
-			show_file = true,
+			show_file = false,
 			click_support = function(node, clicks, button, modifiers)
-				-- To see all avaiable details: vim.pretty_print(node)
 				local st = node.range.start
 				local en = node.range["end"]
 				if button == "l" then
@@ -115,8 +114,8 @@ function config.lspsaga()
 					end
 				elseif button == "r" then
 					if modifiers == "s" then
-						print("lspsaga") -- shift right click to print "lspsaga"
-					end -- jump to node's ending line+char
+						print("symbol_winbar")
+					end
 					vim.fn.cursor(en.line + 1, en.character + 1)
 				elseif button == "m" then
 					-- middle click to visual select node
