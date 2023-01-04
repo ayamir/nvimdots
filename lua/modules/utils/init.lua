@@ -34,12 +34,14 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 
 	if use_bg then
 		if hlexists then
-			hex = string.format("#%06x", vim.api.nvim_get_hl_by_name(hl_group, true).background)
+			local bg = vim.api.nvim_get_hl_by_name(hl_group, true).background or "NONE"
+			hex = bg == "NONE" and bg or string.format("#%06x", bg)
 		end
 		return hex
 	else
 		if hlexists then
-			hex = string.format("#%06x", vim.api.nvim_get_hl_by_name(hl_group, true).foreground)
+			local bg = vim.api.nvim_get_hl_by_name(hl_group, true).foreground or "NONE"
+			hex = bg == "NONE" and bg or string.format("#%06x", bg)
 		end
 		return hex
 	end
@@ -49,11 +51,12 @@ end
 ---@param name string @Target highlight group name
 ---@param def table @Attributes to be extended
 function M.extend_hl(name, def)
-	local current_def = vim.api.nvim_get_hl_by_name(name, true)
-	if current_def == nil then
+	local hlexists = M.tobool(tonumber(vim.api.nvim_exec('echo hlexists("' .. name .. '")', true)))
+	if not hlexists then
 		-- Do nothing if highlight group not found
 		return
 	end
+	local current_def = vim.api.nvim_get_hl_by_name(name, true)
 	local combined_def = vim.tbl_deep_extend("force", current_def, def)
 
 	vim.api.nvim_set_hl(0, name, combined_def)
