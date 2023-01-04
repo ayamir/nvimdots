@@ -530,7 +530,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = { { get_cwd }, { lspsaga_symbols, cond = conditions.check_code_context } },
+			lualine_c = { { lspsaga_symbols, cond = conditions.check_code_context } },
 			lualine_x = {
 				{ escape_status },
 				{
@@ -542,6 +542,7 @@ function config.lualine()
 						info = icons.diagnostics.Information,
 					},
 				},
+				{ get_cwd },
 			},
 			lualine_y = {
 				{ "filetype", colored = true, icon_only = true },
