@@ -40,8 +40,8 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 		return hex
 	else
 		if hlexists then
-			local bg = vim.api.nvim_get_hl_by_name(hl_group, true).foreground or "NONE"
-			hex = bg == "NONE" and bg or string.format("#%06x", bg)
+			local fg = vim.api.nvim_get_hl_by_name(hl_group, true).foreground or "NONE"
+			hex = fg == "NONE" and fg or string.format("#%06x", fg)
 		end
 		return hex
 	end
