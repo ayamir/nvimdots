@@ -244,6 +244,7 @@ function config.catppuccin()
 			mocha = function(cp)
 				return {
 					-- For base configs.
+					NormalFloat = { fg = cp.text, bg = cp.base },
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
@@ -350,7 +351,10 @@ function config.catppuccin()
 					["@type.css"] = { fg = cp.lavender },
 					["@property.css"] = { fg = cp.yellow, style = { "italic" } },
 
+					["@type.builtin.c"] = { fg = cp.yellow, style = {} },
+
 					["@property.cpp"] = { fg = cp.text },
+					["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
 
 					-- ["@symbol"] = { fg = cp.flamingo },
 				}

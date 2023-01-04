@@ -21,7 +21,9 @@ function config.rust_tools()
 					fix_pos = true,
 					hint_enable = true,
 					hi_parameter = "Search",
-					handler_opts = { "double" },
+					handler_opts = {
+						border = "rounded",
+					},
 				})
 			end,
 
