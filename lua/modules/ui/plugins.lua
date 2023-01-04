@@ -12,7 +12,7 @@ ui["catppuccin/nvim"] = {
 ui["zbirenbaum/neodim"] = {
 	opt = true,
 	event = "LspAttach",
-	requires = "nvim-treesitter",
+	requires = "nvim-treesitter/nvim-treesitter",
 	config = conf.neodim,
 }
 ui["rcarriga/nvim-notify"] = {
