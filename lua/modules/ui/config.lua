@@ -124,6 +124,8 @@ function config.nord()
 end
 
 function config.catppuccin()
+	local transparent_background = false -- Set background transparency here!
+
 	require("catppuccin").setup({
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
@@ -134,7 +136,7 @@ function config.catppuccin()
 			shade = "dark",
 			percentage = 0.15,
 		},
-		transparent_background = false,
+		transparent_background = transparent_background,
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
@@ -244,7 +246,7 @@ function config.catppuccin()
 			mocha = function(cp)
 				return {
 					-- For base configs.
-					NormalFloat = { fg = cp.text, bg = cp.base },
+					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.base },
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
