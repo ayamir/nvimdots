@@ -225,7 +225,7 @@ function config.wilder()
 		),
 	})
 
-	local match_hl = require("modules.utils").hlToRgb("String", false, "#ABE9B3")
+	local match_hl = require("modules.utils").hl_to_rgb("String", false, "#ABE9B3")
 
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",

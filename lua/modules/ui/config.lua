@@ -361,7 +361,7 @@ end
 
 function config.neodim()
 	vim.api.nvim_command([[packadd nvim-treesitter]])
-	local blend_color = require("modules.utils").hlToRgb("Normal", true, "#000000")
+	local blend_color = require("modules.utils").hl_to_rgb("Normal", true)
 
 	require("neodim").setup({
 		alpha = 0.45,
@@ -580,7 +580,7 @@ function config.lualine()
 	})
 
 	-- Properly set background color for lspsaga
-	local winbar_bg = require("modules.utils").hlToRgb("StatusLine", true, "#000000")
+	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
 	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })
 	for _, hlGroup in pairs(require("lspsaga.lspkind")) do
 		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
