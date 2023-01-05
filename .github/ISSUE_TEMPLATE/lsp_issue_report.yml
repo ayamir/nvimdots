@@ -6,6 +6,13 @@ body:
     attributes:
       value: |
         _Before reporting:_ Search [existing issues](https://github.com/ayamir/nvimdots/issues) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+  - type: checkboxes
+    id: is-latest-commit
+    attributes:
+      label: "Version confirmation"
+      description: "The local configuration is up-to-date in the current branch and this issue _persists_."
+      options:
+        - label: "Confirm"
 
   - type: input
     id: nvim-version
