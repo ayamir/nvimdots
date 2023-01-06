@@ -36,7 +36,7 @@ local function get_highlight(hl_group)
 	result.bg = hl.background and string.format("#%06x", hl.background)
 	result.sp = hl.special and string.format("#%06x", hl.special)
 	for attr, val in pairs(hl) do
-		if attr ~= "foreground" and attr ~= "background" and attr ~= "special" then
+		if type(attr) == "string" and attr ~= "foreground" and attr ~= "background" and attr ~= "special" then
 			result[attr] = val
 		end
 	end
