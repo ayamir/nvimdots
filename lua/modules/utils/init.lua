@@ -6,6 +6,44 @@ local function hexToRgb(c)
 	return { tonumber(c:sub(2, 3), 16), tonumber(c:sub(4, 5), 16), tonumber(c:sub(6, 7), 16) }
 end
 
+---Parse the `style` string into nvim_set_hl options
+---@param style string @The style config
+---@return table
+local function parse_style(style)
+	if not style or style == "NONE" then
+		return {}
+	end
+
+	local result = {}
+	for field in string.gmatch(style, "([^,]+)") do
+		result[field] = true
+	end
+
+	return result
+end
+
+---Wrapper function for nvim_get_hl_by_name
+---@param hl_group string @Highlight group name
+---@return table
+local function get_highlight(hl_group)
+	local hl = vim.api.nvim_get_hl_by_name(hl_group, true)
+	if hl.link then
+		return get_highlight(hl.link)
+	end
+
+	local result = parse_style(hl.style)
+	result.fg = hl.foreground and string.format("#%06x", hl.foreground)
+	result.bg = hl.background and string.format("#%06x", hl.background)
+	result.sp = hl.special and string.format("#%06x", hl.special)
+	for attr, val in pairs(hl) do
+		if type(attr) == "string" and attr ~= "foreground" and attr ~= "background" and attr ~= "special" then
+			result[attr] = val
+		end
+	end
+
+	return result
+end
+
 --- Blend foreground with background
 ---@param foreground string @The foreground color
 ---@param background string @The background color to blend with
@@ -32,19 +70,16 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	local hex = fallback_hl or "#000000"
 	local hlexists = M.tobool(tonumber(vim.api.nvim_exec('echo hlexists("' .. hl_group .. '")', true)))
 
-	if use_bg then
-		if hlexists then
-			local bg = vim.api.nvim_get_hl_by_name(hl_group, true).background or "NONE"
-			hex = bg == "NONE" and bg or string.format("#%06x", bg)
+	if hlexists then
+		local result = get_highlight(hl_group)
+		if use_bg then
+			hex = result.bg and result.bg or "NONE"
+		else
+			hex = result.fg and result.fg or "NONE"
 		end
-		return hex
-	else
-		if hlexists then
-			local fg = vim.api.nvim_get_hl_by_name(hl_group, true).foreground or "NONE"
-			hex = fg == "NONE" and fg or string.format("#%06x", fg)
-		end
-		return hex
 	end
+
+	return hex
 end
 
 --- Extend a highlight group
@@ -56,7 +91,7 @@ function M.extend_hl(name, def)
 		-- Do nothing if highlight group not found
 		return
 	end
-	local current_def = vim.api.nvim_get_hl_by_name(name, true)
+	local current_def = get_highlight(name)
 	local combined_def = vim.tbl_deep_extend("force", current_def, def)
 
 	vim.api.nvim_set_hl(0, name, combined_def)
