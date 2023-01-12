@@ -15,13 +15,13 @@ tools["nvim-telescope/telescope.nvim"] = {
 }
 tools["ahmedkhalf/project.nvim"] = {
 	opt = true,
-	after = "telescope.nvim",
+	event = "BufReadPost",
 	config = conf.project,
 }
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
 	opt = true,
 	run = "make",
-	after = "project.nvim",
+	after = "telescope.nvim",
 }
 tools["nvim-telescope/telescope-frecency.nvim"] = {
 	opt = true,
