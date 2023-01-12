@@ -336,13 +336,10 @@ function config.legendary()
 			},
 			d = {
 				name = "Dap commands",
-				b = "debug: Toggle breakpoint",
-				d = "debug: Terminate debug session",
-				r = "debug: Run/Continue",
-				l = "debug: Open repl",
-				i = "debug: Step into",
-				o = "debug: Step out",
-				v = "debug: Step over",
+				b = "debug: Set breakpoint with condition",
+				c = "debug: Run to cursor",
+				l = "debug: Run last",
+				o = "debug: Open repl",
 			},
 			f = {
 				name = "Telescope commands",
