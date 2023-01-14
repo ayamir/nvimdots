@@ -27,7 +27,7 @@ local M = {}
 ---@field base string
 ---@field mantle string
 ---@field crust string
----@field none "NONE"|string
+---@field none "NONE"
 
 ---@type palette
 local palette = nil
