@@ -801,6 +801,12 @@ function config.nvim_bufferline()
 					text_align = "center",
 					padding = 1,
 				},
+				{
+					filetype = "lspsagaoutline",
+					text = "Outline",
+					text_align = "center",
+					padding = 1,
+				},
 			},
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
