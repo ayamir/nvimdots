@@ -115,7 +115,7 @@ function config.lspsaga()
 			code_action = icons.ui.CodeAction,
 			diagnostic = icons.ui.Bug,
 			incoming = icons.ui.Incoming,
-			outgoing = icons.ui.Outcoming,
+			outgoing = icons.ui.Outgoing,
 			colors = {
 				normal_bg = colors.base,
 				title_bg = colors.base,
