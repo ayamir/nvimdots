@@ -1,5 +1,90 @@
 local M = {}
 
+---@class palette
+---@field rosewater string
+---@field flamingo string
+---@field mauve string
+---@field pink string
+---@field red string
+---@field maroon string
+---@field peach string
+---@field yellow string
+---@field green string
+---@field sapphire string
+---@field blue string
+---@field sky string
+---@field teal string
+---@field lavender string
+---@field text string
+---@field subtext1 string
+---@field subtext0 string
+---@field overlay2 string
+---@field overlay1 string
+---@field overlay0 string
+---@field surface2 string
+---@field surface1 string
+---@field surface0 string
+---@field base string
+---@field mantle string
+---@field crust string
+---@field none "NONE"
+
+---@type palette
+local palette = nil
+
+---Initialize the palette
+---@return palette
+local function init_palette()
+	if not palette then
+		palette = vim.g.colors_name == "catppuccin" and require("catppuccin.palettes").get_palette()
+			or {
+				rosewater = "#DC8A78",
+				flamingo = "#DD7878",
+				mauve = "#CBA6F7",
+				pink = "#F5C2E7",
+				red = "#E95678",
+				maroon = "#B33076",
+				peach = "#FF8700",
+				yellow = "#F7BB3B",
+				green = "#AFD700",
+				sapphire = "#36D0E0",
+				blue = "#61AFEF",
+				sky = "#04A5E5",
+				teal = "#B5E8E0",
+				lavender = "#7287FD",
+
+				text = "#F2F2BF",
+				subtext1 = "#BAC2DE",
+				subtext0 = "#A6ADC8",
+				overlay2 = "#C3BAC6",
+				overlay1 = "#988BA2",
+				overlay0 = "#6E6B6B",
+				surface2 = "#6E6C7E",
+				surface1 = "#575268",
+				surface0 = "#302D41",
+
+				base = "#1D1536",
+				mantle = "#1C1C19",
+				crust = "#161320",
+			}
+
+		palette = vim.tbl_extend("force", { none = "NONE" }, palette, require("core.settings").palette_overwrite)
+	end
+
+	return palette
+end
+
+---Generate universal highlight groups
+---@param overwrite palette? @The color to be overwritten | highest priority
+---@return palette
+function M.get_palette(overwrite)
+	if not overwrite then
+		return init_palette()
+	else
+		return vim.tbl_extend("force", init_palette(), overwrite)
+	end
+end
+
 ---@param c string @The color in hexadecimal.
 local function hexToRgb(c)
 	c = string.lower(c)
@@ -44,7 +129,7 @@ local function get_highlight(hl_group)
 	return result
 end
 
---- Blend foreground with background
+---Blend foreground with background
 ---@param foreground string @The foreground color
 ---@param background string @The background color to blend with
 ---@param alpha number|string @Number between 0 and 1 for blending amount.
@@ -61,14 +146,14 @@ function M.blend(foreground, background, alpha)
 	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
---- Get RGB highlight by highlight group
+---Get RGB highlight by highlight group
 ---@param hl_group string @Highlight group name
 ---@param use_bg boolean @Returns background or not
 ---@param fallback_hl? string @Fallback value if the hl group is not defined
 ---@return string
 function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	local hex = fallback_hl or "#000000"
-	local hlexists = M.tobool(tonumber(vim.api.nvim_exec('echo hlexists("' .. hl_group .. '")', true)))
+	local hlexists = pcall(vim.api.nvim_get_hl_by_name, hl_group, true)
 
 	if hlexists then
 		local result = get_highlight(hl_group)
@@ -82,11 +167,11 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	return hex
 end
 
---- Extend a highlight group
+---Extend a highlight group
 ---@param name string @Target highlight group name
 ---@param def table @Attributes to be extended
 function M.extend_hl(name, def)
-	local hlexists = M.tobool(tonumber(vim.api.nvim_exec('echo hlexists("' .. name .. '")', true)))
+	local hlexists = pcall(vim.api.nvim_get_hl_by_name, name, true)
 	if not hlexists then
 		-- Do nothing if highlight group not found
 		return
@@ -97,11 +182,11 @@ function M.extend_hl(name, def)
 	vim.api.nvim_set_hl(0, name, combined_def)
 end
 
---- Convert number (0/1) to boolean
----@param value number? @The value to check, can be nil (API Error)
----@return boolean|nil
+---Convert number (0/1) to boolean
+---@param value number @The value to check
+---@return boolean|nil @Returns nil if failed
 function M.tobool(value)
-	if value == 0 or value == nil then
+	if value == 0 then
 		return false
 	elseif value == 1 then
 		return true

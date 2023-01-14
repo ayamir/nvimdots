@@ -271,6 +271,9 @@ function config.catppuccin()
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
+					-- For trouble.nvim
+					TroubleNormal = { bg = cp.base },
+
 					-- For treesitter.
 					["@field"] = { fg = cp.rosewater },
 					["@property"] = { fg = cp.yellow },
@@ -448,8 +451,8 @@ function config.lualine()
 		else
 			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
 			if ok then
-				if lspsaga.get_symbol_node() ~= nil then
-					return lspsaga.get_symbol_node()
+				if lspsaga:get_winbar() ~= nil then
+					return lspsaga:get_winbar()
 				else
 					return "" -- Cannot get node
 				end
@@ -476,12 +479,6 @@ function config.lualine()
 		end
 		return icons.ui.RootFolderOpened .. cwd
 	end
-
-	local conditions = {
-		check_code_context = function()
-			return lspsaga_symbols() ~= ""
-		end,
-	}
 
 	local mini_sections = {
 		lualine_a = { "filetype" },
@@ -536,7 +533,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = { { lspsaga_symbols, cond = conditions.check_code_context } },
+			lualine_c = { lspsaga_symbols },
 			lualine_x = {
 				{ escape_status },
 				{
@@ -589,7 +586,7 @@ function config.lualine()
 	-- Properly set background color for lspsaga
 	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
 	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })
-	for _, hlGroup in pairs(require("lspsaga.lspkind")) do
+	for _, hlGroup in pairs(require("lspsaga.highlight").get_kind()) do
 		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
 	end
 end
@@ -806,6 +803,12 @@ function config.nvim_bufferline()
 					text_align = "center",
 					padding = 1,
 				},
+				{
+					filetype = "lspsagaoutline",
+					text = "Lspsaga Outline",
+					text_align = "center",
+					padding = 1,
+				},
 			},
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
@@ -817,8 +820,7 @@ function config.nvim_bufferline()
 	}
 
 	if vim.g.colors_name == "catppuccin" then
-		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
-		cp.none = "NONE" -- Special setting for complete transparent fg/bg.
+		local cp = require("modules.utils").get_palette() -- Get the palette.
 
 		local catppuccin_hl_overwrite = {
 			highlights = require("catppuccin.groups.integrations.bufferline").get({
