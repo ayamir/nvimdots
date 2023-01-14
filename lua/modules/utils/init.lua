@@ -29,37 +29,60 @@ local M = {}
 ---@field crust string
 
 ---@type palette
-local palette = vim.g.colors_name == "catppuccin" and require("catppuccin.palettes").get_palette()
-	or {
-		rosewater = "#DC8A78",
-		flamingo = "#DD7878",
-		mauve = "#CBA6F7",
-		pink = "#F5C2E7",
-		red = "#E95678",
-		maroon = "#B33076",
-		peach = "#FF8700",
-		yellow = "#F7BB3B",
-		green = "#AFD700",
-		sapphire = "#36D0E0",
-		blue = "#61AFEF",
-		sky = "#04A5E5",
-		teal = "#B5E8E0",
-		lavender = "#7287FD",
+local palette = nil
 
-		text = "#F2F2BF",
-		subtext1 = "#BAC2DE",
-		subtext0 = "#A6ADC8",
-		overlay2 = "#C3BAC6",
-		overlay1 = "#988BA2",
-		overlay0 = "#6E6B6B",
-		surface2 = "#6E6C7E",
-		surface1 = "#575268",
-		surface0 = "#302D41",
+---Initialize the palette
+---@return palette
+local function init_palette()
+	if not palette then
+		palette = vim.g.colors_name == "catppuccin" and require("catppuccin.palettes").get_palette()
+			or {
+				rosewater = "#DC8A78",
+				flamingo = "#DD7878",
+				mauve = "#CBA6F7",
+				pink = "#F5C2E7",
+				red = "#E95678",
+				maroon = "#B33076",
+				peach = "#FF8700",
+				yellow = "#F7BB3B",
+				green = "#AFD700",
+				sapphire = "#36D0E0",
+				blue = "#61AFEF",
+				sky = "#04A5E5",
+				teal = "#B5E8E0",
+				lavender = "#7287FD",
 
-		base = "#1D1536",
-		mantle = "#1C1C19",
-		crust = "#161320",
-	}
+				text = "#F2F2BF",
+				subtext1 = "#BAC2DE",
+				subtext0 = "#A6ADC8",
+				overlay2 = "#C3BAC6",
+				overlay1 = "#988BA2",
+				overlay0 = "#6E6B6B",
+				surface2 = "#6E6C7E",
+				surface1 = "#575268",
+				surface0 = "#302D41",
+
+				base = "#1D1536",
+				mantle = "#1C1C19",
+				crust = "#161320",
+			}
+
+		palette = vim.tbl_extend("force", palette, require("core.settings").palette_overwrite)
+	end
+
+	return palette
+end
+
+---Generate universal highlight groups
+---@param overwrite palette? @The color to be overwritten | highest priority
+---@return palette
+function M.get_palette(overwrite)
+	if not overwrite then
+		return init_palette()
+	else
+		return vim.tbl_extend("force", init_palette(), overwrite)
+	end
+end
 
 ---@param c string @The color in hexadecimal.
 local function hexToRgb(c)
@@ -129,7 +152,7 @@ end
 ---@return string
 function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	local hex = fallback_hl or "#000000"
-	local hlexists = M.tobool(tonumber(vim.api.nvim_exec('echo hlexists("' .. hl_group .. '")', true)))
+	local hlexists = pcall(vim.api.nvim_get_hl_by_name, hl_group, true)
 
 	if hlexists then
 		local result = get_highlight(hl_group)
@@ -147,7 +170,7 @@ end
 ---@param name string @Target highlight group name
 ---@param def table @Attributes to be extended
 function M.extend_hl(name, def)
-	local hlexists = M.tobool(tonumber(vim.api.nvim_exec('echo hlexists("' .. name .. '")', true)))
+	local hlexists = pcall(vim.api.nvim_get_hl_by_name, name, true)
 	if not hlexists then
 		-- Do nothing if highlight group not found
 		return
@@ -159,10 +182,10 @@ function M.extend_hl(name, def)
 end
 
 ---Convert number (0/1) to boolean
----@param value number? @The value to check, can be nil (API Error)
----@return boolean|nil
+---@param value number @The value to check
+---@return boolean|nil @Returns nil if failed
 function M.tobool(value)
-	if value == 0 or value == nil then
+	if value == 0 then
 		return false
 	elseif value == 1 then
 		return true
@@ -174,12 +197,6 @@ function M.tobool(value)
 		)
 		return nil
 	end
-end
-
----Generate universal highlight groups
----@return table
-function M.get_palette()
-	return palette
 end
 
 return M
