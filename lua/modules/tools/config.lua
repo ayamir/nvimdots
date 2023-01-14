@@ -381,8 +381,8 @@ function config.legendary()
 				u = "packer: PackerUpdate",
 			},
 			s = {
-				c = "lsp: show cursor disgnostics",
-				l = "lsp: show line disgnostics",
+				c = "lsp: Show cursor disgnostics",
+				l = "lsp: Show line disgnostics",
 				s = "sesson: Save session",
 				r = "sesson: Restore session",
 				d = "sesson: Delete session",
