@@ -27,6 +27,7 @@ local M = {}
 ---@field base string
 ---@field mantle string
 ---@field crust string
+---@field none "NONE"|string
 
 ---@type palette
 local palette = nil
@@ -67,7 +68,7 @@ local function init_palette()
 				crust = "#161320",
 			}
 
-		palette = vim.tbl_extend("force", palette, require("core.settings").palette_overwrite)
+		palette = vim.tbl_extend("force", { none = "NONE" }, palette, require("core.settings").palette_overwrite)
 	end
 
 	return palette
