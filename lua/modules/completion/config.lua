@@ -129,6 +129,7 @@ function config.lspsaga()
 				purple = colors.purple,
 				white = colors.text,
 				black = colors.mantle,
+				fg = colors.text,
 			},
 			kind = {
 				Class = icons.kind.Class,
