@@ -271,6 +271,9 @@ function config.catppuccin()
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
+					-- For trouble.nvim
+					TroubleNormal = { bg = cp.base },
+
 					-- For treesitter.
 					["@field"] = { fg = cp.rosewater },
 					["@property"] = { fg = cp.yellow },
@@ -530,7 +533,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = { { lspsaga_symbols } },
+			lualine_c = { lspsaga_symbols },
 			lualine_x = {
 				{ escape_status },
 				{
@@ -583,9 +586,8 @@ function config.lualine()
 	-- Properly set background color for lspsaga
 	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
 	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })
-	local colors = require("lspsaga.highlight").get_colors()()
-	for _, hlGroup in pairs(colors) do
-		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup, { bg = winbar_bg })
+	for _, hlGroup in pairs(require("lspsaga.highlight").get_kind()) do
+		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
 	end
 end
 
@@ -803,7 +805,7 @@ function config.nvim_bufferline()
 				},
 				{
 					filetype = "lspsagaoutline",
-					text = "Outline",
+					text = "Lspsaga Outline",
 					text_align = "center",
 					padding = 1,
 				},
@@ -818,8 +820,7 @@ function config.nvim_bufferline()
 	}
 
 	if vim.g.colors_name == "catppuccin" then
-		local cp = require("catppuccin.palettes").get_palette() -- Get the palette.
-		cp.none = "NONE" -- Special setting for complete transparent fg/bg.
+		local cp = require("modules.utils").get_palette() -- Get the palette.
 
 		local catppuccin_hl_overwrite = {
 			highlights = require("catppuccin.groups.integrations.bufferline").get({
