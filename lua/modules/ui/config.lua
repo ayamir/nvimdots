@@ -448,8 +448,8 @@ function config.lualine()
 		else
 			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
 			if ok then
-				if lspsaga.get_symbol_node() ~= nil then
-					return lspsaga.get_symbol_node()
+				if lspsaga:get_winbar() ~= nil then
+					return lspsaga:get_winbar()
 				else
 					return "" -- Cannot get node
 				end
@@ -476,12 +476,6 @@ function config.lualine()
 		end
 		return icons.ui.RootFolderOpened .. cwd
 	end
-
-	local conditions = {
-		check_code_context = function()
-			return lspsaga_symbols() ~= ""
-		end,
-	}
 
 	local mini_sections = {
 		lualine_a = { "filetype" },
@@ -536,7 +530,7 @@ function config.lualine()
 		sections = {
 			lualine_a = { { "mode" } },
 			lualine_b = { { "branch" }, { "diff", source = diff_source } },
-			lualine_c = { { lspsaga_symbols, cond = conditions.check_code_context } },
+			lualine_c = { { lspsaga_symbols } },
 			lualine_x = {
 				{ escape_status },
 				{
@@ -589,8 +583,9 @@ function config.lualine()
 	-- Properly set background color for lspsaga
 	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
 	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })
-	for _, hlGroup in pairs(require("lspsaga.lspkind")) do
-		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
+	local colors = require("lspsaga.highlight").get_colors()()
+	for _, hlGroup in pairs(colors) do
+		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup, { bg = winbar_bg })
 	end
 end
 

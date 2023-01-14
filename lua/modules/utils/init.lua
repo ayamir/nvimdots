@@ -44,7 +44,7 @@ local function get_highlight(hl_group)
 	return result
 end
 
---- Blend foreground with background
+---Blend foreground with background
 ---@param foreground string @The foreground color
 ---@param background string @The background color to blend with
 ---@param alpha number|string @Number between 0 and 1 for blending amount.
@@ -61,7 +61,7 @@ function M.blend(foreground, background, alpha)
 	return string.format("#%02x%02x%02x", blendChannel(1), blendChannel(2), blendChannel(3))
 end
 
---- Get RGB highlight by highlight group
+---Get RGB highlight by highlight group
 ---@param hl_group string @Highlight group name
 ---@param use_bg boolean @Returns background or not
 ---@param fallback_hl? string @Fallback value if the hl group is not defined
@@ -82,7 +82,7 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	return hex
 end
 
---- Extend a highlight group
+---Extend a highlight group
 ---@param name string @Target highlight group name
 ---@param def table @Attributes to be extended
 function M.extend_hl(name, def)
@@ -97,7 +97,7 @@ function M.extend_hl(name, def)
 	vim.api.nvim_set_hl(0, name, combined_def)
 end
 
---- Convert number (0/1) to boolean
+---Convert number (0/1) to boolean
 ---@param value number? @The value to check, can be nil (API Error)
 ---@return boolean|nil
 function M.tobool(value)
@@ -112,6 +112,43 @@ function M.tobool(value)
 			{ title = "[utils] Runtime error" }
 		)
 		return nil
+	end
+end
+
+---@class palette (WIP)
+---@field red string
+---@field WIP nil
+
+---Generate universal highlight groups
+---@return table
+function M.get_palette()
+	if vim.g.colors_name == "catppuccin" then
+		-- If the colorscheme is catppuccin then use the palette.
+		return require("catppuccin.palettes").get_palette()
+	else
+		-- Default behavior: return lspsaga's default palette.
+		local palette = {
+			red = "#E95678",
+			magenta = "#B33076",
+			orange = "#FF8700",
+			yellow = "#F7BB3B",
+			green = "#AFD700",
+			cyan = "#36D0E0",
+			blue = "#61AFEF",
+			purple = "#CBA6F7",
+			text = "#D1D4CF",
+			gray = "#6E6B6B",
+			base = "#1D1536",
+			mantle = "#1C1C19",
+		}
+		palette.peach = palette.orange
+		palette.flamingo = palette.orange
+		palette.rosewater = palette.yellow
+		palette.mauve = palette.purple
+		palette.sapphire = palette.blue
+		palette.maroon = palette.magenta
+
+		return palette
 	end
 end
 
