@@ -264,7 +264,6 @@ end
 function config.dap()
 	local icons = { dap = require("modules.ui.icons").get("dap") }
 
-	vim.api.nvim_command([[packadd nvim-dap-ui]])
 	local dap = require("dap")
 	local dapui = require("dapui")
 

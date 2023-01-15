@@ -1,9 +1,5 @@
 local formatting = require("modules.completion.formatting")
 
-vim.api.nvim_command([[packadd lsp_signature.nvim]])
-vim.api.nvim_command([[packadd lspsaga.nvim]])
-vim.api.nvim_command([[packadd cmp-nvim-lsp]])
-
 local nvim_lsp = require("lspconfig")
 local mason = require("mason")
 local mason_lsp = require("mason-lspconfig")

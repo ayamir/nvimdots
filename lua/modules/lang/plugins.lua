@@ -2,26 +2,26 @@ local lang = {}
 local conf = require("modules.lang.config")
 
 lang["fatih/vim-go"] = {
-	opt = true,
+	lazy = true,
 	ft = "go",
-	run = ":GoInstallBinaries",
+	build = ":GoInstallBinaries",
 	config = conf.lang_go,
 }
 lang["simrat39/rust-tools.nvim"] = {
-	opt = true,
+	lazy = true,
 	ft = "rust",
 	config = conf.rust_tools,
-	requires = "nvim-lua/plenary.nvim",
+	dependencies = {
+		{ "nvim-lua/plenary.nvim" },
+	},
 }
--- lang["kristijanhusak/orgmode.nvim"] = {
--- 	opt = true,
--- 	ft = "org",
--- 	config = conf.lang_org,
--- }
 lang["iamcco/markdown-preview.nvim"] = {
-	opt = true,
+	lazy = true,
 	ft = "markdown",
-	run = "cd app && yarn install",
+	build = "cd app && yarn install",
 }
-lang["chrisbra/csv.vim"] = { opt = true, ft = "csv" }
+lang["chrisbra/csv.vim"] = {
+	lazy = true,
+	ft = "csv",
+}
 return lang

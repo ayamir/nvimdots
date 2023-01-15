@@ -1,14 +1,6 @@
 local config = {}
 
 function config.telescope()
-	vim.api.nvim_command([[packadd sqlite.lua]])
-	vim.api.nvim_command([[packadd project.nvim]])
-	vim.api.nvim_command([[packadd telescope-fzf-native.nvim]])
-	vim.api.nvim_command([[packadd telescope-frecency.nvim]])
-	vim.api.nvim_command([[packadd telescope-zoxide]])
-	vim.api.nvim_command([[packadd telescope-live-grep-args.nvim]])
-	vim.api.nvim_command([[packadd telescope-undo.nvim]])
-
 	local icons = { ui = require("modules.ui.icons").get("ui", true) }
 	local telescope_actions = require("telescope.actions.set")
 	local fixfolds = {

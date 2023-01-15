@@ -72,7 +72,8 @@ function config.alpha()
 	dashboard.section.buttons.opts.hl = "String"
 
 	local function footer()
-		local total_plugins = #vim.tbl_keys(packer_plugins)
+		local stats = require("lazy").stats()
+		local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
 		return "   Have Fun with neovim"
 			.. "   v"
 			.. vim.version().major
@@ -81,8 +82,10 @@ function config.alpha()
 			.. "."
 			.. vim.version().patch
 			.. "   "
-			.. total_plugins
-			.. " plugins"
+			.. stats.count
+			.. " plugins in "
+			.. ms
+			.. "ms"
 	end
 
 	dashboard.section.footer.val = footer()
@@ -103,6 +106,14 @@ function config.alpha()
 	}
 
 	alpha.setup(dashboard.opts)
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "LazyVimStarted",
+		callback = function()
+			dashboard.section.footer.val = footer()
+			pcall(vim.cmd.AlphaRedraw)
+		end,
+	})
 end
 
 function config.edge()
@@ -127,7 +138,7 @@ function config.catppuccin()
 	local transparent_background = false -- Set background transparency here!
 
 	require("catppuccin").setup({
-		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
+		flavour = "latte", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
 		dim_inactive = {
 			enabled = false,
@@ -369,7 +380,6 @@ function config.catppuccin()
 end
 
 function config.neodim()
-	vim.api.nvim_command([[packadd nvim-treesitter]])
 	local blend_color = require("modules.utils").hl_to_rgb("Normal", true)
 
 	require("neodim").setup({
@@ -598,7 +608,6 @@ function config.nvim_tree()
 		git = require("modules.ui.icons").get("git"),
 		ui = require("modules.ui.icons").get("ui"),
 	}
-	vim.api.nvim_command([[packadd nvim-window-picker]])
 
 	require("nvim-tree").setup({
 		create_in_closed_folder = false,

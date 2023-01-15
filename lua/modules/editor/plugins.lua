@@ -1,59 +1,46 @@
 local editor = {}
 local conf = require("modules.editor.config")
 
-editor["junegunn/vim-easy-align"] = { opt = true, cmd = "EasyAlign" }
+editor["junegunn/vim-easy-align"] = {
+	lazy = true,
+	cmd = "EasyAlign",
+}
 editor["RRethy/vim-illuminate"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.illuminate,
 }
 editor["terrortylor/nvim-comment"] = {
-	opt = false,
+	lazy = false,
 	config = conf.nvim_comment,
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
-	opt = true,
-	run = ":TSUpdate",
+	lazy = true,
+	build = ":TSUpdate",
 	event = "BufReadPost",
 	config = conf.nvim_treesitter,
-}
-editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
-	opt = true,
-	after = "nvim-treesitter",
-}
-editor["p00f/nvim-ts-rainbow"] = {
-	opt = true,
-	after = "nvim-treesitter",
-}
-editor["JoosepAlviste/nvim-ts-context-commentstring"] = {
-	opt = true,
-	after = "nvim-treesitter",
-}
-editor["mfussenegger/nvim-ts-hint-textobject"] = {
-	opt = true,
-	after = "nvim-treesitter",
-}
-editor["windwp/nvim-ts-autotag"] = {
-	opt = true,
-	after = "nvim-treesitter",
-	config = conf.autotag,
-}
-editor["andymass/vim-matchup"] = {
-	opt = true,
-	after = "nvim-treesitter",
+	dependencies = {
+		{ "nvim-treesitter/nvim-treesitter-textobjects" },
+		{ "p00f/nvim-ts-rainbow" },
+		{ "JoosepAlviste/nvim-ts-context-commentstring" },
+		{ "mfussenegger/nvim-ts-hint-textobject" },
+		{ "andymass/vim-matchup" },
+		{ "windwp/nvim-ts-autotag", config = conf.autotag },
+		{ "NvChad/nvim-colorizer.lua", config = conf.nvim_colorizer },
+	},
 }
 editor["rainbowhxch/accelerated-jk.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufWinEnter",
 	config = conf.accelerated_jk,
 }
 editor["rhysd/clever-f.vim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.clever_f,
 }
 editor["romainl/vim-cool"] = {
-	opt = true,
+	lazy = true,
 	event = { "CursorMoved", "InsertEnter" },
 }
 editor["phaazon/hop.nvim"] = {
@@ -63,32 +50,27 @@ editor["phaazon/hop.nvim"] = {
 	config = conf.hop,
 }
 editor["karb94/neoscroll.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.neoscroll,
 }
 editor["akinsho/toggleterm.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "UIEnter",
 	config = conf.toggleterm,
 }
-editor["NvChad/nvim-colorizer.lua"] = {
-	opt = true,
-	after = "nvim-treesitter",
-	config = conf.nvim_colorizer,
-}
 editor["rmagatti/auto-session"] = {
-	opt = true,
+	lazy = true,
 	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
 	config = conf.auto_session,
 }
 editor["max397574/better-escape.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.better_escape,
 }
 editor["mfussenegger/nvim-dap"] = {
-	opt = true,
+	lazy = true,
 	cmd = {
 		"DapSetLogLevel",
 		"DapShowLog",
@@ -100,40 +82,34 @@ editor["mfussenegger/nvim-dap"] = {
 		"DapStepOut",
 		"DapTerminate",
 	},
-	module = "dap",
 	config = conf.dap,
+	dependencies = {
+		{ "rcarriga/nvim-dap-ui", config = conf.dapui },
+	},
 }
-editor["rcarriga/nvim-dap-ui"] = {
-	opt = true,
-	after = "nvim-dap", -- Need to call setup after dap has been initialized.
-	config = conf.dapui,
+editor["tpope/vim-fugitive"] = {
+	lazy = true,
+	cmd = { "Git", "G" },
 }
-editor["tpope/vim-fugitive"] = { opt = true, cmd = { "Git", "G" } }
 editor["ojroques/nvim-bufdel"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 }
 editor["edluffy/specs.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "CursorMoved",
 	config = conf.specs,
 }
-editor["abecodes/tabout.nvim"] = {
-	opt = true,
-	event = "InsertEnter",
-	after = "nvim-cmp",
-	config = conf.tabout,
-}
 editor["sindrets/diffview.nvim"] = {
-	opt = true,
+	lazy = true,
 	cmd = { "DiffviewOpen", "DiffviewClose" },
 }
 editor["luukvbaal/stabilize.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 }
 editor["ibhagwan/smartyank.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.smartyank,
 }

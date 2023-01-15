@@ -1,36 +1,41 @@
 local ui = {}
 local conf = require("modules.ui.config")
 
-ui["kyazdani42/nvim-web-devicons"] = { opt = false }
-ui["shaunsingh/nord.nvim"] = { opt = false, config = conf.nord }
-ui["sainnhe/edge"] = { opt = false, config = conf.edge }
+ui["kyazdani42/nvim-web-devicons"] = { lazy = false }
+ui["shaunsingh/nord.nvim"] = {
+	lazy = false,
+	config = conf.nord,
+}
+ui["sainnhe/edge"] = {
+	lazy = false,
+	config = conf.edge,
+}
 ui["catppuccin/nvim"] = {
-	opt = false,
-	as = "catppuccin",
+	lazy = false,
+	name = "catppuccin",
 	config = conf.catppuccin,
 }
-ui["zbirenbaum/neodim"] = {
-	opt = true,
-	event = "LspAttach",
-	requires = "nvim-treesitter/nvim-treesitter",
-	config = conf.neodim,
-}
 ui["rcarriga/nvim-notify"] = {
-	opt = false,
+	lazy = false,
 	config = conf.notify,
 }
+ui["zbirenbaum/neodim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = conf.neodim,
+}
 ui["hoob3rt/lualine.nvim"] = {
-	opt = true,
-	after = { "nvim-lspconfig", "lspsaga.nvim" },
+	lazy = true,
+	event = "VeryLazy",
 	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufWinEnter",
 	config = conf.alpha,
 }
 ui["nvim-tree/nvim-tree.lua"] = {
-	opt = true,
+	lazy = true,
 	cmd = {
 		"NvimTreeToggle",
 		"NvimTreeOpen",
@@ -39,38 +44,36 @@ ui["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeRefresh",
 	},
 	config = conf.nvim_tree,
-	requires = {
+	dependencies = {
 		"s1n7ax/nvim-window-picker",
-		opt = true,
-		tag = "v1.*",
+		version = "v1.*",
 		config = function()
 			require("window-picker").setup()
 		end,
 	},
 }
 ui["lewis6991/gitsigns.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = { "BufReadPost", "BufNewFile" },
 	config = conf.gitsigns,
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.indent_blankline,
 }
 ui["akinsho/bufferline.nvim"] = {
-	opt = true,
-	tag = "*",
-	event = "BufReadPost",
+	lazy = true,
+	event = "VeryLazy",
 	config = conf.nvim_bufferline,
 }
 ui["dstein64/nvim-scrollview"] = {
-	opt = true,
-	event = { "BufReadPost" },
+	lazy = true,
+	event = "BufReadPost",
 	config = conf.scrollview,
 }
 ui["j-hui/fidget.nvim"] = {
-	opt = true,
+	lazy = true,
 	event = "BufReadPost",
 	config = conf.fidget,
 }
