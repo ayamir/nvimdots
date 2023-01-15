@@ -28,10 +28,6 @@ tools["folke/trouble.nvim"] = {
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
 	config = conf.trouble,
 }
-tools["dstein64/vim-startuptime"] = {
-	lazy = true,
-	cmd = "StartupTime",
-}
 tools["gelguy/wilder.nvim"] = {
 	lazy = true,
 	event = "CmdlineEnter",
