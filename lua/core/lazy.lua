@@ -1,4 +1,4 @@
-local fn, uv, api = vim.fn, vim.loop, vim.api
+local fn = vim.fn
 local global = require("core.global")
 local is_mac = global.is_mac
 local vim_path = global.vim_path
