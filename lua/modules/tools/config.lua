@@ -366,11 +366,11 @@ function config.legendary()
 				r = "filetree: NvimTree refresh",
 			},
 			p = {
-				name = "Packer commands",
-				s = "packer: PackerSync",
-				i = "packer: PackerInstall",
-				c = "packer: PackerClean",
-				u = "packer: PackerUpdate",
+				name = "Package commands",
+				s = "package: Sync",
+				i = "package: Install",
+				c = "package: Check",
+				u = "package: Update",
 			},
 			s = {
 				c = "lsp: Show cursor disgnostics",

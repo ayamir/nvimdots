@@ -24,11 +24,11 @@ local plug_map = {
 	["n|<A-7>"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent(),
 	["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent(),
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent(),
-	-- Packer
-	["n|<leader>ps"] = map_cr("PackerSync"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pu"] = map_cr("PackerUpdate"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pi"] = map_cr("PackerInstall"):with_silent():with_noremap():with_nowait(),
-	["n|<leader>pc"] = map_cr("PackerClean"):with_silent():with_noremap():with_nowait(),
+	-- Lazy.nvim
+	["n|<leader>ps"] = map_cr("Lazy sync"):with_silent():with_noremap():with_nowait(),
+	["n|<leader>pu"] = map_cr("Lazy update"):with_silent():with_noremap():with_nowait(),
+	["n|<leader>pi"] = map_cr("Lazy install"):with_silent():with_noremap():with_nowait(),
+	["n|<leader>pc"] = map_cr("Lazy check"):with_silent():with_noremap():with_nowait(),
 	-- Lsp mapp work when insertenter and lsp start
 	["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(),
 	["n|<leader>lr"] = map_cr("LspRestart"):with_noremap():with_silent():with_nowait(),
