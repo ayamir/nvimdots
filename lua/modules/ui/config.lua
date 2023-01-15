@@ -138,7 +138,7 @@ function config.catppuccin()
 	local transparent_background = false -- Set background transparency here!
 
 	require("catppuccin").setup({
-		flavour = "latte", -- Can be one of: latte, frappe, macchiato, mocha
+		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
 		dim_inactive = {
 			enabled = false,
