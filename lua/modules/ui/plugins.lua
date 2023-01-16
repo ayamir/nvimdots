@@ -16,6 +16,7 @@ ui["catppuccin/nvim"] = {
 }
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
+	event = "VeryLazy",
 	config = conf.notify,
 }
 ui["zbirenbaum/neodim"] = {
