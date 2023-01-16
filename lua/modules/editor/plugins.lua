@@ -117,7 +117,7 @@ editor["ibhagwan/smartyank.nvim"] = {
 
 -- only for fcitx5 user who uses non-English language during coding
 -- editor["brglng/vim-im-select"] = {
--- 	opt = true,
+-- 	lazy = true,
 -- 	event = "BufReadPost",
 -- 	config = conf.imselect,
 -- }
