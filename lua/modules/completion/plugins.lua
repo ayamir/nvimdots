@@ -34,7 +34,6 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
 		{ "windwp/nvim-autopairs", config = conf.autopairs },
-		{ "abecodes/tabout.nvim", event = "InsertEnter", config = conf.tabout },
 		-- {
 		-- 	"tzachar/cmp-tabnine",
 		-- 	build = "./install.sh",

@@ -432,26 +432,6 @@ function config.specs()
 	})
 end
 
-function config.tabout()
-	require("tabout").setup({
-		tabkey = "<A-l>",
-		backwards_tabkey = "<A-h>",
-		ignore_beginning = false,
-		act_as_tab = true,
-		enable_backward = true,
-		completion = true,
-		tabouts = {
-			{ open = "'", close = "'" },
-			{ open = '"', close = '"' },
-			{ open = "`", close = "`" },
-			{ open = "(", close = ")" },
-			{ open = "[", close = "]" },
-			{ open = "{", close = "}" },
-		},
-		exclude = {},
-	})
-end
-
 function config.imselect()
 	-- fcitx5 need a manual config
 	if vim.fn.executable("fcitx5-remote") == 1 then
