@@ -32,7 +32,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 }
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = "VeryLazy",
 	config = conf.accelerated_jk,
 }
 editor["rhysd/clever-f.vim"] = {
