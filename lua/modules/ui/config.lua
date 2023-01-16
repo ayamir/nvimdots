@@ -137,6 +137,7 @@ function config.catppuccin()
 			percentage = 0.15,
 		},
 		transparent_background = transparent_background,
+		show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
@@ -243,6 +244,12 @@ function config.catppuccin()
 			},
 		},
 		highlight_overrides = {
+			all = function(cp)
+				return {
+					-- For lspsaga.nvim
+					SagaBeacon = { bg = cp.surface0 },
+				}
+			end,
 			mocha = function(cp)
 				return {
 					-- For base configs.
