@@ -6,6 +6,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 	cmd = "Telescope",
 	config = conf.telescope,
 	dependencies = {
+		{ "kyazdani42/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-lua/popup.nvim" },
 		{ "debugloop/telescope-undo.nvim" },
@@ -42,7 +43,7 @@ tools["mrjones2014/legendary.nvim"] = {
 		{ "kkharji/sqlite.lua" },
 		{ "stevearc/dressing.nvim", event = "VeryLazy", config = conf.dressing },
 		-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
-		{ "folke/which-key.nvim", lazy = false, config = conf.which_key },
+		{ "folke/which-key.nvim", event = "VeryLazy", config = conf.which_key },
 	},
 }
 

@@ -11,7 +11,8 @@ editor["RRethy/vim-illuminate"] = {
 	config = conf.illuminate,
 }
 editor["terrortylor/nvim-comment"] = {
-	lazy = false,
+	lazy = true,
+	event = "BufReadPost",
 	config = conf.nvim_comment,
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
@@ -31,7 +32,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 }
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	lazy = true,
-	event = "BufWinEnter",
+	event = "BufReadPost",
 	config = conf.accelerated_jk,
 }
 editor["rhysd/clever-f.vim"] = {

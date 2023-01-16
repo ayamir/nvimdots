@@ -1,22 +1,21 @@
 local ui = {}
 local conf = require("modules.ui.config")
 
-ui["kyazdani42/nvim-web-devicons"] = { lazy = false }
 ui["shaunsingh/nord.nvim"] = {
-	lazy = false,
+	lazy = true,
 	config = conf.nord,
 }
 ui["sainnhe/edge"] = {
-	lazy = false,
+	lazy = true,
 	config = conf.edge,
 }
 ui["catppuccin/nvim"] = {
-	lazy = false,
+	lazy = true,
 	name = "catppuccin",
 	config = conf.catppuccin,
 }
 ui["rcarriga/nvim-notify"] = {
-	lazy = false,
+	lazy = true,
 	config = conf.notify,
 }
 ui["zbirenbaum/neodim"] = {
@@ -26,7 +25,7 @@ ui["zbirenbaum/neodim"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	lazy = true,
-	event = "VeryLazy",
+	event = "BufReadPost",
 	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {
@@ -64,7 +63,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
-	event = "VeryLazy",
+	event = "BufReadPost",
 	config = conf.nvim_bufferline,
 }
 ui["dstein64/nvim-scrollview"] = {
