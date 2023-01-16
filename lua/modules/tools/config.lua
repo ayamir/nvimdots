@@ -370,6 +370,8 @@ function config.legendary()
 				s = "package: Sync",
 				i = "package: Install",
 				c = "package: Check",
+				d = "package: Debug",
+				p = "package: Profile",
 				x = "package: Clean",
 				u = "package: Update",
 			},

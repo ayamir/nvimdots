@@ -29,6 +29,8 @@ local plug_map = {
 	["n|<leader>pu"] = map_cr("Lazy update"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>pi"] = map_cr("Lazy install"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>pc"] = map_cr("Lazy check"):with_silent():with_noremap():with_nowait(),
+	["n|<leader>pd"] = map_cr("Lazy debug"):with_silent():with_noremap():with_nowait(),
+	["n|<leader>pp"] = map_cr("Lazy profile"):with_silent():with_noremap():with_nowait(),
 	["n|<leader>px"] = map_cr("Lazy clean"):with_silent():with_noremap():with_nowait(),
 	-- Lsp mapp work when insertenter and lsp start
 	["n|<leader>li"] = map_cr("LspInfo"):with_noremap():with_silent():with_nowait(),
