@@ -1,5 +1,5 @@
 local settings = {}
-local home = os.getenv("HOME")
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
 
 settings["use_ssh"] = true
 
