@@ -19,15 +19,19 @@ function Lazy:load_plugins()
 		local list = {}
 		local tmp = vim.split(fn.globpath(modules_dir, "*/plugins.lua"), "\n")
 		local subtmp = vim.split(fn.globpath(modules_dir, "*/user/plugins.lua"), "\n")
-		for _, v in ipairs(subtmp) do
-			if v ~= "" then
-				table.insert(tmp, v)
+		if type(subtmp) == "table" then
+			for _, v in ipairs(subtmp) do
+				if v ~= "" then
+					table.insert(tmp, v)
+				end
 			end
 		end
-		for _, f in ipairs(tmp) do
-			-- fill list with `plugins.lua`'s path used for later `require` like this:
-			-- list[#list + 1] = "modules/completion/plugins.lua"
-			list[#list + 1] = f:sub(#modules_dir - 6, -1)
+		if type(tmp) == "table" then
+			for _, f in ipairs(tmp) do
+				-- fill list with `plugins.lua`'s path used for later `require` like this:
+				-- list[#list + 1] = "modules/completion/plugins.lua"
+				list[#list + 1] = f:sub(#modules_dir - 6, -1)
+			end
 		end
 		return list
 	end
@@ -37,8 +41,10 @@ function Lazy:load_plugins()
 		-- require repos which returned in `plugins.lua` like this:
 		-- local repos = require("modules/completion/plugins")
 		local repos = require(m:sub(0, #m - 4))
-		for repo, conf in pairs(repos) do
-			self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
+		if type(repos) == "table" then
+			for repo, conf in pairs(repos) do
+				self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
+			end
 		end
 	end
 end
