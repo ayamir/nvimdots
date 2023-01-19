@@ -1,27 +1,27 @@
 local tools = {}
 local conf = require("modules.tools.config")
 
-tools["nvim-lua/plenary.nvim"] = { opt = false }
+tools["nvim-lua/plenary.nvim"] = { opt = true, module = "plenary" }
 tools["nvim-telescope/telescope.nvim"] = {
 	opt = true,
 	module = "telescope",
 	cmd = "Telescope",
 	config = conf.telescope,
 	requires = {
-		{ "nvim-lua/plenary.nvim", opt = false },
+		"nvim-lua/plenary.nvim",
 		{ "nvim-lua/popup.nvim", opt = true },
 		{ "debugloop/telescope-undo.nvim", opt = true },
 	},
 }
 tools["ahmedkhalf/project.nvim"] = {
 	opt = true,
-	after = "telescope.nvim",
+	event = "BufReadPost",
 	config = conf.project,
 }
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
 	opt = true,
 	run = "make",
-	after = "project.nvim",
+	after = "telescope.nvim",
 }
 tools["nvim-telescope/telescope-frecency.nvim"] = {
 	opt = true,

@@ -12,7 +12,7 @@ ui["catppuccin/nvim"] = {
 ui["zbirenbaum/neodim"] = {
 	opt = true,
 	event = "LspAttach",
-	requires = "nvim-treesitter",
+	requires = "nvim-treesitter/nvim-treesitter",
 	config = conf.neodim,
 }
 ui["rcarriga/nvim-notify"] = {
@@ -21,7 +21,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	opt = true,
-	after = "nvim-lspconfig",
+	after = { "nvim-lspconfig", "lspsaga.nvim" },
 	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {
@@ -39,6 +39,14 @@ ui["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeRefresh",
 	},
 	config = conf.nvim_tree,
+	requires = {
+		"s1n7ax/nvim-window-picker",
+		opt = true,
+		tag = "v1.*",
+		config = function()
+			require("window-picker").setup()
+		end,
+	},
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	opt = true,

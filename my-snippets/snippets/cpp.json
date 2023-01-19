@@ -15,10 +15,7 @@
     "lc": {
         "prefix": "lc",
         "body": [
-            "#include <algorithm>",
-            "#include <iostream>",
-            "#include <string>",
-            "#include <vector>",
+            "#include <bits/stdc++.h>",
             "",
             "using namespace std;",
             "",
@@ -32,7 +29,6 @@
             "",
             "int main(int argc, char *argv[]) {",
             "\tSolution s;",
-            "\ts.$2();",
             "\treturn 0;",
             "}"
         ],
