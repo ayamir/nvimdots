@@ -24,7 +24,7 @@ ui["zbirenbaum/neodim"] = {
 	event = "LspAttach",
 	config = conf.neodim,
 }
-ui["hoob3rt/lualine.nvim"] = {
+ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = conf.lualine,
