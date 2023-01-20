@@ -10,7 +10,7 @@ ui["sainnhe/edge"] = {
 	config = conf.edge,
 }
 ui["catppuccin/nvim"] = {
-	lazy = true,
+	lazy = false,
 	name = "catppuccin",
 	config = conf.catppuccin,
 }
@@ -26,7 +26,7 @@ ui["zbirenbaum/neodim"] = {
 }
 ui["hoob3rt/lualine.nvim"] = {
 	lazy = true,
-	event = "VeryLazy",
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = conf.lualine,
 }
 ui["goolord/alpha-nvim"] = {
@@ -64,7 +64,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
-	event = "VeryLazy",
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = conf.nvim_bufferline,
 }
 ui["dstein64/nvim-scrollview"] = {

@@ -203,7 +203,7 @@ if [ "$USE_SSH" -eq "0" ]; then
 fi
 
 prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-prompt "If \`lazy.nvim\` failed to fetch any plugin(s), maunally execute \`:Lazy sync\` until everything is up-to-date."
+prompt "If lazy.nvim failed to fetch any plugin(s), maunally execute \`nvim \"+Lazy sync\"\` until everything is up-to-date."
 cat <<EOS
 
 Thank you for using this set of configuration!
@@ -214,4 +214,4 @@ Thank you for using this set of configuration!
 EOS
 wait_for_user
 
-nvim
+nvim "+Lazy sync"

@@ -12,7 +12,7 @@ editor["RRethy/vim-illuminate"] = {
 }
 editor["terrortylor/nvim-comment"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = { "BufNewFile", "BufReadPre" },
 	config = conf.nvim_comment,
 }
 editor["nvim-treesitter/nvim-treesitter"] = {
@@ -46,7 +46,7 @@ editor["romainl/vim-cool"] = {
 	event = { "CursorMoved", "InsertEnter" },
 }
 editor["phaazon/hop.nvim"] = {
-	opt = true,
+	lazy = true,
 	branch = "v2",
 	event = "BufReadPost",
 	config = conf.hop,

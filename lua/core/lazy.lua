@@ -66,7 +66,7 @@ function Lazy:load_lazy()
 	local lazy_settings = {
 		root = data_dir .. "lazy",
 		git = {
-			log = { "-10" },
+			-- log = { "-10" }, -- show the last 10 commits
 			timeout = 300,
 			url_format = clone_prefix,
 		},
@@ -75,7 +75,7 @@ function Lazy:load_lazy()
 			colorscheme = { "catppuccin" },
 		},
 		ui = {
-			border = "rounded",
+			border = "single",
 		},
 	}
 	if is_mac then
