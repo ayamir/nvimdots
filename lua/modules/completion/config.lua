@@ -270,8 +270,6 @@ function config.cmp()
 					cmp.select_next_item()
 				elseif require("luasnip").expand_or_jumpable() then
 					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
-				elseif has_words_before() then
-					cmp.complete()
 				else
 					fallback()
 				end

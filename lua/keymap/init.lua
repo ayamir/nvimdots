@@ -140,6 +140,9 @@ local plug_map = {
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
 	-- Plugin Legendary
 	["n|<C-p>"] = map_cr("Legendary"):with_silent():with_noremap(),
+	-- Plugin Tabout
+	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap(),
+	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap(),
 }
 
 bind.nvim_load_mapping(plug_map)

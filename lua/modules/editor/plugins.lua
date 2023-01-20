@@ -28,6 +28,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "andymass/vim-matchup" },
 		{ "windwp/nvim-ts-autotag", config = conf.autotag },
 		{ "NvChad/nvim-colorizer.lua", config = conf.nvim_colorizer },
+		{ "abecodes/tabout.nvim", config = conf.tabout },
 	},
 }
 editor["rainbowhxch/accelerated-jk.nvim"] = {
