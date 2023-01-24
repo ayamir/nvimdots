@@ -1,5 +1,5 @@
 local settings = {}
-local home = os.getenv("HOME")
+local home = require("core.global").home
 
 settings["use_ssh"] = true
 
