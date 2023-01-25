@@ -1,0 +1,39 @@
+name: update lockfile
+on:
+  # Scheduled update (each day)
+  schedule: [{ cron: "30 01 * * *" }]
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  update-lockfile:
+    if: github.repository_owner == 'ayamir'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: andstor/file-existence-action@v2
+        id: check_lockfile
+        with:
+          files: "lazy-lock.json"
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+      - name: Run lockfile-autoupdate
+        if: steps.check_lockfile.outputs.files_exists == 'true'
+        timeout-minutes: 5
+        run: |
+          ./install/install.sh
+          nvim --headless "+Lazy! sync" +qa
+          cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
+      - if: steps.check_lockfile.outputs.files_exists == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore(lockfile): auto update lazy-lock.json"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          file_pattern: "lazy-lock.json"
