@@ -127,8 +127,10 @@ local load_core = function()
 	require("core.event")
 	require("core.lazy")
 
-	-- vim.api.nvim_command([[set background=light]])
-	vim.api.nvim_command([[colorscheme catppuccin]])
+	local colorscheme = require("core.settings").colorscheme
+	local background = require("core.settings").background
+	vim.api.nvim_command("set background=" .. background)
+	vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
 load_core()

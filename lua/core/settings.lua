@@ -16,4 +16,13 @@ settings["format_disabled_dirs"] = {
 ---@type palette
 settings["palette_overwrite"] = {}
 
+-- Set the colorscheme to use here.
+-- Available values are: `catppuccin`, `edge`, `nord`.
+settings["colorscheme"] = "catppuccin"
+
+-- Set background color to use here.
+-- Useful for when you want to use a colorscheme that has a light and dark variant like `edge`.
+-- Available values are: `dark`, `light`.
+settings["background"] = "dark"
+
 return settings
