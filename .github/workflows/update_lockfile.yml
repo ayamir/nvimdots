@@ -37,4 +37,3 @@ jobs:
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           file_pattern: "lazy-lock.json"
-          push_options: --force
