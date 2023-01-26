@@ -736,7 +736,6 @@ function config.nvim_tree()
 				window_picker = {
 					enable = true,
 					chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-					picker = require("window-picker").pick_window,
 					exclude = {
 						filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
 						buftype = { "terminal", "help" },
