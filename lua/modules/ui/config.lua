@@ -738,7 +738,7 @@ function config.nvim_tree()
 					chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 					picker = require("window-picker").pick_window,
 					exclude = {
-						filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+						filetype = { "notify", "qf", "diff", "fugitive", "fugitiveblame" },
 						buftype = { "nofile", "terminal", "help" },
 					},
 				},
@@ -941,7 +941,6 @@ function config.indent_blankline()
 			"log",
 			"fugitive",
 			"gitcommit",
-			"packer",
 			"vimwiki",
 			"markdown",
 			"json",

@@ -98,7 +98,6 @@ function config.illuminate()
 			"norg",
 			"NvimTree",
 			"Outline",
-			"packer",
 			"toggleterm",
 		},
 		under_cursor = false,
