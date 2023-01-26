@@ -14,7 +14,7 @@
 
 This is my neovim's configuration, which contains two branches.
 
-I use [packer.nvim](https://github.com/wbthomason/packer.nvim) to manage plugins.
+I use [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 | Branch |    Completion Solution     |
 | :----: | :------------------------: |
