@@ -110,7 +110,7 @@ for _, server in ipairs(mason_lsp.get_installed_servers()) do
 			on_attach = custom_attach,
 			settings = {
 				Lua = {
-					diagnostics = { globals = { "vim", "packer_plugins" } },
+					diagnostics = { globals = { "vim" } },
 					workspace = {
 						library = {
 							[vim.fn.expand("$VIMRUNTIME/lua")] = true,

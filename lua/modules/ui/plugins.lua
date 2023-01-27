@@ -44,13 +44,6 @@ ui["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeRefresh",
 	},
 	config = conf.nvim_tree,
-	dependencies = {
-		"s1n7ax/nvim-window-picker",
-		version = "v1.*",
-		config = function()
-			require("window-picker").setup()
-		end,
-	},
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
