@@ -115,6 +115,11 @@ editor["ibhagwan/smartyank.nvim"] = {
 	event = "BufReadPost",
 	config = conf.smartyank,
 }
+editor["LunarVim/bigfile.nvim"] = {
+	lazy = false,
+	config = conf.bigfile,
+	cond = require("core.settings").load_big_files_faster,
+}
 
 -- only for fcitx5 user who uses non-English language during coding
 -- editor["brglng/vim-im-select"] = {

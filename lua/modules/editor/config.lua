@@ -30,7 +30,14 @@ function config.nvim_treesitter()
 		},
 		highlight = {
 			enable = true,
-			disable = { "vim" },
+			disable = function(ft, bufnr)
+				if vim.tbl_contains({ "vim" }, ft) then
+					return true
+				end
+
+				local ok, is_large_file = pcall(vim.api.nvim_buf_get_var, bufnr, "bigfile_disable_treesitter")
+				return ok and is_large_file
+			end,
 			additional_vim_regex_highlighting = { "c", "cpp" },
 		},
 		textobjects = {
@@ -529,6 +536,30 @@ function config.tabout()
 		},
 		ignore_beginning = true, -- if the cursor is at the beginning of a filled element it will rather tab out than shift the content
 		exclude = {}, -- tabout will ignore these filetypes
+	})
+end
+
+function config.bigfile()
+	local cmp = {
+		name = "nvim-cmp",
+		opts = { defer = false },
+		disable = function()
+			require("cmp").setup.buffer({ enabled = false })
+		end,
+	}
+
+	require("bigfile").config({
+		filesize = 1, -- size of the file in MiB
+		pattern = { "*" }, -- autocmd pattern
+		features = { -- features to disable
+			"indent_blankline",
+			"lsp",
+			"illuminate",
+			"treesitter",
+			"syntax",
+			"vimopts",
+			cmp,
+		},
 	})
 end
 

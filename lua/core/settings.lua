@@ -9,6 +9,9 @@ settings["format_disabled_dirs"] = {
 	home .. "/format_disabled_dir_under_home",
 }
 
+-- Disable features that could affect performance when loading large files
+settings["load_big_files_faster"] = true
+
 ---Change the colors of the global palette here.
 ---Settings will complete their replacement at initialization.
 ---Parameters will be automatically completed as you type.
