@@ -34,6 +34,6 @@ jobs:
         with:
           commit_message: "chore(lockfile): auto update lazy-lock.json"
           commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
           file_pattern: "lazy-lock.json"
