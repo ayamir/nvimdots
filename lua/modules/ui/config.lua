@@ -605,7 +605,7 @@ function config.lualine()
 
 	-- Properly set background color for lspsaga
 	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
-	for _, hlGroup in pairs(require("lspsaga.highlight").get_kind()) do
+	for _, hlGroup in pairs(require("lspsaga.lspkind").get_kind()) do
 		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
 	end
 	require("modules.utils").extend_hl("LspSagaWinbarSep", { bg = winbar_bg })
