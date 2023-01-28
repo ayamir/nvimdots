@@ -455,6 +455,7 @@ function config.lualine()
 		return ok and m.waiting and icons.misc.EscapeST or ""
 	end
 
+	local _cache = { context = "", bufnr = -1 }
 	local function lspsaga_symbols()
 		local exclude = {
 			["terminal"] = true,
@@ -466,14 +467,16 @@ function config.lualine()
 		if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
 			return "" -- Excluded filetypes
 		else
+			local currbuf = vim.api.nvim_get_current_buf()
 			local ok, lspsaga = pcall(require, "lspsaga.symbolwinbar")
-			if ok then
-				if lspsaga:get_winbar() ~= nil then
-					return lspsaga:get_winbar()
-				else
-					return "" -- Cannot get node
-				end
+			if ok and lspsaga:get_winbar() ~= nil then
+				_cache.context = lspsaga:get_winbar()
+				_cache.bufnr = currbuf
+			elseif _cache.bufnr ~= currbuf then
+				_cache.context = "" -- Reset [invalid] cache (usually from another buffer)
 			end
+
+			return _cache.context
 		end
 	end
 
