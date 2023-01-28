@@ -8,6 +8,7 @@ set -u
 
 # global vars
 DEST_DIR="${HOME}/.config/nvim"
+BACKUP_DIR="${DEST_DIR}_backup-$(date +%Y%m%dT%H%M%S)"
 REQUIRED_NVIM_VERSION=0.8
 USE_SSH=1
 
@@ -76,6 +77,10 @@ prompt() {
 
 warn() {
 	printf "${tty_yellow}Warning${tty_reset}: %s\n" "$(chomp "$1")"
+}
+
+warn_ext() {
+	printf "         %s\n" "$(chomp "$1")"
 }
 
 getc() {
@@ -198,20 +203,23 @@ fi
 prompt "This script will install ayamir/nvimdots to:"
 echo "${DEST_DIR}"
 
+BACKUP_DIR="${HOME}/.config/backup_nvim_$(date +%Y%m%dT%H%M%S)"
 if [[ -d "${DEST_DIR}" ]]; then
-	warn "The destination folder: \"${DEST_DIR}\" already exists. We will make a backup for you under the same folder."
+	warn "The destination folder: \"${DEST_DIR}\" already exists."
+	warn_ext "We will make a backup for you at \"${BACKUP_DIR}\"."
 fi
 
 if [[ -z "${NONINTERACTIVE-}" ]]; then
 	ring_bell
 	wait_for_user
+
 	if check_ssh; then
 		USE_SSH=0
 	fi
 fi
 
 if [[ -d "${DEST_DIR}" ]]; then
-	execute "mv" "-f" "${DEST_DIR}" "${DEST_DIR}_$(date +%Y%m%dT%H%M%S)"
+	execute "mv" "-f" "${DEST_DIR}" "${BACKUP_DIR}"
 fi
 
 prompt "Fetching in progress..."
