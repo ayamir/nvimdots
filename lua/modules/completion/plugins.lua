@@ -35,7 +35,7 @@ completion["hrsh7th/nvim-cmp"] = {
 }
 completion["zbirenbaum/copilot.lua"] = {
 	cmd = "Copilot",
-	event = "VeryLazy",
+	event = "InsertEnter",
 	config = conf.copilot,
 	dependencies = {
 		{
