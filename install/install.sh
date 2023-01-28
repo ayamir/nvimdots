@@ -198,8 +198,9 @@ fi
 prompt "This script will install ayamir/nvimdots to:"
 echo "${DEST_DIR}"
 
+BACKUP_DIR="${HOME}/.config/backup_nvim_$(date +%Y%m%dT%H%M%S)"
 if [[ -d "${DEST_DIR}" ]]; then
-	warn "The destination folder: \"${DEST_DIR}\" already exists. We will make a backup for you under the same folder."
+	warn "The destination folder: \"${DEST_DIR}\" already exists. We will make a backup for you under \"${BACKUP_DIR}\"."
 fi
 
 if [[ -z "${NONINTERACTIVE-}" ]]; then
@@ -211,7 +212,7 @@ if [[ -z "${NONINTERACTIVE-}" ]]; then
 fi
 
 if [[ -d "${DEST_DIR}" ]]; then
-	execute "mv" "-f" "${DEST_DIR}" "${DEST_DIR}_$(date +%Y%m%dT%H%M%S)"
+	execute "mv" "-f" "${DEST_DIR}" "${BACKUP_DIR}"
 fi
 
 prompt "Fetching in progress..."
