@@ -268,13 +268,13 @@ function config.catppuccin()
 				CodeActionText = { fg = cp.green },
 				CodeActionNumber = { fg = cp.pink },
 
-				FinderSelection = { fg = cp.blue, bold = true },
+				FinderSelection = { fg = cp.blue, style = { "bold" } },
 				FinderFileName = { fg = cp.text },
 				FinderIcon = { fg = cp.sky },
 				FinderType = { fg = cp.mauve },
 
-				FinderSpinnerTitle = { fg = cp.mauve, bold = true },
-				FinderSpinner = { fg = cp.mauve, bold = true },
+				FinderSpinnerTitle = { fg = cp.mauve, style = { "bold" } },
+				FinderSpinner = { fg = cp.mauve, style = { "bold" } },
 
 				RenameNormal = { fg = cp.text },
 
