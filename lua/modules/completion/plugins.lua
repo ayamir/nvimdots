@@ -10,7 +10,7 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim", config = conf.mason_install },
-		{ "glepnir/lspsaga.nvim", commit = "e018bb0", config = conf.lspsaga },
+		{ "glepnir/lspsaga.nvim", config = conf.lspsaga },
 		{ "ray-x/lsp_signature.nvim" },
 	},
 }
