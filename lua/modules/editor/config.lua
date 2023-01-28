@@ -540,6 +540,14 @@ function config.tabout()
 end
 
 function config.bigfile()
+	local ftdetect = {
+		name = "ftdetect",
+		opts = { defer = true },
+		disable = function()
+			vim.api.nvim_set_option_value("filetype", "disabled_big_file", { scope = "local" })
+		end,
+	}
+
 	local cmp = {
 		name = "nvim-cmp",
 		opts = { defer = false },
@@ -558,6 +566,7 @@ function config.bigfile()
 			"treesitter",
 			"syntax",
 			"vimopts",
+			ftdetect,
 			cmp,
 		},
 	})
