@@ -550,7 +550,7 @@ function config.bigfile()
 
 	local cmp = {
 		name = "nvim-cmp",
-		opts = { defer = false },
+		opts = { defer = true },
 		disable = function()
 			require("cmp").setup.buffer({ enabled = false })
 		end,
