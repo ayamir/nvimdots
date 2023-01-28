@@ -544,7 +544,7 @@ function config.bigfile()
 		name = "ftdetect",
 		opts = { defer = true },
 		disable = function()
-			vim.api.nvim_set_option_value("filetype", "disabled_big_file", { scope = "local" })
+			vim.api.nvim_set_option_value("filetype", "big_file_disabled_ft", { scope = "local" })
 		end,
 	}
 

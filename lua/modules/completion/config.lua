@@ -409,7 +409,7 @@ function config.copilot()
 			},
 			filetypes = {
 				["dap-repl"] = false,
-				["disabled_big_file"] = false,
+				["big_file_disabled_ft"] = false,
 			},
 		})
 	end, 100)
