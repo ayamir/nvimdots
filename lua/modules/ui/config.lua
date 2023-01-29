@@ -254,42 +254,6 @@ function config.catppuccin()
 				crust = "#161320",
 			},
 		},
-		custom_highlights = function(cp)
-			return {
-				-- For lspsaga.nvim
-				TitleString = { fg = cp.text },
-				TitleIcon = { fg = cp.red },
-				SagaBorder = { fg = cp.blue, bg = cp.none },
-				SagaNormal = { bg = cp.base },
-				SagaExpand = { fg = cp.green },
-				SagaCollapse = { fg = cp.green },
-				SagaBeacon = { bg = cp.surface0 },
-
-				CodeActionText = { fg = cp.green },
-				CodeActionNumber = { fg = cp.pink },
-
-				FinderSelection = { fg = cp.blue, style = { "bold" } },
-				FinderFileName = { fg = cp.text },
-				FinderIcon = { fg = cp.sky },
-				FinderType = { fg = cp.mauve },
-
-				FinderSpinnerTitle = { fg = cp.mauve, style = { "bold" } },
-				FinderSpinner = { fg = cp.mauve, style = { "bold" } },
-
-				RenameNormal = { fg = cp.text },
-
-				DiagnosticSource = { fg = cp.surface2 },
-				DiagnosticPos = { fg = cp.surface2 },
-				DiagnosticWord = { fg = cp.text },
-
-				CallHierarchyIcon = { fg = cp.mauve },
-				CallHierarchyTitle = { fg = cp.blue },
-
-				SagaShadow = { bg = cp.crust },
-
-				OutlineIndent = { fg = cp.surface1 },
-			}
-		end,
 		highlight_overrides = {
 			mocha = function(cp)
 				return {
