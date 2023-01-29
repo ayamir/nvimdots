@@ -221,7 +221,7 @@ Safe-Execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
 
 if (-not $USE_SSH) {
 	prompt -Msg "Changing default fetching method to HTTPS..."
-	Safe-Execute -WithCmd { (Get-Content "$CCDEST_DIR\lua\core\settings.lua") | ForEach-Object { $_ -replace '\[\"use_ssh\"\] \= true','\[\"use_ssh\"\] \= false' } | Set-Content "$CCDEST_DIR\lua\core\settings.lua" -WhatIf }
+	Safe-Execute -WithCmd { (Get-Content "$env:CCDEST_DIR\lua\core\settings.lua") | ForEach-Object { $_ -replace '\[\"use_ssh\"\] \= true','\[\"use_ssh\"\] \= false' } | Set-Content "$env:CCDEST_DIR\lua\core\settings.lua" -WhatIf }
 }
 
 prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
