@@ -203,7 +203,6 @@ fi
 prompt "This script will install ayamir/nvimdots to:"
 echo "${DEST_DIR}"
 
-BACKUP_DIR="${HOME}/.config/backup_nvim_$(date +%Y%m%dT%H%M%S)"
 if [[ -d "${DEST_DIR}" ]]; then
 	warn "The destination folder: \"${DEST_DIR}\" already exists."
 	warn_ext "We will make a backup for you at \"${BACKUP_DIR}\"."
