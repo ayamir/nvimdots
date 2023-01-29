@@ -45,6 +45,7 @@ local plug_map = {
 	["n|<leader>sc"] = map_cr("Lspsaga show_cursor_diagnostics"):with_noremap():with_silent(),
 	["n|gs"] = map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent(),
 	["n|gr"] = map_cr("Lspsaga rename"):with_noremap():with_silent(),
+	["n|gR"] = map_cr("Lspsaga rename ++project"):with_noremap():with_silent(),
 	["n|K"] = map_cr("Lspsaga hover_doc"):with_noremap():with_silent(),
 	["n|ga"] = map_cr("Lspsaga code_action"):with_noremap():with_silent(),
 	["v|ga"] = map_cu("Lspsaga code_action"):with_noremap():with_silent(),
@@ -74,7 +75,7 @@ local plug_map = {
 	["n|<leader>G"] = map_cu("Git"):with_noremap():with_silent(),
 	-- Plugin trouble
 	["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
-	["n|gR"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
+	["n|<leader>tr"] = map_cr("TroubleToggle lsp_references"):with_noremap():with_silent(),
 	["n|<leader>td"] = map_cr("TroubleToggle document_diagnostics"):with_noremap():with_silent(),
 	["n|<leader>tw"] = map_cr("TroubleToggle workspace_diagnostics"):with_noremap():with_silent(),
 	["n|<leader>tq"] = map_cr("TroubleToggle quickfix"):with_noremap():with_silent(),

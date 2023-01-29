@@ -391,6 +391,7 @@ function config.legendary()
 				w = "lsp: Show workspace diagnostics",
 				q = "lsp: Show quickfix list",
 				l = "lsp: Show loclist",
+				r = "lsp: Show lsp references",
 			},
 		},
 		["g"] = {
@@ -399,7 +400,8 @@ function config.legendary()
 			D = "lsp: Goto definition",
 			h = "lsp: Show reference",
 			o = "lsp: Toggle outline",
-			r = "lsp: Rename",
+			r = "lsp: Rename in file range",
+			R = "lsp: Rename in project range",
 			s = "lsp: Signature help",
 			t = "lsp: Toggle trouble list",
 			b = "buffer: Buffer pick",
