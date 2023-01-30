@@ -184,11 +184,13 @@ function _install_nodejs_deps {
 }
 
 function _install_python_deps {
+	Safe-Execute -WithCmd { python -m pip install --user wheel }
 	Safe-Execute -WithCmd { python -m pip install --user pynvim }
 }
 
 function _install_ruby_deps {
 	Safe-Execute -WithCmd { gem install neovim }
+	Safe-Execute -WithCmd { ridk install }
 }
 
 function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
@@ -351,8 +353,8 @@ if (-not $USE_SSH) {
 	}
 }
 
-prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-prompt 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
+prompt -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
+prompt -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 Write-Host @'
 
 Thank you for using this set of configuration!
