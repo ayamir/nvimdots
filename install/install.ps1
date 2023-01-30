@@ -41,8 +41,9 @@ function Test-OpType {
 	$NonInteractive = [Environment]::GetCommandLineArgs() | Where-Object { $_ -like '-NonI*' }
 	if ([Environment]::UserInteractive -and -not $NonInteractive) {
 		return $False
+	} else {
+		return $True
 	}
-	return $True
 }
 
 function prompt ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
@@ -65,7 +66,6 @@ function Safe-Execute ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][
 	}
 	catch {
 		_abort -Msg "Failed during: $WithCmd" -Type "InvalidResult"
-		exit 1
 	}
 }
 
@@ -156,7 +156,7 @@ function Init-Pack {
 		} elseif (($env:CCPACK_MGR -eq 'scoop') -and (Check-Def-Exe -WithName $env:CCPACK_MGR)) {
 			prompt -Msg "We'll use 'Scoop' as the default package mgr."
 		} else {
-			prompt -Msg "Validation faled. Fallback to query."
+			prompt -Msg "Validation failed. Fallback to query."
 			Query-Pack
 		}
 	} else {
@@ -191,7 +191,7 @@ function _install_ruby_deps {
 	Safe-Execute -WithCmd { gem install neovim }
 }
 
-function Check-And-Fetch-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
+function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	if (-not (Check-Def-Exe -WithName $PkgName)) {
 		Write-Host "Checking dependency: '$PkgName'`t" -NoNewline
 		Start-Sleep -Milliseconds 350
@@ -226,18 +226,18 @@ function Check-Dep-Choice ([Parameter(Mandatory = $True,ValueFromPipeline = $Tru
 }
 
 function Fetch-Deps {
-	Check-And-Fetch-Exe -PkgName "git"
-	Check-And-Fetch-Exe -PkgName "nvim"
-	Check-And-Fetch-Exe -PkgName "make"
-	Check-And-Fetch-Exe -PkgName "node"
-	Check-And-Fetch-Exe -PkgName "pip"
-	Check-And-Fetch-Exe -PkgName "fzf"
-	Check-And-Fetch-Exe -PkgName "ruby"
-	Check-And-Fetch-Exe -PkgName "go"
-	Check-And-Fetch-Exe -PkgName "curl"
-	Check-And-Fetch-Exe -PkgName "wget"
-	Check-And-Fetch-Exe -PkgName "rustc"
-	Check-And-Fetch-Exe -PkgName "tree-sitter"
+	Check-And-Fetch-Exec -PkgName "git"
+	Check-And-Fetch-Exec -PkgName "nvim"
+	Check-And-Fetch-Exec -PkgName "make"
+	Check-And-Fetch-Exec -PkgName "node"
+	Check-And-Fetch-Exec -PkgName "pip"
+	Check-And-Fetch-Exec -PkgName "fzf"
+	Check-And-Fetch-Exec -PkgName "ruby"
+	Check-And-Fetch-Exec -PkgName "go"
+	Check-And-Fetch-Exec -PkgName "curl"
+	Check-And-Fetch-Exec -PkgName "wget"
+	Check-And-Fetch-Exec -PkgName "rustc"
+	Check-And-Fetch-Exec -PkgName "tree-sitter"
 }
 
 function Is-Latest {
@@ -278,7 +278,7 @@ if ((Check-Dep-Choice -PkgName "Ruby")) {
 }
 
 # Check dependencies
-if ((Get-Command "nvim" -ErrorAction SilentlyContinue) -eq $null) {
+if (-not (Check-Def-Exe -WithName "nvim")) {
 	_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install NeoVim before installing this Nvim config. See:
   https://github.com/neovim/neovim/wiki/Installing-Neovim
@@ -288,7 +288,7 @@ You must install NeoVim before installing this Nvim config. See:
 '@
 }
 
-if ((Get-Command "git" -ErrorAction SilentlyContinue) -eq $null) {
+if (-not (Check-Def-Exe -WithName "git")) {
 	_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install Git before installing this Nvim config. See:
   https://git-scm.com/
