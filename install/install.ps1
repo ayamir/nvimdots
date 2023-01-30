@@ -175,7 +175,7 @@ function _install_exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][
 		$_inst_name = $scoop_package_matrix[$WithName]
 		Safe-Execute -WithCmd { scoop install "$_inst_name" }
 	} else {
-		_abort -Msg 'This function is invoked incorrectly - invalid data: $env:CCPACK_MGR' -Type "InvalidOperation"
+		_abort -Msg 'This function is invoked incorrectly - Invalid data: $env:CCPACK_MGR' -Type "InvalidOperation"
 	}
 }
 
@@ -208,7 +208,7 @@ function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = 
 function Check-Dep-Choice ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_inst_name = $installer_pkg_matrix[$PkgName]
 	if (-not (Check-Def-Exe -WithName "$_inst_name")) {
-		_abort -Msg 'This function is invoked incorrectly - executable not found' -Type "InvalidOperation"
+		_abort -Msg "This function is invoked incorrectly - The '$_inst_name' executable not found" -Type "InvalidOperation"
 	} else {
 		$_title = "Dependencies Installation"
 		$_message = "Would you like to check & install $PkgName dependencies?"
