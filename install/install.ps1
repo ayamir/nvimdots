@@ -167,11 +167,13 @@ function Init-Pack {
 function _install_exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
 	if ($env:CCPACK_MGR -eq 'choco') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Chocolatey"
-		Safe-Execute -WithCmd { choco install "$choco_package_matrix[$WithName]" }
+		$_inst_name = $choco_package_matrix[$WithName]
+		Safe-Execute -WithCmd { choco install "$_inst_name" }
 	}
 	elseif ($env:CCPACK_MGR -eq 'scoop') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Scoop"
-		Safe-Execute -WithCmd { scoop install "$scoop_package_matrix[$WithName]" }
+		$_inst_name = $scoop_package_matrix[$WithName]
+		Safe-Execute -WithCmd { scoop install "$_inst_name" }
 	} else {
 		_abort -Msg 'This function is invoked incorrectly - invalid data: $env:CCPACK_MGR' -Type "InvalidOperation"
 	}
@@ -200,7 +202,8 @@ function Check-And-Fetch-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $
 }
 
 function Check-Dep-Choice ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
-	if (-not (Check-Def-Exe -WithName "$choco_package_matrix[$PkgName]")) {
+	$_inst_name = $installer_pkg_matrix[$PkgName]
+	if (-not (Check-Def-Exe -WithName "$_inst_name")) {
 		_abort -Msg 'This function is invoked incorrectly - executable not found' -Type "InvalidOperation"
 	} else {
 		$_title = "Dependencies Installation"
