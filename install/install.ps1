@@ -110,7 +110,7 @@ function Check-Def-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)]
 
 function Query-Pack {
 	if ((Check-Def-Exe -WithName "scoop") -and (Check-Def-Exe -WithName "choco")) {
-		prompt -Msg " [Detected] Multiple package mgrs detected."
+		prompt -Msg "   [Detected] Multiple package mgrs detected."
 
 		$_title = "Package manager Preferences"
 		$_message = "Pick your favorite package manager"
@@ -125,10 +125,10 @@ function Query-Pack {
 			$env:CCPACK_MGR = 'choco'
 		}
 	} elseif ((Check-Def-Exe -WithName "scoop")) {
-		prompt -Msg " [Detected] We'll use 'Scoop' as the default package mgr."
+		prompt -Msg "   [Detected] We'll use 'Scoop' as the default package mgr."
 		$env:CCPACK_MGR = 'scoop'
 	} elseif ((Check-Def-Exe -WithName "choco")) {
-		prompt -Msg " [Detected] We'll use 'Chocolatey' as the default package mgr."
+		prompt -Msg "   [Detected] We'll use 'Chocolatey' as the default package mgr."
 		$env:CCPACK_MGR = 'choco'
 	} else {
 		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
