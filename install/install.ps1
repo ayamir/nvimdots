@@ -14,7 +14,7 @@ $USE_SSH = $True
 # package mgr vars
 $choco_package_matrix = @{ "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
 $scoop_package_matrix = @{ "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust" }
-$installer_pkg_matrix = @{ "NodeJS" = "node"; "Python" = "python"; "Ruby" = "ruby" }
+$installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 
 # env vars
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
@@ -238,6 +238,9 @@ function Fetch-Deps {
 	Check-And-Fetch-Exec -PkgName "wget"
 	Check-And-Fetch-Exec -PkgName "rustc"
 	Check-And-Fetch-Exec -PkgName "tree-sitter"
+
+	# Reload PATH for future use
+	$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
 function Is-Latest {
