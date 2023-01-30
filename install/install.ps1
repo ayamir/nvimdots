@@ -38,8 +38,8 @@ function _chomp ([Parameter(Mandatory = $True,ValueFromPipeline = $True)] [strin
 # Check if script is run with non-interactive mode, this is not allowed
 # Returns $True if validation failed (i.e., in non-interactive mode)
 function Test-OpType {
-	$NonInteractive = [Environment]::GetCommandLineArgs() | Where-Object { $_ -like '-NonI*' }
-	if ([Environment]::UserInteractive -and -not $NonInteractive) {
+	$NonInteractive = [System.Environment]::GetCommandLineArgs() | Where-Object { $_ -like '-NonI*' }
+	if ([System.Environment]::UserInteractive -and -not $NonInteractive) {
 		return $False
 	} else {
 		return $True
@@ -72,7 +72,7 @@ function Safe-Execute ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][
 function Wait-For-User {
 	Write-Host ""
 	Write-Host "Press " -NoNewline; Write-Host "RETURN" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host "/" -NoNewline; Write-Host "ENTER" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host " to continue or any other key to abort...";
-	$ks = [console]::ReadKey()
+	$ks = [System.Console]::ReadKey()
 	if ($ks.Key -ne 'Enter') {
 		Write-Host ""
 		_abort -Msg "Aborted." -Type "OperationStopped"
@@ -101,7 +101,7 @@ function Check-SSH {
 	}
 }
 
-function Check-Def-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
+function Check-Def-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
 	if ((Get-Command $WithName -ErrorAction SilentlyContinue)) {
 		return $True
 	} else {
@@ -110,7 +110,7 @@ function Check-Def-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)]
 }
 
 function Query-Pack {
-	if ((Check-Def-Exe -WithName "scoop") -and (Check-Def-Exe -WithName "choco")) {
+	if ((Check-Def-Exec -WithName "scoop") -and (Check-Def-Exec -WithName "choco")) {
 		prompt -Msg "   [Detected] Multiple package mgrs detected."
 
 		$_title = "Package manager Preferences"
@@ -125,10 +125,10 @@ function Query-Pack {
 		} else {
 			$env:CCPACK_MGR = 'choco'
 		}
-	} elseif ((Check-Def-Exe -WithName "scoop")) {
+	} elseif ((Check-Def-Exec -WithName "scoop")) {
 		prompt -Msg "   [Detected] We'll use 'Scoop' as the default package mgr."
 		$env:CCPACK_MGR = 'scoop'
-	} elseif ((Check-Def-Exe -WithName "choco")) {
+	} elseif ((Check-Def-Exec -WithName "choco")) {
 		prompt -Msg "   [Detected] We'll use 'Chocolatey' as the default package mgr."
 		$env:CCPACK_MGR = 'choco'
 	} else {
@@ -151,9 +151,9 @@ function Init-Pack {
 	prompt -Msg "Intializing package manager preferences..."
 	if ($env:CCPACK_MGR -ne 'unknown') {
 		prompt -Msg '$env:CCPACK_MGR already defined. Validating...'
-		if (($env:CCPACK_MGR -eq 'choco') -and (Check-Def-Exe -WithName $env:CCPACK_MGR)) {
+		if (($env:CCPACK_MGR -eq 'choco') -and (Check-Def-Exec -WithName $env:CCPACK_MGR)) {
 			prompt -Msg "We'll use 'Chocolatey' as the default package mgr."
-		} elseif (($env:CCPACK_MGR -eq 'scoop') -and (Check-Def-Exe -WithName $env:CCPACK_MGR)) {
+		} elseif (($env:CCPACK_MGR -eq 'scoop') -and (Check-Def-Exec -WithName $env:CCPACK_MGR)) {
 			prompt -Msg "We'll use 'Scoop' as the default package mgr."
 		} else {
 			prompt -Msg "Validation failed. Fallback to query."
@@ -192,14 +192,15 @@ function _install_ruby_deps {
 }
 
 function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
-	if (-not (Check-Def-Exe -WithName $PkgName)) {
-		Write-Host "Checking dependency: '$PkgName'`t" -NoNewline
+	$_str = "Checking dependency: '$PkgName'" + " " * 15
+	if (-not (Check-Def-Exec -WithName $PkgName)) {
+		Write-Host $_str.substring(0, [System.Math]::Min(40, $_str.Length)) -NoNewline
 		Start-Sleep -Milliseconds 350
 		Write-Host "Failed" -ForegroundColor Red
 
 		_install_exe -WithName $PkgName
 	} else {
-		Write-Host "Checking dependency: '$PkgName'`t" -NoNewline
+		Write-Host $_str.substring(0, [System.Math]::Min(40, $_str.Length)) -NoNewline
 		Start-Sleep -Milliseconds 350
 		Write-Host "Success" -ForegroundColor Green
 	}
@@ -207,7 +208,7 @@ function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = 
 
 function Check-Dep-Choice ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_inst_name = $installer_pkg_matrix[$PkgName]
-	if (-not (Check-Def-Exe -WithName "$_inst_name")) {
+	if (-not (Check-Def-Exec -WithName "$_inst_name")) {
 		_abort -Msg "This function is invoked incorrectly - The '$_inst_name' executable not found" -Type "InvalidOperation"
 	} else {
 		$_title = "Dependencies Installation"
@@ -245,7 +246,7 @@ function Fetch-Deps {
 
 function Is-Latest {
 	$nvim_version = Invoke-Command -ErrorAction SilentlyContinue -ScriptBlock { nvim --version } # First get neovim version
-	$nvim_version = $nvim_version.Split([Environment]::NewLine) | Select-Object -First 1 # Then do head -n1
+	$nvim_version = $nvim_version.Split([System.Environment]::NewLine) | Select-Object -First 1 # Then do head -n1
 	$nvim_version = $nvim_version.Split('-') | Select-Object -First 1 # Special for dev branches
 	$nvim_version = $nvim_version -replace '[^(\d+(\.\d+)*)]','' # Then do regex replacement similar to sed
 
@@ -254,7 +255,7 @@ function Is-Latest {
 }
 
 function Ring-Bell {
-	[console]::beep()
+	[System.Console]::beep()
 }
 
 if (-not $IsWindows) {
@@ -281,7 +282,7 @@ if ((Check-Dep-Choice -PkgName "Ruby")) {
 }
 
 # Check dependencies
-if (-not (Check-Def-Exe -WithName "nvim")) {
+if (-not (Check-Def-Exec -WithName "nvim")) {
 	_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install NeoVim before installing this Nvim config. See:
   https://github.com/neovim/neovim/wiki/Installing-Neovim
@@ -291,7 +292,7 @@ You must install NeoVim before installing this Nvim config. See:
 '@
 }
 
-if (-not (Check-Def-Exe -WithName "git")) {
+if (-not (Check-Def-Exec -WithName "git")) {
 	_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install Git before installing this Nvim config. See:
   https://git-scm.com/
