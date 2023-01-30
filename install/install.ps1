@@ -228,12 +228,12 @@ function Fetch-Deps {
 	Check-And-Fetch-Exe -PkgName "node"
 	Check-And-Fetch-Exe -PkgName "pip"
 	Check-And-Fetch-Exe -PkgName "fzf"
-	Check-And-Fetch-Exe -PkgName "tree-sitter"
 	Check-And-Fetch-Exe -PkgName "ruby"
 	Check-And-Fetch-Exe -PkgName "go"
 	Check-And-Fetch-Exe -PkgName "curl"
 	Check-And-Fetch-Exe -PkgName "wget"
 	Check-And-Fetch-Exe -PkgName "rustc"
+	Check-And-Fetch-Exe -PkgName "tree-sitter"
 }
 
 function Is-Latest {
