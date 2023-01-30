@@ -344,7 +344,7 @@ if (-not $USE_SSH) {
 }
 
 prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-prompt 'If lazy.nvim failed to fetch any plugin(s), maunally execute `nvim "+Lazy sync"` until everything is up-to-date.'
+prompt 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 Write-Host @'
 
 Thank you for using this set of configuration!
@@ -359,4 +359,4 @@ Thank you for using this set of configuration!
 Ring-Bell
 Wait-For-User
 
-Safe-Execute -WithCmd { nvim "+Lazy sync" }
+Safe-Execute -WithCmd { nvim }
