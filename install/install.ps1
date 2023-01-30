@@ -193,6 +193,10 @@ function _install_ruby_deps {
 
 function Check-And-Fetch-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	if (-not (Check-Def-Exe -WithName $PkgName)) {
+		Write-Host "Checking dependency: '$PkgName'`t" -NoNewline
+		Start-Sleep -Milliseconds 350
+		Write-Host "Failed" -ForegroundColor Red
+
 		_install_exe -WithName $PkgName
 	} else {
 		Write-Host "Checking dependency: '$PkgName'`t" -NoNewline
