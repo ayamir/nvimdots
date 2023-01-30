@@ -326,19 +326,19 @@ prompt -Msg "Fetching in progress..."
 
 if ($USE_SSH) {
 	if ((Is-Latest)) {
-		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
 	} else {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 		prompt -Msg "Automatically redirecting you to legacy version..."
-		Safe-Execute -WithCmd { git clone -b 0.7 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		Safe-Execute -WithCmd { git clone -b 0.7 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
 	}
 } else {
 	if ((Is-Latest)) {
-		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
 	} else {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 		prompt -Msg "Automatically redirecting you to legacy version..."
-		Safe-Execute -WithCmd { git clone -b 0.7 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		Safe-Execute -WithCmd { git clone -b 0.7 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
 	}
 }
 
