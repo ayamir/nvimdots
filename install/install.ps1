@@ -14,6 +14,7 @@ $USE_SSH = $True
 # package mgr vars
 $choco_package_matrix = @{ "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
 $scoop_package_matrix = @{ "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust" }
+$installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 
 # env vars
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
@@ -191,11 +192,15 @@ function _install_ruby_deps {
 function Check-And-Fetch-Exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	if (-not (Check-Def-Exe -WithName $PkgName)) {
 		_install_exe -WithName $PkgName
+	} else {
+		Write-Host "Checking dependency: '$PkgName'`t" -NoNewline
+		Start-Sleep -Milliseconds 350
+		Write-Host "Success" -ForegroundColor Green
 	}
 }
 
 function Check-Dep-Choice ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
-	if (-not (Check-Def-Exe -WithName $PkgName)) {
+	if (-not (Check-Def-Exe -WithName "$choco_package_matrix[$PkgName]")) {
 		_abort -Msg 'This function is invoked incorrectly - executable not found' -Type "InvalidOperation"
 	} else {
 		$_title = "Dependencies Installation"
