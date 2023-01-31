@@ -334,6 +334,7 @@ Wait-For-User
 if ((Check-SSH)) {
 	$USE_SSH = $False
 }
+Check-Clone-Pref
 
 if ((Test-Path $env:CCDEST_DIR)) {
 	Safe-Execute -WithCmd { Move-Item -Path "$env:CCDEST_DIR" -Destination "$env:CCBACKUP_DIR" -Force }
