@@ -170,8 +170,8 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 ## ❤️ Thanks to
 
 - [ayamir](https://github.com/ayamir)
-- [CharlesChiuGit](https://github.com/CharlesChiuGit)
 - [Jint-lzxy](https://github.com/Jint-lzxy)
+- [CharlesChiuGit](https://github.com/CharlesChiuGit)
 
 ## 🎉 Acknowledgement
 
