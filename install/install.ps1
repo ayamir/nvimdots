@@ -12,8 +12,8 @@ $REQUIRED_NVIM_VERSION = [version]'0.8.0'
 $USE_SSH = $True
 
 # package mgr vars
-$choco_package_matrix = @{ "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
-$scoop_package_matrix = @{ "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust" }
+$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
+$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust" }
 $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 
 # env vars
@@ -186,7 +186,7 @@ function _install_exe ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] 
 	if ($env:CCPACK_MGR -eq 'choco') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Chocolatey"
 		$_inst_name = $choco_package_matrix[$WithName]
-		Safe-Execute -WithCmd { choco install "$_inst_name" }
+		Safe-Execute -WithCmd { choco install "$_inst_name" -y }
 	}
 	elseif ($env:CCPACK_MGR -eq 'scoop') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Scoop"
@@ -246,6 +246,7 @@ function Check-Dep-Choice ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty
 }
 
 function Fetch-Deps {
+	Check-And-Fetch-Exec -PkgName "gcc"
 	Check-And-Fetch-Exec -PkgName "git"
 	Check-And-Fetch-Exec -PkgName "nvim"
 	Check-And-Fetch-Exec -PkgName "make"
@@ -388,3 +389,6 @@ Ring-Bell
 Wait-For-User
 
 Safe-Execute -WithCmd { nvim }
+
+# Exit the script
+exit
