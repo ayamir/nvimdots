@@ -38,34 +38,36 @@
 
 This repo hosts my [NeoVim](https://neovim.io/) configuration for Linux, macOS, and Windows. `init.lua` is the config entry point.
 
-It contains two branches.
-| Branch |    Completion Solution     |
+It contains two branches:
+| Branch | Completion Solution |
 | :----: | :------------------------: |
-|  main  | config for nvim 0.8 stable |
-|  0.7   | config for nvim 0.7 stable |
-
+| main | config for nvim 0.8 stable |
+| 0.7 | config for nvim 0.7 stable |
 
 I use [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
-
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
-
 
 ### 🎐 Features
 
--   Fast. Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
--   Simple. Run out of the box.
--   Modern. Pure lua to config.
--   Modular. Easy to customize.
--   Powerful. Full functionality to code.
+- Fast. Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
+- Simple. Run out of the box.
+- Modern. Pure `lua` config.
+- Modular. Easy to customize.
+- Powerful. Full functionality to code.
 
 ## 🏗 How to Install
-Just run the following interactive bootstrap command and you're good to go 👍
+
+Just run the following interactive bootstrap command, and you're good to go 👍
+
 - **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
+
 ```pwsh
 Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/install/install.ps1' | Invoke-Expression
 ```
+
 - **\*nix**
+
 ```sh
 if command -v curl >/dev/null 2>&1; then
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/install/install.sh)"
@@ -73,9 +75,11 @@ else
     bash -c "$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/install/install.sh)"
 fi
 ```
+
 It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites) before starting, especially for \*nix users.
 
-## ⚙️  Configuration & Usage
+## ⚙️ Configuration & Usage
+
 <h4 align="center">
     🗺️ Keybindings
 </h4>
@@ -95,7 +99,6 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
     🤔 FAQ
 </h4>
 <p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Issues" rel="nofollow">Wiki: FAQ</a></p>
-
 
 ## ✨ Features
 
@@ -159,21 +162,25 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 </p>
 
 ## 👐 Contributing
+
 - If you find anything that needs improving, do not hesitate to point it out or create a PR.
 - If you come across an issue, you can first use `:checkhealth` command provided by nvim to trouble-shoot yourself.
   - If you still have such problems, feel free to open a new issue!
 
-## ❤️  Thanks to
+## ❤️ Thanks to
+
 - [ayamir](https://github.com/ayamir)
 - [CharlesChiuGit](https://github.com/CharlesChiuGit)
 - [Jint-lzxy](https://github.com/Jint-lzxy)
 
 ## 🎉 Acknowledgement
 
--   [glepnir/nvim](https://github.com/glepnir/nvim)
+- [glepnir/nvim](https://github.com/glepnir/nvim)
 
 ## 📜 License
+
 This config is released under the MIT license, which grants the following permissions:
+
 - Commercial use
 - Distribution
 - Modification
