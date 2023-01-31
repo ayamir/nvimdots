@@ -70,7 +70,7 @@ function Safe-Execute ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] 
 	}
 }
 
-function -Msg Wait-For-User {
+function Wait-For-User {
 	Write-Host ""
 	Write-Host "Press " -NoNewline; Write-Host "RETURN" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host "/" -NoNewline; Write-Host "ENTER" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host " to continue or any other key to abort...";
 	$ks = [System.Console]::ReadKey()
