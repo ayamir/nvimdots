@@ -182,7 +182,7 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 
 ## 📜 License
 
-This config is released under the MIT license, which grants the following permissions:
+This NeoVim configuration is released under the MIT license, which grants the following permissions:
 
 - Commercial use
 - Distribution
