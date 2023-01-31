@@ -6,7 +6,7 @@
         alt="NeoVim Version Capability"
         src="https://img.shields.io/badge/Supports%20Nvim-v0.8-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
     </a>
-    <a href="https://github.com/ayamir/nvimdots/releases/tag/stable">
+    <a href="https://github.com/ayamir/nvimdots/releases">
     <img
         alt="Release"
         src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
@@ -31,7 +31,7 @@
     </a>
     <img
         alt="Code Size"
-        src="https://img.shields.io/github/languages/code-size/CharlesChiuGit/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
 </p>
 
 ## 🪷 Introduction
