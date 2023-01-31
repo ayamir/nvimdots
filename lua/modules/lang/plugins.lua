@@ -1,16 +1,19 @@
 local lang = {}
-local conf = require("modules.lang.config")
 
 lang["fatih/vim-go"] = {
 	lazy = true,
 	ft = "go",
 	build = ":GoInstallBinaries",
-	config = conf.lang_go,
+	config = function()
+		require("modules.lang.golang")
+	end,
 }
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
 	ft = "rust",
-	config = conf.rust_tools,
+	config = function()
+		require("modules.lang.rusttools")
+	end,
 	dependencies = { { "nvim-lua/plenary.nvim" } },
 }
 lang["iamcco/markdown-preview.nvim"] = {

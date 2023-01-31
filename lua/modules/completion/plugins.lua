@@ -1,24 +1,43 @@
 local completion = {}
-local conf = require("modules.completion.config")
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = conf.nvim_lsp,
+	config = function()
+		require("modules.completion.lsp")
+	end,
 	dependencies = {
 		{ "creativenull/efmls-configs-nvim" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
-		{ "WhoIsSethDaniel/mason-tool-installer.nvim", config = conf.mason_install },
-		{ "glepnir/lspsaga.nvim", config = conf.lspsaga },
+		{
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			config = function()
+				require("modules.completion.masoninstall")
+			end,
+		},
+		{
+			"glepnir/lspsaga.nvim",
+			config = function()
+				require("modules.completion.saga")
+			end,
+		},
 		{ "ray-x/lsp_signature.nvim" },
 	},
 }
 completion["hrsh7th/nvim-cmp"] = {
-	config = conf.cmp,
 	event = "InsertEnter",
+	config = function()
+		require("modules.completion.Cmp")
+	end,
 	dependencies = {
-		{ "L3MON4D3/LuaSnip", config = conf.luasnip, dependencies = { "rafamadriz/friendly-snippets" } },
+		{
+			"L3MON4D3/LuaSnip",
+			dependencies = { "rafamadriz/friendly-snippets" },
+			config = function()
+				require("modules.completion.Luasnip")
+			end,
+		},
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip" },
@@ -29,14 +48,21 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "f3fora/cmp-spell" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
-		{ "windwp/nvim-autopairs", config = conf.autopairs },
+		{
+			"windwp/nvim-autopairs",
+			config = function()
+				require("modules.completion.autopairs")
+			end,
+		},
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = conf.tabnine },
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
 	cmd = "Copilot",
 	event = "InsertEnter",
-	config = conf.copilot,
+	config = function()
+		require("modules.completion.copilot")
+	end,
 	dependencies = {
 		{
 			"zbirenbaum/copilot-cmp",

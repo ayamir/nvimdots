@@ -1,38 +1,79 @@
 local ui = {}
-local conf = require("modules.ui.config")
 
-ui["shaunsingh/nord.nvim"] = {
+ui["goolord/alpha-nvim"] = {
 	lazy = true,
-	config = conf.nord,
+	event = "BufWinEnter",
+	config = function()
+		require("modules.ui.alpha")
+	end,
 }
-ui["sainnhe/edge"] = {
+ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
-	config = conf.edge,
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	config = function()
+		require("modules.ui.Bufferline")
+	end,
 }
 ui["catppuccin/nvim"] = {
 	lazy = false,
 	name = "catppuccin",
-	config = conf.catppuccin,
+	config = function()
+		require("modules.ui.catppuccin")
+	end,
 }
-ui["rcarriga/nvim-notify"] = {
+ui["sainnhe/edge"] = {
 	lazy = true,
-	event = "VeryLazy",
-	config = conf.notify,
+	config = function()
+		require("modules.ui.edge")
+	end,
 }
-ui["zbirenbaum/neodim"] = {
+ui["j-hui/fidget.nvim"] = {
 	lazy = true,
-	event = "LspAttach",
-	config = conf.neodim,
+	event = "BufReadPost",
+	config = function()
+		require("modules.ui.fidget")
+	end,
+}
+ui["lewis6991/gitsigns.nvim"] = {
+	lazy = true,
+	event = { "BufReadPost", "BufNewFile" },
+	config = function()
+		require("modules.ui.gitsigns")
+	end,
+}
+ui["lukas-reineke/indent-blankline.nvim"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = function()
+		require("modules.ui.indentblankline")
+	end,
 }
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = conf.lualine,
+	config = function()
+		require("modules.ui.lualine")
+	end,
 }
-ui["goolord/alpha-nvim"] = {
+ui["zbirenbaum/neodim"] = {
 	lazy = true,
-	event = "BufWinEnter",
-	config = conf.alpha,
+	event = "LspAttach",
+	config = function()
+		require("modules.ui.neodim")
+	end,
+}
+ui["shaunsingh/nord.nvim"] = {
+	lazy = true,
+	config = function()
+		require("modules.ui.nord")
+	end,
+}
+ui["rcarriga/nvim-notify"] = {
+	lazy = true,
+	event = "VeryLazy",
+	config = function()
+		require("modules.ui.notify")
+	end,
 }
 ui["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
@@ -43,32 +84,16 @@ ui["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeFindFileToggle",
 		"NvimTreeRefresh",
 	},
-	config = conf.nvim_tree,
-}
-ui["lewis6991/gitsigns.nvim"] = {
-	lazy = true,
-	event = { "BufReadPost", "BufNewFile" },
-	config = conf.gitsigns,
-}
-ui["lukas-reineke/indent-blankline.nvim"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = conf.indent_blankline,
-}
-ui["akinsho/bufferline.nvim"] = {
-	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = conf.nvim_bufferline,
+	config = function()
+		require("modules.ui.nvimtree")
+	end,
 }
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = conf.scrollview,
-}
-ui["j-hui/fidget.nvim"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = conf.fidget,
+	config = function()
+		require("scrollview").setup({})
+	end,
 }
 
 return ui
