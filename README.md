@@ -27,7 +27,7 @@
     <a href="https://github.com/ayamir/nvimdots/contributors">
     <img
         alt="Contributors"
-        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=A6DA95&logo=git&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE&style=for-the-badge">
     </a>
     <img
         alt="Code Size"

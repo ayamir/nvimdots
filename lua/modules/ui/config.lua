@@ -64,7 +64,7 @@ function config.alpha()
 		button("space f c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
 		button("space f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
 		button("space f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
-		button("space f p", " Project find", leader, "<cmd>Telescope project<cr>"),
+		button("space f p", " Project find", leader, "<cmd>Telescope projects<cr>"),
 		button("space f f", " File find", leader, "<cmd>Telescope find_files<cr>"),
 		button("space f n", " File new", leader, "<cmd>enew<cr>"),
 		button("space f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
