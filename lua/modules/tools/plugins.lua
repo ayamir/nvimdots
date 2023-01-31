@@ -3,9 +3,7 @@ local tools = {}
 tools["nvim-telescope/telescope.nvim"] = {
 	lazy = true,
 	cmd = "Telescope",
-	config = function()
-		require("modules.tools.telescope")
-	end,
+	config = require("modules.tools.configs.telescope"),
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
@@ -14,9 +12,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 		{
 			"ahmedkhalf/project.nvim",
 			event = "BufReadPost",
-			config = function()
-				require("modules.tools.project")
-			end,
+			config = require("modules.tools.configs.project"),
 		},
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{ "nvim-telescope/telescope-frecency.nvim", dependencies = {
@@ -30,47 +26,35 @@ tools["michaelb/sniprun"] = {
 	lazy = true,
 	build = "bash ./install.sh",
 	cmd = { "SnipRun" },
-	config = function()
-		require("modules.tools.sniprun")
-	end,
+	config = require("modules.tools.configs.sniprun"),
 }
 tools["folke/trouble.nvim"] = {
 	lazy = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
-	config = function()
-		require("modules.tools.trouble")
-	end,
+	config = require("modules.tools.configs.trouble"),
 }
 tools["gelguy/wilder.nvim"] = {
 	lazy = true,
 	event = "CmdlineEnter",
-	config = function()
-		require("modules.tools.wilder")
-	end,
+	config = require("modules.tools.configs.wilder"),
 	dependencies = { { "romgrk/fzy-lua-native" } },
 }
 tools["mrjones2014/legendary.nvim"] = {
 	lazy = true,
 	cmd = "Legendary",
-	config = function()
-		require("modules.tools.legendary")
-	end,
+	config = require("modules.tools.configs.legendary"),
 	dependencies = {
 		{ "kkharji/sqlite.lua" },
 		{
 			"stevearc/dressing.nvim",
 			event = "VeryLazy",
-			config = function()
-				require("modules.tools.dressing")
-			end,
+			config = require("modules.tools.configs.dressing"),
 		},
 		-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 		{
 			"folke/which-key.nvim",
 			event = "VeryLazy",
-			config = function()
-				require("modules.tools.whichkey")
-			end,
+			config = require("modules.tools.configs.whichkey"),
 		},
 	},
 }

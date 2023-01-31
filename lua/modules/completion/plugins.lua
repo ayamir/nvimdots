@@ -3,40 +3,30 @@ local completion = {}
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = function()
-		require("modules.completion.lsp")
-	end,
+	config = require("modules.completion.configs.lsp"),
 	dependencies = {
 		{ "creativenull/efmls-configs-nvim" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			config = function()
-				require("modules.completion.masoninstall")
-			end,
+			config = require("modules.completion.configs.mason-installer"),
 		},
 		{
 			"glepnir/lspsaga.nvim",
-			config = function()
-				require("modules.completion.saga")
-			end,
+			config = require("modules.completion.configs.saga"),
 		},
 		{ "ray-x/lsp_signature.nvim" },
 	},
 }
 completion["hrsh7th/nvim-cmp"] = {
 	event = "InsertEnter",
-	config = function()
-		require("modules.completion.Cmp")
-	end,
+	config = require("modules.completion.configs.cmp"),
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
-			config = function()
-				require("modules.completion.Luasnip")
-			end,
+			config = require("modules.completion.configs.luasnip"),
 		},
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
@@ -50,9 +40,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 		{
 			"windwp/nvim-autopairs",
-			config = function()
-				require("modules.completion.autopairs")
-			end,
+			config = require("modules.completion.configs.autopairs"),
 		},
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = conf.tabnine },
 	},
@@ -60,15 +48,11 @@ completion["hrsh7th/nvim-cmp"] = {
 completion["zbirenbaum/copilot.lua"] = {
 	cmd = "Copilot",
 	event = "InsertEnter",
-	config = function()
-		require("modules.completion.copilot")
-	end,
+	config = require("modules.completion.configs.copilot"),
 	dependencies = {
 		{
 			"zbirenbaum/copilot-cmp",
-			config = function()
-				require("copilot_cmp").setup({})
-			end,
+			config = require("modules.completion.configs.copilot-cmp"),
 		},
 	},
 }
