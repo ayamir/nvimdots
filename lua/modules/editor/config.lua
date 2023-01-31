@@ -180,6 +180,9 @@ function config.auto_session()
 end
 
 function config.toggleterm()
+	local colors = require("modules.utils").get_palette()
+	local floatborder_hl = require("modules.utils").hl_to_rgb("FloatBorder", false, colors.blue)
+
 	require("toggleterm").setup({
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
@@ -189,6 +192,11 @@ function config.toggleterm()
 				return vim.o.columns * 0.40
 			end
 		end,
+		highlights = {
+			FloatBorder = {
+				guifg = floatborder_hl,
+			},
+		},
 		on_open = function()
 			-- Prevent infinite calls from freezing neovim.
 			-- Only set these options specific to this terminal buffer.
@@ -269,6 +277,7 @@ end
 
 function config.dap()
 	local icons = { dap = require("modules.ui.icons").get("dap") }
+	local colors = require("modules.utils").get_palette()
 
 	local dap = require("dap")
 	local dapui = require("dapui")
@@ -284,7 +293,7 @@ function config.dap()
 	end
 
 	-- We need to override nvim-dap's default highlight groups, AFTER requiring nvim-dap for catppuccin.
-	vim.api.nvim_set_hl(0, "DapStopped", { fg = "#ABE9B3" })
+	vim.api.nvim_set_hl(0, "DapStopped", { fg = colors.green })
 
 	vim.fn.sign_define(
 		"DapBreakpoint",
