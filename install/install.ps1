@@ -24,7 +24,7 @@ $env:CCLONE_ATTR ??= '--progress --depth=1'
 $env:CCDEST_DIR ??= "$env:XDG_CONFIG_HOME\nvim"
 $env:CCBACKUP_DIR = "$env:CCDEST_DIR" + "_backup-" + (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmss")
 
-function _abort ([Parameter(Mandatory = $True,ValueFromPipeline = $True)] [string]$Msg,[Parameter(Mandatory = $True)] [string]$Type,[Parameter(Mandatory = $False)] [string]$Info_msg) {
+function _abort ([Parameter(Mandatory = $True)] [string]$Msg,[Parameter(Mandatory = $True)] [string]$Type,[Parameter(Mandatory = $False)] [string]$Info_msg) {
 	if ($Info_msg -ne $null) {
 		Write-Host $Info_msg
 	}
@@ -32,7 +32,7 @@ function _abort ([Parameter(Mandatory = $True,ValueFromPipeline = $True)] [strin
 	exit 1
 }
 
-function _chomp ([Parameter(Mandatory = $True,ValueFromPipeline = $True)] [string]$Str) {
+function _chomp ([Parameter(Mandatory = $True)] [string]$Str) {
 	return [string]::Join("\n",([string]::Join("\r",($Str.Split("`r"))).Split("`n")))
 }
 
@@ -47,18 +47,18 @@ function Test-OpType {
 	}
 }
 
-function prompt ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
+function prompt ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
 	Write-Host "==> " -ForegroundColor Blue -NoNewline; Write-Host $(_chomp -Str $Msg);
 }
 
-function warn ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
+function warn ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
 	Write-Host "Warning" -ForegroundColor Yellow -NoNewline; Write-Host ": $(_chomp -Str $Msg)";
 }
-function warn-Ext ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
+function warn-Ext ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
 	Write-Host "         $(_chomp -Str $Msg)"
 }
 
-function Safe-Execute ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [scriptblock]$WithCmd) {
+function Safe-Execute ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [scriptblock]$WithCmd) {
 	try {
 		Invoke-Command -ErrorAction Stop -ScriptBlock $WithCmd
 		if (-not $?) {
@@ -70,7 +70,7 @@ function Safe-Execute ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][
 	}
 }
 
-function Wait-For-User {
+function -Msg Wait-For-User {
 	Write-Host ""
 	Write-Host "Press " -NoNewline; Write-Host "RETURN" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host "/" -NoNewline; Write-Host "ENTER" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host " to continue or any other key to abort...";
 	$ks = [System.Console]::ReadKey()
@@ -103,7 +103,7 @@ function Check-SSH {
 }
 
 function Check-Clone-Pref {
-	prompt "Checking 'git clone' preferences..."
+	prompt -Msg "Checking 'git clone' preferences..."
 
 	$_title = "'git clone' Preferences"
 	$_message = "Would you like to perform a shallow clone ('--depth=1')?"
@@ -119,7 +119,7 @@ function Check-Clone-Pref {
 	}
 }
 
-function Check-Def-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
+function Check-Def-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
 	if ((Get-Command $WithName -ErrorAction SilentlyContinue)) {
 		return $True
 	} else {
@@ -182,7 +182,7 @@ function Init-Pack {
 	}
 }
 
-function _install_exe ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
+function _install_exe ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
 	if ($env:CCPACK_MGR -eq 'choco') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Chocolatey"
 		$_inst_name = $choco_package_matrix[$WithName]
@@ -211,7 +211,7 @@ function _install_ruby_deps {
 	Safe-Execute -WithCmd { ridk install }
 }
 
-function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
+function Check-And-Fetch-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_str = "Checking dependency: '$PkgName'" + " " * 15
 	Write-Host $_str.substring(0,[System.Math]::Min(40,$_str.Length)) -NoNewline
 
@@ -225,7 +225,7 @@ function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = 
 	}
 }
 
-function Check-Dep-Choice ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
+function Check-Dep-Choice ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_inst_name = $installer_pkg_matrix[$PkgName]
 	if (-not (Check-Def-Exec -WithName "$_inst_name")) {
 		_abort -Msg "This function is invoked incorrectly - The '$_inst_name' executable not found" -Type "InvalidOperation"
