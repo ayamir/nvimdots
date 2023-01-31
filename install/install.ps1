@@ -20,6 +20,7 @@ $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
 $env:CCPACK_MGR ??= 'unknown'
 $env:CCLONE_BRANCH ??= 'main'
+$env:CCLONE_ATTR ??= '--progress --depth=1'
 $env:CCDEST_DIR ??= "$env:XDG_CONFIG_HOME\nvim"
 $env:CCBACKUP_DIR = "$env:CCDEST_DIR" + "_backup-" + (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmss")
 
@@ -98,6 +99,23 @@ function Check-SSH {
 		} else {
 			return $True
 		}
+	}
+}
+
+function Check-Clone-Pref {
+	prompt "Checking 'git clone' preferences..."
+
+	$_title = "'git clone' Preferences"
+	$_message = "Would you like to perform a shallow clone ('--depth=1')?"
+
+	$_opt_yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes","Will append '--depth=1' to 'git clone' options"
+	$_opt_no = New-Object System.Management.Automation.Host.ChoiceDescription "&No","Do nothing"
+
+	$USR_CHOICE = $Host.ui.PromptForChoice($_title,$_message,[System.Management.Automation.Host.ChoiceDescription[]]($_opt_yes,$_opt_no),0)
+	if ($USR_CHOICE -eq 0) {
+		$env:CCLONE_ATTR = '--progress --depth=1'
+	} else {
+		$env:CCLONE_ATTR = '--progress'
 	}
 }
 
@@ -195,14 +213,13 @@ function _install_ruby_deps {
 
 function Check-And-Fetch-Exec ([Parameter(Mandatory = $True,ValueFromPipeline = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_str = "Checking dependency: '$PkgName'" + " " * 15
+	Write-Host $_str.substring(0,[System.Math]::Min(40,$_str.Length)) -NoNewline
+
 	if (-not (Check-Def-Exec -WithName $PkgName)) {
-		Write-Host $_str.substring(0, [System.Math]::Min(40, $_str.Length)) -NoNewline
 		Start-Sleep -Milliseconds 350
 		Write-Host "Failed" -ForegroundColor Red
-
 		_install_exe -WithName $PkgName
 	} else {
-		Write-Host $_str.substring(0, [System.Math]::Min(40, $_str.Length)) -NoNewline
 		Start-Sleep -Milliseconds 350
 		Write-Host "Success" -ForegroundColor Green
 	}
@@ -326,19 +343,19 @@ prompt -Msg "Fetching in progress..."
 
 if ($USE_SSH) {
 	if ((Is-Latest)) {
-		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
+		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 	} else {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 		prompt -Msg "Automatically redirecting you to legacy version..."
-		Safe-Execute -WithCmd { git clone -b 0.7 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
+		Safe-Execute -WithCmd { git clone -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 	}
 } else {
 	if ((Is-Latest)) {
-		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
+		Safe-Execute -WithCmd { git clone -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 	} else {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 		prompt -Msg "Automatically redirecting you to legacy version..."
-		Safe-Execute -WithCmd { git clone -b 0.7 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" --depth=1}
+		Safe-Execute -WithCmd { git clone -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 	}
 }
 
