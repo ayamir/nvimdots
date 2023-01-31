@@ -16,7 +16,7 @@ lang["simrat39/rust-tools.nvim"] = {
 lang["iamcco/markdown-preview.nvim"] = {
 	lazy = true,
 	ft = "markdown",
-	build = "cd app && yarn install",
+	build = ":call mkdp#util#install()",
 }
 lang["chrisbra/csv.vim"] = {
 	lazy = true,

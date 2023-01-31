@@ -9,6 +9,7 @@ set -u
 # global vars
 DEST_DIR="${HOME}/.config/nvim"
 BACKUP_DIR="${DEST_DIR}_backup-$(date +%Y%m%dT%H%M%S)"
+CLONE_ATTR=("--progress")
 REQUIRED_NVIM_VERSION=0.8
 USE_SSH=1
 
@@ -114,6 +115,26 @@ version_ge() {
 	[[ "${1%.*}" -gt "${2%.*}" ]] || [[ "${1%.*}" -eq "${2%.*}" && "${1#*.}" -ge "${2#*.}" ]]
 }
 
+prompt_confirm() {
+	while true; do
+		read -r -p "$1 [Y/n]: " USR_CHOICE
+		case "$USR_CHOICE" in
+		[yY][eE][sS] | [yY])
+			return 1
+			;;
+		[nN][oO] | [nN])
+			return 0
+			;;
+		*)
+			if [[ -z "$USR_CHOICE" ]]; then
+				return 1
+			fi
+			printf "${tty_red}%s\n\n${tty_reset}" "Invalid input! Please enter one of: '[yY]/[yY][eE][sS] / [nN]/[nN][oO]'"
+			;;
+		esac
+	done
+}
+
 check_ssh() {
 	prompt "Validating SSH connection..."
 	ssh -T git@github.com &>/dev/null
@@ -121,13 +142,15 @@ check_ssh() {
 		prompt "We'll use HTTPS to fetch and update plugins."
 		return 0
 	else
-		printf "Do you prefer to use SSH to fetch and update plugins? (otherwise HTTPS) [Y/n] "
-		read -r USR_CHOICE
-		if [[ $USR_CHOICE == [nN] || $USR_CHOICE == [Nn][Oo] ]]; then
-			return 0
-		else
-			return 1
-		fi
+		prompt_confirm "Do you prefer to use SSH to fetch and update plugins? (otherwise HTTPS)"
+		return $?
+	fi
+}
+
+clone_pref() {
+	prompt "Checking 'git clone' preferences..."
+	if ! prompt_confirm "Would you like to perform a shallow clone ('--depth=1')?"; then
+		CLONE_ATTR+=("--depth=1")
 	fi
 }
 
@@ -215,6 +238,7 @@ if [[ -z "${NONINTERACTIVE-}" ]]; then
 	if check_ssh; then
 		USE_SSH=0
 	fi
+	clone_pref
 fi
 
 if [[ -d "${DEST_DIR}" ]]; then
@@ -222,33 +246,33 @@ if [[ -d "${DEST_DIR}" ]]; then
 fi
 
 prompt "Fetching in progress..."
-if [ "$USE_SSH" -eq "1" ]; then
+if [[ "$USE_SSH" -eq "1" ]]; then
 	if is_latest; then
-		execute "git" "clone" "-b" "main" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		prompt "Automatically redirecting you to legacy version..."
-		execute "git" "clone" "-b" "0.7" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.7" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
 	fi
 else
 	if is_latest; then
-		execute "git" "clone" "-b" "main" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
+		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		prompt "Automatically redirecting you to legacy version..."
-		execute "git" "clone" "-b" "0.7" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.7" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
 	fi
 fi
 
 cd "${DEST_DIR}" || return
 
-if [ "$USE_SSH" -eq "0" ]; then
+if [[ "$USE_SSH" -eq "0" ]]; then
 	prompt "Changing default fetching method to HTTPS..."
 	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/core/settings.lua"
 fi
 
 prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-prompt "If lazy.nvim failed to fetch any plugin(s), maunally execute \`nvim \"+Lazy sync\"\` until everything is up-to-date."
+prompt "If lazy.nvim failed to fetch any plugin(s), maunally execute \`:Lazy sync\` until everything is up-to-date."
 cat <<EOS
 
 Thank you for using this set of configuration!
@@ -259,6 +283,7 @@ Thank you for using this set of configuration!
 EOS
 
 if [[ -z "${NONINTERACTIVE-}" ]]; then
+	ring_bell
 	wait_for_user
-	nvim "+Lazy sync"
+	nvim
 fi
