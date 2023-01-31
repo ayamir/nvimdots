@@ -72,4 +72,3 @@ require("telescope").load_extension("zoxide")
 require("telescope").load_extension("frecency")
 require("telescope").load_extension("live_grep_args")
 require("telescope").load_extension("undo")
-

@@ -29,4 +29,3 @@ require("mason-tool-installer").setup({
 	-- Default: true
 	run_on_start = true,
 })
-

@@ -83,4 +83,3 @@ if use_ssh then
 		p.install_info.url = p.install_info.url:gsub("https://github.com/", "git@github.com:")
 	end
 end
-

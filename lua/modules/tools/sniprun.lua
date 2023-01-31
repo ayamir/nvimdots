@@ -19,4 +19,3 @@ require("sniprun").setup({
 	borders = "shadow", -- " display borders around floating windows
 	-- " possible values are 'none', 'single', 'double', or 'shadow'
 })
-

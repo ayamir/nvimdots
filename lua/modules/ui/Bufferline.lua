@@ -63,4 +63,3 @@ if vim.g.colors_name == "catppuccin" then
 end
 
 require("bufferline").setup(opts)
-

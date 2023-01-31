@@ -8,4 +8,3 @@ require("dressing").setup({
 		trim_prompt = true,
 	},
 })
-

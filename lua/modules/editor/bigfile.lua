@@ -28,4 +28,3 @@ require("bigfile").config({
 		cmp,
 	},
 })
-

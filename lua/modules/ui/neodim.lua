@@ -13,4 +13,3 @@ require("neodim").setup({
 		underline = false,
 	},
 })
-

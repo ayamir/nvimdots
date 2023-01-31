@@ -13,4 +13,3 @@ if vim.fn.executable("fcitx5-remote") == 1 then
 			]],
 	}, { true, true, true })
 end
-

@@ -8,4 +8,3 @@ require("nvim-ts-autotag").setup({
 		"vue",
 	},
 })
-

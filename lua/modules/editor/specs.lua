@@ -13,4 +13,3 @@ require("specs").setup({
 	ignore_filetypes = {},
 	ignore_buftypes = { nofile = true },
 })
-

@@ -145,4 +145,3 @@ require("which-key").register({
 	["<leader>r"] = "tool: Code snip run",
 	["<F12>"] = "tool: Markdown preview",
 })
-

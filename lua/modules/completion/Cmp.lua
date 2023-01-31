@@ -121,4 +121,3 @@ cmp.setup({
 		-- { name = "cmp_tabnine" },
 	},
 })
-

@@ -9,4 +9,3 @@ require("project_nvim").setup({
 	scope_chdir = "global",
 	datapath = vim.fn.stdpath("data"),
 })
-

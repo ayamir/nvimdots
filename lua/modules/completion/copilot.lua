@@ -18,4 +18,3 @@ vim.defer_fn(function()
 		},
 	})
 end, 100)
-

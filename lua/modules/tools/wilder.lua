@@ -58,4 +58,3 @@ wilder.set_option(
 		substitute = wildmenu_renderer,
 	})
 )
-

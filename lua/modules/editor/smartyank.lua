@@ -20,4 +20,3 @@ require("smartyank").setup({
 		echo_hl = "Directory", -- highlight group of the OSC52 echo message
 	},
 })
-
