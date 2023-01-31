@@ -438,6 +438,7 @@ function config.notify()
 end
 
 function config.lualine()
+	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.ui.icons").get("diagnostics", true),
 		misc = require("modules.ui.icons").get("misc", true),
@@ -598,7 +599,7 @@ function config.lualine()
 	})
 
 	-- Properly set background color for lspsaga
-	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, "#000000")
+	local winbar_bg = require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
 	for _, hlGroup in pairs(require("lspsaga.lspkind").get_kind()) do
 		require("modules.utils").extend_hl("LspSagaWinbar" .. hlGroup[1], { bg = winbar_bg })
 	end
