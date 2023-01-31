@@ -84,16 +84,19 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
     🗺️ Keybindings
 </h3>
 <p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Keybindings" rel="nofollow">Wiki: Keybindings</a></p>
+<br>
 
 <h3 align="center">
     🔌 Plugins & Deps
 </h3>
 <p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Plugins" rel="nofollow">Wiki: Plugins</a> <br><em>(You can also find a deps diagram there!)</em></p>
+<br>
 
 <h3 align="center">
     🔧 Usage & Customization
 </h3>
 <p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Usage" rel="nofollow">Wiki: Usage</a></p>
+<br>
 
 <h3 align="center">
     🤔 FAQ
