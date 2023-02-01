@@ -23,6 +23,7 @@ tools["michaelb/sniprun"] = {
 	lazy = true,
 	build = "bash ./install.sh",
 	cmd = { "SnipRun" },
+	config = conf.sniprun,
 }
 tools["folke/trouble.nvim"] = {
 	lazy = true,
