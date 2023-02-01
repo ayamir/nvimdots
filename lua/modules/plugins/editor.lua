@@ -3,12 +3,12 @@ local editor = {}
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
-	config = require("editor.acc-jk"),
+	config = require("editor.accelerated-jk"),
 }
 editor["rmagatti/auto-session"] = {
 	lazy = true,
 	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
-	config = require("editor.au-session"),
+	config = require("editor.auto-session"),
 }
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
@@ -50,12 +50,12 @@ editor["phaazon/hop.nvim"] = {
 	lazy = true,
 	branch = "v2",
 	event = "BufReadPost",
-	config = require("editor.hop-nvim"),
+	config = require("editor.hop"),
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("editor.illuminate"),
+	config = require("editor.vim-illuminate"),
 }
 -- only for fcitx5 user who uses non-English language during coding
 -- editor["brglng/vim-im-select"] = {
@@ -112,7 +112,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		},
 		{
 			"NvChad/nvim-colorizer.lua",
-			config = require("editor.nvim-colorizer"),
+			config = require("editor.colorizer"),
 		},
 		{
 			"abecodes/tabout.nvim",

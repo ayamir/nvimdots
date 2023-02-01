@@ -32,7 +32,7 @@ ui["lewis6991/gitsigns.nvim"] = {
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("ui.indentblankline"),
+	config = require("ui.indent-blankline"),
 }
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
@@ -62,7 +62,7 @@ ui["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeFindFileToggle",
 		"NvimTreeRefresh",
 	},
-	config = require("ui.nvimtree"),
+	config = require("ui.nvim-tree"),
 }
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,

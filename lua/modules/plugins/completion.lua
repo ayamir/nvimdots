@@ -10,11 +10,11 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			config = require("completion.mason-installer"),
+			config = require("completion.mason-tool-installer"),
 		},
 		{
 			"glepnir/lspsaga.nvim",
-			config = require("completion.saga"),
+			config = require("completion.lspsaga"),
 		},
 		{ "ray-x/lsp_signature.nvim" },
 	},
@@ -42,7 +42,7 @@ completion["hrsh7th/nvim-cmp"] = {
 			"windwp/nvim-autopairs",
 			config = require("completion.autopairs"),
 		},
-		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = conf.tabnine },
+		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {

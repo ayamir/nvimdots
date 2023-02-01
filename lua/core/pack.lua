@@ -22,7 +22,7 @@ local Lazy = {}
 function Lazy:load_plugins()
 	self.modules = {}
 
-	local function append_nativertp()
+	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
 	end
@@ -116,9 +116,7 @@ function Lazy:load_lazy()
 			rtp = {
 				reset = true, -- reset the runtime path to $VIMRUNTIME and the config directory
 				---@type string[]
-				paths = {
-					modules_dir .. "/configs",
-				}, -- add any custom paths here that you want to include in the rtp
+				paths = {}, -- add any custom paths here that you want to include in the rtp
 			},
 		},
 	}

@@ -54,7 +54,7 @@ tools["mrjones2014/legendary.nvim"] = {
 		{
 			"folke/which-key.nvim",
 			event = "VeryLazy",
-			config = require("tools.whichkey"),
+			config = require("tools.which-key"),
 		},
 	},
 }

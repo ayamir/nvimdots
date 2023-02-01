@@ -1,5 +1,6 @@
 return function()
 	local wilder = require("wilder")
+	local colors = require("modules.utils").get_palette()
 	local icons = { ui = require("modules.utils.icons").get("ui") }
 
 	wilder.setup({ modes = { ":", "/", "?" } })
@@ -24,7 +25,7 @@ return function()
 		),
 	})
 
-	local match_hl = require("modules.utils").hl_to_rgb("String", false, "#ABE9B3")
+	local match_hl = require("modules.utils").hl_to_rgb("String", false, colors.green)
 
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
