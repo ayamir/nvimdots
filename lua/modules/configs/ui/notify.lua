@@ -1,8 +1,8 @@
 return function()
 	local notify = require("notify")
 	local icons = {
-		diagnostics = require("modules.ui.icons").get("diagnostics"),
-		ui = require("modules.ui.icons").get("ui"),
+		diagnostics = require("modules.utils.icons").get("diagnostics"),
+		ui = require("modules.utils.icons").get("ui"),
 	}
 
 	notify.setup({

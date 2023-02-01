@@ -1,7 +1,7 @@
 return function()
 	local icons = {
-		ui = require("modules.ui.icons").get("ui"),
-		diagnostics = require("modules.ui.icons").get("diagnostics"),
+		ui = require("modules.utils.icons").get("ui"),
+		diagnostics = require("modules.utils.icons").get("diagnostics"),
 	}
 
 	require("trouble").setup({

@@ -1,5 +1,5 @@
 return function()
-	local icons = { ui = require("modules.ui.icons").get("ui", true) }
+	local icons = { ui = require("modules.utils.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
 
 	require("telescope").setup({

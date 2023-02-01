@@ -3,55 +3,55 @@ local ui = {}
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
-	config = require("modules.ui.configs.alpha"),
+	config = require("ui.alpha"),
 }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("modules.ui.configs.bufferline"),
+	config = require("ui.bufferline"),
 }
 ui["catppuccin/nvim"] = {
 	lazy = false,
 	name = "catppuccin",
-	config = require("modules.ui.configs.catppuccin"),
+	config = require("ui.catppuccin"),
 }
 ui["sainnhe/edge"] = {
 	lazy = true,
-	config = require("modules.ui.configs.edge"),
+	config = require("ui.edge"),
 }
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.ui.configs.fidget"),
+	config = require("ui.fidget"),
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufNewFile" },
-	config = require("modules.ui.configs.gitsigns"),
+	config = require("ui.gitsigns"),
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.ui.configs.indentblankline"),
+	config = require("ui.indentblankline"),
 }
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("modules.ui.configs.lualine"),
+	config = require("ui.lualine"),
 }
 ui["zbirenbaum/neodim"] = {
 	lazy = true,
 	event = "LspAttach",
-	config = require("modules.ui.configs.neodim"),
+	config = require("ui.neodim"),
 }
 ui["shaunsingh/nord.nvim"] = {
 	lazy = true,
-	config = require("modules.ui.configs.nord"),
+	config = require("ui.nord"),
 }
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
 	event = "VeryLazy",
-	config = require("modules.ui.configs.notify"),
+	config = require("ui.notify"),
 }
 ui["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
@@ -62,12 +62,12 @@ ui["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeFindFileToggle",
 		"NvimTreeRefresh",
 	},
-	config = require("modules.ui.configs.nvimtree"),
+	config = require("ui.nvimtree"),
 }
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.ui.configs.scrollview"),
+	config = require("ui.scrollview"),
 }
 
 return ui

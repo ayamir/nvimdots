@@ -1,8 +1,8 @@
 return function()
 	local icons = {
-		kind = require("modules.ui.icons").get("kind", false),
-		type = require("modules.ui.icons").get("type", false),
-		cmp = require("modules.ui.icons").get("cmp", false),
+		kind = require("modules.utils.icons").get("kind"),
+		type = require("modules.utils.icons").get("type"),
+		cmp = require("modules.utils.icons").get("cmp"),
 	}
 	local t = function(str)
 		return vim.api.nvim_replace_termcodes(str, true, true, true)

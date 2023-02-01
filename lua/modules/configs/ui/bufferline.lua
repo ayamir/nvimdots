@@ -1,5 +1,5 @@
 return function()
-	local icons = { ui = require("modules.ui.icons").get("ui") }
+	local icons = { ui = require("modules.utils.icons").get("ui") }
 
 	local opts = {
 		options = {

@@ -1,5 +1,5 @@
 return function()
-	local formatting = require("modules.completion.formatting")
+	local formatting = require("completion.formatting")
 
 	local nvim_lsp = require("lspconfig")
 	local mason = require("mason")
@@ -8,8 +8,8 @@ return function()
 	require("lspconfig.ui.windows").default_options.border = "single"
 
 	local icons = {
-		ui = require("modules.ui.icons").get("ui", true),
-		misc = require("modules.ui.icons").get("misc", true),
+		ui = require("modules.utils.icons").get("ui", true),
+		misc = require("modules.utils.icons").get("misc", true),
 	}
 
 	mason.setup({
@@ -72,48 +72,47 @@ return function()
 		end,
 
 		bashls = function()
-			local _opts = require("modules.completion.server-configs.bashls")
+			local _opts = require("completion.servers.bashls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.bashls.setup(final_opts)
 		end,
 
 		clangd = function()
 			local _capabilities = vim.tbl_deep_extend("keep", { offsetEncoding = { "utf-16", "utf-8" } }, capabilities)
-			local _opts = require("modules.completion.server-configs.clangd")
+			local _opts = require("completion.servers.clangd")
 			local final_opts =
 				vim.tbl_deep_extend("keep", _opts, { on_attach = opts.on_attach, capabilities = _capabilities })
 			nvim_lsp.clangd.setup(final_opts)
 		end,
 
 		efm = function()
-			nvim_lsp.efm.setup(opts)
+			-- Do not setup efm
 		end,
 
 		gopls = function()
-			local _opts = require("modules.completion.server-configs.gopls")
+			local _opts = require("completion.servers.gopls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.gopls.setup(final_opts)
 		end,
 
 		jsonls = function()
-			local _opts = require("modules.completion.server-configs.jsonls")
+			local _opts = require("completion.servers.jsonls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.jsonls.setup(final_opts)
 		end,
 
 		sumneko_lua = function()
-			local _opts = require("modules.completion.server-configs.sumneko_lua")
+			local _opts = require("completion.servers.sumneko_lua")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.sumneko_lua.setup(final_opts)
 		end,
 	})
 
-	local function html_lsp_setup()
-		local _opts = require("modules.completion.server-configs.html")
+	if vim.fn.executable("html-languageserver") then
+		local _opts = require("configs.completion.servers.html")
 		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 		nvim_lsp.html.setup(final_opts)
 	end
-	html_lsp_setup()
 
 	local efmls = require("efmls-configs")
 
@@ -139,8 +138,8 @@ return function()
 
 	-- Add your own config for formatter and linter here
 
-	-- local rustfmt = require("modules.completion.efm.formatters.rustfmt")
-	local clangfmt = require("modules.completion.efm.formatters.clangfmt")
+	-- local rustfmt = require("completion.efm.formatters.rustfmt")
+	local clangfmt = require("completion.efm.formatters.clangfmt")
 
 	-- Override default config here
 

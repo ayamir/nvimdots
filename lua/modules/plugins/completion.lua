@@ -3,30 +3,30 @@ local completion = {}
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("modules.completion.configs.lsp"),
+	config = require("completion.lsp"),
 	dependencies = {
-		{ "creativenull/efmls-configs-nvim" },
+		{ "creativenull/efmls-nvim" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			config = require("modules.completion.configs.mason-installer"),
+			config = require("completion.mason-installer"),
 		},
 		{
 			"glepnir/lspsaga.nvim",
-			config = require("modules.completion.configs.saga"),
+			config = require("completion.saga"),
 		},
 		{ "ray-x/lsp_signature.nvim" },
 	},
 }
 completion["hrsh7th/nvim-cmp"] = {
 	event = "InsertEnter",
-	config = require("modules.completion.configs.cmp"),
+	config = require("completion.cmp"),
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = { "rafamadriz/friendly-snippets" },
-			config = require("modules.completion.configs.luasnip"),
+			config = require("completion.luasnip"),
 		},
 		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
@@ -40,7 +40,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 		{
 			"windwp/nvim-autopairs",
-			config = require("modules.completion.configs.autopairs"),
+			config = require("completion.autopairs"),
 		},
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = conf.tabnine },
 	},
@@ -48,11 +48,11 @@ completion["hrsh7th/nvim-cmp"] = {
 completion["zbirenbaum/copilot.lua"] = {
 	cmd = "Copilot",
 	event = "InsertEnter",
-	config = require("modules.completion.configs.copilot"),
+	config = require("completion.copilot"),
 	dependencies = {
 		{
 			"zbirenbaum/copilot-cmp",
-			config = require("modules.completion.configs.copilot-cmp"),
+			config = require("completion.copilot-cmp"),
 		},
 	},
 }

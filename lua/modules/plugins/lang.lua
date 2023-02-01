@@ -4,12 +4,12 @@ lang["fatih/vim-go"] = {
 	lazy = true,
 	ft = "go",
 	build = ":GoInstallBinaries",
-	config = require("modules.lang.configs.golang"),
+	config = require("lang.golang"),
 }
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
 	ft = "rust",
-	config = require("modules.lang.configs.rust-tools"),
+	config = require("lang.rust-tools"),
 	dependencies = { { "nvim-lua/plenary.nvim" } },
 }
 lang["iamcco/markdown-preview.nvim"] = {

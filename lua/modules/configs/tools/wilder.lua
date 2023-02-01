@@ -1,6 +1,6 @@
 return function()
 	local wilder = require("wilder")
-	local icons = { ui = require("modules.ui.icons").get("ui") }
+	local icons = { ui = require("modules.utils.icons").get("ui") }
 
 	wilder.setup({ modes = { ":", "/", "?" } })
 	wilder.set_option("use_python_remote_plugin", 0)

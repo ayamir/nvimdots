@@ -1,7 +1,7 @@
 return function()
 	local icons = {
-		ui = require("modules.ui.icons").get("ui"),
-		misc = require("modules.ui.icons").get("misc"),
+		ui = require("modules.utils.icons").get("ui"),
+		misc = require("modules.utils.icons").get("misc"),
 	}
 
 	require("which-key").setup({

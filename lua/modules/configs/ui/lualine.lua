@@ -1,8 +1,8 @@
 return function()
 	local icons = {
-		diagnostics = require("modules.ui.icons").get("diagnostics", true),
-		misc = require("modules.ui.icons").get("misc", true),
-		ui = require("modules.ui.icons").get("ui", true),
+		diagnostics = require("modules.utils.icons").get("diagnostics", true),
+		misc = require("modules.utils.icons").get("misc", true),
+		ui = require("modules.utils.icons").get("ui", true),
 	}
 
 	local function escape_status()

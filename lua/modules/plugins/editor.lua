@@ -3,21 +3,21 @@ local editor = {}
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
-	config = require("modules.editor.configs.acc-jk"),
+	config = require("editor.acc-jk"),
 }
 editor["rmagatti/auto-session"] = {
 	lazy = true,
 	cmd = { "SaveSession", "RestoreSession", "DeleteSession" },
-	config = require("modules.editor.configs.au-session"),
+	config = require("editor.au-session"),
 }
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.editor.configs.better-escape"),
+	config = require("editor.better-escape"),
 }
 editor["LunarVim/bigfile.nvim"] = {
 	lazy = false,
-	config = require("modules.editor.configs.bigfile"),
+	config = require("editor.bigfile"),
 	cond = require("core.settings").load_big_files_faster,
 }
 editor["ojroques/nvim-bufdel"] = {
@@ -27,12 +27,12 @@ editor["ojroques/nvim-bufdel"] = {
 editor["rhysd/clever-f.vim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.editor.configs.cleverf"),
+	config = require("editor.cleverf"),
 }
 editor["terrortylor/nvim-comment"] = {
 	lazy = true,
 	event = { "BufNewFile", "BufReadPre" },
-	config = require("modules.editor.configs.nvim-comment"),
+	config = require("editor.nvim-comment"),
 }
 editor["sindrets/diffview.nvim"] = {
 	lazy = true,
@@ -50,33 +50,33 @@ editor["phaazon/hop.nvim"] = {
 	lazy = true,
 	branch = "v2",
 	event = "BufReadPost",
-	config = require("modules.editor.configs.hop-nvim"),
+	config = require("editor.hop-nvim"),
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.editor.configs.illuminate"),
+	config = require("editor.illuminate"),
 }
 -- only for fcitx5 user who uses non-English language during coding
 -- editor["brglng/vim-im-select"] = {
 -- 	lazy = true,
 -- 	event = "BufReadPost",
--- 	config = require("modules.editor.configs.imselect"),
+-- 	config = require("editor.imselect"),
 -- }
 editor["karb94/neoscroll.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.editor.configs.neoscroll"),
+	config = require("editor.neoscroll"),
 }
 editor["ibhagwan/smartyank.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("modules.editor.configs.smartyank"),
+	config = require("editor.smartyank"),
 }
 editor["edluffy/specs.nvim"] = {
 	lazy = true,
 	event = "CursorMoved",
-	config = require("modules.editor.configs.specs"),
+	config = require("editor.specs"),
 }
 editor["luukvbaal/stabilize.nvim"] = {
 	lazy = true,
@@ -85,7 +85,7 @@ editor["luukvbaal/stabilize.nvim"] = {
 editor["akinsho/toggleterm.nvim"] = {
 	lazy = true,
 	event = "UIEnter",
-	config = require("modules.editor.configs.toggleterm"),
+	config = require("editor.toggleterm"),
 }
 editor["romainl/vim-cool"] = {
 	lazy = true,
@@ -99,7 +99,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
 	build = ":TSUpdate",
 	event = "BufReadPost",
-	config = require("modules.editor.configs.treesitter"),
+	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{ "p00f/nvim-ts-rainbow" },
@@ -108,15 +108,15 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "andymass/vim-matchup" },
 		{
 			"windwp/nvim-ts-autotag",
-			config = require("modules.editor.configs.autotag"),
+			config = require("editor.autotag"),
 		},
 		{
 			"NvChad/nvim-colorizer.lua",
-			config = require("modules.editor.configs.nvim-colorizer"),
+			config = require("editor.nvim-colorizer"),
 		},
 		{
 			"abecodes/tabout.nvim",
-			config = require("modules.editor.configs.tabout"),
+			config = require("editor.tabout"),
 		},
 	},
 }
@@ -137,11 +137,11 @@ editor["mfussenegger/nvim-dap"] = {
 		"DapStepOut",
 		"DapTerminate",
 	},
-	config = require("modules.editor.configs.dap"),
+	config = require("editor.dap"),
 	dependencies = {
 		{
 			"rcarriga/nvim-dap-ui",
-			config = require("modules.editor.configs.dap.dapui"),
+			config = require("editor.dap.dapui"),
 		},
 	},
 }

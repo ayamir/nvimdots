@@ -1,7 +1,7 @@
 return function()
 	local icons = {
-		ui = require("modules.ui.icons").get("ui"),
-		dap = require("modules.ui.icons").get("dap"),
+		ui = require("modules.utils.icons").get("ui"),
+		dap = require("modules.utils.icons").get("dap"),
 	}
 
 	require("dapui").setup({

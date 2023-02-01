@@ -73,7 +73,7 @@ function Lazy:load_lazy()
 			size = { width = 0.88, height = 0.8 },
 			wrap = true, -- wrap the lines in the ui
 			-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-			border = "single",
+			border = "rounded",
 			icons = {
 				cmd = icons.misc.Code,
 				config = icons.ui.Gear,
@@ -109,7 +109,9 @@ function Lazy:load_lazy()
 			rtp = {
 				reset = true, -- reset the runtime path to $VIMRUNTIME and the config directory
 				---@type string[]
-				paths = {}, -- add any custom paths here that you want to indluce in the rtp
+				paths = {
+					modules_dir .. "/configs",
+				}, -- add any custom paths here that you want to indluce in the rtp
 			},
 		},
 	}

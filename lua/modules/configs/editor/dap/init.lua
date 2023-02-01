@@ -1,5 +1,5 @@
 return function()
-	local icons = { dap = require("modules.ui.icons").get("dap") }
+	local icons = { dap = require("modules.utils.icons").get("dap") }
 	local colors = require("modules.utils").get_palette()
 
 	local dap = require("dap")
@@ -34,7 +34,7 @@ return function()
 	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 	-- Config lang adaptors
-	require("modules.editor.configs.dap.dap-cpp-c-rust")
-	require("modules.editor.configs.dap.dap-python")
-	require("modules.editor.configs.dap.dap-go")
+	require("editor.dap.dap-lldb")
+	require("editor.dap.dap-debugpy")
+	require("editor.dap.dap-dlv")
 end

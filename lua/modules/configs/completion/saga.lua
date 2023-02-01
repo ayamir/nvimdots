@@ -1,9 +1,9 @@
 return function()
 	local icons = {
-		diagnostics = require("modules.ui.icons").get("diagnostics", true),
-		kind = require("modules.ui.icons").get("kind", true),
-		type = require("modules.ui.icons").get("type", true),
-		ui = require("modules.ui.icons").get("ui", true),
+		diagnostics = require("modules.utils.icons").get("diagnostics", true),
+		kind = require("modules.utils.icons").get("kind", true),
+		type = require("modules.utils.icons").get("type", true),
+		ui = require("modules.utils.icons").get("ui", true),
 	}
 
 	local function set_sidebar_icons()
