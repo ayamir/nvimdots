@@ -22,6 +22,11 @@ local Lazy = {}
 function Lazy:load_plugins()
 	self.modules = {}
 
+	local function append_nativertp()
+		package.path = package.path
+			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
+	end
+
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
@@ -34,6 +39,8 @@ function Lazy:load_plugins()
 		end
 		return list
 	end
+
+	append_nativertp()
 
 	local plugins_file = get_plugins_list()
 	for _, m in ipairs(plugins_file) do
@@ -111,7 +118,7 @@ function Lazy:load_lazy()
 				---@type string[]
 				paths = {
 					modules_dir .. "/configs",
-				}, -- add any custom paths here that you want to indluce in the rtp
+				}, -- add any custom paths here that you want to include in the rtp
 			},
 		},
 	}

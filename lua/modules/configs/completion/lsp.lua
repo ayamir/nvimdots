@@ -109,7 +109,7 @@ return function()
 	})
 
 	if vim.fn.executable("html-languageserver") then
-		local _opts = require("configs.completion.servers.html")
+		local _opts = require("completion.servers.html")
 		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 		nvim_lsp.html.setup(final_opts)
 	end
