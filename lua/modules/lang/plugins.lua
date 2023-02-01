@@ -13,6 +13,12 @@ lang["simrat39/rust-tools.nvim"] = {
 	config = conf.rust_tools,
 	dependencies = { { "nvim-lua/plenary.nvim" } },
 }
+lang["Saecki/crates.nvim"] = {
+	opt = true,
+	ft = "rust",
+	config = conf.crates,
+	dependencies = { { "nvim-lua/plenary.nvim" } },
+}
 lang["iamcco/markdown-preview.nvim"] = {
 	lazy = true,
 	ft = "markdown",
