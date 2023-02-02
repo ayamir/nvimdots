@@ -6,11 +6,11 @@ return function()
 		interpreter_options = {}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
 		display = {
-			"LongTempFloatingWindowOk", -- display ok results in the long floating window
+			"TempFloatingWindowOk", -- display ok results in the floating window
 			"NvimNotifyErr", -- display err results with the nvim-notify plugin
 			-- "Classic", -- display results in the command line"
 			-- "VirtualText", -- display results in virtual text"
-			-- "TempFloatingWindow", -- display results in the floating window
+			-- "LongTempFloatingWindow", -- display results in the long floating window
 			-- "Terminal" -- display results in a vertical split
 			-- "TerminalWithCode" -- display results and code history in a vertical split
 		},
