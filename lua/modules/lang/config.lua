@@ -218,6 +218,7 @@ function config.crates()
 		},
 		popup = {
 			autofocus = false,
+			hide_on_select = true,
 			copy_register = '"',
 			style = "minimal",
 			border = "rounded",
