@@ -141,6 +141,32 @@ local plug_map = {
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap(),
 	-- Plugin Legendary
 	["n|<C-p>"] = map_cr("Legendary"):with_silent():with_noremap(),
+	-- Plugin crates.nvim
+	["n|<leader>ct"] = map_cr("lua require('crates').toggle()"):with_noremap():with_silent(),
+	["n|<leader>cr"] = map_cr("lua require('crates').reload()"):with_noremap():with_silent(),
+
+	["n|<leader>cp"] = map_cr("lua require('crates').show_popup()"):with_noremap():with_silent(),
+	["n|<leader>cv"] = map_cr("lua require('crates').show_versions_popup() require('crates').show_popup()")
+		:with_noremap()
+		:with_silent(),
+	["n|<leader>cf"] = map_cr("lua require('crates').show_features_popup() require('crates').show_popup()")
+		:with_noremap()
+		:with_silent(),
+	["n|<leader>cd"] = map_cr("lua require('crates').show_dependencies_popup() require('crates').show_popup()")
+		:with_noremap()
+		:with_silent(),
+
+	["n|<leader>cu"] = map_cr("lua require('crates').update_crate()"):with_noremap():with_silent(),
+	["v|<leader>cu"] = map_cr("lua require('crates').update_crates()"):with_noremap():with_silent(),
+	["n|<leader>ca"] = map_cr("lua require('crates').update_all_crates()"):with_noremap():with_silent(),
+	["n|<leader>cU"] = map_cr("lua require('crates').upgrade_crate()"):with_noremap():with_silent(),
+	["v|<leader>cU"] = map_cr("lua require('crates').upgrade_crates()"):with_noremap():with_silent(),
+	["n|<leader>cA"] = map_cr("lua require('crates').upgrade_all_crates()"):with_noremap():with_silent(),
+
+	["n|<leader>cH"] = map_cr("lua require('crates').open_homepage()"):with_noremap():with_silent(),
+	["n|<leader>cR"] = map_cr("lua require('crates').open_repository()"):with_noremap():with_silent(),
+	["n|<leader>cD"] = map_cr("lua require('crates').open_documentation()"):with_noremap():with_silent(),
+	["n|<leader>cC"] = map_cr("lua require('crates').open_crates_io()"):with_noremap():with_silent(),
 	-- Plugin Tabout
 	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap(),
 	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap(),

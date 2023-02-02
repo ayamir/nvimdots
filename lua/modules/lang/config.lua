@@ -191,6 +191,7 @@ function config.crates()
 		git = require("modules.ui.icons").get("git", true),
 		misc = require("modules.ui.icons").get("misc", true),
 		ui = require("modules.ui.icons").get("ui", true),
+		kind = require("modules.ui.icons").get("kind", true),
 	}
 
 	local opts = {
@@ -202,12 +203,12 @@ function config.crates()
 		autoupdate_throttle = 250,
 		loading_indicator = true,
 		date_format = "%Y-%m-%d",
-		thousands_separator = ".",
+		thousands_separator = ",",
 		notification_title = "Crates",
 		curl_args = { "-sL", "--retry", "1" },
 		disable_invalid_feature_diagnostic = false,
 		text = {
-			loading = " " .. icons.ui.Perf .. "Loading",
+			loading = " " .. icons.misc.Watch .. "Loading",
 			version = " " .. icons.ui.Check .. "%s",
 			prerelease = " " .. icons.diagnostics.Warning_alt .. "%s",
 			yanked = " " .. icons.diagnostics.Error .. "%s",
@@ -219,8 +220,8 @@ function config.crates()
 			autofocus = false,
 			copy_register = '"',
 			style = "minimal",
-			border = "none",
-			show_version_date = false,
+			border = "rounded",
+			show_version_date = true,
 			show_dependency_version = true,
 			max_height = 30,
 			min_width = 20,
@@ -245,8 +246,8 @@ function config.crates()
 				categories_label = icons.kind.Class .. "categories     ",
 				keywords_label = icons.kind.Keyword .. "keywords       ",
 				version = "  %s",
-				prerelease = icons.diagnostics.Warning_alt .. "%s",
-				yanked = icons.diagnostics.Error .. "%s",
+				prerelease = icons.diagnostics.Warning_alt .. "%s prerelease",
+				yanked = icons.diagnostics.Error .. "%s yanked",
 				version_date = "  %s",
 				feature = "  %s",
 				enabled = icons.ui.Play .. "%s",
@@ -257,18 +258,7 @@ function config.crates()
 				dependency = "  %s",
 				optional = icons.ui.BigUnfilledCircle .. "%s",
 				dependency_version = "  %s",
-				loading = " " .. icons.ui.Perf,
-			},
-			keys = {
-				hide = { "q", "<esc>" },
-				open_url = { "<cr>" },
-				select = { "<cr>" },
-				select_alt = { "s" },
-				toggle_feature = { "<cr>" },
-				copy_value = { "yy" },
-				goto_item = { "gd", "K", "<C-LeftMouse>" },
-				jump_forward = { "<c-i>" },
-				jump_back = { "<c-o>", "<C-RightMouse>" },
+				loading = " " .. icons.misc.Watch,
 			},
 		},
 		src = {
@@ -278,11 +268,8 @@ function config.crates()
 				yanked = " " .. icons.diagnostics.Error_alt .. "yanked ",
 			},
 		},
-		null_ls = {
-			enabled = false,
-			name = "Crates",
-		},
 	}
+
 	require("crates").setup(opts)
 end
 
