@@ -488,9 +488,12 @@ function config.lualine()
 
 	local function get_cwd()
 		local cwd = vim.fn.getcwd()
-		local home = os.getenv("HOME")
-		if cwd:find(home, 1, true) == 1 then
-			cwd = "~" .. cwd:sub(#home + 1)
+		local is_windows = require("core.global").is_windows
+		if not is_windows then
+			local home = require("core.global").home
+			if cwd:find(home, 1, true) == 1 then
+				cwd = "~" .. cwd:sub(#home + 1)
+			end
 		end
 		return icons.ui.RootFolderOpened .. cwd
 	end
