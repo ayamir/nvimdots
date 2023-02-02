@@ -129,7 +129,7 @@ function Check-Def-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()
 
 function Query-Pack {
 	if ((Check-Def-Exec -WithName "scoop") -and (Check-Def-Exec -WithName "choco")) {
-		prompt -Msg "   [Detected] Multiple package mgrs detected."
+		prompt -Msg "   [Detected] Multiple package managers detected."
 
 		$_title = "Package manager Preferences"
 		$_message = "Pick your favorite package manager"
@@ -166,7 +166,7 @@ Avaliable choices are:
 }
 
 function Init-Pack {
-	prompt -Msg "Intializing package manager preferences..."
+	prompt -Msg "Initializing package manager preferences..."
 	if ($env:CCPACK_MGR -ne 'unknown') {
 		prompt -Msg '$env:CCPACK_MGR already defined. Validating...'
 		if (($env:CCPACK_MGR -eq 'choco') -and (Check-Def-Exec -WithName $env:CCPACK_MGR)) {
