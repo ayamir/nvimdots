@@ -187,10 +187,10 @@ end
 
 function config.crates()
 	local icons = {
-		diagnostics = require("modules.icons.ui.icons").get("diagnostics", true),
-		git = require("modules.icons.ui.icons").get("git", true),
-		misc = require("modules.icons.ui.icons").get("misc", true),
-		ui = require("modules.icons.ui.icons").get("ui", true),
+		diagnostics = require("modules.ui.icons").get("diagnostics", true),
+		git = require("modules.ui.icons").get("git", true),
+		misc = require("modules.ui.icons").get("misc", true),
+		ui = require("modules.ui.icons").get("ui", true),
 	}
 
 	local opts = {
@@ -276,10 +276,6 @@ function config.crates()
 			text = {
 				prerelease = " " .. icons.diagnostics.Warning_alt .. "pre-release ",
 				yanked = " " .. icons.diagnostics.Error_alt .. "yanked ",
-			},
-			coq = {
-				enabled = false,
-				name = "Crates",
 			},
 		},
 		null_ls = {
