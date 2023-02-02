@@ -188,7 +188,7 @@ local data = {
 }
 
 ---Get a specific icon set.
----@param category string|"kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
+---@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
 ---@param add_space? boolean @Add trailing space after the icon.
 function icons.get(category, add_space)
 	if add_space then
