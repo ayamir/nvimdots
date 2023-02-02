@@ -121,12 +121,6 @@ local function load_options()
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
-
-	-- fix sqlite3 missing-lib issue on Wondows
-	if global.is_windows then
-		-- Download the DLLs form https://www.sqlite.org/download.html
-		vim.g.sqlite_clib_path = "C:/Users/Charles/Documents/sqlite-dll-win64-x64-3400100/sqlite3.dll"
-	end
 end
 
 load_options()
