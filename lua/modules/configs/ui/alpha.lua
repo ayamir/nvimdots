@@ -59,13 +59,13 @@ return function()
 
 	local leader = " "
 	dashboard.section.buttons.val = {
-		button("space f c", " Scheme change", leader, "<cmd>Telescope colorscheme<cr>"),
-		button("space f r", " File frecency", leader, "<cmd>Telescope frecency<cr>"),
-		button("space f e", " File history", leader, "<cmd>Telescope oldfiles<cr>"),
-		button("space f p", " Project find", leader, "<cmd>Telescope projects<cr>"),
-		button("space f f", " File find", leader, "<cmd>Telescope find_files<cr>"),
-		button("space f n", " File new", leader, "<cmd>enew<cr>"),
-		button("space f w", " Word find", leader, "<cmd>Telescope live_grep<cr>"),
+		button("space f c", " Scheme change", leader, "<cmd>Telescope colorscheme<CR>"),
+		button("space f r", " File frecency", leader, "<cmd>Telescope frecency<CR>"),
+		button("space f e", " File history", leader, "<cmd>Telescope oldfiles<CR>"),
+		button("space f p", " Project find", leader, "<cmd>Telescope projects<CR>"),
+		button("space f f", " File find", leader, "<cmd>Telescope find_files<CR>"),
+		button("space f n", " File new", leader, "<cmd>enew<CR>"),
+		button("space f w", " Word find", leader, "<cmd>Telescope live_grep<CR>"),
 	}
 	dashboard.section.buttons.opts.hl = "String"
 
