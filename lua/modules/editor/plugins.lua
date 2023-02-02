@@ -121,6 +121,11 @@ editor["LunarVim/bigfile.nvim"] = {
 	cond = require("core.settings").load_big_files_faster,
 }
 
+editor["johnfrankmorgan/whitespace.nvim"] = {
+	lazy = false,
+	config = conf.whitespace,
+}
+
 -- only for fcitx5 user who uses non-English language during coding
 -- editor["brglng/vim-im-select"] = {
 -- 	lazy = true,

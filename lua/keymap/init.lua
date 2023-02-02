@@ -56,6 +56,8 @@ local plug_map = {
 	["n|<leader>co"] = map_cr("Lspsaga outgoing_calls"):with_noremap():with_silent(),
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent(),
 	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent(),
+	-- Plugin whitespace
+	["n|<leader>tt"] = map_cr("lua require('whitespace-nvim').trim()"):with_noremap():with_silent(),
 	-- toggleterm
 	-- ["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]), -- switch to normal mode in terminal.
 	["n|<C-\\>"] = map_cr([[execute v:count . "ToggleTerm direction=horizontal"]]):with_noremap():with_silent(),
