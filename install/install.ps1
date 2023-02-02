@@ -279,103 +279,104 @@ function Ring-Bell {
 	[System.Console]::beep()
 }
 
-if (-not $IsWindows) {
-	_abort -Msg "This install script can only execute on Windows." -Type "DeviceError"
-}
+function _main {
+	if (-not $IsWindows) {
+		_abort -Msg "This install script can only execute on Windows." -Type "DeviceError"
+	}
 
-if ((Test-OpType)) {
-	_abort -Msg "This script cannot proceed in non-interactive mode." -Type "NotImplemented"
-}
+	if ((Test-OpType)) {
+		_abort -Msg "This script cannot proceed in non-interactive mode." -Type "NotImplemented"
+	}
 
-prompt -Msg "Checking dependencies..."
+	prompt -Msg "Checking dependencies..."
 
-Init-Pack
-Fetch-Deps
+	Init-Pack
+	Fetch-Deps
 
-if ((Check-Dep-Choice -PkgName "NodeJS")) {
-	_install_nodejs_deps
-}
-if ((Check-Dep-Choice -PkgName "Python")) {
-	_install_python_deps
-}
-if ((Check-Dep-Choice -PkgName "Ruby")) {
-	_install_ruby_deps
-}
+	if ((Check-Dep-Choice -PkgName "NodeJS")) {
+		_install_nodejs_deps
+	}
+	if ((Check-Dep-Choice -PkgName "Python")) {
+		_install_python_deps
+	}
+	if ((Check-Dep-Choice -PkgName "Ruby")) {
+		_install_ruby_deps
+	}
 
-# Check dependencies
-if (-not (Check-Def-Exec -WithName "nvim")) {
-	_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
+	# Check dependencies
+	if (-not (Check-Def-Exec -WithName "nvim")) {
+		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install NeoVim before installing this Nvim config. See:
   https://github.com/neovim/neovim/wiki/Installing-Neovim
   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 [INFO] "nvim" is either not installed, missing from PATH, or not executable.
 
 '@
-}
+	}
 
-if (-not (Check-Def-Exec -WithName "git")) {
-	_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
+	if (-not (Check-Def-Exec -WithName "git")) {
+		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install Git before installing this Nvim config. See:
   https://git-scm.com/
   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 [INFO] "git" is either not installed, missing from PATH, or not executable.
 
 '@
-}
+	}
 
-prompt -Msg "This script will install ayamir/nvimdots to:"
-Write-Host $env:CCDEST_DIR
+	prompt -Msg "This script will install ayamir/nvimdots to:"
+	Write-Host $env:CCDEST_DIR
 
-if ((Test-Path $env:CCDEST_DIR)) {
-	warn -Msg "The destination folder: `"$env:CCDEST_DIR`" already exists."
-	warn-Ext -Msg "We will make a backup for you at `"$env:CCBACKUP_DIR`"."
-}
+	if ((Test-Path $env:CCDEST_DIR)) {
+		warn -Msg "The destination folder: `"$env:CCDEST_DIR`" already exists."
+		warn-Ext -Msg "We will make a backup for you at `"$env:CCBACKUP_DIR`"."
+	}
 
-Ring-Bell
-Wait-For-User
-if ((Check-SSH)) {
-	$USE_SSH = $False
-}
-Check-Clone-Pref
+	Ring-Bell
+	Wait-For-User
+	if ((Check-SSH)) {
+		$USE_SSH = $False
+	}
+	Check-Clone-Pref
 
-if ((Test-Path $env:CCDEST_DIR)) {
-	Safe-Execute -WithCmd { Move-Item -Path "$env:CCDEST_DIR" -Destination "$env:CCBACKUP_DIR" -Force }
-}
+	if ((Test-Path $env:CCDEST_DIR)) {
+		Safe-Execute -WithCmd { Move-Item -Path "$env:CCDEST_DIR" -Destination "$env:CCBACKUP_DIR" -Force }
+	}
 
-prompt -Msg "Fetching in progress..."
+	prompt -Msg "Fetching in progress..."
 
-if ($USE_SSH) {
-	if ((Is-Latest)) {
-		Safe-Execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+	if ($USE_SSH) {
+		if ((Is-Latest)) {
+			Safe-Execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		} else {
+			warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
+			prompt -Msg "Automatically redirecting you to legacy version..."
+			Safe-Execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		}
 	} else {
-		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
-		prompt -Msg "Automatically redirecting you to legacy version..."
-		Safe-Execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		if ((Is-Latest)) {
+			Safe-Execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		} else {
+			warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
+			prompt -Msg "Automatically redirecting you to legacy version..."
+			Safe-Execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		}
 	}
-} else {
-	if ((Is-Latest)) {
-		Safe-Execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
-	} else {
-		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
-		prompt -Msg "Automatically redirecting you to legacy version..."
-		Safe-Execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+
+	Safe-Execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
+
+	if (-not $USE_SSH) {
+		prompt -Msg "Changing default fetching method to HTTPS..."
+		Safe-Execute -WithCmd {
+			(Get-Content "$env:CCDEST_DIR\lua\core\settings.lua") |
+			ForEach-Object { $_ -replace '\["use_ssh"\] = true','["use_ssh"] = false' } |
+			Set-Content "$env:CCDEST_DIR\lua\core\settings.lua"
+		}
 	}
-}
 
-Safe-Execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
-
-if (-not $USE_SSH) {
-	prompt -Msg "Changing default fetching method to HTTPS..."
-	Safe-Execute -WithCmd {
-		(Get-Content "$env:CCDEST_DIR\lua\core\settings.lua") |
-		ForEach-Object { $_ -replace '\["use_ssh"\] = true','["use_ssh"] = false' } |
-		Set-Content "$env:CCDEST_DIR\lua\core\settings.lua"
-	}
-}
-
-prompt -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-prompt -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
-Write-Host @'
+	prompt -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
+	prompt -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
+	Write-Host @'
 
 Thank you for using this set of configuration!
 - Project Homepage:
@@ -386,10 +387,13 @@ Thank you for using this set of configuration!
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 '@
 
-Ring-Bell
-Wait-For-User
+	Ring-Bell
+	Wait-For-User
 
-Safe-Execute -WithCmd { nvim }
+	Safe-Execute -WithCmd { nvim }
 
-# Exit the script
-exit
+	# Exit the script
+	exit
+}
+
+_main
