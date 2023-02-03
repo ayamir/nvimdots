@@ -33,5 +33,15 @@
             "}"
         ],
         "description": "leetcode template"
+    },
+    "hdef": {
+        "prefix": "hdef",
+        "body": [
+            "#ifndef $1",
+            "#define $1",
+            "",
+            "#endif // $1"
+        ],
+        "description": "header file definitions"
     }
 }
