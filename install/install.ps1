@@ -375,6 +375,8 @@ You must install Git before installing this Nvim config. See:
 	}
 
 	prompt -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
+	prompt -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and'
+	prompt -Msg '  replace vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`'
 	prompt -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 	Write-Host @'
 
