@@ -122,10 +122,10 @@ local function load_options()
 		vim.o[name] = value
 	end
 
-	-- fix sqlite3 missing-lib issue on Wondows
+	-- Fix sqlite3 missing-lib issue on Windows
 	if global.is_windows then
 		-- Download the DLLs form https://www.sqlite.org/download.html
-		vim.g.sqlite_clib_path = "C:/Users/Charles/Documents/sqlite-dll-win64-x64-3400100/sqlite3.dll"
+		vim.g.sqlite_clib_path = global.home .. "/Documents/sqlite-dll-win64-x64-3400100/sqlite3.dll"
 	end
 end
 
