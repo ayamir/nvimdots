@@ -1,0 +1,153 @@
+===============================================================================
+=                   Welcome to the nvimdots tutor - Version 1.0               =
+===============================================================================
+
+    Nvimdots is a config for neovim which provides tons of functionalities
+    to code and edit text. This tutor is designed to describe enough of the
+    usage that you will able to use nvim as a powerful code editor quickly.
+
+    As a modern neovim config, it provides almost all of features you need.
+    It pre-configured lots of awesome plugins to provide intuitive and
+    advanced features.
+
+    The default `<leader>` key is `<Space>`.
+
+    The approximate time required to complete the tutor is 25-30 minutes,
+    depending upon how much time is spent with experimentation.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                Chapter 1.1:  Explanation of UI
+
+The opened buffers are showed at the top, you can use `<A-j>` and `<A-k>` to
+switch between them. Also, `<A-n>`(n meaning No) can be used to switch to the
+target buffer directly.
+
+You can use `<C-n>` to open/close file explorer which will appear on the left.
+Now move cursor to the line of `lua` folder, press `o` to open it, repeat this
+process to `core` folder, then open `event.lua` in new buffer by press `o` too.
+You can press `<C-h>` and `<C-l>` to move cursor to file explorer and back to
+this buffer. But we don't need it anymore, so please close it.
+
+Now press `<C-w>v` to split current window vertically, then `<A-j>` switch to
+the `event.lua` buffer for the right window. You can use `<A-]>` and `<A-[>` 
+to resize the right window and ensure you can view each word of this buffer.
+Of course, the resize process can be continous by holding the key.
+
+Back to the left window, the status line is showed at the bottom of the window.
+-------------------------------------------------------------------------------
+|Normal|main|+1-1~3|                          |~/.config/nvim|utf-8|LF|4%|50:1|
+-------------------------------------------------------------------------------
+   |     |     |                                      |         |    |     |
+   |     |     |          current work directory -----|         |    |     |
+   |     |     |                                      |         |    |     |
+   |     |     |------ git status of current file      charset -|    |     |
+   |     |----- current git branch                     EOL format ---|     |
+   |---- current edit mode                             cursor position ----|
+
+You will see different content under different conditions. It will looks like
+this if you switch to the right window and move cursor to the second line.
+-------------------------------------------------------------------------------
+|Normal|main|  vim                            |~/.config/nvim|utf-8|LF|1%|2:1|
+-------------------------------------------------------------------------------
+" vim" indicates this line has a variable named `vim`. So this part of status
+line will show you the context of your cursor position. This feature is based
+on lsp, so it is disabled if corresponding lsp is not attach to current buffer.
+
+You can press `<leader>li` to check lsp info. You will view there are two active
+clients attached to this buffer(`sumneko_lua` and `efm`).
+
+Now press `go` to open lspsaga outline which show all of symbols defined in
+`event.lua` in the new right window. Maybe you have noticed that there are
+several scroll bar for each window. They can be dragged by mouse and indicates
+current cursor approximate location.
+
+Before you switch to the window of `dotstutor`, please press `go` to close
+outline, because it's also lsp-based. So it will be empty for `dotstutor`.
+
+Now switch to the left window and check lsp info. You will see the two clients
+not attached to this buffer. It means there no suitable lsp server for this
+buffer, that's why I told you to turn outline off.
+
+OK, now you have known enough about the UI of nvimdots. Let's move on to the
+next topic about the coding process.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                Chapter 1.2:  Enhanced ability of vanilla nvim
+
+------------------------------------------------------------------------------
+
+    ** You can yank content to clipboard and paste clipboard content to nvim **
+
+    This feature also enabled for ssh session and nvim running in tmux.
+
+------------------------------------------------------------------------------
+
+Keys: `j`, `k`
+
+Mode: ** Normal **
+
+Effect: Move speed of `j` and `k` will increase for long duration of pressing.
+
+Plugin: rainbowhxch/accelerated-jk.nvim
+
+------------------------------------------------------------------------------
+
+Keys: "f", "F", "t", "T", ";", ","
+
+Mode: ** Normal **
+
+Effect: It will show you highlight for the target letter.
+
+Plugin: rhysd/clever-f.vim
+
+------------------------------------------------------------------------------
+
+Keys: `:`, `/`, `?`
+
+Mode: ** Normal **
+
+Effect: It will show you fuzzy match list of your input.
+
+NOTE: The highlight of searched word will be clear when the cursor moved.
+
+Plugin: gelguy/wilder.nvim
+
+------------------------------------------------------------------------------
+
+Keys: `<leader>w`
+
+Mode: ** Normal **
+
+Effect: Show key index of each word showed in screen.
+
+NOTE: You can press corresponding key to move cursor to the word.
+
+Plugin: phaazon/hop.nvim
+
+Practice: Now press `<leader>w` to move cursor ** Here **.
+
+------------------------------------------------------------------------------
+
+Keys: `<leader>c`
+
+Mode: ** Normal **
+
+Effect: Show key index of the required character.
+
+NOTE: You need to input required character after press `<leader>c`.
+
+Plugin: phaazon/hop.nvim
+
+Practice: Now press `<leader>c` and input `H` to move cursor ** Here **.
+
+------------------------------------------------------------------------------
+
+Keys: `jk`
+
+Mode: ** Insert **
+
+Effect: Escape from insert mode.
+
+NOTE: You can see the state of it in lualine after you press `j`.
+
+Plugin: max397574/better-escape.nvim
