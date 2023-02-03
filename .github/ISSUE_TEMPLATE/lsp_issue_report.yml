@@ -18,7 +18,7 @@ body:
     id: prerequisites-done
     attributes:
       label: "Following prerequisites"
-      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)?"
+      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)."
       options:
         - label: "Confirm"
           required: true
