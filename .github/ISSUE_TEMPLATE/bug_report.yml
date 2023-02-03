@@ -13,6 +13,17 @@ body:
       description: "The local configuration is up-to-date in the current branch and this issue _persists_."
       options:
         - label: "Confirm"
+      validations:
+      required: true
+  - type: checkboxes
+    id: prerequisites-done
+    attributes:
+      label: "Prerequisites check"
+      description: "Have you done everything mentioned in [prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)?"
+      options:
+        - label: "Confirm"
+      validations:
+      required: true
 
   - type: input
     id: nvim-version
