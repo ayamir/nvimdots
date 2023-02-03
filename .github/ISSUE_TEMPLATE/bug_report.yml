@@ -17,8 +17,8 @@ body:
   - type: checkboxes
     id: prerequisites-done
     attributes:
-      label: "Prerequisites check"
-      description: "Have you done everything mentioned in [prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)?"
+      label: "Following prerequisites"
+      description: "Have you checked everything mentioned in [Wiki: prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)?"
       options:
         - label: "Confirm"
           required: true
