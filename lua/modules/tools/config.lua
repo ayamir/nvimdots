@@ -9,7 +9,6 @@ function config.telescope()
 			initial_mode = "insert",
 			prompt_prefix = " " .. icons.ui.Telescope .. " ",
 			selection_caret = icons.ui.ChevronRight,
-			entry_prefix = " ",
 			scroll_strategy = "limit",
 			results_title = false,
 			layout_strategy = "horizontal",
