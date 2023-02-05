@@ -15,8 +15,11 @@
     The approximate time required to complete the tutor is 25-30 minutes,
     depending upon how much time is spent with experimentation.
 
+===============================================================================
+                    Chapter 1:    Basic Workflow
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                Chapter 1.1:  Explanation of UI
+                    Chapter 1.1:  Explanation of UI
 
 The opened buffers are showed at the top, you can use `<A-j>` and `<A-k>` to
 switch between them. Also, `<A-n>`(n meaning No) can be used to switch to the
@@ -69,10 +72,66 @@ not attached to this buffer. It means there no suitable lsp server for this
 buffer, that's why I told you to turn outline off.
 
 OK, now you have known enough about the UI of nvimdots. Let's move on to the
-next topic about the coding process.
+next topic about the basic workflow.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                Chapter 1.2:  Enhanced ability of vanilla nvim
+                    Chapter 1.2:  Find and Search
+
+Nvimdots use "telescope.nvim" as the main fuzzy finder. It provides lots of
+features to find and search. You can press `<leader>ff` to open file finder
+under current work directory. You can input the keyword of file which you want
+find and use `<C-p>` and `<C-n>` to navigate up and down. You can preview its
+content in the right window and press enter to open it in buffer.
+
+Nvimdots also provide other find features. The most commonly used keymap maybe
+`<leader>fr` if you are used to editing files in different projects. It will
+list files you ever opened and sort them by "frecency" which used in firefox's
+address bar. This feature utilizes "sqlite" to store the key-value pairs of
+file path and its "frecency" value permanently at 
+`~/.local/share/nvim/file_frecency.sqlite3`.
+
+You can press `<leader>fw` to search word in current work directory. It
+utilizes ripgrep to search and you can use it naturally as you use ripgrep.
+
+Nvimdots provides project management feature and integrates it with telescope.
+You can press `<leader>fp` to open recent project list. Don't quit this inter-
+face, you can add current work directory to project list by pressing `<C-a>`
+and remove it by pressing `<C-d>`. The current work directory is usually the
+project directory which are identfied by lsp and patterns like git. Of course,
+you can set patterns on your own. So it will change automatically when you
+switch to another buffer whose file belongs to another project.
+
+There are many other features I have not mentioned. You can press `<C-p>` to
+open command panel and type "find" to view all of them.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                Chapter 1.3:  Edit and Format
+
+The completion window will always show no matter what file you are editing.
+You can use `<Tab>` and `<S-Tab>` to select next and previous candidate in
+the completion window and use <CR> to confirm completion. You can also use
+`<C-n>` and `<C-p>` and `<C-y>` to do it. Sometimes you don't want confirm
+completion but just want to new a line, you can use `<C-e>` to close the
+window manually.
+
+Snippet is a awesome method to help us write code quickly and efficiently.
+As most other editors and IDEs, `<Tab>` and `<S-Tab>` are configured to
+navigate in expanded snippet, the former is used to jump next and the latter
+to jump previous.
+
+Format on save is a very useful feature which is enabled by default. It can
+ensure the code style is consistent and you don't need to care about it.
+You can disable it temprarily by executing `:FormatToggle` and permanently
+by set `settings["format_on_save"] = false` in `lua/core/settings.lua`.
+Besides, you can just toggle it for specific language temprarily by executing
+`:FormatterToggle {language_name}`.
+
+Nvimdots use "efm-langserver" to manage linters and formatters together.
+You can view all of pre-configured formatters at the end of `lua/modules/
+completion/lsp.lua`. You can also customized the format arguments on your
+demand. For example, you can just set `formatCommand = "clang-format"` to make
+`clang-format` respect the `.clang-format` file under your project root at
+`lua/modules/completion/efm/formatters/clangfmt.lua`.
 
 ------------------------------------------------------------------------------
 
