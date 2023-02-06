@@ -47,9 +47,6 @@ return function()
 			},
 			undo = {
 				side_by_side = true,
-				layout_config = {
-					preview_height = 0.8,
-				},
 				mappings = { -- this whole table is the default
 					i = {
 						-- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
