@@ -8,7 +8,7 @@ tool["tpope/vim-fugitive"] = {
 -- tool["brglng/vim-im-select"] = {
 -- 	lazy = true,
 -- 	event = "BufReadPost",
--- 	config = require("editor.imselect"),
+-- 	config = require("tool.imselect"),
 -- }
 tool["mrjones2014/legendary.nvim"] = {
 	lazy = true,
