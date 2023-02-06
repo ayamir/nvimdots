@@ -5,8 +5,6 @@
 
 Set-StrictMode -Version 3.0
 
-$ErrorActionPreference = "Stop" # Exit when command fails
-
 # global-scope vars
 $REQUIRED_NVIM_VERSION = [version]'0.8.0'
 $USE_SSH = $True
