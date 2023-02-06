@@ -1,3 +1,0 @@
-local custom = {}
-
-return custom
