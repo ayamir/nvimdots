@@ -1,4 +1,4 @@
-local tools = {}
+local tool = {}
 
 -- only for fcitx5 user who uses non-English language during coding
 -- tool["brglng/vim-im-select"] = {
@@ -6,26 +6,26 @@ local tools = {}
 -- 	event = "BufReadPost",
 -- 	config = require("editor.imselect"),
 -- }
-tools["mrjones2014/legendary.nvim"] = {
+tool["mrjones2014/legendary.nvim"] = {
 	lazy = true,
 	cmd = "Legendary",
-	config = require("tools.legendary"),
+	config = require("tool.legendary"),
 	dependencies = {
 		{ "kkharji/sqlite.lua" },
 		{
 			"stevearc/dressing.nvim",
 			event = "VeryLazy",
-			config = require("tools.dressing"),
+			config = require("tool.dressing"),
 		},
 		-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 		{
 			"folke/which-key.nvim",
 			event = "VeryLazy",
-			config = require("tools.which-key"),
+			config = require("tool.which-key"),
 		},
 	},
 }
-tools["nvim-tree/nvim-tree.lua"] = {
+tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = {
 		"NvimTreeToggle",
@@ -34,45 +34,45 @@ tools["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeFindFileToggle",
 		"NvimTreeRefresh",
 	},
-	config = require("tools.nvim-tree"),
+	config = require("tool.nvim-tree"),
 }
-tools["ibhagwan/smartyank.nvim"] = {
+tool["ibhagwan/smartyank.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("tools.smartyank"),
+	config = require("tool.smartyank"),
 }
-tools["michaelb/sniprun"] = {
+tool["michaelb/sniprun"] = {
 	lazy = true,
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
 	cmd = { "SnipRun" },
-	config = require("tools.sniprun"),
+	config = require("tool.sniprun"),
 }
-tools["akinsho/toggleterm.nvim"] = {
+tool["akinsho/toggleterm.nvim"] = {
 	lazy = true,
 	event = "UIEnter",
-	config = require("tools.toggleterm"),
+	config = require("tool.toggleterm"),
 }
-tools["folke/trouble.nvim"] = {
+tool["folke/trouble.nvim"] = {
 	lazy = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
-	config = require("tools.trouble"),
+	config = require("tool.trouble"),
 }
-tools["gelguy/wilder.nvim"] = {
+tool["gelguy/wilder.nvim"] = {
 	lazy = true,
 	event = "CmdlineEnter",
-	config = require("tools.wilder"),
+	config = require("tool.wilder"),
 	dependencies = { "romgrk/fzy-lua-native" },
 }
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
 ----------------------------------------------------------------------
-tools["nvim-telescope/telescope.nvim"] = {
+tool["nvim-telescope/telescope.nvim"] = {
 	lazy = true,
 	cmd = "Telescope",
-	config = require("tools.telescope"),
+	config = require("tool.telescope"),
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
@@ -81,7 +81,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 		{
 			"ahmedkhalf/project.nvim",
 			event = "BufReadPost",
-			config = require("tools.project"),
+			config = require("tool.project"),
 		},
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{ "nvim-telescope/telescope-frecency.nvim", dependencies = {
@@ -95,7 +95,7 @@ tools["nvim-telescope/telescope.nvim"] = {
 ----------------------------------------------------------------------
 --                           DAP Plugins                            --
 ----------------------------------------------------------------------
-tools["mfussenegger/nvim-dap"] = {
+tool["mfussenegger/nvim-dap"] = {
 	lazy = true,
 	cmd = {
 		"DapSetLogLevel",
@@ -108,13 +108,13 @@ tools["mfussenegger/nvim-dap"] = {
 		"DapStepOut",
 		"DapTerminate",
 	},
-	config = require("tools.dap"),
+	config = require("tool.dap"),
 	dependencies = {
 		{
 			"rcarriga/nvim-dap-ui",
-			config = require("tools.dap.dapui"),
+			config = require("tool.dap.dapui"),
 		},
 	},
 }
 
-return tools
+return tool
