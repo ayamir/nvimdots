@@ -1,3 +1,4 @@
+local global = require("core.global")
 local function switch_source_header_splitcmd(bufnr, splitcmd)
 	bufnr = require("lspconfig").util.validate_bufnr(bufnr)
 	local clangd_client = require("lspconfig").util.get_active_client_by_name(bufnr, "clangd")
@@ -22,6 +23,30 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 	end
 end
 
+local function get_binary_path(binary)
+	local path = nil
+	if global.is_mac or global.is_linux then
+		path = vim.fn.trim(vim.fn.system("which " .. binary))
+	elseif global.is_windows then
+		path = vim.fn.trim(vim.fn.system("where " .. binary))
+	end
+	if vim.v.shell_error ~= 0 then
+		path = nil
+	end
+	return path
+end
+
+local function get_binary_path_list(binaries)
+	local path_list = {}
+	for _, binary in ipairs(binaries) do
+		local path = get_binary_path(binary)
+		if path then
+			table.insert(path_list, path)
+		end
+	end
+	return table.concat(path_list, ",")
+end
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/clangd.lua
 return {
 	single_file_support = true,
@@ -30,7 +55,7 @@ return {
 		"--background-index",
 		"--pch-storage=memory",
 		-- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
-		"--query-driver=/usr/bin/clang++,/usr/bin/**/clang-*,/bin/clang,/bin/clang++,/usr/bin/gcc,/usr/bin/g++",
+		"--query-driver=" .. get_binary_path_list({ "clang++", "clang", "gcc", "g++" }),
 		"--clang-tidy",
 		"--all-scopes-completion",
 		"--completion-style=detailed",
