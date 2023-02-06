@@ -10,8 +10,8 @@ $REQUIRED_NVIM_VERSION = [version]'0.8.0'
 $USE_SSH = $True
 
 # package mgr vars
-$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust-ms" }
-$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust" }
+$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "ripgrep"="ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust-ms" }
+$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "ripgrep"="ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust" }
 $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 
 # env vars
@@ -251,6 +251,7 @@ function Fetch-Deps {
 	Check-And-Fetch-Exec -PkgName "node"
 	Check-And-Fetch-Exec -PkgName "pip"
 	Check-And-Fetch-Exec -PkgName "fzf"
+	Check-And-Fetch-Exec -PkgName "ripgrep"
 	Check-And-Fetch-Exec -PkgName "ruby"
 	Check-And-Fetch-Exec -PkgName "go"
 	Check-And-Fetch-Exec -PkgName "curl"
