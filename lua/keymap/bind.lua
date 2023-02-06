@@ -8,6 +8,7 @@ function rhs_options:new()
 			silent = false,
 			expr = false,
 			nowait = false,
+			callback = nil,
 		},
 		buffer = false,
 	}
@@ -34,6 +35,12 @@ end
 function rhs_options:map_cu(cmd_string)
 	-- <C-u> to eliminate the automatically inserted range in visual mode
 	self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
+	return self
+end
+
+function rhs_options:map_callback(callback)
+	self.cmd = ""
+	self.options.callback = callback
 	return self
 end
 
@@ -82,6 +89,11 @@ end
 function pbind.map_args(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_args(cmd_string)
+end
+
+function pbind.map_callback(callback)
+	local ro = rhs_options:new()
+	return ro:map_callback(callback)
 end
 
 function pbind.nvim_load_mapping(mapping)
