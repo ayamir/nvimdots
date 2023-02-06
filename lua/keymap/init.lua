@@ -3,7 +3,19 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-require("keymap.config")
+
+local _lazygit = nil
+local function toggle_lazygit()
+	if not _lazygit then
+		local Terminal = require("toggleterm.terminal").Terminal
+		_lazygit = Terminal:new({
+			cmd = "lazygit",
+			hidden = true,
+			direction = "float",
+		})
+	end
+	_lazygit:toggle()
+end
 
 local plug_map = {
 	-- nvim-bufdel
@@ -81,7 +93,11 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent(),
-	["t|<leader>g"] = map_cmd("<Esc><Cmd>lua toggle_lazygit()<CR>"):with_noremap():with_silent(),
+	["t|<leader>g"] = map_callback(function()
+			toggle_lazygit()
+		end)
+		:with_noremap()
+		:with_silent(),
 	["n|<leader>G"] = map_cu("Git"):with_noremap():with_silent(),
 	-- Plugin trouble
 	["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent(),
@@ -123,11 +139,19 @@ local plug_map = {
 	["n|<leader>fz"] = map_cu("Telescope zoxide list"):with_noremap():with_silent(),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent(),
 	-- Plugin accelerate-jk
-	["n|j"] = map_cmd("v:lua.enhance_jk_move('j')"):with_silent():with_expr(),
-	["n|k"] = map_cmd("v:lua.enhance_jk_move('k')"):with_silent():with_expr(),
+	["n|j"] = map_callback(function()
+		return vim.api.nvim_replace_termcodes("<Plug>(accelerated_jk_gj)", true, true, true)
+	end):with_expr(),
+	["n|k"] = map_callback(function()
+		return vim.api.nvim_replace_termcodes("<Plug>(accelerated_jk_gk)", true, true, true)
+	end):with_expr(),
 	-- Plugin vim-eft
-	["n|;"] = map_cmd("v:lua.enhance_ft_move(';')"):with_expr(),
-	["n|,"] = map_cmd("v:lua.enhance_ft_move(',')"):with_expr(),
+	["n|;"] = map_callback(function()
+		return vim.api.nvim_replace_termcodes("<Plug>(clever-f-repeat-forward)", true, true, true)
+	end):with_expr(),
+	["n|,"] = map_callback(function()
+		return vim.api.nvim_replace_termcodes("<Plug>(clever-f-repeat-back)", true, true, true)
+	end):with_expr(),
 	-- Plugin Hop
 	["n|<leader>w"] = map_cu("HopWord"):with_noremap(),
 	["n|<leader>j"] = map_cu("HopLine"):with_noremap(),
@@ -135,8 +159,12 @@ local plug_map = {
 	["n|<leader>c"] = map_cu("HopChar1"):with_noremap(),
 	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap(),
 	-- Plugin EasyAlign
-	["n|gea"] = map_cmd("v:lua.enhance_align('nea')"):with_expr(),
-	["x|gea"] = map_cmd("v:lua.enhance_align('xea')"):with_expr(),
+	["n|gea"] = map_callback(function()
+		return vim.api.nvim_replace_termcodes("<Plug>(EasyAlign)", true, true, true)
+	end):with_expr(),
+	["x|gea"] = map_callback(function()
+		return vim.api.nvim_replace_termcodes("<Plug>(EasyAlign)", true, true, true)
+	end):with_expr(),
 	-- Plugin MarkdownPreview
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent(),
 	-- Plugin auto_session
