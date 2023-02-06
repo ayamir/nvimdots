@@ -9,6 +9,7 @@ function rhs_options:new()
 			expr = false,
 			nowait = false,
 			callback = nil,
+			desc = "",
 		},
 		buffer = false,
 	}
@@ -46,6 +47,11 @@ end
 
 function rhs_options:with_silent()
 	self.options.silent = true
+	return self
+end
+
+function rhs_options:with_desc(description_string)
+	self.options.desc = description_string
 	return self
 end
 

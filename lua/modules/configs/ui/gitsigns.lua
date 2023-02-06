@@ -32,30 +32,83 @@ return function()
 				linehl = "GitSignsChangeLn",
 			},
 		},
-		keymaps = {
-			-- Default keymap options
-			noremap = true,
-			buffer = true,
-			["n ]g"] = {
-				expr = true,
-				"&diff ? ']g' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'",
-			},
-			["n [g"] = {
-				expr = true,
-				"&diff ? '[g' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'",
-			},
-			["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-			["v <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-			["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-			["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-			["v <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-			["n <leader>hR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-			["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-			["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line({full=true})<CR>',
-			-- Text objects
-			["o ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-			["x ih"] = ':<C-U>lua require"gitsigns".text_object()<CR>',
-		},
+		on_attach = function(bufnr)
+			local bind = require("keymap.bind")
+
+			bind.nvim_load_mapping({
+				["n|]g"] = bind.map_callback(function()
+					if vim.wo.diff then
+						return "]g"
+					end
+					vim.schedule(function()
+						require("gitsigns.actions").next_hunk()
+					end)
+					return "<Ignore>"
+				end)
+					:with_buffer(bufnr)
+					:with_expr()
+					:with_desc("git: Goto next hunk"),
+				["n|[g"] = bind.map_callback(function()
+					if vim.wo.diff then
+						return "[g"
+					end
+					vim.schedule(function()
+						require("gitsigns.actions").prev_hunk()
+					end)
+					return "<Ignore>"
+				end)
+					:with_buffer(bufnr)
+					:with_expr()
+					:with_desc("git: Goto prev hunk"),
+				["n|<Leader>hs"] = bind.map_callback(function()
+					require("gitsigns.actions").stage_hunk()
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Stage hunk"),
+				["v|<Leader>hs"] = bind.map_callback(function()
+					require("gitsigns.actions").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Stage hunk"),
+				["n|<Leader>hu"] = bind.map_callback(function()
+					require("gitsigns.actions").undo_stage_hunk()
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Undo stage hunk"),
+				["n|<Leader>hr"] = bind.map_callback(function()
+					require("gitsigns.actions").reset_hunk()
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Reset hunk"),
+				["v|<Leader>hr"] = bind.map_callback(function()
+					require("gitsigns.actions").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Reset hunk"),
+				["n|<Leader>hR"] = bind.map_callback(function()
+					require("gitsigns.actions").reset_buffer()
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Reset buffer"),
+				["n|<Leader>hp"] = bind.map_callback(function()
+					require("gitsigns.actions").preview_hunk()
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Preview hunk"),
+				["n|<Leader>hb"] = bind.map_callback(function()
+					require("gitsigns.actions").blame_line({ full = true })
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Blame line"),
+				-- Text objects
+				["o|ih"] = bind.map_callback(function()
+					require("gitsigns.actions").text_object()
+				end):with_buffer(bufnr),
+				["x|ih"] = bind.map_callback(function()
+					require("gitsigns.actions").text_object()
+				end):with_buffer(bufnr),
+			})
+		end,
 		watch_gitdir = { interval = 1000, follow_files = true },
 		current_line_blame = true,
 		current_line_blame_opts = { delay = 1000, virtual_text_pos = "eol" },
