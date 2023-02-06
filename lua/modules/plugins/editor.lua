@@ -42,10 +42,6 @@ editor["junegunn/vim-easy-align"] = {
 	lazy = true,
 	cmd = "EasyAlign",
 }
-editor["tpope/vim-fugitive"] = {
-	lazy = true,
-	cmd = { "Git", "G" },
-}
 editor["phaazon/hop.nvim"] = {
 	lazy = true,
 	branch = "v2",
