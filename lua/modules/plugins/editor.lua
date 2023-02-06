@@ -57,35 +57,9 @@ editor["RRethy/vim-illuminate"] = {
 	event = "BufReadPost",
 	config = require("editor.vim-illuminate"),
 }
--- only for fcitx5 user who uses non-English language during coding
--- editor["brglng/vim-im-select"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	config = require("editor.imselect"),
--- }
-editor["karb94/neoscroll.nvim"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = require("editor.neoscroll"),
-}
-editor["ibhagwan/smartyank.nvim"] = {
-	lazy = true,
-	event = "BufReadPost",
-	config = require("editor.smartyank"),
-}
-editor["edluffy/specs.nvim"] = {
-	lazy = true,
-	event = "CursorMoved",
-	config = require("editor.specs"),
-}
 editor["luukvbaal/stabilize.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-}
-editor["akinsho/toggleterm.nvim"] = {
-	lazy = true,
-	event = "UIEnter",
-	config = require("editor.toggleterm"),
 }
 editor["romainl/vim-cool"] = {
 	lazy = true,
@@ -117,31 +91,6 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{
 			"abecodes/tabout.nvim",
 			config = require("editor.tabout"),
-		},
-	},
-}
-
-----------------------------------------------------------------------
---                           DAP Plugins                            --
-----------------------------------------------------------------------
-editor["mfussenegger/nvim-dap"] = {
-	lazy = true,
-	cmd = {
-		"DapSetLogLevel",
-		"DapShowLog",
-		"DapContinue",
-		"DapToggleBreakpoint",
-		"DapToggleRepl",
-		"DapStepOver",
-		"DapStepInto",
-		"DapStepOut",
-		"DapTerminate",
-	},
-	config = require("editor.dap"),
-	dependencies = {
-		{
-			"rcarriga/nvim-dap-ui",
-			config = require("editor.dap.dapui"),
 		},
 	},
 }

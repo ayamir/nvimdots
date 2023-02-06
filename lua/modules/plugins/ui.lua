@@ -44,6 +44,11 @@ ui["zbirenbaum/neodim"] = {
 	event = "LspAttach",
 	config = require("ui.neodim"),
 }
+ui["karb94/neoscroll.nvim"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = require("ui.neoscroll"),
+}
 ui["shaunsingh/nord.nvim"] = {
 	lazy = true,
 	config = require("ui.nord"),
@@ -53,21 +58,15 @@ ui["rcarriga/nvim-notify"] = {
 	event = "VeryLazy",
 	config = require("ui.notify"),
 }
-ui["nvim-tree/nvim-tree.lua"] = {
-	lazy = true,
-	cmd = {
-		"NvimTreeToggle",
-		"NvimTreeOpen",
-		"NvimTreeFindFile",
-		"NvimTreeFindFileToggle",
-		"NvimTreeRefresh",
-	},
-	config = require("ui.nvim-tree"),
-}
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = "BufReadPost",
 	config = require("ui.scrollview"),
+}
+ui["edluffy/specs.nvim"] = {
+	lazy = true,
+	event = "CursorMoved",
+	config = require("ui.specs"),
 }
 
 return ui
