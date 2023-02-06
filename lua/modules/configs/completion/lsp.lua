@@ -129,7 +129,6 @@ return function()
 	local vint = require("efmls-configs.linters.vint")
 	local eslint = require("efmls-configs.linters.eslint")
 	local flake8 = require("efmls-configs.linters.flake8")
-	local shellcheck = require("efmls-configs.linters.shellcheck")
 
 	local black = require("efmls-configs.formatters.black")
 	local stylua = require("efmls-configs.formatters.stylua")
@@ -168,7 +167,7 @@ return function()
 		html = { formatter = prettier },
 		css = { formatter = prettier },
 		scss = { formatter = prettier },
-		sh = { formatter = shfmt, linter = shellcheck },
+		sh = { formatter = shfmt },
 		markdown = { formatter = prettier },
 		-- rust = {formatter = rustfmt},
 	})

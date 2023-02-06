@@ -83,7 +83,7 @@ return function()
 			mark = "x",
 			confirm = "<CR>",
 			exec = "<CR>",
-			in_select = false,
+			in_select = true,
 		},
 		outline = {
 			win_position = "right",
