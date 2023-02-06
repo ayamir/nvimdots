@@ -82,7 +82,7 @@
   "vim-cool": { "branch": "master", "commit": "80c19445728d70595c2f72d0436527e28292ebd9" },
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
   "vim-fugitive": { "branch": "master", "commit": "2019e0e4139390f485a024d7a2411218b004a5b3" },
-  "vim-go": { "branch": "master", "commit": "5b1353826c734b46ae0bbd18334ed0c6f60b6207" },
+  "vim-go": { "branch": "master", "commit": "63e79baca1c645ab6997fbc9f04ef0ecdda29645" },
   "vim-illuminate": { "branch": "master", "commit": "d6ca7f77eeaf61b3e6ce9f0e5a978d606df44298" },
   "vim-matchup": { "branch": "master", "commit": "959e0e79ea240cdee29efbdd0d2e2e718931ccec" },
   "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" },
