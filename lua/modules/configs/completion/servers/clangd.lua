@@ -23,7 +23,7 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 	end
 end
 
-local get_binary_path = function(binary)
+local function get_binary_path(binary)
 	local path = nil
 	if global.is_mac or global.is_linux then
 		path = vim.fn.trim(vim.fn.system("which " .. binary))
@@ -36,7 +36,7 @@ local get_binary_path = function(binary)
 	return path
 end
 
-local get_binary_path_list = function(binaries)
+local function get_binary_path_list(binaries)
 	local path_list = {}
 	for _, binary in ipairs(binaries) do
 		local path = get_binary_path(binary)
@@ -46,6 +46,7 @@ local get_binary_path_list = function(binaries)
 	end
 	return table.concat(path_list, ",")
 end
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/clangd.lua
 return {
 	single_file_support = true,
@@ -54,7 +55,7 @@ return {
 		"--background-index",
 		"--pch-storage=memory",
 		-- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
-		"--query-driver=" .. get_binary_path_list({ "clang++", "clang", "clang++", "gcc", "g++" }),
+		"--query-driver=" .. get_binary_path_list({ "clang++", "clang", "gcc", "g++" }),
 		"--clang-tidy",
 		"--all-scopes-completion",
 		"--completion-style=detailed",
