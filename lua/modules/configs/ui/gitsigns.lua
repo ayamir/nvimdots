@@ -58,28 +58,28 @@ return function()
 				end)
 					:with_buffer(bufnr)
 					:with_expr(),
-				["n|<Space>hs"] = bind.map_callback(function()
+				["n|<Leader>hs"] = bind.map_callback(function()
 					require("gitsigns.actions").stage_hunk()
 				end):with_buffer(bufnr),
-				["v|<Space>hs"] = bind.map_callback(function()
+				["v|<Leader>hs"] = bind.map_callback(function()
 					require("gitsigns.actions").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end):with_buffer(bufnr),
-				["n|<Space>hu"] = bind.map_callback(function()
+				["n|<Leader>hu"] = bind.map_callback(function()
 					require("gitsigns.actions").undo_stage_hunk()
 				end):with_buffer(bufnr),
-				["n|<Space>hr"] = bind.map_callback(function()
+				["n|<Leader>hr"] = bind.map_callback(function()
 					require("gitsigns.actions").reset_hunk()
 				end):with_buffer(bufnr),
-				["v|<Space>hr"] = bind.map_callback(function()
+				["v|<Leader>hr"] = bind.map_callback(function()
 					require("gitsigns.actions").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end):with_buffer(bufnr),
-				["n|<Space>hR"] = bind.map_callback(function()
+				["n|<Leader>hR"] = bind.map_callback(function()
 					require("gitsigns.actions").reset_buffer()
 				end):with_buffer(bufnr),
-				["n|<Space>hp"] = bind.map_callback(function()
+				["n|<Leader>hp"] = bind.map_callback(function()
 					require("gitsigns.actions").preview_hunk()
 				end):with_buffer(bufnr),
-				["n|<Space>hb"] = bind.map_callback(function()
+				["n|<Leader>hb"] = bind.map_callback(function()
 					require("gitsigns.actions").blame_line({ full = true })
 				end):with_buffer(bufnr),
 				-- Text objects
