@@ -1,4 +1,4 @@
-# Plugins used in
+# Plugins related concepts
 
 ### Folder structure
 
