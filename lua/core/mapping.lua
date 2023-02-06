@@ -45,8 +45,8 @@ local def_map = {
 	["c|<C-h>"] = map_cmd("<BS>"):with_noremap(),
 	["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap(),
 	-- Visual
-	["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
-	["v|K"] = map_cmd(":m '<-2<cr>gv=gv"),
+	["v|J"] = map_cmd(":m '>+1<CR>gv=gv"),
+	["v|K"] = map_cmd(":m '<-2<CR>gv=gv"),
 	["v|<"] = map_cmd("<gv"),
 	["v|>"] = map_cmd(">gv"),
 }

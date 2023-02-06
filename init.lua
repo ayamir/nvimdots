@@ -5,8 +5,8 @@ if not vim.g.vscode then
 	vim.schedule(function()
 		vim.notify_once(
 			[[
-We've released version v1.0.0!
-It has brought about some major changes that would require a manual cleanup.
+We've released version v2.0.0!
+This is a backward-incompatible release. See the release notes for instructions on how to migrate your configs.
 
 Visit https://github.com/ayamir/nvimdots/releases to see the release notes.
 
