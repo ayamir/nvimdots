@@ -57,12 +57,6 @@ return function()
 			},
 			h = {
 				name = "Gitsigns commands",
-				b = "git: Blame line",
-				p = "git: Preview hunk",
-				s = "git: Stage hunk",
-				u = "git: Undo stage hunk",
-				r = "git: Reset hunk",
-				R = "git: Reset buffer",
 			},
 			l = {
 				name = "LSP commands",
@@ -130,8 +124,6 @@ return function()
 		["<leader>g"] = "git: Show lazygit",
 		["<leader>D"] = "git: Show diff",
 		["<leader><leader>D"] = "git: Close diff",
-		["]g"] = "git: Goto next hunk",
-		["[g"] = "git: Goto prev hunk",
 		["g["] = "lsp: Goto prev diagnostic",
 		["g]"] = "lsp: Goto next diagnostic",
 		["<leader>ci"] = "lsp: Incoming calls",

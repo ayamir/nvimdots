@@ -46,7 +46,8 @@ return function()
 					return "<Ignore>"
 				end)
 					:with_buffer(bufnr)
-					:with_expr(),
+					:with_expr()
+					:with_desc("git: Goto next hunk"),
 				["n|[g"] = bind.map_callback(function()
 					if vim.wo.diff then
 						return "[g"
@@ -57,31 +58,48 @@ return function()
 					return "<Ignore>"
 				end)
 					:with_buffer(bufnr)
-					:with_expr(),
+					:with_expr()
+					:with_desc("git: Goto prev hunk"),
 				["n|<Leader>hs"] = bind.map_callback(function()
 					require("gitsigns.actions").stage_hunk()
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Stage hunk"),
 				["v|<Leader>hs"] = bind.map_callback(function()
 					require("gitsigns.actions").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Stage hunk"),
 				["n|<Leader>hu"] = bind.map_callback(function()
 					require("gitsigns.actions").undo_stage_hunk()
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Undo stage hunk"),
 				["n|<Leader>hr"] = bind.map_callback(function()
 					require("gitsigns.actions").reset_hunk()
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Reset hunk"),
 				["v|<Leader>hr"] = bind.map_callback(function()
 					require("gitsigns.actions").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Reset hunk"),
 				["n|<Leader>hR"] = bind.map_callback(function()
 					require("gitsigns.actions").reset_buffer()
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Reset buffer"),
 				["n|<Leader>hp"] = bind.map_callback(function()
 					require("gitsigns.actions").preview_hunk()
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Preview hunk"),
 				["n|<Leader>hb"] = bind.map_callback(function()
 					require("gitsigns.actions").blame_line({ full = true })
-				end):with_buffer(bufnr),
+				end)
+					:with_buffer(bufnr)
+					:with_desc("git: Blame line"),
 				-- Text objects
 				["o|ih"] = bind.map_callback(function()
 					require("gitsigns.actions").text_object()
