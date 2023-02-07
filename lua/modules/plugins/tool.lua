@@ -4,31 +4,17 @@ tool["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },
 }
+-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
+tool["folke/which-key.nvim"] = {
+	event = "VeryLazy",
+	config = require("tool.which-key"),
+}
 -- only for fcitx5 user who uses non-English language during coding
 -- tool["brglng/vim-im-select"] = {
 -- 	lazy = true,
 -- 	event = "BufReadPost",
 -- 	config = require("tool.imselect"),
 -- }
-tool["mrjones2014/legendary.nvim"] = {
-	lazy = true,
-	cmd = "Legendary",
-	config = require("tool.legendary"),
-	dependencies = {
-		{ "kkharji/sqlite.lua" },
-		{
-			"stevearc/dressing.nvim",
-			event = "VeryLazy",
-			config = require("tool.dressing"),
-		},
-		-- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
-		{
-			"folke/which-key.nvim",
-			event = "VeryLazy",
-			config = require("tool.which-key"),
-		},
-	},
-}
 tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = {
