@@ -239,12 +239,12 @@ local plug_map = {
 			return vim.api.nvim_replace_termcodes("<Plug>(EasyAlign)", true, true, true)
 		end)
 		:with_expr()
-		:with_desc("editn: align"),
+		:with_desc("editn: Align with delimiter"),
 	["x|gea"] = map_callback(function()
 			return vim.api.nvim_replace_termcodes("<Plug>(EasyAlign)", true, true, true)
 		end)
 		:with_expr()
-		:with_desc("editn: align"),
+		:with_desc("editx: Align with delimiter"),
 	-- Plugin MarkdownPreview
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent():with_desc("tool: Preview markdown"),
 	-- Plugin auto_session
