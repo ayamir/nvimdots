@@ -4,6 +4,10 @@ local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
+local function t(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 local _lazygit = nil
 local function toggle_lazygit()
 	if not _lazygit then
@@ -30,7 +34,6 @@ local plug_map = {
 	-- nvim-bufdel
 	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
 	-- Bufferline
-	["n|gb"] = map_cr("BufferLinePick"):with_noremap():with_silent():with_desc("buffer: Pick"),
 	["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_desc("buffer: Switch to next"),
 	["n|<A-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_desc("buffer: Switch to prev"),
 	["n|<A-S-j>"] = map_cr("BufferLineMoveNext"):with_noremap():with_silent():with_desc("buffer: Move current to next"),
@@ -225,17 +228,17 @@ local plug_map = {
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 	-- Plugin accelerate-jk
 	["n|j"] = map_callback(function()
-		return vim.api.nvim_replace_termcodes("<Plug>(accelerated_jk_gj)", true, true, true)
+		return t("<Plug>(accelerated_jk_gj)")
 	end):with_expr(),
 	["n|k"] = map_callback(function()
-		return vim.api.nvim_replace_termcodes("<Plug>(accelerated_jk_gk)", true, true, true)
+		return t("<Plug>(accelerated_jk_gk)")
 	end):with_expr(),
 	-- Plugin vim-eft
 	["n|;"] = map_callback(function()
-		return vim.api.nvim_replace_termcodes("<Plug>(clever-f-repeat-forward)", true, true, true)
+		return t("<Plug>(clever-f-repeat-forward)")
 	end):with_expr(),
 	["n|,"] = map_callback(function()
-		return vim.api.nvim_replace_termcodes("<Plug>(clever-f-repeat-back)", true, true, true)
+		return t("<Plug>(clever-f-repeat-back)")
 	end):with_expr(),
 	-- Plugin Hop
 	["n|<leader>w"] = map_cu("HopWord"):with_noremap():with_desc("jump: Goto word"),
@@ -245,12 +248,12 @@ local plug_map = {
 	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap():with_desc("jump: Goto two chars"),
 	-- Plugin EasyAlign
 	["n|gea"] = map_callback(function()
-			return vim.api.nvim_replace_termcodes("<Plug>(EasyAlign)", true, true, true)
+			return t("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
 		:with_desc("editn: Align with delimiter"),
 	["x|gea"] = map_callback(function()
-			return vim.api.nvim_replace_termcodes("<Plug>(EasyAlign)", true, true, true)
+			return t("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
 		:with_desc("editx: Align with delimiter"),
@@ -338,6 +341,39 @@ local plug_map = {
 		:with_silent()
 		:with_noremap()
 		:with_desc("editi: Goto begin of pair"),
+	-- Plugin Comment.nvim
+	["n|gcc"] = map_callback(function()
+			return vim.v.count == 0 and t("<Plug>(comment_toggle_linewise_current)")
+				or t("<Plug>(comment_toggle_linewise_count)")
+		end)
+		:with_silent()
+		:with_noremap()
+		:with_expr()
+		:with_desc("editn: Toggle comment for line"),
+	["n|gbc"] = map_callback(function()
+			return vim.v.count == 0 and t("<Plug>(comment_toggle_blockwise_current)")
+				or t("<Plug>(comment_toggle_blockwise_count)")
+		end)
+		:with_silent()
+		:with_noremap()
+		:with_expr()
+		:with_desc("editn: Toggle comment for block"),
+	["n|gc"] = map_cmd("<Plug>(comment_toggle_linewise)")
+		:with_silent()
+		:with_noremap()
+		:with_desc("editn: Toggle comment for line with operator"),
+	["n|gb"] = map_cmd("<Plug>(comment_toggle_blockwise)")
+		:with_silent()
+		:with_noremap()
+		:with_desc("editn: Toggle comment for block with operator"),
+	["x|gc"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
+		:with_silent()
+		:with_noremap()
+		:with_desc("editx: Toggle comment for line with selection"),
+	["x|gb"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)")
+		:with_silent()
+		:with_noremap()
+		:with_desc("editx: Toggle comment for block with selection"),
 }
 
 bind.nvim_load_mapping(plug_map)
