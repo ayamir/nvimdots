@@ -231,6 +231,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("editn: Change current direrctory by zoxide"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
+	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 	-- Plugin accelerate-jk
 	["n|j"] = map_callback(function()
 		return t("<Plug>(accelerated_jk_gj)")
