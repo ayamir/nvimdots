@@ -17,6 +17,15 @@ local function toggle_lazygit()
 	_lazygit:toggle()
 end
 
+local function command_panel()
+	local opts = {
+		lhs_filter = function(lhs)
+			return not string.find(lhs, "Þ")
+		end,
+	}
+	require("telescope.builtin").keymaps(opts)
+end
+
 local plug_map = {
 	-- nvim-bufdel
 	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
@@ -322,7 +331,7 @@ local plug_map = {
 	-- Plugin Diffview
 	["n|<leader>D"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
-	["n|<C-p>"] = map_cr("Telescope keymaps"):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
+	["n|<C-p>"] = map_callback(command_panel):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
 	-- Plugin Tabout
 	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap():with_desc("editi: Goto end of pair"),
 	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)")
