@@ -29,10 +29,10 @@ editor["rhysd/clever-f.vim"] = {
 	event = "BufReadPost",
 	config = require("editor.cleverf"),
 }
-editor["terrortylor/nvim-comment"] = {
+editor["numToStr/Comment.nvim"] = {
 	lazy = true,
 	event = { "BufNewFile", "BufReadPre" },
-	config = require("editor.nvim-comment"),
+	config = require("editor.comment"),
 }
 editor["sindrets/diffview.nvim"] = {
 	lazy = true,
