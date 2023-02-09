@@ -1,10 +1,10 @@
 return function()
 	local icons = {
-		diagnostics = require("modules.ui.icons").get("diagnostics", true),
-		git = require("modules.ui.icons").get("git", true),
-		misc = require("modules.ui.icons").get("misc", true),
-		ui = require("modules.ui.icons").get("ui", true),
-		kind = require("modules.ui.icons").get("kind", true),
+		diagnostics = require("modules.utils.icons").get("diagnostics", true),
+		git = require("modules.utils.icons").get("git", true),
+		misc = require("modules.utils.icons").get("misc", true),
+		ui = require("modules.utils.icons").get("ui", true),
+		kind = require("modules.utils.icons").get("kind", true),
 	}
 
 	local opts = {
