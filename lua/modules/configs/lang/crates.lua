@@ -7,7 +7,7 @@ return function()
 		kind = require("modules.utils.icons").get("kind", true),
 	}
 
-	local opts = {
+	require("crates").setup({
 		smart_insert = true,
 		insert_closing_quote = true,
 		avoid_prerelease = true,
@@ -82,76 +82,5 @@ return function()
 				yanked = " " .. icons.diagnostics.Error_alt .. "yanked ",
 			},
 		},
-	}
-
-	-- custom key map setup
-	vim.keymap.set("n", "<leader>ct", function()
-		require("crates").toggle()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cr", function()
-		require("crates").reload()
-	end, { buffer = true })
-
-	vim.keymap.set("n", "<leader>cp", function()
-		require("crates").show_popup()
-	end, { buffer = true })
-	vim.keymap.set("n", "K", function()
-		require("crates").show_popup()
-	end, { buffer = true })
-
-	vim.keymap.set("n", "<leader>cv", function()
-		require("crates").show_versions_popup()
-		require("crates").show_popup()
-	end, { buffer = true })
-	vim.keymap.set("n", "ga", function()
-		require("crates").show_versions_popup()
-		require("crates").show_popup()
-	end, { buffer = true })
-
-	vim.keymap.set("n", "gf", function()
-		require("crates").show_features_popup()
-		require("crates").show_popup()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cf", function()
-		require("crates").show_features_popup()
-		require("crates").show_popup()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cd", function()
-		require("crates").show_dependencies_popup()
-		require("crates").show_popup()
-	end, { buffer = true })
-
-	vim.keymap.set("n", "<leader>cu", function()
-		require("crates").update_crate()
-	end, { buffer = true })
-	vim.keymap.set("v", "<leader>cu", function()
-		require("crates").update_crates()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>ca", function()
-		require("crates").update_all_crates()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cU", function()
-		require("crates").upgrade_crate()
-	end, { buffer = true })
-	vim.keymap.set("v", "<leader>cU", function()
-		require("crates").upgrade_crates()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cA", function()
-		require("crates").upgrade_all_crates()
-	end, { buffer = true })
-
-	vim.keymap.set("n", "<leader>cH", function()
-		require("crates").open_homepage()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cR", function()
-		require("crates").open_repository()
-	end, { buffer = true })
-	vim.keymap.set("n", "gD", function()
-		require("crates").open_documentation()
-	end, { buffer = true })
-	vim.keymap.set("n", "<leader>cC", function()
-		require("crates").open_crates_io()
-	end, { buffer = true })
-
-	require("crates").setup(opts)
+	})
 end
