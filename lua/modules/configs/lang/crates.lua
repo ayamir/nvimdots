@@ -1,3 +1,155 @@
+local keymaps = {
+	{
+		"n",
+		"<leader>ct",
+		function()
+			require("crates").toggle()
+		end,
+	},
+	{
+		"n",
+		"<leader>cr",
+		function()
+			require("crates").reload()
+		end,
+	},
+	{
+		"n",
+		"<leader>cp",
+		function()
+			require("crates").show_popup()
+		end,
+	},
+	{
+		"n",
+		"K",
+		function()
+			require("crates").show_popup()
+		end,
+	},
+
+	{
+		"n",
+		"<leader>cv",
+		function()
+			require("crates").show_versions_popup()
+			require("crates").show_popup()
+		end,
+	},
+	{
+		"n",
+		"ga",
+		function()
+			require("crates").show_versions_popup()
+			require("crates").show_popup()
+		end,
+	},
+	{
+		"n",
+		"gf",
+		function()
+			require("crates").show_features_popup()
+			require("crates").show_popup()
+		end,
+	},
+	{
+		"n",
+		"<leader>cf",
+		function()
+			require("crates").show_features_popup()
+			require("crates").show_popup()
+		end,
+	},
+	{
+		"n",
+		"<leader>cd",
+		function()
+			require("crates").show_dependencies_popup()
+			require("crates").show_popup()
+		end,
+	},
+
+	{
+		"n",
+		"<leader>cu",
+		function()
+			require("crates").update_crate()
+		end,
+	},
+	{
+		"v",
+		"<leader>cu",
+		function()
+			require("crates").update_crates()
+		end,
+	},
+	{
+		"n",
+		"<leader>ca",
+		function()
+			require("crates").update_all_crates()
+		end,
+	},
+	{
+		"n",
+		"<leader>cU",
+		function()
+			require("crates").upgrade_crate()
+		end,
+	},
+	{
+		"v",
+		"<leader>cU",
+		function()
+			require("crates").upgrade_crates()
+		end,
+	},
+	{
+		"n",
+		"<leader>cA",
+		function()
+			require("crates").upgrade_all_crates()
+		end,
+	},
+
+	{
+		"n",
+		"<leader>cH",
+		function()
+			require("crates").open_homepage()
+		end,
+	},
+	{
+		"n",
+		"<leader>cR",
+		function()
+			require("crates").open_repository()
+		end,
+	},
+	{
+		"n",
+		"gD",
+		function()
+			require("crates").open_documentation()
+		end,
+	},
+	{
+		"n",
+		"<leader>cC",
+		function()
+			require("crates").open_crates_io()
+		end,
+	},
+}
+
+local function local_key_setup()
+	-- custom key map setup
+	for _, keymap in ipairs(keymaps) do
+		local mode, lhs, rhs = table.unpack(keymap)
+		vim.keymap.set(mode, lhs, rhs, { buffer = true })
+	end
+end
+
 return function()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
@@ -6,6 +158,8 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 		kind = require("modules.utils.icons").get("kind", true),
 	}
+
+	local_key_setup()
 
 	require("crates").setup({
 		smart_insert = true,
