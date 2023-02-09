@@ -1,4 +1,3 @@
-local vim = vim
 local autocmd = {}
 
 function autocmd.nvim_create_augroups(definitions)
