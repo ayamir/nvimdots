@@ -157,6 +157,7 @@ return function()
 		lua = { formatter = stylua },
 		c = { formatter = clangfmt },
 		cpp = { formatter = clangfmt },
+		cuda = { formatter = clangfmt },
 		python = { formatter = black },
 		vue = { formatter = prettier },
 		typescript = { formatter = prettier, linter = eslint },

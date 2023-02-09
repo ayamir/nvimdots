@@ -38,6 +38,7 @@ end, {
 			"lua",
 			"c",
 			"cpp",
+			"cuda",
 			"python",
 			"vue",
 			"typescript",
