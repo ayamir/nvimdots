@@ -44,6 +44,36 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("lsp: Show outgoing calls"),
+	["n|gDC"] = map_callback(function()
+			vim.lsp.buf.declaration()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("lsp: Goto declaration"),
+	["n|gI"] = map_callback(function()
+			vim.lsp.buf.implementation()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("lsp: Goto implementation"),
+	["n|gT"] = map_callback(function()
+			vim.lsp.buf.type_definition()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("lsp: Goto type_definition"),
+	-- ["n|gDL"] = map_callback(function() -- NOTE: use trouble instead
+	-- 		vim.diagnostic.setloclist()
+	-- 	end)
+	-- 	:with_noremap()
+	-- 	:with_silent()
+	-- 	:with_desc("lsp: Show diagnostic location list"),
+	-- ["n|gQL"] = map_callback(function() -- NOTE: use trouble instead
+	-- 		vim.diagnostic.setqflist()
+	-- 	end)
+	-- 	:with_noremap()
+	-- 	:with_silent()
+	-- 	:with_desc("lsp: Show diagnostic quickfix list"),
 }
 
 bind.nvim_load_mapping(plug_map)
