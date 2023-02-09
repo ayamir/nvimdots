@@ -1,0 +1,125 @@
+local bind = require("keymap.bind")
+local map_callback = bind.map_callback
+
+local crates_keymap = {
+	["n|<leader>ct"] = map_callback(function()
+			require("crates").toggle()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc("crates: <your-desc>"),
+	["n|<leader>cr"] = map_callback(function()
+			require("crates").reload()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+
+	["n|<leader>cs"] = map_callback(function()
+			require("crates").show_popup()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cv"] = map_callback(function()
+			require("crates").show_versions_popup()
+			require("crates").show_popup()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cf"] = map_callback(function()
+			require("crates").show_features_popup()
+			require("crates").show_popup()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cd"] = map_callback(function()
+			require("crates").show_dependencies_popup()
+			require("crates").show_popup()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+
+	["n|<leader>cu"] = map_callback(function()
+			require("crates").update_crate()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["v|<leader>cu"] = map_callback(function()
+			require("crates").update_crates()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>ca"] = map_callback(function()
+			require("crates").update_all_crates()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cU"] = map_callback(function()
+			require("crates").upgrade_crate()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["v|<leader>cU"] = map_callback(function()
+			require("crates").upgrade_crates()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cA"] = map_callback(function()
+			require("crates").upgrade_all_crates()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+
+	["n|<leader>cH"] = map_callback(function()
+			require("crates").open_homepage()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cR"] = map_callback(function()
+			require("crates").open_repository()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cD"] = map_callback(function()
+			require("crates").open_documentation()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+	["n|<leader>cC"] = map_callback(function()
+			require("crates").open_crates_io()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_buffer(0)
+		:with_desc(""),
+}
+
+bind.nvim_load_mapping(crates_keymap)
