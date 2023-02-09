@@ -1,4 +1,4 @@
----@class RhsContainer
+---@class map_rhs
 ---@field cmd string
 ---@field options table
 ---@field options.noremap boolean
@@ -29,28 +29,28 @@ function rhs_options:new()
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function rhs_options:map_cmd(cmd_string)
 	self.cmd = cmd_string
 	return self
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function rhs_options:map_cr(cmd_string)
 	self.cmd = (":%s<CR>"):format(cmd_string)
 	return self
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function rhs_options:map_args(cmd_string)
 	self.cmd = (":%s<Space>"):format(cmd_string)
 	return self
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function rhs_options:map_cu(cmd_string)
 	-- <C-u> to eliminate the automatically inserted range in visual mode
 	self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
@@ -59,46 +59,46 @@ end
 
 ---@param callback fun():nil
 --- Takes a callback that will be called when the key is pressed
----@return RhsContainer
+---@return map_rhs
 function rhs_options:map_callback(callback)
 	self.cmd = ""
 	self.options.callback = callback
 	return self
 end
 
----@return RhsContainer
+---@return map_rhs
 function rhs_options:with_silent()
 	self.options.silent = true
 	return self
 end
 
 ---@param description_string string
----@return RhsContainer
+---@return map_rhs
 function rhs_options:with_desc(description_string)
 	self.options.desc = description_string
 	return self
 end
 
----@return RhsContainer
+---@return map_rhs
 function rhs_options:with_noremap()
 	self.options.noremap = true
 	return self
 end
 
----@return RhsContainer
+---@return map_rhs
 function rhs_options:with_expr()
 	self.options.expr = true
 	return self
 end
 
----@return RhsContainer
+---@return map_rhs
 function rhs_options:with_nowait()
 	self.options.nowait = true
 	return self
 end
 
 ---@param num number
----@return RhsContainer
+---@return map_rhs
 function rhs_options:with_buffer(num)
 	self.buffer = num
 	return self
@@ -107,41 +107,41 @@ end
 local pbind = {}
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function pbind.map_cr(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_cr(cmd_string)
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function pbind.map_cmd(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_cmd(cmd_string)
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function pbind.map_cu(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_cu(cmd_string)
 end
 
 ---@param cmd_string string
----@return RhsContainer
+---@return map_rhs
 function pbind.map_args(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_args(cmd_string)
 end
 
 ---@param callback fun():nil
----@return RhsContainer
+---@return map_rhs
 function pbind.map_callback(callback)
 	local ro = rhs_options:new()
 	return ro:map_callback(callback)
 end
 
----@param mapping table<string, RhsContainer>
+---@param mapping table<string, map_rhs>
 function pbind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do
 		local mode, keymap = key:match("([^|]*)|?(.*)")
