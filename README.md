@@ -17,7 +17,7 @@
     <a href="https://github.com/ayamir/nvimdots/stargazers">
     <img
         alt="Stars"
-        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&style=for-the-badge">
+        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE&style=for-the-badge">
     </a>
     <a href="https://github.com/ayamir/nvimdots/issues">
     <img
@@ -39,10 +39,15 @@
 This repo hosts my [NeoVim](https://neovim.io/) configuration for Linux, macOS, and Windows. `init.lua` is the config entry point.
 
 It contains two branches:
-| Branch | Completion Solution |
+
+<div align="center">
+
+| Branch |    Completion Solution     |
 | :----: | :------------------------: |
-| main | config for nvim 0.8 stable |
-| 0.7 | config for nvim 0.7 stable |
+|  main  | config for nvim 0.8 stable |
+|  0.7   | config for nvim 0.7 stable |
+
+</div>
 
 I use [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
@@ -63,16 +68,16 @@ Just run the following interactive bootstrap command, and you're good to go 👍
 - **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
 
 ```pwsh
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/install/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.ps1'))
 ```
 
 - **\*nix**
 
 ```sh
 if command -v curl >/dev/null 2>&1; then
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/install/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)"
 else
-    bash -c "$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/install/install.sh)"
+    bash -c "$(wget -O- https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.sh)"
 fi
 ```
 

@@ -8,6 +8,8 @@ function rhs_options:new()
 			silent = false,
 			expr = false,
 			nowait = false,
+			callback = nil,
+			desc = "",
 		},
 		buffer = false,
 	}
@@ -37,8 +39,19 @@ function rhs_options:map_cu(cmd_string)
 	return self
 end
 
+function rhs_options:map_callback(callback)
+	self.cmd = ""
+	self.options.callback = callback
+	return self
+end
+
 function rhs_options:with_silent()
 	self.options.silent = true
+	return self
+end
+
+function rhs_options:with_desc(description_string)
+	self.options.desc = description_string
 	return self
 end
 
@@ -82,6 +95,11 @@ end
 function pbind.map_args(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_args(cmd_string)
+end
+
+function pbind.map_callback(callback)
+	local ro = rhs_options:new()
+	return ro:map_callback(callback)
 end
 
 function pbind.nvim_load_mapping(mapping)
