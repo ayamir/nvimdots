@@ -1,5 +1,4 @@
 local global = require("core.global")
-local vim = vim
 
 -- Create cache dir and data dirs
 local createdir = function()
