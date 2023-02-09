@@ -17,6 +17,20 @@ local function toggle_lazygit()
 	_lazygit:toggle()
 end
 
+local function command_panel()
+	local opts = {
+		lhs_filter = function(lhs)
+			return not string.find(lhs, "Þ")
+		end,
+		layout_config = {
+			width = 0.6,
+			height = 0.6,
+			prompt_position = "top",
+		},
+	}
+	require("telescope.builtin").keymaps(opts)
+end
+
 local plug_map = {
 	-- Plugin: vim-fugitive
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
@@ -114,6 +128,7 @@ local plug_map = {
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
 
 	-- Plugin: telescope
+	["n|<C-p>"] = map_callback(command_panel):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
 	["n|<leader>u"] = map_callback(function()
 			require("telescope").extensions.undo.undo()
 		end)

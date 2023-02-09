@@ -8,20 +8,6 @@ local function t(str)
 	return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local function command_panel()
-	local opts = {
-		lhs_filter = function(lhs)
-			return not string.find(lhs, "Þ")
-		end,
-		layout_config = {
-			width = 0.6,
-			height = 0.6,
-			prompt_position = "top",
-		},
-	}
-	require("telescope.builtin").keymaps(opts)
-end
-
 local plug_map = {
 	-- Plugin: accelerate-jk
 	["n|j"] = map_callback(function()
@@ -84,7 +70,6 @@ local plug_map = {
 	-- Plugin: diffview
 	["n|<leader>D"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
-	["n|<C-p>"] = map_callback(command_panel):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
 
 	-- Plugin: vim-easy-align
 	["n|gea"] = map_callback(function()
