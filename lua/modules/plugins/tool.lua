@@ -7,7 +7,7 @@ tool["tpope/vim-fugitive"] = {
 -- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tool["folke/which-key.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "VeryLazy",
 	config = require("tool.which-key"),
 }
 -- only for fcitx5 user who uses non-English language during coding
