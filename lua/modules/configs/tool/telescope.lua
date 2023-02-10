@@ -74,18 +74,4 @@ return function()
 	require("telescope").load_extension("projects")
 	require("telescope").load_extension("undo")
 	require("telescope").load_extension("zoxide")
-
-	function _Command_panel()
-		local opts = {
-			lhs_filter = function(lhs)
-				return not string.find(lhs, "Þ")
-			end,
-			layout_config = {
-				width = 0.6,
-				height = 0.6,
-				prompt_position = "top",
-			},
-		}
-		require("telescope.builtin").keymaps(opts)
-	end
 end
