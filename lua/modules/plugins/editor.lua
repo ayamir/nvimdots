@@ -74,7 +74,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{ "p00f/nvim-ts-rainbow" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
-		{ "mfussenegger/nvim-ts-hint-textobject" },
+		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
 		{
 			"windwp/nvim-ts-autotag",
