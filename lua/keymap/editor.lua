@@ -38,7 +38,7 @@ local plug_map = {
 		:with_silent()
 		:with_noremap()
 		:with_expr()
-		:with_desc("editn: Toggle comment for line"),
+		:with_desc("edit: Toggle comment for line"),
 	["n|gbc"] = map_callback(function()
 			return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)")
 				or et("<Plug>(comment_toggle_blockwise_count)")
@@ -46,23 +46,23 @@ local plug_map = {
 		:with_silent()
 		:with_noremap()
 		:with_expr()
-		:with_desc("editn: Toggle comment for block"),
+		:with_desc("edit: Toggle comment for block"),
 	["n|gc"] = map_cmd("<Plug>(comment_toggle_linewise)")
 		:with_silent()
 		:with_noremap()
-		:with_desc("editn: Toggle comment for line with operator"),
+		:with_desc("edit: Toggle comment for line with operator"),
 	["n|gb"] = map_cmd("<Plug>(comment_toggle_blockwise)")
 		:with_silent()
 		:with_noremap()
-		:with_desc("editn: Toggle comment for block with operator"),
+		:with_desc("edit: Toggle comment for block with operator"),
 	["x|gc"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
 		:with_silent()
 		:with_noremap()
-		:with_desc("editx: Toggle comment for line with selection"),
+		:with_desc("edit: Toggle comment for line with selection"),
 	["x|gb"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)")
 		:with_silent()
 		:with_noremap()
-		:with_desc("editx: Toggle comment for block with selection"),
+		:with_desc("edit: Toggle comment for block with selection"),
 
 	-- Plugin: diffview
 	["n|<leader>D"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
@@ -73,12 +73,12 @@ local plug_map = {
 			return et("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
-		:with_desc("editn: Align with delimiter"),
+		:with_desc("edit: Align with delimiter"),
 	["x|gea"] = map_callback(function()
 			return et("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
-		:with_desc("editx: Align with delimiter"),
+		:with_desc("edit: Align with delimiter"),
 
 	-- Plugin: hop
 	["n|<leader>w"] = map_cu("HopWord"):with_noremap():with_desc("jump: Goto word"),
@@ -91,11 +91,8 @@ local plug_map = {
 	["o|m"] = map_cu("require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
 
 	-- Plugin: tabout
-	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap():with_desc("editi: Goto end of pair"),
-	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)")
-		:with_silent()
-		:with_noremap()
-		:with_desc("editi: Goto begin of pair"),
+	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap():with_desc("edit: Goto end of pair"),
+	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap():with_desc("edit: Goto begin of pair"),
 }
 
 bind.nvim_load_mapping(plug_map)

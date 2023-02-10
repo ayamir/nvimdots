@@ -112,7 +112,7 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("editn: Show undo history"),
+		:with_desc("edit: Show undo history"),
 	["n|<leader>fp"] = map_callback(function()
 			require("telescope").extensions.projects.projects({})
 		end)
@@ -145,7 +145,7 @@ local plug_map = {
 	["n|<leader>fz"] = map_cu("Telescope zoxide list")
 		:with_noremap()
 		:with_silent()
-		:with_desc("editn: Change current direrctory by zoxide"),
+		:with_desc("edit: Change current direrctory by zoxide"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 
