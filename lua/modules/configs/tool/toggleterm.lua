@@ -35,20 +35,39 @@ return function()
 		shell = vim.o.shell, -- change the default shell
 	})
 
+	local function not_found_notify(program)
+		vim.notify(string.format("[%s] not found!", program), vim.log.levels.ERROR, { title = "toggleterm.nvim" })
+	end
+
 	local Terminal = require("toggleterm.terminal").Terminal
 
 	function _Lazygit_toggle()
-		local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-		lazygit:toggle()
+		if vim.fn.executable("lazygit") then
+			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+			lazygit:toggle()
+		else
+			not_found_notify("Lazygit")
+		end
 	end
 
 	function _Htop_toggle()
-		local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
-		htop:toggle()
+		if vim.fn.executable("lazygit") then
+			local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
+			htop:toggle()
+		else
+			not_found_notify("Htop")
+		end
 	end
 
 	function _Python_toggle()
-		local python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
-		python:toggle()
+		if vim.fn.executable("python3") then
+			local python = Terminal:new({ cmd = "python3", hidden = true, direction = "float" })
+			python:toggle()
+		elseif vim.fn.executable("python") then
+			local python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
+			python:toggle()
+		else
+			not_found_notify("Python")
+		end
 	end
 end
