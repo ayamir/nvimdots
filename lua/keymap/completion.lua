@@ -44,24 +44,24 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("lsp: Show outgoing calls"),
-	["n|gDC"] = map_callback(function()
-			vim.lsp.buf.declaration()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("lsp: Goto declaration"),
-	["n|gI"] = map_callback(function()
-			vim.lsp.buf.implementation()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("lsp: Goto implementation"),
-	["n|gT"] = map_callback(function()
-			vim.lsp.buf.type_definition()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("lsp: Goto type_definition"),
+	-- ["n|gDC"] = map_callback(function()
+	-- 		vim.lsp.buf.declaration()
+	-- 	end)
+	-- 	:with_noremap()
+	-- 	:with_silent()
+	-- 	:with_desc("lsp: Goto declaration"),
+	-- ["n|gI"] = map_callback(function()
+	-- 		vim.lsp.buf.implementation()
+	-- 	end)
+	-- 	:with_noremap()
+	-- 	:with_silent()
+	-- 	:with_desc("lsp: Goto implementation"),
+	-- ["n|gT"] = map_callback(function()
+	-- 		vim.lsp.buf.type_definition()
+	-- 	end)
+	-- 	:with_noremap()
+	-- 	:with_silent()
+	-- 	:with_desc("lsp: Goto type_definition"),
 }
 
 bind.nvim_load_mapping(plug_map)
