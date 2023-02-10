@@ -101,7 +101,12 @@ local plug_map = {
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
 
 	-- Plugin: telescope
-	["n|<C-p>"] = map_callback(_Command_panel):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
+	["n|<C-p>"] = map_callback(function()
+			_Command_panel()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Toggle command panel"),
 	["n|<leader>u"] = map_callback(function()
 			require("telescope").extensions.undo.undo()
 		end)
