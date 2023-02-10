@@ -16,7 +16,7 @@
     depending upon how much time is spent with experimentation.
 
 ===============================================================================
-                    Chapter 1:    Basic Workflow
+                        Chapter 1:    Basic Workflow
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     Chapter 1.1:  Explanation of UI
@@ -75,7 +75,7 @@ OK, now you have known enough about the UI of nvimdots. Let's move on to the
 next topic about the basic workflow.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                    Chapter 1.2:  Find and Search
+                        Chapter 1.2:  Find and Search
 
 Nvimdots use "telescope.nvim" as the main fuzzy finder. It provides lots of
 features to find and search. You can press `<leader>ff` to open file finder
@@ -105,7 +105,7 @@ There are many other features I have not mentioned. You can press `<C-p>` to
 open command panel and type "find" to view all of them.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                Chapter 1.3:  Edit and Format
+                    Chapter 1.3:  Edit and Format
 
 The completion window will always show no matter what file you are editing.
 You can use `<Tab>` and `<S-Tab>` to select next and previous candidate in
@@ -113,6 +113,13 @@ the completion window and use <CR> to confirm completion. You can also use
 `<C-n>` and `<C-p>` and `<C-y>` to do it. Sometimes you don't want confirm
 completion but just want to new a line, you can use `<C-e>` to close the
 window manually.
+
+There are more functions provided by lsp besides code completion. You can
+experienced almost all of features like smart rename, find references,
+goto definition, view docs of some functions etc provided by vscode here
+if you were a vscode user before. Of course, it doesn't matter whether
+you have knowledge about lsp. Just check the keymaps and use them directly,
+all of them are intuitive.
 
 Snippet is a awesome method to help us write code quickly and efficiently.
 As most other editors and IDEs, `<Tab>` and `<S-Tab>` are configured to
@@ -126,87 +133,24 @@ by set `settings["format_on_save"] = false` in `lua/core/settings.lua`.
 Besides, you can just toggle it for specific language temprarily by executing
 `:FormatterToggle {language_name}`.
 
-Nvimdots use "efm-langserver" to manage linters and formatters together.
-You can view all of pre-configured formatters at the end of `lua/modules/
-completion/lsp.lua`. You can also customized the format arguments on your
-demand. For example, you can just set `formatCommand = "clang-format"` to make
-`clang-format` respect the `.clang-format` file under your project root at
-`lua/modules/completion/efm/formatters/clangfmt.lua`.
-
 ------------------------------------------------------------------------------
 
-    ** You can yank content to clipboard and paste clipboard content to nvim **
+Congratulations! You have learned 60% features nvimdots provided till now.
+So you will get curious about where can you master the left 40%? It's because
+we enhanced lots of nvim's default abilities that you can use them naturally
+except the mentioned above.
 
-    This feature also enabled for ssh session and nvim running in tmux.
+Last but not least, you can press `<C-p>` to call the command panel and
+search keymaps for features you want at any time.
 
-------------------------------------------------------------------------------
+Let's move on to the next chapter to learn how to customize nvimdots for users
+who want to make it more powerful and more suitable for their own needs.
 
-Keys: `j`, `k`
+===============================================================================
+                        Chapter 2:    Customization
 
-Mode: ** Normal **
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    Chapter 2.1:  Overview of structure
 
-Effect: Move speed of `j` and `k` will increase for long duration of pressing.
-
-Plugin: rainbowhxch/accelerated-jk.nvim
-
-------------------------------------------------------------------------------
-
-Keys: "f", "F", "t", "T", ";", ","
-
-Mode: ** Normal **
-
-Effect: It will show you highlight for the target letter.
-
-Plugin: rhysd/clever-f.vim
-
-------------------------------------------------------------------------------
-
-Keys: `:`, `/`, `?`
-
-Mode: ** Normal **
-
-Effect: It will show you fuzzy match list of your input.
-
-NOTE: The highlight of searched word will be clear when the cursor moved.
-
-Plugin: gelguy/wilder.nvim
-
-------------------------------------------------------------------------------
-
-Keys: `<leader>w`
-
-Mode: ** Normal **
-
-Effect: Show key index of each word showed in screen.
-
-NOTE: You can press corresponding key to move cursor to the word.
-
-Plugin: phaazon/hop.nvim
-
-Practice: Now press `<leader>w` to move cursor ** Here **.
-
-------------------------------------------------------------------------------
-
-Keys: `<leader>c`
-
-Mode: ** Normal **
-
-Effect: Show key index of the required character.
-
-NOTE: You need to input required character after press `<leader>c`.
-
-Plugin: phaazon/hop.nvim
-
-Practice: Now press `<leader>c` and input `H` to move cursor ** Here **.
-
-------------------------------------------------------------------------------
-
-Keys: `jk`
-
-Mode: ** Insert **
-
-Effect: Escape from insert mode.
-
-NOTE: You can see the state of it in lualine after you press `j`.
-
-Plugin: max397574/better-escape.nvim
+We architected nvimdots with modularity in mind, so you can customize and
+maintain your own fork easily.
