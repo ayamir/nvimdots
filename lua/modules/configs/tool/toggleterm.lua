@@ -51,7 +51,7 @@ return function()
 	end
 
 	function _Htop_toggle()
-		if vim.fn.executable("lazygit") then
+		if vim.fn.executable("htop") then
 			local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
 			htop:toggle()
 		else
