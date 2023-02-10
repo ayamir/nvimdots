@@ -3,9 +3,8 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 
--- default map
-local def_map = {
-	-- Vim map
+local core_map = {
+	-- Suckless
 	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("editn: Toggle code fold"),
 	["n|<C-s>"] = map_cu("write"):with_noremap():with_silent():with_desc("editn: Save file"),
 	["n|<C-S-s>"] = map_cmd("execute 'silent! write !sudo tee % >/dev/null' <bar> edit!")
@@ -32,13 +31,13 @@ local def_map = {
 	["n|<C-q>"] = map_cmd(":wq<CR>"):with_desc("editn: Save file and quit"),
 	["n|<A-S-q>"] = map_cmd(":q!<CR>"):with_desc("editn: Force quit"),
 	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("editn: Toggle spell check"),
-	-- Insert
+	-- Insert mode
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("editi: Delete previous block"),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("editi: Move cursor to left"),
 	["i|<C-a>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("editi: Move cursor to line start"),
 	["i|<C-s>"] = map_cmd("<Esc>:w<CR>"):with_desc("editi: Save file"),
 	["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"):with_desc("editi: Save file and quit"),
-	-- command line
+	-- Command mode
 	["c|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("editc: Left"),
 	["c|<C-f>"] = map_cmd("<Right>"):with_noremap():with_desc("editc: Right"),
 	["c|<C-a>"] = map_cmd("<Home>"):with_noremap():with_desc("editc: Home"),
@@ -48,11 +47,11 @@ local def_map = {
 	["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]])
 		:with_noremap()
 		:with_desc("editc: Complete path of current file"),
-	-- Visual
+	-- Visual mode
 	["v|J"] = map_cmd(":m '>+1<CR>gv=gv"):with_desc("editv: Move this line down"),
 	["v|K"] = map_cmd(":m '<-2<CR>gv=gv"):with_desc("editv: Move this line up"),
 	["v|<"] = map_cmd("<gv"):with_desc("editv: Decrease indent"),
 	["v|>"] = map_cmd(">gv"):with_desc("editv: Increase indent"),
 }
 
-bind.nvim_load_mapping(def_map)
+bind.nvim_load_mapping(core_map)
