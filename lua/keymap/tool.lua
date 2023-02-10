@@ -4,33 +4,6 @@ local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
-local _lazygit = nil
-local function toggle_lazygit()
-	if not _lazygit then
-		local Terminal = require("toggleterm.terminal").Terminal
-		_lazygit = Terminal:new({
-			cmd = "lazygit",
-			hidden = true,
-			direction = "float",
-		})
-	end
-	_lazygit:toggle()
-end
-
-local function command_panel()
-	local opts = {
-		lhs_filter = function(lhs)
-			return not string.find(lhs, "Þ")
-		end,
-		layout_config = {
-			width = 0.6,
-			height = 0.6,
-			prompt_position = "top",
-		},
-	}
-	require("telescope.builtin").keymaps(opts)
-end
-
 local plug_map = {
 	-- Plugin: vim-fugitive
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
@@ -94,13 +67,13 @@ local plug_map = {
 		:with_desc("terminal: Toggle float"),
 	["t|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
 	["n|<leader>g"] = map_callback(function()
-			toggle_lazygit()
+			_Lazygit_toggle()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("git: Toggle lazygit"),
 	["t|<leader>g"] = map_callback(function()
-			toggle_lazygit()
+			_Lazygit_toggle()
 		end)
 		:with_noremap()
 		:with_silent()
@@ -128,7 +101,7 @@ local plug_map = {
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
 
 	-- Plugin: telescope
-	["n|<C-p>"] = map_callback(command_panel):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
+	["n|<C-p>"] = map_callback(_Command_panel):with_silent():with_noremap():with_desc("tool: Toggle command panel"),
 	["n|<leader>u"] = map_callback(function()
 			require("telescope").extensions.undo.undo()
 		end)

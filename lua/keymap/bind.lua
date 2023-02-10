@@ -139,6 +139,12 @@ function bind.map_callback(callback)
 	return ro:map_callback(callback)
 end
 
+---@param cmd_string string
+---@return string escaped_string
+function bind.escape_termcode(cmd_string)
+	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
+end
+
 ---@param mapping table<string, map_rhs>
 function bind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do

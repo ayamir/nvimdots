@@ -34,4 +34,21 @@ return function()
 		close_on_exit = true, -- close the terminal window when the process exits
 		shell = vim.o.shell, -- change the default shell
 	})
+
+	local Terminal = require("toggleterm.terminal").Terminal
+
+	function _Lazygit_toggle()
+		local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+		lazygit:toggle()
+	end
+
+	function _Htop_toggle()
+		local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
+		htop:toggle()
+	end
+
+	function _Python_toggle()
+		local python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
+		python:toggle()
+	end
 end

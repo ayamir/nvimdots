@@ -3,18 +3,15 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-
-local function t(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+local et = bind.escape_termcode
 
 local plug_map = {
 	-- Plugin: accelerate-jk
 	["n|j"] = map_callback(function()
-		return t("<Plug>(accelerated_jk_gj)")
+		return et("<Plug>(accelerated_jk_gj)")
 	end):with_expr(),
 	["n|k"] = map_callback(function()
-		return t("<Plug>(accelerated_jk_gk)")
+		return et("<Plug>(accelerated_jk_gk)")
 	end):with_expr(),
 
 	-- Plugin: auto_session
@@ -27,24 +24,24 @@ local plug_map = {
 
 	-- Plugin: clever-f
 	["n|;"] = map_callback(function()
-		return t("<Plug>(clever-f-repeat-forward)")
+		return et("<Plug>(clever-f-repeat-forward)")
 	end):with_expr(),
 	["n|,"] = map_callback(function()
-		return t("<Plug>(clever-f-repeat-back)")
+		return et("<Plug>(clever-f-repeat-back)")
 	end):with_expr(),
 
 	-- Plugin: comment.nvim
 	["n|gcc"] = map_callback(function()
-			return vim.v.count == 0 and t("<Plug>(comment_toggle_linewise_current)")
-				or t("<Plug>(comment_toggle_linewise_count)")
+			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")
+				or et("<Plug>(comment_toggle_linewise_count)")
 		end)
 		:with_silent()
 		:with_noremap()
 		:with_expr()
 		:with_desc("editn: Toggle comment for line"),
 	["n|gbc"] = map_callback(function()
-			return vim.v.count == 0 and t("<Plug>(comment_toggle_blockwise_current)")
-				or t("<Plug>(comment_toggle_blockwise_count)")
+			return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)")
+				or et("<Plug>(comment_toggle_blockwise_count)")
 		end)
 		:with_silent()
 		:with_noremap()
@@ -73,12 +70,12 @@ local plug_map = {
 
 	-- Plugin: vim-easy-align
 	["n|gea"] = map_callback(function()
-			return t("<Plug>(EasyAlign)")
+			return et("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
 		:with_desc("editn: Align with delimiter"),
 	["x|gea"] = map_callback(function()
-			return t("<Plug>(EasyAlign)")
+			return et("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
 		:with_desc("editx: Align with delimiter"),
