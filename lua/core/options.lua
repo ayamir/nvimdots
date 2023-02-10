@@ -87,6 +87,7 @@ local function load_options()
 		ttimeoutlen = 0,
 		undodir = global.cache_dir .. "undo/",
 		undofile = true,
+		-- Please do NOT set `updatetime` to above 500, otherwise most plugins may not work correctly
 		updatetime = 200,
 		viewoptions = "folds,cursor,curdir,slash,unix",
 		virtualedit = "block",
