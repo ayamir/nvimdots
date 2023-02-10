@@ -90,6 +90,11 @@ local plug_map = {
 	["n|<leader>c"] = map_cu("HopChar1"):with_noremap():with_desc("jump: Goto one char"),
 	["n|<leader>cc"] = map_cu("HopChar2"):with_noremap():with_desc("jump: Goto two chars"),
 
+	-- Plugin: treehopper
+	["o|m"] = map_callback(function()
+		require("tsht").nodes()
+	end):with_silent(),
+
 	-- Plugin: tabout
 	["i|<A-l>"] = map_cmd("<Plug>(TaboutMulti)"):with_silent():with_noremap():with_desc("editi: Goto end of pair"),
 	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)")

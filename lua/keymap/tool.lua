@@ -233,9 +233,6 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Open REPL"),
-	["o|m"] = map_callback(function()
-		require("tsht").nodes()
-	end):with_silent(),
 }
 
 bind.nvim_load_mapping(plug_map)
