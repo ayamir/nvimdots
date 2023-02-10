@@ -74,17 +74,6 @@ local function init_palette()
 	return palette
 end
 
----Generate universal highlight groups
----@param overwrite palette? @The color to be overwritten | highest priority
----@return palette
-function M.get_palette(overwrite)
-	if not overwrite then
-		return init_palette()
-	else
-		return vim.tbl_extend("force", init_palette(), overwrite)
-	end
-end
-
 ---@param c string @The color in hexadecimal.
 local function hexToRgb(c)
 	c = string.lower(c)
@@ -134,6 +123,7 @@ end
 ---@param background string @The background color to blend with
 ---@param alpha number|string @Number between 0 and 1 for blending amount.
 function M.blend(foreground, background, alpha)
+	---@diagnostic disable-next-line: cast-local-type
 	alpha = type(alpha) == "string" and (tonumber(alpha, 16) / 0xff) or alpha
 	local bg = hexToRgb(background)
 	local fg = hexToRgb(foreground)
@@ -180,6 +170,17 @@ function M.extend_hl(name, def)
 	local combined_def = vim.tbl_deep_extend("force", current_def, def)
 
 	vim.api.nvim_set_hl(0, name, combined_def)
+end
+
+---Generate universal highlight groups
+---@param overwrite palette? @The color to be overwritten | highest priority
+---@return palette
+function M.get_palette(overwrite)
+	if not overwrite then
+		return init_palette()
+	else
+		return vim.tbl_extend("force", init_palette(), overwrite)
+	end
 end
 
 ---Convert number (0/1) to boolean

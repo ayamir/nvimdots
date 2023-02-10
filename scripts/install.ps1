@@ -5,15 +5,13 @@
 
 Set-StrictMode -Version 3.0
 
-$ErrorActionPreference = "Stop" # Exit when command fails
-
 # global-scope vars
 $REQUIRED_NVIM_VERSION = [version]'0.8.0'
 $USE_SSH = $True
 
 # package mgr vars
-$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust-ms" }
-$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust" }
+$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust-ms" }
+$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust" }
 $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 
 # env vars
@@ -253,6 +251,7 @@ function Fetch-Deps {
 	Check-And-Fetch-Exec -PkgName "node"
 	Check-And-Fetch-Exec -PkgName "pip"
 	Check-And-Fetch-Exec -PkgName "fzf"
+	Check-And-Fetch-Exec -PkgName "rg"
 	Check-And-Fetch-Exec -PkgName "ruby"
 	Check-And-Fetch-Exec -PkgName "go"
 	Check-And-Fetch-Exec -PkgName "curl"
@@ -375,6 +374,8 @@ You must install Git before installing this Nvim config. See:
 	}
 
 	prompt -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
+	prompt -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and'
+	prompt -Msg '  replace vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`'
 	prompt -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 	Write-Host @'
 
