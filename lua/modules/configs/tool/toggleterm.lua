@@ -52,8 +52,8 @@ return function()
 			toggleterm_cache.lazygit:toggle()
 		else
 			if vim.fn.executable("lazygit") then
-				local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-				lazygit:toggle()
+				toggleterm_cache.lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+				toggleterm_cache.lazygit:toggle()
 			else
 				not_found_notify("Lazygit")
 			end
@@ -65,8 +65,8 @@ return function()
 			toggleterm_cache.htop:toggle()
 		else
 			if vim.fn.executable("htop") then
-				local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
-				htop:toggle()
+				toggleterm_cache.htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
+				toggleterm_cache.htop:toggle()
 			else
 				not_found_notify("Htop")
 			end
@@ -78,11 +78,11 @@ return function()
 			toggleterm_cache.python:toggle()
 		else
 			if vim.fn.executable("python3") then
-				local python = Terminal:new({ cmd = "python3", hidden = true, direction = "float" })
-				python:toggle()
+				toggleterm_cache.python = Terminal:new({ cmd = "python3", hidden = true, direction = "float" })
+				toggleterm_cache.python:toggle()
 			elseif vim.fn.executable("python") then
-				local python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
-				python:toggle()
+				toggleterm_cache.python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
+				toggleterm_cache.python:toggle()
 			else
 				not_found_notify("Python")
 			end
