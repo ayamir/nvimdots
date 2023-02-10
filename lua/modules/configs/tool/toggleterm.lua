@@ -41,33 +41,51 @@ return function()
 
 	local Terminal = require("toggleterm.terminal").Terminal
 
+	local toggleterm_cache = {
+		lazygit = nil,
+		htop = nil,
+		python = nil,
+	}
+
 	function _Lazygit_toggle()
-		if vim.fn.executable("lazygit") then
-			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-			lazygit:toggle()
+		if toggleterm_cache.lazygit then
+			toggleterm_cache.lazygit:toggle()
 		else
-			not_found_notify("Lazygit")
+			if vim.fn.executable("lazygit") then
+				local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+				lazygit:toggle()
+			else
+				not_found_notify("Lazygit")
+			end
 		end
 	end
 
 	function _Htop_toggle()
-		if vim.fn.executable("htop") then
-			local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
-			htop:toggle()
+		if toggleterm_cache.htop then
+			toggleterm_cache.htop:toggle()
 		else
-			not_found_notify("Htop")
+			if vim.fn.executable("htop") then
+				local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
+				htop:toggle()
+			else
+				not_found_notify("Htop")
+			end
 		end
 	end
 
 	function _Python_toggle()
-		if vim.fn.executable("python3") then
-			local python = Terminal:new({ cmd = "python3", hidden = true, direction = "float" })
-			python:toggle()
-		elseif vim.fn.executable("python") then
-			local python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
-			python:toggle()
+		if toggleterm_cache.python then
+			toggleterm_cache.python:toggle()
 		else
-			not_found_notify("Python")
+			if vim.fn.executable("python3") then
+				local python = Terminal:new({ cmd = "python3", hidden = true, direction = "float" })
+				python:toggle()
+			elseif vim.fn.executable("python") then
+				local python = Terminal:new({ cmd = "python", hidden = true, direction = "float" })
+				python:toggle()
+			else
+				not_found_notify("Python")
+			end
 		end
 	end
 end
