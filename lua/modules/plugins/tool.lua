@@ -6,7 +6,8 @@ tool["tpope/vim-fugitive"] = {
 }
 -- Please don't remove which-key.nvim otherwise you need to set timeoutlen=300 at `lua/core/options.lua`
 tool["folke/which-key.nvim"] = {
-	event = "VeryLazy",
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
 -- only for fcitx5 user who uses non-English language during coding
@@ -41,7 +42,14 @@ tool["michaelb/sniprun"] = {
 }
 tool["akinsho/toggleterm.nvim"] = {
 	lazy = true,
-	event = "UIEnter",
+	cmd = {
+		"ToggleTerm",
+		"ToggleTermSetName",
+		"ToggleTermToggleAll",
+		"ToggleTermSendVisualLines",
+		"ToggleTermSendCurrentLine",
+		"ToggleTermSendVisualSelection",
+	},
 	config = require("tool.toggleterm"),
 }
 tool["folke/trouble.nvim"] = {
