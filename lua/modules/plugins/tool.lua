@@ -62,7 +62,7 @@ tool["gelguy/wilder.nvim"] = {
 tool["nvim-telescope/telescope.nvim"] = {
 	lazy = true,
 	cmd = "Telescope",
-	event = "UIEnter",
+	event = "VeryLazy",
 	config = require("tool.telescope"),
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
