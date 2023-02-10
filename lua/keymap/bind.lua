@@ -35,6 +35,8 @@ function rhs_options:map_cmd(cmd_string)
 	return self
 end
 
+---@param cmd_string string
+---@return map_rhs
 function rhs_options:map_cr(cmd_string)
 	self.cmd = (":%s<CR>"):format(cmd_string)
 	return self
