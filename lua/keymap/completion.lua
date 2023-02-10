@@ -62,18 +62,6 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("lsp: Goto type_definition"),
-	-- ["n|gDL"] = map_callback(function() -- NOTE: use trouble instead
-	-- 		vim.diagnostic.setloclist()
-	-- 	end)
-	-- 	:with_noremap()
-	-- 	:with_silent()
-	-- 	:with_desc("lsp: Show diagnostic location list"),
-	-- ["n|gQL"] = map_callback(function() -- NOTE: use trouble instead
-	-- 		vim.diagnostic.setqflist()
-	-- 	end)
-	-- 	:with_noremap()
-	-- 	:with_silent()
-	-- 	:with_desc("lsp: Show diagnostic quickfix list"),
 }
 
 bind.nvim_load_mapping(plug_map)
