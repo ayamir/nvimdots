@@ -34,7 +34,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"qf",
 		"help",
 		"man",
-		"notify",
 		"nofile",
 		"lspinfo",
 		"terminal",
