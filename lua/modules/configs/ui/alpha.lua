@@ -59,13 +59,62 @@ return function()
 
 	local leader = " "
 	dashboard.section.buttons.val = {
-		button("space f c", " Scheme change", leader, "<cmd>Telescope colorscheme<CR>"),
-		button("space f r", " File frecency", leader, "<cmd>Telescope frecency<CR>"),
-		button("space f e", " File history", leader, "<cmd>Telescope oldfiles<CR>"),
-		button("space f p", " Project find", leader, "<cmd>Telescope projects<CR>"),
-		button("space f f", " File find", leader, "<cmd>Telescope find_files<CR>"),
-		button("space f n", " File new", leader, "<cmd>enew<CR>"),
-		button("space f w", " Word find", leader, "<cmd>Telescope live_grep<CR>"),
+		button("space f c", " Scheme change", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").colorscheme()
+			end,
+		}),
+		button("space f r", " File frecency", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope").extensions.frecency.frecency()
+			end,
+		}),
+		button("space f e", " File history", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").oldfiles()
+			end,
+		}),
+		button("space f p", " Project find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope").extensions.projects.projects({})
+			end,
+		}),
+		button("space f f", " File find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").find_files()
+			end,
+		}),
+		button("space f n", " File new", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				vim.api.nvim_command("enew")
+			end,
+		}),
+		button("space f w", " Word find", leader, nil, {
+			noremap = true,
+			silent = true,
+			nowait = true,
+			callback = function()
+				require("telescope.builtin").live_grep()
+			end,
+		}),
 	}
 	dashboard.section.buttons.opts.hl = "String"
 
