@@ -104,45 +104,51 @@ function rhs_options:with_buffer(num)
 	return self
 end
 
-local pbind = {}
+local bind = {}
 
 ---@param cmd_string string
 ---@return map_rhs
-function pbind.map_cr(cmd_string)
+function bind.map_cr(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_cr(cmd_string)
 end
 
 ---@param cmd_string string
 ---@return map_rhs
-function pbind.map_cmd(cmd_string)
+function bind.map_cmd(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_cmd(cmd_string)
 end
 
 ---@param cmd_string string
 ---@return map_rhs
-function pbind.map_cu(cmd_string)
+function bind.map_cu(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_cu(cmd_string)
 end
 
 ---@param cmd_string string
 ---@return map_rhs
-function pbind.map_args(cmd_string)
+function bind.map_args(cmd_string)
 	local ro = rhs_options:new()
 	return ro:map_args(cmd_string)
 end
 
 ---@param callback fun():nil
 ---@return map_rhs
-function pbind.map_callback(callback)
+function bind.map_callback(callback)
 	local ro = rhs_options:new()
 	return ro:map_callback(callback)
 end
 
+---@param cmd_string string
+---@return string escaped_string
+function bind.escape_termcode(cmd_string)
+	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
+end
+
 ---@param mapping table<string, map_rhs>
-function pbind.nvim_load_mapping(mapping)
+function bind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do
 		local mode, keymap = key:match("([^|]*)|?(.*)")
 		if type(value) == "table" then
@@ -158,4 +164,4 @@ function pbind.nvim_load_mapping(mapping)
 	end
 end
 
-return pbind
+return bind
