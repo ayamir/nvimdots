@@ -109,31 +109,31 @@ return function()
 		nvim_lsp.html.setup(final_opts)
 	end
 
-	local efmls = require("efmls-configs")
+	-- local efmls = require("efmls-configs")
 
 	-- Init `efm-langserver` here.
 
-	efmls.init({
-		on_attach = opts.on_attach,
-		capabilities = capabilities,
-		init_options = { documentFormatting = true, codeAction = true },
-	})
+	-- efmls.init({
+	--	on_attach = opts.on_attach,
+	--	capabilities = capabilities,
+	--	init_options = { documentFormatting = true, codeAction = true },
+	--})
 
 	-- Require `efmls-configs-nvim`'s config here
 
-	local vint = require("efmls-configs.linters.vint")
-	local eslint = require("efmls-configs.linters.eslint")
-	local flake8 = require("efmls-configs.linters.flake8")
+	--local vint = require("efmls-configs.linters.vint")
+	--local eslint = require("efmls-configs.linters.eslint")
+	--local flake8 = require("efmls-configs.linters.flake8")
 
-	local black = require("efmls-configs.formatters.black")
-	local stylua = require("efmls-configs.formatters.stylua")
-	local prettier = require("efmls-configs.formatters.prettier")
-	local shfmt = require("efmls-configs.formatters.shfmt")
+	--local black = require("efmls-configs.formatters.black")
+	--local stylua = require("efmls-configs.formatters.stylua")
+	--local prettier = require("efmls-configs.formatters.prettier")
+	--local shfmt = require("efmls-configs.formatters.shfmt")
 
 	-- Add your own config for formatter and linter here
 
 	-- local rustfmt = require("completion.efm.formatters.rustfmt")
-	local clangfmt = require("completion.efm.formatters.clangfmt")
+	--local clangfmt = require("completion.efm.formatters.clangfmt")
 
 	-- formatting.configure_format_on_save()
 end
