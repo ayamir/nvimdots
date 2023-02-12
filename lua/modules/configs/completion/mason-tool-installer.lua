@@ -6,16 +6,27 @@ return function()
 			-- you can turn off/on auto_update per tool
 			-- "editorconfig-checker",
 
+			-- LSP
+			"bash-language-server", -- nvim-lspconfig: bashls
+			"clangd",
+			"gopls",
+			"html-lsp", -- nvim-lspconfig: html
+			"json-lsp", -- nvim-lspconfig: jsonls
+			"lua-language-server", -- nvim-lspconfig: lua_ls
+			"pyright",
+
+			-- formatter
+			"black",
+			"clang-format",
+			"eslint_d",
+			"markdownlint",
+			"prettierd",
+			"rustfmt",
+			"shfmt",
 			"stylua",
 
-			"black",
-
-			"prettier",
-
+			-- diagnostics
 			"shellcheck",
-			"shfmt",
-
-			-- "vint",
 		},
 
 		-- if set to true this will check each tool for updates. If updates

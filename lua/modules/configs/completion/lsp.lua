@@ -1,5 +1,5 @@
 return function()
-	local formatting = require("completion.formatting")
+	-- local formatting = require("completion.formatting")
 
 	local nvim_lsp = require("lspconfig")
 	local mason = require("mason")
@@ -36,7 +36,6 @@ return function()
 		ensure_installed = {
 			"bashls",
 			"clangd",
-			"efm",
 			"gopls",
 			"pyright",
 			"sumneko_lua",
@@ -83,10 +82,6 @@ return function()
 			local final_opts =
 				vim.tbl_deep_extend("keep", _opts, { on_attach = opts.on_attach, capabilities = _capabilities })
 			nvim_lsp.clangd.setup(final_opts)
-		end,
-
-		efm = function()
-			-- Do not setup efm
 		end,
 
 		gopls = function()
@@ -140,37 +135,5 @@ return function()
 	-- local rustfmt = require("completion.efm.formatters.rustfmt")
 	local clangfmt = require("completion.efm.formatters.clangfmt")
 
-	-- Override default config here
-
-	flake8 = vim.tbl_extend("force", flake8, {
-		prefix = "flake8: max-line-length=160, ignore F403 and F405",
-		lintStdin = true,
-		lintIgnoreExitCode = true,
-		lintFormats = { "%f:%l:%c: %t%n%n%n %m" },
-		lintCommand = "flake8 --max-line-length 160 --extend-ignore F403,F405 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
-	})
-
-	-- Setup formatter and linter for efmls here
-
-	efmls.setup({
-		vim = { formatter = vint },
-		lua = { formatter = stylua },
-		c = { formatter = clangfmt },
-		cpp = { formatter = clangfmt },
-		python = { formatter = black },
-		vue = { formatter = prettier },
-		typescript = { formatter = prettier, linter = eslint },
-		javascript = { formatter = prettier, linter = eslint },
-		typescriptreact = { formatter = prettier, linter = eslint },
-		javascriptreact = { formatter = prettier, linter = eslint },
-		yaml = { formatter = prettier },
-		html = { formatter = prettier },
-		css = { formatter = prettier },
-		scss = { formatter = prettier },
-		sh = { formatter = shfmt },
-		markdown = { formatter = prettier },
-		-- rust = {formatter = rustfmt},
-	})
-
-	formatting.configure_format_on_save()
+	-- formatting.configure_format_on_save()
 end
