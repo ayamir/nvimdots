@@ -1,4 +1,4 @@
--- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/sumneko_lua.lua
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/lua_ls.lua
 return {
 	settings = {
 		Lua = {
@@ -15,7 +15,7 @@ return {
 				preloadFileSize = 10000,
 			},
 			telemetry = { enable = false },
-			-- Do not override treesitter lua highlighting with sumneko lua highlighting
+			-- Do not override treesitter lua highlighting with lua_ls's highlighting
 			semantic = { enable = false },
 		},
 	},
