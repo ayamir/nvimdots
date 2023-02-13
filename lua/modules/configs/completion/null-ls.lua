@@ -19,13 +19,14 @@ return function()
 
 		b.formatting.black.with({ extra_args = { "--fast" } }),
 		b.formatting.prettierd.with({
-			extra_filetypes = { "toml" },
 			extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
 		}),
 		b.formatting.shfmt,
 		b.formatting.stylua,
 		b.formatting.markdownlint,
-		b.formatting.clang_format,
+		b.formatting.clang_format.with({
+			command = "clang-format -style='{BasedOnStyle: LLVM, IndentWidth: 4}'",
+		}),
 		b.formatting.rustfmt,
 		b.formatting.eslint_d,
 
