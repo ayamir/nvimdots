@@ -123,6 +123,7 @@ return function()
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
+			{ name = "treesitter" },
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
