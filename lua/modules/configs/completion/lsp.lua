@@ -33,6 +33,7 @@ return function()
 		},
 	})
 	mason_lspconfig.setup({
+		-- NOTE: use the lsp names in nvim-lspconfig
 		ensure_installed = {
 			"bashls",
 			"clangd",
@@ -91,6 +92,12 @@ return function()
 			nvim_lsp.gopls.setup(final_opts)
 		end,
 
+		html = function()
+			local _opts = require("completion.servers.html")
+			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
+			nvim_lsp.html.setup(final_opts)
+		end,
+
 		jsonls = function()
 			local _opts = require("completion.servers.jsonls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
@@ -103,12 +110,6 @@ return function()
 			nvim_lsp.lua_ls.setup(final_opts)
 		end,
 	})
-
-	if vim.fn.executable("html-languageserver") then
-		local _opts = require("completion.servers.html")
-		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-		nvim_lsp.html.setup(final_opts)
-	end
 
 	-- local efmls = require("efmls-configs")
 
