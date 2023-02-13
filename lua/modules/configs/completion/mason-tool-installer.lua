@@ -6,15 +6,6 @@ return function()
 			-- you can turn off/on auto_update per tool
 			-- "editorconfig-checker",
 
-			-- LSP
-			"bash-language-server", -- nvim-lspconfig: bashls
-			"clangd",
-			"gopls",
-			"html-lsp", -- nvim-lspconfig: html
-			"json-lsp", -- nvim-lspconfig: jsonls
-			"lua-language-server", -- nvim-lspconfig: lua_ls
-			"pyright",
-
 			-- formatter
 			"black",
 			"clang-format",
