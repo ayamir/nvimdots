@@ -16,7 +16,6 @@ return function()
 
 	local sources = {
 		-- formatting
-
 		b.formatting.black.with({ extra_args = { "--fast" } }),
 		b.formatting.prettierd.with({
 			extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
@@ -58,9 +57,6 @@ return function()
 						vim.lsp.buf.format({
 							bufnr = bufnr,
 							name = "null-ls",
-							-- filter = function()
-							--     return client.name == "null-ls"
-							-- end,
 						})
 						vim.notify(
 							string.format("Format successfully with [%s]!", client.name),
@@ -72,11 +68,4 @@ return function()
 			end
 		end,
 	})
-
-	-- NOTE: if you want to use local executables.
-	-- local sources = {
-	--     null_ls.builtins.formatting.prettier.with({
-	--         command = "/path/to/prettier",
-	--     }),
-	-- }
 end
