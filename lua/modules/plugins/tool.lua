@@ -11,11 +11,12 @@ tool["folke/which-key.nvim"] = {
 	config = require("tool.which-key"),
 }
 -- only for fcitx5 user who uses non-English language during coding
--- tool["brglng/vim-im-select"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	config = require("tool.imselect"),
--- }
+tool["pysan3/fcitx5.nvim"] = {
+	lazy = true,
+	event = "BufReadPost",
+	cond = vim.fn.executable("fcitx5-remote") == 1,
+	config = require("tool.fcitx5"),
+}
 tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = {
