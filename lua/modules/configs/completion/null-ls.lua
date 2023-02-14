@@ -17,9 +17,7 @@ return function()
 	local sources = {
 		-- formatting
 		b.formatting.black.with({ extra_args = { "--fast" } }),
-		b.formatting.prettierd.with({
-			extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-		}),
+		b.formatting.prettierd,
 		b.formatting.shfmt,
 		b.formatting.stylua,
 		b.formatting.markdownlint,
