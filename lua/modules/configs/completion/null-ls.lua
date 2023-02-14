@@ -1,18 +1,10 @@
 return function()
 	local null_ls = require("null-ls")
+	local btn = null_ls.builtins -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 	local disabled_worksapces = require("core.settings").format_disabled_dirs
 	local format_on_save = require("core.settings").format_on_save
 
-	-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
-	local btn = null_ls.builtins
-
 	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-	local with_diagnostics_code = function(builtin)
-		return builtin.with({
-			diagnostics_format = "#{m} [#{c}]",
-		})
-	end
 
 	local sources = {
 		-- formatting
@@ -27,7 +19,7 @@ return function()
 		btn.formatting.stylua,
 
 		-- diagnostics
-		with_diagnostics_code(btn.diagnostics.shellcheck),
+		btn.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
 		btn.diagnostics.markdownlint.with({ extra_args = { "--disable MD033" } }),
 	}
 
