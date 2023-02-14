@@ -41,6 +41,14 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "kdheepak/cmp-latex-symbols" },
 		{ "ray-x/cmp-treesitter" },
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
+		-- {
+		-- 	"jcdickinson/codeium.nvim",
+		-- 	dependencies = {
+		-- 		"nvim-lua/plenary.nvim",
+		-- 		"MunifTanjim/nui.nvim",
+		-- 	},
+		-- 	config = require("completion.codeium"),
+		-- },
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
