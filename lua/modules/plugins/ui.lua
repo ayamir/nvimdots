@@ -58,6 +58,11 @@ ui["rcarriga/nvim-notify"] = {
 	event = "VeryLazy",
 	config = require("ui.notify"),
 }
+ui["folke/paint.nvim"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = require("ui.paint"),
+}
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = "BufReadPost",

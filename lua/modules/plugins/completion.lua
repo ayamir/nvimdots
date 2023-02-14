@@ -39,11 +39,16 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "f3fora/cmp-spell" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
-		{
-			"windwp/nvim-autopairs",
-			config = require("completion.autopairs"),
-		},
+		{ "ray-x/cmp-treesitter" },
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
+		-- {
+		-- 	"jcdickinson/codeium.nvim",
+		-- 	dependencies = {
+		-- 		"nvim-lua/plenary.nvim",
+		-- 		"MunifTanjim/nui.nvim",
+		-- 	},
+		-- 	config = require("completion.codeium"),
+		-- },
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
