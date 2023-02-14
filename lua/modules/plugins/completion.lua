@@ -9,16 +9,15 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
-			config = require("completion.mason-tool-installer"),
-		},
-		{
 			"glepnir/lspsaga.nvim",
 			config = require("completion.lspsaga"),
 		},
 		{
 			"jose-elias-alvarez/null-ls.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"jay-babu/mason-null-ls.nvim",
+			},
 			config = require("completion.null-ls"),
 		},
 	},

@@ -4,7 +4,7 @@ return function()
 	local format_on_save = require("core.settings").format_on_save
 
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
-	local b = null_ls.builtins
+	local btn = null_ls.builtins
 
 	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -16,20 +16,20 @@ return function()
 
 	local sources = {
 		-- formatting
-		b.formatting.black.with({ extra_args = { "--fast" } }),
-		b.formatting.prettierd,
-		b.formatting.shfmt,
-		b.formatting.stylua,
-		b.formatting.markdownlint,
-		b.formatting.clang_format.with({
-			command = "clang-format -style='{BasedOnStyle: LLVM, IndentWidth: 4}'",
+		btn.formatting.black.with({ extra_args = { "--fast" } }),
+		btn.formatting.prettierd,
+		btn.formatting.shfmt,
+		btn.formatting.stylua,
+		btn.formatting.markdownlint,
+		btn.formatting.clang_format.with({
+			command = "clang-format -style='{btnasedOnStyle: LLVM, IndentWidth: 4}'",
 		}),
-		b.formatting.rustfmt,
-		b.formatting.eslint_d,
+		btn.formatting.rustfmt,
+		btn.formatting.eslint_d,
 
 		-- diagnostics
-		with_diagnostics_code(b.diagnostics.shellcheck),
-		b.diagnostics.markdownlint.with({
+		with_diagnostics_code(btn.diagnostics.shellcheck),
+		btn.diagnostics.markdownlint.with({
 			extra_args = { "--disable MD033" },
 		}),
 	}
@@ -65,5 +65,11 @@ return function()
 				})
 			end
 		end,
+	})
+
+	require("mason-null-ls").setup({
+		ensure_installed = nil,
+		automatic_installation = true,
+		automatic_setup = false,
 	})
 end
