@@ -17,21 +17,18 @@ return function()
 	local sources = {
 		-- formatting
 		btn.formatting.black.with({ extra_args = { "--fast" } }),
+		btn.formatting.clang_format.with({ command = "clang-format -style='{btnasedOnStyle: LLVM, IndentWidth: 4}'" }),
+		btn.formatting.eslint_d,
+		btn.formatting.jq,
+		btn.formatting.markdownlint,
 		btn.formatting.prettierd,
+		btn.formatting.rustfmt,
 		btn.formatting.shfmt,
 		btn.formatting.stylua,
-		btn.formatting.markdownlint,
-		btn.formatting.clang_format.with({
-			command = "clang-format -style='{btnasedOnStyle: LLVM, IndentWidth: 4}'",
-		}),
-		btn.formatting.rustfmt,
-		btn.formatting.eslint_d,
 
 		-- diagnostics
 		with_diagnostics_code(btn.diagnostics.shellcheck),
-		btn.diagnostics.markdownlint.with({
-			extra_args = { "--disable MD033" },
-		}),
+		btn.diagnostics.markdownlint.with({ extra_args = { "--disable MD033" } }),
 	}
 
 	null_ls.setup({
