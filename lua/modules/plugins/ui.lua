@@ -60,7 +60,7 @@ ui["rcarriga/nvim-notify"] = {
 }
 ui["folke/paint.nvim"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.paint"),
 }
 ui["dstein64/nvim-scrollview"] = {
