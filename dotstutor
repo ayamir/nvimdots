@@ -141,16 +141,4 @@ we enhanced lots of nvim's default abilities that you can use them naturally
 except the mentioned above.
 
 Last but not least, you can press `<C-p>` to call the command panel and
-search keymaps for features you want at any time.
-
-Let's move on to the next chapter to learn how to customize nvimdots for users
-who want to make it more powerful and more suitable for their own needs.
-
-===============================================================================
-                        Chapter 2:    Customization
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                    Chapter 2.1:  Overview of structure
-
-We architected nvimdots with modularity in mind, so you can customize and
-maintain your own fork easily.
+search keymaps for features you want at any time!
