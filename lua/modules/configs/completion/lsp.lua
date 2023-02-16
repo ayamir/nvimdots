@@ -43,7 +43,7 @@ return function()
 	end
 
 	---@param use_server_formatting_provider boolean whether to use the server's formatting provider
-	--- This is useful when using in conjiunction with null-ls
+	--- This is useful when using in conjunction with null-ls
 	local on_attach_factory = function(use_server_formatting_provider)
 		return function(client, _)
 			if not use_server_formatting_provider then
