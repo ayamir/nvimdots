@@ -9,7 +9,7 @@ return function()
 	local sources = {
 		-- formatting
 		btn.formatting.black.with({ extra_args = { "--fast" } }),
-		btn.formatting.clang_format.with({ command = "clang-format -style='{btnasedOnStyle: LLVM, IndentWidth: 4}'" }),
+		btn.formatting.clang_format,
 		btn.formatting.eslint_d,
 		btn.formatting.jq,
 		btn.formatting.markdownlint,
