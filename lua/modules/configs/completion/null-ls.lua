@@ -27,7 +27,7 @@ return function()
 			null_reg(btnf.markdownlint)
 			null_reg(btnd.markdownlint.with({ extra_args = { "--disable MD033" } }))
 		end,
-		-- example for changing the diagnostics_format
+		-- example for changing diagnostics_format
 		-- shellcheck = function()
 		-- 	null_reg(btnd.shellcheck.with({ diagnostics_format = "#{m} [#{s} #{c}]" }))
 		-- end,
