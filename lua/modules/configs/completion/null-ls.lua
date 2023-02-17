@@ -8,7 +8,7 @@ return function()
 	null_ls.setup({
 		debug = false,
 		update_in_insert = false,
-		diagnostics_format = "[#{c}] #{m} (#{s})",
+		diagnostics_format = "[#{s} #{c}] #{m}",
 	})
 
 	mason_null_ls.setup({
@@ -27,9 +27,10 @@ return function()
 			null_reg(btnf.markdownlint)
 			null_reg(btnd.markdownlint.with({ extra_args = { "--disable MD033" } }))
 		end,
-		shellcheck = function()
-			null_reg(btnd.shellcheck.with({ diagnostics_format = "#{m} [#(c)]" }))
-		end,
+		-- example for changing the diagnostics_format
+		-- shellcheck = function()
+		-- 	null_reg(btnd.shellcheck.with({ diagnostics_format = "#{m} [#{s} #{c}]" }))
+		-- end,
 	})
 
 	require("completion.formatting").configure_format_on_save()
