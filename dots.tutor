@@ -135,5 +135,5 @@ relies on the basic nvim motions. We enhanced lots of nvim's default abilities t
 use those abilities naturally if you were already an experienced nvim user. You can also check
 https://github.com/ayamir/nvimdots/wiki for more!
 
-Last but not least, you can press `<C-p>` in noraml mode to call the command panel and
-search keymaps for features you want at any time!
+Last but not least, you can press `<C-p>` in noraml mode to call the command panel then
+search for keymaps any time you want!
