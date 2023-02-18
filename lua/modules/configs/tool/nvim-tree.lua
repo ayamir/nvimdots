@@ -41,6 +41,11 @@ return function()
 					col = 1,
 				},
 			},
+			mappings = {
+				list = {
+					{ key = "<C-e>", action = "" },
+				},
+			},
 		},
 		renderer = {
 			add_trailing = false,

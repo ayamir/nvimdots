@@ -73,5 +73,12 @@ ui["edluffy/specs.nvim"] = {
 	event = "CursorMoved",
 	config = require("ui.specs"),
 }
+ui["sainnhe/gruvbox-material"] = {
+	lazy = true,
+	--event = "VimEnter",
+	config = function()
+		require("ui.gruvbox-material")
+	end,
+}
 
 return ui

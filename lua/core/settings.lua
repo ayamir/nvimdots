@@ -2,7 +2,7 @@ local settings = {}
 local home = require("core.global").home
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
-settings["use_ssh"] = true
+settings["use_ssh"] = false
 
 -- Set it to false if there are no need to format on save.
 settings["format_on_save"] = true
@@ -25,7 +25,8 @@ settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
-settings["colorscheme"] = "catppuccin"
+--settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "gruvbox-material"
 
 -- Set background color to use here.
 -- Useful for when you want to use a colorscheme that has a light and dark variant like `edge`.
@@ -39,9 +40,12 @@ settings["lsp"] = {
 	"bashls",
 	"clangd",
 	"gopls",
+	"jsonls",
 	"html",
 	"lua_ls",
 	"pyright",
+	"rust_analyzer",
+	"yamlls",
 }
 
 -- Set the desired non-LSP sources here.

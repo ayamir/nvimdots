@@ -102,7 +102,7 @@ local plug_map = {
 	["n|<leader>tl"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
 
 	-- Plugin: telescope
-	["n|<C-p>"] = map_callback(function()
+	["n|<A-p>"] = map_callback(function()
 			_command_panel()
 		end)
 		:with_noremap()

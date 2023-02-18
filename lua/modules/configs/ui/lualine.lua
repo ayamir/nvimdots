@@ -104,7 +104,8 @@ return function()
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			theme = "catppuccin",
+			--theme = "catppuccin",
+			theme = "gruvbox-material",
 			disabled_filetypes = {},
 			component_separators = "|",
 			section_separators = { left = "", right = "" },
