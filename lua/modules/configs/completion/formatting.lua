@@ -103,8 +103,8 @@ function M.format_filter(clients)
 		local status_ok, formatting_supported = pcall(function()
 			return client.supports_method("textDocument/formatting")
 		end)
-		if status_ok and formatting_supported and client.name == "efm" then
-			return "efm"
+		if status_ok and formatting_supported and client.name == "null-ls" then
+			return "null-ls"
 		elseif client.name ~= "lua_ls" and client.name ~= "tsserver" and client.name ~= "clangd" then
 			return status_ok and formatting_supported and client.name
 		end
@@ -140,7 +140,7 @@ function M.format(opts)
 
 	if #clients == 0 then
 		vim.notify(
-			"[LSP] Format request failed, no matching language servers.",
+			"[LSP]Format request failed, no matching language servers.",
 			vim.log.levels.WARN,
 			{ title = "Formatting Failed!" }
 		)
@@ -165,7 +165,7 @@ function M.format(opts)
 		if result and result.result then
 			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
 			vim.notify(
-				string.format("Format successfully with %s!", client.name),
+				string.format("[LSP]Format successfully with [%s]!", client.name),
 				vim.log.levels.INFO,
 				{ title = "LSP Format Success!" }
 			)
