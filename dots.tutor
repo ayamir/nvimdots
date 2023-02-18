@@ -132,7 +132,8 @@ Besides, you can just toggle it for specific language temprarily by executing
 Congratulations! You have learned 60% features nvimdots provided till now.
 Of course you will be curious about where you can master the rest 40%. And the answer
 relies on the basic nvim motions. We enhanced lots of nvim's default abilities that you can
-use those abilities naturally if you were already an experienced nvim user.
+use those abilities naturally if you were already an experienced nvim user. You can also check
+https://github.com/ayamir/nvimdots/wiki for more!
 
-Last but not least, you can press `<C-p>`{normal} to call the command panel and
+Last but not least, you can press `<C-p>` in noraml mode to call the command panel and
 search keymaps for features you want at any time!
