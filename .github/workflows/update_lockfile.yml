@@ -5,7 +5,7 @@ on:
 
 jobs:
   update-lockfile:
-    if: github.repository_owner == 'ayamir'
+    if: github.repository_owner == 'double12gzh'
     runs-on: ubuntu-latest
     permissions:
       contents: write
