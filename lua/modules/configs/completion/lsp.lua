@@ -11,10 +11,11 @@ return function()
 	}
 
 	mason.setup({
-        max_concurrent_installers = 30,
-        github = {
-		    download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
-	    },
+		-- speed
+		max_concurrent_installers = 30,
+		github = {
+			download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
+		},
 		ui = {
 			border = "rounded",
 			icons = {
@@ -37,11 +38,12 @@ return function()
 	mason_lspconfig.setup({
 		-- NOTE: use the lsp names in nvim-lspconfig
 		-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
-        github = {
-		    download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
-	    },
+		-- speed
+		github = {
+			download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
+		},
 		ensure_installed = require("core.settings").lsp,
-        automatic_installation = true,
+		automatic_installation = true,
 	})
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
