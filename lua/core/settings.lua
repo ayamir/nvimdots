@@ -32,6 +32,13 @@ settings["colorscheme"] = "catppuccin"
 -- Available values are: `dark`, `light`.
 settings["background"] = "dark"
 
+-- Filetypes in this list will skip lsp formatting if rhs is true
+---@type table<string, boolean>
+settings["formatter_block_list"] = {
+	-- Example
+	lua = false,
+}
+
 -- Set the language servers that will be installed during bootstrap here
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
