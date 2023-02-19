@@ -12,7 +12,7 @@ local block_list = {}
 vim.api.nvim_create_user_command("FormatterToggle", function(opts)
 	if block_list[opts.args] == nil then
 		vim.notify(
-			string.format("[LSP]Formatter for [%s] has been recorded in list and disabled.", opts.args),
+			string.format("[LSP] Formatter for [%s] has been recorded in list and disabled.", opts.args),
 			vim.log.levels.WARN,
 			{ title = "LSP Formatter Warning!" }
 		)
@@ -21,7 +21,7 @@ vim.api.nvim_create_user_command("FormatterToggle", function(opts)
 		block_list[opts.args] = not block_list[opts.args]
 		vim.notify(
 			string.format(
-				"[LSP]Formatter for [%s] has been %s.",
+				"[LSP] Formatter for [%s] has been %s.",
 				opts.args,
 				not block_list[opts.args] and "enabled" or "disabled"
 			),
@@ -140,7 +140,7 @@ function M.format(opts)
 
 	if #clients == 0 then
 		vim.notify(
-			"[LSP]Format request failed, no matching language servers.",
+			"[LSP] Format request failed, no matching language servers.",
 			vim.log.levels.WARN,
 			{ title = "Formatting Failed!" }
 		)
@@ -165,7 +165,7 @@ function M.format(opts)
 		if result and result.result then
 			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
 			vim.notify(
-				string.format("[LSP]Format successfully with [%s]!", client.name),
+				string.format("[LSP] Format successfully with [%s]!", client.name),
 				vim.log.levels.INFO,
 				{ title = "LSP Format Success!" }
 			)

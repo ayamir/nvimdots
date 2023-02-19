@@ -32,7 +32,7 @@ settings["colorscheme"] = "catppuccin"
 -- Available values are: `dark`, `light`.
 settings["background"] = "dark"
 
--- Set the desired LSPs here.
+-- Set the language servers that will be installed during bootstrap here
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 settings["lsp"] = {
@@ -44,8 +44,8 @@ settings["lsp"] = {
 	"pyright",
 }
 
--- Set the desired non-LSP sources here.
--- check the below link for all supported non-LSP sources
+-- Set the general servers that will be installed during bootstrap here
+-- check the below link for all supported sources
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 settings["null_ls"] = {
