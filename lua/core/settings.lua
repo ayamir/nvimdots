@@ -49,20 +49,14 @@ settings["lsp_deps"] = {
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 settings["null_ls_deps"] = {
-	-- formatting
 	"black",
 	"clang_format",
-	"eslint_d",
-	"jq",
-	"markdownlint",
-	"prettierd",
+	"editorconfig_checker",
+	"prettier",
 	"rustfmt",
 	"shfmt",
 	"stylua",
-
-	-- diagnostics
-	"shellcheck",
-	-- "markdownlint",
+	"vint",
 }
 
 return settings

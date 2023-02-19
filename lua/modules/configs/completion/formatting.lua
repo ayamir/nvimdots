@@ -151,7 +151,7 @@ function M.format(opts)
 		if block_list[vim.bo.filetype] == true then
 			vim.notify(
 				string.format(
-					"[LSP][%s] formatter for [%s] has been disabled. This file was not processed.",
+					"[LSP][%s] Formatter for [%s] has been disabled. This file is not being processed.",
 					client.name,
 					vim.bo.filetype
 				),

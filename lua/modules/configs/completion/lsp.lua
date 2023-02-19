@@ -31,8 +31,6 @@ return function()
 		},
 	})
 	mason_lspconfig.setup({
-		-- NOTE: use the lsp names in nvim-lspconfig
-		-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
 		ensure_installed = require("core.settings").lsp_deps,
 	})
 

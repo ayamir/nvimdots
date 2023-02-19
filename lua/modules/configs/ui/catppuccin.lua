@@ -18,7 +18,7 @@ return function()
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
-			functions = { "italic", "bold" },
+			functions = { "bold" },
 			keywords = { "italic" },
 			operators = { "bold" },
 			conditionals = { "bold" },
