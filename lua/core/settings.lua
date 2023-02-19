@@ -44,7 +44,7 @@ settings["lsp"] = {
 	"pyright",
 }
 
--- Set the general servers that will be installed during bootstrap here
+-- Set the general-purpose servers that will be installed during bootstrap here
 -- check the below link for all supported sources
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
