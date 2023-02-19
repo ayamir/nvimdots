@@ -35,7 +35,7 @@ settings["background"] = "dark"
 -- Set the language servers that will be installed during bootstrap here
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
-settings["lsp"] = {
+settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
 	"gopls",
@@ -48,7 +48,7 @@ settings["lsp"] = {
 -- check the below link for all supported sources
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
-settings["null_ls"] = {
+settings["null_ls_deps"] = {
 	-- formatting
 	"black",
 	"clang_format",
