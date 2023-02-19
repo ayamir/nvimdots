@@ -1,5 +1,6 @@
 return function()
-	local colors = require("modules.utils").get_palette()
+	require("modules.utils").gen_lspkind_hl()
+
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
 		kind = require("modules.utils.icons").get("kind", true),
@@ -21,51 +22,7 @@ return function()
 		end
 	end
 
-	local function gen_hl()
-		local dat = {
-			Class = colors.yellow,
-			Constant = colors.peach,
-			Constructor = colors.sapphire,
-			Enum = colors.yellow,
-			EnumMember = colors.teal,
-			Event = colors.yellow,
-			Field = colors.teal,
-			File = colors.rosewater,
-			Function = colors.blue,
-			Interface = colors.yellow,
-			Key = colors.red,
-			Method = colors.blue,
-			Module = colors.blue,
-			Namespace = colors.blue,
-			Number = colors.peach,
-			Operator = colors.sky,
-			Package = colors.blue,
-			Property = colors.teal,
-			Struct = colors.yellow,
-			TypeParameter = colors.maroon,
-			Variable = colors.peach,
-			Array = colors.peach,
-			Boolean = colors.peach,
-			Null = colors.yellow,
-			Object = colors.yellow,
-			String = colors.green,
-			TypeAlias = colors.green,
-			Parameter = colors.blue,
-			StaticMethod = colors.peach,
-			Text = colors.green,
-			Snippet = colors.mauve,
-			Folder = colors.blue,
-			Unit = colors.green,
-			Value = colors.peach,
-		}
-
-		for hl, color in pairs(dat) do
-			vim.api.nvim_set_hl(0, "LspKind" .. hl, { fg = color, default = true })
-		end
-	end
-
 	set_sidebar_icons()
-	gen_hl()
 
 	require("lspsaga").setup({
 		preview = {
