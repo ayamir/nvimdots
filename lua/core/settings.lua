@@ -47,6 +47,7 @@ settings["lsp_deps"] = {
 	"clangd",
 	"gopls",
 	"html",
+	"jsonls",
 	"lua_ls",
 	"pyright",
 }
