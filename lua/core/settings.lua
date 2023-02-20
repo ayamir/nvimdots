@@ -42,6 +42,7 @@ settings["lsp"] = {
 	"gopls",
 	"jsonls",
 	"html",
+	"jsonls",
 	"lua_ls",
 	"pyright",
 	"rust_analyzer",
