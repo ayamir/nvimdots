@@ -1,14 +1,17 @@
 # Welcome to the nvimdots tutor
 
-Nvimdots is a config for neovim which provides tons of functionalities to code
-and edit text. This tutor is designed to describe enough of the usage that you
-will able to use nvim as a powerful code editor quickly.
+Nvimdots is a neovim config suite that is designed for extensibility,
+performance, and ease of use. It provides the ability to work with textfile,
+yet feels like you are working within an IDE environment.
+This tutor will walk through how one can utilize this configuration suite to
+use Neovim as a powerful code editor.
 
-As a modern neovim config, it provides almost all of features you need. It
-preconfigured lots of awesome plugins to provide intuitive and advanced
-features.
+As a modern neovim config, it provides all of the features you need, code
+completion, snippet run, tree-sitter, DAP, fuzzy find, and more. It comes
+with state-of-the-art (SOTA) neovim plugins from the community to provide the
+best user experience.
 
-The default [<leader>](<leader>) key is <Space>{normal}.
+The default [<leader>](<leader>) key is `<Space>`{normal}.
 
 The approximate time required to complete the tutor is 5 minutes, depending
 upon how much time is spent with experimentation.
