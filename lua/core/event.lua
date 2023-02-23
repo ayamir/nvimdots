@@ -1,3 +1,4 @@
+-- Now use `<A-k>` or `<A-1>` to back to the `dotstutor`.
 local autocmd = {}
 
 function autocmd.nvim_create_augroups(definitions)

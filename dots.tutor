@@ -1,0 +1,142 @@
+# Welcome to the nvimdots tutor
+
+Nvimdots is a neovim config suite that is designed for extensibility,
+performance, and ease of use. It provides the ability to work with textfile,
+yet feels like you are working within an IDE environment.
+This tutor will walk through how one can utilize this configuration suite to
+use Neovim as a powerful code editor.
+
+As a modern neovim config, it provides all of the features you need, code
+completion, snippet run, tree-sitter, DAP, fuzzy find, and more. It comes
+with state-of-the-art (SOTA) neovim plugins from the community to provide the
+best user experience.
+
+The default [<leader>](<leader>) key is `<Space>`{normal}.
+
+The approximate time required to complete the tutor is 5 minutes, depending
+upon how much time is spent with experimentation.
+
+# Lesson 1.1: EXPLANATION OF UI
+
+The opened buffers are showed at the top, you can use `<A-j>`{normal} and `<A-k>`{normal} to
+switch between them. Also, `<A-n>`{normal}(n meaning No) can be used to switch to the
+target buffer directly.
+
+You can use `<C-n>`{normal} to open/close file explorer which will appear on the left.
+Now move cursor to the line of **lua** folder, press `o`{normal} to open it, repeat this
+process to **core** folder, then open **event.lua** in new buffer by press `o`{normal} too.
+You can press `<C-h>`{normal} and `<C-l>`{normal} to move cursor to file explorer and back to
+this buffer. Since we nolonger need the file explorer in the following sections, please close it.
+
+Now press `<C-w>v`{normal} to split current window vertically, then `<A-j>`{normal} switch to
+the **event.lua** buffer for the right window. You can use `<A-]>`{normal} and `<A-[>`{normal} 
+to resize the right window and ensure you can view each word of this buffer.
+Of course, the resize process can be continous by holding the key.
+
+Back to the left window, the status line is showed at the bottom of the window.
+-------------------------------------------------------------------------------
+|Normal|main|+1-1~3|                          |~/.config/nvim|utf-8|LF|4%|50:1|
+-------------------------------------------------------------------------------
+   |     |     |                                      |         |    |     |
+   |     |     |          current work directory -----|         |    |     |
+   |     |     |                                      |         |    |     |
+   |     |     |------ git status of current file      charset -|    |     |
+   |     |----- current git branch                     EOL format ---|     |
+   |---- current edit mode                             cursor position ----|
+
+You will see different content under different conditions. It will looks like
+this if you switch to the right window and move cursor to the second line.
+-------------------------------------------------------------------------------
+|Normal|main|  autocmd                        |~/.config/nvim|utf-8|LF|1%|2:1|
+-------------------------------------------------------------------------------
+" autocmd" indicates this line has a variable named "autocmd". So this part of
+status line will show you the context of your cursor position. This feature
+is based on lsp, so it is disabled if corresponding lsp is not attach to current
+buffer.
+
+You can press `<leader>li`{normal} to check lsp info. You will view there are two active
+clients attached to this buffer.
+
+Now press `go`{normal} to open lspsaga outline which show all of symbols defined in
+**event.lua** in the new right window. Maybe you have noticed that there are
+several scroll bar for each window. They can be dragged by mouse and indicates
+current cursor approximate location.
+
+Before you switch to the window of dotstutor, please press `go`{normal} to close
+outline, because it's also lsp-based. So it will be empty for dotstutor.
+
+Now switch to the left window and check lsp info. You will see the two clients
+not attached to this buffer. It means there no suitable lsp server for this
+buffer, that's why I told you to turn outline off.
+
+OK, now you have known enough about the UI of nvimdots. Let's move on to the
+next topic about the basic workflow.
+
+# Lesson 1.2:  FIND AND SEARCH
+
+Nvimdots use "telescope.nvim" as the main fuzzy finder. It provides lots of
+features to find and search. You can press `<leader>ff`{normal} to open file finder
+under current work directory. You can input the keyword of file which you want
+find and use `<C-p>`{normal} and `<C-n>`{normal} to navigate up and down. You can preview its
+content in the right window and press enter to open it in buffer.
+
+Nvimdots also provide other find features. The most commonly used keymap maybe
+`<leader>fr`{normal} if you are used to editing files in different projects. It will
+list files you ever opened and sort them by "frecency" which used in firefox's
+address bar. This feature utilizes "sqlite" to store the key-value pairs of
+file path and its "frecency" value permanently at 
+**~/.local/share/nvim/file_frecency.sqlite3**.
+
+You can press `<leader>fw`{normal} to search word in current work directory. It
+utilizes ripgrep to search and you can use it naturally as you use ripgrep.
+
+Nvimdots provides project management feature and integrates it with telescope.
+You can press `<leader>fp`{normal} to open recent project list. Don't quit this inter-
+face, you can add current work directory to project list by pressing `<C-a>`{normal}
+and remove it by pressing `<C-d>`{normal}. The current work directory is usually the
+project directory which are identfied by lsp and patterns like git. Of course,
+you can set patterns on your own. So it will change automatically when you
+switch to another buffer whose file belongs to another project.
+
+# Lesson 1.3:  Edit and Format
+
+The completion window will always show no matter what file you are editing.
+You can use `<Tab>`{normal} and `<S-Tab>`{normal} to select next and previous candidate in
+the completion window and use `<CR>`{normal} to confirm completion. You can also use
+`<C-n>`{normal} and `<C-p>`{normal} and `<C-y>`{normal} to do it. Sometimes you don't want confirm
+completion but just want to new a line, you can use `<C-e>`{normal} to close the
+window manually.
+
+There are more functions provided by lsp besides code completion. For a former vscode user, you 
+can experienced lots of vscode-like features, i.e., smart rename, find references, 
+goto definition, view docs of some functions etc. No matter you heard about lsp or not, all 
+relevant keymaps are very intuitive, so just try it out!
+
+Snippet is an awesome method to help us write code more productively.
+As most other editors and IDEs, `<Tab>`{normal} and `<S-Tab>`{normal} are configured to
+navigate in expanded snippet, the former keymap is used to jump next and the latter
+to jump previous.
+
+Format on save is a very useful feature which is enabled by default. It can
+ensure the code style is consistent and you don't need to care about it.
+You can disable it temprarily by executing
+~~~ cmd
+    :FormatToggle <CR>
+~~~
+and permanently by set **settings["format_on_save"] = false** in
+**lua/core/settings.lua**.
+Besides, you can just toggle it for specific language temprarily by executing
+~~~ cmd
+    :FormatterToggle {language_name} <CR>
+~~~
+
+# Lesson 1: SUMMARY
+
+Congratulations! You have learned 60% features nvimdots provided till now.
+Of course you will be curious about where you can master the rest 40%. And the answer
+relies on the basic nvim motions. We enhanced lots of nvim's default abilities that you can
+use those abilities naturally if you were already an experienced nvim user. You can also check
+https://github.com/ayamir/nvimdots/wiki for more!
+
+Last but not least, you can press `<C-p>` in noraml mode to call the command panel then
+search for keymaps any time you want!
