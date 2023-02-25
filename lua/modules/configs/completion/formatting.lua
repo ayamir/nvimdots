@@ -84,7 +84,7 @@ function M.format_filter(clients)
 		end)
 		if status_ok and formatting_supported and client.name == "null-ls" then
 			return "null-ls"
-		elseif not require("core.settings").server_block_list[client.name] then
+		elseif not require("core.settings").server_formatting_block_list[client.name] then
 			return status_ok and formatting_supported and client.name
 		end
 	end, clients)

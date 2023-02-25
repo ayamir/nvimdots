@@ -46,7 +46,7 @@ settings["formatter_block_list"] = {
 
 -- Servers in this list will skip setting formatting capabilities
 ---@type table<string, boolean>
-settings["server_block_list"] = {
+settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	tsserver = true,
 	cland = true,
