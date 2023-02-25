@@ -52,11 +52,12 @@ settings["formatter_block_list"] = {
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	"gopls",
 	"html",
 	"jsonls",
 	"lua_ls",
 	"pyright",
+	-- Uncomment the below line to make sure `gopls` installed by `mason`.
+	-- "gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here
