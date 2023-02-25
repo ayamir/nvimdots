@@ -84,7 +84,7 @@ function M.format_filter(clients)
 		end)
 		if status_ok and formatting_supported and client.name == "null-ls" then
 			return "null-ls"
-		elseif client.name ~= "lua_ls" and client.name ~= "tsserver" and client.name ~= "clangd" then
+		elseif not require("core.settings").server_block_list[client.name] then
 			return status_ok and formatting_supported and client.name
 		end
 	end, clients)

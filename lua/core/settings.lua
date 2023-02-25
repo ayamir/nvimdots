@@ -41,8 +41,15 @@ settings["background"] = "dark"
 -- Filetypes in this list will skip lsp formatting if rhs is true
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
-	-- Example
-	lua = false,
+	lua = false, -- example
+}
+
+-- Servers in this list will skip setting formatting capabilities
+---@type table<string, boolean>
+settings["server_block_list"] = {
+	lua_ls = true,
+	tsserver = true,
+	cland = true,
 }
 
 -- Set the language servers that will be installed during bootstrap here
