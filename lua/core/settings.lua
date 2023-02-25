@@ -56,7 +56,6 @@ settings["lsp_deps"] = {
 	"jsonls",
 	"lua_ls",
 	"pyright",
-	-- Uncomment the below line to make sure `gopls` installed by `mason`.
 	-- "gopls",
 }
 
