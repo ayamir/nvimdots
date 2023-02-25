@@ -9,6 +9,10 @@ return function()
 		debug = false,
 		update_in_insert = false,
 		diagnostics_format = "[#{s} #{c}] #{m}",
+		sources = {
+			-- Set sources that are not supported by `mason.nvim` here like `dart_format`
+			btnf.dart_format,
+		},
 	})
 
 	mason_null_ls.setup({

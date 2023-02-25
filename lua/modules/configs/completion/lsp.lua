@@ -56,9 +56,16 @@ return function()
 		capabilities = capabilities,
 	}
 
+	-- Set lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
+	-- Like `dartls` can be configured in this way.
+	nvim_lsp["dartls"].setup({
+		capabilities = opts.capabilities,
+		on_attach = opts.on_attach,
+	})
+
 	mason_lspconfig.setup_handlers({
 		function(server)
-			require("lspconfig")[server].setup({
+			nvim_lsp[server].setup({
 				capabilities = opts.capabilities,
 				on_attach = opts.on_attach,
 			})
