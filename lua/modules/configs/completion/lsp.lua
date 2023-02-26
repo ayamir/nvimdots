@@ -99,4 +99,11 @@ return function()
 	end
 
 	mason_lspconfig.setup_handlers({ mason_handler })
+
+	-- Set lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
+	if vim.fn.executable("html-languageserver") then
+		local _opts = require("completion.servers.html")
+		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
+		nvim_lsp.html.setup(final_opts)
+	end
 end
