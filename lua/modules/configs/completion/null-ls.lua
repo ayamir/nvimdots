@@ -7,6 +7,7 @@ return function()
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.rustfmt,
+		null_ls.builtins.formatting.dart_format,
 		null_ls.builtins.diagnostics.editorconfig_checker,
 		null_ls.builtins.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
