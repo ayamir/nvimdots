@@ -3,6 +3,7 @@ local M = {}
 local settings = require("core.settings")
 local disabled_workspaces = settings.format_disabled_dirs
 local format_on_save = settings.format_on_save
+local server_formatting_block_list = settings.server_formatting_block_list
 
 vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
@@ -84,7 +85,7 @@ function M.format_filter(clients)
 		end)
 		if status_ok and formatting_supported and client.name == "null-ls" then
 			return "null-ls"
-		elseif not require("core.settings").server_formatting_block_list[client.name] then
+		elseif not server_formatting_block_list[client.name] and status_ok and formatting_supported then
 			return status_ok and formatting_supported and client.name
 		end
 	end, clients)

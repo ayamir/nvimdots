@@ -10,7 +10,7 @@ return function()
 		null_ls.builtins.diagnostics.editorconfig_checker,
 		null_ls.builtins.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
-			extra_args = require("completion.null-ls.formatters.clang_format"),
+			extra_args = require("completion.formatters.clang_format"),
 		}),
 		null_ls.builtins.formatting.black.with({
 			extra_args = { "--fast" },
