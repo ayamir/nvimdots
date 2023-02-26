@@ -72,7 +72,7 @@ return function()
 		end
 
 		if not check_config() then
-			-- default to use factory config for server(s) that doesn't include a spec
+			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
 			return
 		end
