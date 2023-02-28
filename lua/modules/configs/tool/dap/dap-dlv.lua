@@ -40,6 +40,21 @@ dap.configurations.go = {
 	{ type = "go", name = "Debug", request = "launch", program = "${file}" },
 	{
 		type = "go",
+		name = "Debug with args",
+		request = "launch",
+		program = "${file}",
+		args = function()
+			local args = {}
+			local args_string = vim.fn.input("Args: ")
+			for word in args_string:gmatch("%S+") do
+				table.insert(args, word)
+			end
+			vim.notify(args)
+			return args
+		end,
+	},
+	{
+		type = "go",
 		name = "Debug test", -- configuration for debugging test files
 		request = "launch",
 		mode = "test",
