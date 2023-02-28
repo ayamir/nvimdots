@@ -44,13 +44,8 @@ dap.configurations.go = {
 		request = "launch",
 		program = "${file}",
 		args = function()
-			local args = {}
-			local args_string = vim.fn.input("Args: ")
-			for word in args_string:gmatch("%S+") do
-				table.insert(args, word)
-			end
-			vim.notify(args)
-			return args
+			local argument_string = vim.fn.input("Program arg(s): ")
+			return vim.fn.split(argument_string, " ", true)
 		end,
 	},
 	{
