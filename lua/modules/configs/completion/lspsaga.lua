@@ -2,6 +2,7 @@ return function()
 	require("modules.utils").gen_lspkind_hl()
 
 	local icons = {
+		cmp = require("modules.utils.icons").get("cmp", true),
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
 		kind = require("modules.utils.icons").get("kind", true),
 		type = require("modules.utils.icons").get("type", true),
@@ -71,6 +72,7 @@ return function()
 			on_insert = true,
 			on_insert_follow = false,
 			show_code_action = true,
+			show_virt_line = true,
 			show_source = true,
 			border_follow = true,
 			jump_num_shortcut = true,
@@ -119,6 +121,7 @@ return function()
 			code_action = icons.ui.CodeAction,
 			incoming = icons.ui.Incoming,
 			outgoing = icons.ui.Outgoing,
+			diagnostic = " " .. icons.cmp.nvim_lsp,
 			kind = {
 				-- Kind
 				Class = { icons.kind.Class, "LspKindClass" },
