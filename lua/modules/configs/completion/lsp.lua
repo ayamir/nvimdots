@@ -31,9 +31,7 @@ return function()
 		},
 	})
 	mason_lspconfig.setup({
-		-- NOTE: use the lsp names in nvim-lspconfig
-		-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/lua/mason-lspconfig/mappings/server.lua
-		ensure_installed = require("core.settings").lsp,
+		ensure_installed = require("core.settings").lsp_deps,
 	})
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -56,57 +54,56 @@ return function()
 		capabilities = capabilities,
 	}
 
+	---A handler to setup all servers defined under `completion/servers/*.lua`
+	---@param lsp_name string
+	local function mason_handler(lsp_name)
+		---Check whether this server has custom configs
+		---@return boolean
+		local function check_config()
+			local cfg_path = require("core.global").vim_path .. "/lua/modules/configs/completion/servers"
+			local list = {}
+			local servers_list = vim.split(vim.fn.glob(cfg_path .. "/*.lua"), "\n")
+			if type(servers_list) == "table" then
+				for _, s in ipairs(servers_list) do
+					list[#list + 1] = s:sub(#cfg_path + 2, -5)
+				end
+			end
+			return vim.tbl_contains(list, lsp_name)
+		end
+
+		if not check_config() then
+			-- Default to use factory config for server(s) that doesn't include a spec
+			nvim_lsp[lsp_name].setup(opts)
+			return
+		end
+
+		local custom_handler = require("completion.servers." .. lsp_name)
+		if type(custom_handler) == "function" then
+			--- Case where language server requires its own setup
+			--- Make sure to call require("lspconfig")[lsp_name].setup() in the function
+			--- See `clangd.lua` for example.
+			custom_handler(opts)
+		elseif type(custom_handler) == "table" then
+			nvim_lsp[lsp_name].setup(vim.tbl_deep_extend("force", opts, custom_handler))
+		else
+			vim.notify(
+				string.format(
+					"Failed to setup [%s].\n\nServer definition under `completion/servers` must return\neither a fun(opts) or a table (got '%s' instead)",
+					lsp_name,
+					type(custom_handler)
+				),
+				vim.log.levels.ERROR,
+				{ title = "nvim-lspconfig" }
+			)
+		end
+	end
+
+	mason_lspconfig.setup_handlers({ mason_handler })
+
 	-- Set lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
-	-- Like `dartls` can be configured in this way.
-	nvim_lsp["dartls"].setup({
-		capabilities = opts.capabilities,
-		on_attach = opts.on_attach,
-	})
-
-	mason_lspconfig.setup_handlers({
-		function(server)
-			nvim_lsp[server].setup({
-				capabilities = opts.capabilities,
-				on_attach = opts.on_attach,
-			})
-		end,
-
-		bashls = function()
-			local _opts = require("completion.servers.bashls")
-			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-			nvim_lsp.bashls.setup(final_opts)
-		end,
-
-		clangd = function()
-			local _capabilities = vim.tbl_deep_extend("keep", { offsetEncoding = { "utf-16", "utf-8" } }, capabilities)
-			local _opts = require("completion.servers.clangd")
-			local final_opts =
-				vim.tbl_deep_extend("keep", _opts, { on_attach = opts.on_attach, capabilities = _capabilities })
-			nvim_lsp.clangd.setup(final_opts)
-		end,
-
-		gopls = function()
-			local _opts = require("completion.servers.gopls")
-			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-			nvim_lsp.gopls.setup(final_opts)
-		end,
-
-		html = function()
-			local _opts = require("completion.servers.html")
-			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-			nvim_lsp.html.setup(final_opts)
-		end,
-
-		jsonls = function()
-			local _opts = require("completion.servers.jsonls")
-			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-			nvim_lsp.jsonls.setup(final_opts)
-		end,
-
-		lua_ls = function()
-			local _opts = require("completion.servers.lua_ls")
-			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-			nvim_lsp.lua_ls.setup(final_opts)
-		end,
-	})
+	if vim.fn.executable("dart") then
+		local _opts = require("completion.servers.dartls")
+		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
+		nvim_lsp.dartls.setup(final_opts)
+	end
 end
