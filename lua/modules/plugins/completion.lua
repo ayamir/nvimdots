@@ -12,14 +12,15 @@ completion["neovim/nvim-lspconfig"] = {
 			"glepnir/lspsaga.nvim",
 			config = require("completion.lspsaga"),
 		},
-		{
-			"jose-elias-alvarez/null-ls.nvim",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"jay-babu/mason-null-ls.nvim",
-			},
-			config = require("completion.null-ls"),
-		},
+	},
+}
+completion["jose-elias-alvarez/null-ls.nvim"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("completion.null-ls"),
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"jay-babu/mason-null-ls.nvim",
 	},
 }
 completion["hrsh7th/nvim-cmp"] = {

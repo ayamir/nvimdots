@@ -1,22 +1,19 @@
 return function()
 	local null_ls = require("null-ls")
 	local mason_null_ls = require("mason-null-ls")
+	local btns = null_ls.builtins
 
+	-- Please set additional flags for the supported servers here
+	-- Don't specify any config here if you are using the default one.
 	local sources = {
-		null_ls.builtins.diagnostics.vint,
-		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.rustfmt,
-		null_ls.builtins.formatting.dart_format,
-		null_ls.builtins.diagnostics.editorconfig_checker,
-		null_ls.builtins.formatting.clang_format.with({
+		btns.formatting.clang_format.with({
 			filetypes = { "c", "cpp" },
 			extra_args = require("completion.formatters.clang_format"),
 		}),
-		null_ls.builtins.formatting.black.with({
+		btns.formatting.black.with({
 			extra_args = { "--fast" },
 		}),
-		null_ls.builtins.formatting.prettier.with({
+		btns.formatting.prettier.with({
 			filetypes = {
 				"vue",
 				"typescript",
@@ -43,8 +40,9 @@ return function()
 	mason_null_ls.setup({
 		ensure_installed = require("core.settings").null_ls_deps,
 		automatic_installation = false,
-		automatic_setup = false,
+		automatic_setup = true,
 	})
+	require("mason-null-ls").setup_handlers()
 
 	require("completion.formatting").configure_format_on_save()
 end
