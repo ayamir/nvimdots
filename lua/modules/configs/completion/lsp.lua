@@ -57,28 +57,12 @@ return function()
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
 	local function mason_handler(lsp_name)
-		---Check whether this server has custom configs
-		---@return boolean
-		local function check_config()
-			local cfg_path = require("core.global").vim_path .. "/lua/modules/configs/completion/servers"
-			local list = {}
-			local servers_list = vim.split(vim.fn.glob(cfg_path .. "/*.lua"), "\n")
-			if type(servers_list) == "table" then
-				for _, s in ipairs(servers_list) do
-					list[#list + 1] = s:sub(#cfg_path + 2, -5)
-				end
-			end
-			return vim.tbl_contains(list, lsp_name)
-		end
-
-		if not check_config() then
+		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
+		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
 			return
-		end
-
-		local custom_handler = require("completion.servers." .. lsp_name)
-		if type(custom_handler) == "function" then
+		elseif type(custom_handler) == "function" then
 			--- Case where language server requires its own setup
 			--- Make sure to call require("lspconfig")[lsp_name].setup() in the function
 			--- See `clangd.lua` for example.
