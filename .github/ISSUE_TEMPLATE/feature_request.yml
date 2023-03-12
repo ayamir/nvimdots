@@ -1,0 +1,22 @@
+name: Feature Request
+description: Request an enhancement for this project
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        _Before requesting:_ Search [existing issues](https://github.com/ayamir/nvimdots/labels/enhancement) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+
+  - type: textarea
+    id: feat-desc
+    attributes:
+      label: "Feature description"
+    validations:
+      required: true
+  - type: textarea
+    id: extras
+    attributes:
+      label: "Additional information"
+      description: "If applicable, you may include images or videos to help explain your request"
+    validations:
+      required: false

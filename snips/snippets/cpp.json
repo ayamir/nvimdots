@@ -1,0 +1,47 @@
+{
+  "solu": {
+    "prefix": "solu",
+    "body": [
+      "class Solution",
+      "{",
+      "public:",
+      "\t$1 $2($3) {",
+      "\t\t$4",
+      "\t}",
+      "};"
+    ],
+    "description": "leetcode class Solution template"
+  },
+  "lc": {
+    "prefix": "lc",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "",
+      "using namespace std;",
+      "",
+      "class Solution",
+      "{",
+      "public:",
+      "\t$1 $2($3) {",
+      "\t\t$4",
+      "\t}",
+      "};",
+      "",
+      "int main(int argc, char *argv[]) {",
+      "\tSolution s;",
+      "\treturn 0;",
+      "}"
+    ],
+    "description": "leetcode template"
+  },
+  "hdef": {
+    "prefix": "hdef",
+    "body": [
+        "#ifndef $1",
+        "#define $1",
+        "",
+        "#endif // $1"
+    ],
+    "description": "header file definitions"
+  }
+}
