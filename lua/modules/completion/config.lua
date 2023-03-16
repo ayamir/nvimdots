@@ -48,7 +48,7 @@ function config.lspsaga()
 
 	local colors = get_palette()
 
-	require("lspsaga").init_lsp_saga({
+	require("lspsaga").setup({
 		diagnostic_header = {
 			icons.diagnostics.Error_alt,
 			icons.diagnostics.Warning_alt,
@@ -131,6 +131,20 @@ function config.lspsaga()
 				end
 			end,
 		},
+        ui = {
+            -- This option only works in Neovim 0.9
+            title = true,
+            -- Border type can be single, double, rounded, solid, shadow.
+            border = "single",
+            winblend = 0,
+            expand = "",
+            collapse = "",
+            code_action = "💡",
+            incoming = " ",
+            outgoing = " ",
+            hover = ' ',
+            kind = {},
+        },
 	})
 end
 
