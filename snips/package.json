@@ -6,13 +6,7 @@
   "contributes": {
     "snippets": [
       {
-        "language": [
-          "plaintext",
-          "markdown",
-          "tex",
-          "html",
-          "global"
-        ],
+        "language": ["plaintext", "markdown", "tex", "html", "global"],
         "path": "./snippets/global.json"
       },
       {
@@ -24,17 +18,11 @@
         "path": "./snippets/cpp.json"
       },
       {
-        "language": [
-          "csharp",
-          "cs"
-        ],
+        "language": ["csharp", "cs"],
         "path": "./snippets/csharp.json"
       },
       {
-        "language": [
-          "gitcommit",
-          "NeogitCommitMessage"
-        ],
+        "language": ["gitcommit", "NeogitCommitMessage"],
         "path": "./snippets/gitcommit.json"
       },
       {
@@ -118,25 +106,15 @@
         "path": "./snippets/sql.json"
       },
       {
-        "language": [
-          "shellscript",
-          "shell",
-          "sh"
-        ],
+        "language": ["shellscript", "shell", "sh"],
         "path": "./snippets/shell.json"
       },
       {
-        "language": [
-          "markdown",
-          "rmd"
-        ],
+        "language": ["markdown", "rmd"],
         "path": "./snippets/markdown.json"
       },
       {
-        "language": [
-          "plaintex",
-          "tex"
-        ],
+        "language": ["plaintex", "tex"],
         "path": "./snippets/latex.json"
       },
       {
@@ -144,37 +122,19 @@
         "path": "./snippets/java.json"
       },
       {
-        "language": [
-          "html",
-          "jade",
-          "pug",
-          "eruby"
-        ],
+        "language": ["html", "jade", "pug", "eruby"],
         "path": "./snippets/html.json"
       },
       {
-        "language": [
-          "css",
-          "scss",
-          "sass",
-          "less",
-          "stylus"
-        ],
+        "language": ["css", "scss", "sass", "less", "stylus"],
         "path": "./snippets/css.json"
       },
       {
-        "language": [
-          "javascript",
-          "javascriptreact",
-          "vue"
-        ],
+        "language": ["javascript", "javascriptreact", "vue"],
         "path": "./snippets/javascript/javascript.json"
       },
       {
-        "language": [
-          "typescript",
-          "typescriptreact"
-        ],
+        "language": ["typescript", "typescriptreact"],
         "path": "./snippets/javascript/typescript.json"
       },
       {
@@ -270,17 +230,11 @@
         "path": "./snippets/kotlin.json"
       },
       {
-        "language": [
-          "plaintex",
-          "tex"
-        ],
+        "language": ["plaintex", "tex"],
         "path": "./snippets/latex/latex-snippets.json"
       },
       {
-        "language": [
-          "plaintex",
-          "tex"
-        ],
+        "language": ["plaintex", "tex"],
         "path": "./snippets/latex/vscode-latex-snippets.json"
       },
       {
@@ -288,10 +242,7 @@
         "path": "./snippets/frameworks/twig.json"
       },
       {
-        "language": [
-          "r",
-          "rmd"
-        ],
+        "language": ["r", "rmd"],
         "path": "./snippets/r.json"
       },
       {

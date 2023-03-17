@@ -18,7 +18,7 @@ return function()
 		styles = {
 			comments = { "italic" },
 			properties = { "italic" },
-			functions = { "italic", "bold" },
+			functions = { "bold" },
 			keywords = { "italic" },
 			operators = { "bold" },
 			conditionals = { "bold" },
@@ -220,6 +220,7 @@ return function()
 
 					["@field.lua"] = { fg = cp.lavender },
 					["@constructor.lua"] = { fg = cp.flamingo },
+					["@variable.builtin.lua"] = { fg = cp.flamingo, style = { "italic" } },
 
 					["@constant.java"] = { fg = cp.teal },
 
