@@ -3,7 +3,7 @@ return function()
 
 	local opts = {
 		options = {
-			number = nil,
+			numbers = "ordinal",
 			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
 			left_trunc_marker = icons.ui.Left,
