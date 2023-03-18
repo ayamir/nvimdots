@@ -10,11 +10,6 @@ ui["akinsho/bufferline.nvim"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
-ui["catppuccin/nvim"] = {
-	lazy = false,
-	name = "catppuccin",
-	config = require("ui.catppuccin"),
-}
 ui["sainnhe/edge"] = {
 	lazy = true,
 	config = require("ui.edge"),

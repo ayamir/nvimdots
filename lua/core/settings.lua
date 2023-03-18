@@ -65,7 +65,7 @@ settings["lsp_deps"] = {
 	"pyright",
 	"rust_analyzer",
 	"yamlls",
-	-- "gopls",
+	"gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here

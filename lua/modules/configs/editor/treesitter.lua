@@ -81,7 +81,7 @@ return vim.schedule_wrap(function()
 
 	-- speed
 	require("nvim-treesitter.install").command_extra_args = {
-		curl = { "--proxy", "http://127.0.0.1:7890" },
+		curl = { "--proxy", "http://127.0.0.1:52088" },
 	}
 
 	require("nvim-treesitter.install").prefer_git = true
