@@ -1,3 +1,5 @@
+local global = require("core.global")
+
 return vim.schedule_wrap(function()
 	local use_ssh = require("core.settings").use_ssh
 
@@ -81,7 +83,7 @@ return vim.schedule_wrap(function()
 
 	-- speed
 	require("nvim-treesitter.install").command_extra_args = {
-		curl = { "--proxy", "http://127.0.0.1:52088" },
+		curl = { "--proxy", global.proxy_nvim },
 	}
 
 	require("nvim-treesitter.install").prefer_git = true
