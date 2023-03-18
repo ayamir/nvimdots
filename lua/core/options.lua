@@ -23,7 +23,7 @@ local function load_options()
 		completeopt = "menuone,noselect",
 		concealcursor = "niv",
 		conceallevel = 0,
-		cursorcolumn = true,
+		cursorcolumn = false,
 		cursorline = true,
 		diffopt = "filler,iwhite,internal,algorithm:patience",
 		display = "lastline",
