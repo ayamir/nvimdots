@@ -13,6 +13,7 @@ function global:load_variables()
 	self.modules_dir = self.vim_path .. path_sep .. "modules"
 	self.home = home
 	self.data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
+	self.proxy_nvim = os.getenv("PROXY_NVIM") or "http://127.0.0.1:7890"
 end
 
 global:load_variables()
