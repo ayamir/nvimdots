@@ -72,7 +72,7 @@ chomp() {
 	printf "%s" "${1/"$'\n'"/}"
 }
 
-prompt() {
+info() {
 	printf "${tty_blue}==>${tty_bold} %s${tty_reset}\n" "$(shell_join "$@")"
 }
 
@@ -136,10 +136,10 @@ prompt_confirm() {
 }
 
 check_ssh() {
-	prompt "Validating SSH connection..."
+	info "Validating SSH connection..."
 	ssh -T git@github.com &>/dev/null
 	if ! [ $? -eq 1 ]; then
-		prompt "We'll use HTTPS to fetch and update plugins."
+		info "We'll use HTTPS to fetch and update plugins."
 		return 0
 	else
 		prompt_confirm "Do you prefer to use SSH to fetch and update plugins? (otherwise HTTPS)"
@@ -148,7 +148,7 @@ check_ssh() {
 }
 
 clone_pref() {
-	prompt "Checking 'git clone' preferences..."
+	info "Checking 'git clone' preferences..."
 	if ! prompt_confirm "Would you like to perform a shallow clone ('--depth=1')?"; then
 		CLONE_ATTR+=("--depth=1")
 	fi
@@ -188,7 +188,7 @@ if [[ -z "${NONINTERACTIVE-}" ]]; then
 		fi
 	fi
 else
-	prompt 'Running in non-interactive mode because `$NONINTERACTIVE` is set.'
+	info 'Running in non-interactive mode because `$NONINTERACTIVE` is set.'
 fi
 
 if ! command -v perl >/dev/null; then
@@ -223,7 +223,7 @@ if [[ -n "${NONINTERACTIVE-}" ]]; then
 	USE_SSH=0
 fi
 
-prompt "This script will install ayamir/nvimdots to:"
+info "This script will install ayamir/nvimdots to:"
 echo "${DEST_DIR}"
 
 if [[ -d "${DEST_DIR}" ]]; then
@@ -245,13 +245,13 @@ if [[ -d "${DEST_DIR}" ]]; then
 	execute "mv" "-f" "${DEST_DIR}" "${BACKUP_DIR}"
 fi
 
-prompt "Fetching in progress..."
+info "Fetching in progress..."
 if [[ "$USE_SSH" -eq "1" ]]; then
 	if is_latest; then
 		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
-		prompt "Automatically redirecting you to legacy version..."
+		info "Automatically redirecting you to legacy version..."
 		execute "git" "clone" "-b" "0.7" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
 	fi
 else
@@ -259,7 +259,7 @@ else
 		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
-		prompt "Automatically redirecting you to legacy version..."
+		info "Automatically redirecting you to legacy version..."
 		execute "git" "clone" "-b" "0.7" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
 	fi
 fi
@@ -267,12 +267,12 @@ fi
 cd "${DEST_DIR}" || return
 
 if [[ "$USE_SSH" -eq "0" ]]; then
-	prompt "Changing default fetching method to HTTPS..."
+	info "Changing default fetching method to HTTPS..."
 	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/core/settings.lua"
 fi
 
-prompt "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-prompt "If lazy.nvim failed to fetch any plugin(s), maunally execute \`:Lazy sync\` until everything is up-to-date."
+info "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
+info "If lazy.nvim failed to fetch any plugin(s), maunally execute \`:Lazy sync\` until everything is up-to-date."
 cat <<EOS
 
 Thank you for using this set of configuration!
