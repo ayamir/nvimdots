@@ -5,6 +5,8 @@
 
 Set-StrictMode -Version 3.0
 
+$ErrorActionPreference = "Stop" # Exit when command fails
+
 # global-scope vars
 $REQUIRED_NVIM_VERSION = [version]'0.8.0'
 $USE_SSH = $True
@@ -36,7 +38,7 @@ function _chomp ([Parameter(Mandatory = $True)] [string]$Str) {
 
 # Check if script is run with non-interactive mode, this is not allowed
 # Returns $True if validation failed (i.e., in non-interactive mode)
-function Test-OpType {
+function test_host {
 	$NonInteractive = [System.Environment]::GetCommandLineArgs() | Where-Object { $_ -like '-NonI*' }
 	if ([System.Environment]::UserInteractive -and -not $NonInteractive) {
 		return $False
@@ -45,18 +47,22 @@ function Test-OpType {
 	}
 }
 
-function prompt ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
+function info ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
 	Write-Host "==> " -ForegroundColor Blue -NoNewline; Write-Host $(_chomp -Str $Msg);
+}
+
+function info_ext ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
+	Write-Host "    $(_chomp -Str $Msg)"
 }
 
 function warn ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
 	Write-Host "Warning" -ForegroundColor Yellow -NoNewline; Write-Host ": $(_chomp -Str $Msg)";
 }
-function warn-Ext ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
+function warn_ext ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
 	Write-Host "         $(_chomp -Str $Msg)"
 }
 
-function Safe-Execute ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [scriptblock]$WithCmd) {
+function safe_execute ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [scriptblock]$WithCmd) {
 	try {
 		Invoke-Command -ErrorAction Stop -ScriptBlock $WithCmd
 		if (-not $?) {
@@ -68,7 +74,7 @@ function Safe-Execute ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] 
 	}
 }
 
-function Wait-For-User {
+function wait_for_user {
 	Write-Host ""
 	Write-Host "Press " -NoNewline; Write-Host "RETURN" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host "/" -NoNewline; Write-Host "ENTER" -ForegroundColor White -BackgroundColor DarkGray -NoNewline; Write-Host " to continue or any other key to abort...";
 	$ks = [System.Console]::ReadKey()
@@ -78,11 +84,11 @@ function Wait-For-User {
 	}
 }
 
-function Check-SSH {
-	prompt -Msg "Validating SSH connection..."
+function check_ssh {
+	info -Msg "Validating SSH connection..."
 	Invoke-Command -ErrorAction SilentlyContinue -ScriptBlock { ssh -T git@github.com *> $null }
 	if ($LastExitCode -ne 1) {
-		prompt -Msg "We'll use HTTPS to fetch and update plugins."
+		info -Msg "We'll use HTTPS to fetch and update plugins."
 		return $True
 	} else {
 		$_title = "Fetch Preferences"
@@ -100,8 +106,8 @@ function Check-SSH {
 	}
 }
 
-function Check-Clone-Pref {
-	prompt -Msg "Checking 'git clone' preferences..."
+function check_clone_pref {
+	info -Msg "Checking 'git clone' preferences..."
 
 	$_title = "'git clone' Preferences"
 	$_message = "Would you like to perform a shallow clone ('--depth=1')?"
@@ -117,7 +123,7 @@ function Check-Clone-Pref {
 	}
 }
 
-function Check-Def-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
+function check_in_path ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$WithName) {
 	if ((Get-Command $WithName -ErrorAction SilentlyContinue)) {
 		return $True
 	} else {
@@ -125,9 +131,9 @@ function Check-Def-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()
 	}
 }
 
-function Query-Pack {
-	if ((Check-Def-Exec -WithName "scoop") -and (Check-Def-Exec -WithName "choco")) {
-		prompt -Msg "   [Detected] Multiple package managers detected."
+function query_pack {
+	if ((check_in_path -WithName "scoop") -and (check_in_path -WithName "choco")) {
+		info -Msg "   [Detected] Multiple package managers detected."
 
 		$_title = "Package manager Preferences"
 		$_message = "Pick your favorite package manager"
@@ -141,11 +147,11 @@ function Query-Pack {
 		} else {
 			$env:CCPACK_MGR = 'choco'
 		}
-	} elseif ((Check-Def-Exec -WithName "scoop")) {
-		prompt -Msg "   [Detected] We'll use 'Scoop' as the default package mgr."
+	} elseif ((check_in_path -WithName "scoop")) {
+		info -Msg "   [Detected] We'll use 'Scoop' as the default package mgr."
 		$env:CCPACK_MGR = 'scoop'
-	} elseif ((Check-Def-Exec -WithName "choco")) {
-		prompt -Msg "   [Detected] We'll use 'Chocolatey' as the default package mgr."
+	} elseif ((check_in_path -WithName "choco")) {
+		info -Msg "   [Detected] We'll use 'Chocolatey' as the default package mgr."
 		$env:CCPACK_MGR = 'choco'
 	} else {
 		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
@@ -163,20 +169,20 @@ Avaliable choices are:
 	}
 }
 
-function Init-Pack {
-	prompt -Msg "Initializing package manager preferences..."
+function init_pack {
+	info -Msg "Initializing package manager preferences..."
 	if ($env:CCPACK_MGR -ne 'unknown') {
-		prompt -Msg '$env:CCPACK_MGR already defined. Validating...'
-		if (($env:CCPACK_MGR -eq 'choco') -and (Check-Def-Exec -WithName $env:CCPACK_MGR)) {
-			prompt -Msg "We'll use 'Chocolatey' as the default package mgr."
-		} elseif (($env:CCPACK_MGR -eq 'scoop') -and (Check-Def-Exec -WithName $env:CCPACK_MGR)) {
-			prompt -Msg "We'll use 'Scoop' as the default package mgr."
+		info -Msg '$env:CCPACK_MGR already defined. Validating...'
+		if (($env:CCPACK_MGR -eq 'choco') -and (check_in_path -WithName $env:CCPACK_MGR)) {
+			info -Msg "We'll use 'Chocolatey' as the default package mgr."
+		} elseif (($env:CCPACK_MGR -eq 'scoop') -and (check_in_path -WithName $env:CCPACK_MGR)) {
+			info -Msg "We'll use 'Scoop' as the default package mgr."
 		} else {
-			prompt -Msg "Validation failed. Fallback to query."
-			Query-Pack
+			info -Msg "Validation failed. Fallback to query."
+			query_pack
 		}
 	} else {
-		Query-Pack
+		query_pack
 	}
 }
 
@@ -184,36 +190,36 @@ function _install_exe ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] 
 	if ($env:CCPACK_MGR -eq 'choco') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Chocolatey"
 		$_inst_name = $choco_package_matrix[$WithName]
-		Safe-Execute -WithCmd { choco install "$_inst_name" -y }
+		safe_execute -WithCmd { choco install "$_inst_name" -y }
 	}
 	elseif ($env:CCPACK_MGR -eq 'scoop') {
 		Write-Host "Attempting to install dependency [" -NoNewline; Write-Host $WithName -ForegroundColor Green -NoNewline; Write-Host "] with Scoop"
 		$_inst_name = $scoop_package_matrix[$WithName]
-		Safe-Execute -WithCmd { scoop install "$_inst_name" }
+		safe_execute -WithCmd { scoop install "$_inst_name" }
 	} else {
 		_abort -Msg 'This function is invoked incorrectly - Invalid data: $env:CCPACK_MGR' -Type "InvalidOperation"
 	}
 }
 
 function _install_nodejs_deps {
-	Safe-Execute -WithCmd { npm install --global neovim tree-sitter-cli }
+	safe_execute -WithCmd { npm install --global neovim tree-sitter-cli }
 }
 
 function _install_python_deps {
-	Safe-Execute -WithCmd { python -m pip install --user wheel }
-	Safe-Execute -WithCmd { python -m pip install --user pynvim }
+	safe_execute -WithCmd { python -m pip install --user wheel }
+	safe_execute -WithCmd { python -m pip install --user pynvim }
 }
 
 function _install_ruby_deps {
-	Safe-Execute -WithCmd { gem install neovim }
-	Safe-Execute -WithCmd { ridk install }
+	safe_execute -WithCmd { gem install neovim }
+	safe_execute -WithCmd { ridk install }
 }
 
-function Check-And-Fetch-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
+function check_and_fetch_exec ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_str = "Checking dependency: '$PkgName'" + " " * 15
 	Write-Host $_str.substring(0,[System.Math]::Min(40,$_str.Length)) -NoNewline
 
-	if (-not (Check-Def-Exec -WithName $PkgName)) {
+	if (-not (check_in_path -WithName $PkgName)) {
 		Start-Sleep -Milliseconds 350
 		Write-Host "Failed" -ForegroundColor Red
 		_install_exe -WithName $PkgName
@@ -223,9 +229,9 @@ function Check-And-Fetch-Exec ([Parameter(Mandatory = $True)][ValidateNotNullOrE
 	}
 }
 
-function Check-Dep-Choice ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
+function confirm_dep_inst ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$PkgName) {
 	$_inst_name = $installer_pkg_matrix[$PkgName]
-	if (-not (Check-Def-Exec -WithName "$_inst_name")) {
+	if (-not (check_in_path -WithName "$_inst_name")) {
 		_abort -Msg "This function is invoked incorrectly - The '$_inst_name' executable not found" -Type "InvalidOperation"
 	} else {
 		$_title = "Dependencies Installation"
@@ -243,28 +249,28 @@ function Check-Dep-Choice ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty
 	}
 }
 
-function Fetch-Deps {
-	Check-And-Fetch-Exec -PkgName "gcc"
-	Check-And-Fetch-Exec -PkgName "git"
-	Check-And-Fetch-Exec -PkgName "nvim"
-	Check-And-Fetch-Exec -PkgName "make"
-	Check-And-Fetch-Exec -PkgName "node"
-	Check-And-Fetch-Exec -PkgName "pip"
-	Check-And-Fetch-Exec -PkgName "fzf"
-	Check-And-Fetch-Exec -PkgName "rg"
-	Check-And-Fetch-Exec -PkgName "ruby"
-	Check-And-Fetch-Exec -PkgName "go"
-	Check-And-Fetch-Exec -PkgName "curl"
-	Check-And-Fetch-Exec -PkgName "wget"
-	Check-And-Fetch-Exec -PkgName "rustc"
-	Check-And-Fetch-Exec -PkgName "sqlite3"
-	Check-And-Fetch-Exec -PkgName "tree-sitter"
+function fetch_deps {
+	check_and_fetch_exec -PkgName "gcc"
+	check_and_fetch_exec -PkgName "git"
+	check_and_fetch_exec -PkgName "nvim"
+	check_and_fetch_exec -PkgName "make"
+	check_and_fetch_exec -PkgName "node"
+	check_and_fetch_exec -PkgName "pip"
+	check_and_fetch_exec -PkgName "fzf"
+	check_and_fetch_exec -PkgName "rg"
+	check_and_fetch_exec -PkgName "ruby"
+	check_and_fetch_exec -PkgName "go"
+	check_and_fetch_exec -PkgName "curl"
+	check_and_fetch_exec -PkgName "wget"
+	check_and_fetch_exec -PkgName "rustc"
+	check_and_fetch_exec -PkgName "sqlite3"
+	check_and_fetch_exec -PkgName "tree-sitter"
 
 	# Reload PATH for future use
 	$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
-function Is-Latest {
+function is_latest {
 	$nvim_version = Invoke-Command -ErrorAction SilentlyContinue -ScriptBlock { nvim --version } # First get neovim version
 	$nvim_version = $nvim_version.Split([System.Environment]::NewLine) | Select-Object -First 1 # Then do head -n1
 	$nvim_version = $nvim_version.Split('-') | Select-Object -First 1 # Special for dev branches
@@ -274,7 +280,7 @@ function Is-Latest {
 	return ($nvim_version -ge $REQUIRED_NVIM_VERSION)
 }
 
-function Ring-Bell {
+function ring_bell {
 	[System.Console]::beep()
 }
 
@@ -283,27 +289,27 @@ function _main {
 		_abort -Msg "This install script can only execute on Windows." -Type "DeviceError"
 	}
 
-	if ((Test-OpType)) {
+	if ((test_host)) {
 		_abort -Msg "This script cannot proceed in non-interactive mode." -Type "NotImplemented"
 	}
 
-	prompt -Msg "Checking dependencies..."
+	info -Msg "Checking dependencies..."
 
-	Init-Pack
-	Fetch-Deps
+	init_pack
+	fetch_deps
 
-	if ((Check-Dep-Choice -PkgName "NodeJS")) {
+	if ((confirm_dep_inst -PkgName "NodeJS")) {
 		_install_nodejs_deps
 	}
-	if ((Check-Dep-Choice -PkgName "Python")) {
+	if ((confirm_dep_inst -PkgName "Python")) {
 		_install_python_deps
 	}
-	if ((Check-Dep-Choice -PkgName "Ruby")) {
+	if ((confirm_dep_inst -PkgName "Ruby")) {
 		_install_ruby_deps
 	}
 
 	# Check dependencies
-	if (-not (Check-Def-Exec -WithName "nvim")) {
+	if (-not (check_in_path -WithName "nvim")) {
 		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install NeoVim before installing this Nvim config. See:
   https://github.com/neovim/neovim/wiki/Installing-Neovim
@@ -313,7 +319,7 @@ You must install NeoVim before installing this Nvim config. See:
 '@
 	}
 
-	if (-not (Check-Def-Exec -WithName "git")) {
+	if (-not (check_in_path -WithName "git")) {
 		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install Git before installing this Nvim config. See:
   https://git-scm.com/
@@ -323,60 +329,60 @@ You must install Git before installing this Nvim config. See:
 '@
 	}
 
-	prompt -Msg "This script will install ayamir/nvimdots to:"
+	info -Msg "This script will install ayamir/nvimdots to:"
 	Write-Host $env:CCDEST_DIR
 
 	if ((Test-Path $env:CCDEST_DIR)) {
 		warn -Msg "The destination folder: `"$env:CCDEST_DIR`" already exists."
-		warn-Ext -Msg "We will make a backup for you at `"$env:CCBACKUP_DIR`"."
+		warn_ext -Msg "We will make a backup for you at `"$env:CCBACKUP_DIR`"."
 	}
 
-	Ring-Bell
-	Wait-For-User
-	if ((Check-SSH)) {
+	ring_bell
+	wait_for_user
+	if ((check_ssh)) {
 		$USE_SSH = $False
 	}
-	Check-Clone-Pref
+	check_clone_pref
 
 	if ((Test-Path $env:CCDEST_DIR)) {
-		Safe-Execute -WithCmd { Move-Item -Path "$env:CCDEST_DIR" -Destination "$env:CCBACKUP_DIR" -Force }
+		safe_execute -WithCmd { Move-Item -Path "$env:CCDEST_DIR" -Destination "$env:CCBACKUP_DIR" -Force }
 	}
 
-	prompt -Msg "Fetching in progress..."
+	info -Msg "Fetching in progress..."
 
 	if ($USE_SSH) {
-		if ((Is-Latest)) {
-			Safe-Execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		if ((is_latest)) {
+			safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 		} else {
 			warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
-			prompt -Msg "Automatically redirecting you to legacy version..."
-			Safe-Execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+			info -Msg "Automatically redirecting you to legacy version..."
+			safe_execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 		}
 	} else {
-		if ((Is-Latest)) {
-			Safe-Execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+		if ((is_latest)) {
+			safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 		} else {
 			warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
-			prompt -Msg "Automatically redirecting you to legacy version..."
-			Safe-Execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+			info -Msg "Automatically redirecting you to legacy version..."
+			safe_execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
 		}
 	}
 
-	Safe-Execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
+	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
 
 	if (-not $USE_SSH) {
-		prompt -Msg "Changing default fetching method to HTTPS..."
-		Safe-Execute -WithCmd {
+		info -Msg "Changing default fetching method to HTTPS..."
+		safe_execute -WithCmd {
 			(Get-Content "$env:CCDEST_DIR\lua\core\settings.lua") |
 			ForEach-Object { $_ -replace '\["use_ssh"\] = true','["use_ssh"] = false' } |
 			Set-Content "$env:CCDEST_DIR\lua\core\settings.lua"
 		}
 	}
 
-	prompt -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
-	prompt -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and'
-	prompt -Msg '  replace vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`'
-	prompt -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
+	info -Msg "Spawning neovim and fetching plugins... (You'll be redirected shortly)"
+	info -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and'
+	info_ext -Msg 'replace vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`'
+	info -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 	Write-Host @'
 
 Thank you for using this set of configuration!
@@ -388,10 +394,10 @@ Thank you for using this set of configuration!
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 '@
 
-	Ring-Bell
-	Wait-For-User
+	ring_bell
+	wait_for_user
 
-	Safe-Execute -WithCmd { nvim }
+	safe_execute -WithCmd { nvim }
 
 	# Exit the script
 	exit
