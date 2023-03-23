@@ -329,7 +329,7 @@ You must install Git before installing this Nvim config. See:
 '@
 	}
 
-	info -Msg "This script will install ayamir/nvimdots to:"
+	info -Msg "This script will install double12gzh/nvimdots to:"
 	Write-Host $env:CCDEST_DIR
 
 	if ((Test-Path $env:CCDEST_DIR)) {
@@ -352,19 +352,19 @@ You must install Git before installing this Nvim config. See:
 
 	if ($USE_SSH) {
 		if ((is_latest)) {
-			safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+			safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'git@github.com:double12gzh/nvimdots.git' "$env:CCDEST_DIR" }
 		} else {
 			warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 			info -Msg "Automatically redirecting you to legacy version..."
-			safe_execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+			safe_execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'git@github.com:double12gzh/nvimdots.git' "$env:CCDEST_DIR" }
 		}
 	} else {
 		if ((is_latest)) {
-			safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+			safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" 'https://github.com/double12gzh/nvimdots.git' "$env:CCDEST_DIR" }
 		} else {
 			warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 			info -Msg "Automatically redirecting you to legacy version..."
-			safe_execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/ayamir/nvimdots.git' "$env:CCDEST_DIR" }
+			safe_execute -WithCmd { git clone --progress -b 0.7 "$env:CCLONE_ATTR" 'https://github.com/double12gzh/nvimdots.git' "$env:CCDEST_DIR" }
 		}
 	}
 
@@ -387,10 +387,10 @@ You must install Git before installing this Nvim config. See:
 
 Thank you for using this set of configuration!
 - Project Homepage:
-    https://github.com/ayamir/nvimdots
+    https://github.com/double12gzh/nvimdots
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 - Further documentation (including executables you |must| install for full functionality):
-    https://github.com/ayamir/nvimdots/wiki/Prerequisites
+    https://github.com/double12gzh/nvimdots/wiki/Prerequisites
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 '@
 
