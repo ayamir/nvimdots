@@ -93,7 +93,7 @@ return function()
 		},
 		hover = {
 			open_link = "gl",
-			open_browser = "!chrome",
+			open_browser = "silent !" .. require("core.settings").external_browser,
 		},
 		outline = {
 			win_position = "right",
