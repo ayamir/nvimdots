@@ -160,8 +160,8 @@ local data = {
 		Vim = "",
 	},
 	cmp = {
-		Codeium = "",
-		TabNine = "",
+		Codeium = "",
+		TabNine = "",
 		Copilot = "",
 		Copilot_alt = "",
 		nvim_lsp = "",
