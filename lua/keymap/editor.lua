@@ -69,12 +69,7 @@ local plug_map = {
 	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
 
 	-- Plugin: vim-easy-align
-	["n|gea"] = map_callback(function()
-			return et("<Plug>(EasyAlign)")
-		end)
-		:with_expr()
-		:with_desc("edit: Align with delimiter"),
-	["x|gea"] = map_callback(function()
+	["nx|gea"] = map_callback(function()
 			return et("<Plug>(EasyAlign)")
 		end)
 		:with_expr()
