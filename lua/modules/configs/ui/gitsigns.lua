@@ -101,10 +101,7 @@ return function()
 					:with_buffer(bufnr)
 					:with_desc("git: Blame line"),
 				-- Text objects
-				["o|ih"] = bind.map_callback(function()
-					require("gitsigns.actions").text_object()
-				end):with_buffer(bufnr),
-				["x|ih"] = bind.map_callback(function()
+				["ox|ih"] = bind.map_callback(function()
 					require("gitsigns.actions").text_object()
 				end):with_buffer(bufnr),
 			})
