@@ -150,15 +150,17 @@ end
 ---@param mapping table<string, map_rhs>
 function bind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do
-		local mode, keymap = key:match("([^|]*)|?(.*)")
+		local modes, keymap = key:match("([^|]*)|?(.*)")
 		if type(value) == "table" then
-			local rhs = value.cmd
-			local options = value.options
-			local buf = value.buffer
-			if buf and type(buf) == "number" then
-				vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
-			else
-				vim.api.nvim_set_keymap(mode, keymap, rhs, options)
+			for _, mode in ipairs(vim.split(modes, "")) do
+				local rhs = value.cmd
+				local options = value.options
+				local buf = value.buffer
+				if buf and type(buf) == "number" then
+					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
+				else
+					vim.api.nvim_set_keymap(mode, keymap, rhs, options)
+				end
 			end
 		end
 	end

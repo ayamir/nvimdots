@@ -75,7 +75,6 @@ tool["nvim-telescope/telescope.nvim"] = {
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-lua/popup.nvim" },
 		{ "debugloop/telescope-undo.nvim" },
 		{
 			"ahmedkhalf/project.nvim",
