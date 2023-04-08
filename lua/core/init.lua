@@ -62,6 +62,9 @@ local disable_distribution_plugins = function()
 	-- Disable sql omni completion.
 	vim.g.loaded_sql_completion = 1
 
+	-- Disable EditorConfig support
+	vim.g.editorconfig = 1
+
 	-- Disable remote plugins
 	-- NOTE: Disabling rplugin.vim will show error for `wilder.nvim` in :checkhealth,
 	-- NOTE:  but since it's config doesn't require python rtp, it's fine to ignore.
