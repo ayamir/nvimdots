@@ -79,7 +79,6 @@ settings["lsp_deps"] = {
 settings["null_ls_deps"] = {
 	"black",
 	"clang_format",
-	"editorconfig_checker",
 	"prettier",
 	"rustfmt",
 	"shfmt",
