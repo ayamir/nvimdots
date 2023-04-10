@@ -10,7 +10,8 @@ set -u
 DEST_DIR="${HOME}/.config/nvim"
 BACKUP_DIR="${DEST_DIR}_backup-$(date +%Y%m%dT%H%M%S)"
 CLONE_ATTR=("--progress")
-REQUIRED_NVIM_VERSION=0.8
+REQUIRED_NVIM_VERSION=0.9.0
+REQUIRED_NVIM_VERSION_LEGACY=0.8.0
 USE_SSH=1
 
 abort() {
@@ -118,7 +119,7 @@ version_ge() {
 prompt_confirm() {
 	while true; do
 		read -r -p "$1 [Y/n]: " USR_CHOICE
-		case "$USR_CHOICE" in
+		case "${USR_CHOICE}" in
 		[yY][eE][sS] | [yY])
 			return 1
 			;;
@@ -126,10 +127,10 @@ prompt_confirm() {
 			return 0
 			;;
 		*)
-			if [[ -z "$USR_CHOICE" ]]; then
+			if [[ -z "${USR_CHOICE}" ]]; then
 				return 1
 			fi
-			printf "${tty_red}%s\n\n${tty_reset}" "Invalid input! Please enter one of: '[yY]/[yY][eE][sS] / [nN]/[nN][oO]'"
+			printf "${tty_red}%s\n\n${tty_reset}" "Invalid input! Please enter one of: '[y/yes] / [n/no]'"
 			;;
 		esac
 	done
@@ -154,10 +155,10 @@ clone_pref() {
 	fi
 }
 
-is_latest() {
+check_nvim_version() {
 	local nvim_version
 	nvim_version="$(nvim --version | head -n1 | sed -e 's|^[^0-9]*||' -e 's| .*||')"
-	if version_ge "$(major_minor "${nvim_version##* }")" "$(major_minor "${REQUIRED_NVIM_VERSION}")"; then
+	if version_ge "$(major_minor "${nvim_version##* }")" "$(major_minor "$1")"; then
 		return 0
 	else
 		return 1
@@ -246,19 +247,27 @@ if [[ -d "${DEST_DIR}" ]]; then
 fi
 
 info "Fetching in progress..."
-if [[ "$USE_SSH" -eq "1" ]]; then
-	if is_latest; then
+if [[ "${USE_SSH}" -eq "1" ]]; then
+	if check_nvim_version "${REQUIRED_NVIM_VERSION}"; then
 		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
-	else
+	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
-		info "Automatically redirecting you to legacy version..."
+		info "Automatically redirecting you to the latest compatible version..."
+		execute "git" "clone" "-b" "0.8" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
+	else
+		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION_LEGACY})."
+		info "Automatically redirecting you to the latest compatible version..."
 		execute "git" "clone" "-b" "0.7" "${CLONE_ATTR[@]}" "git@github.com:ayamir/nvimdots.git" "${DEST_DIR}"
 	fi
 else
-	if is_latest; then
+	if check_nvim_version "${REQUIRED_NVIM_VERSION}"; then
 		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
-	else
+	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
+		info "Automatically redirecting you to the latest compatible version..."
+		execute "git" "clone" "-b" "0.8" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
+	else
+		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION_LEGACY})."
 		info "Automatically redirecting you to legacy version..."
 		execute "git" "clone" "-b" "0.7" "${CLONE_ATTR[@]}" "https://github.com/ayamir/nvimdots.git" "${DEST_DIR}"
 	fi
@@ -266,7 +275,7 @@ fi
 
 cd "${DEST_DIR}" || return
 
-if [[ "$USE_SSH" -eq "0" ]]; then
+if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
 	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/core/settings.lua"
 fi
