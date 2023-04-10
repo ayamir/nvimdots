@@ -66,6 +66,10 @@ editor["romainl/vim-cool"] = {
 	lazy = true,
 	event = { "CursorMoved", "InsertEnter" },
 }
+editor["lambdalisue/suda.vim"] = {
+	lazy = true,
+	cmd = { "SudaRead", "SudaWrite" },
+}
 
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --

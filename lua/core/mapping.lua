@@ -7,10 +7,6 @@ local core_map = {
 	-- Suckless
 	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("editn: Toggle code fold"),
 	["n|<C-s>"] = map_cu("write"):with_noremap():with_silent():with_desc("editn: Save file"),
-	["n|<C-S-s>"] = map_cmd("execute 'silent! write !sudo tee % >/dev/null' <bar> edit!")
-		:with_silent()
-		:with_noremap()
-		:with_desc("editn: Save file using sudo"),
 	["n|Y"] = map_cmd("y$"):with_desc("editn: Yank text to EOL"),
 	["n|D"] = map_cmd("d$"):with_desc("editn: Delete text to EOL"),
 	["n|n"] = map_cmd("nzzzv"):with_noremap():with_desc("editn: Next search result"),
