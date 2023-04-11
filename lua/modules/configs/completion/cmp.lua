@@ -62,12 +62,11 @@ return function()
 				vim_item = opts.before(entry, vim_item)
 			end
 
-			local symbol = opts.symbol_map[vim_item.kind] or ""
-			vim_item.kind = string.format("  ⟬ %s %s ⟭", symbol, vim_item.kind)
+			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefinded
+			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.Undefinded
 
-			if opts.menu ~= nil then
-				vim_item.menu = " " .. opts.symbol_map[entry.source.name] .. "  |"
-			end
+			vim_item.menu = " " .. source_symbol .. "  |"
+			vim_item.kind = string.format("  ⟬ %s %s ⟭", kind_symbol, vim_item.kind)
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
@@ -118,7 +117,6 @@ return function()
 			format = function(entry, vim_item)
 				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
 				local kind = cmp_kind({
-					menu = true,
 					maxwidth = 50,
 					symbol_map = kind_map,
 				})(entry, vim_item)
