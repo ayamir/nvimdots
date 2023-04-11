@@ -35,7 +35,7 @@ return function()
 			cursor = 5,
 			width = 50,
 			align_shortcut = "right",
-			hl = "AlphaOptions",
+			hl = "AlphaButton",
 			hl_shortcut = "AlphaAttr",
 		}
 
@@ -118,7 +118,7 @@ return function()
 			end,
 		}),
 	}
-	dashboard.section.buttons.opts.hl = "AlphaOptions"
+	dashboard.section.buttons.opts.hl = "AlphaButton"
 
 	local function footer()
 		local stats = require("lazy").stats()
