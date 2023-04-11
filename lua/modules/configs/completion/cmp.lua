@@ -41,18 +41,14 @@ return function()
 		return (diff < 0)
 	end
 
-	local function cmp_kind(opts)
-		if opts == nil then
-			opts = {}
-		end
+	local function cmp_format(opts)
+		opts = opts or {}
 
 		return function(entry, vim_item)
-			if opts.before then
-				vim_item = opts.before(entry, vim_item)
-			end
+			vim_item = opts.before and opts.before(entry, vim_item)
 
 			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefinded
-			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.Undefinded
+			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.undefined
 
 			vim_item.menu = " " .. source_symbol .. "  |"
 			vim_item.kind = string.format("  ⟬ %s %s ⟭", kind_symbol, vim_item.kind)
@@ -105,7 +101,7 @@ return function()
 			fields = { "menu", "abbr", "kind" },
 			format = function(entry, vim_item)
 				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
-				local kind = cmp_kind({
+				local kind = cmp_format({
 					maxwidth = 50,
 					symbol_map = kind_map,
 				})(entry, vim_item)
@@ -152,17 +148,13 @@ return function()
 			{ name = "path" },
 			{
 				name = "treesitter",
-				---@diagnostic disable-next-line: unused-local
-				entry_filter = function(entry, _ctx)
-					local banned_kinds = {
+				entry_filter = function(entry)
+					local ignore_list = {
 						"Error",
 						"Comment",
 					}
 					local kind = entry:get_completion_item().cmp.kind_text
-					if vim.tbl_contains(banned_kinds, kind) then
-						return false
-					end
-					return true
+					return not vim.tbl_contains(ignore_list, kind)
 				end,
 			},
 			{ name = "spell" },
