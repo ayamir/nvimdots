@@ -145,6 +145,7 @@ function M.get_palette(overwrite)
 	end
 end
 
+-- Generate highlight groups for lspsaga. Existing attributes will NOT be overwritten
 function M.gen_lspkind_hl()
 	local colors = M.get_palette()
 	local dat = {
@@ -187,6 +188,16 @@ function M.gen_lspkind_hl()
 	for kind, color in pairs(dat) do
 		vim.api.nvim_set_hl(0, "LspKind" .. kind, { fg = color, default = true })
 	end
+end
+
+-- Generate highlight groups for alpha. Existing attributes will NOT be overwritten
+function M.gen_alpha_hl()
+	local colors = M.get_palette()
+
+	vim.api.nvim_set_hl(0, "AlphaHeader", { fg = colors.blue, default = true })
+	vim.api.nvim_set_hl(0, "AlphaButton", { fg = colors.green, default = true })
+	vim.api.nvim_set_hl(0, "AlphaAttr", { fg = colors.pink, italic = true, default = true })
+	vim.api.nvim_set_hl(0, "AlphaFooter", { fg = colors.yellow, default = true })
 end
 
 ---Convert number (0/1) to boolean
