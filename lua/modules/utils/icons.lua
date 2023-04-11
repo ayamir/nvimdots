@@ -28,7 +28,7 @@ local data = {
 		Text = "",
 		TypeParameter = "",
 		Unit = "",
-		Undefinded = "",
+		Undefined = "",
 		Value = "",
 		Variable = "",
 		-- ccls-specific icons.
@@ -161,14 +161,12 @@ local data = {
 		Vim = "",
 	},
 	cmp = {
-		-- kind_text
 		Codeium = "",
 		TabNine = "",
 		Copilot = "",
 		Copilot_alt = "",
-		-- User needs to add a icon according to the source after adding it.
-		-- sources
-		Undefinded = "",
+		-- Add source-specific icons here
+		undefined = "",
 		buffer = "",
 		cmp_tabnine = "",
 		codeium = "",
