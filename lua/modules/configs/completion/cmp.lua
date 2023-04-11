@@ -63,10 +63,10 @@ return function()
 			end
 
 			local symbol = opts.symbol_map[vim_item.kind]
-			vim_item.kind = string.format("%s %s", symbol, vim_item.kind)
+			vim_item.kind = string.format("  ⟬ %s %s ⟭", symbol, vim_item.kind)
 
 			if opts.menu ~= nil then
-				vim_item.menu = opts.menu[entry.source.name]
+				vim_item.menu = " " .. opts.symbol_map[entry.source.name] .. "  |"
 			end
 
 			if opts.maxwidth ~= nil then
@@ -114,16 +114,14 @@ return function()
 			},
 		},
 		formatting = {
-			fields = { "kind", "abbr", "menu" },
+			fields = { "menu", "abbr", "kind" },
 			format = function(entry, vim_item)
 				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
 				local kind = cmp_kind({
+					menu = true,
 					maxwidth = 50,
 					symbol_map = kind_map,
 				})(entry, vim_item)
-				-- local strings = vim.split(kind.kind, "%s", { trimempty = true })
-				kind.menu = "  ⟬ " .. kind.kind .. " ⟭"
-				kind.kind = " " .. kind_map[entry.source.name] .. " "
 				return kind
 			end,
 		},
