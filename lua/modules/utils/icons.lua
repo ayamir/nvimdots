@@ -160,10 +160,13 @@ local data = {
 		Vim = "",
 	},
 	cmp = {
+		-- kind_text
 		Codeium = "",
 		TabNine = "",
 		Copilot = "",
 		Copilot_alt = "",
+		-- User needs to add a icon according to the source after adding it.
+		-- sources
 		nvim_lsp = "",
 		nvim_lua = "",
 		path = "",
@@ -171,6 +174,12 @@ local data = {
 		spell = "暈",
 		luasnip = "",
 		treesitter = "",
+		tmux = "",
+		orgmode = "",
+		latex_symbols = "",
+		codeium = "",
+		cmp_tabnine = "",
+		copilot = "",
 	},
 	dap = {
 		Breakpoint = "",
