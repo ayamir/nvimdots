@@ -62,7 +62,7 @@ return function()
 				vim_item = opts.before(entry, vim_item)
 			end
 
-			local symbol = opts.symbol_map[vim_item.kind]
+			local symbol = opts.symbol_map[vim_item.kind] or ""
 			vim_item.kind = string.format("  ⟬ %s %s ⟭", symbol, vim_item.kind)
 
 			if opts.menu ~= nil then
