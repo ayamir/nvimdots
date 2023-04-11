@@ -28,6 +28,7 @@ local data = {
 		Text = "",
 		TypeParameter = "",
 		Unit = "",
+		Undefinded = "",
 		Value = "",
 		Variable = "",
 		-- ccls-specific icons.
@@ -160,16 +161,26 @@ local data = {
 		Vim = "",
 	},
 	cmp = {
+		-- kind_text
 		Codeium = "",
 		TabNine = "",
 		Copilot = "",
 		Copilot_alt = "",
+		-- User needs to add a icon according to the source after adding it.
+		-- sources
+		Undefinded = "",
+		buffer = "",
+		cmp_tabnine = "",
+		codeium = "",
+		copilot = "",
+		latex_symbols = "",
+		luasnip = "",
 		nvim_lsp = "",
 		nvim_lua = "",
+		orgmode = "",
 		path = "",
-		buffer = "",
 		spell = "暈",
-		luasnip = "",
+		tmux = "",
 		treesitter = "",
 	},
 	dap = {
