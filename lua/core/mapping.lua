@@ -64,6 +64,6 @@ bind.nvim_load_mapping(core_map)
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader><leader>s",
-	"<cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+	"<Cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
 	{ noremap = true, silent = true, nowait = true, desc = "edit: Start replacment mode of current word" }
 )
