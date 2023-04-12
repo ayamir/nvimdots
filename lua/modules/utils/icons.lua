@@ -166,7 +166,6 @@ local data = {
 		Copilot = "",
 		Copilot_alt = "",
 		-- Add source-specific icons here
-		undefined = "",
 		buffer = "",
 		cmp_tabnine = "",
 		codeium = "",
@@ -180,6 +179,7 @@ local data = {
 		spell = "暈",
 		tmux = "",
 		treesitter = "",
+		undefined = "",
 	},
 	dap = {
 		Breakpoint = "",
