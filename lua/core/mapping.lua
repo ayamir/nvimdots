@@ -12,7 +12,7 @@ local core_map = {
 	["n|n"] = map_cmd("nzzzv"):with_noremap():with_desc("edit: Next search result"),
 	["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("edit: Prev search result"),
 	["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
-	["n|<Esc>"] = map_cmd("<Cmd>noh<CR>"):with_noremap():with_silent():with_desc("edit: Clear search highlight"),
+	["n|<Esc>"] = map_cr("noh"):with_noremap():with_silent():with_desc("edit: Clear search highlight"),
 	["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap():with_desc("window: Focus left"),
 	["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap():with_desc("window: Focus right"),
 	["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap():with_desc("window: Focus down"),
@@ -25,17 +25,17 @@ local core_map = {
 	["n|<A-]>"] = map_cr("vertical resize +5"):with_silent():with_desc("window: Resize +5 vertically"),
 	["n|<A-;>"] = map_cr("resize -2"):with_silent():with_desc("window: Resize -2 horizontally"),
 	["n|<A-'>"] = map_cr("resize +2"):with_silent():with_desc("window: Resize +2 horizontally"),
-	["n|<C-q>"] = map_cmd(":wq<CR>"):with_desc("edit: Save file and quit"),
-	["n|<A-S-q>"] = map_cmd(":q!<CR>"):with_desc("edit: Force quit"),
+	["n|<C-q>"] = map_cr("wq"):with_desc("edit: Save file and quit"),
+	["n|<A-S-q>"] = map_cr("q!"):with_desc("edit: Force quit"),
 	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
 	["n|+"] = map_cmd("<C-a>"):with_noremap():with_silent():with_desc("edit: Increment"),
 	["n|-"] = map_cmd("<C-x>"):with_noremap():with_silent():with_desc("edit: Decrement"),
 	["n|<C-a>"] = map_cmd("gg0vG$"):with_noremap():with_silent():with_desc("edit: Select all"),
-	["n|tn"] = map_cmd("<Cmd>tabnew<CR>"):with_noremap():with_silent():with_desc("tab: Create a new tab"),
-	["n|tk"] = map_cmd("<Cmd>tabnext<CR>"):with_noremap():with_silent():with_desc("tab: Move to next tab"),
-	["n|tj"] = map_cmd("<Cmd>tabprevious<CR>"):with_noremap():with_silent():with_desc("tab: Move to previous tab"),
-	["n|to"] = map_cmd("<Cmd>tabonly<CR>"):with_noremap():with_silent():with_desc("tab: Only keep current tab"),
-	["n|<leader><leader>x"] = map_cmd("<Cmd>!chmod +x %<CR>"):with_silent():with_desc("file: chmod +x current file"),
+	["x|<C-a>"] = map_cmd("<Esc>gg0vG$"):with_noremap():with_silent():with_desc("edit: Select all"),
+	["n|tn"] = map_cr("tabnew"):with_noremap():with_silent():with_desc("tab: Create a new tab"),
+	["n|tk"] = map_cr("tabnext"):with_noremap():with_silent():with_desc("tab: Move to next tab"),
+	["n|tj"] = map_cr("tabprevious"):with_noremap():with_silent():with_desc("tab: Move to previous tab"),
+	["n|to"] = map_cr("tabonly"):with_noremap():with_silent():with_desc("tab: Only keep current tab"),
 	-- Insert mode
 	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("edit: Delete previous block"),
 	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
@@ -60,10 +60,3 @@ local core_map = {
 }
 
 bind.nvim_load_mapping(core_map)
-
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader><leader>s",
-	"<Cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-	{ noremap = true, silent = true, nowait = true, desc = "edit: Start replacment mode of current word" }
-)
