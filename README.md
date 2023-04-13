@@ -38,14 +38,15 @@
 
 This repo hosts my [NeoVim](https://neovim.io/) configuration for Linux, macOS, and Windows. `init.lua` is the config entry point.
 
-It contains two branches:
+Branch info:
 
 <div align="center">
 
-| Branch |    Completion Solution     |
-| :----: | :------------------------: |
-|  main  | config for nvim 0.8 stable |
-|  0.7   | config for nvim 0.7 stable |
+| Branch | Supported neovim version |
+| :----: | :----------------------: |
+|  main  |     nvim 0.9 stable      |
+|  0.8   |         nvim 0.8         |
+|  0.7   |         nvim 0.7         |
 
 </div>
 
