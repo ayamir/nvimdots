@@ -117,7 +117,7 @@ end
 
 local win_shell_config = function()
 	if global.is_windows then
-		vim.o.shell = "powershell.exe"
+		vim.o.shell = vim.fn.executable("pwsh") and "pwsh" or "powershell"
 		vim.o.shellcmdflag =
 			"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf-8';"
 		vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
