@@ -151,11 +151,15 @@ return function()
 			{
 				name = "treesitter",
 				entry_filter = function(entry)
+					local types = require("cmp.types")
+					local cmp_opts = entry:get_completion_item().cmp or {}
+					local kind = cmp_opts.kind_text
+						or types.lsp.CompletionItemKind[entry:get_kind()]
+						or types.lsp.CompletionItemKind[1]
 					local ignore_list = {
 						"Error",
 						"Comment",
 					}
-					local kind = entry:get_completion_item().cmp.kind_text
 					return not vim.tbl_contains(ignore_list, kind)
 				end,
 			},
