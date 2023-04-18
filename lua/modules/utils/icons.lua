@@ -163,13 +163,13 @@ local data = {
 	cmp = {
 		Codeium = "",
 		TabNine = "",
-		Copilot = "",
-		Copilot_alt = "",
+		Copilot = "",
 		-- Add source-specific icons here
 		buffer = "",
-		cmp_tabnine = "",
-		codeium = "",
+		cmp_tabnine = "",
+		codeium = "",
 		copilot = "",
+		copilot_alt = "",
 		latex_symbols = "",
 		luasnip = "",
 		nvim_lsp = "",
