@@ -53,7 +53,7 @@ return function()
 			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.undefined
 
 			vim_item.menu = " " .. source_symbol .. "  |"
-			vim_item.kind = string.format("  ⟬ %s %s ⟭", kind_symbol, vim_item.kind)
+			vim_item.kind = string.format("  〔 %s %s 〕", kind_symbol, vim_item.kind)
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
