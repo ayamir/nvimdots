@@ -12,7 +12,7 @@ return function()
 			},
 			{
 				filter = { filetype = "python" },
-				pattern = "%s*(%w+:)",
+				pattern = "%s*([_%w]+:)",
 				hl = "Constant",
 			},
 		},
