@@ -1,5 +1,6 @@
 return function()
 	local transparent_background = require("core.settings").transparent_background
+	local clear = {}
 
 	require("catppuccin").setup({
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
@@ -119,19 +120,17 @@ return function()
 			},
 		},
 		highlight_overrides = {
+			---@param cp palette
 			mocha = function(cp)
 				return {
-					-- For base configs.
+					-- For base configs
 					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.base },
+					-- FloatBorder = { fg = cp.blue },
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
-					Keyword = { fg = cp.pink },
-					Type = { fg = cp.blue },
-					Typedef = { fg = cp.yellow },
-					StorageClass = { fg = cp.red, style = { "italic" } },
 
-					-- For native lsp configs.
+					-- For native lsp configs
 					DiagnosticVirtualTextError = { bg = cp.none },
 					DiagnosticVirtualTextWarn = { bg = cp.none },
 					DiagnosticVirtualTextInfo = { bg = cp.none },
@@ -143,9 +142,12 @@ return function()
 					LspDiagnosticsVirtualTextHint = { fg = cp.rosewater },
 					LspDiagnosticsUnderlineHint = { sp = cp.rosewater },
 
-					-- For fidget.
+					-- For fidget
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
+
+					-- For nvim-tree
+					NvimTreeRootFolder = { fg = cp.pink },
 
 					-- For trouble.nvim
 					TroubleNormal = { bg = cp.base },
@@ -153,7 +155,10 @@ return function()
 					-- For lsp semantic tokens
 					["@lsp.type.comment"] = { fg = cp.overlay0 },
 					["@lsp.type.enum"] = { link = "@type" },
+					["@lsp.type.type"] = { link = "@type" },
 					["@lsp.type.property"] = { link = "@property" },
+					["@lsp.type.property.c"] = { link = "@property.cpp" },
+					["@lsp.type.property.cpp"] = { link = "@property.cpp" },
 					["@lsp.type.macro"] = { link = "@constant" },
 					["@lsp.typemod.function.defaultLibrary"] = { fg = cp.blue, style = { "bold", "italic" } },
 					["@lsp.typemod.function.defaultLibrary.c"] = { fg = cp.blue, style = { "bold" } },
@@ -161,65 +166,86 @@ return function()
 					["@lsp.typemod.method.defaultLibrary"] = { link = "@lsp.typemod.function.defaultLibrary" },
 					["@lsp.typemod.variable.defaultLibrary"] = { fg = cp.flamingo },
 
-					-- For treesitter.
-					["@field"] = { fg = cp.rosewater },
-					["@property"] = { fg = cp.yellow },
-
-					["@include"] = { fg = cp.teal },
-					-- ["@operator"] = { fg = cp.sky },
-					["@keyword.operator"] = { fg = cp.sky },
-					["@punctuation.special"] = { fg = cp.maroon },
-
-					-- ["@float"] = { fg = cp.peach },
-					-- ["@number"] = { fg = cp.peach },
-					-- ["@boolean"] = { fg = cp.peach },
-
-					["@constructor"] = { fg = cp.lavender },
-					-- ["@constant"] = { fg = cp.peach },
-					-- ["@conditional"] = { fg = cp.mauve },
-					-- ["@repeat"] = { fg = cp.mauve },
-					["@exception"] = { fg = cp.peach },
-
-					["@constant.builtin"] = { fg = cp.lavender },
-					-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
-					-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
-					["@type.qualifier"] = { link = "@keyword" },
-					["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
-
-					-- ["@function"] = { fg = cp.blue },
-					["@function.macro"] = { fg = cp.red, style = {} },
-					["@parameter"] = { fg = cp.rosewater },
-					["@keyword"] = { fg = cp.red, style = { "italic" } },
-					["@keyword.function"] = { fg = cp.maroon },
-					["@keyword.return"] = { fg = cp.pink, style = {} },
-
-					-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
-					-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
-					-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
-					-- ["@constant.macro"] = { fg = cp.mauve },
-
-					-- ["@label"] = { fg = cp.blue },
-					["@method"] = { fg = cp.blue, style = { "italic" } },
-					["@namespace"] = { fg = cp.rosewater, style = {} },
+					-- For treesitter
+					-- Comment = { fg = cp.overlay0 },
+					-- Error = { fg = cp.red },
+					-- PreProc = { fg = cp.pink },
+					-- Operator = { fg = cp.sky },
 
 					["@punctuation.delimiter"] = { fg = cp.teal },
 					["@punctuation.bracket"] = { fg = cp.overlay2 },
-					-- ["@string"] = { fg = cp.green },
-					-- ["@string.regex"] = { fg = cp.peach },
-					["@type"] = { fg = cp.yellow },
-					["@variable"] = { fg = cp.text },
-					["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
-					["@tag"] = { fg = cp.peach },
-					["@tag.delimiter"] = { fg = cp.maroon },
-					["@text"] = { fg = cp.text },
+					["@punctuation.special"] = { fg = cp.maroon },
 
-					-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
-					-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
-					-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
-					-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
-					-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
-					-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
+					-- String = { fg = cp.green },
+					-- ["@string.regex"] = { fg = cp.peach },
 					-- ["@string.escape"] = { fg = cp.pink },
+					-- ["@string.special"] = { fg = cp.blue },
+
+					-- Character = { fg = cp.teal },
+					-- SpecialChar = { link = "Special" },
+
+					-- Boolean = { fg = cp.peach },
+					-- Number = { fg = cp.peach },
+
+					-- Function = { fg = cp.blue },
+					-- ["@function.builtin"] = { fg = cp.peach },
+					-- ["@function.call"] = { link = "@function" },
+					-- ["@function.macro"] = { fg = cp.teal },
+					["@method"] = { link = "Function" },
+					-- ["@method.call"] = { link = "@method" },
+
+					["@constructor"] = { fg = cp.lavender },
+					["@parameter"] = { fg = cp.rosewater },
+
+					Keyword = { fg = cp.red },
+					["@keyword.function"] = { fg = cp.maroon },
+					["@keyword.operator"] = { fg = cp.sky },
+					["@keyword.return"] = { fg = cp.pink, style = clear },
+					-- ["@keyword.export"] = { fg = cp.sky },
+
+					Conditional = { fg = cp.mauve },
+					Repeat = { fg = cp.mauve },
+					Label = { fg = cp.rosewater },
+					["@include"] = { fg = cp.teal },
+					["@exception"] = { fg = cp.peach },
+
+					-- Type = { fg = cp.yellow },
+					-- ["@type.builtin"] = { fg = cp.yellow },
+					-- ["@type.definition"] = { link = "@type" },
+					["@type.qualifier"] = { link = "@keyword" },
+
+					StorageClass = { link = "@keyword" },
+					-- Constant = { fg = cp.peach },
+					["@field"] = { fg = cp.rosewater },
+					["@property"] = { fg = cp.yellow },
+
+					-- ["@variable"] = { fg = cp.text },
+					["@variable.builtin"] = { fg = cp.flamingo, style = { "italic" } },
+
+					["@constant"] = { link = "Constant" },
+					["@constant.builtin"] = { fg = cp.lavender },
+					Macro = { fg = cp.mauve },
+
+					["@namespace"] = { fg = cp.rosewater, style = clear },
+					-- ["@symbol"] = { fg = cp.flamingo },
+
+					["@text"] = { fg = cp.text },
+					["@tag"] = { fg = cp.peach },
+					["@tag.attribute"] = { fg = cp.mauve },
+					["@tag.delimiter"] = { fg = cp.maroon },
+
+					-- TODO: support semantic tokens
+
+					-- ["@class"] = { fg = cp.blue },
+					-- ["@struct"] = { fg = cp.blue },
+					["@enum"] = { link = "@type" },
+					-- ["@enumMember"] = { fg = cp.flamingo },
+					-- ["@event"] = { fg = cp.flamingo },
+					["@interface"] = { fg = cp.yellow },
+					-- ["@modifier"] = { fg = cp.flamingo },
+					-- ["@regexp"] = { fg = cp.pink },
+					-- ["@typeParameter"] = { fg = cp.yellow },
+					-- ["@decorator"] = { fg = cp.flamingo },
 
 					-- ["@property.toml"] = { fg = cp.blue },
 					-- ["@field.yaml"] = { fg = cp.blue },
@@ -227,11 +253,10 @@ return function()
 					-- ["@label.json"] = { fg = cp.blue },
 
 					["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
-					["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
+					-- ["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
 
-					["@field.lua"] = { fg = cp.lavender },
 					["@constructor.lua"] = { fg = cp.flamingo },
-					["@variable.builtin.lua"] = { fg = cp.flamingo, style = { "italic" } },
+					["@field.lua"] = { fg = cp.lavender },
 
 					["@constant.java"] = { fg = cp.teal },
 
@@ -244,12 +269,15 @@ return function()
 					["@type.css"] = { fg = cp.lavender },
 					["@property.css"] = { fg = cp.yellow, style = { "italic" } },
 
-					["@type.builtin.c"] = { fg = cp.yellow, style = {} },
+					["@type.builtin.c"] = { style = clear },
 
 					["@property.cpp"] = { fg = cp.text },
-					["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
+					["@type.builtin.cpp"] = { style = clear },
 
 					-- ["@symbol"] = { fg = cp.flamingo },
+
+					-- Misc
+					gitcommitSummary = { fg = cp.rosewater, style = { "italic" } },
 				}
 			end,
 		},
