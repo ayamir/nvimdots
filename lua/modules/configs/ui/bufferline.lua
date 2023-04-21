@@ -14,13 +14,19 @@ return function()
 			color_icons = true,
 			show_buffer_icons = true,
 			show_buffer_close_icons = true,
-			show_buffer_default_icon = true,
 			show_close_icon = true,
 			show_tab_indicators = true,
 			enforce_regular_tabs = true,
 			persist_buffer_sort = true,
 			always_show_bufferline = true,
 			separator_style = "thin",
+			get_element_icon = function(buf)
+				return require("nvim-web-devicons").get_icon(
+					buf.name,
+					vim.bo.filetype,
+					{ default = true, strict = true }
+				)
+			end,
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
