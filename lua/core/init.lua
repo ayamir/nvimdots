@@ -115,15 +115,32 @@ local clipboard_config = function()
 	end
 end
 
-local win_shell_config = function()
+local shell_config = function()
 	if global.is_windows then
-		vim.o.shell = vim.fn.executable("pwsh") and "pwsh" or "powershell"
-		vim.o.shellcmdflag =
-			"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf-8';"
-		vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-		vim.o.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
-		vim.o.shellquote = ""
-		vim.o.shellxquote = ""
+		if not (vim.fn.executable("pwsh") or vim.fn.executable("powershell")) then
+			vim.notify(
+				[[
+Failed to setup terminal config
+
+PowerShell is either not installed, missing from PATH, or not executable;
+cmd.exe will be used instead for `:!` (shell bang).
+
+You're recommended to install Windows PowerShell for better experience.]],
+				vim.log.levels.WARN,
+				{ title = "[core] Runtime error" }
+			)
+			return
+		end
+
+		local basecmd = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned "
+		local ctrlcmd =
+			"-Command $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding"
+		vim.api.nvim_set_option_value("shell", vim.fn.executable("pwsh") and "pwsh" or "powershell", {})
+		vim.api.nvim_set_option_value("shellcmdflag", basecmd .. ctrlcmd .. ";", {})
+		vim.api.nvim_set_option_value("shellredir", '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode', {})
+		vim.api.nvim_set_option_value("shellpipe", '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode', {})
+		vim.api.nvim_set_option_value("shellquote", nil, {})
+		vim.api.nvim_set_option_value("shellxquote", nil, {})
 	end
 end
 
@@ -134,7 +151,7 @@ local load_core = function()
 
 	neovide_config()
 	clipboard_config()
-	win_shell_config()
+	shell_config()
 
 	require("core.options")
 	require("core.mapping")
