@@ -123,16 +123,16 @@ local shell_config = function()
 Failed to setup terminal config
 
 PowerShell is either not installed, missing from PATH, or not executable;
-cmd.exe will be used instead for `:!` (shell bang).
+cmd.exe will be used instead for `:!` (shell bang) and toggleterm.nvim.
 
-You're recommended to install Windows PowerShell for better experience.]],
+You're recommended to install PowerShell for better experience.]],
 				vim.log.levels.WARN,
 				{ title = "[core] Runtime error" }
 			)
 			return
 		end
 
-		local basecmd = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned"
+		local basecmd = "-NoLogo -NoExit -ExecutionPolicy RemoteSigned"
 		local ctrlcmd =
 			"-Command $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding"
 		vim.api.nvim_set_option_value("shell", vim.fn.executable("pwsh") and "pwsh" or "powershell", {})
