@@ -119,7 +119,7 @@ function check_clone_pref {
 	if ($USR_CHOICE -eq 0) {
 		$env:CCLONE_ATTR = '--depth=1'
 	} else {
-		$env:CCLONE_ATTR = ''
+		$env:CCLONE_ATTR = '--progress'
 	}
 }
 
