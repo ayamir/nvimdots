@@ -132,11 +132,11 @@ You're recommended to install Windows PowerShell for better experience.]],
 			return
 		end
 
-		local basecmd = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned "
+		local basecmd = "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned"
 		local ctrlcmd =
 			"-Command $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding"
 		vim.api.nvim_set_option_value("shell", vim.fn.executable("pwsh") and "pwsh" or "powershell", {})
-		vim.api.nvim_set_option_value("shellcmdflag", basecmd .. ctrlcmd .. ";", {})
+		vim.api.nvim_set_option_value("shellcmdflag", string.format("%s %s;", basecmd, ctrlcmd), {})
 		vim.api.nvim_set_option_value("shellredir", '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode', {})
 		vim.api.nvim_set_option_value("shellpipe", '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode', {})
 		vim.api.nvim_set_option_value("shellquote", nil, {})
