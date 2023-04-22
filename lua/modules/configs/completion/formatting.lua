@@ -103,10 +103,7 @@ function M.format(opts)
 	for i = 1, #disabled_workspaces do
 		if cwd.find(cwd, disabled_workspaces[i]) ~= nil then
 			vim.notify(
-				string.format(
-					"[LSP] Formatting support for all files under [%s] has been disabled.",
-					disabled_workspaces[i]
-				),
+				string.format("[LSP] Formatting support for all files under [%s] is disabled.", disabled_workspaces[i]),
 				vim.log.levels.WARN,
 				{ title = "LSP Formatter Warning" }
 			)
