@@ -132,7 +132,7 @@ You're recommended to install PowerShell for better experience.]],
 			return
 		end
 
-		local basecmd = "-NoLogo -MTA -NoLogo -NoProfileLoadTime -NonInteractive -ExecutionPolicy RemoteSigned"
+		local basecmd = "-NoLogo -MTA -NoProfileLoadTime -NonInteractive -ExecutionPolicy RemoteSigned"
 		local ctrlcmd = "-Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8"
 		vim.api.nvim_set_option_value("shell", vim.fn.executable("pwsh") and "pwsh" or "powershell", {})
 		vim.api.nvim_set_option_value("shellcmdflag", string.format("%s %s;", basecmd, ctrlcmd), {})
