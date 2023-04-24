@@ -105,7 +105,7 @@ The completion window will always show no matter what file you are editing.
 You can use `<Tab>`{normal} and `<S-Tab>`{normal} to select next and previous candidate in
 the completion window and use `<CR>`{normal} to confirm completion. You can also use
 `<C-n>`{normal} and `<C-p>`{normal} and `<C-y>`{normal} to do it. Sometimes you don't want confirm
-completion but just want to new a line, you can use `<C-e>`{normal} to close the
+completion but just want to new a line, you can use `<C-w>`{normal} to close the
 window manually.
 
 There are more functions provided by lsp besides code completion.
