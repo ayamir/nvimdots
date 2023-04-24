@@ -1,1 +1,5 @@
 blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/ayamir/nvimdots/discussions
+    about: When you have questions that are not bug reports or feature requests
