@@ -32,7 +32,7 @@ settings["palette_overwrite"] = {}
 ---@type string
 settings["colorscheme"] = "catppuccin"
 
--- Use transparent background when it's ture
+-- Set it to true if your terminal has transparent background.
 ---@type boolean
 settings["transparent_background"] = false
 
