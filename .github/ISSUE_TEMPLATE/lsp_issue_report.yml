@@ -1,6 +1,6 @@
 name: LSP Issue
 description: File a bug report related to LSPs
-labels: [bug, lsp]
+labels: [ bug, lsp ]
 body:
   - type: markdown
     attributes:
@@ -59,7 +59,8 @@ body:
       description: "Which branch are you currently on? If you are not sure, check the output of `git rev-parse --abbrev-ref HEAD`"
       options:
         - main (Default/Latest)
-        - 0.7 (Legacy)
+        - 0.8 (Legacy)
+        - 0.7 (Deprecated)
     validations:
       required: true
   - type: dropdown
