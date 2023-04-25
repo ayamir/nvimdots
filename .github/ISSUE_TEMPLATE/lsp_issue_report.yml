@@ -60,7 +60,7 @@ body:
       options:
         - main (Default/Latest)
         - 0.8 (Legacy)
-        - 0.7 (Bug fixes only)
+        - 0.7 (Deprecated)
     validations:
       required: true
   - type: dropdown
