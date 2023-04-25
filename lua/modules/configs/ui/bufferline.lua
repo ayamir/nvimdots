@@ -20,13 +20,6 @@ return function()
 			persist_buffer_sort = true,
 			always_show_bufferline = true,
 			separator_style = "thin",
-			get_element_icon = function(buf)
-				return require("nvim-web-devicons").get_icon(
-					buf.name,
-					vim.bo.filetype,
-					{ default = true, strict = true }
-				)
-			end,
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
