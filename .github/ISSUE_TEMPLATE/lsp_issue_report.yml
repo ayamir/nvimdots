@@ -1,6 +1,6 @@
 name: LSP Issue
 description: File a bug report related to LSPs
-labels: [ bug, lsp ]
+labels: [bug, lsp]
 body:
   - type: markdown
     attributes:
