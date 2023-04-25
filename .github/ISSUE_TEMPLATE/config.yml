@@ -1,8 +1,8 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
   - name: GitHub Discussions
     url: https://github.com/ayamir/nvimdots/discussions/new/choose
-    about: Any issue that does not fall into the above categories shall go here.
+    about: Any issue that does not fall into the above categories shall go here
   - name: GitHub Wiki
     url: https://github.com/ayamir/nvimdots/wiki
-    about: Make sure you have checked our documentation first. To be explicit, the "Issues" section.
+    about: Make sure you have checked our documentation first. To be explicit, the "Issues" section
