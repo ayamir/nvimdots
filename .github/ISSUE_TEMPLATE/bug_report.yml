@@ -1,6 +1,6 @@
 name: Bug Report
 description: File a bug report
-labels: [bug]
+labels: [ bug ]
 body:
   - type: markdown
     attributes:
@@ -58,7 +58,6 @@ body:
       label: "Branch info"
       description: "Which branch are you currently on? If you are not sure, check the output of `git rev-parse --abbrev-ref HEAD`"
       options:
-        - 0.9 (Nightly)
         - main (Default/Latest)
         - 0.8 (Legacy)
         - 0.7 (deprecated)
