@@ -58,7 +58,7 @@ local function load_options()
 		relativenumber = true,
 		ruler = true,
 		scrolloff = 2,
-		sessionoptions = "curdir,help,tabpages,winsize",
+		sessionoptions = "buffers,curdir,help,tabpages,winsize",
 		shada = "!,'300,<50,@100,s10,h",
 		shiftround = true,
 		shiftwidth = 4,
