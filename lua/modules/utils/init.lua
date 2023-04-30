@@ -36,7 +36,7 @@ local palette = nil
 ---@return palette
 local function init_palette()
 	if not palette then
-		palette = vim.g.colors_name == "catppuccin" and require("catppuccin.palettes").get_palette()
+		palette = vim.g.colors_name:find("catppuccin") and require("catppuccin.palettes").get_palette()
 			or {
 				rosewater = "#DC8A78",
 				flamingo = "#DD7878",
