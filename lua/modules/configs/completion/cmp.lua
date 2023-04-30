@@ -41,7 +41,35 @@ return function()
 		return (diff < 0)
 	end
 
-	local lspkind = require("lspkind")
+	local function cmp_format(opts)
+		opts = opts or {}
+
+		return function(entry, vim_item)
+			if opts.before then
+				vim_item = opts.before(entry, vim_item)
+			end
+
+			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
+			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.undefined
+
+			vim_item.menu = " " .. source_symbol .. "  |"
+			vim_item.kind = string.format("  〔 %s %s 〕", kind_symbol, vim_item.kind)
+
+			if opts.maxwidth ~= nil then
+				if opts.ellipsis_char == nil then
+					vim_item.abbr = string.sub(vim_item.abbr, 1, opts.maxwidth)
+				else
+					local label = vim_item.abbr
+					local truncated_label = vim.fn.strcharpart(label, 0, opts.maxwidth)
+					if truncated_label ~= label then
+						vim_item.abbr = truncated_label .. opts.ellipsis_char
+					end
+				end
+			end
+			return vim_item
+		end
+	end
+
 	local cmp = require("cmp")
 
 	cmp.setup({
@@ -72,16 +100,13 @@ return function()
 			},
 		},
 		formatting = {
-			fields = { "kind", "abbr", "menu" },
+			fields = { "menu", "abbr", "kind" },
 			format = function(entry, vim_item)
-				local kind = lspkind.cmp_format({
-					mode = "symbol_text",
+				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
+				local kind = cmp_format({
 					maxwidth = 50,
-					symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp),
+					symbol_map = kind_map,
 				})(entry, vim_item)
-				local strings = vim.split(kind.kind, "%s", { trimempty = true })
-				kind.kind = " " .. strings[1] .. " "
-				kind.menu = "    (" .. strings[2] .. ")"
 				return kind
 			end,
 		},
@@ -123,7 +148,17 @@ return function()
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-			{ name = "treesitter" },
+			{
+				name = "treesitter",
+				entry_filter = function(entry)
+					local ignore_list = {
+						"Error",
+						"Comment",
+					}
+					local kind = entry:get_completion_item().cmp.kind_text
+					return not vim.tbl_contains(ignore_list, kind)
+				end,
+			},
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },

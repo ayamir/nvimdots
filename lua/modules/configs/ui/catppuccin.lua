@@ -1,6 +1,4 @@
 return function()
-	local transparent_background = false -- Set background transparency here!
-
 	require("catppuccin").setup({
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
@@ -11,7 +9,7 @@ return function()
 			shade = "dark",
 			percentage = 0.15,
 		},
-		transparent_background = transparent_background,
+		transparent_background = require("core.settings").transparent_background,
 		show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 		term_colors = true,
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
@@ -77,7 +75,7 @@ return function()
 			nvimtree = true,
 			overseer = false,
 			pounce = false,
-			semantic_tokens = false,
+			semantic_tokens = true,
 			symbols_outline = false,
 			telekasten = false,
 			telescope = true,
@@ -149,6 +147,17 @@ return function()
 
 					-- For trouble.nvim
 					TroubleNormal = { bg = cp.base },
+
+					-- For lsp semantic tokens
+					["@lsp.type.comment"] = { fg = cp.overlay0 },
+					["@lsp.type.enum"] = { link = "@type" },
+					["@lsp.type.property"] = { link = "@property" },
+					["@lsp.type.macro"] = { link = "@constant" },
+					["@lsp.typemod.function.defaultLibrary"] = { fg = cp.blue, style = { "bold", "italic" } },
+					["@lsp.typemod.function.defaultLibrary.c"] = { fg = cp.blue, style = { "bold" } },
+					["@lsp.typemod.function.defaultLibrary.cpp"] = { fg = cp.blue, style = { "bold" } },
+					["@lsp.typemod.method.defaultLibrary"] = { link = "@lsp.typemod.function.defaultLibrary" },
+					["@lsp.typemod.variable.defaultLibrary"] = { fg = cp.flamingo },
 
 					-- For treesitter.
 					["@field"] = { fg = cp.rosewater },

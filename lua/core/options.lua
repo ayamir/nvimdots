@@ -25,7 +25,7 @@ local function load_options()
 		conceallevel = 0,
 		cursorcolumn = true,
 		cursorline = true,
-		diffopt = "filler,iwhite,internal,algorithm:patience",
+		diffopt = "filler,iwhite,internal,linematch:60,algorithm:patience",
 		display = "lastline",
 		encoding = "utf-8",
 		equalalways = false,
@@ -58,7 +58,7 @@ local function load_options()
 		relativenumber = true,
 		ruler = true,
 		scrolloff = 2,
-		sessionoptions = "curdir,help,tabpages,winsize",
+		sessionoptions = "buffers,curdir,help,tabpages,winsize",
 		shada = "!,'300,<50,@100,s10,h",
 		shiftround = true,
 		shiftwidth = 4,
@@ -73,6 +73,7 @@ local function load_options()
 		smarttab = true,
 		softtabstop = 4,
 		splitbelow = true,
+		splitkeep = "cursor",
 		splitright = true,
 		startofline = false,
 		swapfile = false,
@@ -124,7 +125,7 @@ local function load_options()
 	-- Fix sqlite3 missing-lib issue on Windows
 	if global.is_windows then
 		-- Download the DLLs form https://www.sqlite.org/download.html
-		vim.g.sqlite_clib_path = global.home .. "/Documents/sqlite-dll-win64-x64-3400100/sqlite3.dll"
+		vim.g.sqlite_clib_path = global.home .. "/Documents/sqlite-dll-win64-x64-3400200/sqlite3.dll"
 	end
 end
 
