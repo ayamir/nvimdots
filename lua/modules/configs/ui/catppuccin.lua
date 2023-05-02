@@ -131,6 +131,24 @@ return function()
 					Type = { fg = cp.blue },
 					Typedef = { fg = cp.yellow },
 					StorageClass = { fg = cp.red, style = { "italic" } },
+					WinSeparator = { bg = cp.base, fg = cp.base },
+
+					-- For indent-blankline
+					IndentBlanklineContextChar = { fg = cp.pink },
+
+					-- For nvim-tree
+					NvimTreeIndentMarker = { fg = cp.surface0 },
+
+					-- For nvim-cmp and wilder
+					Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
+					PmenuBorder = { fg = cp.surface1, bg = transparent_background and cp.none or cp.base },
+					PmenuSel = { bg = cp.green, fg = cp.base },
+					CmpItemAbbr = { fg = cp.overlay2 },
+					CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
+
+					-- For lspsaga
+					OutlineNormal = { bg = cp.crust },
+					OutlineIndent = { fg = cp.surface0 },
 
 					-- For native lsp configs.
 					DiagnosticVirtualTextError = { bg = cp.none },
