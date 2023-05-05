@@ -24,18 +24,23 @@ return function()
 			diagnostics_indicator = function(count)
 				return "(" .. count .. ")"
 			end,
+			indicator = {
+				-- icon = "▎",
+				icon = " ",
+				style = "icon",
+			},
 			offsets = {
 				{
 					filetype = "NvimTree",
-					text = "File Explorer",
+					text = "",
 					text_align = "center",
-					padding = 1,
+					padding = 0,
 				},
 				{
 					filetype = "lspsagaoutline",
-					text = "Lspsaga Outline",
+					text = "",
 					text_align = "center",
-					padding = 1,
+					padding = 0,
 				},
 			},
 		},
