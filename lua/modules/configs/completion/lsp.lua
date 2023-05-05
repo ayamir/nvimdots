@@ -98,4 +98,7 @@ return function()
 		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 		nvim_lsp.dartls.setup(final_opts)
 	end
+
+	local _ts_server_opts = require("completion.servers.tsserver")
+	nvim_lsp.tsserver.setup(_ts_server_opts)
 end
