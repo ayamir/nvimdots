@@ -82,7 +82,7 @@ return function()
 			symbols_outline = false,
 			telekasten = false,
 			telescope = true,
-			treesitter_context = false,
+			treesitter_context = true,
 			ts_rainbow = true,
 			vim_sneak = false,
 			vimwiki = false,
@@ -120,10 +120,11 @@ return function()
 			},
 		},
 		highlight_overrides = {
-			mocha = function(cp)
+			all = function(cp)
 				return {
 					-- For base configs.
-					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.base },
+					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.mantle },
+					FloatBorder = { fg = cp.mantle, bg = cp.mantle },
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
@@ -131,6 +132,27 @@ return function()
 					Type = { fg = cp.blue },
 					Typedef = { fg = cp.yellow },
 					StorageClass = { fg = cp.red, style = { "italic" } },
+
+					-- For lsp
+					LspInfoBorder = { link = "FloatBorder" },
+
+					-- For mason
+					MasonNormal = { link = "NormalFloat" },
+
+					-- For indent-blankline
+					IndentBlanklineContextChar = { fg = cp.pink },
+
+					-- For nvim-cmp and wilder
+					Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
+					PmenuBorder = { fg = cp.surface1, bg = transparent_background and cp.none or cp.base },
+					PmenuSel = { bg = cp.green, fg = cp.base },
+					CmpItemAbbr = { fg = cp.overlay2 },
+					CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
+
+					-- For lspsaga
+					OutlineNormal = { bg = cp.mantle },
+					OutlineIndent = { fg = cp.surface0 },
+					OutlineWinSeparator = { bg = cp.base, fg = cp.base },
 
 					-- For native lsp configs.
 					DiagnosticVirtualTextError = { bg = cp.none },
@@ -148,8 +170,26 @@ return function()
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
+					-- For nvim-tree
+					NvimTreeRootFolder = { fg = cp.pink },
+					NvimTreeIndentMarker = { fg = cp.surface0 },
+
 					-- For trouble.nvim
 					TroubleNormal = { bg = cp.base },
+
+					-- For telescope
+					TelescopeBorder = { link = "FloatBorder" },
+					TelescopePromptBorder = { fg = cp.surface0, bg = cp.surface0 },
+					TelescopePromptNormal = { fg = cp.text, bg = cp.surface0 },
+					TelescopePromptPrefix = { fg = cp.flamingo, bg = cp.surface0 },
+					TelescopeNormal = { link = "NormalFloat" },
+					TelescopePreviewTitle = { fg = cp.base, bg = cp.green },
+					TelescopePromptTitle = { fg = cp.base, bg = cp.red },
+					TelescopeResultsTitle = { fg = cp.mantle, bg = cp.mantle },
+					TelescopeSelection = { fg = cp.text, bg = cp.surface0 },
+					TelescopeResultsDiffAdd = { fg = cp.green },
+					TelescopeResultsDiffChange = { fg = cp.yellow },
+					TelescopeResultsDiffDelete = { fg = cp.red },
 
 					-- For lsp semantic tokens
 					["@lsp.type.comment"] = { fg = cp.overlay0 },

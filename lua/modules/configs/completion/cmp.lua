@@ -50,10 +50,8 @@ return function()
 			end
 
 			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
-			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.undefined
 
-			vim_item.menu = " " .. source_symbol .. "  |"
-			vim_item.kind = string.format("  〔 %s %s 〕", kind_symbol, vim_item.kind)
+			vim_item.kind = string.format(" %s %s", kind_symbol, vim_item.kind)
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
@@ -75,12 +73,14 @@ return function()
 	cmp.setup({
 		window = {
 			completion = {
-				border = border("Normal"),
+				border = border("PmenuBorder"),
+				winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
 				max_width = 80,
 				max_height = 20,
 			},
 			documentation = {
-				border = border("CmpDocBorder"),
+				border = border("PmenuBorder"),
+				winhighlight = "Normal:Pmenu",
 			},
 		},
 		sorting = {
@@ -100,7 +100,7 @@ return function()
 			},
 		},
 		formatting = {
-			fields = { "menu", "abbr", "kind" },
+			fields = { "abbr", "kind" },
 			format = function(entry, vim_item)
 				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
 				local kind = cmp_format({
