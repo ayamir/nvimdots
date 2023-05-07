@@ -9,6 +9,10 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["format_on_save"] = true
 
+-- Set it to false if diagnostics virtual text is annoying for you
+---@type boolean
+settings["diagnostics_virtual_text"] = true
+
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
 ---@type string[]
 settings["format_disabled_dirs"] = {
@@ -89,9 +93,5 @@ settings["null_ls_deps"] = {
 	"stylua",
 	"vint",
 }
-
--- Set the inline_diagnostic_virtual_text to false if they are annoying for you
----@type boolean
-settings["inline_diagnostic_virtual_text"] = true
 
 return settings

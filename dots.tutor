@@ -48,9 +48,9 @@ Back to the left window, the status line is showed at the bottom of the window.
 You will see different content under different conditions. It will looks like
 this if you switch to the right window and move cursor to the second line.
 -------------------------------------------------------------------------------
-|Normal|main|  autocmd                        |~/.config/nvim|utf-8|LF|1%|2:1|
+|Normal|main| 󰅩 autocmd                        |~/.config/nvim|utf-8|LF|1%|2:1|
 -------------------------------------------------------------------------------
-" autocmd" indicates this line has a variable named "autocmd". So this part of
+"󰅩 autocmd" indicates this line has a variable named "autocmd". So this part of
 status line will show you the context of your cursor position. This feature
 is based on lsp, so it is disabled if corresponding lsp is not attach to current
 buffer.
