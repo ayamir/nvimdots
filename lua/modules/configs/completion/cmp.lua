@@ -51,7 +51,7 @@ return function()
 
 			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
 
-			vim_item.kind = string.format(" %s %s", kind_symbol, vim_item.kind)
+			vim_item.kind = string.format("  %s  %s", kind_symbol, vim_item.kind)
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
@@ -75,12 +75,11 @@ return function()
 			completion = {
 				border = border("PmenuBorder"),
 				winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
-				max_width = 80,
-				max_height = 20,
+				scrollbar = false,
 			},
 			documentation = {
-				border = border("PmenuBorder"),
-				winhighlight = "Normal:Pmenu",
+				border = border("CmpDocBorder"),
+				winhighlight = "Normal:CmpDoc",
 			},
 		},
 		sorting = {

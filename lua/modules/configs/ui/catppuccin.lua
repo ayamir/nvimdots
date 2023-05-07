@@ -148,6 +148,8 @@ return function()
 					PmenuSel = { bg = cp.green, fg = cp.base },
 					CmpItemAbbr = { fg = cp.overlay2 },
 					CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
+					CmpDoc = { link = "NormalFloat" },
+					CmpDocBorder = { link = "FloatBorder" },
 
 					-- For lspsaga
 					OutlineNormal = { bg = cp.mantle },
