@@ -158,6 +158,8 @@ return function()
 					},
 
 					-- For lspsaga
+					SagaNormal = { link = "NormalFloat" },
+					SagaBorder = { link = "FloatBorder" },
 					OutlineNormal = { bg = transparent_background and cp.none or cp.mantle },
 					OutlineWinSeparator = {
 						bg = transparent_background and cp.none or cp.base,
