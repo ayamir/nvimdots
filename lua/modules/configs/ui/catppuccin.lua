@@ -124,7 +124,10 @@ return function()
 				return {
 					-- For base configs.
 					NormalFloat = { fg = cp.text, bg = transparent_background and cp.none or cp.mantle },
-					FloatBorder = { fg = cp.mantle, bg = cp.mantle },
+					FloatBorder = {
+						fg = transparent_background and cp.blue or cp.mantle,
+						bg = transparent_background and cp.none or cp.mantle,
+					},
 					CursorLineNr = { fg = cp.green },
 					Search = { bg = cp.surface1, fg = cp.pink, style = { "bold" } },
 					IncSearch = { bg = cp.pink, fg = cp.surface1 },
@@ -149,12 +152,18 @@ return function()
 					CmpItemAbbr = { fg = cp.overlay2 },
 					CmpItemAbbrMatch = { fg = cp.blue, style = { "bold" } },
 					CmpDoc = { link = "NormalFloat" },
-					CmpDocBorder = { link = "FloatBorder" },
+					CmpDocBorder = {
+						fg = transparent_background and cp.surface1 or cp.mantle,
+						bg = transparent_background and cp.none or cp.mantle,
+					},
 
 					-- For lspsaga
-					OutlineNormal = { bg = cp.mantle },
+					OutlineNormal = { bg = transparent_background and cp.none or cp.mantle },
+					OutlineWinSeparator = {
+						bg = transparent_background and cp.none or cp.base,
+						fg = transparent_background and cp.surface1 or cp.base,
+					},
 					OutlineIndent = { fg = cp.surface0 },
-					OutlineWinSeparator = { bg = cp.base, fg = cp.base },
 
 					-- For native lsp configs.
 					DiagnosticVirtualTextError = { bg = cp.none },
@@ -177,17 +186,26 @@ return function()
 					NvimTreeIndentMarker = { fg = cp.surface0 },
 
 					-- For trouble.nvim
-					TroubleNormal = { bg = cp.base },
+					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
+
+					-- For treesitter-context
+					TreesitterContext = { link = "NormalFloat" },
 
 					-- For telescope
 					TelescopeBorder = { link = "FloatBorder" },
-					TelescopePromptBorder = { fg = cp.surface0, bg = cp.surface0 },
-					TelescopePromptNormal = { fg = cp.text, bg = cp.surface0 },
-					TelescopePromptPrefix = { fg = cp.flamingo, bg = cp.surface0 },
+					TelescopePromptBorder = {
+						fg = transparent_background and cp.blue or cp.surface0,
+						bg = transparent_background and cp.none or cp.surface0,
+					},
+					TelescopePromptNormal = { fg = cp.text, bg = transparent_background and cp.none or cp.surface0 },
+					TelescopePromptPrefix = { fg = cp.flamingo, bg = transparent_background and cp.none or cp.surface0 },
 					TelescopeNormal = { link = "NormalFloat" },
 					TelescopePreviewTitle = { fg = cp.base, bg = cp.green },
 					TelescopePromptTitle = { fg = cp.base, bg = cp.red },
-					TelescopeResultsTitle = { fg = cp.mantle, bg = cp.mantle },
+					TelescopeResultsTitle = {
+						fg = transparent_background and cp.none or cp.mantle,
+						bg = transparent_background and cp.none or cp.mantle,
+					},
 					TelescopeSelection = { fg = cp.text, bg = cp.surface0 },
 					TelescopeResultsDiffAdd = { fg = cp.green },
 					TelescopeResultsDiffChange = { fg = cp.yellow },
