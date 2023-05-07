@@ -56,6 +56,8 @@ return function()
 				use_lspsaga = false,
 				floating_window = true,
 				fix_pos = true,
+				-- hint_prefix = "🐼 ", -- should install color emoji
+				hint_prefix = "",
 				hint_enable = true,
 				hi_parameter = "Search",
 				handler_opts = {
