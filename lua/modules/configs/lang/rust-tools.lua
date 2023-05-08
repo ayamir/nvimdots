@@ -1,4 +1,8 @@
 return function()
+	local icons = {
+		kind = require("modules.utils.icons").get("kind", true),
+	}
+
 	local opts = {
 		tools = { -- rust-tools options
 
@@ -14,6 +18,7 @@ return function()
 					use_lspsaga = false,
 					floating_window = true,
 					fix_pos = true,
+					hint_prefix = icons.kind.Parameter,
 					hint_enable = true,
 					hi_parameter = "Search",
 					handler_opts = {

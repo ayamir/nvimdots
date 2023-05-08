@@ -8,6 +8,7 @@ return function()
 	local icons = {
 		ui = require("modules.utils.icons").get("ui", true),
 		misc = require("modules.utils.icons").get("misc", true),
+		kind = require("modules.utils.icons").get("kind", true),
 	}
 
 	mason.setup({
@@ -57,7 +58,7 @@ return function()
 				floating_window = true,
 				fix_pos = true,
 				-- hint_prefix = "🐼 ", -- should install color emoji
-				hint_prefix = "",
+				hint_prefix = icons.kind.Parameter,
 				hint_enable = true,
 				hi_parameter = "Search",
 				handler_opts = {
