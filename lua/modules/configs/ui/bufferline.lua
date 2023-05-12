@@ -25,8 +25,7 @@ return function()
 				return "(" .. count .. ")"
 			end,
 			indicator = {
-				icon = " ",
-				style = "icon",
+				style = "none",
 			},
 			offsets = {
 				{
