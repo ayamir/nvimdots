@@ -58,11 +58,11 @@ return function()
 			root_folder_label = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
-				git_placement = "before",
+				git_placement = "after",
 				show = {
 					file = true,
 					folder = true,
-					folder_arrow = false,
+					folder_arrow = true,
 					git = true,
 				},
 				padding = " ",
@@ -146,7 +146,7 @@ return function()
 		},
 		git = {
 			enable = true,
-			ignore = true,
+			ignore = false,
 			show_on_dirs = true,
 			timeout = 400,
 		},
