@@ -66,19 +66,19 @@ return function()
 					git = true,
 				},
 				padding = " ",
-				symlink_arrow = "  ",
+				symlink_arrow = " 󰁔 ",
 				glyphs = {
-					default = icons.documents.Default,
-					symlink = icons.documents.Symlink,
+					default = icons.documents.Default, --
+					symlink = icons.documents.Symlink, --
 					bookmark = icons.ui.Bookmark,
 					git = {
-						unstaged = icons.git.Mod,
-						staged = icons.git.Add,
+						unstaged = icons.git.Mod_alt,
+						staged = icons.git.Add, --󰄬
 						unmerged = icons.git.Unmerged,
-						renamed = icons.git.Rename,
-						untracked = icons.git.Untracked,
-						deleted = icons.git.Remove,
-						ignored = icons.git.Ignore,
+						renamed = icons.git.Rename, --󰁔
+						untracked = icons.git.Untracked, -- "󰞋"
+						deleted = icons.git.Remove, --
+						ignored = icons.git.Ignore, --◌
 					},
 					folder = {
 						arrow_open = "",
