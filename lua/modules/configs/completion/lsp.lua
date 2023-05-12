@@ -40,7 +40,7 @@ return function()
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 		signs = true,
 		underline = true,
-		virtual_text = require("core.settings").inline_diagnostic_virtual_text,
+		virtual_text = require("core.settings").diagnostics_virtual_text,
 		-- set update_in_insert to false bacause it was enabled by lspsaga
 		update_in_insert = false,
 	})
