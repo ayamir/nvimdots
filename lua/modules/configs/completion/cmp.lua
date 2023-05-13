@@ -51,7 +51,7 @@ return function()
 
 			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
 
-			vim_item.kind = string.format("%s %s", kind_symbol, vim_item.kind or "")
+			vim_item.kind = string.format(" %s  %s", kind_symbol, vim_item.kind or "")
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
