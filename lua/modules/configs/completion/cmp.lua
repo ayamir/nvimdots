@@ -51,7 +51,7 @@ return function()
 
 			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
 
-			vim_item.kind = string.format("  %s  %s", kind_symbol, vim_item.kind)
+			vim_item.kind = string.format("%s %s", kind_symbol, vim_item.kind or "")
 
 			if opts.maxwidth ~= nil then
 				if opts.ellipsis_char == nil then
@@ -71,6 +71,9 @@ return function()
 	local cmp = require("cmp")
 
 	cmp.setup({
+		completion = {
+			completeopt = "menu,menuone",
+		},
 		window = {
 			completion = {
 				border = border("PmenuBorder"),
@@ -99,11 +102,11 @@ return function()
 			},
 		},
 		formatting = {
-			fields = { "abbr", "kind" },
+			fields = { "abbr", "kind", "menu" },
 			format = function(entry, vim_item)
 				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
 				local kind = cmp_format({
-					maxwidth = 50,
+					maxwidth = nil,
 					symbol_map = kind_map,
 				})(entry, vim_item)
 				return kind
