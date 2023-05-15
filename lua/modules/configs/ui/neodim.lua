@@ -3,7 +3,8 @@ return function()
 
 	require("neodim").setup({
 		alpha = 0.45,
-		blend_color = blend_color,
+		--blend_color = blend_color,
+		blend_color = "#000000",
 		update_in_insert = {
 			enable = true,
 			delay = 100,
