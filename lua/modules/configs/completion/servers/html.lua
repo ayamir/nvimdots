@@ -1,6 +1,6 @@
--- https://github.com/vscode-langservers/vscode-html-languageserver-bin
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/html.lua
 return {
-	cmd = { "html-languageserver", "--stdio" },
+	cmd = { "vscode-html-language-server", "--stdio" },
 	filetypes = { "html" },
 	init_options = {
 		configurationSection = { "html", "css", "javascript" },
