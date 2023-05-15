@@ -12,6 +12,7 @@ local core_map = {
 	["n|n"] = map_cmd("nzzzv"):with_noremap():with_desc("edit: Next search result"),
 	["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("edit: Prev search result"),
 	["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
+	["n|;"] = map_cmd(":"):with_noremap():with_desc("edit: not need to press shift to enter command mode"),
 	["n|<Esc>"] = map_cr("noh"):with_noremap():with_silent():with_desc("edit: Clear search highlight"),
 	["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap():with_desc("window: Focus left"),
 	["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap():with_desc("window: Focus right"),
