@@ -212,7 +212,7 @@ function M.tobool(value)
 		vim.notify(
 			"Attempting to convert data of type '" .. type(value) .. "' [other than 0 or 1] to boolean",
 			vim.log.levels.ERROR,
-			{ title = "[utils] Runtime error" }
+			{ title = "[utils] Runtime Error" }
 		)
 		return nil
 	end
