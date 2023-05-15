@@ -54,9 +54,9 @@ function M.enable_format_on_save(is_configured)
 	end
 end
 
-function M.disable_format_on_save()
+function M.disable_format_on_save(is_configured)
 	pcall(vim.api.nvim_del_augroup_by_name, "format_on_save")
-	if format_on_save then
+	if not is_configured then
 		vim.notify(
 			"Successfully disabled format-on-save",
 			vim.log.levels.INFO,
@@ -69,7 +69,7 @@ function M.configure_format_on_save()
 	if format_on_save then
 		M.enable_format_on_save(true)
 	else
-		M.disable_format_on_save()
+		M.disable_format_on_save(true)
 	end
 end
 
@@ -81,7 +81,7 @@ function M.toggle_format_on_save()
 	if not status then
 		M.enable_format_on_save(false)
 	else
-		M.disable_format_on_save()
+		M.disable_format_on_save(false)
 	end
 end
 
