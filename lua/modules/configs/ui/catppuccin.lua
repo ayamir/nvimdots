@@ -149,7 +149,7 @@ return function()
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
 					-- For trouble.nvim
-					TroubleNormal = { bg = cp.base },
+					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 
 					-- For lsp semantic tokens
 					["@lsp.type.comment"] = { fg = cp.overlay0 },
