@@ -107,8 +107,8 @@ local clipboard_config = function()
 				["*"] = "clip.exe",
 			},
 			paste = {
-				["+"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -MTA -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
-				["*"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -MTA -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
+				["+"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
+				["*"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
 			},
 			cache_enabled = 0,
 		}
