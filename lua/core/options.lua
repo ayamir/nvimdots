@@ -110,9 +110,6 @@ local function load_options()
 	if not isempty(conda_prefix) then
 		vim.g.python_host_prog = conda_prefix .. "/bin/python"
 		vim.g.python3_host_prog = conda_prefix .. "/bin/python"
-	elseif global.is_windows then
-		vim.g.python_host_prog = "python"
-		vim.g.python3_host_prog = "python"
 	else
 		vim.g.python_host_prog = "python"
 		vim.g.python3_host_prog = "python3"
