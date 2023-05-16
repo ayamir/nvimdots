@@ -23,7 +23,7 @@ local plug_map = {
 	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
 
 	-- Plugin: clever-f
-	["n|;;"] = map_callback(function()
+	["n|."] = map_callback(function()
 		return et("<Plug>(clever-f-repeat-forward)")
 	end):with_expr(),
 	["n|,"] = map_callback(function()
