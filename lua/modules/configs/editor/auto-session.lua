@@ -16,7 +16,9 @@ return function()
 	})
 
 	vim.api.nvim_create_user_command("SessionLenShow", function()
-		require("auto-session").setup_session_lens()
+		if not package.loaded["auto-session.session-lens"] then
+			require("auto-session").setup_session_lens()
+		end
 		require("auto-session.session-lens").search_session()
 	end, { nargs = 0 })
 end
