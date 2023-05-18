@@ -10,6 +10,7 @@ local core_map = {
 	["n|<leader>p"] = map_cmd("m`o<ESC>p``"):with_desc("edit: paste below current line"),
 	["n|<leader>P"] = map_cmd("m`O<ESC>p``"):with_desc("edit: paste above current line"),
 	["n|<leader>q"] = map_cr("quit"):with_desc("edit: quit"),
+	["n|<leader>w"] = map_cr("w"):with_desc("edit: save"),
 	["n|<leader>qq"] = map_cr("quitall"):with_desc("edit: quitall"),
 	["n|<leader>wq"] = map_cr("wq"):with_desc("edit: save and quit"),
 	["n|Y"] = map_cmd("y$"):with_desc("edit: Yank text to EOL"),

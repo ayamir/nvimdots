@@ -72,7 +72,7 @@ local plug_map = {
 	["nx|gea"] = map_cr("EasyAlign"):with_desc("edit: Align with delimiter"),
 
 	-- Plugin: hop
-	["nv|<leader>w"] = map_cmd("<Cmd>HopWord<CR>"):with_noremap():with_desc("jump: Goto word"),
+	["nv|<leader>h"] = map_cmd("<Cmd>HopWord<CR>"):with_noremap():with_desc("jump: Goto word"),
 	["nv|<leader>j"] = map_cmd("<Cmd>HopLine<CR>"):with_noremap():with_desc("jump: Goto line"),
 	["nv|<leader>k"] = map_cmd("<Cmd>HopLine<CR>"):with_noremap():with_desc("jump: Goto line"),
 	["nv|<leader>c"] = map_cmd("<Cmd>HopChar1<CR>"):with_noremap():with_desc("jump: Goto one char"),
