@@ -1,7 +1,7 @@
 local custom = {}
 
 custom["RRethy/nvim-base16"] = {
-	lazy = true,
+	lazy = false,
 	event = "BufRead",
 	-- config = require("custom.configname"), -- Require that config
 }
