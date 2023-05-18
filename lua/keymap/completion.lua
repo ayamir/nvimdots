@@ -1,8 +1,13 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
--- local map_cmd = bind.map_cmd
+local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
+
+local plug_map = {
+	["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("Formater: Toggle format on save"),
+}
+bind.nvim_load_mapping(plug_map)
 
 local mapping = {}
 
