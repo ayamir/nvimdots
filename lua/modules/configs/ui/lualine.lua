@@ -105,7 +105,7 @@ return function()
 		options = {
 			icons_enabled = true,
 			-- theme = "catppuccin",
-			theme = "solarized_light",
+			theme = "auto",
 			disabled_filetypes = {},
 			component_separators = "|",
 			-- section_separators = { left = "", right = "" },

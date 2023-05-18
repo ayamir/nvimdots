@@ -35,7 +35,7 @@ settings["palette_overwrite"] = {}
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
 ---@type string
 -- settings["colorscheme"] = "catppuccin"
-settings["colorscheme"] = "base16-solarized-light"
+settings["colorscheme"] = "base16-ayu-light"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
