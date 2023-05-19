@@ -9,7 +9,7 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
-			"glepnir/lspsaga.nvim",
+			"nvimdev/lspsaga.nvim",
 			config = require("completion.lspsaga"),
 		},
 	},
@@ -33,7 +33,6 @@ completion["hrsh7th/nvim-cmp"] = {
 			dependencies = { "rafamadriz/friendly-snippets" },
 			config = require("completion.luasnip"),
 		},
-		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lsp" },
@@ -43,7 +42,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "f3fora/cmp-spell" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
-		{ "ray-x/cmp-treesitter", commit = "c8e3a74" },
+		{ "ray-x/cmp-treesitter" },
 		-- { "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
 		-- {
 		-- 	"jcdickinson/codeium.nvim",

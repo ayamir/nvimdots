@@ -8,6 +8,10 @@ settings["use_ssh"] = false
 ---@type boolean
 settings["format_on_save"] = true
 
+-- Set it to false if diagnostics virtual text is annoying for you
+---@type boolean
+settings["diagnostics_virtual_text"] = true
+
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
 ---@type string[]
 settings["format_disabled_dirs"] = {
@@ -30,6 +34,10 @@ settings["palette_overwrite"] = {}
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
 --settings["colorscheme"] = "catppuccin"
 settings["colorscheme"] = "gruvbox-material"
+
+-- Set it to true if your terminal has transparent background.
+---@type boolean
+settings["transparent_background"] = false
 
 -- Set background color to use here.
 -- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`.
@@ -54,6 +62,7 @@ settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	tsserver = true,
 	clangd = true,
+	pylsp = true,
 }
 
 -- Set the language servers that will be installed during bootstrap here
@@ -71,6 +80,8 @@ settings["lsp_deps"] = {
 	"rust_analyzer",
 	"yamlls",
 	"gopls",
+	"pylsp",
+	"gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here
@@ -81,7 +92,6 @@ settings["lsp_deps"] = {
 settings["null_ls_deps"] = {
 	"black",
 	"clang_format",
-	"editorconfig_checker",
 	"prettier",
 	"rustfmt",
 	"shfmt",

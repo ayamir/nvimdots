@@ -21,15 +21,6 @@ return function()
 		}
 	end
 
-	local cmp_window = require("cmp.utils.window")
-
-	cmp_window.info_ = cmp_window.info
-	cmp_window.info = function(self)
-		local info = self:info_()
-		info.scrollable = false
-		return info
-	end
-
 	local compare = require("cmp.config.compare")
 	compare.lsp_scores = function(entry1, entry2)
 		local diff
@@ -41,15 +32,44 @@ return function()
 		return (diff < 0)
 	end
 
-	local lspkind = require("lspkind")
-	local cmp = require("cmp")
+	local function cmp_format(opts)
+		opts = opts or {}
 
+		return function(entry, vim_item)
+			if opts.before then
+				vim_item = opts.before(entry, vim_item)
+			end
+
+			local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
+			local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.undefined
+
+			vim_item.menu = " " .. source_symbol .. "  |"
+			vim_item.kind = string.format("  〔 %s %s 〕", kind_symbol, vim_item.kind)
+
+			if opts.maxwidth ~= nil then
+				if opts.ellipsis_char == nil then
+					vim_item.abbr = string.sub(vim_item.abbr, 1, opts.maxwidth)
+				else
+					local label = vim_item.abbr
+					local truncated_label = vim.fn.strcharpart(label, 0, opts.maxwidth)
+					if truncated_label ~= label then
+						vim_item.abbr = truncated_label .. opts.ellipsis_char
+					end
+				end
+			end
+			return vim_item
+		end
+	end
+
+	local cmp = require("cmp")
 	cmp.setup({
+		preselect = cmp.PreselectMode.Item,
 		window = {
 			completion = {
 				border = border("Normal"),
 				max_width = 80,
 				max_height = 20,
+				scrollbar = false,
 			},
 			documentation = {
 				border = border("CmpDocBorder"),
@@ -61,29 +81,33 @@ return function()
 				require("copilot_cmp.comparators").prioritize,
 				require("copilot_cmp.comparators").score,
 				-- require("cmp_tabnine.compare"),
-				compare.offset,
+				compare.offset, -- Items closer to cursor will have lower priority
 				compare.exact,
+				-- compare.scopes,
 				compare.lsp_scores,
+				compare.sort_text,
+				compare.score,
+				compare.recently_used,
+				-- compare.locality, -- Items closer to cursor will have higher priority, conflicts with `offset`
 				require("cmp-under-comparator").under,
 				compare.kind,
-				compare.sort_text,
 				compare.length,
 				compare.order,
 			},
 		},
 		formatting = {
-			fields = { "kind", "abbr", "menu" },
+			fields = { "menu", "abbr", "kind" },
 			format = function(entry, vim_item)
-				local kind = lspkind.cmp_format({
-					mode = "symbol_text",
+				local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
+				local kind = cmp_format({
 					maxwidth = 50,
-					symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp),
+					symbol_map = kind_map,
 				})(entry, vim_item)
-				local strings = vim.split(kind.kind, "%s", { trimempty = true })
-				kind.kind = " " .. strings[1] .. " "
-				kind.menu = "    (" .. strings[2] .. ")"
 				return kind
 			end,
+		},
+		matching = {
+			disallow_partial_fuzzy_matching = false,
 		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
@@ -119,11 +143,21 @@ return function()
 		},
 		-- You should specify your *installed* sources.
 		sources = {
-			{ name = "nvim_lsp" },
+			{ name = "nvim_lsp", max_item_count = 350 },
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-			{ name = "treesitter" },
+			{
+				name = "treesitter",
+				entry_filter = function(entry)
+					local ignore_list = {
+						"Error",
+						"Comment",
+					}
+					local kind = entry:get_completion_item().cmp.kind_text
+					return not vim.tbl_contains(ignore_list, kind)
+				end,
+			},
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
@@ -132,6 +166,11 @@ return function()
 			{ name = "copilot" },
 			-- { name = "codeium" },
 			-- { name = "cmp_tabnine" },
+		},
+		experimental = {
+			ghost_text = {
+				hl_group = "Whitespace",
+			},
 		},
 	})
 end
