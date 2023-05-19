@@ -21,7 +21,7 @@ editor["max397574/better-escape.nvim"] = {
 	config = require("editor.better-escape"),
 }
 editor["LunarVim/bigfile.nvim"] = {
-	lazy = false,
+	lazy = true,
 	config = require("editor.bigfile"),
 	cond = require("core.settings").load_big_files_faster,
 }

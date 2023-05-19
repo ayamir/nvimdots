@@ -11,7 +11,7 @@ ui["akinsho/bufferline.nvim"] = {
 	config = require("ui.bufferline"),
 }
 ui["catppuccin/nvim"] = {
-	lazy = false,
+	lazy = true,
 	name = "catppuccin",
 	config = require("ui.catppuccin"),
 }

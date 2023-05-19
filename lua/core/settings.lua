@@ -22,7 +22,7 @@ settings["format_disabled_dirs"] = {
 -- NOTE: The startup time will be slowed down when it's true.
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
-settings["load_big_files_faster"] = true
+settings["load_big_files_faster"] = false
 
 -- Change the colors of the global palette here.
 -- Settings will complete their replacement at initialization.
@@ -35,7 +35,7 @@ settings["palette_overwrite"] = {}
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
 ---@type string
 -- settings["colorscheme"] = "catppuccin"
-settings["colorscheme"] = "base16-ayu-light"
+settings["colorscheme"] = "base16-ayu-dark"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
