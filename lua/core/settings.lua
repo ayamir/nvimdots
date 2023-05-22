@@ -9,11 +9,11 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["format_on_save"] = true
 
--- Set it to false if the nofitication after formatting is annoying for you.
+-- Set it to false if the notification after formatting is annoying.
 ---@type boolean
 settings["format_notify"] = true
 
--- Set it to false if diagnostics virtual text is annoying for you
+-- Set it to false if diagnostics virtual text is annoying.
 ---@type boolean
 settings["diagnostics_virtual_text"] = true
 
@@ -55,13 +55,13 @@ settings["background"] = "dark"
 ---@type string
 settings["external_browser"] = "chrome-cli open"
 
--- Filetypes in this list will skip lsp formatting if rhs is true
+-- Filetypes in this list will skip lsp formatting if rhs is true.
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
 	lua = false, -- example
 }
 
--- Servers in this list will skip setting formatting capabilities if rhs is true
+-- Servers in this list will skip setting formatting capabilities if rhs is true.
 ---@type table<string, boolean>
 settings["server_formatting_block_list"] = {
 	lua_ls = true,
@@ -70,7 +70,7 @@ settings["server_formatting_block_list"] = {
 	pylsp = true,
 }
 
--- Set the language servers that will be installed during bootstrap here
+-- Set the language servers that will be installed during bootstrap here.
 -- check the below link for all the supported LSPs:
 -- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
@@ -84,8 +84,8 @@ settings["lsp_deps"] = {
 	-- "gopls",
 }
 
--- Set the general-purpose servers that will be installed during bootstrap here
--- check the below link for all supported sources
+-- Set the general-purpose servers that will be installed during bootstrap here.
+-- Check the below link for all supported sources.
 -- in `code_actions`, `completion`, `diagnostics`, `formatting`, `hover` folders:
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
