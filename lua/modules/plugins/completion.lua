@@ -14,6 +14,10 @@ completion["neovim/nvim-lspconfig"] = {
 		},
 		{
 			"lvimuser/lsp-inlayhints.nvim",
+			config = require("completion.inlay-hints"),
+			lazy = true,
+			branch = "anticonceal",
+			event = { "LspAttach" },
 		},
 	},
 }

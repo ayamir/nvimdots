@@ -68,13 +68,6 @@ editor["lambdalisue/suda.vim"] = {
 	config = require("editor.suda"),
 }
 
-editor["lvimuser/lsp-inlayhints.nvim"] = {
-	lazy = true,
-	branch = "anticonceal",
-	event = { "LspAttach" },
-	config = require("editor.inlay_hints"),
-}
-
 ----------------------------------------------------------------------
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
