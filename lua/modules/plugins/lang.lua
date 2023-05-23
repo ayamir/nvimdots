@@ -1,10 +1,16 @@
 local lang = {}
 
-lang["fatih/vim-go"] = {
+lang["ray-x/go.nvim"] = {
 	lazy = true,
-	ft = "go",
-	build = ":GoInstallBinaries",
-	config = require("lang.vim-go"),
+	dependencies = { -- optional packages
+		"ray-x/guihua.lua",
+		"neovim/nvim-lspconfig",
+		"nvim-treesitter/nvim-treesitter",
+	},
+	ft = { "go", "gomod" },
+	event = { "CmdlineEnter" },
+	build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+	config = require("lang.go-nvim"),
 }
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
