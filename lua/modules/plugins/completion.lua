@@ -12,6 +12,9 @@ completion["neovim/nvim-lspconfig"] = {
 			"nvimdev/lspsaga.nvim",
 			config = require("completion.lspsaga"),
 		},
+		{
+			"lvimuser/lsp-inlayhints.nvim",
+		},
 	},
 }
 completion["jose-elias-alvarez/null-ls.nvim"] = {
