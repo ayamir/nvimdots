@@ -6,7 +6,7 @@ return function()
 		gofmt = "gopls",
 		goimport = "gopls",
 		lsp_gofumpt = "true",
-		lsp_inlay_hint = { enable = false },
+		lsp_inlay_hints = { enable = false },
 		run_in_floaterm = true,
 		trouble = true,
 		lsp_cfg = {
@@ -20,6 +20,14 @@ return function()
 						shadow = true,
 						unusedparams = true,
 						unusewrites = true,
+					},
+					hints = {
+						assignVariableTypes = true,
+						compositeLiteralFields = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
 					},
 				},
 			},
