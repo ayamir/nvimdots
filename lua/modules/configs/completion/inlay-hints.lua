@@ -41,7 +41,7 @@ return function()
 			priority = 0,
 		},
 		enabled_at_startup = true,
-		debug_mode = true,
+		debug_mode = false,
 	}
 	require("lsp-inlayhints").setup(override)
 end
