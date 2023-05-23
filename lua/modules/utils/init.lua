@@ -200,6 +200,20 @@ function M.gen_alpha_hl()
 	vim.api.nvim_set_hl(0, "AlphaFooter", { fg = colors.yellow, default = true })
 end
 
+-- Generate blend_color for neodim.
+function M.gen_neodim_blend()
+	local trans_bg = require("core.settings").transparent_background
+	local bg = require("core.settings").background
+
+	if trans_bg and bg == "dark" then
+		return "#000000"
+	elseif trans_bg and bg == "light" then
+		return "#ffffff"
+	else
+		return M.hl_to_rgb("Normal", true)
+	end
+end
+
 ---Convert number (0/1) to boolean
 ---@param value number @The value to check
 ---@return boolean|nil @Returns nil if failed
