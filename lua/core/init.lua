@@ -101,14 +101,14 @@ local clipboard_config = function()
 		}
 	elseif global.is_wsl then
 		vim.g.clipboard = {
-			name = "psyank-wsl",
+			name = "win32yank-wsl",
 			copy = {
-				["+"] = "clip.exe",
-				["*"] = "clip.exe",
+				["+"] = "win32yank.exe -i --crlf",
+				["*"] = "win32yank.exe -i --crlf",
 			},
 			paste = {
-				["+"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
-				["*"] = [[powershell.exe -NoProfile -NoLogo -NonInteractive -Command [console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))]],
+				["+"] = "win32yank.exe -o --lf",
+				["*"] = "win32yank.exe -o --lf",
 			},
 			cache_enabled = 0,
 		}
