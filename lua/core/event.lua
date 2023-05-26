@@ -115,11 +115,11 @@ function autocmd.load_autocmds()
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
 			},
 			-- Force write shada on leaving nvim
-			{
-				"VimLeave",
-				"*",
-				[[if has('nvim') | wshada! | else | wviminfo! | endif]],
-			},
+			-- {
+			-- 	"VimLeave",
+			-- 	"*",
+			-- 	[[if has('nvim') | wshada! | else | wviminfo! | endif]],
+			-- },
 			-- Check if file changed when its window is focus, more eager than 'autoread'
 			{ "FocusGained", "* checktime" },
 			-- Equalize window dimensions when resizing vim window
