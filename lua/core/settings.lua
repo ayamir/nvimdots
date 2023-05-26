@@ -67,7 +67,6 @@ settings["server_formatting_block_list"] = {
 	lua_ls = true,
 	tsserver = true,
 	clangd = true,
-	pylsp = true,
 }
 
 -- Set the language servers that will be installed during bootstrap here.
@@ -90,7 +89,6 @@ settings["lsp_deps"] = {
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins
 ---@type string[]
 settings["null_ls_deps"] = {
-	"black",
 	"clang_format",
 	"prettier",
 	"rustfmt",
