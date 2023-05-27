@@ -109,6 +109,10 @@ return function()
 		matching = {
 			disallow_partial_fuzzy_matching = false,
 		},
+		performance = {
+			async_budget = 1,
+			max_view_entries = 300,
+		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
 			["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
@@ -140,9 +144,6 @@ return function()
 			expand = function(args)
 				require("luasnip").lsp_expand(args.body)
 			end,
-		},
-		performance = {
-			max_view_entries = 350,
 		},
 		-- You should specify your *installed* sources.
 		sources = {
