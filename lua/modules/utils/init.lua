@@ -201,14 +201,14 @@ function M.gen_alpha_hl()
 end
 
 -- Generate blend_color for neodim.
-function M.gen_neodim_blend()
+function M.gen_neodim_blend_attr()
 	local trans_bg = require("core.settings").transparent_background
-	local bg = require("core.settings").background
+	local appearance = require("core.settings").background
 
-	if trans_bg and bg == "dark" then
+	if trans_bg and appearance == "dark" then
 		return "#000000"
-	elseif trans_bg and bg == "light" then
-		return "#ffffff"
+	elseif trans_bg and appearance == "light" then
+		return "#FFFFFF"
 	else
 		return M.hl_to_rgb("Normal", true)
 	end
