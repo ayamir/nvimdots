@@ -109,6 +109,10 @@ return function()
 		matching = {
 			disallow_partial_fuzzy_matching = false,
 		},
+		performance = {
+			async_budget = 1,
+			max_view_entries = 300,
+		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
 			["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
@@ -143,7 +147,7 @@ return function()
 		},
 		-- You should specify your *installed* sources.
 		sources = {
-			{ name = "nvim_lsp", max_item_count = 350 },
+			{ name = "nvim_lsp" },
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
