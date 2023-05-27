@@ -116,7 +116,6 @@ return function()
 				"python-lsp-black",
 				"python-lsp-ruff",
 				"pylsp-rope",
-				"pyls-isort",
 			},
 			cwd = venv,
 			env = { VIRTUAL_ENV = venv },
