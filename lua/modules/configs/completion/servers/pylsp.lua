@@ -14,9 +14,9 @@ return {
 					},
 					ignore = {
 						-- ignore E501 (line too long)
-						"E501",
+						-- "E501",
 						-- ignore F401 (imported but unused)
-						"F401",
+						-- "F401",
 					},
 					extendSelect = { "I" },
 				},
