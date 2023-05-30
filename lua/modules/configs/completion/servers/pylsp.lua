@@ -19,6 +19,11 @@ return {
 						-- "F401",
 					},
 					extendSelect = { "I" },
+					severities = {
+						-- Hint, Information, Warning, Error
+						F401 = "I",
+						E501 = "I",
+					},
 				},
 				-- refactor related
 				rope = { enabled = true },
