@@ -21,6 +21,11 @@ return {
 						-- "F401",
 					},
 					extendSelect = { "I" },
+					severities = {
+						-- Hint, Information, Warning, Error
+						F401 = "I",
+						E501 = "I",
+					},
 				},
 				flake8 = { enabled = false },
 				pyflakes = { enabled = false },
