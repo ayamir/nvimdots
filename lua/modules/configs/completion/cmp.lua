@@ -74,7 +74,7 @@ return function()
 				vim_item.kind =
 					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
 
-				vim_item.menu = ({
+				vim_item.menu = setmetatable({
 					cmp_tabnine = "[TN]",
 					copilot = "[CPLT]",
 					buffer = "[BUF]",
@@ -83,8 +83,13 @@ return function()
 					nvim_lua = "[LUA]",
 					path = "[PATH]",
 					tmux = "[TMUX]",
+					treesitter = "[TS]",
 					luasnip = "[SNIP]",
 					spell = "[SPELL]",
+				}, {
+					__index = function()
+						return "[BTN]" -- builtin/unknown source names
+					end,
 				})[entry.source.name]
 
 				local label = vim_item.abbr
