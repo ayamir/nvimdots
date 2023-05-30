@@ -90,10 +90,15 @@ return function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
+	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
+	local diagnostics_severity_limit = require("core.settings").diagnostics_severity_limit
+	local virtual_text_setting = diagnostics_virtual_text and {
+		severity_limit = diagnostics_severity_limit,
+	} or false
 	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 		signs = true,
 		underline = true,
-		virtual_text = require("core.settings").diagnostics_virtual_text,
+		virtual_text = virtual_text_setting,
 		-- set update_in_insert to false bacause it was enabled by lspsaga
 		update_in_insert = false,
 	})
