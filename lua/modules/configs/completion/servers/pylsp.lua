@@ -1,9 +1,11 @@
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/pylsp.lua
 return {
+	cmd = { "pylsp" },
+	filetypes = { "python" },
 	settings = {
 		pylsp = {
 			plugins = {
-				-- enabled tools
-				-- lint related
+				-- Lint
 				ruff = {
 					enabled = true,
 					select = {
@@ -25,18 +27,16 @@ return {
 						E501 = "I",
 					},
 				},
-				-- refactor related
-				rope = { enabled = true },
-				-- format related
-				black = { enabled = true },
-
-				-- disabled tools
-				-- lint related
 				flake8 = { enabled = false },
 				pyflakes = { enabled = false },
 				pycodestyle = { enabled = false },
 				mccabe = { enabled = false },
-				-- format related
+
+				-- Code refactor
+				rope = { enabled = true },
+
+				-- Formatting
+				black = { enabled = true },
 				pyls_isort = { enabled = false },
 				autopep8 = { enabled = false },
 				yapf = { enabled = false },
