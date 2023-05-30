@@ -67,7 +67,7 @@ return function(options)
 			"--header-insertion-decorators",
 			"--header-insertion=iwyu",
 			"--limit-references=3000",
-			"--limit-results=350",
+			"--limit-results=270",
 		},
 		commands = {
 			ClangdSwitchSourceHeader = {
