@@ -4,6 +4,8 @@ local function isempty(s)
 	return s == nil or s == ""
 end
 
+local debugpy_abspath = vim.fn.stdpath("data") .. "/dap/debugpy/"
+
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#python
 dap.adapters.python = function(cb, config)
 	if config.request == "attach" then
@@ -22,11 +24,7 @@ dap.adapters.python = function(cb, config)
 	else
 		cb({
 			type = "executable",
-			-- mkdir .virtualenvs
-			-- cd .virtualenvs
-			-- python -m venv debugpy
-			-- debugpy/bin/python -m pip install debugpy
-			command = vim.fn.getcwd() .. "/.virtualenvs/debugpy/bin/python",
+			command = debugpy_abspath .. "bin/python",
 			args = { "-m", "debugpy.adapter" },
 			options = {
 				source_filetype = "python",
@@ -41,7 +39,6 @@ dap.configurations.python = {
 		request = "launch",
 		name = "Launch file",
 		-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
 		program = "${file}", -- This configuration will launch the current file if used.
 		pythonPath = function()
 			if not isempty(vim.env.CONDA_PREFIX) then

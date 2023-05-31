@@ -2,6 +2,9 @@ local dap = require("dap")
 
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-lldb-vscode
 local lldb_abspath = vim.fn.exepath("lldb-vscode")
+local path_to_program = require("modules.configs.tool.dap.dap-utils").path_to_program()
+local get_env = require("modules.configs.tool.dap.dap-utils").get_env()
+local input_args = require("modules.configs.tool.dap.dap-utils").input_args()
 
 dap.adapters.lldb = {
 	type = "executable",
@@ -13,16 +16,11 @@ dap.configurations.cpp = {
 		name = "Launch",
 		type = "lldb",
 		request = "launch",
-		program = function()
-			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-		end,
+		program = path_to_program,
 		cwd = "${workspaceFolder}",
+		env = get_env,
+		args = input_args,
 		stopOnEntry = false,
-		args = function()
-			local input = vim.fn.input("Input args: ")
-			return vim.fn.split(input, " ", true)
-		end,
-
 		-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
 		--
 		--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
