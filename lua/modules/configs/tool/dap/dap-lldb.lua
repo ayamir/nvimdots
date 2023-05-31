@@ -1,8 +1,11 @@
 local dap = require("dap")
 
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-lldb-vscode
+local lldb_abspath = vim.fn.exepath("lldb-vscode")
+
 dap.adapters.lldb = {
 	type = "executable",
-	command = "lldb-vscode",
+	command = lldb_abspath,
 	name = "lldb",
 }
 dap.configurations.cpp = {
