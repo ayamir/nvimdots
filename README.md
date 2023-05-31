@@ -154,19 +154,25 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 <br>
 
 <p align="center">
+    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/code_action.png" alt="Code Action">
+    <em>Code Action</em>
+</p>
+<br>
+
+<p align="center">
     <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/dap.png" alt="Debugging">
     <em>Debugging</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/gitui.png" alt="Lazygit">
+    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/lazygit.png" alt="Lazygit">
     <em>Lazygit with built-in Terminal</em>
 </p>
 <br>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/legendary.png" alt="Legendary">
+    <img src="https://raw.githubusercontent.com/ayamir/blog-imgs/main/command_ref.png" alt="Command quickref">
     <em>Command quickref</em>
 </p>
 
