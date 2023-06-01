@@ -70,7 +70,12 @@ return function()
 								vim.log.levels.INFO,
 								{ title = "[lsp] Install Status" }
 							)
-							return
+						else
+							vim.notify(
+								"Failed to install pylsp plugins. [Executable not found]",
+								vim.log.levels.ERROR,
+								{ title = "[lsp] Install Failure" }
+							)
 						end
 					end,
 					on_start = function()
