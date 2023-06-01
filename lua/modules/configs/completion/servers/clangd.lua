@@ -23,24 +23,11 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 	end
 end
 
-local function get_binary_path(binary)
-	local path = nil
-	if global.is_mac or global.is_linux then
-		path = vim.fn.trim(vim.fn.system("which " .. binary))
-	elseif global.is_windows then
-		path = vim.fn.trim(vim.fn.system("where " .. binary))
-	end
-	if vim.v.shell_error ~= 0 then
-		path = nil
-	end
-	return path
-end
-
 local function get_binary_path_list(binaries)
 	local path_list = {}
 	for _, binary in ipairs(binaries) do
-		local path = get_binary_path(binary)
-		if path then
+		local path = vim.fn.exepath(binary)
+		if path ~= "" then
 			table.insert(path_list, path)
 		end
 	end
