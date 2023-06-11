@@ -35,7 +35,7 @@ return function()
 
 	-- Config lang adaptors
 	local dap_deps = require("core.settings").dap_deps
-	require("tool.dap." .. dap_deps.c_cpp)
-	require("tools.dap." .. dap_deps.go)
-	require("tools.dap." .. dap_deps.python)
+	require("tool.dap.servers." .. dap_deps.c_cpp_rust)
+	require("tools.dap.servers." .. dap_deps.go)
+	require("tools.dap.servers." .. dap_deps.python)
 end
