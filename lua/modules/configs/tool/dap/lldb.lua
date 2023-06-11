@@ -1,10 +1,11 @@
 local dap = require("dap")
+local dap_utils = require("modules.configs.tool.dap.utils")
 
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-lldb-vscode
 local lldb_abspath = vim.fn.exepath("lldb-vscode")
-local path_to_program = require("modules.configs.tool.dap.dap-utils").path_to_program()
-local get_env = require("modules.configs.tool.dap.dap-utils").get_env()
-local input_args = require("modules.configs.tool.dap.dap-utils").input_args()
+local path_to_program = dap_utils.path_to_program()
+local get_env = dap_utils.get_env()
+local input_args = dap_utils.input_args()
 
 dap.adapters.lldb = {
 	type = "executable",

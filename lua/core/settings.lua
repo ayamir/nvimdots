@@ -105,4 +105,10 @@ settings["null_ls_deps"] = {
 	"vint",
 }
 
+settings["dap_deps"] = {
+	c_cpp_rust = "codelldb", -- available values: codelldb, lldb, cpptools
+	go = "dlv", -- available values: dlv
+	python = "debugpy", -- available values: debugpy
+}
+
 return settings

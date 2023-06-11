@@ -1,10 +1,11 @@
 local dap = require("dap")
+local dap_utils = require("modules.configs.tool.dap.utils")
 
 -- https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)
 local gdb_abspath = vim.fn.exepath("gdb")
 local cpptools_abspath = vim.fn.stdpath("data") .. "/dap/cpptools/extension/debugAdapters/bin/OpenDebugAD7"
-local path_to_program = require("modules.configs.tool.dap.dap-utils").path_to_program()
-local get_env = require("modules.configs.tool.dap.dap-utils").get_env()
+local path_to_program = dap_utils.path_to_program()
+local get_env = dap_utils.get_env()
 local setupCommands = {
 	text = "-enable-pretty-printing",
 	description = "enable pretty printing",
