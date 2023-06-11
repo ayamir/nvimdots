@@ -4,6 +4,7 @@ return function()
 
 	local dap = require("dap")
 	local dapui = require("dapui")
+	local mason_dap = require("mason-nvim-dap")
 
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()
@@ -33,9 +34,37 @@ return function()
 	)
 	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
-	-- Config lang adaptors
-	local dap_deps = require("core.settings").dap_deps
-	require("tool.dap.servers." .. dap_deps.c_cpp_rust)
-	require("tools.dap.servers." .. dap_deps.go)
-	require("tools.dap.servers." .. dap_deps.python)
+	---A handler to setup all servers defined under `tool/dap/servers/*.lua`
+	---@param config table
+	local function mason_dap_handler(config)
+		local dap_name = config.name
+		local ok, custom_handler = pcall(require, "modules.configs.tool.dap.servers." .. dap_name)
+		if not ok then
+			-- Default to use factory config for dap server(s) that doesn't include a spec
+			mason_dap.default_setup(config)
+			return
+		elseif type(custom_handler) == "function" then
+			--- Case where dap server requires its own setup
+			--- Make sure to set
+			--- dap.adpaters.<dap_name> = {some config}
+			--- dap.configurations.<lang> = {some config}
+			--- See `codelldb.lua` for example.
+			custom_handler(config)
+		else
+			vim.notify(
+				string.format(
+					"Failed to setup [%s].\n\nDap server settings under `tool/dap/servers` must return\n a fun(opts) (got '%s' instead)",
+					config.name,
+					type(custom_handler)
+				),
+				vim.log.levels.ERROR,
+				{ title = "nvim-dap" }
+			)
+		end
+	end
+
+	mason_dap.setup({
+		ensure_installed = require("core.settings").dap_deps,
+		handlers = { mason_dap_handler },
+	})
 end

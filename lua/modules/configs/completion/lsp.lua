@@ -129,10 +129,10 @@ return function()
 
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
-	local function mason_handler(lsp_name)
+	local function mason_lsp_handler(lsp_name)
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
-			-- Default to use factory config for server(s) that doesn't include a spec
+			-- Default to use factory config for lsp server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
 			return
 		elseif type(custom_handler) == "function" then
@@ -145,7 +145,7 @@ return function()
 		else
 			vim.notify(
 				string.format(
-					"Failed to setup [%s].\n\nServer definition under `completion/servers` must return\neither a fun(opts) or a table (got '%s' instead)",
+					"Failed to setup [%s].\n\nLsp server settings under `completion/servers` must return\neither a fun(opts) or a table (got '%s' instead)",
 					lsp_name,
 					type(custom_handler)
 				),
@@ -155,7 +155,7 @@ return function()
 		end
 	end
 
-	mason_lspconfig.setup_handlers({ mason_handler })
+	mason_lspconfig.setup_handlers({ mason_lsp_handler })
 
 	-- Setup lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
 	if vim.fn.executable("dart") == 1 then

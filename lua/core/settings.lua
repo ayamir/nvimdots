@@ -105,10 +105,14 @@ settings["null_ls_deps"] = {
 	"vint",
 }
 
+-- Set the dap  servers that will be installed during bootstrap here.
+-- check  the below link for all the supported DAPs:
+-- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+---@type string[]
 settings["dap_deps"] = {
-	c_cpp_rust = "codelldb", -- available values: codelldb, lldb, cpptools
-	go = "dlv", -- available values: dlv
-	python = "debugpy", -- available values: debugpy
+	"codelldb",
+	"delve",
+	"python",
 }
 
 return settings
