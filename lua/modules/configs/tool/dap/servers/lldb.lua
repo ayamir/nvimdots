@@ -1,4 +1,5 @@
-return function(config)
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-lldb-vscode
+return function()
 	local dap = require("dap")
 	local dap_utils = require("modules.configs.tool.dap.utils")
 

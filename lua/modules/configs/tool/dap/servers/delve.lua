@@ -1,3 +1,4 @@
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#go-using-delve-directly
 return function()
 	local dap = require("dap")
 	local dlv = vim.fn.exepath("dlv")

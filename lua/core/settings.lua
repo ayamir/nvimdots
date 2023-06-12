@@ -110,9 +110,9 @@ settings["null_ls_deps"] = {
 -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 ---@type string[]
 settings["dap_deps"] = {
-	"codelldb",
-	"delve",
-	"python",
+	"codelldb", -- C/C++/Rust
+	"delve", -- Go
+	"python", -- Python (debugpy)
 }
 
 return settings
