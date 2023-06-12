@@ -19,7 +19,6 @@ return function()
 			type = "codelldb",
 			request = "launch",
 			program = utils.input_exec_path(),
-			env = utils.get_env(),
 			args = utils.input_args(),
 			cwd = "${workspaceFolder}",
 			stopOnEntry = false,
