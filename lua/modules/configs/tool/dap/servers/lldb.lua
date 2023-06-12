@@ -1,29 +1,23 @@
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-lldb-vscode
 return function()
 	local dap = require("dap")
-	local dap_utils = require("modules.configs.tool.dap.utils")
-
-	-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#ccrust-via-lldb-vscode
-	local lldb_abspath = vim.fn.exepath("lldb-vscode")
-	local path_to_program = dap_utils.path_to_program()
-	local get_env = dap_utils.get_env()
-	local input_args = dap_utils.input_args()
+	local utils = require("modules.utils.dap")
 
 	dap.adapters.lldb = {
 		type = "executable",
-		command = lldb_abspath,
+		command = "lldb-vscode",
 		name = "lldb",
 	}
-	dap.configurations.cpp = {
+	dap.configurations.c = {
 		{
 			name = "Launch",
 			type = "lldb",
 			request = "launch",
-			program = path_to_program,
+			program = utils.input_exec_path(),
 			cwd = "${workspaceFolder}",
-			env = get_env,
-			args = input_args,
-			stopOnEntry = false,
+			args = utils.input_args(),
+			env = utils.get_env(),
+
 			-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
 			--
 			--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
@@ -38,6 +32,6 @@ return function()
 		},
 	}
 
-	dap.configurations.c = dap.configurations.cpp
-	dap.configurations.rust = dap.configurations.cpp
+	dap.configurations.cpp = dap.configurations.c
+	dap.configurations.rust = dap.configurations.c
 end

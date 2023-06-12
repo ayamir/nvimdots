@@ -1,19 +1,20 @@
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#go-using-delve-directly
+-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 return function()
 	local dap = require("dap")
-	local dlv = vim.fn.exepath("dlv")
+	local utils = require("modules.utils.dap")
 
 	dap.adapters.go = function(callback)
 		local stdout = vim.loop.new_pipe(false)
 		local handle
 		local pid_or_err
-		local port = 38697
+		local port = 28695
 		local opts = {
 			stdio = { nil, stdout },
 			args = { "dap", "-l", "127.0.0.1:" .. port },
 			detached = true,
 		}
-		handle, pid_or_err = vim.loop.spawn(dlv, opts, function(code)
+		handle, pid_or_err = vim.loop.spawn(vim.fn.exepath("dlv"), opts, function(code)
 			stdout:close()
 			handle:close()
 			if code ~= 0 then
@@ -38,7 +39,6 @@ return function()
 			callback({ type = "server", host = "127.0.0.1", port = port })
 		end, 100)
 	end
-	-- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 	dap.configurations.go = {
 		{ type = "go", name = "Debug", request = "launch", program = "${file}" },
 		{
@@ -46,10 +46,7 @@ return function()
 			name = "Debug with args",
 			request = "launch",
 			program = "${file}",
-			args = function()
-				local argument_string = vim.fn.input("Program arg(s): ")
-				return vim.fn.split(argument_string, " ", true)
-			end,
+			args = utils.input_args(),
 		},
 		{
 			type = "go",

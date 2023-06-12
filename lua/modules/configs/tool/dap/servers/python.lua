@@ -3,31 +3,27 @@ return function()
 	local dap = require("dap")
 	local debugpy = vim.fn.exepath("debugpy-adapter")
 
-	local function isempty(s)
+	local function is_empty(s)
 		return s == nil or s == ""
 	end
 
-	dap.adapters.python = function(cb, config)
+	dap.adapters.python = function(callback, config)
 		if config.request == "attach" then
 			---@diagnostic disable-next-line: undefined-field
 			local port = (config.connect or config).port
 			---@diagnostic disable-next-line: undefined-field
 			local host = (config.connect or config).host or "127.0.0.1"
-			cb({
+			callback({
 				type = "server",
 				port = assert(port, "`connect.port` is required for a python `attach` configuration"),
 				host = host,
-				options = {
-					source_filetype = "python",
-				},
+				options = { source_filetype = "python" },
 			})
 		else
-			cb({
+			callback({
 				type = "executable",
 				command = debugpy,
-				options = {
-					source_filetype = "python",
-				},
+				options = { source_filetype = "python" },
 			})
 		end
 	end
@@ -40,7 +36,7 @@ return function()
 			-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 			program = "${file}", -- This configuration will launch the current file if used.
 			pythonPath = function()
-				if not isempty(vim.env.CONDA_PREFIX) then
+				if not is_empty(vim.env.CONDA_PREFIX) then
 					return vim.env.CONDA_PREFIX .. "/bin/python"
 				else
 					return "python3"

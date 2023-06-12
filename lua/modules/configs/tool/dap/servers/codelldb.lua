@@ -1,33 +1,30 @@
 -- https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(via--codelldb)
 return function()
 	local dap = require("dap")
-	local dap_utils = require("modules.configs.tool.dap.utils")
-
-	local codelldb = vim.fn.exepath("codelldb")
-	local path_to_program = dap_utils.path_to_program()
+	local utils = require("modules.utils.dap")
 
 	dap.adapters.codelldb = {
 		type = "server",
 		port = "${port}",
 		executable = {
-			-- CHANGE THIS to your path!
-			command = codelldb,
+			command = vim.fn.exepath("codelldb"), -- Find codelldb on $PATH
 			args = { "--port", "${port}" },
 			-- On windows you may have to uncomment this:
 			-- detached = false,
 		},
 	}
-
-	dap.configurations.cpp = {
+	dap.configurations.c = {
 		{
-			name = "Launch file",
+			name = "Launch the debugger",
 			type = "codelldb",
 			request = "launch",
-			program = path_to_program,
+			program = utils.input_exec_path(),
+			env = utils.get_env(),
+			args = utils.input_args(),
 			cwd = "${workspaceFolder}",
 			stopOnEntry = false,
 		},
 	}
-	dap.configurations.c = dap.configurations.cpp
-	dap.configurations.rust = dap.configurations.cpp
+	dap.configurations.cpp = dap.configurations.c
+	dap.configurations.rust = dap.configurations.c
 end

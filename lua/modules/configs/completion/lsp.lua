@@ -1,12 +1,13 @@
 return function()
 	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
 	local diagnostics_level = require("core.settings").diagnostics_level
+	local is_windows = require("core.global").is_windows
 
 	local nvim_lsp = require("lspconfig")
 	local mason = require("mason")
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
-	require("lspconfig.ui.windows").default_options.border = "single"
+	require("lspconfig.ui.windows").default_options.border = "rounded"
 
 	local icons = {
 		ui = require("modules.utils.icons").get("ui", true),
@@ -34,8 +35,6 @@ return function()
 		},
 	})
 
-	local is_win = require("core.global").is_windows
-
 	-- Additional plugins for pylsp
 	mason_registry:on(
 		"package:install:success",
@@ -45,9 +44,10 @@ return function()
 			end
 
 			local venv = vim.fn.stdpath("data") .. "/mason/packages/python-lsp-server/venv"
-			local python = is_win and venv .. "/Scripts/python.exe" or venv .. "/bin/python"
-			local black = is_win and venv .. "/Scripts/black.exe" or venv .. "/bin/black"
-			local ruff = is_win and venv .. "/Scripts/ruff.exe" or venv .. "/bin/ruff"
+			local python = is_windows and venv .. "/Scripts/python.exe" or venv .. "/bin/python"
+			local black = is_windows and venv .. "/Scripts/black.exe" or venv .. "/bin/black"
+			local ruff = is_windows and venv .. "/Scripts/ruff.exe" or venv .. "/bin/ruff"
+
 			require("plenary.job")
 				:new({
 					command = python,
@@ -132,7 +132,7 @@ return function()
 	local function mason_lsp_handler(lsp_name)
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
-			-- Default to use factory config for lsp server(s) that doesn't include a spec
+			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
 			return
 		elseif type(custom_handler) == "function" then
@@ -145,7 +145,7 @@ return function()
 		else
 			vim.notify(
 				string.format(
-					"Failed to setup [%s].\n\nLsp server settings under `completion/servers` must return\neither a fun(opts) or a table (got '%s' instead)",
+					"Failed to setup [%s].\n\nServer definition under `completion/servers` must return\neither a fun(opts) or a table (got '%s' instead)",
 					lsp_name,
 					type(custom_handler)
 				),
