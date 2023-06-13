@@ -2,6 +2,7 @@
 return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
+	local is_windows = require("core.global").is_windows
 
 	dap.adapters.codelldb = {
 		type = "server",
@@ -10,7 +11,7 @@ return function()
 			command = vim.fn.exepath("codelldb"), -- Find codelldb on $PATH
 			args = { "--port", "${port}" },
 			-- On windows you may have to uncomment this:
-			-- detached = false,
+			detached = is_windows and false or true,
 		},
 	}
 	dap.configurations.c = {
