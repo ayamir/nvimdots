@@ -1,12 +1,13 @@
 return function()
 	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
 	local diagnostics_level = require("core.settings").diagnostics_level
+	local is_windows = require("core.global").is_windows
 
 	local nvim_lsp = require("lspconfig")
 	local mason = require("mason")
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
-	require("lspconfig.ui.windows").default_options.border = "single"
+	require("lspconfig.ui.windows").default_options.border = "rounded"
 
 	local icons = {
 		ui = require("modules.utils.icons").get("ui", true),
@@ -34,8 +35,6 @@ return function()
 		},
 	})
 
-	local is_win = require("core.global").is_windows
-
 	-- Additional plugins for pylsp
 	mason_registry:on(
 		"package:install:success",
@@ -45,9 +44,10 @@ return function()
 			end
 
 			local venv = vim.fn.stdpath("data") .. "/mason/packages/python-lsp-server/venv"
-			local python = is_win and venv .. "/Scripts/python.exe" or venv .. "/bin/python"
-			local black = is_win and venv .. "/Scripts/black.exe" or venv .. "/bin/black"
-			local ruff = is_win and venv .. "/Scripts/ruff.exe" or venv .. "/bin/ruff"
+			local python = is_windows and venv .. "/Scripts/python.exe" or venv .. "/bin/python"
+			local black = is_windows and venv .. "/Scripts/black.exe" or venv .. "/bin/black"
+			local ruff = is_windows and venv .. "/Scripts/ruff.exe" or venv .. "/bin/ruff"
+
 			require("plenary.job")
 				:new({
 					command = python,
@@ -129,7 +129,7 @@ return function()
 
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
-	local function mason_handler(lsp_name)
+	local function mason_lsp_handler(lsp_name)
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
@@ -155,7 +155,7 @@ return function()
 		end
 	end
 
-	mason_lspconfig.setup_handlers({ mason_handler })
+	mason_lspconfig.setup_handlers({ mason_lsp_handler })
 
 	-- Setup lsps that are not supported by `mason.nvim` but supported by `nvim-lspconfig` here.
 	if vim.fn.executable("dart") == 1 then
