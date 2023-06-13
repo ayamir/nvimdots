@@ -6,7 +6,7 @@ function M.input_args()
 end
 
 function M.input_exec_path()
-	return vim.fn.input('Path to executable (default to "a.out"): ', vim.fn.expand("<cfile>:p:h") .. "/a.out", "file")
+	return vim.fn.input('Path to executable (default to "a.out"): ', vim.fn.expand("%:p:h") .. "/a.out", "file")
 end
 
 function M.get_env()
