@@ -10,7 +10,6 @@ return function()
 		executable = {
 			command = vim.fn.exepath("codelldb"), -- Find codelldb on $PATH
 			args = { "--port", "${port}" },
-			-- On windows you may have to uncomment this:
 			detached = is_windows and false or true,
 		},
 	}
