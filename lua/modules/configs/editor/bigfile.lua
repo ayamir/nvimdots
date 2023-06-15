@@ -15,7 +15,7 @@ return function()
 		end,
 	}
 
-	require("bigfile").config({
+	require("bigfile").setup({
 		filesize = 1, -- size of the file in MiB
 		pattern = { "*" }, -- autocmd pattern
 		features = { -- features to disable

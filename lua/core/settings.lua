@@ -31,7 +31,6 @@ settings["format_disabled_dirs"] = {
 	home .. "/format_disabled_dir_under_home",
 }
 
--- NOTE: The startup time will be slowed down when it's true.
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
 settings["load_big_files_faster"] = true
