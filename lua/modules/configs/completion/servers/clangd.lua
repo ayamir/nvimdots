@@ -1,4 +1,3 @@
-local global = require("core.global")
 local function switch_source_header_splitcmd(bufnr, splitcmd)
 	bufnr = require("lspconfig").util.validate_bufnr(bufnr)
 	local clangd_client = require("lspconfig").util.get_active_client_by_name(bufnr, "clangd")
