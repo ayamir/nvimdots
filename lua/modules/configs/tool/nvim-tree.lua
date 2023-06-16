@@ -41,7 +41,7 @@ return function()
 		renderer = {
 			add_trailing = false,
 			group_empty = true,
-			highlight_git = false,
+			highlight_git = true,
 			full_name = false,
 			highlight_opened_files = "none",
 			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
@@ -58,7 +58,7 @@ return function()
 			root_folder_label = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
-				git_placement = "before",
+				git_placement = "after",
 				show = {
 					file = true,
 					folder = true,
@@ -136,10 +136,10 @@ return function()
 			show_on_dirs = false,
 			debounce_delay = 50,
 			icons = {
-				hint = icons.diagnostics.Hint_alt,
-				info = icons.diagnostics.Information_alt,
-				warning = icons.diagnostics.Warning_alt,
-				error = icons.diagnostics.Error_alt,
+				hint = icons.diagnostics.Hint,
+				info = icons.diagnostics.Information,
+				warning = icons.diagnostics.Warning,
+				error = icons.diagnostics.Error,
 			},
 		},
 		filesystem_watchers = {
@@ -148,7 +148,7 @@ return function()
 		},
 		git = {
 			enable = true,
-			ignore = true,
+			ignore = false,
 			show_on_dirs = true,
 			timeout = 400,
 		},
