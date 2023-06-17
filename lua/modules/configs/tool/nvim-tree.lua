@@ -41,7 +41,7 @@ return function()
 		renderer = {
 			add_trailing = false,
 			group_empty = true,
-			highlight_git = false,
+			highlight_git = true,
 			full_name = false,
 			highlight_opened_files = "none",
 			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
@@ -58,7 +58,7 @@ return function()
 			root_folder_label = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
-				git_placement = "before",
+				git_placement = "after",
 				show = {
 					file = true,
 					folder = true,
@@ -148,7 +148,7 @@ return function()
 		},
 		git = {
 			enable = true,
-			ignore = true,
+			ignore = false,
 			show_on_dirs = true,
 			timeout = 400,
 		},
