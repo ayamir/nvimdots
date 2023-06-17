@@ -112,6 +112,10 @@ return function()
 					-- For mason.nvim
 					MasonNormal = { link = "NormalFloat" },
 
+					-- For indent-blankline
+					IndentBlanklineContextStart = { bg = cp.surface0, style = {} },
+					IndentBlanklineContextChar = { fg = cp.surface1 },
+
 					-- For nvim-cmp and wilder.nvim
 					Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
 					PmenuBorder = { fg = cp.surface1, bg = transparent_background and cp.none or cp.base },
