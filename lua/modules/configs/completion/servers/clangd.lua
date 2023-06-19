@@ -1,4 +1,3 @@
-local global = require("core.global")
 local function switch_source_header_splitcmd(bufnr, splitcmd)
 	bufnr = require("lspconfig").util.validate_bufnr(bufnr)
 	local clangd_client = require("lspconfig").util.get_active_client_by_name(bufnr, "clangd")
@@ -23,24 +22,11 @@ local function switch_source_header_splitcmd(bufnr, splitcmd)
 	end
 end
 
-local function get_binary_path(binary)
-	local path = nil
-	if global.is_mac or global.is_linux then
-		path = vim.fn.trim(vim.fn.system("which " .. binary))
-	elseif global.is_windows then
-		path = vim.fn.trim(vim.fn.system("where " .. binary))
-	end
-	if vim.v.shell_error ~= 0 then
-		path = nil
-	end
-	return path
-end
-
 local function get_binary_path_list(binaries)
 	local path_list = {}
 	for _, binary in ipairs(binaries) do
-		local path = get_binary_path(binary)
-		if path then
+		local path = vim.fn.exepath(binary)
+		if path ~= "" then
 			table.insert(path_list, path)
 		end
 	end
@@ -55,6 +41,8 @@ return function(options)
 		single_file_support = true,
 		cmd = {
 			"clangd",
+			"-j=12",
+			"--enable-config",
 			"--background-index",
 			"--pch-storage=memory",
 			-- You MUST set this arg ↓ to your c/cpp compiler location (if not included)!
@@ -64,6 +52,8 @@ return function(options)
 			"--completion-style=detailed",
 			"--header-insertion-decorators",
 			"--header-insertion=iwyu",
+			"--limit-references=3000",
+			"--limit-results=350",
 		},
 		commands = {
 			ClangdSwitchSourceHeader = {
