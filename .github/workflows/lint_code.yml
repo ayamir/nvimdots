@@ -1,4 +1,4 @@
-name: code_lint
+name: lint code
 on: [push, pull_request]
 jobs:
   luacheck:
