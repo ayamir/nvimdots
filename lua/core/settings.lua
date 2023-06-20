@@ -82,14 +82,11 @@ settings["server_formatting_block_list"] = {
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	"jsonls",
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pyright",
 	"rust_analyzer",
 	"yamlls",
-	"gopls",
 	"pylsp",
 	"gopls",
 }
