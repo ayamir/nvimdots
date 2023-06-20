@@ -1,5 +1,5 @@
 return function()
-	local blend_color = require("modules.utils").hl_to_rgb("Normal", true)
+	local blend_color = require("modules.utils").gen_neodim_blend_attr()
 
 	require("neodim").setup({
 		alpha = 0.45,

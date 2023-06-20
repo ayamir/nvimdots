@@ -26,8 +26,8 @@ return function()
 			cursor = 5,
 			width = 50,
 			align_shortcut = "right",
-			hl = "AlphaButton",
-			hl_shortcut = "AlphaAttr",
+			hl = "AlphaButtons",
+			hl_shortcut = "AlphaShortcut",
 		}
 
 		if nil == keybind then
@@ -109,7 +109,7 @@ return function()
 			end,
 		}),
 	}
-	dashboard.section.buttons.opts.hl = "AlphaButton"
+	dashboard.section.buttons.opts.hl = "AlphaButtons"
 
 	local function footer()
 		local stats = require("lazy").stats()
