@@ -41,7 +41,7 @@ return function()
 		renderer = {
 			add_trailing = false,
 			group_empty = true,
-			highlight_git = true,
+			highlight_git = false,
 			full_name = false,
 			highlight_opened_files = "none",
 			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "CMakeLists.txt" },
@@ -58,33 +58,33 @@ return function()
 			root_folder_label = ":.:s?.*?/..?",
 			icons = {
 				webdev_colors = true,
-				git_placement = "after",
+				git_placement = "before",
 				show = {
 					file = true,
 					folder = true,
-					folder_arrow = true,
+					folder_arrow = false,
 					git = true,
 				},
 				padding = " ",
-				symlink_arrow = " 󰁔 ",
+				symlink_arrow = "  ",
 				glyphs = {
 					default = icons.documents.Default, --
 					symlink = icons.documents.Symlink, --
 					bookmark = icons.ui.Bookmark,
 					git = {
 						unstaged = icons.git.Mod_alt,
-						staged = icons.git.Add, --󰄬
+						staged = icons.git.Add, --
 						unmerged = icons.git.Unmerged,
-						renamed = icons.git.Rename, --󰁔
-						untracked = icons.git.Untracked, -- "󰞋"
+						renamed = icons.git.Rename, --
+						untracked = icons.git.Untracked, -- "ﲉ"
 						deleted = icons.git.Remove, --
 						ignored = icons.git.Ignore, --◌
 					},
 					folder = {
-						arrow_open = icons.ui.ArrowOpen,
-						arrow_closed = icons.ui.ArrowClosed,
-						-- arrow_open = "",
-						-- arrow_closed = "",
+						-- arrow_open = "",
+						-- arrow_closed = "",
+						arrow_open = "",
+						arrow_closed = "",
 						default = icons.ui.Folder,
 						open = icons.ui.FolderOpen,
 						empty = icons.ui.EmptyFolder,
@@ -148,7 +148,7 @@ return function()
 		},
 		git = {
 			enable = true,
-			ignore = false,
+			ignore = true,
 			show_on_dirs = true,
 			timeout = 400,
 		},

@@ -5,6 +5,10 @@ local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 require("keymap.helpers")
 
+function telescope_buffer_dir()
+	return vim.fn.expand("%:p:h")
+end
+
 local plug_map = {
 	-- Plugin: vim-fugitive
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
@@ -23,11 +27,11 @@ local plug_map = {
 	-- Plugin: toggleterm
 	["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
 	["t|jk"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
-	["n|<C-\\>"] = map_cr([[execute v:count . "ToggleTerm direction=horizontal"]])
+	["n|<C-\\>"] = map_cr([[execute v:count . "ToggleTerm direction=vertical"]])
 		:with_noremap()
 		:with_silent()
 		:with_desc("terminal: Toggle horizontal"),
-	["i|<C-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
+	["i|<C-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
 		:with_noremap()
 		:with_silent()
 		:with_desc("terminal: Toggle horizontal"),
@@ -111,14 +115,14 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("find: File by frecency"),
-	["n|<leader>fw"] = map_callback(function()
+	["n|;r"] = map_callback(function()
 			require("telescope").extensions.live_grep_args.live_grep_args()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("find: Word in project"),
 	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
-	["n|<leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent():with_desc("find: File in project"),
+	["n|;f"] = map_cu("Telescope find_files"):with_noremap():with_silent():with_desc("find: File in project"),
 	["n|<leader>fc"] = map_cu("Telescope colorscheme")
 		:with_noremap()
 		:with_silent()
@@ -134,6 +138,22 @@ local plug_map = {
 		:with_desc("edit: Change current direrctory by zoxide"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
+	["n|sf"] = map_callback(function()
+		require("telescope").extensions.file_browser.file_browser({
+			path = "%:p:h",
+            select_buffer = true,
+			cwd = telescope_buffer_dir(),
+			respect_git_ignore = false,
+			hidden = true,
+			grouped = true,
+			previewer = false,
+			initial_mode = "normal",
+			layout_config = { height = 40 },
+		})
+	end),
+
+	-- Plugin: WhichKey
+	["n|<leader>w"] = map_cu(":WhichKey"):with_noremap():with_silent(),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()

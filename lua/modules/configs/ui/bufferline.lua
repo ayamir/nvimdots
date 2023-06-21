@@ -3,6 +3,7 @@ return function()
 
 	local opts = {
 		options = {
+			mode = "tabs",
 			number = nil,
 			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
@@ -11,10 +12,14 @@ return function()
 			max_name_length = 14,
 			max_prefix_length = 13,
 			tab_size = 20,
+			indicator = {
+				style = "underline",
+			},
 			color_icons = true,
-			show_buffer_icons = true,
-			show_buffer_close_icons = true,
-			show_close_icon = true,
+			show_buffer_icons = false,
+			show_buffer_close_icons = false,
+			--show_buffer_default_icon = true,
+			show_close_icon = false,
 			show_tab_indicators = true,
 			enforce_regular_tabs = true,
 			persist_buffer_sort = true,
@@ -44,7 +49,7 @@ return function()
 		highlights = {},
 	}
 
-	if vim.g.colors_name:find("catppuccin") then
+	if vim.g.colors_name == "catppuccin" then
 		local cp = require("modules.utils").get_palette() -- Get the palette.
 
 		local catppuccin_hl_overwrite = {

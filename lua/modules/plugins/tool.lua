@@ -85,6 +85,12 @@ tool["nvim-telescope/telescope.nvim"] = {
 			{ "kkharji/sqlite.lua" },
 		} },
 		{ "jvgrootveld/telescope-zoxide" },
+		{
+			"nvim-telescope/telescope-file-browser.nvim",
+			dependencies = {
+				{ "nvim-telescope/telescope.nvim" },
+			},
+		},
 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 	},
 }
@@ -111,7 +117,6 @@ tool["mfussenegger/nvim-dap"] = {
 			"rcarriga/nvim-dap-ui",
 			config = require("tool.dap.dapui"),
 		},
-		{ "jay-babu/mason-nvim-dap.nvim" },
 	},
 }
 

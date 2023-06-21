@@ -13,14 +13,6 @@ function autocmd.nvim_create_augroups(definitions)
 	end
 end
 
-local mapping = require("keymap.completion")
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(event)
-		mapping.lsp(event.buf)
-	end,
-})
-
 -- auto close NvimTree
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
@@ -114,11 +106,11 @@ function autocmd.load_autocmds()
 				"*",
 				[[if &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal nocursorline | endif]],
 			},
-			-- Attempt to write shada when leaving nvim
+			-- Force write shada on leaving nvim
 			{
 				"VimLeave",
 				"*",
-				[[if has('nvim') | wshada | else | wviminfo! | endif]],
+				[[if has('nvim') | wshada! | else | wviminfo! | endif]],
 			},
 			-- Check if file changed when its window is focus, more eager than 'autoread'
 			{ "FocusGained", "* checktime" },

@@ -1,7 +1,6 @@
 return function()
 	local alpha = require("alpha")
 	local dashboard = require("alpha.themes.dashboard")
-	require("modules.utils").gen_alpha_hl()
 
 	dashboard.section.header.val = {
 		[[⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
@@ -24,7 +23,7 @@ return function()
 		[[⠿⠛⠛⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣯⣟⠷⢷⣿⡿⠋⠀⠀⠀⠀⣵⡀⢠⡿⠋⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
 		[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
 	}
-	dashboard.section.header.opts.hl = "AlphaHeader"
+	dashboard.section.header.opts.hl = "Type"
 
 	local function button(sc, txt, leader_txt, keybind, keybind_opts)
 		local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
@@ -35,8 +34,7 @@ return function()
 			cursor = 5,
 			width = 50,
 			align_shortcut = "right",
-			hl = "AlphaButtons",
-			hl_shortcut = "AlphaShortcut",
+			hl_shortcut = "Keyword",
 		}
 
 		if nil == keybind then
@@ -77,7 +75,7 @@ return function()
 				require("telescope").extensions.frecency.frecency()
 			end,
 		}),
-		button("space f e", "󰋚 File history", leader, nil, {
+		button("space f e", " File history", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -93,7 +91,7 @@ return function()
 				require("telescope").extensions.projects.projects({})
 			end,
 		}),
-		button("space f f", "󰈞 File find", leader, nil, {
+		button("space f f", " File find", leader, nil, {
 			noremap = true,
 			silent = true,
 			nowait = true,
@@ -118,19 +116,19 @@ return function()
 			end,
 		}),
 	}
-	dashboard.section.buttons.opts.hl = "AlphaButtons"
+	dashboard.section.buttons.opts.hl = "String"
 
 	local function footer()
 		local stats = require("lazy").stats()
 		local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
 		return "   Have Fun with neovim"
-			.. "  󰀨 v"
+			.. "   v"
 			.. vim.version().major
 			.. "."
 			.. vim.version().minor
 			.. "."
 			.. vim.version().patch
-			.. "  󰂖 "
+			.. "   "
 			.. stats.count
 			.. " plugins in "
 			.. ms
@@ -138,7 +136,7 @@ return function()
 	end
 
 	dashboard.section.footer.val = footer()
-	dashboard.section.footer.opts.hl = "AlphaFooter"
+	dashboard.section.footer.opts.hl = "Function"
 
 	local head_butt_padding = 2
 	local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding

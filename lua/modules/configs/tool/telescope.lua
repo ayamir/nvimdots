@@ -1,49 +1,76 @@
 return function()
 	local icons = { ui = require("modules.utils.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
+	local fb_actions = require("telescope").extensions.file_browser.actions
 
 	require("telescope").setup({
 		defaults = {
-			vimgrep_arguments = {
-				"rg",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-				"--smart-case",
-			},
-			initial_mode = "insert",
-			prompt_prefix = " " .. icons.ui.Telescope .. " ",
+			initial_mode = "normal",
 			selection_caret = icons.ui.ChevronRight,
-			scroll_strategy = "limit",
-			results_title = false,
+			prompt_prefix = "   ",
+			--borderchars = {
+			--	prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+			--	results = { "─", "▐", "─", "│", "╭", "▐", "▐", "╰" },
+			--	preview = { " ", "│", " ", "▌", "▌", "╮", "╯", "▌" },
+			--},
+			--scroll_strategy = "limit",
+			--results_title = false,
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
-			selection_strategy = "reset",
-			sorting_strategy = "ascending",
-			color_devicons = true,
-			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
+			file_ignore_patterns = { ".git/", ".cache", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
+				width = 0.60,
+				height = 0.85,
+				-- preview_cutoff = 120,
 				horizontal = {
-					prompt_position = "top",
-					preview_width = 0.55,
-					results_width = 0.8,
+					preview_width = function(_, cols, _)
+						return math.floor(cols * 0.6)
+					end,
 				},
 				vertical = {
-					mirror = false,
+					width = 0.9,
+					height = 0.95,
+					preview_height = 0.5,
 				},
-				width = 0.85,
-				height = 0.92,
-				preview_cutoff = 120,
+
+				flex = {
+					horizontal = {
+						preview_width = 0.9,
+					},
+				},
 			},
 			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 			grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 			qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 			file_sorter = require("telescope.sorters").get_fuzzy_file,
 			generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+		},
+		pickers = {
+			keymaps = {
+				theme = "dropdown",
+			},
 		},
 		extensions = {
+			file_browser = {
+				theme = "dropdown",
+				-- disables netrw add use telescope-file-browser in its place
+				hijack_netrw = true,
+				mappings = {
+					-- your custom insert mode mappings
+					--["i"] = {
+					--	["<C-w>"] = function()
+					--		vim.cmd("normal vbd")
+					--	end,
+					--},
+					["n"] = {
+						["N"] = fb_actions.create,
+						["h"] = fb_actions.goto_parent_dir,
+						--	["/"] = function()
+						--		vim.cmd("startinsert")
+						--	end,
+					},
+				},
+			},
 			fzf = {
 				fuzzy = false,
 				override_generic_sorter = true,
@@ -82,6 +109,7 @@ return function()
 		},
 	})
 
+	require("telescope").load_extension("file_browser")
 	require("telescope").load_extension("frecency")
 	require("telescope").load_extension("fzf")
 	require("telescope").load_extension("live_grep_args")

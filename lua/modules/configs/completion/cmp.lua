@@ -10,15 +10,24 @@ return function()
 
 	local border = function(hl)
 		return {
-			{ "┌", hl },
+			{ "╭", hl },
 			{ "─", hl },
-			{ "┐", hl },
+			{ "╮", hl },
 			{ "│", hl },
-			{ "┘", hl },
+			{ "╯", hl },
 			{ "─", hl },
-			{ "└", hl },
+			{ "╰", hl },
 			{ "│", hl },
 		}
+	end
+
+	local cmp_window = require("cmp.utils.window")
+
+	cmp_window.info_ = cmp_window.info
+	cmp_window.info = function(self)
+		local info = self:info_()
+		info.scrollable = false
+		return info
 	end
 
 	local compare = require("cmp.config.compare")
@@ -32,18 +41,18 @@ return function()
 		return (diff < 0)
 	end
 
+	local lspkind = require("lspkind")
 	local cmp = require("cmp")
+
 	cmp.setup({
-		preselect = cmp.PreselectMode.Item,
 		window = {
 			completion = {
-				border = border("PmenuBorder"),
-				winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
-				scrollbar = false,
+				border = border("Normal"),
+				max_width = 80,
+				max_height = 20,
 			},
 			documentation = {
 				border = border("CmpDocBorder"),
-				winhighlight = "Normal:CmpDoc",
 			},
 		},
 		sorting = {
@@ -52,61 +61,29 @@ return function()
 				require("copilot_cmp.comparators").prioritize,
 				require("copilot_cmp.comparators").score,
 				-- require("cmp_tabnine.compare"),
-				compare.offset, -- Items closer to cursor will have lower priority
+				compare.offset,
 				compare.exact,
-				-- compare.scopes,
 				compare.lsp_scores,
-				compare.sort_text,
-				compare.score,
-				compare.recently_used,
-				-- compare.locality, -- Items closer to cursor will have higher priority, conflicts with `offset`
 				require("cmp-under-comparator").under,
 				compare.kind,
+				compare.sort_text,
 				compare.length,
 				compare.order,
 			},
 		},
 		formatting = {
-			fields = { "abbr", "kind", "menu" },
+			fields = { "kind", "abbr", "menu" },
 			format = function(entry, vim_item)
-				local lspkind_icons = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
-				-- load lspkind icons
-				vim_item.kind =
-					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
-
-				vim_item.menu = setmetatable({
-					cmp_tabnine = "[TN]",
-					copilot = "[CPLT]",
-					buffer = "[BUF]",
-					orgmode = "[ORG]",
-					nvim_lsp = "[LSP]",
-					nvim_lua = "[LUA]",
-					path = "[PATH]",
-					tmux = "[TMUX]",
-					treesitter = "[TS]",
-					luasnip = "[SNIP]",
-					spell = "[SPELL]",
-				}, {
-					__index = function()
-						return "[BTN]" -- builtin/unknown source names
-					end,
-				})[entry.source.name]
-
-				local label = vim_item.abbr
-				local truncated_label = vim.fn.strcharpart(label, 0, 80)
-				if truncated_label ~= label then
-					vim_item.abbr = truncated_label .. "..."
-				end
-
-				return vim_item
+				local kind = lspkind.cmp_format({
+					mode = "symbol_text",
+					maxwidth = 50,
+					symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp),
+				})(entry, vim_item)
+				local strings = vim.split(kind.kind, "%s", { trimempty = true })
+				kind.kind = " " .. strings[1] .. " "
+				kind.menu = "    (" .. strings[2] .. ")"
+				return kind
 			end,
-		},
-		matching = {
-			disallow_partial_fuzzy_matching = false,
-		},
-		performance = {
-			async_budget = 1,
-			max_view_entries = 120,
 		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
@@ -142,7 +119,7 @@ return function()
 		},
 		-- You should specify your *installed* sources.
 		sources = {
-			{ name = "nvim_lsp", max_item_count = 350 },
+			{ name = "nvim_lsp" },
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
@@ -155,11 +132,6 @@ return function()
 			{ name = "copilot" },
 			-- { name = "codeium" },
 			-- { name = "cmp_tabnine" },
-		},
-		experimental = {
-			ghost_text = {
-				hl_group = "Whitespace",
-			},
 		},
 	})
 end

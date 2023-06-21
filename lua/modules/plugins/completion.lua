@@ -9,7 +9,7 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
-			"nvimdev/lspsaga.nvim",
+			"glepnir/lspsaga.nvim",
 			config = require("completion.lspsaga"),
 		},
 	},
@@ -33,6 +33,7 @@ completion["hrsh7th/nvim-cmp"] = {
 			dependencies = { "rafamadriz/friendly-snippets" },
 			config = require("completion.luasnip"),
 		},
+		{ "onsails/lspkind.nvim" },
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lsp" },

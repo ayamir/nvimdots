@@ -1,4 +1,7 @@
 return function()
+	local colors = require("modules.utils").get_palette()
+	local floatborder_hl = require("modules.utils").hl_to_rgb("FloatBorder", false, colors.blue)
+
 	require("toggleterm").setup({
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
@@ -15,14 +18,8 @@ return function()
 			vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
 		end,
 		highlights = {
-			Normal = {
-				link = "Normal",
-			},
-			NormalFloat = {
-				link = "NormalFloat",
-			},
 			FloatBorder = {
-				link = "FloatBorder",
+				guifg = floatborder_hl,
 			},
 		},
 		open_mapping = false, -- [[<c-\>]],
