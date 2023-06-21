@@ -1,5 +1,4 @@
 local settings = {}
-local home = require("core.global").home
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
 ---@type boolean
