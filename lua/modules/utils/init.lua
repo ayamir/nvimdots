@@ -32,8 +32,7 @@ local M = {}
 ---@type nil|palette
 local palette = nil
 
--- Indicates if the autocmd for refreshing the palette has already been registered
--- [status variable]
+-- Indicates if autocmd for refreshing the builtin palette has already been registered
 ---@type boolean
 local _has_autocmd = false
 
