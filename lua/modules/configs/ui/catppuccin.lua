@@ -181,6 +181,14 @@ return function()
 
 					-- For treesitter
 					["@keyword.return"] = { fg = cp.pink, style = clear },
+
+					-- For lualine
+					LualineBranch = { fg = cp.subtext0, bg = cp.mantle, style = { "bold" } },
+					LualineDiff = { fg = cp.subtext0, bg = cp.mantle },
+					LualineLSP = { fg = cp.blue, bg = cp.mantle, style = { "bold" } },
+					LualinePyVenv = { fg = cp.green, bg = cp.mantle },
+					LualineCWD = { fg = cp.subtext0, bg = cp.mantle, style = { "bold" } },
+					LualineSeparator = { fg = cp.surface1, bg = cp.mantle },
 				}
 			end,
 		},
