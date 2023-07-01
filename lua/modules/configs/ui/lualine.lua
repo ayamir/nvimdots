@@ -235,7 +235,7 @@ return function()
 				local cursorline = vim.fn.line(".")
 				local cursorcol = vim.fn.virtcol(".")
 				local filelines = vim.fn.line("$")
-				local position = "N/A"
+				local position
 				if cursorline == 1 then
 					position = "Top"
 				elseif cursorline == filelines then
