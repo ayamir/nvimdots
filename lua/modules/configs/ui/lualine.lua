@@ -8,7 +8,14 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
-	local custom_theme = function()
+	local function custom_theme()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
+			callback = function()
+				require("lualine").setup({ options = { theme = custom_theme() } })
+			end,
+		})
+
 		colors = require("modules.utils").get_palette()
 		local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
 		return {
@@ -18,7 +25,7 @@ return function()
 				c = { fg = colors.text, bg = universal_bg },
 			},
 			command = {
-				a = { fg = colors.yellow, bg = colors.surface0, gui = "bold" },
+				a = { fg = colors.peach, bg = colors.surface0, gui = "bold" },
 			},
 			insert = {
 				a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
@@ -39,12 +46,6 @@ return function()
 			},
 		}
 	end
-	vim.api.nvim_create_autocmd("ColorScheme", {
-		group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
-		callback = function()
-			require("lualine").setup({ options = { theme = custom_theme() } })
-		end,
-	})
 
 	local mini_sections = {
 		lualine_a = { "filetype" },
