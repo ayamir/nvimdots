@@ -126,6 +126,7 @@ local data = {
 		Sort = "",
 		Spell = "󰓆",
 		Symlink = "",
+		Tab = "",
 		Table = "",
 		Telescope = "",
 	},

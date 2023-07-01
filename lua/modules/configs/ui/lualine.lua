@@ -65,8 +65,8 @@ return function()
 	}
 
 	local conditionals = {
-		trunc = function()
-			return vim.o.columns > 145
+		has_enough_room = function()
+			return vim.o.columns > 100
 		end,
 		has_comp_before = function()
 			return vim.bo.filetype ~= ""
@@ -185,7 +185,7 @@ return function()
 					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
 			end,
 			color = utils.gen_hl("blue", true, true, nil, "bold"),
-			cond = conditionals.trunc,
+			cond = conditionals.has_enough_room,
 		},
 
 		python_venv = {
@@ -214,12 +214,12 @@ return function()
 				return ""
 			end,
 			color = utils.gen_hl("green", true, true),
-			cond = conditionals.trunc,
+			cond = conditionals.has_enough_room,
 		},
 
-		shiftwidth = {
+		tabwidth = {
 			function()
-				return icons.ui.ArrowClosed .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+				return icons.ui.Tab .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 			end,
 			padding = 1,
 		},
@@ -311,7 +311,7 @@ return function()
 					"encoding",
 					fmt = string.upper,
 					padding = { left = 1 },
-					cond = conditionals.trunc,
+					cond = conditionals.has_enough_room,
 				},
 				{
 					"fileformat",
@@ -322,7 +322,7 @@ return function()
 					},
 					padding = { left = 1 },
 				},
-				components.shiftwidth,
+				components.tabwidth,
 			},
 			lualine_y = {
 				components.separator,
