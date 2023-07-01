@@ -1,10 +1,50 @@
 return function()
+	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
 		git = require("modules.utils.icons").get("git", true),
+		git_nosep = require("modules.utils.icons").get("git"),
+		misc = require("modules.utils.icons").get("misc", true),
 		ui = require("modules.utils.icons").get("ui", true),
 	}
-	local iconsNoSpace = { git = require("modules.utils.icons").get("git", false) }
+
+	local custom_theme = function()
+		colors = require("modules.utils").get_palette()
+		local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
+		return {
+			normal = {
+				a = { fg = colors.lavender, bg = colors.surface0, gui = "bold" },
+				b = { fg = colors.text, bg = universal_bg },
+				c = { fg = colors.text, bg = universal_bg },
+			},
+			command = {
+				a = { fg = colors.yellow, bg = colors.surface0, gui = "bold" },
+			},
+			insert = {
+				a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
+			},
+			visual = {
+				a = { fg = colors.flamingo, bg = colors.surface0, gui = "bold" },
+			},
+			terminal = {
+				a = { fg = colors.teal, bg = colors.surface0, gui = "bold" },
+			},
+			replace = {
+				a = { fg = colors.red, bg = colors.surface0, gui = "bold" },
+			},
+			inactive = {
+				a = { fg = colors.subtext0, bg = universal_bg, gui = "bold" },
+				b = { fg = colors.subtext0, bg = universal_bg },
+				c = { fg = colors.subtext0, bg = universal_bg },
+			},
+		}
+	end
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
+		callback = function()
+			require("lualine").setup({ options = { theme = custom_theme() } })
+		end,
+	})
 
 	local mini_sections = {
 		lualine_a = { "filetype" },
@@ -23,41 +63,54 @@ return function()
 		filetypes = { "DiffviewFiles" },
 	}
 
-	local custom_theme = function()
-		local cp = require("modules.utils").get_palette()
-		return {
-			normal = {
-				a = { fg = cp.green, bg = cp.surface0, gui = "bold" },
-				b = { fg = cp.text, bg = cp.mantle },
-				c = { fg = cp.text, bg = cp.mantle },
-			},
-			command = { a = { fg = cp.yellow, bg = cp.surface0, gui = "bold" } },
-			insert = { a = { fg = cp.blue, bg = cp.surface0, gui = "bold" } },
-			visual = { a = { fg = cp.mauve, bg = cp.surface0, gui = "bold" } },
-			terminal = { a = { fg = cp.teal, bg = cp.surface0, gui = "bold" } },
-			replace = { a = { fg = cp.red, bg = cp.surface0, gui = "bold" } },
-			inactive = {
-				a = { fg = cp.subtext0, bg = cp.mantle, gui = "bold" },
-				b = { fg = cp.subtext0, bg = cp.mantle },
-				c = { fg = cp.subtext0, bg = cp.mantle },
-			},
-		}
-	end
-	vim.api.nvim_create_autocmd("ColorScheme", {
-		group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
-		callback = function()
-			require("lualine").setup({ options = { theme = custom_theme() } })
+	local conditionals = {
+		trunc = function()
+			return vim.o.columns > 145
 		end,
-	})
-
-	local conditions = {
-		hide_in_width = function()
-			return vim.o.columns > 100
+		has_comp_before = function()
+			return vim.bo.filetype ~= ""
 		end,
-		check_git_workspace = function()
+		has_git = function()
 			local filepath = vim.fn.expand("%:p:h")
 			local gitdir = vim.fn.finddir(".git", filepath .. ";")
 			return gitdir and #gitdir > 0 and #gitdir < #filepath
+		end,
+	}
+
+	---@class lualine_hlgrp
+	---@field fg string
+	---@field bg string
+	---@field gui string?
+	local utils = {
+		force_centering = function()
+			return "%="
+		end,
+		abbreviate_path = function(path)
+			local home = require("core.global").home
+			if path:find(home, 1, true) == 1 then
+				path = "~" .. path:sub(#home + 1)
+			end
+			return path
+		end,
+		---Generate <func>`color` for any component
+		---@param fg string @Foreground hl group
+		---@param gen_bg boolean @Generate guibg from hl group |StatusLine|?
+		---@param special_nobg boolean @Disable guibg for transparent backgrounds?
+		---@param bg string? @Background hl group
+		---@param gui string? @GUI highlight arguments
+		---@return fun():lualine_hlgrp
+		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
+			return function()
+				local guifg = colors[fg]
+				local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
+					or colors[bg]
+				local nobg = special_nobg and require("core.settings").transparent_background
+				return {
+					fg = guifg and guifg or colors.none,
+					bg = (guibg and not nobg) and guibg or colors.none,
+					gui = gui and gui or nil,
+				}
+			end
 		end,
 	}
 
@@ -77,27 +130,61 @@ return function()
 			function()
 				return "│"
 			end,
-			padding = {},
-			color = "LualineSeparator",
+			padding = 0,
+			color = utils.gen_hl("surface1", true, true),
+		},
+
+		file_status = {
+			function()
+				local function is_new_file()
+					local filename = vim.fn.expand("%")
+					return filename ~= "" and vim.bo.buftype == "" and vim.fn.filereadable(filename) == 0
+				end
+
+				local symbols = {}
+				if vim.bo.modified then
+					table.insert(symbols, "[+]")
+				end
+				if vim.bo.modifiable == false then
+					table.insert(symbols, "[-]")
+				end
+				if vim.bo.readonly == true then
+					table.insert(symbols, "[RO]")
+				end
+				if is_new_file() then
+					table.insert(symbols, "[New]")
+				end
+				return #symbols > 0 and table.concat(symbols, "") or ""
+			end,
+			padding = { left = -1, right = 1 },
+			cond = conditionals.has_comp_before,
 		},
 
 		lsp = {
 			function()
-				if rawget(vim, "lsp") then
-					local names = {}
-					local lsp_exist = false
-					for _, client in ipairs(vim.lsp.get_active_clients()) do
-						if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
-							table.insert(names, client.name)
-							lsp_exist = true
+				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+				local clients = vim.lsp.get_active_clients()
+				local lsp_lists = {}
+				local available_servers = {}
+				if next(clients) == nil then
+					return icons.misc.NoActiveLsp -- No server available
+				end
+				for _, client in ipairs(clients) do
+					local filetypes = client.config.filetypes
+					local client_name = client.name
+					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+						-- Avoid adding servers that already exists.
+						if not lsp_lists[client_name] then
+							lsp_lists[client_name] = true
+							table.insert(available_servers, client_name)
 						end
 					end
-					return lsp_exist and "󱜙 [" .. table.concat(names, ", ") .. "]" or "󱚧"
 				end
-				return "󱚧"
+				return next(available_servers) == nil and icons.misc.NoActiveLsp
+					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
 			end,
-			color = "LualineLSP",
-			cond = conditions.hide_in_width,
+			color = utils.gen_hl("blue", true, true, nil, "bold"),
+			cond = conditionals.trunc,
 		},
 
 		python_venv = {
@@ -113,7 +200,7 @@ return function()
 					return venv
 				end
 
-				if vim.bo.filetype == "python" then
+				if vim.api.nvim_buf_get_option(0, "filetype") == "python" then
 					local venv = os.getenv("CONDA_DEFAULT_ENV")
 					if venv then
 						return string.format("%s", env_cleanup(venv))
@@ -125,22 +212,39 @@ return function()
 				end
 				return ""
 			end,
-			color = "LualinePyVenv",
-			cond = conditions.hide_in_width,
+			color = utils.gen_hl("green", true, true),
+			cond = conditionals.trunc,
 		},
+
+		shiftwidth = {
+			function()
+				return icons.ui.ArrowClosed .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+			end,
+			padding = 1,
+		},
+
 		cwd = {
 			function()
-				local cwd = vim.fn.getcwd()
-				local is_windows = require("core.global").is_windows
-				if not is_windows then
-					local home = require("core.global").home
-					if cwd:find(home, 1, true) == 1 then
-						cwd = "~" .. cwd:sub(#home + 1)
-					end
-				end
-				return icons.ui.RootFolderOpened .. cwd
+				return icons.ui.FolderWithHeart .. utils.abbreviate_path(vim.fs.normalize(vim.fn.getcwd()))
 			end,
-			color = "LualineCWD",
+			color = utils.gen_hl("subtext0", true, true, nil, "bold"),
+		},
+
+		file_location = {
+			function()
+				local cursorline = vim.fn.line(".")
+				local cursorcol = vim.fn.virtcol(".")
+				local filelines = vim.fn.line("$")
+				local position = "N/A"
+				if cursorline == 1 then
+					position = "Top"
+				elseif cursorline == filelines then
+					position = "Bot"
+				else
+					position = string.format("%2d%%%%", math.floor(cursorline / filelines * 100))
+				end
+				return string.format("%s · %3d:%-2d", position, cursorline, cursorcol)
+			end,
 		},
 	}
 
@@ -155,36 +259,39 @@ return function()
 		sections = {
 			lualine_a = { "mode" },
 			lualine_b = {
-				-- idk what to put here
-
-				-- FIXME: not perfect when in buffers such as `help`
-				-- vim.tbl_deep_extend("force", components.separator, { cond = conditions.check_git_workspace }),
+				{
+					"filetype",
+					colored = true,
+					icon_only = false,
+					icon = { align = "left" },
+				},
+				components.file_status,
+				vim.tbl_deep_extend("force", components.separator, {
+					cond = function()
+						return conditionals.has_git() and conditionals.has_comp_before()
+					end,
+				}),
 			},
 			lualine_c = {
-				{ -- branch
-					"b:gitsigns_head",
-					icon = iconsNoSpace.git.Branch,
-					color = "LualineBranch",
+				{
+					"branch",
+					icon = icons.git_nosep.Branch,
+					color = utils.gen_hl("subtext0", true, true, nil, "bold"),
 				},
 				{
 					"diff",
 					symbols = {
 						added = icons.git.Add,
-						modified = icons.git.Mod,
+						modified = icons.git.Mod_alt,
 						removed = icons.git.Remove,
 					},
 					source = diff_source,
 					colored = false,
-					color = "LualineDiff",
+					color = utils.gen_hl("subtext0", true, true),
 					padding = { right = 1 },
 				},
 
-				{ -- center
-					function()
-						return "%="
-					end,
-				},
-
+				{ utils.force_centering },
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
@@ -193,41 +300,35 @@ return function()
 						error = icons.diagnostics.Error,
 						warn = icons.diagnostics.Warning,
 						info = icons.diagnostics.Information,
-						hint = icons.diagnostics.Hint,
+						hint = icons.diagnostics.Hint_alt,
 					},
 				},
 				components.lsp,
 			},
 			lualine_x = {
 				{
-					"o:encoding",
+					"encoding",
 					fmt = string.upper,
 					padding = { left = 1 },
-					cond = conditions.hide_in_width,
+					cond = conditionals.trunc,
 				},
 				{
 					"fileformat",
 					symbols = {
 						unix = "LF",
 						dos = "CRLF",
-						mac = "CR",
+						mac = "CR", -- Legacy macOS
 					},
 					padding = { left = 1 },
 				},
-				{ -- spaces
-					function()
-						local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
-						return icons.ui.ChevronRight .. shiftwidth
-					end,
-					padding = 1,
-				},
+				components.shiftwidth,
 			},
 			lualine_y = {
 				components.separator,
 				components.python_venv,
 				components.cwd,
 			},
-			lualine_z = { "location" },
+			lualine_z = { components.file_location },
 		},
 		inactive_sections = {
 			lualine_a = {},

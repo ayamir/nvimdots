@@ -38,7 +38,7 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 }
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
-	event = "BufWinEnter",
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.lualine"),
 }
 ui["zbirenbaum/neodim"] = {

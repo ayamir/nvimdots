@@ -172,7 +172,7 @@ return function()
 						bg = transparent_background and cp.none or cp.mantle,
 					},
 					TelescopeSelection = {
-						fg = cp.green,
+						fg = transparent_background and cp.subtext0 or cp.text,
 						bg = transparent_background and cp.none or cp.surface0,
 					},
 					TelescopeResultsDiffAdd = { fg = cp.green },
