@@ -186,6 +186,13 @@ return function()
 					TelescopeResultsDiffChange = { fg = cp.yellow },
 					TelescopeResultsDiffDelete = { fg = cp.red },
 
+					-- For nvim-treehopper
+					TSNodeKey = {
+						fg = cp.peach,
+						bg = transparent_background and cp.none or cp.base,
+						style = { "bold", "underline" },
+					},
+
 					-- For treesitter
 					["@keyword.return"] = { fg = cp.pink, style = clear },
 				}
