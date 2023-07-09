@@ -56,9 +56,9 @@ editor["junegunn/vim-easy-align"] = {
 	lazy = true,
 	cmd = "EasyAlign",
 }
-editor["phaazon/hop.nvim"] = {
+editor["smoka7/hop.nvim"] = {
 	lazy = true,
-	branch = "v2",
+	version = "*",
 	event = "BufReadPost",
 	config = require("editor.hop"),
 }
@@ -91,7 +91,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		{ "mrjones2014/nvim-ts-rainbow" },
+		{ "hiphish/rainbow-delimiters.nvim" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
