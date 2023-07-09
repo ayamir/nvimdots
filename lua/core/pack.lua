@@ -73,7 +73,7 @@ function Lazy:load_lazy()
 		install = {
 			-- install missing plugins on startup. This doesn't increase startup time.
 			missing = true,
-			colorscheme = { "catppuccin" },
+			colorscheme = { settings.colorscheme },
 		},
 		ui = {
 			-- a number <1 is a percentage., >1 is a fixed size
