@@ -87,7 +87,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 			vim.api.nvim_command("TSUpdate")
 		end
 	end,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "BufReadPre",
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },

@@ -33,7 +33,7 @@ ui["lewis6991/gitsigns.nvim"] = {
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "BufReadPost",
 	config = require("ui.indent-blankline"),
 }
 ui["nvim-lualine/lualine.nvim"] = {
