@@ -59,7 +59,7 @@ editor["junegunn/vim-easy-align"] = {
 editor["smoka7/hop.nvim"] = {
 	lazy = true,
 	version = "*",
-	event = "BufReadPost",
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.hop"),
 }
 editor["RRethy/vim-illuminate"] = {
@@ -95,6 +95,10 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
 		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
+		{
+			"hiphish/rainbow-delimiters.nvim",
+			config = require("editor.rainbow_delims"),
+		},
 		{
 			"nvim-treesitter/nvim-treesitter-context",
 			config = require("editor.ts-context"),
