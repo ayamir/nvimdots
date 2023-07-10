@@ -397,8 +397,11 @@ Please make sure you have nvim v$REQUIRED_NVIM_VERSION_LEGACY installed at the v
 	}
 
 	info -Msg "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"
-	info -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and'
-	info_ext -Msg 'replace vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`'
+	info -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and replace'
+	info_ext -Msg 'vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`.'
+	info -Msg 'Also, please make sure you have a Rust Toolchain installed via `rustup`! Otherwise, unexpected things may'
+	info_ext -Msg 'happen. See: https://www.rust-lang.org/tools/install.      ¯¯¯¯¯¯¯¯¯¯¯¯'
+	info_ext -Msg '             ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯'
 	info -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 	Write-Host @'
 
