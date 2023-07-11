@@ -129,13 +129,6 @@ return function()
 						bg = transparent_background and cp.none or cp.mantle,
 					},
 
-					-- For lspsaga.nvim
-					OutlineNormal = { bg = transparent_background and cp.none or cp.mantle },
-					OutlineWinSeparator = {
-						bg = transparent_background and cp.none or cp.base,
-						fg = transparent_background and cp.surface1 or cp.base,
-					},
-
 					-- For fidget
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
