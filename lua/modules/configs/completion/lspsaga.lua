@@ -74,6 +74,8 @@ return function()
 			virtual_text = false,
 		},
 		diagnostic = {
+			max_width = 0.5,
+			max_height = 0.6,
 			text_hl_follow = true,
 			show_code_action = true,
 			border_follow = true,
@@ -98,6 +100,8 @@ return function()
 			},
 		},
 		hover = {
+			max_width = 0.3,
+			max_height = 0.7,
 			open_link = "gl",
 			open_browser = "silent !" .. require("core.settings").external_browser,
 		},
