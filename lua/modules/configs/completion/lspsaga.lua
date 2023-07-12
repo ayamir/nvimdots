@@ -60,7 +60,7 @@ return function()
 		},
 		code_action = {
 			num_shortcut = true,
-			show_server_name = false,
+			show_server_name = true,
 			extend_gitsigns = false,
 			keys = {
 				quit = "q",
