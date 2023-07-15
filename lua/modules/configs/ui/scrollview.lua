@@ -4,7 +4,7 @@ return function()
 	require("scrollview").setup({
 		scrollview_mode = "virtual",
 		excluded_filetypes = { "NvimTree", "terminal", "nofile" },
-		winblend = 55,
+		winblend = 0,
 		signs_on_startup = { "diagnostics", "folds", "marks", "search", "spell" },
 		diagnostics_error_symbol = icons.diagnostics.Error,
 		diagnostics_warn_symbol = icons.diagnostics.Warning,

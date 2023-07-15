@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		local layout = vim.api.nvim_call_function("winlayout", {})
 		if
 			layout[1] == "leaf"
-			and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree"
+			and vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(layout[2]) }) == "NvimTree"
 			and layout[3] == nil
 		then
 			vim.api.nvim_command([[confirm quit]])
