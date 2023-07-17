@@ -147,7 +147,6 @@ local data = {
 	misc = {
 		Campass = "󰀹",
 		Code = "",
-		EscapeST = "",
 		Gavel = "",
 		Glass = "󰂖",
 		NoActiveLsp = "󱚧",
