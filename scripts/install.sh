@@ -77,6 +77,10 @@ info() {
 	printf "${tty_blue}==>${tty_bold} %s${tty_reset}\n" "$(shell_join "$@")"
 }
 
+info_ext() {
+	printf "${tty_bold}    %s${tty_reset}\n" "$(shell_join "$@")"
+}
+
 warn() {
 	printf "${tty_yellow}Warning${tty_reset}: %s\n" "$(chomp "$1")"
 }
@@ -289,6 +293,9 @@ if [[ "${USE_SSH}" -eq "0" ]]; then
 fi
 
 info "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"
+info "NOTE: Please make sure you have a Rust Toolchain installed ${tty_underline}via \`rustup\`${tty_reset}${tty_bold}! Otherwise, unexpected things may"
+info_ext "      happen. See: ${tty_underline}https://www.rust-lang.org/tools/install${tty_reset}."
+info_ext ""
 info "If lazy.nvim failed to fetch any plugin(s), maunally execute \`:Lazy sync\` until everything is up-to-date."
 cat <<EOS
 

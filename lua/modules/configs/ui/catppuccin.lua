@@ -79,12 +79,13 @@ return function()
 			nvimtree = true,
 			overseer = false,
 			pounce = false,
+			rainbow_delimiters = true,
 			semantic_tokens = true,
 			symbols_outline = false,
 			telekasten = false,
-			telescope = true,
+			telescope = { enabled = true, style = "nvchad" },
 			treesitter_context = true,
-			ts_rainbow = true,
+			ts_rainbow = false,
 			vim_sneak = false,
 			vimwiki = false,
 			which_key = true,
@@ -140,44 +141,17 @@ return function()
 					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 
 					-- For telescope.nvim
-					TelescopeBorder = {
-						fg = transparent_background and cp.blue or cp.mantle,
-						bg = transparent_background and cp.none or cp.mantle,
-					},
-					TelescopePromptBorder = {
-						fg = transparent_background and cp.blue or cp.surface0,
-						bg = transparent_background and cp.none or cp.surface0,
-					},
-					TelescopePromptNormal = {
-						fg = cp.text,
-						bg = transparent_background and cp.none or cp.surface0,
-					},
-					TelescopePromptPrefix = {
-						fg = cp.flamingo,
-						bg = transparent_background and cp.none or cp.surface0,
-					},
-					TelescopeNormal = {
-						bg = transparent_background and cp.none or cp.mantle,
-					},
-					TelescopePreviewTitle = {
-						fg = transparent_background and cp.green or cp.base,
-						bg = transparent_background and cp.none or cp.green,
-					},
-					TelescopePromptTitle = {
-						fg = transparent_background and cp.red or cp.base,
-						bg = transparent_background and cp.none or cp.red,
-					},
-					TelescopeResultsTitle = {
-						fg = cp.mantle,
-						bg = transparent_background and cp.none or cp.mantle,
-					},
-					TelescopeSelection = {
-						fg = cp.green,
-						bg = transparent_background and cp.none or cp.surface0,
-					},
+					TelescopeMatching = { fg = cp.lavender },
 					TelescopeResultsDiffAdd = { fg = cp.green },
 					TelescopeResultsDiffChange = { fg = cp.yellow },
 					TelescopeResultsDiffDelete = { fg = cp.red },
+
+					-- For nvim-treehopper
+					TSNodeKey = {
+						fg = cp.peach,
+						bg = transparent_background and cp.none or cp.base,
+						style = { "bold", "underline" },
+					},
 
 					-- For treesitter
 					["@keyword.return"] = { fg = cp.pink, style = clear },
