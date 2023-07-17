@@ -42,5 +42,23 @@ return function()
 		handlers = {},
 	})
 
+	-- Setup usercmd to register/deregister available source(s)
+	local function _gen_completion()
+		local sources_cont = null_ls.get_source({
+			filetype = vim.api.nvim_get_option_value("filetype", { scope = "local" }),
+		})
+		local completion_items = {}
+		for _, server in pairs(sources_cont) do
+			table.insert(completion_items, server.name)
+		end
+		return completion_items
+	end
+	vim.api.nvim_create_user_command("NullLsToggle", function(opts)
+		null_ls.toggle({ name = opts.args })
+	end, {
+		nargs = 1,
+		complete = _gen_completion,
+	})
+
 	require("completion.formatting").configure_format_on_save()
 end
