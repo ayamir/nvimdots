@@ -94,7 +94,7 @@ return function()
 			in_select = false,
 			auto_save = false,
 			keys = {
-				quit = "<Esc>",
+				quit = "<C-c>",
 				select = "x",
 				exec = "<CR>",
 			},
