@@ -54,7 +54,15 @@ return function()
 		return completion_items
 	end
 	vim.api.nvim_create_user_command("NullLsToggle", function(opts)
-		null_ls.toggle({ name = opts.args })
+		if vim.tbl_contains(_gen_completion(), opts.args) then
+			null_ls.toggle({ name = opts.args })
+		else
+			vim.notify(
+				string.format("[Null-ls] Unable to find any registered source named [%s].", opts.args),
+				vim.log.levels.ERROR,
+				{ title = "Null-ls Internal Error" }
+			)
+		end
 	end, {
 		nargs = 1,
 		complete = _gen_completion,
