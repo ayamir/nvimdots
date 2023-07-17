@@ -151,6 +151,13 @@ local load_core = function()
 	neovide_config()
 	clipboard_config()
 	shell_config()
+    local ok, wf = pcall(require, "vim.lsp._watchfiles")
+    if ok then
+        -- disable lsp watcher. Too slow on linux
+        wf._watchfunc = function()
+        return function() end
+        end
+    end
 
 	require("core.options")
 	require("core.mapping")
