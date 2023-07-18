@@ -149,7 +149,7 @@ return function()
 			frequency = 12,
 		},
 		ui = {
-			title = false,
+			title = true,
 			devicon = true,
 			border = "single", -- Can be single, double, rounded, solid, shadow.
 			actionfix = icons.ui.Spell,
