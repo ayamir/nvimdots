@@ -1,24 +1,30 @@
 local ui = {}
 
-ui["goolord/alpha-nvim"] = {
+ui["yucao16/dashboard-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
-	config = require("ui.alpha"),
+	config = require("ui.dashboard"),
 }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
+	dependencies = {
+		{ "tiagovla/scope.nvim" },
+	},
 }
-ui["Jint-lzxy/nvim"] = {
-	lazy = false,
+ui["Jint-lzxy/nvim"] = { -- catppuccin
+	lazy = true,
 	branch = "refactor/syntax-highlighting",
 	name = "catppuccin",
 	config = require("ui.catppuccin"),
 }
-ui["sainnhe/edge"] = {
-	lazy = true,
-	config = require("ui.edge"),
+ui["folke/tokyonight.nvim"] = {
+	lazy = false,
+}
+ui["navarasu/onedark.nvim"] = {
+	lazy = false,
+	config = require("ui.onedark"),
 }
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
@@ -41,39 +47,61 @@ ui["nvim-lualine/lualine.nvim"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.lualine"),
 }
-ui["zbirenbaum/neodim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("ui.neodim"),
-}
 ui["karb94/neoscroll.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = "BufReadPost",
 	config = require("ui.neoscroll"),
-}
-ui["shaunsingh/nord.nvim"] = {
-	lazy = true,
-	config = require("ui.nord"),
 }
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
 	event = "VeryLazy",
 	config = require("ui.notify"),
 }
-ui["folke/paint.nvim"] = {
+ui["folke/paint.nvim"] = { -- Easily add additional highlights to your buffers Topics
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.paint"),
 }
-ui["dstein64/nvim-scrollview"] = {
+ui["petertriho/nvim-scrollbar"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("ui.scrollview"),
+	event = "BufReadPost",
+	config = require("ui.scroll_bar"),
 }
-ui["edluffy/specs.nvim"] = {
+ui["folke/zen-mode.nvim"] = {
 	lazy = true,
-	event = "CursorMoved",
-	config = require("ui.specs"),
+	cmd = { "ZenMode" },
+	config = require("ui.zenmode"),
+}
+ui["dvoytik/hi-my-words.nvim"] = {
+	lazy = true,
+	config = true,
+	cmd = { "HiMyWordsToggle", "HiMyWordsClear" },
+	event = { "VeryLazy" },
+}
+ui["machakann/vim-highlightedyank"] = {
+	lazy = true,
+	event = { "VeryLazy" },
+}
+ui["kevinhwang91/nvim-bqf"] = {
+	lazy = true,
+	config = true,
+	ft = { "qf" },
+}
+ui["lvimuser/lsp-inlayhints.nvim"] = {
+	lazy = true,
+	event = { "LspAttach" },
+	config = require("ui.inlay_hint"),
+}
+ui["itchyny/vim-highlighturl"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = function()
+		vim.g.highlighturl_guifg = "#8AB4F8"
+	end,
+}
+ui["stevearc/dressing.nvim"] = {
+	lazy = false,
+	config = require("ui.dressing_config"),
 }
 
 return ui

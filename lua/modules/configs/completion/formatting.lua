@@ -10,6 +10,13 @@ vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
 end, {})
 
+vim.api.nvim_create_user_command("Format", function()
+	require("completion.formatting").format({
+		timeout_ms = 1000,
+		filter = M.format_filter,
+	})
+end, {})
+
 local block_list = require("core.settings").formatter_block_list
 vim.api.nvim_create_user_command("FormatterToggleFt", function(opts)
 	if block_list[opts.args] == nil then

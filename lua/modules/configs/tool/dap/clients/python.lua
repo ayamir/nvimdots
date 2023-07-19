@@ -34,7 +34,42 @@ return function()
 			request = "launch",
 			name = "Launch file",
 			-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+			console = "integratedTerminal",
 			program = "${file}", -- This configuration will launch the current file if used.
+			justMyCode = false,
+			pythonPath = function()
+				if not is_empty(vim.env.CONDA_PREFIX) then
+					return vim.env.CONDA_PREFIX .. "/bin/python"
+				else
+					return "python3"
+				end
+			end,
+		},
+		{
+			type = "python",
+			request = "launch",
+			name = "Launch file with arguments",
+			program = "${file}",
+			args = function()
+				local args_string = vim.fn.input("Arguments: ")
+				return vim.split(args_string, " +")
+			end,
+			console = "integratedTerminal",
+			pythonPath = function()
+				if not is_empty(vim.env.CONDA_PREFIX) then
+					return vim.env.CONDA_PREFIX .. "/bin/python"
+				else
+					return "python3"
+				end
+			end,
+		},
+		{
+			type = "python",
+			request = "launch",
+			name = "Launch file inside my code",
+			console = "integratedTerminal",
+			program = "${file}",
+			justMyCode = false,
 			pythonPath = function()
 				if not is_empty(vim.env.CONDA_PREFIX) then
 					return vim.env.CONDA_PREFIX .. "/bin/python"

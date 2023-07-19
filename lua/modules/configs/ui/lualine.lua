@@ -8,46 +8,6 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
-	local function custom_theme()
-		vim.api.nvim_create_autocmd("ColorScheme", {
-			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
-			pattern = "*",
-			callback = function()
-				require("lualine").setup({ options = { theme = custom_theme() } })
-			end,
-		})
-
-		colors = require("modules.utils").get_palette()
-		local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
-		return {
-			normal = {
-				a = { fg = colors.lavender, bg = colors.surface0, gui = "bold" },
-				b = { fg = colors.text, bg = universal_bg },
-				c = { fg = colors.text, bg = universal_bg },
-			},
-			command = {
-				a = { fg = colors.peach, bg = colors.surface0, gui = "bold" },
-			},
-			insert = {
-				a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
-			},
-			visual = {
-				a = { fg = colors.flamingo, bg = colors.surface0, gui = "bold" },
-			},
-			terminal = {
-				a = { fg = colors.teal, bg = colors.surface0, gui = "bold" },
-			},
-			replace = {
-				a = { fg = colors.red, bg = colors.surface0, gui = "bold" },
-			},
-			inactive = {
-				a = { fg = colors.subtext0, bg = universal_bg, gui = "bold" },
-				b = { fg = colors.subtext0, bg = universal_bg },
-				c = { fg = colors.subtext0, bg = universal_bg },
-			},
-		}
-	end
-
 	local mini_sections = {
 		lualine_a = { "filetype" },
 		lualine_b = {},
@@ -253,108 +213,71 @@ return function()
 			end,
 		},
 	}
+	local function getWords()
+		if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+			if vim.fn.wordcount().visual_words == 1 then
+				return tostring(vim.fn.wordcount().visual_words) .. " word"
+			elseif not (vim.fn.wordcount().visual_words == nil) then
+				return tostring(vim.fn.wordcount().visual_words) .. " words"
+			else
+				return tostring(vim.fn.wordcount().words) .. " words"
+			end
+		else
+			return vim.opt.fileencoding:get()
+		end
+	end
 
+	function Split(s, delimiter)
+		local result = {}
+		for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
+			table.insert(result, match)
+		end
+		return result
+	end
+
+	local function showLsp()
+		local msg = " LSP: No Active Lsp"
+		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+		local clients = vim.lsp.get_active_clients()
+		if next(clients) == nil then
+			return msg
+		end
+		for _, client in ipairs(clients) do
+			local filetypes = client.config.filetypes
+			if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+				return " LSP: " .. client.name
+			end
+		end
+		return msg
+	end
 	require("lualine").setup({
 		options = {
-			icons_enabled = true,
-			theme = custom_theme(),
-			disabled_filetypes = { statusline = { "alpha" } },
-			component_separators = "",
-			section_separators = { left = "", right = "" },
+			component_separators = "|",
+			section_separators = { left = "", right = "" },
+			globalstatus = true,
 		},
 		sections = {
-			lualine_a = { "mode" },
-			lualine_b = {
-				{
-					"filetype",
-					colored = true,
-					icon_only = false,
-					icon = { align = "left" },
-				},
-				components.file_status,
-				vim.tbl_extend("force", components.separator, {
-					cond = function()
-						return conditionals.has_git() and conditionals.has_comp_before()
-					end,
-				}),
+			lualine_a = {
+				{ "mode", separator = { left = "" }, right_padding = 2 },
 			},
-			lualine_c = {
-				{
-					"branch",
-					icon = icons.git_nosep.Branch,
-					color = utils.gen_hl("subtext0", true, true, nil, "bold"),
-					cond = conditionals.has_git,
-				},
-				{
-					"diff",
-					symbols = {
-						added = icons.git.Add,
-						modified = icons.git.Mod_alt,
-						removed = icons.git.Remove,
-					},
-					source = diff_source,
-					colored = false,
-					color = utils.gen_hl("subtext0", true, true),
-					cond = conditionals.has_git,
-					padding = { right = 1 },
-				},
-
-				{ utils.force_centering },
-				{
-					"diagnostics",
-					sources = { "nvim_diagnostic" },
-					sections = { "error", "warn", "info", "hint" },
-					symbols = {
-						error = icons.diagnostics.Error,
-						warn = icons.diagnostics.Warning,
-						info = icons.diagnostics.Information,
-						hint = icons.diagnostics.Hint_alt,
-					},
-				},
-				components.lsp,
+			lualine_b = { "branch", "diff", "diagnostics" },
+			-- lualine_c = { getPath },
+			lualine_c = { showLsp },
+			lualine_x = { getWords },
+			lualine_y = { "filetype", "filesize", "progress" },
+			lualine_z = {
+				{ "location", separator = { right = "" }, left_padding = 2 },
 			},
-			lualine_x = {
-				{
-					"encoding",
-					fmt = string.upper,
-					padding = { left = 1 },
-					cond = conditionals.has_enough_room,
-				},
-				{
-					"fileformat",
-					symbols = {
-						unix = "LF",
-						dos = "CRLF",
-						mac = "CR", -- Legacy macOS
-					},
-					padding = { left = 1 },
-				},
-				components.tabwidth,
-			},
-			lualine_y = {
-				components.separator,
-				components.python_venv,
-				components.cwd,
-			},
-			lualine_z = { components.file_location },
 		},
 		inactive_sections = {
-			lualine_a = {},
+			lualine_a = { "filename" },
 			lualine_b = {},
-			lualine_c = { "filename" },
-			lualine_x = { "location" },
+			lualine_c = {},
+			lualine_x = {},
 			lualine_y = {},
-			lualine_z = {},
+			lualine_z = { "location" },
 		},
 		tabline = {},
-		extensions = {
-			"quickfix",
-			"nvim-tree",
-			"nvim-dap-ui",
-			"toggleterm",
-			"fugitive",
-			outline,
-			diffview,
-		},
+		extensions = { "toggleterm", "nvim-tree", "neo-tree", "nvim-dap-ui" },
 	})
 end

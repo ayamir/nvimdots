@@ -6,12 +6,11 @@ local map_cr = bind.map_cr
 
 local plug_map = {
 	-- Plugin: bufferline
-	["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_desc("buffer: Switch to next"),
-	["n|<A-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_desc("buffer: Switch to prev"),
+	["n|<leader>b"] = map_cr("BufferLineCycleNext"):with_noremap():with_desc("buffer: Cycle next"),
+	["n|<leader>B"] = map_cr("BufferLineCyclePrev"):with_noremap():with_desc("buffer: Cycle prev"),
+	["n|<leader>gb"] = map_cr("BufferLinePick"):with_noremap():with_desc("buffer: Line pick"),
 	["n|<A-S-j>"] = map_cr("BufferLineMoveNext"):with_noremap():with_silent():with_desc("buffer: Move current to next"),
 	["n|<A-S-k>"] = map_cr("BufferLineMovePrev"):with_noremap():with_silent():with_desc("buffer: Move current to prev"),
-	["n|<leader>be"] = map_cr("BufferLineSortByExtension"):with_noremap():with_desc("buffer: Sort by extension"),
-	["n|<leader>bd"] = map_cr("BufferLineSortByDirectory"):with_noremap():with_desc("buffer: Sort by direrctory"),
 	["n|<A-1>"] = map_cr("BufferLineGoToBuffer 1"):with_noremap():with_silent():with_desc("buffer: Goto buffer 1"),
 	["n|<A-2>"] = map_cr("BufferLineGoToBuffer 2"):with_noremap():with_silent():with_desc("buffer: Goto buffer 2"),
 	["n|<A-3>"] = map_cr("BufferLineGoToBuffer 3"):with_noremap():with_silent():with_desc("buffer: Goto buffer 3"),
@@ -21,6 +20,12 @@ local plug_map = {
 	["n|<A-7>"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent():with_desc("buffer: Goto buffer 7"),
 	["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent():with_desc("buffer: Goto buffer 8"),
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
+
+	-- Plugin: ZenMode
+	["n|<leader>z"] = map_cr("ZenMode"):with_noremap():with_silent():with_desc("Toggle ZenMode"),
+
+	-- Plugin: ZenMode
+	["n|<leader>hw"] = map_cr("HiMyWordsToggle"):with_noremap():with_silent():with_desc("Toggle hi-my-words"),
 }
 
 bind.nvim_load_mapping(plug_map)

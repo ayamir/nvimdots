@@ -1,11 +1,20 @@
 return function()
 	local icons = { ui = require("modules.utils.icons").get("ui") }
+	local close_func = function(bufnum)
+		local bufdelete_avail, bufdelete = pcall(require, "bufdelete")
+		if bufdelete_avail then
+			bufdelete.bufdelete(bufnum, true)
+		else
+			vim.cmd.bdelete({ args = { bufnum }, bang = true })
+		end
+	end
 
 	local opts = {
 		options = {
 			number = nil,
-			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
+			close_command = close_func,
+			right_mouse_command = close_func,
 			left_trunc_marker = icons.ui.Left,
 			right_trunc_marker = icons.ui.Right,
 			max_name_length = 20,
@@ -21,9 +30,22 @@ return function()
 			always_show_bufferline = true,
 			separator_style = "thin",
 			diagnostics = "nvim_lsp",
-			diagnostics_indicator = function(count)
-				return "(" .. count .. ")"
+			diagnostics_indicator = function(_, _, diagnostics)
+				local result = {}
+				local symbols = {
+					error = " ",
+					warning = " ",
+					info = " ",
+				}
+				for name, count in pairs(diagnostics) do
+					if symbols[name] and count > 0 then
+						table.insert(result, symbols[name] .. count)
+					end
+				end
+				local res = table.concat(result, " ")
+				return #res > 0 and res or ""
 			end,
+
 			offsets = {
 				{
 					filetype = "NvimTree",
@@ -31,6 +53,12 @@ return function()
 					text_align = "center",
 					padding = 0,
 				},
+				-- {
+				-- 	filetype = "neo-tree",
+				-- 	text = "File Explorer",
+				-- 	text_align = "center",
+				-- 	padding = 0,
+				-- },
 				{
 					filetype = "lspsagaoutline",
 					text = "Lspsaga Outline",

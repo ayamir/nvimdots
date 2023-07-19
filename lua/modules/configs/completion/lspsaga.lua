@@ -1,201 +1,131 @@
 return function()
 	require("modules.utils").gen_lspkind_hl()
 
-	local icons = {
-		cmp = require("modules.utils.icons").get("cmp", true),
-		diagnostics = require("modules.utils.icons").get("diagnostics", true),
-		kind = require("modules.utils.icons").get("kind", true),
-		type = require("modules.utils.icons").get("type", true),
-		ui = require("modules.utils.icons").get("ui", true),
-	}
-
-	local function set_sidebar_icons()
-		-- Set icons for sidebar.
-		local diagnostic_icons = {
-			Error = icons.diagnostics.Error_alt,
-			Warn = icons.diagnostics.Warning_alt,
-			Info = icons.diagnostics.Information_alt,
-			Hint = icons.diagnostics.Hint_alt,
-		}
-		for type, icon in pairs(diagnostic_icons) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl })
-		end
-	end
-
-	set_sidebar_icons()
-
 	require("lspsaga").setup({
-		scroll_preview = {
-			scroll_down = "<C-j>",
-			scroll_up = "<C-k>",
+		ui = {
+			-- currently only round theme
+			theme = "round",
+			-- border type can be single,double,rounded,solid,shadow.
+			border = "rounded",
+			winblend = 0,
+			expand = "",
+			collaspe = "",
+			preview = " ",
+			code_action = "💡",
+			diagnostic = "🐞",
+			incoming = " 󰏷 ",
+			outgoing = " 󰏻 ",
+			colors = {
+				--float window normal bakcground color
+				-- normal_bg = "#1d1536",
+				normal_bg = "None",
+				--title background color
+				title_bg = "#afd700",
+				red = "#e95678",
+				magenta = "#b33076",
+				orange = "#FF8700",
+				yellow = "#f7bb3b",
+				green = "#afd700",
+				cyan = "#36d0e0",
+				blue = "#61afef",
+				purple = "#CBA6F7",
+				white = "#d1d4cf",
+				black = "#1c1c19",
+			},
+			kind = {},
 		},
-		request_timeout = 3000,
+		preview = {
+			lines_above = 0,
+			lines_below = 10,
+		},
+		scroll_preview = {
+			scroll_down = "<C-f>",
+			scroll_up = "<C-b>",
+		},
+		request_timeout = 4000,
+		symbol_in_winbar = {
+			enable = false,
+			separator = " ",
+			hide_keyword = true,
+			show_file = true,
+			folder_level = 2,
+		},
 		finder = {
-			silent = true,
-			default = "def+ref+imp",
-			layout = "float",
-			filter = {},
+			max_height = 0.3,
+			position = "above",
 			keys = {
-				shuttle = "[]",
-				toggle_or_open = "<CR>",
-				jump_to = "e",
-				vsplit = "v",
-				split = "s",
+				jump_to = "p",
+				edit = { "o", "<CR>" },
+				vsplit = "s",
+				split = "i",
 				tabe = "t",
-				tabnew = "n",
-				quit = "q",
-				close = "<Esc>",
+				quit = { "q", "<ESC>" },
+				close_in_preview = "q",
 			},
 		},
 		definition = {
-			keys = {
-				edit = "<C-c>o",
-				vsplit = "<C-c>v",
-				split = "<C-c>s",
-				tabe = "<C-c>t",
-				close = "<C-c>q",
-				quit = "q",
-			},
+			edit = "<C-c>o",
+			vsplit = "<C-c>v",
+			split = "<C-c>i",
+			tabe = "<C-c>t",
+			quit = "q",
+			close = "<Esc>",
 		},
 		code_action = {
 			num_shortcut = true,
-			show_server_name = true,
-			extend_gitsigns = false,
 			keys = {
 				quit = "q",
 				exec = "<CR>",
 			},
 		},
 		lightbulb = {
-			enable = false,
-			sign = true,
-			sign_priority = 20,
+			enable = true,
+			enable_in_insert = true,
+			sign = false,
+			sign_priority = 40,
 			virtual_text = false,
 		},
 		diagnostic = {
-			max_width = 0.5,
-			max_height = 0.6,
-			text_hl_follow = true,
+			twice_into = false,
 			show_code_action = true,
-			border_follow = true,
-			diagnostic_only_current = false,
-			extend_relatedInformation = false,
-			jump_num_shortcut = true,
-			show_layout = "float",
+			show_source = true,
 			keys = {
-				exec_action = "r",
+				exec_action = "o",
 				quit = "q",
-				toggle_or_jump = "<CR>",
-				quit_in_show = { "q", "<Esc>" },
 			},
 		},
 		rename = {
-			in_select = false,
-			auto_save = false,
-			keys = {
-				quit = "<C-c>",
-				select = "x",
-				exec = "<CR>",
-			},
-		},
-		hover = {
-			max_width = 0.3,
-			max_height = 0.7,
-			open_link = "gl",
-			open_browser = "silent !" .. require("core.settings").external_browser,
+			-- quit = "<C-c>",
+			quit = "<ESC>",
+			exec = "<CR>",
+			in_select = true,
 		},
 		outline = {
 			win_position = "right",
+			win_with = "",
 			win_width = 30,
+			show_detail = true,
 			auto_preview = false,
-			auto_close = true,
-			close_after_jump = true,
-			detail = false,
-			layout = "normal",
+			auto_refresh = true,
+			auto_close = false,
+			custom_sort = nil,
+			focus = false,
 			keys = {
-				toggle_or_jump = "<CR>",
-				jump = "o",
+				jump = "<CR>",
+				expand_collapse = "o",
 				quit = "q",
 			},
-		},
-		symbol_in_winbar = {
-			enable = true,
-			separator = " " .. icons.ui.Separator,
-			hide_keyword = false,
-			show_file = false,
-			color_mode = true,
-		},
-		implement = {
-			enable = true,
-			sign = true,
-			virtual_text = false,
 		},
 		callhierarchy = {
-			layout = "float",
+			show_detail = false,
 			keys = {
 				edit = "e",
-				vsplit = "v",
-				split = "s",
+				vsplit = "s",
+				split = "i",
 				tabe = "t",
+				jump = "p",
 				quit = "q",
-				shuttle = "[]",
-				toggle_or_req = "u",
-				close = "<Esc>",
-			},
-		},
-		beacon = {
-			enable = true,
-			frequency = 12,
-		},
-		ui = {
-			title = true,
-			devicon = true,
-			border = "single", -- Can be single, double, rounded, solid, shadow.
-			actionfix = icons.ui.Spell,
-			expand = icons.ui.ArrowClosed,
-			collapse = icons.ui.ArrowOpen,
-			code_action = icons.ui.CodeAction,
-			imp_sign = icons.kind.Implementation,
-			kind = {
-				-- Kind
-				Class = { icons.kind.Class, "LspKindClass" },
-				Constant = { icons.kind.Constant, "LspKindConstant" },
-				Constructor = { icons.kind.Constructor, "LspKindConstructor" },
-				Enum = { icons.kind.Enum, "LspKindEnum" },
-				EnumMember = { icons.kind.EnumMember, "LspKindEnumMember" },
-				Event = { icons.kind.Event, "LspKindEvent" },
-				Field = { icons.kind.Field, "LspKindField" },
-				File = { icons.kind.File, "LspKindFile" },
-				Function = { icons.kind.Function, "LspKindFunction" },
-				Interface = { icons.kind.Interface, "LspKindInterface" },
-				Key = { icons.kind.Keyword, "LspKindKey" },
-				Method = { icons.kind.Method, "LspKindMethod" },
-				Module = { icons.kind.Module, "LspKindModule" },
-				Namespace = { icons.kind.Namespace, "LspKindNamespace" },
-				Number = { icons.kind.Number, "LspKindNumber" },
-				Operator = { icons.kind.Operator, "LspKindOperator" },
-				Package = { icons.kind.Package, "LspKindPackage" },
-				Property = { icons.kind.Property, "LspKindProperty" },
-				Struct = { icons.kind.Struct, "LspKindStruct" },
-				TypeParameter = { icons.kind.TypeParameter, "LspKindTypeParameter" },
-				Variable = { icons.kind.Variable, "LspKindVariable" },
-				-- Type
-				Array = { icons.type.Array, "LspKindArray" },
-				Boolean = { icons.type.Boolean, "LspKindBoolean" },
-				Null = { icons.type.Null, "LspKindNull" },
-				Object = { icons.type.Object, "LspKindObject" },
-				String = { icons.type.String, "LspKindString" },
-				-- ccls-specific icons.
-				TypeAlias = { icons.kind.TypeAlias, "LspKindTypeAlias" },
-				Parameter = { icons.kind.Parameter, "LspKindParameter" },
-				StaticMethod = { icons.kind.StaticMethod, "LspKindStaticMethod" },
-				-- Microsoft-specific icons.
-				Text = { icons.kind.Text, "LspKindText" },
-				Snippet = { icons.kind.Snippet, "LspKindSnippet" },
-				Folder = { icons.kind.Folder, "LspKindFolder" },
-				Unit = { icons.kind.Unit, "LspKindUnit" },
-				Value = { icons.kind.Value, "LspKindValue" },
+				expand_collaspe = "u",
 			},
 		},
 	})

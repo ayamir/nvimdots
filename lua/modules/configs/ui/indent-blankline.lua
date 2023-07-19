@@ -1,8 +1,8 @@
 return function()
 	require("indent_blankline").setup({
-		char = "│",
-		context_char = "┃",
-		show_first_indent_level = true,
+		space_char_blankline = " ",
+		show_current_context = true,
+
 		filetype_exclude = {
 			"", -- for all buffers without a file type
 			"dashboard",
@@ -16,6 +16,7 @@ return function()
 			"log",
 			"markdown",
 			"NvimTree",
+			"neo-tree",
 			"peekaboo",
 			"startify",
 			"TelescopePrompt",
@@ -26,24 +27,21 @@ return function()
 			"vista",
 		},
 		buftype_exclude = { "terminal", "nofile" },
-		show_trailing_blankline_indent = false,
-		show_current_context = true,
-		context_patterns = {
-			"^if",
-			"^table",
-			"block",
-			"class",
-			"for",
-			"function",
-			"if_statement",
-			"import",
-			"list_literal",
-			"method",
-			"selector",
-			"type",
-			"var",
-			"while",
-		},
-		space_char_blankline = " ",
+		-- context_patterns = {
+		-- 	"^if",
+		-- 	"^table",
+		-- 	"block",
+		-- 	"class",
+		-- 	"for",
+		-- 	"function",
+		-- 	"if_statement",
+		-- 	"import",
+		-- 	"list_literal",
+		-- 	"method",
+		-- 	"selector",
+		-- 	"type",
+		-- 	"var",
+		-- 	"while",
+		-- },
 	})
 end

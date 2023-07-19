@@ -1,0 +1,1 @@
+require("internal.cursorword").setup()

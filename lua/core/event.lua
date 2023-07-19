@@ -37,8 +37,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
+-- auto close some filetype with <ESC>
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("SoftESCQuit", { clear = true }),
+	pattern = {
+		"sagacodeaction",
+		"nil",
+		"nofile",
+		"notify",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.api.nvim_buf_set_keymap(event.buf, "n", "<ESC>", "<CMD>close<CR>", { silent = true })
+	end,
+})
+
 -- auto close some filetype with <q>
 vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("SoftQuit", { clear = true }),
 	pattern = {
 		"qf",
 		"help",
@@ -53,10 +69,22 @@ vim.api.nvim_create_autocmd("FileType", {
 		"startuptime",
 		"tsplayground",
 		"PlenaryTestPopup",
+		"fugitive",
+		"lspsagaoutline",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<CMD>close<CR>", { silent = true })
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("HardQuit", { clear = true }),
+	pattern = {
+		"dashboard",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<CMD>q<CR>", { silent = true })
 	end,
 })
 
@@ -90,7 +118,7 @@ function autocmd.load_autocmds()
 			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
 			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
 			{ "BufWritePre", "*.bak", "setlocal noundofile" },
-			-- auto place to last edit
+			-- auto place to ast edit
 			{
 				"BufReadPost",
 				"*",
@@ -120,13 +148,19 @@ function autocmd.load_autocmds()
 				"*",
 				[[if has('nvim') | wshada | else | wviminfo! | endif]],
 			},
+			-- SaveSession
+			{
+				"VimLeave",
+				"*",
+				[[lua require('persisted').save({override = true, leave_vim = true })]],
+			},
 			-- Check if file changed when its window is focus, more eager than 'autoread'
 			{ "FocusGained", "* checktime" },
 			-- Equalize window dimensions when resizing vim window
 			{ "VimResized", "*", [[tabdo wincmd =]] },
 		},
 		ft = {
-			{ "FileType", "alpha", "set showtabline=0" },
+			{ "FileType", "dashboard", "set showtabline=0" },
 			{ "FileType", "markdown", "set wrap" },
 			{ "FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0" },
 			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
@@ -141,13 +175,13 @@ function autocmd.load_autocmds()
 				"nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>",
 			},
 		},
-		yank = {
-			{
-				"TextYankPost",
-				"*",
-				[[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]],
-			},
-		},
+		-- yank = {
+		-- 	{
+		-- 		"TextYankPost",
+		-- 		"*",
+		-- 		[[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=500})]],
+		-- 	},
+		-- },
 	}
 
 	autocmd.nvim_create_augroups(definitions)

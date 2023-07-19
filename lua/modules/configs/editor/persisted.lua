@@ -2,10 +2,10 @@ return function()
 	require("persisted").setup({
 		save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
 		silent = false, -- silent nvim message when sourcing session file
-		use_git_branch = true, -- create session files based on the branch of the git enabled repository
+		-- use_git_branch = true, -- create session files based on the branch of the git enabled repository
 		autosave = true, -- automatically save session files when exiting Neovim
 		should_autosave = function()
-			if vim.bo.filetype == "alpha" then
+			if vim.bo.filetype == "dashboard" then
 				return false
 			end
 			return true

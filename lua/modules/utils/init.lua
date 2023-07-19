@@ -207,28 +207,31 @@ function M.gen_lspkind_hl()
 	end
 end
 
--- Generate highlight groups for alpha. Existing attributes will NOT be overwritten
-function M.gen_alpha_hl()
-	local colors = M.get_palette()
-
-	vim.api.nvim_set_hl(0, "AlphaHeader", { fg = colors.blue, default = true })
-	vim.api.nvim_set_hl(0, "AlphaButtons", { fg = colors.green, default = true })
-	vim.api.nvim_set_hl(0, "AlphaShortcut", { fg = colors.pink, italic = true, default = true })
-	vim.api.nvim_set_hl(0, "AlphaFooter", { fg = colors.yellow, default = true })
-end
-
--- Generate blend_color for neodim.
-function M.gen_neodim_blend_attr()
-	local trans_bg = require("core.settings").transparent_background
-	local appearance = require("core.settings").background
-
-	if trans_bg and appearance == "dark" then
-		return "#000000"
-	elseif trans_bg and appearance == "light" then
-		return "#FFFFFF"
-	else
-		return M.hl_to_rgb("Normal", true)
-	end
+-- Generate highlight groups for onedark.nvim. Existing attributes will NOT be overwritten
+-- TODO: Select
+function M.gen_onedark_hl()
+	vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { link = "TSRainbowRed" })
+	vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { link = "TSRainbowYellow" })
+	vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { link = "TSRainbowBlue" })
+	vim.api.nvim_set_hl(0, "RainbowDelimiterOrange", { link = "TSRainbowOrange" })
+	vim.api.nvim_set_hl(0, "RainbowDelimiterGreen", { link = "TSRainbowGreen" })
+	vim.api.nvim_set_hl(0, "RainbowDelimiterViolet", { link = "TSRainbowViolet" })
+	vim.api.nvim_set_hl(0, "RainbowDelimiterCyan", { link = "TSRainbowCyan" })
+	vim.api.nvim_set_hl(0, "TSRainbowRed", { link = "rainbowcol1" })
+	vim.api.nvim_set_hl(0, "TSRainbowYellow", { link = "rainbowcol2" })
+	vim.api.nvim_set_hl(0, "TSRainbowBlue", { link = "rainbowcol3" })
+	vim.api.nvim_set_hl(0, "TSRainbowOrange", { link = "rainbowcol4" })
+	vim.api.nvim_set_hl(0, "TSRainbowGreen", { link = "rainbowcol5" })
+	vim.api.nvim_set_hl(0, "TSRainbowViolet", { link = "rainbowcol6" })
+	vim.api.nvim_set_hl(0, "TSRainbowCyan", { link = "rainbowcol7" })
+	vim.api.nvim_set_hl(0, "rainbowcol1", { fg = "#ffd700" })
+	vim.api.nvim_set_hl(0, "Identifier", { fg = "#abb2bf" })
+	vim.api.nvim_set_hl(0, "@constructor", { fg = "#abb2bf" })
+	vim.api.nvim_set_hl(0, "@method.call", { fg = "#abb2bf" })
+	vim.api.nvim_set_hl(0, "@function.call", { fg = "#abb2bf" })
+	vim.api.nvim_set_hl(0, "@parameter", { fg = "#d19a66" })
+	vim.api.nvim_set_hl(0, "@variable.builtin", { fg = "#E86671" })
+	vim.api.nvim_set_hl(0, "lualine_c_normal", { fg = "#abb2bf" })
 end
 
 ---Convert number (0/1) to boolean

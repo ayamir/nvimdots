@@ -4,13 +4,13 @@ return function()
 		signs = {
 			add = {
 				hl = "GitSignsAdd",
-				text = "│",
+				text = "┃",
 				numhl = "GitSignsAddNr",
 				linehl = "GitSignsAddLn",
 			},
 			change = {
 				hl = "GitSignsChange",
-				text = "│",
+				text = "┃",
 				numhl = "GitSignsChangeNr",
 				linehl = "GitSignsChangeLn",
 			},
@@ -32,7 +32,14 @@ return function()
 				numhl = "GitSignsChangeNr",
 				linehl = "GitSignsChangeLn",
 			},
+			untracked = {
+				hl = "GitSignsAdd",
+				text = "┆",
+				numhl = "GitSignsAddNr",
+				linehl = "GitSignsAddLn",
+			},
 		},
+
 		on_attach = mapping.gitsigns,
 		watch_gitdir = { interval = 1000, follow_files = true },
 		current_line_blame = true,
@@ -42,5 +49,12 @@ return function()
 		status_formatter = nil, -- Use default
 		word_diff = false,
 		diff_opts = { internal = true },
+		preview_config = {
+			border = "rounded",
+			style = "minimal",
+			relative = "cursor",
+			row = 0,
+			col = 1,
+		},
 	})
 end

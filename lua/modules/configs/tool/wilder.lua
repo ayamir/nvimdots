@@ -27,8 +27,8 @@ return function()
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
 		highlights = {
-			default = "Pmenu",
-			border = "PmenuBorder", -- highlight to use for the border
+			default = "Normal",
+			border = "FloatBorder", -- highlight to use for the border
 			accent = wilder.make_hl("WilderAccent", "CmpItemAbbr", "CmpItemAbbrMatch"),
 		},
 		empty_message = wilder.popupmenu_empty_message_with_spinner(),

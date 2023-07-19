@@ -24,7 +24,7 @@ return function()
 		},
 
 		window = {
-			border = "none",
+			border = "rounded",
 			position = "bottom",
 			margin = { 1, 0, 1, 0 },
 			padding = { 1, 1, 1, 1 },

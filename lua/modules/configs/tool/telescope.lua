@@ -20,12 +20,12 @@ return function()
 			layout_strategy = "horizontal",
 			path_display = { "absolute" },
 			selection_strategy = "reset",
-			sorting_strategy = "ascending",
+			sorting_strategy = "descending",
 			color_devicons = true,
 			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
 				horizontal = {
-					prompt_position = "top",
+					prompt_position = "bottom",
 					preview_width = 0.55,
 					results_width = 0.8,
 				},
@@ -86,8 +86,11 @@ return function()
 	require("telescope").load_extension("fzf")
 	require("telescope").load_extension("live_grep_args")
 	require("telescope").load_extension("notify")
-	require("telescope").load_extension("projects")
 	require("telescope").load_extension("undo")
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("persisted")
+	require("telescope").load_extension("recent_files")
+	require("telescope").load_extension("heading")
+	require("telescope").load_extension("neoclip")
+	require("telescope").load_extension("env")
 end

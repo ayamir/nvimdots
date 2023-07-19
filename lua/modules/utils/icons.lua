@@ -38,6 +38,33 @@ local data = {
 		StaticMethod = "",
 		Macro = "",
 	},
+	kind_space = {
+		Text = "󰉿 ",
+		Method = "󰆧 ",
+		Function = "󰊕 ",
+		Constructor = " ",
+		Field = "󰜢 ",
+		Variable = "󰀫 ",
+		Class = "󰠱 ",
+		Interface = " ",
+		Module = " ",
+		Property = "󰜢 ",
+		Unit = "󰑭 ",
+		Value = "󰎠 ",
+		Enum = " ",
+		Keyword = "󰌋 ",
+		Snippet = " ",
+		Color = "󰏘 ",
+		File = "󰈙 ",
+		Reference = "󰈇 ",
+		Folder = "󰉋 ",
+		EnumMember = " ",
+		Constant = "󰏿 ",
+		Struct = "󰙅 ",
+		Event = " ",
+		Operator = "󰆕 ",
+		TypeParameter = "󰊄 ",
+	},
 	type = {
 		Array = "󰅪",
 		Boolean = "",
@@ -201,10 +228,22 @@ local data = {
 		Stopped = "",
 		Terminate = "󰝤",
 	},
+	ts = { -- Treesitter
+		IF = "󰉡",
+		ELSE = "󰎟",
+		FOR = "",
+		WHILE = "󰊳",
+		SWITCH = "󰊲",
+		FUNC = "󰊕",
+		VAR = "󰋙",
+	},
+    other = {
+        ellipsis = "…",
+    }
 }
 
 ---Get a specific icon set.
----@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
+---@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"|"other"|"kind_space"
 ---@param add_space? boolean @Add trailing space after the icon.
 function icons.get(category, add_space)
 	if add_space then

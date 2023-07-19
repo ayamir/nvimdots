@@ -72,7 +72,7 @@ local disable_distribution_plugins = function()
 end
 
 local leader_map = function()
-	vim.g.mapleader = " "
+	vim.g.mapleader = ","
 	vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
 	vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
 end
@@ -156,12 +156,15 @@ local load_core = function()
 	require("core.mapping")
 	require("keymap")
 	require("core.event")
+	require("core.command")
 	require("core.pack")
 
 	local colorscheme = require("core.settings").colorscheme
 	local background = require("core.settings").background
 	vim.api.nvim_command("set background=" .. background)
 	vim.api.nvim_command("colorscheme " .. colorscheme)
+	require("modules.utils").gen_onedark_hl()
+	require("internal")
 end
 
 load_core()

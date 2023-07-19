@@ -3,22 +3,20 @@ return function()
 		kind = require("modules.utils.icons").get("kind"),
 		type = require("modules.utils.icons").get("type"),
 		cmp = require("modules.utils.icons").get("cmp"),
+		other = require("modules.utils.icons").get("other"),
 	}
-	local t = function(str)
-		return vim.api.nvim_replace_termcodes(str, true, true, true)
+	local settings = require("core.settings")
+	local MAX_LABEL_WIDTH = settings.cmp_max_width
+	-- safely load luasnip.nvim
+	local snip_ok, luasnip = pcall(require, "luasnip")
+	if not snip_ok then
+		vim.notify("luasnip failed", "error", { render = "minimal" })
+		return
 	end
 
-	local border = function(hl)
-		return {
-			{ "┌", hl },
-			{ "─", hl },
-			{ "┐", hl },
-			{ "│", hl },
-			{ "┘", hl },
-			{ "─", hl },
-			{ "└", hl },
-			{ "│", hl },
-		}
+	local check_backspace = function()
+		local col = vim.fn.col(".") - 1
+		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 	end
 
 	local compare = require("cmp.config.compare")
@@ -36,13 +34,14 @@ return function()
 	cmp.setup({
 		preselect = cmp.PreselectMode.Item,
 		window = {
-			completion = {
-				border = border("PmenuBorder"),
-				winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:PmenuSel",
+			completion = cmp.config.window.bordered({
+				bordered = "rounded",
+				col_offset = -1,
 				scrollbar = false,
-			},
+				winhighlight = "Normal:NormalFloat,CursorLine:PmenuSel,Search:PmenuSel",
+			}),
 			documentation = {
-				border = border("CmpDocBorder"),
+				border = "rounded",
 				winhighlight = "Normal:CmpDoc",
 			},
 		},
@@ -51,7 +50,7 @@ return function()
 			comparators = {
 				require("copilot_cmp.comparators").prioritize,
 				require("copilot_cmp.comparators").score,
-				-- require("cmp_tabnine.compare"),
+				require("cmp_tabnine.compare"),
 				compare.offset, -- Items closer to cursor will have lower priority
 				compare.exact,
 				-- compare.scopes,
@@ -71,8 +70,7 @@ return function()
 			format = function(entry, vim_item)
 				local lspkind_icons = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
 				-- load lspkind icons
-				vim_item.kind =
-					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
+				vim_item.kind = string.format("%s ", lspkind_icons[vim_item.kind] or icons.cmp.undefined)
 
 				vim_item.menu = setmetatable({
 					cmp_tabnine = "[TN]",
@@ -93,9 +91,10 @@ return function()
 				})[entry.source.name]
 
 				local label = vim_item.abbr
-				local truncated_label = vim.fn.strcharpart(label, 0, 80)
+
+				local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
 				if truncated_label ~= label then
-					vim_item.abbr = truncated_label .. "..."
+					vim_item.abbr = truncated_label .. icons.other.ellipsis
 				end
 
 				return vim_item
@@ -111,6 +110,8 @@ return function()
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
 			["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+			["<down>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "s", "c" }),
+			["<up>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "s", "c" }),
 			["<C-p>"] = cmp.mapping.select_prev_item(),
 			["<C-n>"] = cmp.mapping.select_next_item(),
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
@@ -119,8 +120,12 @@ return function()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif require("luasnip").expand_or_locally_jumpable() then
-					vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"))
+				elseif luasnip.expandable() then
+					luasnip.expand()
+				elseif luasnip.expand_or_jumpable() then
+					luasnip.expand_or_jump()
+				elseif check_backspace() then
+					cmp.complete()
 				else
 					fallback()
 				end
@@ -128,8 +133,8 @@ return function()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("luasnip").jumpable(-1) then
-					vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
 				else
 					fallback()
 				end
@@ -144,7 +149,7 @@ return function()
 		sources = {
 			{ name = "nvim_lsp", max_item_count = 350 },
 			{ name = "nvim_lua" },
-			{ name = "luasnip" },
+			{ name = "luasnip", priority = 9 },
 			{ name = "path" },
 			{ name = "treesitter" },
 			{ name = "spell" },
@@ -161,5 +166,25 @@ return function()
 				hl_group = "Whitespace",
 			},
 		},
+	})
+	cmp.setup.cmdline("/", {
+		completion = {
+			completeopt = "nenu,menuone,noselect",
+		},
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = "buffer" },
+		},
+	})
+	cmp.setup.cmdline(":", {
+		completion = {
+			completeopt = "nenu,menuone,noselect",
+		},
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = "path" },
+		}, {
+			{ name = "cmdline" },
+		}),
 	})
 end

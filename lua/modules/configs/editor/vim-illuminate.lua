@@ -10,10 +10,10 @@ return function()
 			"DoomInfo",
 			"DressingSelect",
 			"NvimTree",
+			"neo-tree",
 			"Outline",
 			"TelescopePrompt",
 			"Trouble",
-			"alpha",
 			"dashboard",
 			"dirvish",
 			"fugitive",
@@ -23,6 +23,6 @@ return function()
 			"norg",
 			"toggleterm",
 		},
-		under_cursor = false,
+		under_cursor = true,
 	})
 end

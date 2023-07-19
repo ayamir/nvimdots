@@ -25,6 +25,10 @@ return function()
 				link = "FloatBorder",
 			},
 		},
+		float_opts = {
+			border = "rounded",
+		},
+
 		open_mapping = false, -- [[<c-\>]],
 		hide_numbers = true, -- hide the number column in toggleterm buffers
 		shade_filetypes = {},

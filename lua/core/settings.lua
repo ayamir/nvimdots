@@ -6,7 +6,11 @@ settings["use_ssh"] = true
 
 -- Set it to false if there are no need to format on save.
 ---@type boolean
-settings["format_on_save"] = true
+settings["format_on_save"] = false
+
+-- Set to cmp menu max width
+---@type number
+settings["cmp_max_width"] = 30
 
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
@@ -15,7 +19,7 @@ settings["format_notify"] = true
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
 ---@type boolean
-settings["diagnostics_virtual_text"] = true
+settings["diagnostics_virtual_text"] = false
 
 -- Set it to one of the values below if you want to change the visible severity level of lsp diagnostics.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
@@ -46,7 +50,7 @@ settings["palette_overwrite"] = {}
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
 ---@type string
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "onedark"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
@@ -87,8 +91,9 @@ settings["lsp_deps"] = {
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pylsp",
-	-- "gopls",
+	"pyright",
+	"jedi_language_server",
+	"gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here.

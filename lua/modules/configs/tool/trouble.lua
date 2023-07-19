@@ -25,14 +25,14 @@ return function()
 			open_split = { "<C-x>" }, -- open buffer in new split
 			open_vsplit = { "<C-v>" }, -- open buffer in new vsplit
 			open_tab = { "<C-t>" }, -- open buffer in new tab
-			jump_close = { "o" }, -- jump to the diagnostic and close the list
+			jump_close = { "O" }, -- jump to the diagnostic and close the list
 			toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
 			toggle_preview = "P", -- toggle auto_preview
 			hover = "K", -- opens a small popup with the full multiline message
 			preview = "p", -- preview the diagnostic location
 			close_folds = { "zM", "zm" }, -- close all folds
 			open_folds = { "zR", "zr" }, -- open all folds
-			toggle_fold = { "zA", "za" }, -- toggle fold of current file
+			toggle_fold = { "zA", "za", "o" }, -- toggle fold of current file
 			previous = "k", -- preview item
 			next = "j", -- next item
 		},

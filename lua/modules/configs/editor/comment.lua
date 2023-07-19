@@ -32,7 +32,7 @@ return function()
 		-- We defined mappings in `lua/keymap/init.lua` with description so disable them here.
 		mappings = {
 			-- Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
-			basic = false,
+			basic = true,
 			-- Extra mapping; `gco`, `gcO`, `gcA`
 			extra = false,
 		},
