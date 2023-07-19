@@ -5,18 +5,21 @@ return function()
 
 	local icons = { dap = require("modules.utils.icons").get("dap") }
 	local colors = require("modules.utils").get_palette()
-	local mapping = require("tool.dap.dap-keymap")
+	local mappings = require("tool.dap.dap-keymap")
 
 	-- Initialize debug hooks
+	local _debugging = false
 	local function debug_init_cb()
-		_G._debugging = true
-		mapping:load()
-		dapui.open()
+		if not _debugging then
+			_debugging = true
+			mappings.load()
+			dapui.open()
+		end
 	end
 	local function debug_terminate_cb()
 		if _debugging then
-			_G._debugging = false
-			mapping:restore()
+			_debugging = false
+			mappings.restore()
 			dapui.close()
 		end
 	end

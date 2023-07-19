@@ -16,14 +16,14 @@ local original_keymap = {
 	["v|K"] = map_cmd(":m '<-2<CR>gv=gv"),
 }
 
-function M:load()
+function M.load()
 	if not did_load_debug_mappings then
 		bind.nvim_load_mapping(debug_keymap)
 		did_load_debug_mappings = true
 	end
 end
 
-function M:restore()
+function M.restore()
 	if did_load_debug_mappings then
 		bind.nvim_load_mapping(original_keymap)
 		did_load_debug_mappings = false
