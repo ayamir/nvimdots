@@ -7,12 +7,37 @@ return function()
 	local colors = require("modules.utils").get_palette()
 
 	dap.listeners.after.event_initialized["dapui_config"] = function()
+		_G._dap_mainbuf_nr = vim.fn.bufnr()
+		vim.api.nvim_buf_set_keymap(
+			_dap_mainbuf_nr,
+			"n",
+			"K",
+			"<Cmd>lua require('dapui').eval()<CR>",
+			{ noremap = true, nowait = true }
+		)
+		vim.api.nvim_buf_set_keymap(
+			_dap_mainbuf_nr,
+			"v",
+			"K",
+			"<Cmd>lua require('dapui').eval()<CR>",
+			{ noremap = true, nowait = true }
+		)
 		dapui.open()
 	end
 	dap.listeners.after.event_terminated["dapui_config"] = function()
+		if _dap_mainbuf_nr then
+			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "n", "K")
+			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "v", "K")
+			_G._dap_mainbuf_nr = nil
+		end
 		dapui.close()
 	end
 	dap.listeners.after.event_exited["dapui_config"] = function()
+		if _dap_mainbuf_nr then
+			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "n", "K")
+			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "v", "K")
+			_G._dap_mainbuf_nr = nil
+		end
 		dapui.close()
 	end
 
