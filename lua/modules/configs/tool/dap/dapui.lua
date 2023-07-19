@@ -37,8 +37,8 @@ return function()
 			},
 			{
 				elements = {
-					{ id = "console", size = 0.45 },
-					{ id = "repl", size = 0.55 },
+					{ id = "console", size = 0.55 },
+					{ id = "repl", size = 0.45 },
 				},
 				position = "bottom",
 				size = 0.25,
@@ -67,6 +67,6 @@ return function()
 				close = { "q", "<Esc>" },
 			},
 		},
-		render = { indent = 1, max_value_lines = 120 },
+		render = { indent = 1, max_value_lines = 85 },
 	})
 end

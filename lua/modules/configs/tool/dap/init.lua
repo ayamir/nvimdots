@@ -10,11 +10,9 @@ return function()
 	-- Initialize debug hooks
 	local _debugging = false
 	local function debug_init_cb()
-		if not _debugging then
-			_debugging = true
-			mappings.load()
-			dapui.open()
-		end
+		_debugging = true
+		mappings.load()
+		dapui.open({ reset = true })
 	end
 	local function debug_terminate_cb()
 		if _debugging then
