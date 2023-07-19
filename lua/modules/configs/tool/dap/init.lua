@@ -5,33 +5,18 @@ return function()
 
 	local icons = { dap = require("modules.utils.icons").get("dap") }
 	local colors = require("modules.utils").get_palette()
+	local mapping = require("tool.dap.dap-keymap")
 
 	-- Initialize debug hooks
 	local function debug_init_cb()
-		_G._dap_mainbuf_nr = vim.fn.bufnr()
-		vim.api.nvim_buf_set_keymap(
-			_dap_mainbuf_nr,
-			"n",
-			"K",
-			"<Cmd>lua require('dapui').eval()<CR>",
-			{ noremap = true, nowait = true }
-		)
-		vim.api.nvim_buf_set_keymap(
-			_dap_mainbuf_nr,
-			"v",
-			"K",
-			"<Cmd>lua require('dapui').eval()<CR>",
-			{ noremap = true, nowait = true }
-		)
-
+		_G._debugging = true
+		mapping:load()
 		dapui.open()
 	end
 	local function debug_terminate_cb()
-		if _dap_mainbuf_nr then
-			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "n", "K")
-			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "v", "K")
-			_G._dap_mainbuf_nr = nil
-
+		if _debugging then
+			_G._debugging = false
+			mapping:restore()
 			dapui.close()
 		end
 	end
