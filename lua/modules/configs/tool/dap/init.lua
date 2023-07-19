@@ -6,7 +6,8 @@ return function()
 	local icons = { dap = require("modules.utils.icons").get("dap") }
 	local colors = require("modules.utils").get_palette()
 
-	dap.listeners.after.event_initialized["dapui_config"] = function()
+	-- Initialize debug hooks
+	local function debug_init_cb()
 		_G._dap_mainbuf_nr = vim.fn.bufnr()
 		vim.api.nvim_buf_set_keymap(
 			_dap_mainbuf_nr,
@@ -22,24 +23,22 @@ return function()
 			"<Cmd>lua require('dapui').eval()<CR>",
 			{ noremap = true, nowait = true }
 		)
+
 		dapui.open()
 	end
-	dap.listeners.after.event_terminated["dapui_config"] = function()
+	local function debug_terminate_cb()
 		if _dap_mainbuf_nr then
 			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "n", "K")
 			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "v", "K")
 			_G._dap_mainbuf_nr = nil
+
+			dapui.close()
 		end
-		dapui.close()
 	end
-	dap.listeners.after.event_exited["dapui_config"] = function()
-		if _dap_mainbuf_nr then
-			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "n", "K")
-			vim.api.nvim_buf_del_keymap(_dap_mainbuf_nr, "v", "K")
-			_G._dap_mainbuf_nr = nil
-		end
-		dapui.close()
-	end
+	dap.listeners.after.event_initialized["dapui_config"] = debug_init_cb
+	dap.listeners.before.event_terminated["dapui_config"] = debug_terminate_cb
+	dap.listeners.before.event_exited["dapui_config"] = debug_terminate_cb
+	dap.listeners.before.disconnect["dapui_config"] = debug_terminate_cb
 
 	-- We need to override nvim-dap's default highlight groups, AFTER requiring nvim-dap for catppuccin.
 	vim.api.nvim_set_hl(0, "DapStopped", { fg = colors.green })
