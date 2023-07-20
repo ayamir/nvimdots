@@ -15,7 +15,7 @@ return function()
 	}
 	dap.configurations.c = {
 		{
-			name = "Launch the debugger",
+			name = "Debug",
 			type = "codelldb",
 			request = "launch",
 			program = utils.input_exec_path(),
@@ -24,7 +24,7 @@ return function()
 			terminal = "integrated",
 		},
 		{
-			name = "Launch the debugger (with args)",
+			name = "Debug (with args)",
 			type = "codelldb",
 			request = "launch",
 			program = utils.input_exec_path(),

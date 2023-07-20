@@ -10,7 +10,7 @@ return function()
 			if errors < 0 then
 				return nil
 			end
-			return (check_lines and vim.fn.line("$") > 450) and require("rainbow-delimiters").strategy["global"]
+			return (check_lines and vim.fn.line("$") > 350) and require("rainbow-delimiters").strategy["global"]
 				or require("rainbow-delimiters").strategy["local"]
 		end
 	end
@@ -20,6 +20,8 @@ return function()
 			[""] = init_strategy(false),
 			c = init_strategy(true),
 			cpp = init_strategy(true),
+			vimdoc = init_strategy(true),
+			vim = init_strategy(true),
 		},
 		query = {
 			[""] = "rainbow-delimiters",
