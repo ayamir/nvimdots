@@ -42,6 +42,7 @@ return function()
 					return "python3"
 				end
 			end,
+			console = "integratedTerminal",
 		},
 	}
 
