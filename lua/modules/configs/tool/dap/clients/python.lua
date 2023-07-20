@@ -43,7 +43,6 @@ return function()
 					return "python3"
 				end
 			end,
-			console = "integratedTerminal",
 		},
 		{
 			-- NOTE: This setting is for people using venv
