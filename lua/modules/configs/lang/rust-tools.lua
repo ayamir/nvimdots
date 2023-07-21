@@ -1,5 +1,7 @@
-return function()
-	local opts = {
+local M = {}
+
+M["opts"] = function()
+    return {
 		tools = { -- rust-tools options
 
 			-- how to execute terminal commands
@@ -163,6 +165,10 @@ return function()
 			},
 		},
 	}
+end
 
+M["config"] = function(_, opts)
 	require("rust-tools").setup(opts)
 end
+
+return M

@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
 		git = require("modules.utils.icons").get("git", true),
@@ -7,7 +9,7 @@ return function()
 		kind = require("modules.utils.icons").get("kind", true),
 	}
 
-	require("crates").setup({
+	return {
 		smart_insert = true,
 		insert_closing_quote = true,
 		avoid_prerelease = true,
@@ -82,8 +84,14 @@ return function()
 				yanked = " " .. icons.diagnostics.Error_alt .. "yanked ",
 			},
 		},
-	})
+	}
+end
+
+M["config"] = function(_, opts)
+	require("crates").setup()
 
 	-- Set buffer-local keymaps
 	require("lang.crates-keymap")
 end
+
+return M

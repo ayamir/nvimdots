@@ -4,18 +4,21 @@ lang["fatih/vim-go"] = {
 	lazy = true,
 	ft = "go",
 	build = ":GoInstallBinaries",
-	config = require("lang.vim-go"),
+	opts = require("lang.vim-go").opts,
+	config = require("lang.vim-go").config,
 }
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
 	ft = "rust",
-	config = require("lang.rust-tools"),
+	opts = require("lang.rust-tools").opts,
+	config = require("lang.rust-tools").opts,
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
 lang["Saecki/crates.nvim"] = {
 	lazy = true,
 	event = "BufReadPost Cargo.toml",
-	config = require("lang.crates"),
+	opts = require("lang.crates").opts,
+	config = require("lang.crates").config,
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
 lang["iamcco/markdown-preview.nvim"] = {
