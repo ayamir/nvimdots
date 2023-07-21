@@ -1,12 +1,13 @@
-return function()
-	local notify = require("notify")
+local M = {}
+
+M["opts"] = function()
 	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics"),
 		ui = require("modules.utils.icons").get("ui"),
 	}
 
-	notify.setup({
+	return {
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
 		stages = "fade",
 		---@usage Function called when a new window is opened, use for changing win settings/config
@@ -36,7 +37,13 @@ return function()
 			DEBUG = icons.ui.Bug,
 			TRACE = icons.ui.Pencil,
 		},
-	})
+	}
+end
 
+M["config"] = function(_, opts)
+	local notify = require("notify")
+	notify.setup(opts)
 	vim.notify = notify
 end
+
+return M

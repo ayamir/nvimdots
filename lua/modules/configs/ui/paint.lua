@@ -1,5 +1,7 @@
-return function()
-	require("paint").setup({
+local M = {}
+
+M["opts"] = function()
+    return {
 		---type PaintHighlight[]
 		highlights = {
 			{
@@ -16,5 +18,11 @@ return function()
 				hl = "Constant",
 			},
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("paint").setup(opts)
+end
+
+return M

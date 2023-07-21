@@ -1,7 +1,9 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local blend_color = require("modules.utils").gen_neodim_blend_attr()
 
-	require("neodim").setup({
+	return {
 		alpha = 0.45,
 		blend_color = blend_color,
 		refresh_delay = 75, -- time in ms to wait after typing before refreshing diagnostics
@@ -12,5 +14,11 @@ return function()
 		},
 		priority = 80,
 		disable = { "big_file_disabled_ft" },
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("neodim").setup(opts)
+end
+
+return M

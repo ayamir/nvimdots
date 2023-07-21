@@ -3,77 +3,92 @@ local ui = {}
 ui["goolord/alpha-nvim"] = {
 	lazy = true,
 	event = "BufWinEnter",
-	config = require("ui.alpha"),
+	opts = require("ui.alpha").opts,
+	config = require("ui.alpha").config,
 }
 ui["akinsho/bufferline.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("ui.bufferline"),
+	opts = require("ui.bufferline").opts,
+	config = require("ui.bufferline").config,
 }
 ui["Jint-lzxy/nvim"] = {
 	lazy = false,
 	branch = "refactor/syntax-highlighting",
 	name = "catppuccin",
-	config = require("ui.catppuccin"),
+	opts = require("ui.catppuccin").opts,
+	config = require("ui.catppuccin").config,
 }
 ui["sainnhe/edge"] = {
 	lazy = true,
-	config = require("ui.edge"),
+	opts = require("ui.edge").opts,
+	config = require("ui.edge").config,
 }
 ui["j-hui/fidget.nvim"] = {
 	lazy = true,
 	branch = "legacy",
 	event = "LspAttach",
-	config = require("ui.fidget"),
+	opts = require("ui.fidget").opts,
+	config = require("ui.fidget").config,
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("ui.gitsigns"),
+	opts = require("ui.gitsigns").opts,
+	config = require("ui.gitsigns").config,
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("ui.indent-blankline"),
+	opts = require("ui.indent-blankline").opts,
+	config = require("ui.indent-blankline").config,
 }
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("ui.lualine"),
+	opts = require("ui.lualine").opts,
+	config = require("ui.lualine").config,
 }
 ui["zbirenbaum/neodim"] = {
 	lazy = true,
 	event = "LspAttach",
-	config = require("ui.neodim"),
+	opts = require("ui.neodim").opts,
+	config = require("ui.neodim").config,
 }
 ui["karb94/neoscroll.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("ui.neoscroll"),
+	opts = require("ui.neoscroll").opts,
+	config = require("ui.neoscroll").config,
 }
 ui["shaunsingh/nord.nvim"] = {
 	lazy = true,
-	config = require("ui.nord"),
+	opts = require("ui.nord").opts,
+	config = require("ui.nord").config,
 }
 ui["rcarriga/nvim-notify"] = {
 	lazy = true,
 	event = "VeryLazy",
-	config = require("ui.notify"),
+	opts = require("ui.notify").opts,
+	config = require("ui.notify").config,
 }
 ui["folke/paint.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("ui.paint"),
+	opts = require("ui.paint").opts,
+	config = require("ui.paint").config,
 }
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("ui.scrollview"),
+	opts = require("ui.scrollview").opts,
+	config = require("ui.scrollview").config,
 }
 ui["edluffy/specs.nvim"] = {
 	lazy = true,
 	event = "CursorMoved",
-	config = require("ui.specs"),
+	opts = require("ui.specs").opts,
+	config = require("ui.specs").config,
 }
 
 return ui

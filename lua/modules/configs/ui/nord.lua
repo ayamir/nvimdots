@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	vim.g.nord_contrast = true
 	vim.g.nord_borders = false
 	vim.g.nord_cursorline_transparent = true
@@ -6,3 +8,9 @@ return function()
 	vim.g.nord_enable_sidebar_background = true
 	vim.g.nord_italic = true
 end
+
+M["config"] = function()
+    return true
+end
+
+return M

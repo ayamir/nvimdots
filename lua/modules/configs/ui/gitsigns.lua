@@ -1,6 +1,8 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local mapping = require("keymap.ui")
-	require("gitsigns").setup({
+	return {
 		signs = {
 			add = {
 				hl = "GitSignsAdd",
@@ -42,5 +44,11 @@ return function()
 		status_formatter = nil, -- Use default
 		word_diff = false,
 		diff_opts = { internal = true },
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("gitsigns").setup(opts)
+end
+
+return M

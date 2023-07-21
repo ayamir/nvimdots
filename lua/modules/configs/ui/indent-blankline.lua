@@ -1,5 +1,7 @@
-return function()
-	require("indent_blankline").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		char = "│",
 		context_char = "┃",
 		show_first_indent_level = true,
@@ -45,5 +47,11 @@ return function()
 			"while",
 		},
 		space_char_blankline = " ",
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("indent_blankline").setup(opts)
+end
+
+return M

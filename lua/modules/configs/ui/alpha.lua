@@ -1,5 +1,6 @@
-return function()
-	local alpha = require("alpha")
+local M = {}
+
+M["opts"] = function()
 	local dashboard = require("alpha.themes.dashboard")
 	require("modules.utils").gen_alpha_hl()
 
@@ -154,8 +155,6 @@ return function()
 		dashboard.section.footer,
 	}
 
-	alpha.setup(dashboard.opts)
-
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "LazyVimStarted",
 		callback = function()
@@ -163,4 +162,13 @@ return function()
 			pcall(vim.cmd.AlphaRedraw)
 		end,
 	})
+
+	return dashboard.opts
 end
+
+M["config"] = function(_, opts)
+	local alpha = require("alpha")
+	alpha.setup(opts)
+end
+
+return M

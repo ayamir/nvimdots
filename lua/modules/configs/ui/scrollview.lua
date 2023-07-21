@@ -1,7 +1,9 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = { diagnostics = require("modules.utils.icons").get("diagnostics", true) }
 
-	require("scrollview").setup({
+	return {
 		scrollview_mode = "virtual",
 		excluded_filetypes = { "NvimTree", "terminal", "nofile" },
 		winblend = 0,
@@ -10,5 +12,11 @@ return function()
 		diagnostics_warn_symbol = icons.diagnostics.Warning,
 		diagnostics_info_symbol = icons.diagnostics.Information,
 		diagnostics_hint_symbol = icons.diagnostics.Hint,
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("scrollview").setup(opts)
+end
+
+return M

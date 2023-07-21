@@ -1,5 +1,7 @@
-return function()
-	require("neoscroll").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		-- All these keys will be mapped to their corresponding default scrolling animation
 		mappings = {
 			"<C-u>",
@@ -20,5 +22,11 @@ return function()
 		easing_function = nil, -- Default easing function
 		pre_hook = nil, -- Function to run before the scrolling animation starts
 		post_hook = nil, -- Function to run after the scrolling animation ends
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("neoscroll").setup(opts)
+end
+
+return M

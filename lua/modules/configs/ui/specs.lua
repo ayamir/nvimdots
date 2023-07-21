@@ -1,5 +1,7 @@
-return function()
-	require("specs").setup({
+local M = {}
+
+M["opts"] = function()
+    return {
 		show_jumps = true,
 		min_jump = 10,
 		popup = {
@@ -13,5 +15,11 @@ return function()
 		},
 		ignore_filetypes = {},
 		ignore_buftypes = { nofile = true },
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("specs").setup(opts)
+end
+
+return M

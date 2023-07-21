@@ -1,4 +1,5 @@
-return function()
+local M = {}
+M["opts"] = function()
 	local icons = { ui = require("modules.utils.icons").get("ui") }
 
 	local opts = {
@@ -67,5 +68,11 @@ return function()
 		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)
 	end
 
+    return opts
+end
+
+M["config"] = function(_, opts)
 	require("bufferline").setup(opts)
 end
+
+return M

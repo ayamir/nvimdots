@@ -1,8 +1,10 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local transparent_background = require("core.settings").transparent_background
 	local clear = {}
 
-	require("catppuccin").setup({
+	return {
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
 		dim_inactive = {
@@ -158,5 +160,11 @@ return function()
 				}
 			end,
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+ 	require("catppuccin").setup(opts)
+end
+
+return M

@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
@@ -254,7 +256,7 @@ return function()
 		},
 	}
 
-	require("lualine").setup({
+	return {
 		options = {
 			icons_enabled = true,
 			theme = custom_theme(),
@@ -356,5 +358,11 @@ return function()
 			outline,
 			diffview,
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("lualine").setup(opts)
+end
+
+return M
