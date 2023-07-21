@@ -1,4 +1,6 @@
 local bind = require("keymap.bind")
+local merge = require("core.merge")
+local user_keymap = require("user.keymap.editor")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
@@ -89,4 +91,5 @@ local plug_map = {
 	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
 }
 
+plug_map = merge(plug_map, user_keymap)
 bind.nvim_load_mapping(plug_map)

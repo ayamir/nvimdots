@@ -1,4 +1,6 @@
 local bind = require("keymap.bind")
+local merge = require("core.merge")
+local user_keymap = require("user.keymap.ui")
 local map_cr = bind.map_cr
 -- local map_cu = bind.map_cu
 -- local map_cmd = bind.map_cmd
@@ -23,6 +25,7 @@ local plug_map = {
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
 }
 
+plug_map = merge(plug_map, user_keymap.plug_map)
 bind.nvim_load_mapping(plug_map)
 
 local mapping = {}
@@ -99,6 +102,7 @@ function mapping.gitsigns(buf)
 			actions.text_object()
 		end):with_buffer(buf),
 	}
+	map = merge(map, user_keymap.gitsigns)
 	bind.nvim_load_mapping(map)
 end
 

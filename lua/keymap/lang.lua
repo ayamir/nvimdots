@@ -1,4 +1,6 @@
 local bind = require("keymap.bind")
+local merge = require("core.merge")
+local user_keymap = require("user.keymap.lang")
 local map_cr = bind.map_cr
 -- local map_cu = bind.map_cu
 -- local map_cmd = bind.map_cmd

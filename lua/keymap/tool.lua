@@ -1,4 +1,6 @@
 local bind = require("keymap.bind")
+local merge = require("core.merge")
+local user_keymap = require("user.keymap.tool")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
@@ -200,4 +202,5 @@ local plug_map = {
 		:with_desc("debug: Open REPL"),
 }
 
+plug_map = merge(plug_map, user_keymap)
 bind.nvim_load_mapping(plug_map)
