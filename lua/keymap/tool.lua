@@ -5,6 +5,19 @@ local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 require("keymap.helpers")
 
+-- handle Vista, if vista open then focus, if no vista then toggle vista
+local function handle_vista()
+	if require("vista-nvim.view").is_win_open() then
+		if vim.bo.filetype == "VistaNvim" then
+			vim.cmd("VistaNvimToggle")
+		else
+			vim.cmd("VistaNvimFocus")
+		end
+	else
+		vim.cmd("VistaNvimToggle")
+	end
+end
+
 local plug_map = {
 	-- Plugin: vim-fugitive
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
@@ -15,7 +28,7 @@ local plug_map = {
 	["n|<leader>q"] = map_cmd("<Cmd>Neotree<cr>"):with_noremap():with_silent():with_desc("filetree: Toggle"),
 
 	-- Plugin: sniprun
-	["n|<leader>;"] = map_cr("VistaNvimToggle"):with_noremap():with_silent():with_desc("tool: Run code by range"),
+	["n|<leader>;"] = map_callback(handle_vista):with_noremap():with_silent():with_desc("tool: Run code by range"),
 
 	-- Plugin: sniprun
 	["v|<leader>2"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
@@ -35,12 +48,28 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("terminal: Toggle float"),
+	["n|<leader>ct"] = map_cr([[execute v:count . "ToggleTerm direction=tab"]])
+		:with_noremap()
+		:with_silent()
+		:with_desc("terminal: Toggle tab"),
 	["n|<leader>cg"] = map_callback(function()
 			_toggle_lazygit()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("git: Toggle lazygit"),
+	["n|<leader>cr"] = map_cr("RunCode")
+		:with_noremap()
+		:with_silent()
+		:with_desc("git: Runcode"),
+	["n|<leader>cs"] = map_cr([[ToggleTermSendCurrentLine]])
+		:with_noremap()
+		:with_silent()
+		:with_desc("terminal: Send current line"),
+	["x|<leader>cs"] = map_cr([[ToggleTermSendVisualSelection]])
+		:with_noremap()
+		:with_silent()
+		:with_desc("terminal: Send visual selection"),
 
 	-- Plugin: trouble
 	["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
@@ -117,6 +146,7 @@ local plug_map = {
 	["n|<leader>sb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 	["n|<leader>ss"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 	["n|<leader>sp"] = map_cu("Telescope persisted"):with_noremap():with_silent():with_desc("find: Session"),
+	["n|<leader>sn"] = map_cu("Telescope neoclip"):with_noremap():with_silent():with_desc("find: Neoclip"),
 
 	-- Plugin: dap
 	["n|<leader>dc"] = map_callback(function()

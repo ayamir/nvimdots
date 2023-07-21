@@ -163,6 +163,7 @@ M.on_attach = function(client, bufnr)
 	elseif client.name == "sourcery" then
 		client.server_capabilities.hoverProvider = false
 	end
+    client.server_capabilities.semanticTokensProvider = nil
 end
 
 return M

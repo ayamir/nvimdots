@@ -73,12 +73,6 @@ tool["folke/which-key.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
--- tool["gelguy/wilder.nvim"] = {
--- 	lazy = true,
--- 	event = "CmdlineEnter",
--- 	config = require("tool.wilder"),
--- 	dependencies = { "romgrk/fzy-lua-native" },
--- }
 tool["yucao16/registers.nvim"] = {
 	lazy = false,
 	config = function()
@@ -123,7 +117,7 @@ tool["yucao16/vista.nvim"] = {
 }
 tool["JellyApple102/flote.nvim"] = {
 	lazy = true,
-	cmd = { "Float" },
+	cmd = { "Flote" },
 	config = require("tool.flote"),
 }
 tool["danymat/neogen"] = {
@@ -149,6 +143,12 @@ tool["stevearc/oil.nvim"] = {
 	lazy = true,
 	cmd = "Oil",
 	config = require("tool.oil"),
+}
+tool["gelguy/wilder.nvim"] = {
+	lazy = true,
+	event = "CmdlineEnter",
+	config = require("tool.wilder"),
+	dependencies = "romgrk/fzy-lua-native",
 }
 
 ----------------------------------------------------------------------

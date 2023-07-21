@@ -5,6 +5,10 @@ local map_cmd = bind.map_cmd
 
 local core_map = {
 	-- Suckless
+	["n|<leader>9"] = map_cr([[execute 'source '.bufname('%')]])
+		:with_noremap()
+		:with_silent()
+		:with_desc("source current buffer"),
 	["n|<leader>w"] = map_cmd("<C-w>"):with_noremap():with_silent():with_desc("toggle wincmd"),
 	["n|<leader>f"] = map_cr("Format"):with_noremap():with_silent():with_desc("toggle Format"),
 	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),

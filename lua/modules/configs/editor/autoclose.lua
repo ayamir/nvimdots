@@ -13,6 +13,12 @@ return function()
 			['"'] = { escape = true, close = true, pair = '""' },
 			["'"] = { escape = true, close = true, pair = "''" },
 			["`"] = { escape = true, close = true, pair = "``" },
+			["$"] = {
+				escape = true,
+				close = true,
+				pair = "$$",
+				disabled_filetypes = { "python", "lua", "c", "cpp", "rust" },
+			},
 		},
 		options = {
 			disabled_filetypes = { "big_file_disabled_ft" },

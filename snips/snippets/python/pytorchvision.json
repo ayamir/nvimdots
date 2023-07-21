@@ -1,0 +1,57 @@
+{
+    "Torchvision Datasets 1": {
+        "prefix": "pytorch:torchvision:load_dataset_1",
+        "description": "Load (download) specified dataset",
+        "body":[
+            "dataset = torchvision.datasets.${1|MNIST,FashionMNIST,KMNIST,CIFAR10,CIFAR100|}(${2:'path/to/root/'}, train=${3|True,False|}, download=${4|False,True|})"
+        ]
+    },
+    "Torchvision Datasets 2": {
+        "prefix": "pytorch:torchvision:load_dataset_2",
+        "description": "Load (download) dataset",
+        "body":[
+            "dataset = torchvision.datasets.${1|ImageNet,STL10,SVHN|}(root=${2:'path/to/root/'}, split=${3:'train'}, download=${4|False,True|})"
+        ]
+    },
+    "Torchvision Dataset 3": {
+        "prefix": "pytorch:torchvision:load_dataset_3",
+        "description": "Load dataset (for Coco the Coco Api has to be installed)",
+        "body":[
+            "dataset = torchvision.datasets.${1|CocoCaptions,CocoDetection,Flickr,Flickr30k|}(root=${2:'path/to/root/'}, annFile=${3:'path/to/annotation/file/'})"
+        ]
+    },
+    "Torchvision ImageFolder": {
+        "prefix": "pytorch:torchvision:image_folder",
+        "description": "Generic image dataloader from folder (requires root/class_x/image.png structure)",
+        "body":[
+            "dataset = torchvision.datasets.ImageFolder(${1:'path/to/root'})"
+        ]
+    },
+    "Torchvision DataFolder": {
+        "prefix": "pytorch:torchvision:dataset_folder",
+        "description": "Generic dataloader (requires root/class_x/xxx.ext structure)",
+        "body":[
+            "dataset = torchvision.datasets.DataFolder(${1:'path/to/root'}, ${2:loader})"
+        ]
+    },
+    "Torchvision Model": {
+        "prefix": "pytorch:torchvision:load_model",
+        "description": "Load specified model",
+        "body":[
+            "model = torchvision.models.${1|alexnet,vgg11,vgg11_bn,vgg13,vgg13_bn,vgg16,vgg16_bn,vgg19,vgg19_bn,resnet18,resnet34,resnet50,resnet101,resnet152,squeezenet1_0,squeezenet1_1,densenet121,densenet169,densenet161,densenet201,inception_v3,googlenet,shufflenet_v2_x0_5,shufflenet_v2_x1_0,shufflenet_v2_x1_5,shufflenet_v2_x2_0,mobilenet_v2,resnext50_32x4d,esnext101_32x8d|}(pretrained=${2|False,True|}, progress=${3|True,False|})"
+        ]
+    },
+    "Torchvision Segmentation Model": {
+        "prefix": "pytorch:torchvision:load_segmentation_model",
+        "description": "Load specified segmentation model",
+        "body":[
+            "model = torchvision.models.segmentation.${1|fcn_resnet50,fcn_resnet101,deeplabv3_resnet50,deeplabv3_resnet101|}(pretrained=${2|False,True|}, progress=${3|True,False|})"
+        ]
+    },
+    "Torchvision Detection Model": {
+        "prefix": "pytorch:torchvision:load_detection_model",
+        "description": "Load specified detection model",
+        "body":[
+            "model = torchvision.models.detection.${1|fasterrcnn_resnet50_fpn,maskrcnn_resnet50_fpn,keypointrcnn_resnet50_fpn|}(pretrained=${2|False,True|}, progress=${3|True,False|}, pretrained_backbone=${4|True,False|})"
+        ]
+    }

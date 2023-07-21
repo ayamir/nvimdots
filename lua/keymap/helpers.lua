@@ -27,3 +27,20 @@ _G._toggle_lazygit = function()
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
 	end
 end
+
+local _runcode = nil
+_G._toggle_runcode = function()
+	if vim.fn.executable("python") == 1 then
+		if not _lazygit then
+			_runcode = require("toggleterm.terminal").Terminal:new({
+				cmd = "python " .. vim.fn.expand("%:p"),
+				direction = "horizontal",
+				close_on_exit = false,
+				hidden = false,
+			})
+		end
+		_runcode:toggle()
+	else
+		vim.notify("Command [python] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
+	end
+end

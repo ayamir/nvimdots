@@ -7,6 +7,7 @@ local et = bind.escape_termcode
 
 local plug_map = {
 	-- Plugin persisted.nvim
+	["n|<leader>sl"] = map_cu("SessionLoadLast"):with_noremap():with_silent():with_desc("session: Save"),
 	["n|<leader>sS"] = map_cu("SessionSave"):with_noremap():with_silent():with_desc("session: Save"),
 	["n|<leader>sL"] = map_cu("SessionLoad"):with_noremap():with_silent():with_desc("session: Load current"),
 	["n|<leader>sD"] = map_cu("SessionDelete"):with_noremap():with_silent():with_desc("session: Delete"),
@@ -17,8 +18,8 @@ local plug_map = {
 		:with_desc("Nvim-window: Pickup a window"),
 
 	-- Plugin: diffview
-	["n|<leader>D"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
-	["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
+	["n|<leader>Do"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
+	["n|<leader>Dc"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Show diff"),
 
 	-- Plugin: vim-easy-align
 	["nx|gea"] = map_cr("EasyAlign"):with_desc("edit: Align with delimiter"),

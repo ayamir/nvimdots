@@ -24,6 +24,14 @@ return function()
 					return vim.api.nvim_win_get_config(win).relative == ""
 				end,
 			},
+			{
+				ft = "code_runner_term",
+				size = { height = 0.2 },
+				-- exclude floating windows
+				filter = function(buf, win)
+					return vim.api.nvim_win_get_config(win).relative == ""
+				end,
+			},
 			"Trouble",
 			{ ft = "qf", title = "QuickFix" },
 			{ ft = "fugitive", title = "Git" },

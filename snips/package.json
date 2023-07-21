@@ -167,6 +167,14 @@
       },
       {
         "language": "python",
+        "path": "./snippets/python/pytorch.json"
+      },
+      {
+        "language": "python",
+        "path": "./snippets/python/pytorchvision.json"
+      },
+      {
+        "language": "python",
         "path": "./snippets/python/comprehension.json"
       },
       {

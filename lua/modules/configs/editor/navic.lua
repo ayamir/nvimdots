@@ -25,7 +25,9 @@ local exclude_filetype = {
 
 local excludes = function()
 	if vim.tbl_contains(exclude_filetype, vim.bo.filetype) or (vim.b.navic_client_id == nil) then
-		-- vim.opt_local.winbar = nil
+		return true
+	end
+	if vim.api.nvim_win_get_config(0).relative ~= "" then
 		return true
 	end
 	return false
@@ -42,7 +44,6 @@ local clean_filepath = function(filepath)
 	else
 		file_path_clean = file_path_clean:sub(1, path_width)
 	end
-	-- file_path_clean = filepath:gsub("/", " 〉")
 	return file_path_clean
 end
 
@@ -116,6 +117,7 @@ M.enable = function()
 		-- depth_limit_indicator = "..",
 	})
 	-- This autocmd is used to show winbar even for those buffer without lsp attached
+	-- TODO: Better handler popup
 	vim.api.nvim_create_autocmd({ "DirChanged", "BufWinEnter", "BufFilePost" }, {
 		callback = function()
 			if string.sub(vim.api.nvim_buf_get_name(0), 1, 1) == "/" and vim.wo.winbar == "" then
@@ -129,7 +131,6 @@ M.enable = function()
 	})
 	vim.api.nvim_create_autocmd({ "WinEnter" }, {
 		callback = function()
-			-- otherwise, these is a ">" above separator
 			if (vim.bo.filetype == "VistaNvim") or (vim.bo.filetype == "NvimSeparator") then
 				return
 			end

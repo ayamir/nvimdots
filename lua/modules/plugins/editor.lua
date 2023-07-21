@@ -1,10 +1,5 @@
 local editor = {}
 
--- editor["rainbowhxch/accelerated-jk.nvim"] = {
--- 	lazy = true,
--- 	event = "VeryLazy",
--- 	config = require("editor.accelerated-jk"),
--- }
 editor["yucao16/persisted.nvim"] = {
 	lazy = true,
 	cmd = {
@@ -38,7 +33,7 @@ editor["LunarVim/bigfile.nvim"] = {
 }
 editor["famiu/bufdelete.nvim"] = {
 	lazy = true,
-	event = "BufReadPost",
+	event = "BufReadPre",
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
@@ -47,8 +42,8 @@ editor["numToStr/Comment.nvim"] = {
 }
 editor["folke/todo-comments.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.comment"),
+	event = { "CursorHold", "CursorHoldI", "VeryLazy" },
+	config = true,
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
 	},
@@ -114,7 +109,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 			vim.api.nvim_command("TSUpdate")
 		end
 	end,
-	event = "BufReadPre",
+	event = "BufReadPost",
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },

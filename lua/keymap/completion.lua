@@ -9,6 +9,15 @@ local plug_map = {
 bind.nvim_load_mapping(plug_map)
 
 local mapping = {}
+local hide_diagnostic = function()
+	if vim.g.diagnostics_active then
+		vim.g.diagnostics_active = false
+		vim.diagnostic.disable()
+	else
+		vim.g.diagnostics_active = true
+		vim.diagnostic.enable()
+	end
+end
 
 function mapping.lsp(buf)
 	local map = {
@@ -31,6 +40,9 @@ function mapping.lsp(buf)
 		["n|<leader>gp"] = map_cr("Lspsaga peek_definition"):with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|<leader>gi"] = map_cr("Lspsaga incoming_calls"):with_buffer(buf):with_desc("lsp: Show incoming calls"),
 		["n|<leader>go"] = map_cr("Lspsaga outgoing_calls"):with_buffer(buf):with_desc("lsp: Show outgoing calls"),
+		["n|<leader>hd"] = map_callback(hide_diagnostic)
+			:with_buffer(buf)
+			:with_desc("lsp: Toggle hide diagnostic"),
 	}
 	bind.nvim_load_mapping(map)
 end

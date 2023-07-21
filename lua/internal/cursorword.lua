@@ -65,7 +65,7 @@ end
 
 local function cursor_moved()
 	if vim.api.nvim_get_mode().mode == "n" then
-		matchadd()
+        pcall(matchadd, nil)
 	end
 end
 

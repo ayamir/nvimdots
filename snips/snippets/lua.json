@@ -1,0 +1,116 @@
+{
+  "_G": {
+    "body": "_G(${0:...})",
+    "description": "5.1,5.2,5.3\n\n_G",
+    "prefix": "_G",
+    "scope": "source.lua"
+  },
+  "assert": {
+    "body": "assert(${1:v}${2:[, message]})",
+    "description": "5.1,5.2,5.3\n\nassert()",
+    "prefix": "assert",
+    "scope": "source.lua"
+  },
+  "collectgarbage": {
+    "body": "collectgarbage(${1:[opt]}${2:[, arg]})",
+    "description": "5.1,5.2,5.3\n\ncollectgarbage()",
+    "prefix": "collectgarbage",
+    "scope": "source.lua"
+  },
+  "coroutine.create": {
+    "body": "coroutine.create( ${1:function} )",
+    "description": "5.1,5.2,5.3\n\ncoroutine.create",
+    "prefix": "coroutine.create",
+    "scope": "source.lua"
+  },
+  "coroutine.isyieldable": {
+    "body": "coroutine.isyieldable( )",
+    "description": "5.3\n\ncoroutine.isyieldable",
+    "prefix": "coroutine.isyieldable",
+    "scope": "source.lua"
+  },
+  "coroutine.resume": {
+    "body": "coroutine.resume( ${1:co}${2:[, val1, ···]} )",
+    "description": "5.1,5.2,5.3\n\ncoroutine.resume",
+    "prefix": "coroutine.resume",
+    "scope": "source.lua"
+  },
+  "coroutine.running": {
+    "body": "coroutine.running( )",
+    "description": "5.1,5.2,5.3\n\ncoroutine.running",
+    "prefix": "coroutine.running",
+    "scope": "source.lua"
+  },
+  "coroutine.status": {
+    "body": "coroutine.status( ${1:co} )",
+    "description": "5.1,5.2,5.3\n\ncoroutine.status",
+    "prefix": "coroutine.status",
+    "scope": "source.lua"
+  },
+  "coroutine.wrap": {
+    "body": "coroutine.wrap( ${1:function} )",
+    "description": "5.1,5.2,5.3\n\ncoroutine.wrap",
+    "prefix": "coroutine.wrap",
+    "scope": "source.lua"
+  },
+  "coroutine.yield": {
+    "body": "coroutine.yield( ${1:...} )",
+    "description": "5.1,5.2,5.3\n\ncoroutine.yield",
+    "prefix": "coroutine.yield",
+    "scope": "source.lua"
+  },
+  "for": {
+    "body": "for ${1:i}=${2:1},${3:10} do\n\t${0:print(i)}\nend",
+    "description": "for i=1,10",
+    "prefix": "for",
+    "scope": "source.lua"
+  },
+  "fori": {
+    "body": "for ${1:i},${2:v} in ipairs(${3:table_name}) do\n\t${0:print(i,v)}\nend",
+    "description": "for i,v in ipairs()",
+    "prefix": "fori",
+    "scope": "source.lua"
+  },
+  "forp": {
+    "body": "for ${1:k},${2:v} in pairs(${3:table_name}) do\n\t${0:print(k,v)}\nend",
+    "description": "for k,v in pairs()",
+    "prefix": "forp",
+    "scope": "source.lua"
+  },
+  "fun": {
+    "body": "function ${1:function_name}( ${2:...} )\n\t${0:-- body}\nend",
+    "description": "function",
+    "prefix": "fun",
+    "scope": "source.lua"
+  },
+  "function": {
+    "body": "function ${1:function_name}( ${2:...} )\n\t${0:-- body}\nend",
+    "description": "function",
+    "prefix": "function",
+    "scope": "source.lua"
+  },
+  "getfenv": {
+    "body": "getfenv(${0:...})",
+    "description": "5.1\n\ngetfenv ([f])",
+    "prefix": "getfenv",
+    "scope": "source.lua"
+  },
+  "getmetatable": {
+    "body": "getmetatable(${1:object})",
+    "description": "5.1,5.2,5.3\n\ngetmetatable (object)",
+    "prefix": "getmetatable",
+    "scope": "source.lua"
+  },
+  "if": {
+    "body": "if ${1:condition} then\n\t${0:-- body}\nend",
+    "description": "if",
+    "prefix": "if",
+    "scope": "source.lua"
+  },
+  "ifel": {
+    "body": "if ${1:condition} then\n\t${2:-- body}\nelse\n\t${0:-- body}\nend",
+    "description": "ifel",
+    "prefix": "ifel",
+    "scope": "source.lua"
+  }
+}

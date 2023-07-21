@@ -44,4 +44,6 @@ return function()
 		-- 	"while",
 		-- },
 	})
+	vim.g["indentLine_char"] = "▏"
+	vim.g["indentLine_defaultGroup"] = "SpecialKey"
 end

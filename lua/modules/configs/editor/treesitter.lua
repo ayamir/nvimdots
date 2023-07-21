@@ -138,7 +138,7 @@ return vim.schedule_wrap(function()
 		},
 
 		rainbow = {
-			enable = true,
+			enable = false,
 			disable = function(_, bufnr)
 				local disable_type = {}
 				local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
