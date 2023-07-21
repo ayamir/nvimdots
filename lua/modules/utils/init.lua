@@ -185,7 +185,7 @@ function M.gen_lspkind_hl()
 		Package = colors.blue,
 		Property = colors.teal,
 		Struct = colors.yellow,
-		TypeParameter = colors.maroon,
+		TypeParameter = colors.blue,
 		Variable = colors.peach,
 		Array = colors.peach,
 		Boolean = colors.peach,
