@@ -1,5 +1,7 @@
-return function()
-	require("sniprun").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		selected_interpreters = {}, -- " use those instead of the default for the current filetype
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters
@@ -23,5 +25,11 @@ return function()
 		-- " to workaround sniprun not being able to display anything
 		borders = "single", -- " display borders around floating windows
 		-- " possible values are 'none', 'single', 'double', or 'shadow'
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("sniprun").setup(opts)
+end
+
+return M

@@ -5,12 +5,14 @@ tool["tpope/vim-fugitive"] = {
 	cmd = { "Git", "G" },
 }
 -- only for fcitx5 user who uses non-English language during coding
--- tool["pysan3/fcitx5.nvim"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	cond = vim.fn.executable("fcitx5-remote") == 1,
--- 	config = require("tool.fcitx5"),
--- }
+tool["pysan3/fcitx5.nvim"] = {
+	enabled = false,
+	lazy = true,
+	event = "BufReadPost",
+	cond = vim.fn.executable("fcitx5-remote") == 1,
+	opts = require("tool.fcitx5").opts,
+	config = require("tool.fcitx5").opts,
+}
 tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = {
@@ -20,12 +22,14 @@ tool["nvim-tree/nvim-tree.lua"] = {
 		"NvimTreeFindFileToggle",
 		"NvimTreeRefresh",
 	},
-	config = require("tool.nvim-tree"),
+	opts = require("tool.nvim-tree").opts,
+	config = require("tool.nvim-tree").config,
 }
 tool["ibhagwan/smartyank.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
-	config = require("tool.smartyank"),
+	opts = require("tool.smartyank").opts,
+	config = require("tool.smartyank").config,
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
@@ -33,7 +37,8 @@ tool["michaelb/sniprun"] = {
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
 	cmd = "SnipRun",
-	config = require("tool.sniprun"),
+	opts = require("tool.sniprun").opts,
+	config = require("tool.sniprun").config,
 }
 tool["akinsho/toggleterm.nvim"] = {
 	lazy = true,
@@ -45,22 +50,26 @@ tool["akinsho/toggleterm.nvim"] = {
 		"ToggleTermSendCurrentLine",
 		"ToggleTermSendVisualSelection",
 	},
-	config = require("tool.toggleterm"),
+	opts = require("tool.toggleterm").opts,
+	config = require("tool.toggleterm").config,
 }
 tool["folke/trouble.nvim"] = {
 	lazy = true,
 	cmd = { "Trouble", "TroubleToggle", "TroubleRefresh" },
-	config = require("tool.trouble"),
+	opts = require("tool.trouble").opts,
+	config = require("tool.trouble").opts,
 }
 tool["folke/which-key.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("tool.which-key"),
+	opts = require("tool.which-key").opts,
+	config = require("tool.which-key").config,
 }
 tool["gelguy/wilder.nvim"] = {
 	lazy = true,
 	event = "CmdlineEnter",
-	config = require("tool.wilder"),
+	opts = require("tool.wilder").opts,
+	config = require("tool.wilder").config,
 	dependencies = { "romgrk/fzy-lua-native" },
 }
 
@@ -70,7 +79,8 @@ tool["gelguy/wilder.nvim"] = {
 tool["nvim-telescope/telescope.nvim"] = {
 	lazy = true,
 	cmd = "Telescope",
-	config = require("tool.telescope"),
+	opts = require("tool.telescope").opts,
+	config = require("tool.telescope").config,
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
@@ -78,7 +88,8 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{
 			"ahmedkhalf/project.nvim",
 			event = { "CursorHold", "CursorHoldI" },
-			config = require("tool.project"),
+			opts = require("tool.project").opts,
+			config = require("tool.project").config,
 		},
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{ "nvim-telescope/telescope-frecency.nvim", dependencies = {
@@ -105,11 +116,12 @@ tool["mfussenegger/nvim-dap"] = {
 		"DapStepOut",
 		"DapTerminate",
 	},
-	config = require("tool.dap"),
+	config = require("tool.dap").config,
 	dependencies = {
 		{
 			"rcarriga/nvim-dap-ui",
-			config = require("tool.dap.dapui"),
+			opts = require("tool.dap.dapui").opts,
+			config = require("tool.dap.dapui").config,
 		},
 		{ "jay-babu/mason-nvim-dap.nvim" },
 	},

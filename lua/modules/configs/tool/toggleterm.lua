@@ -1,5 +1,7 @@
-return function()
-	require("toggleterm").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
 			if term.direction == "horizontal" then
@@ -36,5 +38,11 @@ return function()
 		direction = "horizontal",
 		close_on_exit = true, -- close the terminal window when the process exits
 		shell = vim.o.shell, -- change the default shell
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("toggleterm").setup(opts)
+end
+
+return M

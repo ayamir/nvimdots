@@ -1,5 +1,7 @@
-return function()
-	require("project_nvim").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		manual_mode = false,
 		detection_methods = { "lsp", "pattern" },
 		patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
@@ -9,5 +11,11 @@ return function()
 		silent_chdir = true,
 		scope_chdir = "global",
 		datapath = vim.fn.stdpath("data"),
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("project_nvim").setup(opts)
+end
+
+return M

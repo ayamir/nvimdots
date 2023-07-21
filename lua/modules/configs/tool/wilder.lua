@@ -1,29 +1,8 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local wilder = require("wilder")
 	local icons = { ui = require("modules.utils.icons").get("ui") }
-
-	wilder.setup({ modes = { ":", "/", "?" } })
-	wilder.set_option("use_python_remote_plugin", 0)
-	wilder.set_option("pipeline", {
-		wilder.branch(
-			wilder.cmdline_pipeline({ use_python = 0, fuzzy = 1, fuzzy_filter = wilder.lua_fzy_filter() }),
-			wilder.vim_search_pipeline(),
-			{
-				wilder.check(function(_, x)
-					return x == ""
-				end),
-				wilder.history(),
-				wilder.result({
-					draw = {
-						function(_, x)
-							return icons.ui.Calendar .. " " .. x
-						end,
-					},
-				}),
-			}
-		),
-	})
-
 	local popupmenu_renderer = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		border = "rounded",
 		highlights = {
@@ -53,12 +32,44 @@ return function()
 		left = { " ", wilder.wildmenu_spinner(), " " },
 		right = { " ", wilder.wildmenu_index() },
 	})
-	wilder.set_option(
-		"renderer",
-		wilder.renderer_mux({
-			[":"] = popupmenu_renderer,
-			["/"] = wildmenu_renderer,
-			substitute = wildmenu_renderer,
-		})
-	)
+
+	return {
+		setup = { modes = { ":", "/", "?" } },
+		set_option = {
+			use_python_remove_plugin = 0,
+			pipeline = {
+				wilder.branch(
+					wilder.cmdline_pipeline({ use_python = 0, fuzzy = 1, fuzzy_filter = wilder.lua_fzy_filter() }),
+					wilder.vim_search_pipeline(),
+					{
+						wilder.check(function(_, x)
+							return x == ""
+						end),
+						wilder.history(),
+						wilder.result({
+							draw = {
+								function(_, x)
+									return icons.ui.Calendar .. " " .. x
+								end,
+							},
+						}),
+					}
+				),
+			},
+			render = wilder.renderer_mux({
+				[":"] = popupmenu_renderer,
+				["/"] = wildmenu_renderer,
+				substitute = wildmenu_renderer,
+			})
+		}
+	}
 end
+
+M["config"] = function(_, opts)
+	local wilder = require("wilder")
+
+	wilder.setup(opts["setup"])
+	wilder.setup(opts["set_option"])
+end
+
+return M

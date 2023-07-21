@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics"),
 		documents = require("modules.utils.icons").get("documents"),
@@ -6,7 +8,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui"),
 	}
 
-	require("nvim-tree").setup({
+	return {
 		auto_reload_on_write = true,
 		create_in_closed_folder = false,
 		disable_netrw = false,
@@ -174,5 +176,11 @@ return function()
 				watcher = false,
 			},
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("nvim-tree").setup(opts)
+end
+
+return M

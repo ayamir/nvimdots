@@ -1,10 +1,12 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = {
 		ui = require("modules.utils.icons").get("ui"),
 		misc = require("modules.utils.icons").get("misc"),
 	}
 
-	require("which-key").setup({
+	return {
 		plugins = {
 			presets = {
 				operators = false,
@@ -30,5 +32,11 @@ return function()
 			padding = { 1, 1, 1, 1 },
 			winblend = 0,
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("which-key").setup(opts)
+end
+
+return M

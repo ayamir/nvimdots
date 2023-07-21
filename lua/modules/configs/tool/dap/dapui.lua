@@ -1,10 +1,12 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = {
 		ui = require("modules.utils.icons").get("ui"),
 		dap = require("modules.utils.icons").get("dap"),
 	}
 
-	require("dapui").setup({
+	return {
 		icons = { expanded = icons.ui.ArrowOpen, collapsed = icons.ui.ArrowClosed, current_frame = icons.ui.Indicator },
 		mappings = {
 			-- Use a table to apply multiple mappings
@@ -53,5 +55,11 @@ return function()
 			mappings = { close = { "q", "<Esc>" } },
 		},
 		windows = { indent = 1 },
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("dapui").setup(opts)
+end
+
+return M

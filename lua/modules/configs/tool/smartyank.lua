@@ -1,5 +1,7 @@
-return function()
-	require("smartyank").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		highlight = {
 			enabled = false, -- highlight yanked text
 			higroup = "IncSearch", -- highlight group of yanked text
@@ -20,5 +22,11 @@ return function()
 			silent = false, -- true to disable the "n chars copied" echo
 			echo_hl = "Directory", -- highlight group of the OSC52 echo message
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("smartyank").setup(opts)
+end
+
+return M

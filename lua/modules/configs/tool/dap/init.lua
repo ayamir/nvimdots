@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["config"] = function()
 	local dap = require("dap")
 	local dapui = require("dapui")
 	local mason_dap = require("mason-nvim-dap")
@@ -69,3 +71,5 @@ return function()
 		handlers = { mason_dap_handler },
 	})
 end
+
+return M

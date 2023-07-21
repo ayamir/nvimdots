@@ -1,10 +1,12 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = {
 		ui = require("modules.utils.icons").get("ui"),
 		diagnostics = require("modules.utils.icons").get("diagnostics"),
 	}
 
-	require("trouble").setup({
+	return {
 		position = "bottom", -- position of the list can be: bottom, top, left, right
 		height = 10, -- height of the trouble list when position is top or bottom
 		width = 50, -- width of the list when position is left or right
@@ -51,5 +53,11 @@ return function()
 			other = icons.diagnostics.Question_alt,
 		},
 		use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("trouble").setup(opts)
+end
+
+return M
