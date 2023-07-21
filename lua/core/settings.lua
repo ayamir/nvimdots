@@ -1,3 +1,5 @@
+local merge = require("core.merge")
+local user_settings = require("user.core.settings")
 local settings = {}
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
@@ -114,4 +116,5 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
+settings = merge(settings, user_settings)
 return settings

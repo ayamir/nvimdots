@@ -1,4 +1,6 @@
 local global = require("core.global")
+local merge = require("core.merge")
+local user_global_local = require("user.core.options")
 
 local function load_options()
 	local global_local = {
@@ -103,6 +105,7 @@ local function load_options()
 		wrapscan = true,
 		writebackup = false,
 	}
+    global_local = merge(global_local, user_global_local)
 	local function isempty(s)
 		return s == nil or s == ""
 	end

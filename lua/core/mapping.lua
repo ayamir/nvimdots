@@ -1,4 +1,6 @@
 local bind = require("keymap.bind")
+local merge = require("core.merge")
+local user_core_map = require("user.core.mapping")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
@@ -55,4 +57,5 @@ local core_map = {
 	["v|>"] = map_cmd(">gv"):with_desc("edit: Increase indent"),
 }
 
+core_map = merge(core_map, user_core_map)
 bind.nvim_load_mapping(core_map)
