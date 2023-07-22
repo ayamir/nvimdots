@@ -1,8 +1,8 @@
-return function()
-	local null_ls = require("null-ls")
-	local mason_null_ls = require("mason-null-ls")
-	local btns = null_ls.builtins
+local M = {}
 
+M["opts"] = function()
+	local null_ls = require("null-ls")
+	local btns = null_ls.builtins
 	-- Please set additional flags for the supported servers here
 	-- Don't specify any config here if you are using the default one.
 	local sources = {
@@ -27,20 +27,19 @@ return function()
 		}),
 		btns.formatting.rustfmt,
 	}
-	null_ls.setup({
+	return {
 		border = "rounded",
 		debug = false,
 		log_level = "warn",
 		update_in_insert = false,
 		sources = sources,
-	})
+	}
+end
 
-	mason_null_ls.setup({
-		ensure_installed = require("core.settings").null_ls_deps,
-		automatic_installation = false,
-		automatic_setup = true,
-		handlers = {},
-	})
+M["config"] = function(_, opts)
+	local null_ls = require("null-ls")
+
+	null_ls.setup(opts)
 
 	-- Setup usercmd to register/deregister available source(s)
 	local function _gen_completion()
@@ -70,3 +69,5 @@ return function()
 
 	require("completion.formatting").configure_format_on_save()
 end
+
+return M

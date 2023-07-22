@@ -1,5 +1,7 @@
-return function()
-	require("lsp_signature").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		bind = true,
 		-- TODO: Remove the following line when nvim-cmp#1613 gets resolved
 		check_completion_visible = false,
@@ -11,5 +13,11 @@ return function()
 		wrap = true,
 		zindex = 45, -- avoid overlap with nvim.cmp
 		handler_opts = { border = "single" },
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("lsp_signature").setup(opts)
+end
+
+return M

@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	require("modules.utils").gen_lspkind_hl()
 
 	local icons = {
@@ -25,7 +27,7 @@ return function()
 
 	set_sidebar_icons()
 
-	require("lspsaga").setup({
+	return {
 		scroll_preview = {
 			scroll_down = "<C-j>",
 			scroll_up = "<C-k>",
@@ -198,5 +200,11 @@ return function()
 				Value = { icons.kind.Value, "LspKindValue" },
 			},
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("lspsaga").setup()
+end
+
+return M

@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local icons = {
 		kind = require("modules.utils.icons").get("kind"),
 		type = require("modules.utils.icons").get("type"),
@@ -33,7 +35,8 @@ return function()
 	end
 
 	local cmp = require("cmp")
-	cmp.setup({
+
+	return {
 		preselect = cmp.PreselectMode.Item,
 		window = {
 			completion = {
@@ -161,5 +164,11 @@ return function()
 				hl_group = "Whitespace",
 			},
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("cmp").setup(opts)
+end
+
+return M

@@ -1,6 +1,7 @@
-return function()
-	vim.defer_fn(function()
-		require("copilot").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 			cmp = {
 				enabled = true,
 				method = "getCompletionsCycling",
@@ -17,6 +18,13 @@ return function()
 				["dap-repl"] = false,
 				["big_file_disabled_ft"] = false,
 			},
-		})
+		}
+end
+
+M["config"] = function(_, opts)
+	vim.defer_fn(function()
+		require("copilot").setup()
 	end, 100)
 end
+
+return M

@@ -1,20 +1,12 @@
-return function()
-	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
-	local diagnostics_level = require("core.settings").diagnostics_level
-	local is_windows = require("core.global").is_windows
+local M = {}
 
-	local nvim_lsp = require("lspconfig")
-	local mason = require("mason")
-	local mason_registry = require("mason-registry")
-	local mason_lspconfig = require("mason-lspconfig")
-	require("lspconfig.ui.windows").default_options.border = "rounded"
-
+M["opts"] = function()
 	local icons = {
 		ui = require("modules.utils.icons").get("ui", true),
 		misc = require("modules.utils.icons").get("misc", true),
 	}
 
-	mason.setup({
+	return {
 		ui = {
 			border = "single",
 			icons = {
@@ -33,7 +25,21 @@ return function()
 				cancel_installation = "<C-c>",
 			},
 		},
-	})
+	}
+end
+
+M["config"] = function(_, mason_opts)
+	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
+	local diagnostics_level = require("core.settings").diagnostics_level
+	local is_windows = require("core.global").is_windows
+
+	local nvim_lsp = require("lspconfig")
+	local mason = require("mason")
+	local mason_registry = require("mason-registry")
+	local mason_lspconfig = require("mason-lspconfig")
+	require("lspconfig.ui.windows").default_options.border = "rounded"
+
+	mason.setup(mason_opts)
 
 	-- Additional plugins for pylsp
 	mason_registry:on(
@@ -149,3 +155,5 @@ return function()
 
 	vim.api.nvim_command([[LspStart]]) -- Start LSPs
 end
+
+return M
