@@ -1,5 +1,7 @@
-return function()
-	require("treesitter-context").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		enable = true,
 		max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 		min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
@@ -8,5 +10,11 @@ return function()
 		trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 		mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
 		zindex = 30,
-	})
+	}
 end
+
+M["config"] = function()
+	require("treesitter-context").setup()
+end
+
+return M

@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local ftdetect = {
 		name = "ftdetect",
 		opts = { defer = true },
@@ -15,7 +17,7 @@ return function()
 		end,
 	}
 
-	require("bigfile").setup({
+	return {
 		filesize = 1, -- size of the file in MiB
 		pattern = { "*" }, -- autocmd pattern
 		features = { -- features to disable
@@ -28,5 +30,11 @@ return function()
 			ftdetect,
 			cmp,
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("bigfile").setup(opts)
+end
+
+return M

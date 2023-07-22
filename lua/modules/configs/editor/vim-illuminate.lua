@@ -1,5 +1,7 @@
-return function()
-	require("illuminate").configure({
+local M = {}
+
+M["opts"] = function()
+	return {
 		providers = {
 			"lsp",
 			"treesitter",
@@ -24,5 +26,11 @@ return function()
 			"toggleterm",
 		},
 		under_cursor = false,
-	})
+	}
 end
+
+M["config"] = function()
+	require("illuminate").configure()
+end
+
+return M

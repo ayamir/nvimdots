@@ -1,5 +1,7 @@
-return function()
-	require("Comment").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		-- Add a space b/w comment and the line
 		padding = true,
 		-- Whether the cursor should stay at its position
@@ -40,5 +42,11 @@ return function()
 		pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 		-- Function to call after (un)comment
 		post_hook = nil,
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("Comment").setup(opts)
+end
+
+return M

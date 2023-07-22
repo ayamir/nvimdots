@@ -1,5 +1,7 @@
-return function()
-	require("nvim-ts-autotag").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		filetypes = {
 			"html",
 			"javascript",
@@ -8,5 +10,11 @@ return function()
 			"vue",
 			"xml",
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("nvim-ts-autotag").setup(opts)
+end
+
+return M

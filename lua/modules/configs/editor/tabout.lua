@@ -1,5 +1,7 @@
-return function()
-	require("tabout").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		tabkey = "", -- key to trigger tabout, set to an empty string to disable
 		backwards_tabkey = "", -- key to trigger backwards tabout, set to an empty string to disable
 		act_as_tab = true, -- shift content if tab out is not possible
@@ -16,5 +18,11 @@ return function()
 		},
 		ignore_beginning = true, -- if the cursor is at the beginning of a filled element it will rather tab out than shift the content
 		exclude = {}, -- tabout will ignore these filetypes
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("tabout").setup(opts)
+end
+
+return M

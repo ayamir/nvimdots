@@ -1,5 +1,7 @@
-return function()
-	require("persisted").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
 		silent = false, -- silent nvim message when sourcing session file
 		use_git_branch = true, -- create session files based on the branch of the git enabled repository
@@ -19,5 +21,11 @@ return function()
 		telescope = { -- options for the telescope extension
 			reset_prompt_after_deletion = true, -- whether to reset prompt after session deleted
 		},
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("persisted").setup(opts)
+end
+
+return M

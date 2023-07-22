@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+M["opts"] = function()
 	local function init_strategy(check_lines)
 		return function()
 			local errors = 200
@@ -37,3 +39,9 @@ return function()
 		},
 	}
 end
+
+M["config"] = function()
+	return true
+end
+
+return M

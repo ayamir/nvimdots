@@ -3,7 +3,8 @@ local editor = {}
 editor["rainbowhxch/accelerated-jk.nvim"] = {
 	lazy = true,
 	event = "VeryLazy",
-	config = require("editor.accelerated-jk"),
+	opts = require("editor.accelerated-jk").opts,
+	config = require("editor.accelerated-jk").config,
 }
 editor["olimorris/persisted.nvim"] = {
 	lazy = true,
@@ -17,21 +18,25 @@ editor["olimorris/persisted.nvim"] = {
 		"SessionLoadFromFile",
 		"SessionDelete",
 	},
-	config = require("editor.persisted"),
+	opts = require("editor.persisted").opts,
+	config = require("editor.persisted").config,
 }
 editor["m4xshen/autoclose.nvim"] = {
 	lazy = true,
 	event = "InsertEnter",
-	config = require("editor.autoclose"),
+	opts = require("editor.autoclose").opts,
+	config = require("editor.autoclose").config,
 }
 editor["max397574/better-escape.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.better-escape"),
+	opts = require("editor.better-escape").opts,
+	config = require("editor.better-escape").config,
 }
 editor["LunarVim/bigfile.nvim"] = {
 	lazy = false,
-	config = require("editor.bigfile"),
+	opts = require("editor.bigfile").opts,
+	config = require("editor.bigfile").config,
 	cond = require("core.settings").load_big_files_faster,
 }
 editor["ojroques/nvim-bufdel"] = {
@@ -41,12 +46,14 @@ editor["ojroques/nvim-bufdel"] = {
 editor["rhysd/clever-f.vim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.cleverf"),
+	opts = require("editor.cleverf").opts,
+	config = require("editor.cleverf").config,
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.comment"),
+	opts = require("editor.comment").opts,
+	config = require("editor.comment").config,
 }
 editor["sindrets/diffview.nvim"] = {
 	lazy = true,
@@ -60,12 +67,14 @@ editor["smoka7/hop.nvim"] = {
 	lazy = true,
 	version = "*",
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.hop"),
+	opts = require("editor.hop").opts,
+	config = require("editor.hop").config,
 }
 editor["RRethy/vim-illuminate"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.vim-illuminate"),
+	opts = require("editor.vim-illuminate").opts,
+	config = require("editor.vim-illuminate").config,
 }
 editor["romainl/vim-cool"] = {
 	lazy = true,
@@ -74,7 +83,8 @@ editor["romainl/vim-cool"] = {
 editor["lambdalisue/suda.vim"] = {
 	lazy = true,
 	cmd = { "SudaRead", "SudaWrite" },
-	config = require("editor.suda"),
+	opts = require("editor.suda").opts,
+	config = require("editor.suda").config,
 }
 
 ----------------------------------------------------------------------
@@ -88,7 +98,8 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		end
 	end,
 	event = "BufReadPost",
-	config = require("editor.treesitter"),
+	opts = require("editor.treesitter").opts,
+	config = require("editor.treesitter").config,
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{ "JoosepAlviste/nvim-ts-context-commentstring" },
@@ -96,11 +107,13 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{ "andymass/vim-matchup" },
 		{
 			"hiphish/rainbow-delimiters.nvim",
-			config = require("editor.rainbow_delims"),
+			opts = require("editor.rainbow_delims").opts,
+			config = require("editor.rainbow_delims").config,
 		},
 		{
 			"nvim-treesitter/nvim-treesitter-context",
-			config = require("editor.ts-context"),
+			opts = require("editor.ts-context").opts,
+			config = require("editor.ts-context").config,
 		},
 		{
 			"windwp/nvim-ts-autotag",
@@ -108,11 +121,13 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		},
 		{
 			"NvChad/nvim-colorizer.lua",
-			config = require("editor.colorizer"),
+			opts = require("editor.colorizer").opts,
+			config = require("editor.colorizer").config,
 		},
 		{
 			"abecodes/tabout.nvim",
-			config = require("editor.tabout"),
+			opts = require("editor.tabout").opts,
+			config = require("editor.tabout").config,
 		},
 	},
 }

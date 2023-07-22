@@ -1,5 +1,7 @@
-return function()
-	require("accelerated-jk").setup({
+local M = {}
+
+M["opts"] = function()
+	return {
 		mode = "time_driven",
 		enable_deceleration = false,
 		acceleration_motions = {},
@@ -7,5 +9,11 @@ return function()
 		acceleration_table = { 7, 12, 17, 21, 24, 26, 28, 30 },
 		-- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
 		deceleration_table = { { 150, 9999 } },
-	})
+	}
 end
+
+M["config"] = function(_, opts)
+	require("accelerated-jk").setup(opts)
+end
+
+return M
