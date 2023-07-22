@@ -1,65 +1,28 @@
 -- See core.settigs for details
-local settings = {}
+local M = {}
+M["reset"] = {
+    -- "lsp_deps",
+    -- "null_ls_deps",
+}
 
--- settings["use_ssh"] = true
+-- Refer to lua/core/settings.lua for more details.
+M["merge"] = {
+    -- use_ssh = true,
+    -- format_on_save = true,
+    -- format_notify = true,
+    -- diagnostics_level = "Hint",
+    -- format_disabled_dirs = {},
+    -- load_big_files_faster = true,
+    -- palette_overwrite = {},
+    -- colorscheme = "catppuccin",
+    -- transparent_background = false,
+    -- background = "dark",
+    -- external_browser = "chrome-cli open",
+    -- formatter_block_list = {},
+    -- server_formatting_block_list = {},
+    -- lsp_deps = {},
+    -- null_ls_deps = {},
+    -- dap_deps = {},
+}
 
--- settings["format_on_save"] = true
-
--- settings["format_notify"] = true
-
--- settings["diagnostics_virtual_text"] = true
-
--- settings["diagnostics_level"] = "Hint"
-
--- settings["format_disabled_dirs"] = {
--- 	"~/format_disabled_dir",
--- }
-
--- settings["load_big_files_faster"] = true
-
--- settings["palette_overwrite"] = {}
-
--- settings["colorscheme"] = "catppuccin"
-
--- settings["transparent_background"] = false
-
--- settings["background"] = "dark"
-
--- settings["external_browser"] = "chrome-cli open"
-
--- settings["formatter_block_list"] = {
--- 	lua = false, -- example
--- }
-
--- settings["server_formatting_block_list"] = {
--- 	lua_ls = true,
--- 	tsserver = true,
--- 	clangd = true,
--- }
-
--- settings["lsp_deps"] = {
--- 	"bashls",
--- 	"clangd",
--- 	"html",
--- 	"jsonls",
--- 	"lua_ls",
--- 	"pylsp",
--- 	-- "gopls",
--- }
-
--- settings["null_ls_deps"] = {
--- 	"clang_format",
--- 	"prettier",
--- 	"rustfmt",
--- 	"shfmt",
--- 	"stylua",
--- 	"vint",
--- }
-
--- settings["dap_deps"] = {
--- 	"codelldb", -- C-Family
--- 	"delve", -- Go
--- 	"python", -- Python (debugpy)
--- }
-
-return settings
+return M

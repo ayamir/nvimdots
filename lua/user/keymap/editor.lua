@@ -4,6 +4,10 @@
 -- local map_cmd = bind.map_cmd
 -- local map_callback = bind.map_callback
 -- local et = bind.escape_termcode
+local M = {}
 
-return {
-}
+M["reset"] = {}
+
+M["merge"] = {}
+
+return M

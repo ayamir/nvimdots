@@ -1,4 +1,4 @@
-local merge = require("core.merge")
+local override = require("core.override")
 local user_settings = require("user.core.settings")
 local settings = {}
 
@@ -116,5 +116,7 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
-settings = merge(settings, user_settings)
+settings = override.reset(settings, user_settings.reset)
+settings = override.merge(settings, user_settings.merge)
+
 return settings

@@ -3,6 +3,10 @@
 -- local map_cu = bind.map_cu
 -- local map_cmd = bind.map_cmd
 -- local map_callback = bind.map_callback
+local M = {}
 
-return {
-}
+M["reset"] = {}
+
+M["merge"] = {}
+
+return M

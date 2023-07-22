@@ -3,11 +3,17 @@
 -- local map_cmd = bind.map_cmd
 -- local map_callback = bind.map_callback
 
-local M = {}
-M["plug_map"] = {
+local M = {
+    reset = {},
+    merge = {},
 }
 
-M["lsp"] = {
-}
+M["reset"]["plug_map"] = {}
+
+M["reset"]["lsp"] = {}
+
+M["merge"]["plug_map"] = {}
+
+M["merge"]["lsp"] = {}
 
 return M

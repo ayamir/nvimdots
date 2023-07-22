@@ -1,5 +1,5 @@
 local bind = require("keymap.bind")
-local merge = require("core.merge")
+local override = require("core.override")
 local user_keymap = require("user.keymap.ui")
 local map_cr = bind.map_cr
 -- local map_cu = bind.map_cu
@@ -25,7 +25,8 @@ local plug_map = {
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
 }
 
-plug_map = merge(plug_map, user_keymap.plug_map)
+plug_map = override.merge(plug_map, user_keymap.reset.plug_map)
+plug_map = override.merge(plug_map, user_keymap.merge.plug_map)
 bind.nvim_load_mapping(plug_map)
 
 local mapping = {}
@@ -102,7 +103,8 @@ function mapping.gitsigns(buf)
 			actions.text_object()
 		end):with_buffer(buf),
 	}
-	map = merge(map, user_keymap.gitsigns)
+	map = override.merge(map, user_keymap.reset.gitsigns)
+	map = override.merge(map, user_keymap.merge.gitsigns)
 	bind.nvim_load_mapping(map)
 end
 

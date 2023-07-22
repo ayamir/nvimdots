@@ -1,5 +1,5 @@
 local global = require("core.global")
-local merge = require("core.merge")
+local override = require("core.override")
 local user_global_local = require("user.core.options")
 
 local function load_options()
@@ -105,7 +105,7 @@ local function load_options()
 		wrapscan = true,
 		writebackup = false,
 	}
-    global_local = merge(global_local, user_global_local)
+    global_local = override.merge(global_local, user_global_local)
 	local function isempty(s)
 		return s == nil or s == ""
 	end
@@ -115,9 +115,9 @@ local function load_options()
 	if not isempty(conda_prefix) then
 		vim.g.python_host_prog = conda_prefix .. "/bin/python"
 		vim.g.python3_host_prog = conda_prefix .. "/bin/python"
-	else
-		vim.g.python_host_prog = "python"
-		vim.g.python3_host_prog = "python3"
+	-- else
+	-- 	vim.g.python_host_prog = "python"
+	-- 	vim.g.python3_host_prog = "python3"
 	end
 
 	for name, value in pairs(global_local) do

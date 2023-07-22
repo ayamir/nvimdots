@@ -1,5 +1,5 @@
 require("keymap.helpers")
-local merge = require("core.merge")
+local override = require("core.override")
 local user_keymap = require("user.keymap.init")
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
@@ -21,7 +21,8 @@ local plug_map = {
 	["n|<leader>px"] = map_cr("Lazy clean"):with_silent():with_noremap():with_nowait():with_desc("package: Clean"),
 }
 
-plug_map = merge(plug_map, user_keymap)
+plug_map = override.reset(plug_map, user_keymap.reset)
+plug_map = override.merge(plug_map, user_keymap.merge)
 bind.nvim_load_mapping(plug_map)
 
 -- Plugin keymaps

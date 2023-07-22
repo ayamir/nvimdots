@@ -1,5 +1,5 @@
 -- Now use `<A-k>` or `<A-1>` to back to the `dotstutor`.
-local merge = require("core.merge")
+local override = require("core.override")
 local user_definitions = require("user.core.event")
 local autocmd = {}
 
@@ -151,7 +151,8 @@ function autocmd.load_autocmds()
 			},
 		},
 	}
-	definitions = merge(definitions, user_definitions)
+	definitions = override.reset(definitions, user_definitions.reset)
+	definitions = override.merge(definitions, user_definitions.merge)
 
 	autocmd.nvim_create_augroups(definitions)
 end
