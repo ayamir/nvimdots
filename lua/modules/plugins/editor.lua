@@ -75,9 +75,7 @@ editor["lambdalisue/suda.vim"] = {
 editor["SmiteshP/nvim-navic"] = {
 	lazy = true,
 	event = { "BufReadPost" },
-	config = function()
-		require("editor.navic").enable()
-	end,
+	config = require("editor.navic"),
 }
 editor["yorickpeterse/nvim-window"] = {
 	lazy = true,
@@ -128,7 +126,6 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 			"Wansmer/treesj",
 			config = require("editor.treesj"),
 		},
-
 		{
 			"hiphish/rainbow-delimiters.nvim",
 			config = require("editor.rainbow_delims"),

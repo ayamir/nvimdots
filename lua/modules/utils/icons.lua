@@ -193,8 +193,8 @@ local data = {
 	},
 	cmp = {
 		Codeium = "",
-		TabNine = "",
-		Copilot = "",
+		TabNine = "",
+		Copilot = "",
 		Copilot_alt = "",
 		-- Add source-specific icons here
 		buffer = "",

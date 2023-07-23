@@ -158,8 +158,8 @@ return function()
 			{ name = "buffer" },
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
+			{ name = "cmp_tabnine" },
 			-- { name = "codeium" },
-			-- { name = "cmp_tabnine" },
 		},
 		experimental = {
 			ghost_text = {

@@ -33,6 +33,7 @@ local function matchadd()
 		["mason"] = true,
 		["tagbar"] = true,
 		["VistaNvim"] = true,
+		["lazy"] = true,
 	}
 	if disable_ft[vim.bo.ft] then
 		return

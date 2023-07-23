@@ -1,5 +1,7 @@
 return function()
 	require("lsp_signature").setup({
+		-- TODO: Remove the following line when nvim-cmp#1613 gets resolved
+		check_completion_visible = false,
 		debug = false, -- set to true to enable debug logging
 		log_path = vim.fn.stdpath("cache") .. "/lsp_signature.log", -- log dir when debug is on
 		-- default is  ~/.cache/nvim/lsp_signature.log
@@ -39,7 +41,7 @@ return function()
 
 		auto_close_after = nil, -- autoclose signature float win after x sec, disabled if nil.
 		extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
-		zindex = 200, -- by default it will be on top of all floating windows, set to <= 50 send it to bottom
+		zindex = 45, -- by default it will be on top of all floating windows, set to <= 50 send it to bottom
 
 		padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
 

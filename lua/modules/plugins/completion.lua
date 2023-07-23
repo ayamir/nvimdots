@@ -2,13 +2,13 @@ local completion = {}
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "BufReadPre", "BufAdd", "BufNewFile", "CursorHold" },
+	event = { "CursorHold", "CursorHoldI", "BufReadPost", "BufAdd" },
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
-			"ray-x/lsp_signature.nvim",
+			"Jint-lzxy/lsp_signature.nvim",
 			config = require("completion.lsp-signature"),
 		},
 	},
@@ -52,7 +52,7 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-path" },
 		{ "f3fora/cmp-spell" },
 		{ "hrsh7th/cmp-buffer" },
-		{ "kdheepak/cmp-latex-symbols" },
+		{ "kdheepak/cmp-latex-symbols", ft = { "markdown", "latex", "tex" } },
 		{ "hrsh7th/cmp-cmdline" },
 		{ "ray-x/cmp-treesitter", commit = "c8e3a74" },
 		{ "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },

@@ -9,12 +9,6 @@ local icons = {
 }
 local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
 local diagnostics_level = require("core.settings").diagnostics_level
-local navic = require("nvim-navic")
--- local inlayhints_exists, inlayhints = pcall(require, "lsp-inlayhints")
--- local inlay_opt = require("modules.configs.ui.inlay_hint").configs
--- if inlayhints_exists then
--- 	inlayhints.setup(inlay_opt)
--- end
 
 M.set_sidebar_icons = function()
 	-- Set icons for sidebar.
@@ -38,7 +32,6 @@ M.set_lsp_config = function()
 	lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, popup_opts)
 	lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.hover, popup_opts)
 	local config = {
-		-- virtual_text = diagnostics_virtual_text,
 		virtual_text = diagnostics_virtual_text and {
 			severity_limit = diagnostics_level,
 		} or false,
@@ -66,7 +59,6 @@ M.make_capabilities = function()
 		documentationFormat = { "markdown", "plaintext" },
 	}
 	-- nvim-cmp supports additional completion capabilities
-	-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 	vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 	return capabilities
 end
@@ -87,7 +79,6 @@ M.on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<tab>", ":lua vim.lsp.buf.hover()<CR>", opts)
 	buf_set_keymap("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	buf_set_keymap("n", "<leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	buf_set_keymap("n", "<leader>gq", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
 	buf_set_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>', opts)
 	buf_set_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>', opts)
@@ -139,14 +130,8 @@ M.on_attach = function(client, bufnr)
 			end,
 		})
 	end
-
-	-- if support_navic(M.navic_server_list, client.name) then
-	if client.server_capabilities.documentSymbolProvider then
-		if client.name ~= "pyright" then
-			navic.attach(client, bufnr)
-			require("editor.navic").show_winbar()
-			-- inlayhints.on_attach(client, bufnr)
-		end
+	if client.name ~= "pyright" then
+		require("lsp-overloads").setup(client, {})
 	end
 
 	if client.name == "pyright" then
@@ -163,7 +148,7 @@ M.on_attach = function(client, bufnr)
 	elseif client.name == "sourcery" then
 		client.server_capabilities.hoverProvider = false
 	end
-    client.server_capabilities.semanticTokensProvider = nil
+	-- client.server_capabilities.semanticTokensProvider = nil
 end
 
 return M

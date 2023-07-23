@@ -34,5 +34,6 @@ return function()
 			"RainbowDelimiterCyan",
 			"RainbowDelimiterViolet",
 		},
+		blacklist = { "latex" },
 	}
 end

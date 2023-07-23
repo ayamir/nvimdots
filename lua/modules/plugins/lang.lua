@@ -122,7 +122,7 @@ lang["folke/neodev.nvim"] = {
 lang["CRAG666/code_runner.nvim"] = {
 	lazy = true,
 	config = require("lang.code_runner"),
-	event = { "VeryLazy" },
+	cmd = { "RunCode" },
 }
 
 return lang

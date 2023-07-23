@@ -28,7 +28,7 @@ function mapping.lsp(buf)
 		["n|<leader>ld"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
 			:with_buffer(buf)
 			:with_desc("lsp: Line diagnostic"),
-		["n|gs"] = map_callback(function()
+		["i|<c-s>"] = map_callback(function()
 			vim.lsp.buf.signature_help()
 		end):with_desc("lsp: Signature help"),
 		["n|<leader>rn"] = map_cr("Lspsaga rename"):with_buffer(buf):with_desc("lsp: Rename in file range"),
@@ -40,9 +40,7 @@ function mapping.lsp(buf)
 		["n|<leader>gp"] = map_cr("Lspsaga peek_definition"):with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|<leader>gi"] = map_cr("Lspsaga incoming_calls"):with_buffer(buf):with_desc("lsp: Show incoming calls"),
 		["n|<leader>go"] = map_cr("Lspsaga outgoing_calls"):with_buffer(buf):with_desc("lsp: Show outgoing calls"),
-		["n|<leader>hd"] = map_callback(hide_diagnostic)
-			:with_buffer(buf)
-			:with_desc("lsp: Toggle hide diagnostic"),
+		["n|<leader>hd"] = map_callback(hide_diagnostic):with_buffer(buf):with_desc("lsp: Toggle hide diagnostic"),
 	}
 	bind.nvim_load_mapping(map)
 end

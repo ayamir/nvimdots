@@ -64,7 +64,7 @@ ui["folke/paint.nvim"] = { -- Easily add additional highlights to your buffers T
 }
 ui["petertriho/nvim-scrollbar"] = {
 	lazy = true,
-	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	event = {"VeryLazy"},
 	config = require("ui.scroll_bar"),
 }
 ui["folke/zen-mode.nvim"] = {

@@ -99,15 +99,6 @@ tool["folke/edgy.nvim"] = {
 	lazy = false,
 	config = require("tool.edgy"),
 }
-tool["AckslD/nvim-neoclip.lua"] = {
-	lazy = true,
-	event = { "CmdlineEnter", "TextYankPost" },
-	config = require("tool.neoclip"),
-	dependencies = {
-		{ "kkharji/sqlite.lua" },
-		{ "nvim-telescope/telescope.nvim" },
-	},
-}
 tool["yucao16/vista.nvim"] = {
 	lazy = true,
 	event = { "LspAttach" },
@@ -146,7 +137,7 @@ tool["stevearc/oil.nvim"] = {
 }
 tool["gelguy/wilder.nvim"] = {
 	lazy = true,
-	event = "CmdlineEnter",
+	event = "VeryLazy",
 	config = require("tool.wilder"),
 	dependencies = "romgrk/fzy-lua-native",
 }
@@ -171,6 +162,14 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 		{ "smartpde/telescope-recent-files" },
 		{ "crispgm/telescope-heading.nvim" },
+		{
+			"AckslD/nvim-neoclip.lua",
+			event = { "CmdlineEnter", "TextYankPost" },
+			config = require("tool.neoclip"),
+			dependencies = {
+				{ "kkharji/sqlite.lua" },
+			},
+		},
 	},
 }
 
