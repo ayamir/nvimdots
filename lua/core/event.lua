@@ -71,6 +71,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"PlenaryTestPopup",
 		"fugitive",
 		"lspsagaoutline",
+		"spectre_panel",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false

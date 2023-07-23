@@ -141,6 +141,13 @@ tool["gelguy/wilder.nvim"] = {
 	config = require("tool.wilder"),
 	dependencies = "romgrk/fzy-lua-native",
 }
+tool["nvim-pack/nvim-spectre"] = {
+	lazy = true,
+	event = "VeryLazy",
+	cmd = "Spectre",
+	conifg = true,
+	opts = { open_cmd = "noswapfile 50vnew" },
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --

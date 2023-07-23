@@ -148,6 +148,9 @@ local plug_map = {
 	["n|<leader>sp"] = map_cu("Telescope persisted"):with_noremap():with_silent():with_desc("find: Session"),
 	["n|<leader>sn"] = map_cu("Telescope neoclip"):with_noremap():with_silent():with_desc("find: Neoclip"),
 
+    -- Spectre
+	["n|<leader>sh"] = map_cu("Spectre"):with_noremap():with_silent():with_desc("Spectre: Search and replace"),
+
 	-- Plugin: dap
 	["n|<leader>dc"] = map_callback(function()
 			require("dap").continue()
