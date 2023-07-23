@@ -136,7 +136,19 @@ return vim.schedule_wrap(function()
 				show_help = "?",
 			},
 		},
-
+		indent = {
+			enable = true,
+			disable = function(_, bufnr)
+				local disable_type = {}
+				local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+				if table_contains(disable_type, filetype) then
+					return true
+				end
+				local buf_name = vim.api.nvim_buf_get_name(bufnr)
+				local file_size = vim.api.nvim_call_function("getfsize", { buf_name })
+				return file_size > 256 * 1024
+			end,
+		},
 		rainbow = {
 			enable = false,
 			disable = function(_, bufnr)
@@ -149,7 +161,6 @@ return vim.schedule_wrap(function()
 				local file_size = vim.api.nvim_call_function("getfsize", { buf_name })
 				return file_size > 256 * 1024
 			end,
-
 			extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
 			max_file_lines = 2000, -- Do not enable for files with more than 2000 lines, int
 		},
