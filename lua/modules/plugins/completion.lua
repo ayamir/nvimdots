@@ -8,7 +8,7 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{
-			"ray-x/lsp_signature.nvim",
+			"Jint-lzxy/lsp_signature.nvim",
 			config = require("completion.lsp-signature"),
 		},
 	},
