@@ -27,19 +27,7 @@ tool["nvim-neo-tree/neo-tree.nvim"] = {
 		{
 			"s1n7ax/nvim-window-picker",
 			version = "2.*",
-			config = function()
-				require("window-picker").setup({
-					-- hint = "floating-big-letter",
-					autoselect_one = true,
-					include_current = false,
-					filter_rules = {
-						bo = {
-							filetype = { "neo-tree-popup", "quickfix", "VistaNvim" },
-							buftype = { "terminal", "quickfix" },
-						},
-					},
-				})
-			end,
+			config = require("tool.window_picker"),
 		},
 	},
 }
