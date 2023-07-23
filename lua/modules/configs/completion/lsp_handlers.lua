@@ -130,9 +130,6 @@ M.on_attach = function(client, bufnr)
 			end,
 		})
 	end
-	if client.name ~= "pyright" then
-		require("lsp-overloads").setup(client, {})
-	end
 
 	if client.name == "pyright" then
 		client.server_capabilities.hoverProvider = false
