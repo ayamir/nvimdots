@@ -18,7 +18,7 @@ return function()
 	}
 	local outline = {
 		sections = mini_sections,
-		filetypes = { "lspsagaoutline" },
+		filetypes = { "VistaNvim" },
 	}
 	local diffview = {
 		sections = mini_sections,
@@ -73,7 +73,7 @@ return function()
 				local nobg = special_nobg and require("core.settings").transparent_background
 				return {
 					fg = guifg and guifg or colors.none,
-					bg = (guibg and not nobg) and guibg or colors.none,
+					bg = (guibg and not nobg) and guibg or nil,
 					gui = gui and gui or nil,
 				}
 			end
@@ -149,7 +149,7 @@ return function()
 				return next(available_servers) == nil and icons.misc.NoActiveLsp
 					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
 			end,
-			color = utils.gen_hl("blue", true, true, nil, "bold"),
+			color = utils.gen_hl("blue", false, true, "nil", "bold"),
 			cond = conditionals.has_enough_room,
 		},
 
@@ -178,7 +178,7 @@ return function()
 				end
 				return ""
 			end,
-			color = utils.gen_hl("green", true, true),
+			color = utils.gen_hl("green", false, true, "nil", "bold"),
 			cond = conditionals.has_enough_room,
 		},
 
@@ -213,6 +213,7 @@ return function()
 			end,
 		},
 	}
+
 	local function getWords()
 		if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
 			if vim.fn.wordcount().visual_words == 1 then
@@ -252,7 +253,8 @@ return function()
 	end
 	require("lualine").setup({
 		options = {
-			component_separators = "|",
+			-- component_separators = "|",
+			component_separators = "",
 			section_separators = { left = "", right = "" },
 			globalstatus = true,
 		},
@@ -261,10 +263,21 @@ return function()
 				{ "mode", separator = { left = "" }, right_padding = 2 },
 			},
 			lualine_b = { "branch", "diff", "diagnostics" },
-			-- lualine_c = { getPath },
-			lualine_c = { showLsp },
-			lualine_x = { getWords },
-			lualine_y = { "filetype", "filesize", "progress" },
+			lualine_c = {
+				{ utils.force_centering },
+				components.lsp,
+			},
+			lualine_x = {
+				getWords,
+				components.tabwidth,
+				components.file_status,
+			},
+			lualine_y = {
+				components.python_venv,
+				"filetype",
+				"filesize",
+				"progress",
+			},
 			lualine_z = {
 				{ "location", separator = { right = "" }, left_padding = 2 },
 			},
@@ -278,6 +291,6 @@ return function()
 			lualine_z = { "location" },
 		},
 		tabline = {},
-		extensions = { "toggleterm", "nvim-tree", "neo-tree", "nvim-dap-ui" },
+		extensions = { "toggleterm", "nvim-tree", "neo-tree", "nvim-dap-ui", "fugitive", outline, diffview },
 	})
 end
