@@ -99,7 +99,7 @@ return vim.schedule_wrap(function()
 		autotag = {
 			enable = true,
 			disable = function(_, bufnr)
-				local disable_type = {}
+				local disable_type = { "python" }
 				local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 				if table_contains(disable_type, filetype) then
 					return true
