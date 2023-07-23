@@ -124,7 +124,7 @@ return function()
 					luasnip.expand()
 				elseif luasnip.expand_or_jumpable() then
 					luasnip.expand_or_jump()
-				elseif check_backspace() then
+				elseif not check_backspace() then
 					cmp.complete()
 				else
 					fallback()
