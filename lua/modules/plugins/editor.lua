@@ -21,10 +21,10 @@ editor["gbprod/cutlass.nvim"] = {
 		require("cutlass").setup({ cut_key = "c" })
 	end,
 }
-editor["m4xshen/autoclose.nvim"] = {
-	lazy = true,
-	event = "InsertEnter",
-	config = require("editor.autoclose"),
+editor["windwp/nvim-autopairs"] = {
+    lazy = true,
+    event = "InsertEnter",
+    config = require("editor.autopairs")
 }
 editor["LunarVim/bigfile.nvim"] = {
 	lazy = false,
