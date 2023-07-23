@@ -31,6 +31,10 @@ return function()
 	local latex = { "tex", "latex" }
 	apairs.add_rules(
 		{
+			Rule("```", "```", { "typst", "typ", "markdown", "vimwiki", "rmarkdown", "rmd", "pandoc" }),
+			Rule("```.*$", "```", { "typst", "typ", "markdown", "vimwiki", "rmarkdown", "rmd", "pandoc" })
+				:only_cr()
+				:use_regex(true),
 			Rule("\\(", "  \\)", latex):set_end_pair_length(3),
 			Rule("\\[", "  \\]", latex):set_end_pair_length(3),
 			Rule("$", "  $", { "tex", "latex", "markdown" })
