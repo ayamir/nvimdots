@@ -26,7 +26,7 @@ local plug_map = {
 
 	-- Plugin: hi-my-words
 	["n|<leader>hw"] = map_cr("HiMyWordsToggle"):with_noremap():with_silent():with_desc("Toggle hi-my-words"),
-	["n|<leader>hW"] = map_cr("HiMyWordsToggle"):with_noremap():with_silent():with_desc("Toggle hi-my-words"),
+	["n|<leader>hW"] = map_cr("HiMyWordsClear"):with_noremap():with_silent():with_desc("Toggle hi-my-words"),
 }
 
 bind.nvim_load_mapping(plug_map)
