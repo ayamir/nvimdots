@@ -10,8 +10,8 @@ return function()
 			if errors < 0 then
 				return nil
 			end
-			return (not check_lines and vim.fn.line("$") <= 1000) and require("rainbow-delimiters").strategy["global"]
-				or require("rainbow-delimiters").strategy["local"]
+			return (check_lines and vim.fn.line("$") > 1000) and require("rainbow-delimiters").strategy["local"]
+				or require("rainbow-delimiters").strategy["global"]
 		end
 	end
 	vim.g.rainbow_delimiters = {

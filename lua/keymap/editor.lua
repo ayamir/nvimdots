@@ -19,7 +19,7 @@ local plug_map = {
 
 	-- Plugin: diffview
 	["n|<leader>Do"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
-	["n|<leader>Dc"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Show diff"),
+	["n|<leader>Dc"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
 
 	-- Plugin: vim-easy-align
 	["nx|gea"] = map_cr("EasyAlign"):with_desc("edit: Align with delimiter"),
