@@ -144,6 +144,8 @@ M.on_attach = function(client, bufnr)
 		client.server_capabilities.definitionProvider = false
 	elseif client.name == "sourcery" then
 		client.server_capabilities.hoverProvider = false
+	elseif client.name == "clangd" then
+		client.server_capabilities.semanticTokensProvider = nil
 	end
 	-- client.server_capabilities.semanticTokensProvider = nil
 end

@@ -17,6 +17,14 @@ local plug_map = {
 		:with_silent()
 		:with_desc("Nvim-window: Pickup a window"),
 
+	-- Plugin: clever-f
+	["n|'"] = map_callback(function()
+		return et("<Plug>(clever-f-repeat-forward)")
+	end):with_expr(),
+	["n|;"] = map_callback(function()
+		return et("<Plug>(clever-f-repeat-back)")
+	end):with_expr(),
+
 	-- Plugin: diffview
 	["n|<leader>Do"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
 	["n|<leader>Dc"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
