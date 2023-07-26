@@ -147,7 +147,6 @@ M.on_attach = function(client, bufnr)
 	elseif client.name == "clangd" then
 		client.server_capabilities.semanticTokensProvider = nil
 	end
-	-- client.server_capabilities.semanticTokensProvider = nil
 end
 
 return M
