@@ -56,14 +56,15 @@ completion["hrsh7th/nvim-cmp"] = {
 		{ "hrsh7th/cmp-cmdline" },
 		{ "ray-x/cmp-treesitter", commit = "c8e3a74" },
 		{ "tzachar/cmp-tabnine", build = "./install.sh", config = require("completion.tabnine") },
-		-- {
-		-- 	"jcdickinson/codeium.nvim",
-		-- 	dependencies = {
-		-- 		"nvim-lua/plenary.nvim",
-		-- 		"MunifTanjim/nui.nvim",
-		-- 	},
-		-- 	config = require("completion.codeium"),
-		-- },
+		{
+			"jellydn/codeium.nvim",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"MunifTanjim/nui.nvim",
+			},
+			config = require("completion.codeium"),
+			branch = "patch-1",
+		},
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {

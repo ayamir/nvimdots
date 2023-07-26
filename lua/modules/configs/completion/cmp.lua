@@ -84,6 +84,7 @@ return function()
 					treesitter = "[TS]",
 					luasnip = "[SNIP]",
 					spell = "[SPELL]",
+					codeium = "[CODI]",
 				}, {
 					__index = function()
 						return "[BTN]" -- builtin/unknown source names
@@ -156,10 +157,10 @@ return function()
 			{ name = "tmux" },
 			{ name = "orgmode" },
 			{ name = "buffer" },
-			{ name = "latex_symbols" },
+			{ name = "latex_symbols", priority = 9 },
 			{ name = "copilot" },
 			{ name = "cmp_tabnine" },
-			-- { name = "codeium" },
+			{ name = "codeium" },
 		},
 		experimental = {
 			ghost_text = {
