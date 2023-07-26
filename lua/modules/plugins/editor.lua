@@ -26,11 +26,6 @@ editor["windwp/nvim-autopairs"] = {
     event = "InsertEnter",
     config = require("editor.autopairs")
 }
-editor["rhysd/clever-f.vim"] = {
-	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.cleverf"),
-}
 editor["LunarVim/bigfile.nvim"] = {
 	lazy = false,
 	config = require("editor.bigfile"),
