@@ -11,6 +11,7 @@ return function()
 			local exclude_filetype = {
 				TelescopePrompt = true,
 				lspsagafinder = true,
+				lazy = true,
 				[""] = true,
 			}
 
