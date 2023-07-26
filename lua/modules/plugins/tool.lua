@@ -136,6 +136,17 @@ tool["nvim-pack/nvim-spectre"] = {
 	conifg = true,
 	opts = { open_cmd = "noswapfile 50vnew" },
 }
+tool["m4xshen/hardtime.nvim"] = {
+	lazy = true,
+	cmd = { "Hardtime" },
+	config = function()
+		require("hardtime").setup({
+			notification = false,
+			hint = true,
+			disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
+		})
+	end,
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
