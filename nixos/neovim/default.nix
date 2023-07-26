@@ -119,12 +119,6 @@ in
             See the example for more info.
           '';
         };
-        extraPkgConfigPackages = mkOption {
-          type = with types; listOf package;
-          default = [ ];
-          example = literalExpression "[ pkgs.openssl ]";
-          description = "Extra build dependent for pkgconfig.";
-        };
         extraBuildDependentPackages = mkOption {
           type = with types; listOf package;
           default = [ ];
@@ -136,38 +130,51 @@ in
   };
   config =
     let
-      enabledBash = config.programs.bash.enable; # 
-      enabledFish = config.programs.fish.enable; # shellInit set -x
-      enabledIon = config.programs.ion.enable; # initExtra export PATH
-      enabledNushell = config.programs.nushell.enable; # environmentVariables
-      enabledZsh = config.programs.zsh.enable;
-
-      pkg-config-pkgs = with pkgs; [ openssl zlib ]
+      # From https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
+      build-dependent-pkgs = with pkgs;
+        [
+          zlib
+          zstd
+          stdenv.cc.cc
+          curl
+          openssl
+          attr
+          libssh
+          bzip2
+          libxml2
+          acl
+          libsodium
+          util-linux
+          xz
+          systemd
+          glib
+          clangStdenv.cc
+        ]
+        ++ cfg.extraBuildDependentPackages
         ++ optional cfg.withGo hunspell
-        ++ optionals cfg.withR [ libxml2 glib ]
-        ++ optional cfg.withVala vala
-        ++ optionals (cfg.extraPkgConfigPackages != [ ]) cfg.extraPkgConfigPackages;
+        ++ optionals cfg.withVala [ vala jsonrpc-glib ];
 
-      include-pkgs = with pkgs; [ openssl zlib ]
-        ++ optional cfg.withGo hunspell
-        ++ optionals (cfg.extraBuildDependentPackages != [ ]) cfg.extraBuildDependentPackages;
+      makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
+      makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
 
-      lib-pkgs = with pkgs; [ openssl zlib ]
-        ++ optional cfg.withVala vala
-        ++ optionals (cfg.extraBuildDependentPackages != [ ]) cfg.extraBuildDependentPackages;
-
-      sessionVariables =
-        let
-          makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
-          makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
-        in
-        {
-          # "*".sessionVariables"."*_PATH" = mkAfter (cfg.*.sessionVariables."*_PATH" + ":${pkgs.zlib}/lib"), if you add path to `*_PATH`.
-          SQLITE_CLIB_PATH = "${pkgs.sqlite.out}/lib/libsqlite3.so";
-          PKG_CONFIG_PATH = makePkgConfigPath pkg-config-pkgs;
-          CPATH = makeIncludePath include-pkgs;
-          LIBRARY_PATH = makeLibraryPath lib-pkgs;
-        }; # "*".sessionVariables.DOTNET = mkAfter "${pkgs.dotnet-sdk}", if you override `DOTNET_ROOT`.
+      library-pkgs = pkgs.buildEnv {
+        name = "library-pkgs";
+        pathsToLink = [ "/lib" ];
+        paths = map lib.getLib build-dependent-pkgs;
+        ignoreCollisions = true;
+      };
+      include-pkgs = pkgs.buildEnv {
+        name = "include-pkgs";
+        extraPrefix = "/lib/include";
+        paths = splitString ":" (makeIncludePath build-dependent-pkgs);
+        ignoreCollisions = true;
+      };
+      pkg-config-pkgs = pkgs.buildEnv {
+        name = "pkg-config-pkgs";
+        extraPrefix = "/lib/pkgconfig";
+        paths = splitString ":" (makePkgConfigPath build-dependent-pkgs);
+        ignoreCollisions = true;
+      };
     in
     mkIf cfg.enable
       {
@@ -177,14 +184,8 @@ in
             "nvim/init.lua".source = ../../init.lua;
           };
         };
-        # export build dependent pathes
-        # Reflecting `home.sessionVariables` requires GUI logout, so set it in each shell
-        programs.bash.sessionVariables = mkBefore sessionVariables;
-        programs.fish.shellInit = mkBefore (concatStringsSep "\n" (mapAttrsToList (k: v: "set -x ${k} ${v}") sessionVariables));
-        programs.ion.initExtra = mkBefore (concatStringsSep "\n" (mapAttrsToList (k: v: "export ${k}=${v}") sessionVariables));
-        programs.nushell.environmentVariables = mkBefore sessionVariables;
-        programs.zsh.sessionVariables = mkBefore sessionVariables;
-        home.sessionVariables = optionalAttrs (! enabledBash && enabledFish && enabledIon && enabledNushell && enabledZsh) sessionVariables;
+        home.packages = [ library-pkgs include-pkgs pkg-config-pkgs ];
+        home.shellAliases.nvim = "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/pkgconfig CPATH=${config.home.profileDirectory}/lib/include LIBRARY_PATH=${config.home.profileDirectory}/lib LD_LIBRARY_PATH=${config.home.profileDirectory}/lib:''$NIX_LD_LIBRARY_PATH nvim";
 
         programs.java.enable = cfg.withJava;
         programs.dotnet.enable = cfg.withDotNET;
@@ -226,7 +227,7 @@ in
               (pkgs.writeShellApplication {
                 name = "stack";
                 text = ''
-                  exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${pkgs.zlib.dev}/include" "--extra-lib-dirs=${pkgs.zlib}/lib" "$@"
+                  exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib" "$@"
                 '';
               })
               (haskellPackages.ghcWithPackages (ps: [
