@@ -119,7 +119,7 @@ in
             See the example for more info.
           '';
         };
-        extraBuildDependentPackages = mkOption {
+        extraDependentPackages = mkOption {
           type = with types; listOf package;
           default = [ ];
           example = literalExpression "[ pkgs.openssl ]";
@@ -150,7 +150,7 @@ in
           glib
           clangStdenv.cc
         ]
-        ++ cfg.extraBuildDependentPackages
+        ++ cfg.extraDependentPackages
         ++ optional cfg.withGo hunspell
         ++ optionals cfg.withVala [ vala jsonrpc-glib ];
 
