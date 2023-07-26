@@ -9,7 +9,7 @@ return function()
 			winbar = true,
 			winfixwidth = true,
 			winfixheight = false,
-            winhighlight = "",
+			winhighlight = "",
 			-- winhighlight = "WinBar:EdgyWinBar,Normal:EdgyNormal",
 			spell = false,
 			signcolumn = "no",
@@ -43,6 +43,7 @@ return function()
 					return vim.bo[buf].buftype == "help"
 				end,
 			},
+			{ ft = "sniprun_terminal", title = "Sniprun" },
 			-- { ft = "spectre_panel", size = { height = 0.4 } },
 		},
 		right = {
@@ -56,6 +57,11 @@ return function()
 				filter = function(buf)
 					return vim.b[buf].neo_tree_source == "filesystem"
 				end,
+				size = { height = 0.5 },
+			},
+			{
+				title = "Sidebar",
+				ft = "SidebarNvim",
 				size = { height = 0.5 },
 			},
 			-- {
