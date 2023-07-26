@@ -167,7 +167,7 @@ in
           PKG_CONFIG_PATH = makePkgConfigPath pkg-config-pkgs;
           CPATH = makeIncludePath include-pkgs;
           LIBRARY_PATH = makeLibraryPath lib-pkgs;
-        };
+        }; # "*".sessionVariables.DOTNET = mkAfter "${pkgs.dotnet-sdk}", if you override `DOTNET_ROOT`.
     in
     mkIf cfg.enable
       {
@@ -188,19 +188,6 @@ in
 
         programs.java.enable = cfg.withJava;
         programs.dotnet.enable = cfg.withDotNET;
-
-        programs.nix-ld =
-          if attrByPath [ "nix-ld" "enable" ] false config.programs then {
-            enable = true;
-          } else if attrByPath [ "nix-ld" "dev" "enable" ] false config.programs then {
-            dev = {
-              enable = true;
-            };
-          } else
-            throw ''
-              You must install `nix-ld` as NixOSModule.
-              Please see https://github.com/Mic92/nix-ld/tree/main#installation.
-            '';
 
         programs.neovim = {
           enable = true; # Replace from vi&vim to neovim
