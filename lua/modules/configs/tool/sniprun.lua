@@ -6,12 +6,12 @@ return function()
 		interpreter_options = {}, -- " intepreter-specific options, consult docs / :SnipInfo <name>
 		-- " you can combo different display modes as desired
 		display = {
-			"TempFloatingWindowOk", -- display ok results in the floating window
-			"NvimNotifyErr", -- display err results with the nvim-notify plugin
+			-- "TempFloatingWindowOk", -- display ok results in the floating window
+			-- "NvimNotifyErr", -- display err results with the nvim-notify plugin
 			-- "Classic", -- display results in the command line"
 			-- "VirtualText", -- display results in virtual text"
 			-- "LongTempFloatingWindow", -- display results in the long floating window
-			-- "Terminal" -- display results in a vertical split
+			"Terminal" -- display results in a vertical split
 			-- "TerminalWithCode" -- display results and code history in a vertical split
 		},
 		display_options = {
@@ -21,7 +21,7 @@ return function()
 		-- " miscellaneous compatibility/adjustement settings
 		inline_messages = 0, -- " inline_message (0/1) is a one-line way to display messages
 		-- " to workaround sniprun not being able to display anything
-		borders = "single", -- " display borders around floating windows
+		borders = "rounded", -- " display borders around floating windows
 		-- " possible values are 'none', 'single', 'double', or 'shadow'
 	})
 end
