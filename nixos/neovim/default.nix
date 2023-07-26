@@ -19,9 +19,9 @@ in
           Enable Deno provider. Set to `true` to 
           use Deno plugins.
         '';
-        withDotnet = mkEnableOption ''
+        withDotNET = mkEnableOption ''
           Enable dotnet provider. Set to `true` to 
-          use dotnet plugins.
+          use DotNET plugins.
         '';
         withErlang = mkEnableOption ''
           Enable Erlang provider. Set to `true` to 
@@ -187,6 +187,7 @@ in
         home.sessionVariables = optionalAttrs (! enabledBash && enabledFish && enabledIon && enabledNushell && enabledZsh) sessionVariables;
 
         programs.java.enable = cfg.withJava;
+        programs.dotnet.enable = cfg.withDotNET;
 
         programs.neovim = {
           enable = true; # Replace from vi&vim to neovim
