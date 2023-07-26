@@ -1,5 +1,6 @@
 {
   imports = [
+    ./dotnet
     ./neovim
   ];
 }
