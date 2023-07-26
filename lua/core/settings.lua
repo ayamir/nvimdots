@@ -63,10 +63,6 @@ settings["background"] = "dark"
 ---@type string
 settings["external_browser"] = "chrome-cli open"
 
--- Set it to true if not setting a value for python_host_prog (in cases where it is externally configured, such as on NixOS).
----@type boolean
-settings["dont_set_python_host_prog"] = true
-
 -- Filetypes in this list will skip lsp formatting if rhs is true.
 ---@type table<string, boolean>
 settings["formatter_block_list"] = {
