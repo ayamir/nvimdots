@@ -145,7 +145,6 @@ local plug_map = {
 		:with_desc("debug: Run/Continue"),
 	["n|<F7>"] = map_callback(function()
 			require("dap").terminate()
-			require("dapui").close()
 		end)
 		:with_noremap()
 		:with_silent()
