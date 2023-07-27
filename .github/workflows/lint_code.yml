@@ -7,4 +7,4 @@ jobs:
       - uses: actions/checkout@v3
       - uses: lunarmodules/luacheck@v1
         with:
-          args: . --std luajit --globals vim _toggle_lazygit _command_panel --max-line-length 150 --no-config
+          args: . --std luajit --globals vim _toggle_lazygit _command_panel _lspkeymap_loaded_bufnr --max-line-length 150 --no-config
