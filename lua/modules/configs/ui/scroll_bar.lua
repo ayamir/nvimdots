@@ -1,5 +1,13 @@
 return function()
 	require("scrollbar").setup({
+		excluded_filetypes = {
+			"cmp_docs",
+			"cmp_menu",
+			"noice",
+			"prompt",
+			"TelescopePrompt",
+			"lazy",
+		},
 		exclude_func = function(winid, bufnr)
 			if not vim.api.nvim_win_is_valid(winid) then
 				return true
@@ -11,7 +19,6 @@ return function()
 			local exclude_filetype = {
 				TelescopePrompt = true,
 				lspsagafinder = true,
-				lazy = true,
 				[""] = true,
 			}
 
