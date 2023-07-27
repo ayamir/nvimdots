@@ -32,8 +32,8 @@ return function()
 					{ id = "stacks", size = 0.3 },
 					{ id = "breakpoints", size = 0.1 },
 				},
-				size = 0.3,
-				position = "right",
+				size = 0.2,
+				position = "left",
 			},
 			{
 				elements = {
@@ -62,7 +62,7 @@ return function()
 		floating = {
 			max_height = nil, -- These can be integers or a float between 0 and 1.
 			max_width = nil, -- Floats will be treated as percentage of your screen.
-			border = "single", -- Border style. Can be "single", "double" or "rounded"
+			border = "rounded", -- Border style. Can be "single", "double" or "rounded"
 			mappings = {
 				close = { "q", "<Esc>" },
 			},
