@@ -32,7 +32,7 @@ return function()
 			-- The first three options are required by nvim-dap
 			type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
 			request = "launch",
-			name = "Debug",
+			name = "Debug - with external files",
 			-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 			console = "integratedTerminal",
 			program = "${file}", -- This configuration will launch the current file if used.
@@ -48,13 +48,14 @@ return function()
 		{
 			type = "python",
 			request = "launch",
-			name = "Launch file with arguments",
+			name = "Debug - with arguments (with external files)",
 			program = "${file}",
 			args = function()
 				local args_string = vim.fn.input("Arguments: ")
 				return vim.split(args_string, " +")
 			end,
 			console = "integratedTerminal",
+			justMyCode = false,
 			pythonPath = function()
 				if not is_empty(vim.env.CONDA_PREFIX) then
 					return vim.env.CONDA_PREFIX .. "/bin/python"
@@ -66,7 +67,7 @@ return function()
 		{
 			type = "python",
 			request = "launch",
-			name = "Launch file inside my code",
+			name = "Debug - just my code",
 			console = "integratedTerminal",
 			program = "${file}",
 			justMyCode = false,
