@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema-zh-tw.json",
+  "diagnostics": {
+    "globals": ["vim"],
+    "disable": ["different-requires"]
+  },
+  "runtime": {
+    "version": "LuaJIT"
+  },
+  "workspace": {
+    "maxPreload": 100000,
+    "preloadFileSize": 10000,
+    "ignoreDir": [".vscode", ".git"],
+    "library": [
+      "/path/to/share/nvim/runtime/lua",
+      "/path/to/share/nvim/runtime/plugin"
+    ]
+  },
+  "telemetry": {
+    "enable": false
+  }
+}
