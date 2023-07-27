@@ -168,15 +168,6 @@ return function()
 			},
 		},
 	})
-	-- cmp.setup.cmdline("/", {
-	-- 	completion = {
-	-- 		completeopt = "nenu,menuone,noselect",
-	-- 	},
-	-- 	mapping = cmp.mapping.preset.cmdline(),
-	-- 	sources = {
-	-- 		{ name = "buffer" },
-	-- 	},
-	-- })
 	cmp.setup.cmdline(":", {
 		completion = {
 			completeopt = "nenu,menuone,noselect",
