@@ -128,5 +128,10 @@ return function()
 				expand_collaspe = "u",
 			},
 		},
+		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
+		scroll_preview = {
+			scroll_down = "<C-j>",
+			scroll_up = "<C-k>",
+		},
 	})
 end

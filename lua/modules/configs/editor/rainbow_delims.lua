@@ -19,6 +19,8 @@ return function()
 			[""] = init_strategy(false),
 			c = init_strategy(true),
 			cpp = init_strategy(true),
+			vimdoc = init_strategy(true),
+			vim = init_strategy(true),
 		},
 		query = {
 			[""] = "rainbow-delimiters",
