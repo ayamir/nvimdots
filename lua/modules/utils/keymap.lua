@@ -69,7 +69,7 @@ end
 ---which the original keymapping will be executed.
 ---@param map table keymap object
 ---@return function
-local function get_original(map)
+local function get_fallback(map)
 	return function()
 		local keys, fmode
 		if map.expr then
@@ -93,28 +93,28 @@ end
 ---@param cond string
 ---@param mode string
 ---@param lhs string
----@param rhs string | function
+---@param rhs function
 ---@param opts? table
 local function amend(cond, mode, lhs, rhs, opts)
 	local map = get_map(mode, lhs)
-	local original = get_original(map)
-	opts = opts or {}
-	opts.desc = table.concat({
+	local fallback = get_fallback(map)
+	local options = vim.deepcopy(opts) or {}
+	options.desc = table.concat({
 		"[" .. cond,
-		(opts.desc and ": " .. opts.desc or ""),
-		"] / ",
-		map.desc or "",
+		(options.desc and ": " .. options.desc or ""),
+		"]",
+		(map.desc and " / " .. map.desc or ""),
 	})
 	vim.keymap.set(mode, lhs, function()
-		rhs(original)
-	end, opts)
+		rhs(fallback)
+	end, options)
 end
 
 ---Amend the existing keymap.
 ---@param cond string
 ---@param mode string | string[]
 ---@param lhs string
----@param rhs string | function
+---@param rhs function
 ---@param opts? table
 local function modes_amend(cond, mode, lhs, rhs, opts)
 	if type(mode) == "table" then
@@ -127,16 +127,22 @@ local function modes_amend(cond, mode, lhs, rhs, opts)
 end
 
 ---@param cond string
+---@param global_flag string
 ---@param mapping table<string, map_rhs>
-function M.amend(cond, mapping)
+function M.amend(cond, global_flag, mapping)
 	for key, value in pairs(mapping) do
 		local modes, keymap = key:match("([^|]*)|?(.*)")
 		if type(value) == "table" then
-			for _, mode in ipairs(vim.split(modes, "")) do
-				local rhs = value.cmd
-				local options = value.options
-				modes_amend(cond, mode, keymap, rhs, options)
-			end
+			local rhs = value.cmd
+			local options = value.options
+			modes_amend(cond, vim.split(modes, ""), keymap, function(fallback)
+				if _G[global_flag] then
+					local fmode = options.noremap and "in" or "im"
+					vim.api.nvim_feedkeys(termcodes(rhs), fmode, false)
+				else
+					fallback()
+				end
+			end, options)
 		end
 	end
 end
