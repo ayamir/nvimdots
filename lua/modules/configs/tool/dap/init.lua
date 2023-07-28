@@ -11,7 +11,7 @@ return function()
 	local _debugging = false
 	local function debug_init_cb()
 		_debugging = true
-		mappings.load()
+		mappings.load_extras()
 		dapui.open({ reset = true })
 	end
 	local function debug_terminate_cb()
