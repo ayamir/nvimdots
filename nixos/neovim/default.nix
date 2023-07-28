@@ -18,10 +18,11 @@ in
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies needed by `mason.nvim` and `nvim-treesitter`
           Environment variables are only visible to `nvim` and have no effect on the session.
+          Required for NixOS.
         '';
-        withDeno = mkEnableOption ''
-          Enable Deno provider. Set to `true` to 
-          use Deno plugins.
+        withBuildTools = mkEnableOption ''
+          Include basic build tools like `gcc` and `pkg-config`.
+          Required for NixOS.
         '';
         withDotNET = mkEnableOption ''
           Enable dotnet provider. Set to `true` to 
@@ -216,14 +217,6 @@ in
 
           extraPackages = with pkgs;
             [
-              # Build Tools
-              pkg-config
-              clang
-              gcc
-              cmake
-              gnumake
-              ninja
-
               # Dependent packages used by default plugins
               doq
               neovim-remote
@@ -233,7 +226,14 @@ in
 
               yarn
             ]
-            ++ optional cfg.withDeno deno
+            ++ optionals cfg.withBuildTools [
+              pkg-config
+              clang
+              gcc
+              cmake
+              gnumake
+              ninja
+            ]
             ++ optional cfg.withErlang rebar3
             ++ optional cfg.withGo go
             ++ optionals cfg.withHaskell [
