@@ -130,7 +130,7 @@ in
   };
   config =
     let
-      # From https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
+      # Inspired from https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
       build-dependent-pkgs = with pkgs;
         [
           zlib
@@ -148,7 +148,6 @@ in
           xz
           systemd
           glib
-          clangStdenv.cc
         ]
         ++ cfg.extraDependentPackages
         ++ optional cfg.withGo hunspell
@@ -160,18 +159,19 @@ in
       library-pkgs = pkgs.buildEnv {
         name = "library-pkgs";
         pathsToLink = [ "/lib" ];
+        extraPrefix = "/lib/nvim-lib";
         paths = map lib.getLib build-dependent-pkgs;
         ignoreCollisions = true;
       };
       include-pkgs = pkgs.buildEnv {
         name = "include-pkgs";
-        extraPrefix = "/lib/include";
+        extraPrefix = "/lib/nvim-include";
         paths = splitString ":" (makeIncludePath build-dependent-pkgs);
         ignoreCollisions = true;
       };
       pkg-config-pkgs = pkgs.buildEnv {
         name = "pkg-config-pkgs";
-        extraPrefix = "/lib/pkgconfig";
+        extraPrefix = "/lib/nvim-pkgconfig";
         paths = splitString ":" (makePkgConfigPath build-dependent-pkgs);
         ignoreCollisions = true;
       };
@@ -185,7 +185,7 @@ in
           };
         };
         home.packages = [ library-pkgs include-pkgs pkg-config-pkgs ];
-        home.shellAliases.nvim = "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/pkgconfig CPATH=${config.home.profileDirectory}/lib/include LIBRARY_PATH=${config.home.profileDirectory}/lib LD_LIBRARY_PATH=${config.home.profileDirectory}/lib:''$NIX_LD_LIBRARY_PATH nvim";
+        home.shellAliases.nvim = "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so CPLUS_INCLUDE_PATH=${pkgs.libcxx.dev}/include/c++/v1 PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-pkgconfig CPATH=${config.home.profileDirectory}/lib/nvim-include LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-lib LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-lib:''$NIX_LD_LIBRARY_PATH nvim";
 
         programs.java.enable = cfg.withJava;
         programs.dotnet.enable = cfg.withDotNET;
