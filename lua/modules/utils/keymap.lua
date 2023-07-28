@@ -22,6 +22,7 @@ end
 local function get_map(mode, lhs)
 	for _, map in ipairs(vim.api.nvim_buf_get_keymap(0, mode)) do
 		if keymap_equals(map.lhs, lhs) then
+			vim.api.nvim_buf_del_keymap(0, mode, lhs)
 			return {
 				lhs = map.lhs,
 				rhs = map.rhs or "",
@@ -38,6 +39,7 @@ local function get_map(mode, lhs)
 
 	for _, map in ipairs(vim.api.nvim_get_keymap(mode)) do
 		if keymap_equals(map.lhs, lhs) then
+			vim.api.nvim_del_keymap(mode, lhs)
 			return {
 				lhs = map.lhs,
 				rhs = map.rhs or "",
