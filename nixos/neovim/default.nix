@@ -15,6 +15,10 @@ in
           Activate "ayamir/nvimdots".
           Please see details https://github.com/ayamir/nvimdots
         '';
+        setBuildEnv = mkEnableOption ''
+          Sets environment variables that resolve build dependencies needed by `mason.nvim` and `nvim-treesitter`
+          Environment variables are only visible to `nvim` and have no effect on the session.
+        '';
         withDeno = mkEnableOption ''
           Enable Deno provider. Set to `true` to 
           use Deno plugins.
@@ -147,7 +151,9 @@ in
           util-linux
           xz
           systemd
+          # Packages not included in `nix-ld`'s NixOSModule
           glib
+          libcxx
         ]
         ++ cfg.extraDependentPackages
         ++ optional cfg.withGo hunspell
@@ -156,43 +162,50 @@ in
       makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
       makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
 
-      library-pkgs = pkgs.buildEnv {
-        name = "library-pkgs";
-        pathsToLink = [ "/lib" ];
-        extraPrefix = "/lib/nvim-lib";
+      nvim-depends-library = pkgs.buildEnv {
+        name = "nvim-depends-library";
         paths = map lib.getLib build-dependent-pkgs;
+        extraPrefix = "/lib/nvim-depends";
+        pathsToLink = [ "/lib" ];
         ignoreCollisions = true;
       };
-      include-pkgs = pkgs.buildEnv {
-        name = "include-pkgs";
-        extraPrefix = "/lib/nvim-include";
+      nvim-depends-include = pkgs.buildEnv {
+        name = "nvim-depends-include";
         paths = splitString ":" (makeIncludePath build-dependent-pkgs);
+        extraPrefix = "/lib/nvim-depends/include";
         ignoreCollisions = true;
       };
-      pkg-config-pkgs = pkgs.buildEnv {
-        name = "pkg-config-pkgs";
-        extraPrefix = "/lib/nvim-pkgconfig";
+      nvim-depends-pkgconfig = pkgs.buildEnv {
+        name = "nvim-depends-pkgconfig";
         paths = splitString ":" (makePkgConfigPath build-dependent-pkgs);
+        extraPrefix = "/lib/nvim-depends/pkgconfig";
         ignoreCollisions = true;
       };
+      buildEnv = [
+        "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so"
+        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
+        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
+        "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
+        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib:$NIX_LD_LIBRARY_PATH"
+      ];
     in
     mkIf cfg.enable
       {
-        xdg = {
-          configFile = {
-            "nvim/lua".source = ../../lua;
-            "nvim/init.lua".source = ../../init.lua;
-          };
+        xdg.configFile = {
+          "nvim/lua".source = ../../lua;
+          "nvim/init.lua".source = ../../init.lua;
         };
-        home.packages = [ library-pkgs include-pkgs pkg-config-pkgs ];
-        home.shellAliases.nvim = "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so CPLUS_INCLUDE_PATH=${pkgs.libcxx.dev}/include/c++/v1 PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-pkgconfig CPATH=${config.home.profileDirectory}/lib/nvim-include LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-lib LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-lib:''$NIX_LD_LIBRARY_PATH nvim";
+        home.packages = optionals cfg.setBuildEnv [ nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
+        home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
+        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " " + "nvim";
 
         programs.java.enable = cfg.withJava;
         programs.dotnet.enable = cfg.withDotNET;
 
         programs.neovim = {
-          enable = true; # Replace from vi&vim to neovim
-          viAlias = true;
+          enable = true;
+          viAlias = true; # Replace from vi&vim to neovim
           vimAlias = true;
           vimdiffAlias = true;
 
@@ -202,7 +215,7 @@ in
 
           extraPackages = with pkgs;
             [
-              # Build Dependent
+              # Build Tools
               pkg-config
               clang
               gcc
@@ -231,7 +244,7 @@ in
                 '';
               })
               (haskellPackages.ghcWithPackages (ps: [
-                # ghcup
+                # ghcup # ghcup is broken
               ] ++ cfg.extraHaskellPackages pkgs.haskellPackages))
             ]
             ++ optional cfg.withHaxe haxe
