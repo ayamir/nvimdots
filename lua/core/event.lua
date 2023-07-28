@@ -14,14 +14,10 @@ function autocmd.nvim_create_augroups(definitions)
 end
 
 local mapping = require("keymap.completion")
-_G._lspkeymap_loaded_bufnr = {}
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
 	callback = function(event)
-		if not _lspkeymap_loaded_bufnr[event.buf] then
-			mapping.lsp(event.buf)
-			_lspkeymap_loaded_bufnr[event.buf] = true
-		end
+		mapping.lsp(event.buf)
 	end,
 })
 
