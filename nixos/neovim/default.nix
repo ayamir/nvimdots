@@ -187,7 +187,8 @@ in
         "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
         "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
         "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib:$NIX_LD_LIBRARY_PATH"
+        "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "NIX_LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
       ];
     in
     mkIf cfg.enable
