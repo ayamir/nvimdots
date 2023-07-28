@@ -50,6 +50,9 @@ return function()
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
+			if lsp_name == "typst_lsp" then
+				opts.root_dir = require("lspconfig").util.root_pattern("*.typ")
+			end
 			nvim_lsp[lsp_name].setup(opts)
 			return
 		elseif type(custom_handler) == "function" then

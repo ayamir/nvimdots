@@ -124,5 +124,9 @@ lang["CRAG666/code_runner.nvim"] = {
 	config = require("lang.code_runner"),
 	cmd = { "RunCode" },
 }
+lang["kaarmu/typst.vim"] = {
+	lazy = true,
+	ft = { "typst" },
+}
 
 return lang
