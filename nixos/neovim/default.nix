@@ -183,13 +183,12 @@ in
         ignoreCollisions = true;
       };
       buildEnv = [
-        "SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so"
-        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
-        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
         "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
-        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
         "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
         "NIX_LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
+        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
       ];
     in
     mkIf cfg.enable
@@ -198,9 +197,11 @@ in
           "nvim/lua".source = ../../lua;
           "nvim/init.lua".source = ../../init.lua;
         };
-        home.packages = optionals cfg.setBuildEnv [ nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
+        home.packages = with pkgs; [
+          ripgrep
+        ] ++ optionals cfg.setBuildEnv [ patchelf nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
         home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
-        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " " + "nvim";
+        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
 
         programs.java.enable = cfg.withJava;
         programs.dotnet.dev.enable = cfg.withDotNET;
@@ -219,10 +220,7 @@ in
             [
               # Dependent packages used by default plugins
               doq
-              neovim-remote
-              ripgrep
               sqlite
-              xclip
 
               yarn
             ]
