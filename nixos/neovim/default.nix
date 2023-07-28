@@ -202,7 +202,8 @@ in
 
           extraPackages = with pkgs;
             [
-              # Build Dependent
+              nix-ld #
+              # Build Tools
               pkg-config
               clang
               gcc
