@@ -8,15 +8,16 @@ return function()
 	local mappings = require("tool.dap.dap-keymap")
 
 	-- Initialize debug hooks
-	_G._debugging = false
+	local _debugging = false
 	local function debug_init_cb()
-		_G._debugging = true
-		mappings.load_extras()
+		_debugging = true
+		mappings.load()
 		dapui.open({ reset = true })
 	end
 	local function debug_terminate_cb()
 		if _debugging then
-			_G._debugging = false
+			_debugging = false
+			mappings.restore()
 			dapui.close()
 		end
 	end
