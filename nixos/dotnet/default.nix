@@ -4,11 +4,11 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.programs.dotnet;
+  cfg = config.programs.dotnet.dev;
 in
 {
   options = {
-    programs.dotnet = {
+    programs.dotnet.dev = {
       enable = mkEnableOption "" // {
         description = ''
           Install the DotNet runtime and set the

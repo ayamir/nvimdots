@@ -201,7 +201,7 @@ in
         home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " " + "nvim";
 
         programs.java.enable = cfg.withJava;
-        programs.dotnet.enable = cfg.withDotNET;
+        programs.dotnet.dev.enable = cfg.withDotNET;
 
         programs.neovim = {
           enable = true;
