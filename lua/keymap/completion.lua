@@ -32,7 +32,7 @@ function mapping.lsp(buf)
 		["n|<leader>ld"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
 			:with_buffer(buf)
 			:with_desc("lsp: Line diagnostic"),
-		["n|<TAB>"] = map_cr(":lua vim.lsp.buf.hover()<CR>"):with_buffer(buf):with_desc("lsp: Toggle hover"),
+		["n|<TAB>"] = map_cmd("<cmd>lua vim.lsp.buf.hover()<CR>"):with_buffer(buf):with_desc("lsp: Toggle hover"),
 		["n|K"] = map_cr("lua vim.lsp.buf.hover()"):with_buffer(buf):with_desc("lsp: Show doc"),
 		["n|<leader>rn"] = map_cmd("<cmd>lua vim.lsp.buf.rename()<CR>"):with_buffer(buf):with_desc("lsp: Rename"),
 		["n|gr"] = map_cmd("<cmd>lua vim.lsp.buf.rename()<CR>"):with_buffer(buf):with_desc("lsp: Rename"),
