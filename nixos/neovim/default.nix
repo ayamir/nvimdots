@@ -5,12 +5,12 @@
 , ...
 }:
 with lib; let
-  cfg = config.programs.neovim.activateNvimDots;
+  cfg = config.programs.neovim.nvimdots;
 in
 {
   options = {
     programs.neovim = {
-      activateNvimDots = {
+      nvimdots = {
         enable = mkEnableOption ''
           Activate "ayamir/nvimdots".
           Please see details https://github.com/ayamir/nvimdots
