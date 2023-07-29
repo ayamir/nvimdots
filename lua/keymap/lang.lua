@@ -44,7 +44,7 @@ end
 local plug_map = {
 	-- Plugin MarkdownPreview
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent():with_desc("tool: Preview markdown"),
-	["n|<leader>0"] = map_callback(safe_call_nabla):with_noremap():with_silent():with_desc("tool: Preview markdown"),
+	["n|<leader>0"] = map_callback(safe_call_nabla):with_noremap():with_silent():with_desc("tool: Preview nabla"),
 
 	-- Auto create endwise for latex file
 	["i|]]"] = map_callback(latex_auto_end):with_noremap():with_silent():with_desc("tool: Auto create end for latex"),
