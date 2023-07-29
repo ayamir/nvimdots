@@ -187,6 +187,12 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step over"),
+	["n|<leader>dp"] = map_callback(function()
+			require("dap").step_back()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step back (previous line)"),
 	["n|<leader>dl"] = map_callback(function()
 			require("dap").run_last()
 		end)
