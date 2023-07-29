@@ -36,7 +36,7 @@ return function()
 
 	local lsp_handlers = require("completion.lsp_handlers")
 	lsp_handlers.set_lsp_config()
-	lsp_handlers.set_sidebar_icons()
+	lsp_handlers.set_diagnostic_icons()
 
 	local capabilities = lsp_handlers.make_capabilities()
 
