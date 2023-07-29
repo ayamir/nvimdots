@@ -6,7 +6,7 @@ _G._command_panel = function()
 		layout_config = {
 			width = 0.6,
 			height = 0.6,
-			prompt_position = "top",
+			prompt_position = "bottom",
 		},
 	})
 end
