@@ -10,7 +10,7 @@ local icons = {
 local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
 local diagnostics_level = require("core.settings").diagnostics_level
 
-M.set_sidebar_icons = function()
+M.set_diagnostic_icons = function()
 	-- Set icons for sidebar.
 	local diagnostic_icons = {
 		Error = icons.diagnostics.Error,
@@ -70,18 +70,6 @@ M.on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- keybindings
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
-
-	local opts = { noremap = true, silent = true }
-
-	buf_set_keymap("n", "<tab>", ":lua vim.lsp.buf.hover()<CR>", opts)
-	buf_set_keymap("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	buf_set_keymap("n", "<leader>gq", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
-	buf_set_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>', opts)
-	buf_set_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>', opts)
 	if client.name == "rust_analyzer" then
 		vim.keymap.set("n", "<Leader>gh", require("rust-tools").hover_actions.hover_actions, { buffer = bufnr })
 	end
