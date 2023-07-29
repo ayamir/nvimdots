@@ -5,6 +5,11 @@ return function()
 			top_char = "-",
 			bottom_char = "-",
 		},
+		preview_win_opts = { -- Configure preview window options
+			cursorline = true,
+			number = true,
+			wrap = false,
+		},
 		-- your configuration
 	})
 end
