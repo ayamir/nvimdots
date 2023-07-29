@@ -27,7 +27,7 @@ local plug_map = {
 	-- Plugin: neo-tree
 	["n|<leader>q"] = map_cmd("<Cmd>Neotree<cr>"):with_noremap():with_silent():with_desc("filetree: Toggle"),
 
-	-- Plugin: sniprun
+	-- Plugin: vista
 	["n|<leader>;"] = map_callback(handle_vista):with_noremap():with_silent():with_desc("tool: Run code by range"),
 
 	-- Plugin: sniprun
@@ -170,13 +170,13 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Toggle breakpoint"),
-	["n|<F9>"] = map_callback(function()
+	["n|<leader>di"] = map_callback(function()
 			require("dap").step_into()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step into"),
-	["n|<F10>"] = map_callback(function()
+	["n|<leader>do"] = map_callback(function()
 			require("dap").step_out()
 		end)
 		:with_noremap()
@@ -194,12 +194,6 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Run last"),
-	["n|<leader>do"] = map_callback(function()
-			require("dap").repl.open()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("debug: Open REPL"),
 }
 
 bind.nvim_load_mapping(plug_map)
