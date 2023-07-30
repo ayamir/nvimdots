@@ -22,9 +22,9 @@ editor["gbprod/cutlass.nvim"] = {
 	end,
 }
 editor["windwp/nvim-autopairs"] = {
-    lazy = true,
-    event = "InsertEnter",
-    config = require("editor.autopairs")
+	lazy = true,
+	event = "InsertEnter",
+	config = require("editor.autopairs"),
 }
 editor["LunarVim/bigfile.nvim"] = {
 	lazy = false,
@@ -95,6 +95,10 @@ editor["roobert/search-replace.nvim"] = {
 	lazy = true,
 	event = "BufReadPost",
 	config = require("editor.search-replace"),
+}
+editor["nmac427/guess-indent.nvim"] = {
+	event = { "BufReadPost" },
+	config = require("editor.guess_indent"),
 }
 
 ----------------------------------------------------------------------
