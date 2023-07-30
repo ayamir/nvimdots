@@ -40,7 +40,6 @@ return vim.schedule_wrap(function()
 			enable = true,
 			disable = function(_, bufnr)
 				local buf_name = vim.api.nvim_buf_get_name(bufnr)
-				-- local filetype = vim.bo.filetype
 				local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 				local disable_type = { "org", "tex", "latex" }
 				if table_contains(disable_type, filetype) then
@@ -139,7 +138,7 @@ return vim.schedule_wrap(function()
 		indent = {
 			enable = true,
 			disable = function(_, bufnr)
-				local disable_type = {}
+				local disable_type = { "lua" }
 				local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
 				if table_contains(disable_type, filetype) then
 					return true

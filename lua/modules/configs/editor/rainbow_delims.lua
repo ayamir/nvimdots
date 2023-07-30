@@ -25,7 +25,7 @@ return function()
 		query = {
 			[""] = "rainbow-delimiters",
 			-- latex = "rainbow-blocks",
-			javascript = "rainbow-delimiters-ract",
+			javascript = "rainbow-delimiters-react",
 		},
 		highlight = {
 			"RainbowDelimiterRed",

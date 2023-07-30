@@ -60,5 +60,4 @@ local core_map = {
 	["v|<"] = map_cmd("<gv"):with_desc("edit: Decrease indent"),
 	["v|>"] = map_cmd(">gv"):with_desc("edit: Increase indent"),
 }
-
 bind.nvim_load_mapping(core_map)
