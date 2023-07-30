@@ -110,7 +110,7 @@ M.on_attach = function(client, bufnr)
 				vim.lsp.buf.document_highlight()
 			end,
 		})
-		vim.api.nvim_create_autocmd("CursorMoved", {
+		vim.api.nvim_create_autocmd({ "CursorMoved", "WinLeave" }, {
 			group = highlight_name,
 			buffer = bufnr,
 			callback = function()
