@@ -1,7 +1,9 @@
 return function()
+	vim.g["indentLine_defaultGroup"] = "SpecialKey"
 	require("indent_blankline").setup({
 		space_char_blankline = " ",
 		show_current_context = true,
+		-- char = "▏",
 
 		filetype_exclude = {
 			"", -- for all buffers without a file type
@@ -27,23 +29,21 @@ return function()
 			"vista",
 		},
 		buftype_exclude = { "terminal", "nofile" },
-		-- context_patterns = {
-		-- 	"^if",
-		-- 	"^table",
-		-- 	"block",
-		-- 	"class",
-		-- 	"for",
-		-- 	"function",
-		-- 	"if_statement",
-		-- 	"import",
-		-- 	"list_literal",
-		-- 	"method",
-		-- 	"selector",
-		-- 	"type",
-		-- 	"var",
-		-- 	"while",
-		-- },
+		context_patterns = {
+			"^if",
+			"^table",
+			"block",
+			"class",
+			"for",
+			"function",
+			"if_statement",
+			"import",
+			"list_literal",
+			"method",
+			"selector",
+			"type",
+			"var",
+			"while",
+		},
 	})
-	-- vim.g["indentLine_char"] = "▏"
-	vim.g["indentLine_defaultGroup"] = "SpecialKey"
 end
