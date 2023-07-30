@@ -179,6 +179,9 @@ function autocmd.load_autocmds()
 				"nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>",
 			},
 		},
+		indentline = {
+			{ "WinEnter", "*", 'lua require("indent_blankline.commands").refresh("<bang>" == "!")' },
+		},
 		-- yank = {
 		-- 	{
 		-- 		"TextYankPost",
