@@ -5,6 +5,7 @@ local vim_path = global.vim_path
 local data_dir = global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 local modules_dir = vim_path .. "/lua/modules"
+local user_modules_dir = vim_path .. "/lua/user/modules"
 
 local settings = require("core.settings")
 local use_ssh = settings.use_ssh
@@ -30,6 +31,8 @@ function Lazy:load_plugins()
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
+		local user_plugins_list = vim.split(fn.glob(user_modules_dir .. "/plugins/*.lua"), "\n")
+		plugins_list = vim.list_extend(plugins_list, user_plugins_list)
 		if type(plugins_list) == "table" then
 			for _, f in ipairs(plugins_list) do
 				-- fill list with `plugins/*.lua`'s path used for later `require` like this:
