@@ -4,7 +4,6 @@ return function()
 	local is_windows = require("core.global").is_windows
 
 	local nvim_lsp = require("lspconfig")
-	local mason = require("mason")
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
 	require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -14,7 +13,7 @@ return function()
 		misc = require("modules.utils.icons").get("misc", true),
 	}
 
-	mason.setup({
+	require("modules.utils").load_plugin("mason", {
 		ui = {
 			border = "single",
 			icons = {
@@ -93,7 +92,7 @@ return function()
 		end)
 	)
 
-	mason_lspconfig.setup({
+	require("modules.utils").load_plugin("mason-lspconfig", {
 		ensure_installed = require("core.settings").lsp_deps,
 	})
 

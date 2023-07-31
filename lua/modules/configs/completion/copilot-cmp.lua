@@ -1,3 +1,3 @@
 return function()
-	require("copilot_cmp").setup({})
+	require("modules.utils").load_plugin("copilot_cmp", {})
 end
