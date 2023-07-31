@@ -2,7 +2,7 @@ return function()
 	local transparent_background = require("core.settings").transparent_background
 	local clear = {}
 
-	require("catppuccin").setup({
+	require("modules.utils").load_plugin("catppuccin", {
 		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
 		background = { light = "latte", dark = "mocha" },
 		dim_inactive = {

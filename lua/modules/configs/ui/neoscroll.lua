@@ -1,5 +1,5 @@
 return function()
-	require("neoscroll").setup({
+	require("modules.utils").load_plugin("neoscroll", {
 		-- All these keys will be mapped to their corresponding default scrolling animation
 		mappings = {
 			"<C-u>",
