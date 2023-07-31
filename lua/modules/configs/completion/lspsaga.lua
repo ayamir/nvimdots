@@ -26,111 +26,17 @@ return function()
 	set_sidebar_icons()
 
 	require("lspsaga").setup({
-		scroll_preview = {
-			scroll_down = "<C-j>",
-			scroll_up = "<C-k>",
-		},
-		request_timeout = 3000,
-		finder = {
-			silent = true,
-			default = "def+ref+imp",
-			layout = "float",
-			filter = {},
-			keys = {
-				shuttle = "[]",
-				toggle_or_open = "<CR>",
-				jump_to = "e",
-				vsplit = "v",
-				split = "s",
-				tabe = "t",
-				tabnew = "n",
-				quit = "q",
-				close = "<Esc>",
-			},
-		},
-		definition = {
-			keys = {
-				edit = "<C-c>o",
-				vsplit = "<C-c>v",
-				split = "<C-c>s",
-				tabe = "<C-c>t",
-				close = "<C-c>q",
-				quit = "q",
-			},
-		},
-		code_action = {
-			num_shortcut = true,
-			show_server_name = true,
-			extend_gitsigns = false,
-			keys = {
-				quit = "q",
-				exec = "<CR>",
-			},
-		},
-		lightbulb = {
-			enable = false,
-			sign = true,
-			sign_priority = 20,
-			virtual_text = false,
-		},
-		diagnostic = {
-			max_width = 0.5,
-			max_height = 0.6,
-			text_hl_follow = true,
-			show_code_action = true,
-			border_follow = true,
-			diagnostic_only_current = false,
-			extend_relatedInformation = false,
-			jump_num_shortcut = true,
-			show_layout = "float",
-			keys = {
-				exec_action = "r",
-				quit = "q",
-				toggle_or_jump = "<CR>",
-				quit_in_show = { "q", "<Esc>" },
-			},
-		},
-		rename = {
-			in_select = false,
-			auto_save = false,
-			keys = {
-				quit = "<C-c>",
-				select = "x",
-				exec = "<CR>",
-			},
-		},
-		hover = {
-			max_width = 0.3,
-			max_height = 0.7,
-			open_link = "gl",
-			open_browser = "silent !" .. require("core.settings").external_browser,
-		},
-		outline = {
-			win_position = "right",
-			win_width = 30,
-			auto_preview = false,
-			auto_close = true,
-			close_after_jump = true,
-			detail = false,
-			layout = "normal",
-			keys = {
-				toggle_or_jump = "<CR>",
-				jump = "o",
-				quit = "q",
-			},
-		},
+		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = true,
 			separator = " " .. icons.ui.Separator,
 			hide_keyword = false,
 			show_file = false,
+			folder_level = 1,
 			color_mode = true,
+			delay = 100,
 		},
-		implement = {
-			enable = true,
-			sign = true,
-			virtual_text = false,
-		},
+		-- https://dev.neovim.pro/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",
 			keys = {
@@ -144,18 +50,137 @@ return function()
 				close = "<Esc>",
 			},
 		},
+		-- https://dev.neovim.pro/lspsaga/codeaction/
+		code_action = {
+			num_shortcut = true,
+			show_server_name = true,
+			extend_gitsigns = false,
+			keys = {
+				quit = "q",
+				exec = "<CR>",
+			},
+		},
+		-- https://dev.neovim.pro/lspsaga/definition/
+		definition = {
+			width = 0.6,
+			height = 0.5,
+			keys = {
+				edit = "<C-c>o",
+				vsplit = "<C-c>v",
+				split = "<C-c>s",
+				tabe = "<C-c>t",
+				quit = "q",
+				close = "<C-c>q",
+			},
+		},
+		-- https://dev.neovim.pro/lspsaga/diagnostic/
+		diagnostic = {
+			show_code_action = true,
+			jump_num_shortcut = true,
+			max_width = 0.5,
+			max_height = 0.6,
+			text_hl_follow = true,
+			border_follow = true,
+			extend_relatedInformation = true,
+			show_layout = "float",
+			show_normal_height = 10,
+			max_show_width = 0.9,
+			max_show_height = 0.6,
+			diagnostic_only_current = false,
+			keys = {
+				exec_action = "r",
+				quit = "q",
+				toggle_or_jump = "<CR>",
+				quit_in_show = { "q", "<Esc>" },
+			},
+		},
+		-- https://dev.neovim.pro/lspsaga/finder/
+		finder = {
+			max_height = 0.5,
+			left_width = 0.3,
+			right_width = 0.3,
+			default = "def+ref+imp",
+			methods = {},
+			layout = "float",
+			filter = {},
+			silent = false,
+			keys = {
+				shuttle = "[]",
+				toggle_or_open = "<CR>",
+				vsplit = "v",
+				split = "s",
+				tabe = "t",
+				tabnew = "n",
+				quit = "q",
+				close = "<Esc>",
+			},
+		},
+		-- https://dev.neovim.pro/lspsaga/hover/
+		hover = {
+			max_width = 0.3,
+			max_height = 0.7,
+			open_link = "gl",
+			open_cmd = "silent !" .. require("core.settings").external_browser,
+		},
+		-- https://dev.neovim.pro/lspsaga/implement/
+		implement = {
+			enable = true,
+			sign = true,
+			virtual_text = false,
+			priority = 100,
+		},
+		-- https://dev.neovim.pro/lspsaga/lightbulb/
+		lightbulb = {
+			enable = false,
+			sign = true,
+			virtual_text = false,
+			debounce = 10,
+			sign_priority = 20,
+		},
+		-- https://dev.neovim.pro/lspsaga/outline/
+		outline = {
+			win_position = "right",
+			win_width = 30,
+			auto_preview = false,
+			detail = false,
+			auto_close = true,
+			close_after_jump = true,
+			layout = "normal",
+			max_height = 0.5,
+			left_width = 0.3,
+			keys = {
+				toggle_or_jump = "<CR>",
+				quit = "q",
+				jump = "o",
+			},
+		},
+		-- https://dev.neovim.pro/lspsaga/rename/
+		rename = {
+			in_select = false,
+			auto_save = false,
+			project_max_width = 0.5,
+			project_max_height = 0.5,
+			keys = {
+				quit = "<C-c>",
+				exec = "<CR>",
+				select = "x",
+			},
+		},
+		-- https://dev.neovim.pro/lspsaga/misc/#beacon
 		beacon = {
 			enable = true,
 			frequency = 12,
 		},
+		-- https://dev.neovim.pro/lspsaga/misc/#generic-ui-options
 		ui = {
-			title = true,
-			devicon = true,
 			border = "single", -- Can be single, double, rounded, solid, shadow.
-			actionfix = icons.ui.Spell,
+			devicon = true,
+			title = true,
 			expand = icons.ui.ArrowClosed,
 			collapse = icons.ui.ArrowOpen,
 			code_action = icons.ui.CodeAction,
+			actionfix = icons.ui.Spell,
+			lines = { "┗", "┣", "┃", "━", "┏" },
 			imp_sign = icons.kind.Implementation,
 			kind = {
 				-- Kind
@@ -197,6 +222,11 @@ return function()
 				Unit = { icons.kind.Unit, "LspKindUnit" },
 				Value = { icons.kind.Value, "LspKindValue" },
 			},
+		},
+		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
+		scroll_preview = {
+			scroll_down = "<C-j>",
+			scroll_up = "<C-k>",
 		},
 	})
 end

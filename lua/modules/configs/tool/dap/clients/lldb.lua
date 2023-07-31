@@ -5,8 +5,7 @@ return function()
 
 	dap.adapters.lldb = {
 		type = "executable",
-		command = "lldb-vscode",
-		name = "lldb",
+		command = vim.fn.exepath("lldb-vscode"), -- Find lldb-vscode on $PATH
 	}
 	dap.configurations.c = {
 		{
