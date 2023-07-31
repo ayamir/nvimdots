@@ -164,5 +164,5 @@ return function()
 		},
 	}
 
-	require("rust-tools").setup(opts)
+	require("moudles.utils").load_plugin("rust-tools", opts)
 end
