@@ -72,7 +72,7 @@ return function()
 		end
 	end
 
-	mason_dap.setup({
+	require("modules.utils").load_plugin("mason-nvim-dap", {
 		ensure_installed = require("core.settings").dap_deps,
 		automatic_installation = true,
 		handlers = { mason_dap_handler },

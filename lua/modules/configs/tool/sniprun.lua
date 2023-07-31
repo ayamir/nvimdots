@@ -1,5 +1,5 @@
 return function()
-	require("sniprun").setup({
+	require("modules.utils").load_plugin("sniprun", {
 		selected_interpreters = {}, -- " use those instead of the default for the current filetype
 		repl_enable = {}, -- " enable REPL-like behavior for the given interpreters
 		repl_disable = {}, -- " disable REPL-like behavior for the given interpreters

@@ -6,7 +6,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui"),
 	}
 
-	require("nvim-tree").setup({
+	require("modules.utils").load_plugin("nvim-tree", {
 		auto_reload_on_write = true,
 		create_in_closed_folder = false,
 		disable_netrw = false,
