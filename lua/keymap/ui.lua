@@ -3,8 +3,9 @@ local map_cr = bind.map_cr
 -- local map_cu = bind.map_cu
 -- local map_cmd = bind.map_cmd
 -- local map_callback = bind.map_callback
+local M = {}
 
-local plug_map = {
+M["plug_map"] = {
 	-- Plugin: bufferline
 	["n|<A-j>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_desc("buffer: Switch to next"),
 	["n|<A-k>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_desc("buffer: Switch to prev"),
@@ -23,11 +24,7 @@ local plug_map = {
 	["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
 }
 
-bind.nvim_load_mapping(plug_map)
-
-local mapping = {}
-
-function mapping.gitsigns(buf)
+M["gitsigns"] = function(buf)
 	local actions = require("gitsigns.actions")
 	local map = {
 		["n|]g"] = bind.map_callback(function()
@@ -99,7 +96,8 @@ function mapping.gitsigns(buf)
 			actions.text_object()
 		end):with_buffer(buf),
 	}
+	map = bind.override_mapping("gitsings", map)
 	bind.nvim_load_mapping(map)
 end
 
-return mapping
+return M

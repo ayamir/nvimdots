@@ -147,6 +147,24 @@ function bind.escape_termcode(cmd_string)
 	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
 end
 
+---@param orig table
+function bind.override_mapping(name, orig)
+	local ok, custom = pcall(require, "user.keymap." .. name)
+	if ok then
+		if type(custom) == "table" then
+			for k, v in pairs(custom) do
+				if v == "" then
+					orig[k], custom[k] = nil, nil
+				end
+			end
+			orig = vim.tbl_extend("force", orig, custom)
+		elseif type(custom) == "function" then
+			orig = custom()
+		end
+	end
+	return orig
+end
+
 ---@param mapping table<string, map_rhs>
 function bind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do

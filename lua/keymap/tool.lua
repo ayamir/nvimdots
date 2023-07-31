@@ -199,4 +199,4 @@ local plug_map = {
 		:with_desc("debug: Open REPL"),
 }
 
-bind.nvim_load_mapping(plug_map)
+return plug_map
