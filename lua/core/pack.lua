@@ -26,6 +26,7 @@ function Lazy:load_plugins()
 	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
+			.. string.format(";%s;%s", user_modules_dir .. "/configs/?.lua", user_modules_dir .. "/configs/?/init.lua")
 	end
 
 	local get_plugins_list = function()
