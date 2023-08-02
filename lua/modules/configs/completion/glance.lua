@@ -1,8 +1,9 @@
 return function()
 	local icons = { ui = require("modules.utils.icons").get("ui", true) }
-	local actions = require("glance").actions
+	local glance = require("glance")
+	local actions = glance.actions
 
-	require("glance").setup({
+	glance.setup({
 		height = 20,
 		zindex = 50,
 		preview_win_opts = {
@@ -75,4 +76,12 @@ return function()
 			end,
 		},
 	})
+
+	-- Override LSP handler functions
+	-- stylua: ignore start
+	vim.lsp.buf.references = function() glance.open('references') end
+	vim.lsp.buf.definition = function() glance.open('definitions') end
+	vim.lsp.buf.type_definition = function() glance.open('type_definitions') end
+	vim.lsp.buf.implementations = function() glance.open('implementations') end
+	-- stylua: ignore end
 end
