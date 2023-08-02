@@ -11,7 +11,7 @@ return function()
 		auto_preview = false,
 		position = "right",
 		relative_width = true,
-		width = 20,
+		width = 18,
 		auto_close = true,
 		show_numbers = false,
 		show_symbol_details = true,
