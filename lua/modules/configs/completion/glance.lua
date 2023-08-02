@@ -57,21 +57,25 @@ return function()
 			},
 		},
 		hooks = {
-			before_open = function(results, open)
+			before_open = function(results, open, jump, method)
 				if #results == 0 then
 					vim.notify(
 						"This method is not supported by any of the servers registered for the current buffer",
 						vim.log.levels.WARN,
 						{ title = "Glance" }
 					)
-				elseif #results == 1 then
-					vim.notify(
-						"The identifier under cursor is the only one found",
-						vim.log.levels.INFO,
-						{ title = "Glance" }
-					)
+				elseif method == "references" then
+					if #results == 1 then
+						vim.notify(
+							"The identifier under cursor is the only one found",
+							vim.log.levels.INFO,
+							{ title = "Glance" }
+						)
+					else
+						open(results)
+					end
 				else
-					open(results)
+					jump(results[1])
 				end
 			end,
 		},
@@ -79,9 +83,9 @@ return function()
 
 	-- Override LSP handler functions
 	-- stylua: ignore start
-	vim.lsp.buf.references = function() glance.open('references') end
-	vim.lsp.buf.definition = function() glance.open('definitions') end
-	vim.lsp.buf.type_definition = function() glance.open('type_definitions') end
-	vim.lsp.buf.implementations = function() glance.open('implementations') end
+	vim.lsp.buf.references = function() glance.open("references") end
+	vim.lsp.buf.definition = function() glance.open("definitions") end
+	vim.lsp.buf.type_definition = function() glance.open("type_definitions") end
+	vim.lsp.buf.implementations = function() glance.open("implementations") end
 	-- stylua: ignore end
 end
