@@ -19,6 +19,11 @@ completion["nvimdev/lspsaga.nvim"] = {
 	config = require("completion.lspsaga"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
+completion["dnlhc/glance.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.glance"),
+}
 completion["jose-elias-alvarez/null-ls.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
