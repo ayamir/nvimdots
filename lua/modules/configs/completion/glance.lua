@@ -83,9 +83,11 @@ return function()
 
 	-- Override LSP handler functions
 	-- stylua: ignore start
+    -- luacheck: push ignore 212
 	vim.lsp.buf.references = function(...) glance.open("references") end
 	vim.lsp.buf.definition = function(...) glance.open("definitions") end
 	vim.lsp.buf.type_definition = function(...) glance.open("type_definitions") end
 	vim.lsp.buf.implementations = function(...) glance.open("implementations") end
+	-- luacheck: pop
 	-- stylua: ignore end
 end
