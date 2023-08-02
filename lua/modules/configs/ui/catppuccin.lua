@@ -50,16 +50,28 @@ return function()
 			aerial = false,
 			alpha = false,
 			barbar = false,
+			barbecue = {
+				dim_dirname = true,
+				bold_basename = true,
+				dim_context = false,
+				alt_background = false,
+			},
 			beacon = false,
 			cmp = true,
 			coc_nvim = false,
 			dap = { enabled = true, enable_ui = true },
 			dashboard = false,
+			dropbar = {
+				enabled = true,
+				color_mode = true,
+			},
 			fern = false,
 			fidget = true,
+			flash = false,
 			gitgutter = false,
 			gitsigns = true,
 			harpoon = false,
+			headlines = false,
 			hop = true,
 			illuminate = true,
 			indent_blankline = { enabled = true, colored_indent_levels = false },
@@ -80,8 +92,9 @@ return function()
 			overseer = false,
 			pounce = false,
 			rainbow_delimiters = true,
+			sandwich = false,
 			semantic_tokens = true,
-			symbols_outline = false,
+			symbols_outline = true,
 			telekasten = false,
 			telescope = { enabled = true, style = "nvchad" },
 			treesitter_context = true,
@@ -135,7 +148,7 @@ return function()
 
 					-- For nvim-tree
 					NvimTreeRootFolder = { fg = cp.pink },
-					NvimTreeIndentMarker = { fg = cp.surface0 },
+					NvimTreeIndentMarker = { fg = cp.surface2 },
 
 					-- For trouble.nvim
 					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
@@ -146,6 +159,16 @@ return function()
 					TelescopeResultsDiffChange = { fg = cp.yellow },
 					TelescopeResultsDiffDelete = { fg = cp.red },
 
+					-- For glance.nvim
+					GlanceWinBarFilename = { fg = cp.subtext1, style = { "bold" } },
+					GlanceWinBarFilepath = { fg = cp.subtext0, style = { "italic" } },
+					GlanceWinBarTitle = { fg = cp.teal, style = { "bold" } },
+					GlanceListCount = { fg = cp.lavender },
+					GlanceListFilepath = { link = "Comment" },
+					GlanceListFilename = { fg = cp.blue },
+					GlanceListMatch = { fg = cp.lavender, style = { "bold" } },
+					GlanceFoldIcon = { fg = cp.green },
+
 					-- For nvim-treehopper
 					TSNodeKey = {
 						fg = cp.peach,
@@ -155,6 +178,8 @@ return function()
 
 					-- For treesitter
 					["@keyword.return"] = { fg = cp.pink, style = clear },
+					["@error.c"] = { fg = cp.none, style = clear },
+					["@error.cpp"] = { fg = cp.none, style = clear },
 				}
 			end,
 		},
