@@ -22,7 +22,7 @@ completion["nvimdev/lspsaga.nvim"] = {
 completion["simrat39/symbols-outline.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
-	config = require("completion.outline"),
+	config = require("completion.symbols-outline"),
 }
 completion["jose-elias-alvarez/null-ls.nvim"] = {
 	lazy = true,
