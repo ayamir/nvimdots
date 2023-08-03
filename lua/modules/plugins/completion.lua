@@ -24,6 +24,11 @@ completion["dnlhc/glance.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.glance"),
 }
+completion["simrat39/symbols-outline.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.symbols-outline"),
+}
 completion["jose-elias-alvarez/null-ls.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
