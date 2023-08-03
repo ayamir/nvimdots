@@ -51,43 +51,34 @@ return function()
 			},
 			preview = {
 				["Q"] = actions.close,
+				["<C-c>q"] = actions.close,
+				["<C-c>o"] = actions.jump,
+				["<C-c>v"] = actions.jump_vsplit,
+				["<C-c>s"] = actions.jump_split,
+				["<C-c>t"] = actions.jump_tab,
 				["<C-p>"] = actions.previous_location,
 				["<C-n>"] = actions.next_location,
 				["[]"] = actions.enter_win("list"), -- Focus list window
 			},
 		},
 		hooks = {
-			before_open = function(results, open, jump, method)
+			before_open = function(results, open, _, method)
 				if #results == 0 then
 					vim.notify(
 						"This method is not supported by any of the servers registered for the current buffer",
 						vim.log.levels.WARN,
 						{ title = "Glance" }
 					)
-				elseif method == "references" then
-					if #results == 1 then
-						vim.notify(
-							"The identifier under cursor is the only one found",
-							vim.log.levels.INFO,
-							{ title = "Glance" }
-						)
-					else
-						open(results)
-					end
+				elseif #results == 1 and method == "references" then
+					vim.notify(
+						"The identifier under cursor is the only one found",
+						vim.log.levels.INFO,
+						{ title = "Glance" }
+					)
 				else
-					jump(results[1])
+					open(results)
 				end
 			end,
 		},
 	})
-
-	-- Override LSP handler functions
-	-- stylua: ignore start
-	-- luacheck: push ignore 212
-	vim.lsp.buf.references = function(...) glance.open("references") end
-	vim.lsp.buf.definition = function(...) glance.open("definitions") end
-	vim.lsp.buf.type_definition = function(...) glance.open("type_definitions") end
-	vim.lsp.buf.implementations = function(...) glance.open("implementations") end
-	-- luacheck: pop
-	-- stylua: ignore end
 end
