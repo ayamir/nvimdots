@@ -106,7 +106,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("find: Project"),
 	["n|<leader>fr"] = map_callback(function()
-			require("telescope").extensions.frecency.frecency()
+			require("telescope").extensions.frecency.frecency({})
 		end)
 		:with_noremap()
 		:with_silent()
