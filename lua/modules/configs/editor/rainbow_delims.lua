@@ -10,7 +10,7 @@ return function()
 			if errors < 0 then
 				return nil
 			end
-			return (check_lines and vim.fn.line("$") > 350) and require("rainbow-delimiters").strategy["global"]
+			return (check_lines and vim.fn.line("$") > 200) and require("rainbow-delimiters").strategy["global"]
 				or require("rainbow-delimiters").strategy["local"]
 		end
 	end
@@ -26,7 +26,7 @@ return function()
 		query = {
 			[""] = "rainbow-delimiters",
 			latex = "rainbow-blocks",
-			javascript = "rainbow-delimiters-ract",
+			javascript = "rainbow-delimiters-react",
 		},
 		highlight = {
 			"RainbowDelimiterRed",
