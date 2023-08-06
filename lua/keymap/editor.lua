@@ -89,4 +89,4 @@ local plug_map = {
 	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
 }
 
-return plug_map
+bind.nvim_load_mapping(plug_map)

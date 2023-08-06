@@ -19,15 +19,11 @@ local plug_map = {
 	["n|<leader>px"] = map_cr("Lazy clean"):with_silent():with_noremap():with_nowait():with_desc("package: Clean"),
 }
 
--- Plugin keymaps
-plug_map = vim.tbl_deep_extend(
-	"force",
-	plug_map,
-	require("keymap.completion").plug_map,
-	require("keymap.editor"),
-	require("keymap.lang"),
-	require("keymap.tool"),
-	require("keymap.ui").plug_map
-)
-plug_map = bind.override_mapping("init", plug_map)
 bind.nvim_load_mapping(plug_map)
+
+-- Plugin keymaps
+require("keymap.completion")
+require("keymap.editor")
+require("keymap.lang")
+require("keymap.tool")
+require("keymap.ui")

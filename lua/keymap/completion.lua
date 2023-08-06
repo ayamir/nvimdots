@@ -2,13 +2,15 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-local M = {}
 
-M["plug_map"] = {
+local plug_map = {
 	["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("Formater: Toggle format on save"),
 }
+bind.nvim_load_mapping(plug_map)
 
-M["lsp"] = function(buf)
+local mapping = {}
+
+function mapping.lsp(buf)
 	local map = {
 		-- LSP-related keymaps, work only when event = { "InsertEnter", "LspStart" }
 		["n|<leader>li"] = map_cr("LspInfo"):with_buffer(buf):with_desc("lsp: Info"),
@@ -32,8 +34,7 @@ M["lsp"] = function(buf)
 		["n|<leader>ci"] = map_cr("Lspsaga incoming_calls"):with_buffer(buf):with_desc("lsp: Show incoming calls"),
 		["n|<leader>co"] = map_cr("Lspsaga outgoing_calls"):with_buffer(buf):with_desc("lsp: Show outgoing calls"),
 	}
-	map = bind.override_mapping("lsp", map)
 	bind.nvim_load_mapping(map)
 end
 
-return M
+return mapping

@@ -9,4 +9,4 @@ local plug_map = {
 	["n|<F12>"] = map_cr("MarkdownPreviewToggle"):with_noremap():with_silent():with_desc("tool: Preview markdown"),
 }
 
-return plug_map
+bind.nvim_load_mapping(plug_map)
