@@ -249,27 +249,27 @@ function M.tobool(value)
 	end
 end
 
----@param plugin_name string @Plugin name
+---@param plugin_name string @Name of the plugin
 ---@param opts table @Default options for plugin
----@param isVimPlugin? boolean @If plugin is made by vimscript
----@param extraSetupFunc? function @When the plugin name that calls setup is different from `modules/configs/*.lua`
-function M.load_plugin(plugin_name, opts, isVimPlugin, extraSetupFunc)
-	isVimPlugin = isVimPlugin or false
+---@param vim_plugin? boolean @If this plugin is a Vimscript one
+---@param setup_callback? function @Provide this if the plugin's setup function is not the usual one
+function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
+	vim_plugin = vim_plugin or false
 	local ok, custom = pcall(require, "user.modules." .. plugin_name)
 	if ok then
-		local setupFunc = extraSetupFunc or require(plugin_name).setup
+		local setupFunc = setup_callback or require(plugin_name).setup
 		if custom == nil then
 			setupFunc(false)
 		elseif type(custom) == "table" then
 			assert(
-				not isVimPlugin,
+				not vim_plugin,
 				"This plugin is not made by lua, so define options in functions (probably using `vim.g.*`)"
 			)
 			opts = vim.tbl_deep_extend("force", opts, custom)
 			setupFunc(opts)
 		elseif type(custom) == "function" then
 			local user_opts = custom()
-			if type(user_opts) == "table" and not isVimPlugin then
+			if type(user_opts) == "table" and not vim_plugin then
 				setupFunc(user_opts)
 			end
 		else
@@ -277,8 +277,8 @@ function M.load_plugin(plugin_name, opts, isVimPlugin, extraSetupFunc)
 				"Please return `nil` if you disable plugin or `table` if you override config or `function` if you replace config completely "
 			)
 		end
-	elseif not isVimPlugin then
-		local setupFunc = extraSetupFunc or require(plugin_name).setup
+	elseif not vim_plugin then
+		local setupFunc = setup_callback or require(plugin_name).setup
 		setupFunc(opts)
 	end
 end

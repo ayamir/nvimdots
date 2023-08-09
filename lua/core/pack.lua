@@ -32,16 +32,14 @@ function Lazy:load_plugins()
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
-		local user_plugins_list = vim.split(fn.glob(user_modules_dir .. "/plugins/*.lua"), "\n")
-		if user_plugins_list[1] ~= "" then
-			plugins_list = vim.list_extend(plugins_list, user_plugins_list)
+		local user_plugins_list = vim.split(fn.glob(user_modules_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
+		if not vim.tbl_isempty(user_plugins_list) then
+			vim.list_extend(plugins_list, user_plugins_list)
 		end
-		if type(plugins_list) == "table" then
-			for _, f in ipairs(plugins_list) do
-				-- fill list with `plugins/*.lua`'s path used for later `require` like this:
-				-- list[#list + 1] = "plugins/completion.lua"
-				list[#list + 1] = f:sub(#modules_dir - 6, -1)
-			end
+		for _, f in ipairs(plugins_list) do
+			-- fill list with `plugins/*.lua`'s path used for later `require` like this:
+			-- list[#list + 1] = "plugins/completion.lua"
+			list[#list + 1] = f:sub(#modules_dir - 6, -1)
 		end
 		return list
 	end
