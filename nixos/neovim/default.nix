@@ -28,10 +28,6 @@ in
           Enable dotnet provider. Set to `true` to 
           use DotNET plugins.
         '';
-        withErlang = mkEnableOption ''
-          Enable Erlang provider. Set to `true` to 
-          use Erlang plugins.
-        '';
         withGo = mkEnableOption ''
           Enable Go provider. Set to `true` to 
           use Go plugins.
@@ -40,25 +36,9 @@ in
           Enable Haskell compiler. Set to `true` to
           use Haskell plugins.
         '';
-        withHaxe = mkEnableOption ''
-          Enable Haxe provider. Set to `true` to 
-          use Haxe plugins.
-        '';
         withJava = mkEnableOption ''
           Enable Java provider. Set to `true` to
           use Java plugins.
-        '';
-        withJulia = mkEnableOption ''
-          Enable Julia provider. Set to `true` to
-          use Julia plugins.
-        '';
-        withNim = mkEnableOption ''
-          Enable nim provider. Set to `true` to 
-          use nim plugins.
-        '';
-        withOpam = mkEnableOption ''
-          Enable Opam provider. Set to `true` to 
-          use Opam plugins.
         '';
         withPHP = mkEnableOption ''
           Enable PHP provider. Set to `true` to 
@@ -67,10 +47,6 @@ in
         withR = mkEnableOption ''
           Enable R provider. Set to `true` to 
           use R plugins.
-        '';
-        withRust = mkEnableOption ''
-          Enable Rust provider. Set to `true` to 
-          use Rust plugins.
         '';
         withVala = mkEnableOption ''
           Enable Vala provider. Set to `true` to 
@@ -221,8 +197,6 @@ in
               # Dependent packages used by default plugins
               doq
               sqlite
-
-              yarn
             ]
             ++ optionals cfg.withBuildTools [
               pkg-config
@@ -231,8 +205,9 @@ in
               cmake
               gnumake
               ninja
+              cargo
+              yarn
             ]
-            ++ optional cfg.withErlang rebar3
             ++ optional cfg.withGo go
             ++ optionals cfg.withHaskell [
               ghc
@@ -246,10 +221,6 @@ in
                 # ghcup # ghcup is broken
               ] ++ cfg.extraHaskellPackages pkgs.haskellPackages))
             ]
-            ++ optional cfg.withHaxe haxe
-            ++ optional cfg.withJulia julia-bin
-            ++ optional cfg.withNim nim
-            ++ optional cfg.withOpam opam
             ++ optionals cfg.withPHP [
               php
               phpPackages.composer # php
@@ -259,7 +230,6 @@ in
                 [ xml2 lintr roxygen2 ]
                 ++ cfg.extraRPackages pkgs.rPackages;
             })
-            ++ optional cfg.withRust cargo
             ++ optionals cfg.withVala [ meson vala ];
 
           extraPython3Packages = ps: with ps; [
