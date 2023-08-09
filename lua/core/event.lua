@@ -151,10 +151,7 @@ function autocmd.load_autocmds()
 			},
 		},
 	}
-	local ok, user_definitions = pcall(require, "user.event")
-	if ok then
-		definitions = vim.tbl_deep_extend("force", definitions, user_definitions)
-	end
+	definitions = require("modules.utils").config_extend(definitions, "user.event")
 	autocmd.nvim_create_augroups(definitions)
 end
 

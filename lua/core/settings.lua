@@ -114,8 +114,5 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
-local ok, user_settings = pcall(require, "user.settings")
-if ok then
-	settings = vim.tbl_deep_extend("force", settings, user_settings)
-end
+settings = require("modules.utils").config_extend(settings, "user.settings")
 return settings

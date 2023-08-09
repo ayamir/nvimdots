@@ -292,4 +292,14 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 	end
 end
 
+---@param config table @Default config
+---@param user_config_path string @User config file path
+function M.config_extend(config, user_config_path)
+	local ok, user_config = pcall(require, user_config_path)
+	if ok and type(user_config) == "table" then
+		config = vim.tbl_deep_extend("force", config, user_config)
+	end
+	return config
+end
+
 return M

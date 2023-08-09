@@ -121,6 +121,7 @@ local function load_options()
 		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
 	end
 
+	global_local = require("modules.utils").config_extend(global_local, "user.options")
 	for name, value in pairs(global_local) do
 		vim.o[name] = value
 	end
@@ -133,4 +134,3 @@ local function load_options()
 end
 
 load_options()
-local _ = pcall(require, "user.options")
