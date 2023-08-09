@@ -255,31 +255,40 @@ end
 ---@param setup_callback? function @Provide this if the plugin's setup function is not the usual one
 function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 	vim_plugin = vim_plugin or false
-	local ok, custom = pcall(require, "user.modules." .. plugin_name)
-	if ok then
-		local setupFunc = setup_callback or require(plugin_name).setup
-		if custom == nil then
-			setupFunc(false)
-		elseif type(custom) == "table" then
-			assert(
-				not vim_plugin,
-				"This plugin is not made by lua, so define options in functions (probably using `vim.g.*`)"
-			)
-			opts = vim.tbl_deep_extend("force", opts, custom)
-			setupFunc(opts)
-		elseif type(custom) == "function" then
-			local user_opts = custom()
-			if type(user_opts) == "table" and not vim_plugin then
-				setupFunc(user_opts)
-			end
+	local ok, custom = pcall(require, "user.configs." .. plugin_name)
+	if ok and vim_plugin then
+		if type(custom) == "function" then
+			custom()
 		else
-			error(
-				"Please return `nil` if you disable plugin or `table` if you override config or `function` if you replace config completely "
+			vim.notify(
+				"'"
+					.. plugin_name
+					.. "' is probably not a Lua plugin, so return a function with options defined (probably using `vim.g.*`)",
+				vim.log.levels.ERROR,
+				{ title = "[utils] Runtime Error" }
 			)
 		end
 	elseif not vim_plugin then
-		local setupFunc = setup_callback or require(plugin_name).setup
-		setupFunc(opts)
+		setup_callback = setup_callback or require(plugin_name).setup
+		if ok then
+			if type(custom) == "table" then
+				opts = vim.tbl_deep_extend("force", opts, custom)
+				setup_callback(opts)
+			elseif type(custom) == "function" then
+				local user_opts = custom()
+				if type(user_opts) == "table" then
+					setup_callback(user_opts)
+				end
+			else
+				vim.notify(
+					"Please return `table` if you override some of default options or `function` if you replace default options completely",
+					vim.log.levels.ERROR,
+					{ title = "[utils] Runtime Error" }
+				)
+			end
+		else
+			setup_callback(opts)
+		end
 	end
 end
 
