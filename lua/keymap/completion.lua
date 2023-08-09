@@ -35,6 +35,11 @@ function mapping.lsp(buf)
 		["n|<leader>co"] = map_cr("Lspsaga outgoing_calls"):with_buffer(buf):with_desc("lsp: Show outgoing calls"),
 	}
 	bind.nvim_load_mapping(map)
+	local ok, user_mapping = pcall(require, "user.keymap.completion")
+	if ok and type(user_mapping.lsp) == "function" then
+		user_mapping = user_mapping.lsp(buf)
+		require("modules.utils.keymap").replace(user_mapping)
+	end
 end
 
 return mapping

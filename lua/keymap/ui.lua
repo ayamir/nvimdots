@@ -100,6 +100,11 @@ function mapping.gitsigns(buf)
 		end):with_buffer(buf),
 	}
 	bind.nvim_load_mapping(map)
+	local ok, user_mapping = pcall(require, "user.keymap.ui")
+	if ok and type(user_mapping.gitsigns) == "function" then
+		user_mapping = user_mapping.gitsigns(buf)
+		require("modules.utils.keymap").replace(user_mapping)
+	end
 end
 
 return mapping
