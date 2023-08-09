@@ -5,7 +5,7 @@ local vim_path = global.vim_path
 local data_dir = global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 local modules_dir = vim_path .. "/lua/modules"
-local user_modules_dir = vim_path .. "/lua/user/modules"
+local user_modules_dir = vim_path .. "/lua/user"
 
 local settings = require("core.settings")
 local use_ssh = settings.use_ssh
@@ -39,7 +39,11 @@ function Lazy:load_plugins()
 		for _, f in ipairs(plugins_list) do
 			-- fill list with `plugins/*.lua`'s path used for later `require` like this:
 			-- list[#list + 1] = "plugins/completion.lua"
-			list[#list + 1] = f:sub(#modules_dir - 6, -1)
+			if f:find(modules_dir) ~= nil then
+				list[#list + 1] = f:sub(#modules_dir - 6, -1)
+			elseif f:find(user_modules_dir) ~= nil then
+				list[#list + 1] = f:sub(#user_modules_dir - 3, -1)
+			end
 		end
 		return list
 	end
