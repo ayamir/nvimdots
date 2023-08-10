@@ -249,8 +249,6 @@ function M.tobool(value)
 	end
 end
 
-function M.get_effective_fname() end
-
 -- Function to extend existing core configs (settings, events, etc.)
 ---@param config table @The default config to be merged with
 ---@param user_config string @The module name used to require user config
