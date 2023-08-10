@@ -103,6 +103,7 @@ return function()
 					path = "[PATH]",
 					tmux = "[TMUX]",
 					treesitter = "[TS]",
+					latex_symbols = "[LTEX]",
 					luasnip = "[SNIP]",
 					spell = "[SPELL]",
 				}, {
