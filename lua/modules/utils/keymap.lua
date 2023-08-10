@@ -92,6 +92,7 @@ local function get_fallback(map)
 	end
 end
 
+-- Amends a mapping (i.e., allows fallback when certain conditions are met)
 ---@param cond string
 ---@param mode string
 ---@param lhs string
@@ -112,20 +113,20 @@ local function amend(cond, mode, lhs, rhs, opts)
 	end, options)
 end
 
+-- Completely replace a mapping
 ---@param mode string
 ---@param lhs string
----@param rhs? string
+---@param rhs string
 ---@param opts? table
 ---@param buf? boolean|number
 local function replace(mode, lhs, rhs, opts, buf)
-	local _ = get_map(mode, lhs)
+	get_map(mode, lhs)
+
 	local options = vim.deepcopy(opts) or {}
-	if rhs ~= nil then
-		if buf and type(buf) == "number" then
-			vim.api.nvim_buf_set_keymap(buf, mode, lhs, rhs, options)
-		else
-			vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-		end
+	if buf and type(buf) == "number" then
+		vim.api.nvim_buf_set_keymap(buf, mode, lhs, rhs, options)
+	else
+		vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 	end
 end
 
@@ -145,10 +146,10 @@ local function modes_amend(cond, mode, lhs, rhs, opts)
 	end
 end
 
----Replace the keymap.
+---Replace the existing keymap.
 ---@param mode string | string[]
 ---@param lhs string
----@param rhs? string
+---@param rhs string
 ---@param opts? table
 ---@param buf? boolean|number
 local function modes_replace(mode, lhs, rhs, opts, buf)
@@ -191,8 +192,6 @@ function M.replace(mapping)
 			local options = value.options
 			local buffer = value.buffer
 			modes_replace(vim.split(modes, ""), keymap, rhs, options, buffer)
-		elseif value == "" or false then
-			modes_replace(vim.split(modes, ""), keymap)
 		end
 	end
 end

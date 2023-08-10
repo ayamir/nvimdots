@@ -28,7 +28,8 @@ require("keymap.lang")
 require("keymap.tool")
 require("keymap.ui")
 
-local ok, mapping = pcall(require, "user.keymap")
+-- User keymaps
+local ok, mappings = pcall(require, "user.keymap.init")
 if ok then
-	require("modules.utils.keymap").replace(mapping)
+	require("modules.utils.keymap").replace(mappings)
 end

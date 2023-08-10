@@ -5,7 +5,7 @@ local vim_path = global.vim_path
 local data_dir = global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 local modules_dir = vim_path .. "/lua/modules"
-local user_modules_dir = vim_path .. "/lua/user"
+local user_config_dir = vim_path .. "/lua/user"
 
 local settings = require("core.settings")
 local use_ssh = settings.use_ssh
@@ -26,32 +26,26 @@ function Lazy:load_plugins()
 	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
-			.. string.format(";%s;%s", user_modules_dir .. "/configs/?.lua", user_modules_dir .. "/configs/?/init.lua")
 	end
 
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
-		local user_plugins_list = vim.split(fn.glob(user_modules_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
+		local user_plugins_list = vim.split(fn.glob(user_config_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
 		if not vim.tbl_isempty(user_plugins_list) then
 			vim.list_extend(plugins_list, user_plugins_list)
 		end
 		for _, f in ipairs(plugins_list) do
 			-- fill list with `plugins/*.lua`'s path used for later `require` like this:
 			-- list[#list + 1] = "plugins/completion.lua"
-			if f:find(modules_dir) ~= nil then
-				list[#list + 1] = f:sub(#modules_dir - 6, -1)
-			elseif f:find(user_modules_dir) ~= nil then
-				list[#list + 1] = f:sub(#user_modules_dir - 3, -1)
-			end
+			list[#list + 1] = f:find(modules_dir) and f:sub(#modules_dir - 6, -1) or f:sub(#user_config_dir - 3, -1)
 		end
 		return list
 	end
 
 	append_nativertp()
 
-	local plugins_file = get_plugins_list()
-	for _, m in ipairs(plugins_file) do
+	for _, m in ipairs(get_plugins_list()) do
 		-- require modules which returned in previous operation like this:
 		-- local modules = require("modules/plugins/completion.lua")
 		local modules = require(m:sub(0, #m - 4))

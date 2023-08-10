@@ -6,5 +6,5 @@ return function()
 	vim.g.nord_enable_sidebar_background = true
 	vim.g.nord_italic = true
 
-	require("modules.utils").load_plugin("nord", {}, true)
+	require("modules.utils").load_plugin("nord", nil, true)
 end
