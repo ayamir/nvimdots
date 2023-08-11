@@ -249,6 +249,26 @@ function M.tobool(value)
 	end
 end
 
+--- Function to recursively merge src into dst
+--- Unlike vim.tbl_deep_extend(), extends if the original value is a list
+---@paramm dst table @Table which will be modified and appended to
+---@paramm src table @Table from which values will be inserted
+---@return table @Modified table
+local function tbl_recursive_merge(dst, src)
+	for k, v in pairs(src) do
+		if type(dst[k]) == "table" and type(v) == "function" then
+			dst[k] = v()
+		elseif type(dst[k]) == "table" and vim.tbl_islist(dst[k]) then
+			vim.list_extend(dst[k], v)
+		elseif type(dst[k]) == "table" and not vim.tbl_islist(dst[k]) then
+			tbl_recursive_merge(dst[k], v)
+		else
+			dst[k] = v
+		end
+	end
+	return dst
+end
+
 -- Function to extend existing core configs (settings, events, etc.)
 ---@param config table @The default config to be merged with
 ---@param user_config string @The module name used to require user config
@@ -256,7 +276,7 @@ end
 function M.extend_config(config, user_config)
 	local ok, extras = pcall(require, user_config)
 	if ok and type(extras) == "table" then
-		config = vim.tbl_deep_extend("force", config, extras)
+		config = tbl_recursive_merge(config, extras)
 	end
 	return config
 end
@@ -298,7 +318,7 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 			if ok then
 				-- Extend base config if the returned user config is a table
 				if type(user_config) == "table" then
-					opts = vim.tbl_deep_extend("force", opts, user_config)
+					opts = tbl_recursive_merge(opts, user_config)
 					setup_callback(opts)
 				elseif type(user_config) == "function" then
 					-- Replace base config if the returned user config is a function
