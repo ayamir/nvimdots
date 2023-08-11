@@ -114,4 +114,8 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
+-- Set the plugin names to disable here
+---@type string[]
+settings["disabled_plugins"] = {}
+
 return require("modules.utils").extend_config(settings, "user.settings")
