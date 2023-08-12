@@ -1,4 +1,4 @@
-# home-manager module of neovim setup 
+# home-manager module of neovim setup
 { config
 , lib
 , pkgs
@@ -25,11 +25,11 @@ in
           Required for NixOS.
         '';
         withDotNET = mkEnableOption ''
-          Enable dotnet provider. Set to `true` to 
+          Enable dotnet provider. Set to `true` to
           use DotNET plugins.
         '';
         withGo = mkEnableOption ''
-          Enable Go provider. Set to `true` to 
+          Enable Go provider. Set to `true` to
           use Go plugins.
         '';
         withHaskell = mkEnableOption ''
@@ -41,15 +41,15 @@ in
           use Java plugins.
         '';
         withPHP = mkEnableOption ''
-          Enable PHP provider. Set to `true` to 
+          Enable PHP provider. Set to `true` to
           use PHP plugins.
         '';
         withR = mkEnableOption ''
-          Enable R provider. Set to `true` to 
+          Enable R provider. Set to `true` to
           use R plugins.
         '';
         withVala = mkEnableOption ''
-          Enable Vala provider. Set to `true` to 
+          Enable Vala provider. Set to `true` to
           use Vala plugins.
         '';
         extraRPackages = mkOption {
@@ -170,8 +170,10 @@ in
     mkIf cfg.enable
       {
         xdg.configFile = {
-          "nvim/lua".source = ../../lua;
           "nvim/init.lua".source = ../../init.lua;
+          "nvim/lua".source = ../../lua;
+          "nvim/snips".source = ../../snips;
+          "nvim/tutor".source = ../../tutor;
         };
         home.packages = with pkgs; [
           ripgrep
