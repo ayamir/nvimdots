@@ -281,13 +281,6 @@ function M.extend_config(config, user_config)
 	return config
 end
 
----@param modname string @Module name of the config
----@return unknown
----@return unknown @Loader data
-M.load_config = function(modname)
-	return require("user.configs." .. modname)
-end
-
 ---@param plugin_name string @Module name of the plugin (used to setup itself)
 ---@param opts nil|table @The default config to be merged with
 ---@param vim_plugin? boolean @If this plugin is a vimscript one
