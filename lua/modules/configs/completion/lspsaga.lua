@@ -26,6 +26,10 @@ return function()
 	set_sidebar_icons()
 
 	require("lspsaga").setup({
+		preview = {
+			lines_above = 1,
+			lines_below = 17,
+		},
 		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = true,
@@ -40,6 +44,7 @@ return function()
 		callhierarchy = {
 			layout = "float",
 			keys = {
+				expand_or_jump = "<CR>",
 				edit = "e",
 				vsplit = "v",
 				split = "s",
@@ -175,8 +180,8 @@ return function()
 		},
 		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
 		scroll_preview = {
-			scroll_down = "<C-d>",
-			scroll_up = "<C-u>",
+			scroll_down = "<C-j>",
+			scroll_up = "<C-k>",
 		},
 		request_timeout = 3000,
 	})

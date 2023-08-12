@@ -1,4 +1,5 @@
 local settings = {}
+local home = require("core.global").home
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
 settings["use_ssh"] = false
@@ -32,7 +33,7 @@ settings["diagnostics_level"] = "Hint"
 --- NOTE: Directories are automatically normalized. |vim.fs.normalize()|
 ---@type string[]
 settings["format_disabled_dirs"] = {
-	"~/format_disabled_dir",
+	home .. "/format_disabled_dir",
 }
 
 -- Set it to false if you don't use nvim to open big files.
@@ -104,6 +105,7 @@ settings["lsp_deps"] = {
 settings["null_ls_deps"] = {
 	"clang_format",
 	"prettier",
+	"rustfmt",
 	"shfmt",
 	"stylua",
 	"vint",
