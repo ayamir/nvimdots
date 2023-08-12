@@ -26,15 +26,6 @@ function Lazy:load_plugins()
 	local append_nativertp = function()
 		package.path = package.path
 			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
-		table.insert(package.loaders, function(modulename)
-			local modulepath = user_config_dir .. "/configs/" .. modulename:gsub("%.", "/") .. ".lua"
-			local filename = modulepath:gsub("%?", modulepath)
-			local file = io.open(filename, "rb")
-			if file then
-				return assert(load(assert(file:read("*a")), filename))
-			end
-			return string.format("\n\tno file '%s' (checked with custom loader)", filename)
-		end)
 	end
 
 	local get_plugins_list = function()
