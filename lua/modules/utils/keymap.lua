@@ -192,6 +192,10 @@ function M.replace(mapping)
 			local options = value.options
 			local buffer = value.buffer
 			modes_replace(vim.split(modes, ""), keymap, rhs, options, buffer)
+		elseif value == "" or value == false then
+			for _, m in ipairs(vim.split(modes, "")) do
+				get_map(m, keymap)
+			end
 		end
 	end
 end
