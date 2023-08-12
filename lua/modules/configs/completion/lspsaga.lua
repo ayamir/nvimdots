@@ -45,6 +45,7 @@ return function()
 			layout = "float",
 			keys = {
 				expand_or_jump = "<CR>",
+				close_in_preview = "<ESC>",
 				edit = "e",
 				vsplit = "v",
 				split = "s",
@@ -54,6 +55,13 @@ return function()
 				toggle_or_req = "u",
 				close = "<Esc>",
 			},
+		},
+		definition = {
+			edit = "<C-c>o",
+			vsplit = "<C-c>v",
+			split = "<C-c>s",
+			tabe = "<C-c>t",
+			quit = "q",
 		},
 		-- https://dev.neovim.pro/lspsaga/codeaction/
 		code_action = {
@@ -93,6 +101,19 @@ return function()
 			max_height = 0.7,
 			open_link = "gl",
 			open_cmd = "silent !" .. require("core.settings").external_browser,
+		},
+		outline = {
+			win_position = "right",
+			win_with = "_sagaoutline",
+			win_width = 30,
+			auto_preview = false,
+			auto_refresh = true,
+			auto_close = true,
+			close_after_jump = true,
+			keys = {
+				expand_or_jump = "<CR>",
+				quit = "q",
+			},
 		},
 		-- https://dev.neovim.pro/lspsaga/implement/
 		implement = {
