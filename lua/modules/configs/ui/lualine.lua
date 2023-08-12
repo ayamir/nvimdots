@@ -94,7 +94,8 @@ return function()
 	local components = {
 		separator = { -- use as section separators
 			function()
-				return "│"
+				return ""
+				-- return "│"
 			end,
 			padding = 0,
 			color = utils.gen_hl("surface1", true, true),
