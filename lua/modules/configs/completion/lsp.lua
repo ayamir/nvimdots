@@ -113,7 +113,13 @@ return function()
 	---@param lsp_name string
 	local function mason_lsp_handler(lsp_name)
 		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
-		if not ok then
+		local user_ok, user_custom_handler = pcall(require, "user.configs.completion.servers." .. lsp_name)
+		if ok and user_ok and type(user_custom_handler) == "table" then
+			custom_handler = vim.tbl_deep_extend("force", custom_handler, user_custom_handler)
+		else
+			custom_handler = user_ok and user_custom_handler or custom_handler
+		end
+		if not ok and not user_ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
 			return
