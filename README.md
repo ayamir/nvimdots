@@ -69,7 +69,7 @@ Just run the following interactive bootstrap command, and you're good to go 👍
 - **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
 
 ```pwsh
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ayamir/nvimdots/HEAD/scripts/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/double12gzh/nvimdots/HEAD/scripts/install.ps1'))
 ```
 
 - **\*nix**
