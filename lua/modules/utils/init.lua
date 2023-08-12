@@ -29,12 +29,29 @@ local M = {}
 ---@field crust string
 ---@field none "NONE"
 
----@type palette
+---@type nil|palette
 local palette = nil
+
+-- Indicates if autocmd for refreshing the builtin palette has already been registered
+---@type boolean
+local _has_autocmd = false
 
 ---Initialize the palette
 ---@return palette
 local function init_palette()
+	-- Reinitialize the palette on event `ColorScheme`
+	if not _has_autocmd then
+		_has_autocmd = true
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			group = vim.api.nvim_create_augroup("__builtin_palette", { clear = true }),
+			pattern = "*",
+			callback = function()
+				palette = nil
+				init_palette()
+			end,
+		})
+	end
+
 	if not palette then
 		palette = vim.g.colors_name:find("catppuccin") and require("catppuccin.palettes").get_palette()
 			or {
@@ -168,7 +185,7 @@ function M.gen_lspkind_hl()
 		Package = colors.blue,
 		Property = colors.teal,
 		Struct = colors.yellow,
-		TypeParameter = colors.maroon,
+		TypeParameter = colors.blue,
 		Variable = colors.peach,
 		Array = colors.peach,
 		Boolean = colors.peach,

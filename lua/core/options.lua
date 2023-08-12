@@ -4,10 +4,8 @@ local function load_options()
 	local global_local = {
 		-- backupdir = global.cache_dir .. "backup/",
 		-- directory = global.cache_dir .. "swap/",
-		-- pumblend = 10,
 		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
 		-- viewdir = global.cache_dir .. "view/",
-		-- winblend = 10,
 		autoindent = true,
 		autoread = true,
 		autowrite = true,
@@ -17,7 +15,7 @@ local function load_options()
 		breakat = [[\ \	;:,!?]],
 		breakindentopt = "shift:2,min:20",
 		clipboard = "unnamedplus",
-		cmdheight = 2, -- 0, 1, 2
+		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
 		complete = ".,w,b,k",
 		completeopt = "menuone,noselect",
@@ -53,12 +51,14 @@ local function load_options()
 		mousescroll = "ver:3,hor:6",
 		number = true,
 		previewheight = 12,
+		-- Do NOT adjust the following option (pumblend) if you're using transparent background
+		pumblend = 0,
 		pumheight = 15,
 		redrawtime = 1500,
 		relativenumber = false,
 		ruler = true,
 		scrolloff = 2,
-		sessionoptions = "buffers,curdir,help,tabpages,winsize",
+		sessionoptions = "buffers,curdir,folds,help,tabpages,winpos,winsize",
 		shada = "!,'500,<50,@100,s10,h",
 		shiftround = true,
 		shiftwidth = 4,
@@ -73,7 +73,7 @@ local function load_options()
 		smarttab = true,
 		softtabstop = 4,
 		splitbelow = true,
-		splitkeep = "cursor",
+		splitkeep = "screen",
 		splitright = true,
 		startofline = false,
 		swapfile = false,
@@ -95,24 +95,30 @@ local function load_options()
 		whichwrap = "h,l,<,>,[,],~",
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
 		wildignorecase = true,
+		-- Do NOT adjust the following option (winblend) if you're using transparent background
+		winblend = 0,
 		winminwidth = 10,
 		winwidth = 30,
 		wrap = true,
 		wrapscan = true,
 		writebackup = false,
 	}
+
 	local function isempty(s)
 		return s == nil or s == ""
+	end
+	local function use_if_defined(val, fallback)
+		return val ~= nil and val or fallback
 	end
 
 	-- custom python provider
 	local conda_prefix = os.getenv("CONDA_PREFIX")
 	if not isempty(conda_prefix) then
-		vim.g.python_host_prog = conda_prefix .. "/bin/python"
-		vim.g.python3_host_prog = conda_prefix .. "/bin/python"
+		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, conda_prefix .. "/bin/python")
+		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, conda_prefix .. "/bin/python")
 	else
-		vim.g.python_host_prog = "python"
-		vim.g.python3_host_prog = "python3"
+		vim.g.python_host_prog = use_if_defined(vim.g.python_host_prog, "python")
+		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
 	end
 
 	for name, value in pairs(global_local) do

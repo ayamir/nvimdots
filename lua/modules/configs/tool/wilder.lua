@@ -47,8 +47,8 @@ return function()
 		},
 	}))
 	local wildmenu_renderer = wilder.wildmenu_renderer({
+		apply_incsearch_fix = false,
 		highlighter = wilder.lua_fzy_highlighter(),
-		apply_incsearch_fix = true,
 		separator = " | ",
 		left = { " ", wilder.wildmenu_spinner(), " " },
 		right = { " ", wilder.wildmenu_index() },

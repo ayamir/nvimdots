@@ -8,7 +8,6 @@ return function()
 
 			-- how to execute terminal commands
 			-- options right now: termopen / quickfix
-			executor = require("rust-tools/executors").termopen,
 
 			-- callback to execute once rust-analyzer is done initializing the workspace
 			-- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
@@ -26,6 +25,7 @@ return function()
 					},
 				})
 			end,
+			executor = require("rust-tools.executors").termopen,
 
 			-- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
 			reload_workspace_from_cargo_toml = true,

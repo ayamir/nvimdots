@@ -19,7 +19,7 @@ return function()
 			-- map to {} to remove a mapping, for example:
 			-- close = {},
 			close = "q", -- close the list
-			cancel = "<ESC>", -- cancel the preview and get back to your last window / buffer / cursor
+			cancel = "<Esc>", -- cancel the preview and get back to your last window / buffer / cursor
 			refresh = "r", -- manually refresh
 			jump = { "<CR>", "<TAB>" }, -- jump to the diagnostic or open / close folds
 			open_split = { "<C-x>" }, -- open buffer in new split

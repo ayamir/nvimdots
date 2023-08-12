@@ -5,16 +5,25 @@ return function()
 
 	local icons = { dap = require("modules.utils.icons").get("dap") }
 	local colors = require("modules.utils").get_palette()
+	local mappings = require("tool.dap.dap-keymap")
 
-	dap.listeners.after.event_initialized["dapui_config"] = function()
-		dapui.open()
+	-- Initialize debug hooks
+	_G._debugging = false
+	local function debug_init_cb()
+		_G._debugging = true
+		mappings.load_extras()
+		dapui.open({ reset = true })
 	end
-	dap.listeners.after.event_terminated["dapui_config"] = function()
-		dapui.close()
+	local function debug_terminate_cb()
+		if _debugging then
+			_G._debugging = false
+			dapui.close()
+		end
 	end
-	dap.listeners.after.event_exited["dapui_config"] = function()
-		dapui.close()
-	end
+	dap.listeners.after.event_initialized["dapui_config"] = debug_init_cb
+	dap.listeners.before.event_terminated["dapui_config"] = debug_terminate_cb
+	dap.listeners.before.event_exited["dapui_config"] = debug_terminate_cb
+	dap.listeners.before.disconnect["dapui_config"] = debug_terminate_cb
 
 	-- We need to override nvim-dap's default highlight groups, AFTER requiring nvim-dap for catppuccin.
 	vim.api.nvim_set_hl(0, "DapStopped", { fg = colors.green })

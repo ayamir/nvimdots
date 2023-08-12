@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        _Before reporting:_ Search [existing issues](https://github.com/ayamir/nvimdots/issues) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+        _Before reporting:_ Search [existing issues](https://github.com/double12gzh/nvimdots/issues) and check the [FAQ](https://github.com/double12gzh/nvimdots/wiki/Issues). Thank you for helping us improve!
   - type: checkboxes
     id: is-latest-commit
     attributes:
@@ -18,7 +18,7 @@ body:
     id: prerequisites-done
     attributes:
       label: "Following prerequisites"
-      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)."
+      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/double12gzh/nvimdots/wiki/Prerequisites)."
       options:
         - label: "Confirm"
           required: true

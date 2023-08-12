@@ -1,5 +1,4 @@
 local settings = {}
-local home = require("core.global").home
 
 -- Set it to false if you want to use https to update plugins and treesitter parsers.
 settings["use_ssh"] = false
@@ -11,6 +10,10 @@ settings["format_on_save"] = true
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
 settings["format_notify"] = true
+
+-- Set it to false if you don't use copilot
+---@type boolean
+settings["use_copilot"] = true
 
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
@@ -25,9 +28,11 @@ settings["diagnostics_virtual_text"] = true
 settings["diagnostics_level"] = "Hint"
 
 -- Set the format disabled directories here, files under these dirs won't be formatted on save.
+--- NOTE: Directories may contain regular expressions (grammar: vim). |regexp|
+--- NOTE: Directories are automatically normalized. |vim.fs.normalize()|
 ---@type string[]
 settings["format_disabled_dirs"] = {
-	home .. "/format_disabled_dir_under_home",
+	"~/format_disabled_dir",
 }
 
 -- Set it to false if you don't use nvim to open big files.
@@ -38,7 +43,7 @@ settings["load_big_files_faster"] = true
 -- Settings will complete their replacement at initialization.
 -- Parameters will be automatically completed as you type.
 -- Example: { sky = "#04A5E5" }
----@type palette
+---@type palette[]
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
@@ -99,7 +104,6 @@ settings["lsp_deps"] = {
 settings["null_ls_deps"] = {
 	"clang_format",
 	"prettier",
-	"rustfmt",
 	"shfmt",
 	"stylua",
 	"vint",

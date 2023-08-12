@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        _Before requesting:_ Search [existing issues](https://github.com/ayamir/nvimdots/labels/enhancement) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+        _Before requesting:_ Search [existing issues](https://github.com/double12gzh/nvimdots/labels/enhancement) and check the [FAQ](https://github.com/double12gzh/nvimdots/wiki/Issues). Thank you for helping us improve!
 
   - type: textarea
     id: feat-desc
