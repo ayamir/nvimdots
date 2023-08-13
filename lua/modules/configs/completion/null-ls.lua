@@ -34,12 +34,7 @@ return function()
 		sources = sources,
 	})
 
-	require("modules.utils").load_plugin("mason-null-ls", {
-		ensure_installed = require("core.settings").null_ls_deps,
-		automatic_installation = false,
-		automatic_setup = true,
-		handlers = {},
-	})
+	require("completion.mason-null-ls").setup()
 
 	-- Setup usercmd to register/deregister available source(s)
 	local function _gen_completion()
