@@ -216,7 +216,7 @@ in
               (pkgs.writeShellApplication {
                 name = "stack";
                 text = ''
-                  exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib" "$@"
+                  exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
                 '';
               })
               (haskellPackages.ghcWithPackages (ps: [
