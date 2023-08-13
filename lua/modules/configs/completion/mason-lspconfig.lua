@@ -28,14 +28,12 @@ M.setup = function()
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
 	local function mason_lsp_handler(lsp_name)
-		local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
-		local user_ok, user_custom_handler = pcall(require, "user.configs.completion.servers." .. lsp_name)
-		if ok and user_ok and type(user_custom_handler) == "table" then
-			custom_handler = vim.tbl_deep_extend("force", custom_handler, user_custom_handler)
-		else
-			custom_handler = user_ok and user_custom_handler or custom_handler
+		local ok, custom_handler = pcall(require, "user.configs.lsp-servers." .. lsp_name)
+		-- Use preset if there is no user definition
+		if not ok then
+			ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
 		end
-		if not ok and not user_ok then
+		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
 			return
