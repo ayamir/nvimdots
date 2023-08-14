@@ -255,15 +255,15 @@ end
 ---@paramm src table @Table from which values will be inserted
 ---@return table @Modified table
 local function tbl_recursive_merge(dst, src)
-	for k, v in pairs(src) do
-		if type(dst[k]) == "table" and type(v) == "function" then
-			dst[k] = v()
-		elseif type(dst[k]) == "table" and vim.tbl_islist(dst[k]) then
-			vim.list_extend(dst[k], v)
-		elseif type(dst[k]) == "table" and not vim.tbl_islist(dst[k]) then
-			tbl_recursive_merge(dst[k], v)
+	for key, value in pairs(src) do
+		if type(dst[key]) == "table" and type(value) == "function" then
+			dst[key] = value()
+		elseif type(dst[key]) == "table" and vim.tbl_islist(dst[key]) then
+			vim.list_extend(dst[key], value)
+		elseif type(dst[key]) == "table" and not vim.tbl_islist(dst[key]) then
+			tbl_recursive_merge(dst[key], value)
 		else
-			dst[k] = v
+			dst[key] = value
 		end
 	end
 	return dst
@@ -320,8 +320,8 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 				if type(user_config) == "table" then
 					opts = tbl_recursive_merge(opts, user_config)
 					setup_callback(opts)
+				-- Replace base config if the returned user config is a function
 				elseif type(user_config) == "function" then
-					-- Replace base config if the returned user config is a function
 					local user_opts = user_config()
 					if type(user_opts) == "table" then
 						setup_callback(user_opts)

@@ -162,6 +162,7 @@ local function modes_replace(mode, lhs, rhs, opts, buf)
 	end
 end
 
+---Amend the existing keymap.
 ---@param cond string
 ---@param global_flag string
 ---@param mapping table<string, map_rhs>
@@ -183,6 +184,7 @@ function M.amend(cond, global_flag, mapping)
 	end
 end
 
+---Replace the existing keymap.
 ---@param mapping table<string, map_rhs>
 function M.replace(mapping)
 	for key, value in pairs(mapping) do

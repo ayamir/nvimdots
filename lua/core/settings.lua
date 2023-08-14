@@ -32,6 +32,11 @@ settings["format_disabled_dirs"] = {
 	"~/format_disabled_dir",
 }
 
+-- Set the plugins to disable here.
+-- Example: "Some-User/A-Repo"
+---@type string[]
+settings["disabled_plugins"] = {}
+
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
 settings["load_big_files_faster"] = true
@@ -113,9 +118,5 @@ settings["dap_deps"] = {
 	"delve", -- Go
 	"python", -- Python (debugpy)
 }
-
--- Set the plugin names to disable here
----@type string[]
-settings["disabled_plugins"] = {}
 
 return require("modules.utils").extend_config(settings, "user.settings")
