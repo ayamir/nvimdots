@@ -8,6 +8,46 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
+	local function custom_theme()
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
+			pattern = "*",
+			callback = function()
+				require("lualine").setup({ options = { theme = custom_theme() } })
+			end,
+		})
+
+		colors = require("modules.utils").get_palette()
+		local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
+		return {
+			normal = {
+				a = { fg = colors.lavender, bg = colors.surface0, gui = "bold" },
+				b = { fg = colors.text, bg = universal_bg },
+				c = { fg = colors.text, bg = universal_bg },
+			},
+			command = {
+				a = { fg = colors.peach, bg = colors.surface0, gui = "bold" },
+			},
+			insert = {
+				a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
+			},
+			visual = {
+				a = { fg = colors.flamingo, bg = colors.surface0, gui = "bold" },
+			},
+			terminal = {
+				a = { fg = colors.teal, bg = colors.surface0, gui = "bold" },
+			},
+			replace = {
+				a = { fg = colors.red, bg = colors.surface0, gui = "bold" },
+			},
+			inactive = {
+				a = { fg = colors.subtext0, bg = universal_bg, gui = "bold" },
+				b = { fg = colors.subtext0, bg = universal_bg },
+				c = { fg = colors.subtext0, bg = universal_bg },
+			},
+		}
+	end
+
 	local mini_sections = {
 		lualine_a = { "filetype" },
 		lualine_b = {},
@@ -94,8 +134,7 @@ return function()
 	local components = {
 		separator = { -- use as section separators
 			function()
-				return ""
-				-- return "│"
+				return "│"
 			end,
 			padding = 0,
 			color = utils.gen_hl("surface1", true, true),
@@ -218,11 +257,10 @@ return function()
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			--theme = "catppuccin",
-			theme = "gruvbox-material",
-			component_separators = "|",
-			section_separators = { left = "", right = "" },
+			theme = custom_theme(),
 			disabled_filetypes = { statusline = { "alpha" } },
+			component_separators = "",
+			section_separators = { left = "", right = "" },
 		},
 		sections = {
 			lualine_a = { "mode" },

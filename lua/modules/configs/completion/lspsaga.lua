@@ -26,9 +26,15 @@ return function()
 	set_sidebar_icons()
 
 	require("lspsaga").setup({
-		preview = {
-			lines_above = 1,
-			lines_below = 17,
+		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
+		symbol_in_winbar = {
+			enable = true,
+			separator = " " .. icons.ui.Separator,
+			hide_keyword = false,
+			show_file = false,
+			folder_level = 1,
+			color_mode = true,
+			delay = 100,
 		},
 		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
@@ -102,17 +108,31 @@ return function()
 			open_link = "gl",
 			open_cmd = "silent !" .. require("core.settings").external_browser,
 		},
-		outline = {
-			win_position = "right",
-			win_with = "_sagaoutline",
-			win_width = 30,
-			auto_preview = false,
-			auto_refresh = true,
-			auto_close = true,
-			close_after_jump = true,
+		-- https://dev.neovim.pro/lspsaga/implement/
+		implement = {
+			enable = true,
+			sign = true,
+			virtual_text = false,
+			priority = 100,
+		},
+		-- https://dev.neovim.pro/lspsaga/lightbulb/
+		lightbulb = {
+			enable = false,
+			sign = true,
+			virtual_text = false,
+			debounce = 10,
+			sign_priority = 20,
+		},
+		-- https://dev.neovim.pro/lspsaga/rename/
+		rename = {
+			in_select = false,
+			auto_save = false,
+			project_max_width = 0.5,
+			project_max_height = 0.5,
 			keys = {
-				expand_or_jump = "<CR>",
-				quit = "q",
+				quit = "<C-c>",
+				exec = "<CR>",
+				select = "x",
 			},
 		},
 		-- https://dev.neovim.pro/lspsaga/implement/
