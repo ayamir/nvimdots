@@ -250,7 +250,7 @@ function M.tobool(value)
 end
 
 --- Function to recursively merge src into dst
---- Unlike vim.tbl_deep_extend(), extends if the original value is a list
+--- Unlike vim.tbl_deep_extend(), this function extends if the original value is a list
 ---@paramm dst table @Table which will be modified and appended to
 ---@paramm src table @Table from which values will be inserted
 ---@return table @Modified table
@@ -283,8 +283,8 @@ end
 
 ---@param plugin_name string @Module name of the plugin (used to setup itself)
 ---@param opts nil|table @The default config to be merged with
----@param vim_plugin? boolean @If this plugin is a vimscript one
----@param setup_callback? function @Provide this if the plugin's setup function isn't the usual one
+---@param vim_plugin? boolean @If this plugin is written in vimscript or not
+---@param setup_callback? function @Add new callback if the plugin needs unusual setup function
 function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 	vim_plugin = vim_plugin or false
 
