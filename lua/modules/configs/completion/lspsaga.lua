@@ -36,16 +36,6 @@ return function()
 			color_mode = true,
 			delay = 100,
 		},
-		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
-		symbol_in_winbar = {
-			enable = true,
-			separator = " " .. icons.ui.Separator,
-			hide_keyword = false,
-			show_file = false,
-			folder_level = 1,
-			color_mode = true,
-			delay = 100,
-		},
 		-- https://dev.neovim.pro/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",
@@ -130,34 +120,8 @@ return function()
 			project_max_width = 0.5,
 			project_max_height = 0.5,
 			keys = {
-				quit = "<C-c>",
-				exec = "<CR>",
-				select = "x",
-			},
-		},
-		-- https://dev.neovim.pro/lspsaga/implement/
-		implement = {
-			enable = true,
-			sign = true,
-			virtual_text = false,
-			priority = 100,
-		},
-		-- https://dev.neovim.pro/lspsaga/lightbulb/
-		lightbulb = {
-			enable = false,
-			sign = true,
-			virtual_text = false,
-			debounce = 10,
-			sign_priority = 20,
-		},
-		-- https://dev.neovim.pro/lspsaga/rename/
-		rename = {
-			in_select = false,
-			auto_save = false,
-			project_max_width = 0.5,
-			project_max_height = 0.5,
-			keys = {
-				quit = "<C-c>",
+				expand_or_jump = "<CR>",
+				quit = "q",
 				exec = "<CR>",
 				select = "x",
 			},

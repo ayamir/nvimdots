@@ -105,6 +105,7 @@ settings["lsp_deps"] = {
 settings["null_ls_deps"] = {
 	"clang_format",
 	"prettier",
+	"rustfmt",
 	"shfmt",
 	"stylua",
 	"vint",
