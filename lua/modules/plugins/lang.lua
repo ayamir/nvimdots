@@ -8,7 +8,8 @@ lang["fatih/vim-go"] = {
 }
 lang["simrat39/rust-tools.nvim"] = {
 	lazy = true,
-	ft = "rust",
+	ft = { "rust", "rs" },
+	event = { "BufReadPost *.rs" },
 	config = require("lang.rust-tools"),
 	dependencies = { "nvim-lua/plenary.nvim" },
 }

@@ -7,13 +7,19 @@ completion["neovim/nvim-lspconfig"] = {
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
 		{
 			"Jint-lzxy/lsp_signature.nvim",
 			config = require("completion.lsp-signature"),
 		},
 	},
 }
+
+completion["williamboman/mason-lspconfig.nvim"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	dependencies = { "neovim/nvim-lspconfig" },
+}
+
 completion["nvimdev/lspsaga.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
