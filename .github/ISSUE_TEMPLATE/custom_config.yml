@@ -51,24 +51,24 @@ body:
       label: "Minimal folder structure setup on how to reproduce the issue"
       description: "Note: You only need to show where the new needed files are to reproduce the issue"
       placeholder: |
-      ```txt
-      └── lua/
-        ├── core/
-        ├── keymap/                    default keymaps
-        ├── modules/                   default plugins and plugin configs
-        └── user                       custom configs
-            ├── configs/               custom plugin config folder
-            │   ├── dap-clients/       custom dap client config folder
-            │   ├── lsp-servers/       custom lsp server config folder
-            │   └── tmp.lua
-            ├── keymap/                custom keymap folder
-            │   └── tmp.lua
-            ├── plugins/               custom plugin folder
-            │   └── tmp.lua
-            ├── event.lua              custom `core/events.lua`
-            ├── options.lua            custom `core/options.lua`
-            └── settings.lua           custom `core/settings.lua`
-      ```
+        ```txt
+        └── lua/
+          ├── core/
+          ├── keymap/                    default keymaps
+          ├── modules/                   default plugins and plugin configs
+          └── user                       custom configs
+              ├── configs/               custom plugin config folder
+              │   ├── dap-clients/       custom dap client config folder
+              │   ├── lsp-servers/       custom lsp server config folder
+              │   └── tmp.lua
+              ├── keymap/                custom keymap folder
+              │   └── tmp.lua
+              ├── plugins/               custom plugin folder
+              │   └── tmp.lua
+              ├── event.lua              custom `core/events.lua`
+              ├── options.lua            custom `core/options.lua`
+              └── settings.lua           custom `core/settings.lua`
+        ```
     validations:
       required: true
 
@@ -78,11 +78,11 @@ body:
       label: "Minimal config on how to reproduce the issue"
       description: "Note: Issues without any information will be closed directly"
       placeholder: |
-      ```lua
-      return function()
-          require("modules.utils").load_plugin("<plugin name>", {<user config>})
-      end
-      ```
+        ```lua
+        return function()
+            require("modules.utils").load_plugin("<plugin name>", {<user config>})
+        end
+        ```
     validations:
       required: true
 
