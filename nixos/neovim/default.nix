@@ -133,9 +133,6 @@ in
 
         programs.neovim = {
           enable = true;
-          viAlias = true; # Replace from vi&vim to neovim
-          vimAlias = true;
-          vimdiffAlias = true;
 
           withNodeJs = true;
           withPython3 = true;
