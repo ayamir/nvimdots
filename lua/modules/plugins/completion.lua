@@ -1,4 +1,5 @@
 local completion = {}
+local use_copilot = require("core.settings").use_copilot
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
@@ -18,6 +19,16 @@ completion["nvimdev/lspsaga.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.lspsaga"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
+}
+completion["dnlhc/glance.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.glance"),
+}
+completion["simrat39/symbols-outline.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.symbols-outline"),
 }
 completion["jose-elias-alvarez/null-ls.nvim"] = {
 	lazy = true,
@@ -59,17 +70,19 @@ completion["hrsh7th/nvim-cmp"] = {
 		-- },
 	},
 }
-completion["zbirenbaum/copilot.lua"] = {
-	lazy = true,
-	cmd = "Copilot",
-	event = "InsertEnter",
-	config = require("completion.copilot"),
-	dependencies = {
-		{
-			"zbirenbaum/copilot-cmp",
-			config = require("completion.copilot-cmp"),
+if use_copilot then
+	completion["zbirenbaum/copilot.lua"] = {
+		lazy = true,
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = require("completion.copilot"),
+		dependencies = {
+			{
+				"zbirenbaum/copilot-cmp",
+				config = require("completion.copilot-cmp"),
+			},
 		},
-	},
-}
+	}
+end
 
 return completion

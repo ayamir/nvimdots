@@ -1,66 +1,100 @@
--- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#go-using-delve-directly
--- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#go
+-- https://github.com/golang/vscode-go/blob/master/docs/debugging.md
 return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 
-	dap.adapters.go = function(callback)
-		local stdout = vim.loop.new_pipe(false)
-		local handle
-		local pid_or_err
-		local port = 28695
-		local opts = {
-			stdio = { nil, stdout },
-			args = { "dap", "-l", "127.0.0.1:" .. port },
-			detached = true,
-		}
-		handle, pid_or_err = vim.loop.spawn(vim.fn.exepath("dlv"), opts, function(code)
-			stdout:close()
-			handle:close()
-			if code ~= 0 then
-				vim.notify(
-					string.format('"dlv" exited with code: %d, please check your configs for correctness.', code),
-					vim.log.levels.WARN,
-					{ title = "[go] DAP Warning!" }
-				)
-			end
-		end)
-		assert(handle, "Error running dlv: " .. tostring(pid_or_err))
-		stdout:read_start(function(err, chunk)
-			assert(not err, err)
-			if chunk then
-				vim.schedule(function()
-					require("dap.repl").append(chunk)
-				end)
-			end
-		end)
-		-- Wait for delve to start
-		vim.defer_fn(function()
-			callback({ type = "server", host = "127.0.0.1", port = port })
-		end, 100)
+	if not require("mason-registry").is_installed("go-debug-adapter") then
+		vim.notify(
+			"Automatically installing `go-debug-adapter` for go debugging",
+			vim.log.levels.INFO,
+			{ title = "nvim-dap" }
+		)
+
+		local go_dbg = require("mason-registry").get_package("go-debug-adapter")
+		go_dbg:install():once(
+			"closed",
+			vim.schedule_wrap(function()
+				if go_dbg:is_installed() then
+					vim.notify("Successfully installed `go-debug-adapter`", vim.log.levels.INFO, { title = "nvim-dap" })
+				end
+			end)
+		)
 	end
+
+	dap.adapters.go = {
+		type = "executable",
+		command = "node",
+		args = {
+			require("mason-registry").get_package("go-debug-adapter"):get_install_path()
+				.. "/extension/dist/debugAdapter.js",
+		},
+	}
 	dap.configurations.go = {
-		{ type = "go", name = "Debug", request = "launch", program = "${file}" },
 		{
 			type = "go",
-			name = "Debug with args",
+			name = "Debug (file)",
 			request = "launch",
-			program = "${file}",
-			args = utils.input_args(),
+			cwd = "${workspaceFolder}",
+			program = utils.input_file_path(),
+			console = "integratedTerminal",
+			dlvToolPath = vim.fn.exepath("dlv"),
+			showLog = true,
+			showRegisters = true,
+			stopOnEntry = false,
 		},
 		{
 			type = "go",
-			name = "Debug test", -- configuration for debugging test files
+			name = "Debug (file with args)",
 			request = "launch",
-			mode = "test",
-			program = "${file}",
-		}, -- works with go.mod packages and sub packages
+			cwd = "${workspaceFolder}",
+			program = utils.input_file_path(),
+			args = utils.input_args(),
+			console = "integratedTerminal",
+			dlvToolPath = vim.fn.exepath("dlv"),
+			showLog = true,
+			showRegisters = true,
+			stopOnEntry = false,
+		},
 		{
 			type = "go",
-			name = "Debug test (go.mod)",
+			name = "Debug (executable)",
 			request = "launch",
+			cwd = "${workspaceFolder}",
+			program = utils.input_exec_path(),
+			args = utils.input_args(),
+			console = "integratedTerminal",
+			dlvToolPath = vim.fn.exepath("dlv"),
+			mode = "exec",
+			showLog = true,
+			showRegisters = true,
+			stopOnEntry = false,
+		},
+		{
+			type = "go",
+			name = "Debug (test file)",
+			request = "launch",
+			cwd = "${workspaceFolder}",
+			program = utils.input_file_path(),
+			console = "integratedTerminal",
+			dlvToolPath = vim.fn.exepath("dlv"),
 			mode = "test",
+			showLog = true,
+			showRegisters = true,
+			stopOnEntry = false,
+		},
+		{
+			type = "go",
+			name = "Debug (using go.mod)",
+			request = "launch",
+			cwd = "${workspaceFolder}",
 			program = "./${relativeFileDirname}",
+			console = "integratedTerminal",
+			dlvToolPath = vim.fn.exepath("dlv"),
+			mode = "test",
+			showLog = true,
+			showRegisters = true,
+			stopOnEntry = false,
 		},
 	}
 end
