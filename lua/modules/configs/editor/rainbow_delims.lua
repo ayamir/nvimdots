@@ -1,5 +1,6 @@
 return function()
-	local function init_strategy(check_lines)
+	---@param threshold number @Use global strategy if nr of lines exceeds this value
+	local function init_strategy(threshold)
 		return function()
 			local errors = 200
 			vim.treesitter.get_parser():for_each_tree(function(lt)
@@ -10,18 +11,19 @@ return function()
 			if errors < 0 then
 				return nil
 			end
-			return (check_lines and vim.fn.line("$") > 200) and require("rainbow-delimiters").strategy["global"]
+			return vim.fn.line("$") > threshold and require("rainbow-delimiters").strategy["global"]
 				or require("rainbow-delimiters").strategy["local"]
 		end
 	end
 
 	vim.g.rainbow_delimiters = {
 		strategy = {
-			[""] = init_strategy(false),
-			c = init_strategy(true),
-			cpp = init_strategy(true),
-			vimdoc = init_strategy(true),
-			vim = init_strategy(true),
+			[""] = init_strategy(500),
+			c = init_strategy(200),
+			cpp = init_strategy(200),
+			lua = init_strategy(500),
+			vimdoc = init_strategy(300),
+			vim = init_strategy(300),
 		},
 		query = {
 			[""] = "rainbow-delimiters",
