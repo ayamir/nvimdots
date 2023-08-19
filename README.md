@@ -36,7 +36,7 @@
 
 ## 🪷 Introduction
 
-This repo hosts my [NeoVim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
+This repo hosts our [NeoVim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
 
 Branch info:
 
@@ -50,7 +50,7 @@ Branch info:
 
 </div>
 
-Plugins are managed using [lazy.nvim](https://github.com/folke/lazy.nvim).
+We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
