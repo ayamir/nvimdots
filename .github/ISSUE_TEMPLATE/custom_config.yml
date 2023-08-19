@@ -50,7 +50,7 @@ body:
     attributes:
       label: "Minimal folder structure setup on how to reproduce the issue"
       description: "Note: You only need to show where the new needed files are to reproduce the issue"
-      placeholder: |
+      placeholder:
       ```txt
       └── lua/
         ├── core/
@@ -77,7 +77,7 @@ body:
     attributes:
       label: "Minimal config on how to reproduce the issue"
       description: "Note: Issues without any information will be closed directly"
-      placeholder: |
+      placeholder:
       ```lua
       return function()
           require("modules.utils").load_plugin("<plugin name>", {<user config>})
