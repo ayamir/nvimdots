@@ -51,6 +51,7 @@ body:
       label: "Minimal folder structure setup on how to reproduce the issue"
       description: "Note: You only need to show where the new needed files are to reproduce the issue"
       placeholder: |
+      ```txt
       └── lua/
         ├── core/
         ├── keymap/                    default keymaps
@@ -67,6 +68,7 @@ body:
             ├── event.lua              custom `core/events.lua`
             ├── options.lua            custom `core/options.lua`
             └── settings.lua           custom `core/settings.lua`
+      ```
     validations:
       required: true
 
