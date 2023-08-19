@@ -13,11 +13,11 @@ in
       nvimdots = {
         enable = mkEnableOption ''
           Activate "ayamir/nvimdots".
-          Please see details https://github.com/ayamir/nvimdots
+          Have a look at https://github.com/ayamir/nvimdots for details
         '';
         setBuildEnv = mkEnableOption ''
-          Sets environment variables that resolve build dependencies needed by `mason.nvim` and `nvim-treesitter`
-          Environment variables are only visible to `nvim` and have no effect on the session.
+          Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
+          Environment variables are only visible to `nvim` and have no effect on any parent sessions.
           Required for NixOS.
         '';
         withBuildTools = mkEnableOption ''
@@ -25,7 +25,7 @@ in
           Required for NixOS.
         '';
         withHaskell = mkEnableOption ''
-          Enable Haskell compiler. Set to `true` to
+          Enable the Haskell compiler. Set to `true` to
           use Haskell plugins.
         '';
         extraHaskellPackages = mkOption {
@@ -37,7 +37,7 @@ in
                 Assigning a plain list to extraRPackages is deprecated.
                     Please assign a function taking a package set as argument, so
                         extraHaskellPackages = [ pkgs.haskellPackages.xxx ];
-                    should become
+                    should be
                         extraHaskellPackages = hsPkgs: with hsPkgs; [ xxx ];
               '')
               (functionTo fromType);
