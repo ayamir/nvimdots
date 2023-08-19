@@ -28,7 +28,7 @@ body:
     attributes:
       label: "Neovim version"
       description: "Paste the output of `nvim --version` here"
-      placeholder: "NVIM v0.8.0-dev+199-g2875d45e7"
+      placeholder: "NVIM v0.10.0-dev-873+g71ad771ea"
     validations:
       required: true
   - type: input
@@ -61,6 +61,7 @@ body:
         - main (Default/Latest)
         - 0.8 (Legacy)
         - 0.7 (Deprecated)
+        - 0.10 (Nightly)
     validations:
       required: true
   - type: dropdown
