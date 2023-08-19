@@ -46,7 +46,7 @@ body:
       required: true
 
   - type: textarea
-    id: repro-steps
+    id: folder-struts
     attributes:
       label: "Minimal folder structure setup on how to reproduce the issue"
       description: "Note: You only need to show where the new needed files are to reproduce the issue"
