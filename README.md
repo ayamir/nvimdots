@@ -36,7 +36,7 @@
 
 ## 🪷 Introduction
 
-This repo hosts my [NeoVim](https://neovim.io/) configuration for Linux, macOS, and Windows. `init.lua` is the config entry point.
+This repo hosts our [NeoVim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
 
 Branch info:
 
@@ -50,7 +50,7 @@ Branch info:
 
 </div>
 
-I use [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
+We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
@@ -89,25 +89,31 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 <h3 align="center">
     🗺️ Keybindings
 </h3>
-<p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Keybindings" rel="nofollow">Wiki: Keybindings</a></p>
+<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Keybindings" rel="nofollow">Wiki: Keybindings</a> for details</p>
 <br>
 
 <h3 align="center">
     🔌 Plugins & Deps
 </h3>
-<p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Plugins" rel="nofollow">Wiki: Plugins</a> <br><em>(You can also find a deps diagram there!)</em></p>
+<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Plugins" rel="nofollow">Wiki: Plugins</a> for details <br><em>(You can also find a deps diagram there!)</em></p>
 <br>
 
 <h3 align="center">
     🔧 Usage & Customization
 </h3>
-<p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Usage" rel="nofollow">Wiki: Usage</a></p>
+<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Usage" rel="nofollow">Wiki: Usage</a> for details</p>
+<br>
+
+<h3 align="center" id="nixos-support" name="nixos-support">
+    ❄️  NixOS Support
+</h3>
+<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/NixOS-Support" rel="nofollow">Wiki: NixOS Support</a> for details</p>
 <br>
 
 <h3 align="center">
     🤔 FAQ
 </h3>
-<p align="center">Refer to <a href="https://github.com/ayamir/nvimdots/wiki/Issues" rel="nofollow">Wiki: FAQ</a></p>
+<p align="center">See <a href="https://github.com/ayamir/nvimdots/wiki/Issues" rel="nofollow">Wiki: FAQ</a> for details</p>
 
 ## ✨ Features
 
