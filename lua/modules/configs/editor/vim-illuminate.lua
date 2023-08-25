@@ -1,5 +1,5 @@
 return function()
-	require("illuminate").configure({
+	require("modules.utils").load_plugin("vim-illuminate", {
 		providers = {
 			"lsp",
 			"treesitter",
@@ -24,5 +24,5 @@ return function()
 			"toggleterm",
 		},
 		under_cursor = false,
-	})
+	}, false, require("illuminate").configure)
 end

@@ -1,3 +1,3 @@
 return function()
-	require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+	require("modules.utils").load_plugin("hop", { keys = "etovxqpdygfblzhckisuran" })
 end

@@ -67,5 +67,5 @@ return function()
 		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)
 	end
 
-	require("bufferline").setup(opts)
+	require("modules.utils").load_plugin("bufferline", opts)
 end

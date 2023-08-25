@@ -1,5 +1,5 @@
 return function()
-	require("nvim-ts-autotag").setup({
+	require("modules.utils").load_plugin("nvim-ts-autotag", {
 		filetypes = {
 			"html",
 			"javascript",

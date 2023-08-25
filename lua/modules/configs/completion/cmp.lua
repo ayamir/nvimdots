@@ -68,7 +68,7 @@ return function()
 		}
 
 	local cmp = require("cmp")
-	cmp.setup({
+	require("modules.utils").load_plugin("cmp", {
 		preselect = cmp.PreselectMode.Item,
 		window = {
 			completion = {

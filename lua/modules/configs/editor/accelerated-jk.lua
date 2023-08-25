@@ -1,5 +1,5 @@
 return function()
-	require("accelerated-jk").setup({
+	require("modules.utils").load_plugin("accelerated-jk", {
 		mode = "time_driven",
 		enable_deceleration = false,
 		acceleration_motions = {},
