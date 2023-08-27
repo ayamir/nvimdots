@@ -257,7 +257,7 @@ end
 local function tbl_recursive_merge(dst, src)
 	for key, value in pairs(src) do
 		if type(dst[key]) == "table" and type(value) == "function" then
-			dst[key] = value()
+			dst[key] = value(dst[key])
 		elseif type(dst[key]) == "table" and vim.tbl_islist(dst[key]) then
 			vim.list_extend(dst[key], value)
 		elseif type(dst[key]) == "table" and not vim.tbl_islist(dst[key]) then
@@ -322,7 +322,7 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 					setup_callback(opts)
 				-- Replace base config if the returned user config is a function
 				elseif type(user_config) == "function" then
-					local user_opts = user_config()
+					local user_opts = user_config(opts)
 					if type(user_opts) == "table" then
 						setup_callback(user_opts)
 					end
