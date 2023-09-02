@@ -5,6 +5,7 @@ return function()
 		show_first_indent_level = true,
 		filetype_exclude = {
 			"", -- for all buffers without a file type
+			"alpha",
 			"dashboard",
 			"dotooagenda",
 			"flutterToolsOutline",
