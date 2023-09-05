@@ -169,6 +169,12 @@ check_nvim_version() {
 	fi
 }
 
+cleanup() {
+	info "Untracking user configs from git..."
+	cd "${DEST_DIR}"
+	git ls-files -z lua/user/ | xargs -0 git update-index --skip-worktree
+}
+
 # Check if both `INTERACTIVE` and `NONINTERACTIVE` are set
 # Always use single-quoted strings with `exp` expressions
 # shellcheck disable=SC2016
@@ -291,6 +297,8 @@ if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
 	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/user/settings.lua"
 fi
+
+cleanup
 
 info "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"
 info "NOTE: Please make sure you have a Rust Toolchain installed ${tty_underline}via \`rustup\`${tty_reset}${tty_bold}! Otherwise, unexpected things may"

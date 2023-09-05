@@ -287,6 +287,12 @@ function ring_bell {
 	[System.Console]::beep()
 }
 
+function cleanup {
+	info -Msg "Untracking user configs from git..."
+	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
+	@(git ls-files lua/user) | ForEach-Object {&"git" update-index --skip-worktree $_}
+}
+
 function _main {
 	if (-not $IsWindows) {
 		_abort -Msg "This install script can only execute on Windows." -Type "DeviceError"
@@ -395,6 +401,8 @@ Please make sure you have nvim v$REQUIRED_NVIM_VERSION_LEGACY installed at the v
 			Set-Content "$env:CCDEST_DIR\lua\user\settings.lua"
 		}
 	}
+
+    cleanup
 
 	info -Msg "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"
 	info -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and replace'
