@@ -386,10 +386,7 @@ Please make sure you have nvim v$REQUIRED_NVIM_VERSION_LEGACY installed at the v
 	}
 
 	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
-
-	safe_execute -WithCmd { Copy-Item -Path "$env:CCDEST_DIR\lua\user_template\" -Destination "$env:CCDEST_DIR\lua\user" -Recurse }
-
-	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR\lua\user" }
+	safe_execute -WithCmd { Copy-Item -Path "$env:CCDEST_DIR\lua\user_template\" -Destination "$env:CCDEST_DIR\lua\user" -Recurse -Force }
 
 	if (-not $USE_SSH) {
 		info -Msg "Changing default fetching method to HTTPS..."
