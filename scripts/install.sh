@@ -286,10 +286,7 @@ EOABORT
 fi
 
 cd "${DEST_DIR}" || return
-
-execute "cp" "-r" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
-
-cd "${DEST_DIR}/lua/user" || return
+execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
 
 if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
