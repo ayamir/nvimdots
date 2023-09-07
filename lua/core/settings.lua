@@ -123,4 +123,31 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
+-- Set here the Treesitter that will be installed and configured during boot.
+-- Check the below link for all supported languages:
+-- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+---@type string[]
+settings["treesitter_deps"] = {
+	"bash",
+	"c",
+	"cpp",
+	"css",
+	"go",
+	"gomod",
+	"html",
+	"javascript",
+	"json",
+	"latex",
+	"lua",
+	"make",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"rust",
+	"typescript",
+	"vimdoc",
+	"vue",
+	"yaml",
+}
+
 return require("modules.utils").extend_config(settings, "user.settings")
