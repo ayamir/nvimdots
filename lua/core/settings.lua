@@ -123,7 +123,7 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
--- Set here the Treesitter that will be installed and configured during boot.
+-- Set the Treesitter parsers that will be installed during bootstrap here.
 -- Check the below link for all supported languages:
 -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 ---@type string[]
