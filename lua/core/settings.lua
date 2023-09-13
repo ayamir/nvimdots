@@ -111,6 +111,8 @@ settings["null_ls_deps"] = {
 	"shfmt",
 	"stylua",
 	"vint",
+	"goimports",
+	"gofumpt",
 }
 
 -- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
