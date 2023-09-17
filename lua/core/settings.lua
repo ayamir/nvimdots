@@ -107,12 +107,12 @@ settings["lsp_deps"] = {
 ---@type string[]
 settings["null_ls_deps"] = {
 	"clang_format",
+	"gofumpt",
+	"goimports",
 	"prettier",
 	"shfmt",
 	"stylua",
 	"vint",
-	"goimports",
-	"gofumpt",
 }
 
 -- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
