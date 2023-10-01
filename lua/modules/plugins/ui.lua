@@ -29,7 +29,6 @@ ui["lewis6991/gitsigns.nvim"] = {
 }
 ui["lukas-reineke/indent-blankline.nvim"] = {
 	lazy = true,
-	commit = "9637670",
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.indent-blankline"),
 }
