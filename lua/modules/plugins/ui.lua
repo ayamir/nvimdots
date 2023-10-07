@@ -13,6 +13,7 @@ ui["akinsho/bufferline.nvim"] = {
 ui["sainnhe/edge"] = {
 	lazy = true,
 	config = require("ui.edge"),
+}
 ui["Jint-lzxy/nvim"] = {
 	lazy = false,
 	branch = "refactor/syntax-highlighting",
