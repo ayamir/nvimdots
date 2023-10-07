@@ -25,7 +25,7 @@ return function()
 
 	set_sidebar_icons()
 
-	require("lspsaga").setup({
+	require("modules.utils").load_plugin("lspsaga", {
 		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = true,

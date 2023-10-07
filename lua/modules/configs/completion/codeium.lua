@@ -1,3 +1,3 @@
 return function()
-	require("codeium").setup({})
+	require("modules.utils").load_plugin("codeium", {})
 end

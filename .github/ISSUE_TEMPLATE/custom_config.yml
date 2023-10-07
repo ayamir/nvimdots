@@ -1,0 +1,110 @@
+name: Custom (User) Config Issue
+description: Problems when trying to implement your custom config
+labels: [usage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        _Before requesting:_ Make sure you've read through our [Wiki: Usage](https://github.com/ayamir/nvimdots/wiki/Usage) before you start to add things to nvimdots!
+
+  - type: checkboxes
+    id: is-latest-commit
+    attributes:
+      label: "Version confirmation"
+      description: "The local configuration is up-to-date in the current branch and this issue _persists_."
+      options:
+        - label: "Confirm"
+          required: true
+  - type: checkboxes
+    id: prerequisites-done
+    attributes:
+      label: "Following prerequisites"
+      description: "I've checked everything mentioned in [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites)."
+      options:
+        - label: "Confirm"
+          required: true
+
+  - type: input
+    id: nvim-version
+    attributes:
+      label: "Neovim version"
+      description: "Paste the output of `nvim --version` here"
+      placeholder: "NVIM v0.10.0-dev-873+g71ad771ea"
+    validations:
+      required: true
+  - type: dropdown
+    id: branch-info
+    attributes:
+      label: "Branch info"
+      description: "This issue template mainly targets `main` branch. Check the output of `git rev-parse --abbrev-ref HEAD` if you're not sure."
+      options:
+        - main (Default/Latest)
+        - 0.8 (Legacy)
+        - 0.7 (Deprecated)
+        - 0.10 (Nightly)
+    validations:
+      required: true
+
+  - type: textarea
+    id: folder-structure-ta
+    attributes:
+      label: "Minimal (user) folder structure required to reproduce the issue"
+      description: "Note: You only need to describe where the *new/modified files* are. This section will be automatically formatted."
+      render: console
+      placeholder: |
+        └── lua/
+          ├── core/
+          ├── keymap/                    default keymaps
+          ├── modules/                   default plugins and plugin configs
+          └── user                       custom configs root directory
+              ├── configs/               custom plugin config folder
+              │   ├── dap-clients/       custom dap client config folder
+              │   ├── lsp-servers/       custom lsp server config folder
+              │   └── your-config.lua    your plugin configs (if applicable)
+              ├── keymap/                custom keymap folder
+              │   └── your-config.lua    your keymap overrides (if applicable)
+              ├── plugins/               custom plugin folder
+              │   └── your-config.lua    your plugins (if applicable)
+              ├── event.lua              custom `core/events.lua` overrides
+              ├── options.lua            custom `core/options.lua` overrides
+              └── settings.lua           custom `core/settings.lua` overrides
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro-steps
+    attributes:
+      label: "Minimal config with steps on how to reproduce the issue"
+      description: "Note: Issues without any information will be closed directly"
+      placeholder: |
+        This is my custom config (`specs.lua`):
+        ```lua
+        return {
+          popup = {
+            delay_ms = 20,
+          }
+        }
+        ```
+
+        Steps to reproduce the behavior:
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "Expected behavior"
+      description: "Describe the behavior you expect"
+    validations:
+      required: true
+  - type: textarea
+    id: extras
+    attributes:
+      label: Additional information
+      description: If applicable, you may include logs, images, or videos to help explain your problem
+    validations:
+      required: false

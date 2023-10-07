@@ -1,5 +1,5 @@
 return function()
-	require("specs").setup({
+	require("modules.utils").load_plugin("specs", {
 		show_jumps = true,
 		min_jump = 10,
 		popup = {

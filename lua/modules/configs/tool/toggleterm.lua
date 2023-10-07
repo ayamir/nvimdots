@@ -1,5 +1,5 @@
 return function()
-	require("toggleterm").setup({
+	require("modules.utils").load_plugin("toggleterm", {
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
 			if term.direction == "horizontal" then

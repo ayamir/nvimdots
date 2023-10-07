@@ -5,6 +5,7 @@ local vim_path = global.vim_path
 local data_dir = global.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 local modules_dir = vim_path .. "/lua/modules"
+local user_config_dir = vim_path .. "/lua/user"
 
 local settings = require("core.settings")
 local use_ssh = settings.use_ssh
@@ -24,34 +25,40 @@ function Lazy:load_plugins()
 
 	local append_nativertp = function()
 		package.path = package.path
-			.. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
+			.. string.format(
+				";%s;%s;%s",
+				modules_dir .. "/configs/?.lua",
+				modules_dir .. "/configs/?/init.lua",
+				user_config_dir
+			)
 	end
 
 	local get_plugins_list = function()
 		local list = {}
 		local plugins_list = vim.split(fn.glob(modules_dir .. "/plugins/*.lua"), "\n")
-		if type(plugins_list) == "table" then
-			for _, f in ipairs(plugins_list) do
-				-- fill list with `plugins/*.lua`'s path used for later `require` like this:
-				-- list[#list + 1] = "plugins/completion.lua"
-				list[#list + 1] = f:sub(#modules_dir - 6, -1)
-			end
+		local user_plugins_list = vim.split(fn.glob(user_config_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
+		vim.list_extend(plugins_list, user_plugins_list)
+		for _, f in ipairs(plugins_list) do
+			-- aggregate the plugins from `/plugins/*.lua` and `/user/plugins/*.lua` to a plugin list of a certain field for later `require` action.
+			-- current fields contains: completion, editor, lang, tool, ui
+			list[#list + 1] = f:find(modules_dir) and f:sub(#modules_dir - 6, -1) or f:sub(#user_config_dir - 3, -1)
 		end
 		return list
 	end
 
 	append_nativertp()
 
-	local plugins_file = get_plugins_list()
-	for _, m in ipairs(plugins_file) do
-		-- require modules which returned in previous operation like this:
-		-- local modules = require("modules/plugins/completion.lua")
+	for _, m in ipairs(get_plugins_list()) do
+		-- require modules returned from `get_plugins_list()` function.
 		local modules = require(m:sub(0, #m - 4))
 		if type(modules) == "table" then
 			for name, conf in pairs(modules) do
 				self.modules[#self.modules + 1] = vim.tbl_extend("force", { name }, conf)
 			end
 		end
+	end
+	for _, name in ipairs(settings.disabled_plugins) do
+		self.modules[#self.modules + 1] = { name, enabled = false }
 	end
 end
 

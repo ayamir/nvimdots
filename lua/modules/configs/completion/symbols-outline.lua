@@ -5,7 +5,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
-	require("symbols-outline").setup({
+	require("modules.utils").load_plugin("symbols-outline", {
 		highlight_hovered_item = true,
 		show_guides = true,
 		auto_preview = false,

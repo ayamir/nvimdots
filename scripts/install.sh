@@ -286,10 +286,11 @@ EOABORT
 fi
 
 cd "${DEST_DIR}" || return
+execute "cp" "-fRpP" "${DEST_DIR}/lua/user_template/" "${DEST_DIR}/lua/user"
 
 if [[ "${USE_SSH}" -eq "0" ]]; then
 	info "Changing default fetching method to HTTPS..."
-	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/core/settings.lua"
+	execute "perl" "-pi" "-e" "s/\[\"use_ssh\"\] \= true/\[\"use_ssh\"\] \= false/g" "${DEST_DIR}/lua/user/settings.lua"
 fi
 
 info "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"

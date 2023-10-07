@@ -4,7 +4,7 @@ return function()
 		dap = require("modules.utils.icons").get("dap"),
 	}
 
-	require("dapui").setup({
+	require("modules.utils").load_plugin("dapui", {
 		force_buffers = true,
 		icons = {
 			expanded = icons.ui.ArrowOpen,

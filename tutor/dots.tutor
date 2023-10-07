@@ -36,14 +36,15 @@ Of course, the resize process can be continous by holding the key.
 
 Back to the left window, the status line is showed at the bottom of the window.
 -------------------------------------------------------------------------------
-|Normal|main|+1-1~3|                          |~/.config/nvim|utf-8|LF|4%|50:1|
+|Normal|main| 1|   󱜙 [lua_ls,null-ls]   UTF-8 LF  4|󱃪 ~/.config/nvim|4% 50:1|
 -------------------------------------------------------------------------------
-   |     |     |                                      |         |    |     |
-   |     |     |          current work directory -----|         |    |     |
-   |     |     |                                      |         |    |     |
-   |     |     |------ git status of current file      charset -|    |     |
-   |     |----- current git branch                     EOL format ---|     |
-   |---- current edit mode                             cursor position ----|
+   |     |     |              |              |   |   |        |           |
+   |     |     |      LSPs ---|              |   |   |        |           |
+   |     |     |                  charset ---|   |   |        |           |
+   |     |     |                   EOL format ---|   |        |           |
+   |     |     |------ git status       tab size  ---|        |           |
+   |     |----- git branch                  work directory ---|           |
+   |---- edit mode                                    cursor position ----|
 
 You will see different content under different conditions. It will looks like
 this if you switch to the right window and move cursor to the second line.
@@ -121,15 +122,11 @@ latter to jump previous.
 
 Format on save is a very useful feature which is enabled by default. It can
 ensure the code style is consistent and you don't need to care about it.
-You can disable it temprarily by executing
-~~~ cmd
-    :FormatToggle <CR>
-~~~
-and permanently by set **settings["format_on_save"] = false** in
-**lua/core/settings.lua**.
+You can disable it temprarily by using shortcut `<A-f>`{normal} and permanently
+by adding **settings["format_on_save"] = false** in **lua/user/settings.lua**.
 Besides, you can just toggle it for specific language temprarily by executing
 ~~~ cmd
-    :FormatterToggle {language_name} <CR>
+    :FormatterToggleFt {language_name} <CR>
 ~~~
 
 # Lesson 1: SUMMARY

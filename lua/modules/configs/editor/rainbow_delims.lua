@@ -40,4 +40,5 @@ return function()
 			"RainbowDelimiterViolet",
 		},
 	}
+	require("modules.utils").load_plugin("rainbow_delimiters", nil, true)
 end

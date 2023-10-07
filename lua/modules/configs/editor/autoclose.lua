@@ -1,5 +1,5 @@
 return function()
-	require("autoclose").setup({
+	require("modules.utils").load_plugin("autoclose", {
 		keys = {
 			["("] = { escape = false, close = true, pair = "()" },
 			["["] = { escape = false, close = true, pair = "[]" },

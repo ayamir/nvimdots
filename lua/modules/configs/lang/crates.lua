@@ -7,7 +7,7 @@ return function()
 		kind = require("modules.utils.icons").get("kind", true),
 	}
 
-	require("crates").setup({
+	require("modules.utils").load_plugin("crates", {
 		smart_insert = true,
 		insert_closing_quote = true,
 		avoid_prerelease = true,

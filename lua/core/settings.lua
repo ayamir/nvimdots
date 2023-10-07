@@ -36,6 +36,11 @@ settings["format_disabled_dirs"] = {
 	home .. "/format_disabled_dir",
 }
 
+-- Set the plugins to disable here.
+-- Example: "Some-User/A-Repo"
+---@type string[]
+settings["disabled_plugins"] = {}
+
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
 settings["load_big_files_faster"] = true
@@ -48,9 +53,9 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
---settings["colorscheme"] = "catppuccin"
-settings["colorscheme"] = "gruvbox-material"
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
+---@type string
+settings["colorscheme"] = "catppuccin"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
@@ -104,6 +109,8 @@ settings["lsp_deps"] = {
 ---@type string[]
 settings["null_ls_deps"] = {
 	"clang_format",
+	"gofumpt",
+	"goimports",
 	"prettier",
 	"rustfmt",
 	"shfmt",
@@ -121,4 +128,31 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
-return settings
+-- Set the Treesitter parsers that will be installed during bootstrap here.
+-- Check the below link for all supported languages:
+-- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+---@type string[]
+settings["treesitter_deps"] = {
+	"bash",
+	"c",
+	"cpp",
+	"css",
+	"go",
+	"gomod",
+	"html",
+	"javascript",
+	"json",
+	"latex",
+	"lua",
+	"make",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"rust",
+	"typescript",
+	"vimdoc",
+	"vue",
+	"yaml",
+}
+
+return require("modules.utils").extend_config(settings, "user.settings")

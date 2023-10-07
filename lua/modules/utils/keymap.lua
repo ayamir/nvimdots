@@ -92,6 +92,7 @@ local function get_fallback(map)
 	end
 end
 
+-- Amends a mapping (i.e., allows fallback when certain conditions are met)
 ---@param cond string
 ---@param mode string
 ---@param lhs string
@@ -112,6 +113,23 @@ local function amend(cond, mode, lhs, rhs, opts)
 	end, options)
 end
 
+-- Completely replace a mapping
+---@param mode string
+---@param lhs string
+---@param rhs string
+---@param opts? table
+---@param buf? boolean|number
+local function replace(mode, lhs, rhs, opts, buf)
+	get_map(mode, lhs)
+
+	local options = vim.deepcopy(opts) or {}
+	if buf and type(buf) == "number" then
+		vim.api.nvim_buf_set_keymap(buf, mode, lhs, rhs, options)
+	else
+		vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	end
+end
+
 ---Amend the existing keymap.
 ---@param cond string
 ---@param mode string | string[]
@@ -128,6 +146,23 @@ local function modes_amend(cond, mode, lhs, rhs, opts)
 	end
 end
 
+---Replace the existing keymap.
+---@param mode string | string[]
+---@param lhs string
+---@param rhs string
+---@param opts? table
+---@param buf? boolean|number
+local function modes_replace(mode, lhs, rhs, opts, buf)
+	if type(mode) == "table" then
+		for _, m in ipairs(mode) do
+			replace(m, lhs, rhs, opts, buf)
+		end
+	else
+		replace(mode, lhs, rhs, opts, buf)
+	end
+end
+
+---Amend the existing keymap.
 ---@param cond string
 ---@param global_flag string
 ---@param mapping table<string, map_rhs>
@@ -145,6 +180,24 @@ function M.amend(cond, global_flag, mapping)
 					fallback()
 				end
 			end, options)
+		end
+	end
+end
+
+---Replace the existing keymap.
+---@param mapping table<string, map_rhs>
+function M.replace(mapping)
+	for key, value in pairs(mapping) do
+		local modes, keymap = key:match("([^|]*)|?(.*)")
+		if type(value) == "table" then
+			local rhs = value.cmd
+			local options = value.options
+			local buffer = value.buffer
+			modes_replace(vim.split(modes, ""), keymap, rhs, options, buffer)
+		elseif value == "" or value == false then
+			for _, m in ipairs(vim.split(modes, "")) do
+				get_map(m, keymap)
+			end
 		end
 	end
 end
