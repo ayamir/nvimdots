@@ -66,20 +66,20 @@ in
       # Inspired from https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
       build-dependent-pkgs = with pkgs;
         [
-          zlib
-          zstd
-          stdenv.cc.cc
-          curl
-          openssl
-          attr
-          libssh
-          bzip2
-          libxml2
           acl
+          attr
+          bzip2
+          curl
           libsodium
+          libssh
+          libxml2
+          openssl
+          stdenv.cc.cc
+          systemd
           util-linux
           xz
-          systemd
+          zlib
+          zstd
           # Packages not included in `nix-ld`'s NixOSModule
           glib
           libcxx
@@ -127,7 +127,12 @@ in
         };
         home.packages = with pkgs; [
           ripgrep
-        ] ++ optionals cfg.setBuildEnv [ patchelf nvim-depends-library nvim-depends-include nvim-depends-pkgconfig ];
+        ] ++ optionals cfg.setBuildEnv [
+          nvim-depends-include
+          nvim-depends-library
+          nvim-depends-pkgconfig
+          patchelf
+        ];
         home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
         home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
 
@@ -145,13 +150,14 @@ in
               sqlite
             ]
             ++ optionals cfg.withBuildTools [
-              pkg-config
-              clang
-              gcc
-              cmake
-              gnumake
-              ninja
               cargo
+              clang
+              cmake
+              gcc
+              gnumake
+              go
+              ninja
+              pkg-config
               yarn
             ]
             ++ optionals cfg.withHaskell [
@@ -167,8 +173,8 @@ in
             ];
 
           extraPython3Packages = ps: with ps; [
-            isort
             docformatter
+            isort
             pynvim
           ];
           extraLuaPackages = ls: with ls; [
