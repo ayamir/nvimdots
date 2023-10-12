@@ -13,8 +13,8 @@ $REQUIRED_NVIM_VERSION_LEGACY = [version]'0.8.0'
 $USE_SSH = $True
 
 # package mgr vars
-$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust-ms" }
-$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "sqlite3" = "sqlite"; "rustc" = "rust" }
+$choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
+$scoop_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust" }
 $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 
 # env vars
@@ -266,7 +266,6 @@ function fetch_deps {
 	check_and_fetch_exec -PkgName "curl"
 	check_and_fetch_exec -PkgName "wget"
 	check_and_fetch_exec -PkgName "rustc"
-	check_and_fetch_exec -PkgName "sqlite3"
 	check_and_fetch_exec -PkgName "tree-sitter"
 
 	# Reload PATH for future use
@@ -398,10 +397,8 @@ Please make sure you have nvim v$REQUIRED_NVIM_VERSION_LEGACY installed at the v
 	}
 
 	info -Msg "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"
-	info -Msg 'To make sqlite work with lua, manually grab the dlls from "https://www.sqlite.org/download.html" and replace'
-	info_ext -Msg 'vim.g.sqlite_clib_path with your path at the bottom of `lua/core/options.lua`.'
-	info -Msg 'Also, please make sure you have a Rust Toolchain installed via `rustup`! Otherwise, unexpected things may'
-	info_ext -Msg 'happen. See: https://www.rust-lang.org/tools/install.      ¯¯¯¯¯¯¯¯¯¯¯¯'
+	info -Msg 'Please make sure you have a Rust Toolchain installed via `rustup`! Otherwise, unexpected things may'
+	info_ext -Msg 'happen. See: https://www.rust-lang.org/tools/install.¯¯¯¯¯¯¯¯¯¯¯¯'
 	info_ext -Msg '             ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯'
 	info -Msg 'If lazy.nvim failed to fetch any plugin(s), maunally execute `:Lazy sync` until everything is up-to-date.'
 	Write-Host @'
