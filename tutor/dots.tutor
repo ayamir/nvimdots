@@ -85,9 +85,9 @@ content in the right window and press enter to open it in buffer.
 Nvimdots also provide other find features. The most commonly used keymap maybe
 `<leader>fr`{normal} if you are used to editing files in different projects. It will
 list files you ever opened and sort them by "frecency" which used in firefox's
-address bar. This feature utilizes "sqlite" to store the key-value pairs of
-file path and its "frecency" value permanently at 
-**~/.local/share/nvim/file_frecency.sqlite3**.
+address bar. This feature uses "Lua Bytecode" to store the key-value pairs of
+file path and its "frecency" value permanently at:
+**~/.local/share/nvim/file_frecency.bin**.
 
 You can press `<leader>fw`{normal} to search word in current work directory. It
 utilizes ripgrep to search and you can use it naturally as you use ripgrep.
