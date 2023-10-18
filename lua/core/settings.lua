@@ -4,11 +4,6 @@ local settings = {}
 ---@type boolean
 settings["use_ssh"] = true
 
--- Set it to true if you prefer formatting the modification region instead of the whole file
--- NOTE: format on the whole file will also be executed if partial format is failed
----@type boolean
-settings["format_modify"] = false
-
 -- Set it to false if there are no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
@@ -16,6 +11,14 @@ settings["format_on_save"] = true
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
 settings["format_notify"] = true
+
+-- Set it to true if you prefer formatting ONLY the *changed lines* as defined by your version control system.
+-- NOTE: This entry will only be respected if:
+--  > The buffer to be formatted is under version control (Git or Mercurial);
+--  > Any of the server attached to that buffer supports |DocumentRangeFormattingProvider| server capability.
+-- Otherwise Neovim would fall back to format the whole buffer, and a warning will be issued.
+---@type boolean
+settings["format_modifications_only"] = false
 
 -- Set it to false if you don't use copilot
 ---@type boolean

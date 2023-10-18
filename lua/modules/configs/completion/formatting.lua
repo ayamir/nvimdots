@@ -4,7 +4,7 @@ local settings = require("core.settings")
 local disabled_workspaces = settings.format_disabled_dirs
 local format_on_save = settings.format_on_save
 local format_notify = settings.format_notify
-local format_modify = settings.format_modify
+local format_modifications_only = settings.format_modifications_only
 local server_formatting_block_list = settings.server_formatting_block_list
 
 vim.api.nvim_create_user_command("FormatToggle", function()
@@ -156,17 +156,13 @@ function M.format(opts)
 				{ title = "LSP Formatter Warning" }
 			)
 			return
+		elseif
+			format_modifications_only and require("lsp-format-modifications").format_modifications(client, bufnr)
+		then
+			return
 		end
 
-		if format_modify then
-			local lsp_fmt_modify = require("lsp-format-modifications")
-			local res = lsp_fmt_modify.format_modifications(client, bufnr)
-			if res then
-				return
-			end
-		end
-
-		-- Still try to format the whole file if partial format failed
+		-- Fall back to format the whole buffer (even if partial formatting failed)
 		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
 		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
 		if result and result.result then

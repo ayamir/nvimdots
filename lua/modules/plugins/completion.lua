@@ -30,6 +30,10 @@ completion["simrat39/symbols-outline.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.symbols-outline"),
 }
+completion["joechrisellis/lsp-format-modifications.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+}
 completion["jose-elias-alvarez/null-ls.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
@@ -38,10 +42,6 @@ completion["jose-elias-alvarez/null-ls.nvim"] = {
 		"nvim-lua/plenary.nvim",
 		"jay-babu/mason-null-ls.nvim",
 	},
-}
-completion["joechrisellis/lsp-format-modifications.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
 }
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
