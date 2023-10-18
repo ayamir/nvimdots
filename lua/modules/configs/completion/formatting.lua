@@ -157,6 +157,7 @@ function M.format(opts)
 			)
 			return
 		end
+
 		if format_modify then
 			local lsp_fmt_modify = require("lsp-format-modifications")
 			local res = lsp_fmt_modify.format_modifications(client, bufnr)

@@ -7,7 +7,7 @@ settings["use_ssh"] = true
 -- Set it to true if you prefer formatting the modification region instead of the whole file
 -- NOTE: format on the whole file will also be executed if partial format is failed
 ---@type boolean
-settings["format_modify"] = true
+settings["format_modify"] = false
 
 -- Set it to false if there are no need to format on save.
 ---@type boolean
