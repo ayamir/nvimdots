@@ -39,6 +39,10 @@ completion["jose-elias-alvarez/null-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
+completion["joechrisellis/lsp-format-modifications.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+}
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
 	event = "InsertEnter",

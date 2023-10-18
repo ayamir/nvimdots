@@ -4,6 +4,7 @@ local settings = require("core.settings")
 local disabled_workspaces = settings.format_disabled_dirs
 local format_on_save = settings.format_on_save
 local format_notify = settings.format_notify
+local format_modify = settings.format_modify
 local server_formatting_block_list = settings.server_formatting_block_list
 
 vim.api.nvim_create_user_command("FormatToggle", function()
@@ -156,23 +157,30 @@ function M.format(opts)
 			)
 			return
 		end
-		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
-		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
-		if result and result.result then
-			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
-			if format_notify then
-				vim.notify(
-					string.format("[LSP] Format successfully with %s!", client.name),
-					vim.log.levels.INFO,
-					{ title = "LSP Format Success" }
-				)
+		if format_modify then
+			local lsp_fmt_modify = require("lsp-format-modifications")
+			local res = lsp_fmt_modify.format_modifications(client, bufnr)
+            -- Still try to format the whole file if partial format failed
+			if res == false then
+				local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
+				local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
+				if result and result.result then
+					vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
+					if format_notify then
+						vim.notify(
+							string.format("[LSP] Format successfully with %s!", client.name),
+							vim.log.levels.INFO,
+							{ title = "LSP Format Success" }
+						)
+					end
+				elseif err then
+					vim.notify(
+						string.format("[LSP][%s] %s", client.name, err),
+						vim.log.levels.ERROR,
+						{ title = "LSP Format Error" }
+					)
+				end
 			end
-		elseif err then
-			vim.notify(
-				string.format("[LSP][%s] %s", client.name, err),
-				vim.log.levels.ERROR,
-				{ title = "LSP Format Error" }
-			)
 		end
 	end
 end
