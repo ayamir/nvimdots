@@ -29,7 +29,7 @@ function Lazy:load_plugins()
 				";%s;%s;%s",
 				modules_dir .. "/configs/?.lua",
 				modules_dir .. "/configs/?/init.lua",
-				user_config_dir
+				user_config_dir .. "/?.lua"
 			)
 	end
 
