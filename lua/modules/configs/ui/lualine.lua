@@ -1,4 +1,6 @@
 return function()
+	local colorscheme = vim.g.colors_name
+	local _is_catppuccin = string.find(colorscheme, "catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
@@ -8,44 +10,49 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
-	local function custom_theme()
+	local function custom_theme(is_catppuccin)
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
 			pattern = "*",
 			callback = function()
-				require("lualine").setup({ options = { theme = custom_theme() } })
+				local colorscheme_ = vim.g.colors_name
+				local is_catppuccin_ = string.find(colorscheme_, "catppuccin") ~= nil
+				require("lualine").setup({ options = { theme = custom_theme(is_catppuccin_) } })
 			end,
 		})
 
-		colors = require("modules.utils").get_palette()
-		local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
-		return {
-			normal = {
-				a = { fg = colors.lavender, bg = colors.surface0, gui = "bold" },
-				b = { fg = colors.text, bg = universal_bg },
-				c = { fg = colors.text, bg = universal_bg },
-			},
-			command = {
-				a = { fg = colors.peach, bg = colors.surface0, gui = "bold" },
-			},
-			insert = {
-				a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
-			},
-			visual = {
-				a = { fg = colors.flamingo, bg = colors.surface0, gui = "bold" },
-			},
-			terminal = {
-				a = { fg = colors.teal, bg = colors.surface0, gui = "bold" },
-			},
-			replace = {
-				a = { fg = colors.red, bg = colors.surface0, gui = "bold" },
-			},
-			inactive = {
-				a = { fg = colors.subtext0, bg = universal_bg, gui = "bold" },
-				b = { fg = colors.subtext0, bg = universal_bg },
-				c = { fg = colors.subtext0, bg = universal_bg },
-			},
-		}
+		if is_catppuccin then
+			colors = require("modules.utils").get_palette()
+			local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
+			return {
+				normal = {
+					a = { fg = colors.lavender, bg = colors.surface0, gui = "bold" },
+					b = { fg = colors.text, bg = universal_bg },
+					c = { fg = colors.text, bg = universal_bg },
+				},
+				command = {
+					a = { fg = colors.peach, bg = colors.surface0, gui = "bold" },
+				},
+				insert = {
+					a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
+				},
+				visual = {
+					a = { fg = colors.flamingo, bg = colors.surface0, gui = "bold" },
+				},
+				terminal = {
+					a = { fg = colors.teal, bg = colors.surface0, gui = "bold" },
+				},
+				replace = {
+					a = { fg = colors.red, bg = colors.surface0, gui = "bold" },
+				},
+				inactive = {
+					a = { fg = colors.subtext0, bg = universal_bg, gui = "bold" },
+					b = { fg = colors.subtext0, bg = universal_bg },
+					c = { fg = colors.subtext0, bg = universal_bg },
+				},
+			}
+		end
+		return "auto"
 	end
 
 	local mini_sections = {
@@ -137,7 +144,7 @@ return function()
 				return "│"
 			end,
 			padding = 0,
-			color = utils.gen_hl("surface1", true, true),
+			color = _is_catppuccin and utils.gen_hl("surface1", true, true) or nil,
 		},
 
 		file_status = {
@@ -189,7 +196,7 @@ return function()
 				return next(available_servers) == nil and icons.misc.NoActiveLsp
 					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
 			end,
-			color = utils.gen_hl("blue", true, true, nil, "bold"),
+			color = _is_catppuccin and utils.gen_hl("blue", true, true, nil, "bold") or nil,
 			cond = conditionals.has_enough_room,
 		},
 
@@ -218,7 +225,7 @@ return function()
 				end
 				return ""
 			end,
-			color = utils.gen_hl("green", true, true),
+			color = _is_catppuccin and utils.gen_hl("green", true, true) or nil,
 			cond = conditionals.has_enough_room,
 		},
 
@@ -233,7 +240,7 @@ return function()
 			function()
 				return icons.ui.FolderWithHeart .. utils.abbreviate_path(vim.fs.normalize(vim.fn.getcwd()))
 			end,
-			color = utils.gen_hl("subtext0", true, true, nil, "bold"),
+			color = _is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
 		},
 
 		file_location = {
@@ -257,7 +264,7 @@ return function()
 	require("modules.utils").load_plugin("lualine", {
 		options = {
 			icons_enabled = true,
-			theme = custom_theme(),
+			theme = custom_theme(_is_catppuccin),
 			disabled_filetypes = { statusline = { "alpha" } },
 			component_separators = "",
 			section_separators = { left = "", right = "" },
@@ -282,7 +289,7 @@ return function()
 				{
 					"branch",
 					icon = icons.git_nosep.Branch,
-					color = utils.gen_hl("subtext0", true, true, nil, "bold"),
+					color = _is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
 					cond = conditionals.has_git,
 				},
 				{
@@ -294,7 +301,7 @@ return function()
 					},
 					source = diff_source,
 					colored = false,
-					color = utils.gen_hl("subtext0", true, true),
+					color = _is_catppuccin and utils.gen_hl("subtext0", true, true) or nil,
 					cond = conditionals.has_git,
 					padding = { right = 1 },
 				},
