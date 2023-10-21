@@ -47,7 +47,11 @@ return function()
 	---@param config table
 	local function mason_dap_handler(config)
 		local dap_name = config.name
-		local ok, custom_handler = pcall(require, "tool.dap.clients." .. dap_name)
+		local ok, custom_handler = pcall(require, "user.configs.dap-clients." .. dap_name)
+		if not ok then
+			-- Use preset if there is no user definition
+			ok, custom_handler = pcall(require, "tool.dap.clients." .. dap_name)
+		end
 		if not ok then
 			-- Default to use factory config for clients(s) that doesn't include a spec
 			mason_dap.default_setup(config)
@@ -72,7 +76,7 @@ return function()
 		end
 	end
 
-	mason_dap.setup({
+	require("modules.utils").load_plugin("mason-nvim-dap", {
 		ensure_installed = require("core.settings").dap_deps,
 		automatic_installation = true,
 		handlers = { mason_dap_handler },

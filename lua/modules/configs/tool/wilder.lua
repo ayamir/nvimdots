@@ -2,7 +2,6 @@ return function()
 	local wilder = require("wilder")
 	local icons = { ui = require("modules.utils.icons").get("ui") }
 
-	wilder.setup({ modes = { ":", "/", "?" } })
 	wilder.set_option("use_python_remote_plugin", 0)
 	wilder.set_option("pipeline", {
 		wilder.branch(
@@ -47,8 +46,8 @@ return function()
 		},
 	}))
 	local wildmenu_renderer = wilder.wildmenu_renderer({
+		apply_incsearch_fix = false,
 		highlighter = wilder.lua_fzy_highlighter(),
-		apply_incsearch_fix = true,
 		separator = " | ",
 		left = { " ", wilder.wildmenu_spinner(), " " },
 		right = { " ", wilder.wildmenu_index() },
@@ -61,4 +60,6 @@ return function()
 			substitute = wildmenu_renderer,
 		})
 	)
+
+	require("modules.utils").load_plugin("wilder", { modes = { ":", "/", "?" } })
 end

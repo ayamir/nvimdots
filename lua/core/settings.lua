@@ -4,6 +4,10 @@ local settings = {}
 ---@type boolean
 settings["use_ssh"] = true
 
+-- Set it to false if you don't use copilot
+---@type boolean
+settings["use_copilot"] = true
+
 -- Set it to false if there are no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
@@ -11,6 +15,23 @@ settings["format_on_save"] = true
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
 settings["format_notify"] = true
+
+-- Set it to true if you prefer formatting ONLY the *changed lines* as defined by your version control system.
+-- NOTE: This entry will only be respected if:
+--  > The buffer to be formatted is under version control (Git or Mercurial);
+--  > Any of the server attached to that buffer supports |DocumentRangeFormattingProvider| server capability.
+-- Otherwise Neovim would fall back to format the whole buffer, and a warning will be issued.
+---@type boolean
+settings["format_modifications_only"] = false
+
+-- Set the format disabled directories here, files under these dirs won't be formatted on save.
+--- NOTE: Directories may contain regular expressions (grammar: vim). |regexp|
+--- NOTE: Directories are automatically normalized. |vim.fs.normalize()|
+---@type string[]
+settings["format_disabled_dirs"] = {
+	-- Example
+	"~/format_disabled_dir",
+}
 
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
@@ -24,13 +45,10 @@ settings["diagnostics_virtual_text"] = true
 ---@type "Error"|"Warning"|"Information"|"Hint"
 settings["diagnostics_level"] = "Hint"
 
--- Set the format disabled directories here, files under these dirs won't be formatted on save.
---- NOTE: Directories may contain regular expressions (grammar: vim). |regexp|
---- NOTE: Directories are automatically normalized. |vim.fs.normalize()|
+-- Set the plugins to disable here.
+-- Example: "Some-User/A-Repo"
 ---@type string[]
-settings["format_disabled_dirs"] = {
-	"~/format_disabled_dir",
-}
+settings["disabled_plugins"] = {}
 
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
@@ -44,7 +62,7 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `edge`, `nord`.
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
 ---@type string
 settings["colorscheme"] = "catppuccin"
 
@@ -98,6 +116,8 @@ settings["lsp_deps"] = {
 ---@type string[]
 settings["null_ls_deps"] = {
 	"clang_format",
+	"gofumpt",
+	"goimports",
 	"prettier",
 	"shfmt",
 	"stylua",
@@ -114,4 +134,31 @@ settings["dap_deps"] = {
 	"python", -- Python (debugpy)
 }
 
-return settings
+-- Set the Treesitter parsers that will be installed during bootstrap here.
+-- Check the below link for all supported languages:
+-- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+---@type string[]
+settings["treesitter_deps"] = {
+	"bash",
+	"c",
+	"cpp",
+	"css",
+	"go",
+	"gomod",
+	"html",
+	"javascript",
+	"json",
+	"latex",
+	"lua",
+	"make",
+	"markdown",
+	"markdown_inline",
+	"python",
+	"rust",
+	"typescript",
+	"vimdoc",
+	"vue",
+	"yaml",
+}
+
+return require("modules.utils").extend_config(settings, "user.settings")

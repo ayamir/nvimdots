@@ -32,8 +32,8 @@ return function()
 					padding = 0,
 				},
 				{
-					filetype = "lspsagaoutline",
-					text = "Lspsaga Outline",
+					filetype = "Outline",
+					text = "Symbol Outline",
 					text_align = "center",
 					padding = 0,
 				},
@@ -67,5 +67,5 @@ return function()
 		opts = vim.tbl_deep_extend("force", opts, catppuccin_hl_overwrite)
 	end
 
-	require("bufferline").setup(opts)
+	require("modules.utils").load_plugin("bufferline", opts)
 end

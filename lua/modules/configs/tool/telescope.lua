@@ -2,7 +2,7 @@ return function()
 	local icons = { ui = require("modules.utils.icons").get("ui", true) }
 	local lga_actions = require("telescope-live-grep-args.actions")
 
-	require("telescope").setup({
+	require("modules.utils").load_plugin("telescope", {
 		defaults = {
 			vimgrep_arguments = {
 				"rg",
@@ -51,6 +51,7 @@ return function()
 				case_mode = "smart_case",
 			},
 			frecency = {
+				use_sqlite = false,
 				show_scores = true,
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },

@@ -4,29 +4,8 @@ return vim.schedule_wrap(function()
 	vim.api.nvim_set_option_value("foldmethod", "expr", {})
 	vim.api.nvim_set_option_value("foldexpr", "nvim_treesitter#foldexpr()", {})
 
-	require("nvim-treesitter.configs").setup({
-		ensure_installed = {
-			"bash",
-			"c",
-			"cpp",
-			"css",
-			"go",
-			"gomod",
-			"html",
-			"javascript",
-			"json",
-			"latex",
-			"lua",
-			"make",
-			"markdown",
-			"markdown_inline",
-			"python",
-			"rust",
-			"typescript",
-			"vimdoc",
-			"vue",
-			"yaml",
-		},
+	require("modules.utils").load_plugin("nvim-treesitter", {
+		ensure_installed = require("core.settings").treesitter_deps,
 		highlight = {
 			enable = true,
 			disable = function(ft, bufnr)
@@ -72,7 +51,7 @@ return vim.schedule_wrap(function()
 		},
 		context_commentstring = { enable = true, enable_autocmd = false },
 		matchup = { enable = true },
-	})
+	}, false, require("nvim-treesitter.configs").setup)
 	require("nvim-treesitter.install").prefer_git = true
 	if use_ssh then
 		local parsers = require("nvim-treesitter.parsers").get_parser_configs()

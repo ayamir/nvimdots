@@ -25,7 +25,7 @@ return function()
 
 	set_sidebar_icons()
 
-	require("lspsaga").setup({
+	require("modules.utils").load_plugin("lspsaga", {
 		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = true,
@@ -53,24 +53,12 @@ return function()
 		-- https://dev.neovim.pro/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
+			only_in_cursor = false,
 			show_server_name = true,
 			extend_gitsigns = false,
 			keys = {
 				quit = "q",
 				exec = "<CR>",
-			},
-		},
-		-- https://dev.neovim.pro/lspsaga/definition/
-		definition = {
-			width = 0.6,
-			height = 0.5,
-			keys = {
-				edit = "<C-c>o",
-				vsplit = "<C-c>v",
-				split = "<C-c>s",
-				tabe = "<C-c>t",
-				quit = "q",
-				close = "<C-c>q",
 			},
 		},
 		-- https://dev.neovim.pro/lspsaga/diagnostic/
@@ -94,30 +82,9 @@ return function()
 				quit_in_show = { "q", "<Esc>" },
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/finder/
-		finder = {
-			max_height = 0.5,
-			left_width = 0.3,
-			right_width = 0.3,
-			default = "def+ref+imp",
-			methods = {},
-			layout = "float",
-			filter = {},
-			silent = false,
-			keys = {
-				shuttle = "[]",
-				toggle_or_open = "<CR>",
-				vsplit = "v",
-				split = "s",
-				tabe = "t",
-				tabnew = "n",
-				quit = "q",
-				close = "<Esc>",
-			},
-		},
 		-- https://dev.neovim.pro/lspsaga/hover/
 		hover = {
-			max_width = 0.3,
+			max_width = 0.45,
 			max_height = 0.7,
 			open_link = "gl",
 			open_cmd = "silent !" .. require("core.settings").external_browser,
@@ -136,23 +103,6 @@ return function()
 			virtual_text = false,
 			debounce = 10,
 			sign_priority = 20,
-		},
-		-- https://dev.neovim.pro/lspsaga/outline/
-		outline = {
-			win_position = "right",
-			win_width = 30,
-			auto_preview = false,
-			detail = false,
-			auto_close = true,
-			close_after_jump = true,
-			layout = "normal",
-			max_height = 0.5,
-			left_width = 0.3,
-			keys = {
-				toggle_or_jump = "<CR>",
-				quit = "q",
-				jump = "o",
-			},
 		},
 		-- https://dev.neovim.pro/lspsaga/rename/
 		rename = {
@@ -225,8 +175,9 @@ return function()
 		},
 		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
 		scroll_preview = {
-			scroll_down = "<C-j>",
-			scroll_up = "<C-k>",
+			scroll_down = "<C-d>",
+			scroll_up = "<C-u>",
 		},
+		request_timeout = 3000,
 	})
 end

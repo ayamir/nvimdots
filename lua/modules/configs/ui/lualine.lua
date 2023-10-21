@@ -58,7 +58,7 @@ return function()
 	}
 	local outline = {
 		sections = mini_sections,
-		filetypes = { "lspsagaoutline" },
+		filetypes = { "Outline" },
 	}
 	local diffview = {
 		sections = mini_sections,
@@ -254,7 +254,7 @@ return function()
 		},
 	}
 
-	require("lualine").setup({
+	require("modules.utils").load_plugin("lualine", {
 		options = {
 			icons_enabled = true,
 			theme = custom_theme(),

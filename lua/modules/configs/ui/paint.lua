@@ -1,5 +1,5 @@
 return function()
-	require("paint").setup({
+	require("modules.utils").load_plugin("paint", {
 		---type PaintHighlight[]
 		highlights = {
 			{

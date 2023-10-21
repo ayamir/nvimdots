@@ -1,5 +1,5 @@
 return function()
-	require("fcitx5").setup({
+	require("modules.utils").load_plugin("fcitx5", {
 		msg = nil, -- string | nil: printed when startup is completed
 		imname = { -- fcitx5.Imname | nil: imnames on each mode set as prior. See `:h map-table` for more in-depth information.
 			norm = nil, -- string | nil: imname to set in normal mode. if nil, will restore the mode on exit.

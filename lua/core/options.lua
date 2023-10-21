@@ -121,14 +121,8 @@ local function load_options()
 		vim.g.python3_host_prog = use_if_defined(vim.g.python3_host_prog, "python3")
 	end
 
-	for name, value in pairs(global_local) do
+	for name, value in pairs(require("modules.utils").extend_config(global_local, "user.options")) do
 		vim.o[name] = value
-	end
-
-	-- Fix sqlite3 missing-lib issue on Windows
-	if global.is_windows then
-		-- Download the DLLs form https://www.sqlite.org/download.html
-		vim.g.sqlite_clib_path = global.home .. "/Documents/sqlite-dll-win64-x64-3400200/sqlite3.dll"
 	end
 end
 

@@ -8,4 +8,6 @@ return function()
 	vim.g.clever_f_mark_direct_color = "CleverChar"
 	vim.g.clever_f_mark_direct = true
 	vim.g.clever_f_timeout_ms = 1500
+
+	require("modules.utils").load_plugin("cleverf", nil, true)
 end

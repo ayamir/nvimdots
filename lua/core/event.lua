@@ -13,6 +13,7 @@ function autocmd.nvim_create_augroups(definitions)
 	end
 end
 
+-- defer setting LSP-related keymaps till LspAttach
 local mapping = require("keymap.completion")
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
@@ -151,8 +152,7 @@ function autocmd.load_autocmds()
 			},
 		},
 	}
-
-	autocmd.nvim_create_augroups(definitions)
+	autocmd.nvim_create_augroups(require("modules.utils").extend_config(definitions, "user.event"))
 end
 
 autocmd.load_autocmds()

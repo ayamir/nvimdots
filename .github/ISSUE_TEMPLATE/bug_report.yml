@@ -22,13 +22,21 @@ body:
       options:
         - label: "Confirm"
           required: true
+  - type: checkboxes
+    id: not-user-config-issue
+    attributes:
+      label: "Not a user config issue"
+      description: "This issue _persists_ after removing ALL user configs. If this is not the case, you should open a [Custom (User) Config Issue](https://github.com/ayamir/nvimdots/issues/new?assignees=&labels=usage&projects=&template=custom_config.yml) instead."
+      options:
+        - label: "Confirm"
+          required: true
 
   - type: input
     id: nvim-version
     attributes:
       label: "Neovim version"
       description: "Paste the output of `nvim --version` here"
-      placeholder: "NVIM v0.8.0-dev+199-g2875d45e7"
+      placeholder: "NVIM v0.10.0-dev-873+g71ad771ea"
     validations:
       required: true
   - type: input
@@ -61,6 +69,7 @@ body:
         - main (Default/Latest)
         - 0.8 (Legacy)
         - 0.7 (Deprecated)
+        - 0.10 (Nightly)
     validations:
       required: true
   - type: dropdown
