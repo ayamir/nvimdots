@@ -162,12 +162,14 @@ settings["treesitter_deps"] = {
 }
 
 -- Settings for the neovim-guis like `neovide`, `neovim-qt`, etc.
+-- NOTE: Only supports the options listed below.
 settings["gui_config"] = {
 	font_name = "JetBrainsMono Nerd Font",
 	font_size = 12,
 }
 
--- Settings for `neovide`
+-- Settings for `neovide`.
+-- NOTE: Get the full configurable options: https://neovide.dev/configuration.html
 settings["neovide_config"] = {
 	refresh_rate = 120,
 	cursor_vfx_mode = "railgun",
