@@ -161,11 +161,13 @@ settings["treesitter_deps"] = {
 	"yaml",
 }
 
+-- Settings for the neovim-guis like `neovide`, `neovim-qt`, etc.
 settings["gui_config"] = {
 	font_name = "JetBrainsMono Nerd Font",
 	font_size = 12,
 }
 
+-- Settings for `neovide`
 settings["neovide_config"] = {
 	refresh_rate = 120,
 	cursor_vfx_mode = "railgun",
