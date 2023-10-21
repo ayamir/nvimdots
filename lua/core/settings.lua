@@ -161,4 +161,22 @@ settings["treesitter_deps"] = {
 	"yaml",
 }
 
+settings["gui_config"] = {
+	font_name = "JetBrainsMono Nerd Font",
+	font_size = 12,
+}
+
+settings["neovide_config"] = {
+	refresh_rate = 120,
+	cursor_vfx_mode = "railgun",
+	no_idle = true,
+	cursor_animation_length = 0.03,
+	cursor_trail_length = 0.05,
+	cursor_antialiasing = true,
+	cursor_vfx_opacity = 200.0,
+	cursor_vfx_particle_lifetime = 1.2,
+	cursor_vfx_particle_speed = 20.0,
+	cursor_vfx_particle_density = 5.0,
+}
+
 return require("modules.utils").extend_config(settings, "user.settings")
