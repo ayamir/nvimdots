@@ -41,6 +41,11 @@ editor["ojroques/nvim-bufdel"] = {
 editor["folke/flash.nvim"] = {
 	lazy = true,
 	event = { "VeryLazy" },
+	opts = {
+		search = {
+			multi_window = false,
+		},
+	},
 	config = true,
 }
 editor["numToStr/Comment.nvim"] = {
