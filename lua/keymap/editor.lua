@@ -22,18 +22,6 @@ local plug_map = {
 	-- Plugin: nvim-bufdel
 	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
 
-	-- Plugin: flash.nvim
-	-- ["n|S"] = map_cmd("<Cmd>lua require('flash').jump()<CR>"):with_silent():with_noremap():with_desc("Flash"),
-	-- ["o|r"] = map_cmd("<Cmd>lua require('flash').remote()<CR>"):with_silent():with_noremap():with_desc("Remote Flash"),
-	-- ["ox|R"] = map_cmd("<Cmd>lua require('flash').treesitter_search()<CR>")
-	-- 	:with_silent()
-	-- 	:with_noremap()
-	-- 	:with_desc("Treesitter Search"),
-	-- ["c|<c-s>"] = map_cmd("<Cmd>lua require('flash').toggle()<CR>")
-	-- 	:with_silent()
-	-- 	:with_noremap()
-	-- 	:with_desc("Toggle Flash Search"),
-
 	-- Plugin: comment.nvim
 	["n|gcc"] = map_callback(function()
 			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")
