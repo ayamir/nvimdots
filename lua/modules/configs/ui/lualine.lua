@@ -1,6 +1,6 @@
 return function()
 	local colorscheme = vim.g.colors_name
-	local is_catppuccin = string.find(colorscheme, "catppuccin") ~= nil
+	local _is_catppuccin = string.find(colorscheme, "catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
@@ -99,7 +99,7 @@ return function()
 				return "│"
 			end,
 			padding = 0,
-			color = is_catppuccin and utils.gen_hl("surface1", true, true) or nil,
+			color = _is_catppuccin and utils.gen_hl("surface1", true, true) or nil,
 		},
 
 		file_status = {
@@ -151,7 +151,7 @@ return function()
 				return next(available_servers) == nil and icons.misc.NoActiveLsp
 					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
 			end,
-			color = is_catppuccin and utils.gen_hl("blue", true, true, nil, "bold") or nil,
+			color = _is_catppuccin and utils.gen_hl("blue", true, true, nil, "bold") or nil,
 			cond = conditionals.has_enough_room,
 		},
 
@@ -180,7 +180,7 @@ return function()
 				end
 				return ""
 			end,
-			color = is_catppuccin and utils.gen_hl("green", true, true) or nil,
+			color = _is_catppuccin and utils.gen_hl("green", true, true) or nil,
 			cond = conditionals.has_enough_room,
 		},
 
@@ -195,7 +195,7 @@ return function()
 			function()
 				return icons.ui.FolderWithHeart .. utils.abbreviate_path(vim.fs.normalize(vim.fn.getcwd()))
 			end,
-			color = is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
+			color = _is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
 		},
 
 		file_location = {
@@ -244,7 +244,7 @@ return function()
 				{
 					"branch",
 					icon = icons.git_nosep.Branch,
-					color = is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
+					color = _is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
 					cond = conditionals.has_git,
 				},
 				{
@@ -256,7 +256,7 @@ return function()
 					},
 					source = diff_source,
 					colored = false,
-					color = is_catppuccin and utils.gen_hl("subtext0", true, true) or nil,
+					color = _is_catppuccin and utils.gen_hl("subtext0", true, true) or nil,
 					cond = conditionals.has_git,
 					padding = { right = 1 },
 				},
