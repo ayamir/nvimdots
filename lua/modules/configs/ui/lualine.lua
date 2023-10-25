@@ -109,18 +109,21 @@ return function()
 		---@param special_nobg boolean @Disable guibg for transparent backgrounds?
 		---@param bg string? @Background hl group
 		---@param gui string? @GUI highlight arguments
-		---@return fun():lualine_hlgrp
+		---@return fun()?:lualine_hlgrp
 		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
-			return function()
-				local guifg = colors[fg]
-				local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
-					or colors[bg]
-				local nobg = special_nobg and require("core.settings").transparent_background
-				return {
-					fg = guifg and guifg or colors.none,
-					bg = (guibg and not nobg) and guibg or colors.none,
-					gui = gui and gui or nil,
-				}
+			if is_catppuccin then
+				return function()
+					local guifg = colors[fg]
+					local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
+						or colors[bg]
+					local nobg = special_nobg and require("core.settings").transparent_background
+					---@diagnostic disable-next-line: redundant-return-value
+					return {
+						fg = guifg and guifg or colors.none,
+						bg = (guibg and not nobg) and guibg or colors.none,
+						gui = gui and gui or nil,
+					}
+				end
 			end
 		end,
 	}
@@ -142,7 +145,7 @@ return function()
 				return "│"
 			end,
 			padding = 0,
-			color = is_catppuccin and utils.gen_hl("surface1", true, true) or nil,
+			color = utils.gen_hl("surface1", true, true),
 		},
 
 		file_status = {
@@ -194,7 +197,7 @@ return function()
 				return next(available_servers) == nil and icons.misc.NoActiveLsp
 					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
 			end,
-			color = is_catppuccin and utils.gen_hl("blue", true, true, nil, "bold") or nil,
+			color = utils.gen_hl("blue", true, true, nil, "bold"),
 			cond = conditionals.has_enough_room,
 		},
 
@@ -223,7 +226,7 @@ return function()
 				end
 				return ""
 			end,
-			color = is_catppuccin and utils.gen_hl("green", true, true) or nil,
+			color = utils.gen_hl("green", true, true),
 			cond = conditionals.has_enough_room,
 		},
 
@@ -238,7 +241,7 @@ return function()
 			function()
 				return icons.ui.FolderWithHeart .. utils.abbreviate_path(vim.fs.normalize(vim.fn.getcwd()))
 			end,
-			color = is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
+			color = utils.gen_hl("subtext0", true, true, nil, "bold"),
 		},
 
 		file_location = {
@@ -287,7 +290,7 @@ return function()
 				{
 					"branch",
 					icon = icons.git_nosep.Branch,
-					color = is_catppuccin and utils.gen_hl("subtext0", true, true, nil, "bold") or nil,
+					color = utils.gen_hl("subtext0", true, true, nil, "bold"),
 					cond = conditionals.has_git,
 				},
 				{
@@ -299,7 +302,7 @@ return function()
 					},
 					source = diff_source,
 					colored = false,
-					color = is_catppuccin and utils.gen_hl("subtext0", true, true) or nil,
+					color = utils.gen_hl("subtext0", true, true),
 					cond = conditionals.has_git,
 					padding = { right = 1 },
 				},
