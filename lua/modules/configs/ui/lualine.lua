@@ -1,5 +1,5 @@
 return function()
-	local is_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
+	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
@@ -10,16 +10,16 @@ return function()
 	}
 
 	local function custom_theme()
-		is_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 		vim.api.nvim_create_autocmd("ColorScheme", {
 			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
 			pattern = "*",
 			callback = function()
+				has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 				require("lualine").setup({ options = { theme = custom_theme() } })
 			end,
 		})
 
-		if is_catppuccin then
+		if has_catppuccin then
 			colors = require("modules.utils").get_palette()
 			local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
 			return {
@@ -49,8 +49,9 @@ return function()
 					c = { fg = colors.subtext0, bg = universal_bg },
 				},
 			}
+		else
+			return "auto"
 		end
-		return "auto"
 	end
 
 	local mini_sections = {
@@ -109,21 +110,23 @@ return function()
 		---@param special_nobg boolean @Disable guibg for transparent backgrounds?
 		---@param bg string? @Background hl group
 		---@param gui string? @GUI highlight arguments
-		---@return fun()?:lualine_hlgrp
+		---@return nil|fun():lualine_hlgrp
 		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
-			if is_catppuccin then
+			if has_catppuccin then
 				return function()
 					local guifg = colors[fg]
 					local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
 						or colors[bg]
 					local nobg = special_nobg and require("core.settings").transparent_background
-					---@diagnostic disable-next-line: redundant-return-value
 					return {
 						fg = guifg and guifg or colors.none,
 						bg = (guibg and not nobg) and guibg or colors.none,
 						gui = gui and gui or nil,
 					}
 				end
+			else
+				-- Return `nil` if the theme is user-defined
+				return nil
 			end
 		end,
 	}
