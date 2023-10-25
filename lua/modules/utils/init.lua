@@ -260,7 +260,7 @@ local function tbl_recursive_merge(dst, src)
 			dst[key] = value(dst[key])
 		elseif type(dst[key]) == "table" and vim.tbl_islist(dst[key]) then
 			vim.list_extend(dst[key], value)
-		elseif type(dst[key]) == "table" and not vim.tbl_islist(dst[key]) then
+		elseif type(dst[key]) == "table" and type(value) == "table" and not vim.tbl_islist(dst[key]) then
 			tbl_recursive_merge(dst[key], value)
 		else
 			dst[key] = value
