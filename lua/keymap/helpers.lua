@@ -27,3 +27,14 @@ _G._toggle_lazygit = function()
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
 	end
 end
+
+_G._flash_esc = function()
+	local status_ok, state = pcall(function()
+		return require("flash.plugins.char").state
+	end)
+	if status_ok and state then
+		state:hide()
+	else
+		vim.cmd("noh")
+	end
+end
