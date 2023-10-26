@@ -158,7 +158,7 @@ function query_pack {
 	} else {
 		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
 You must install a modern package manager before installing this Nvim config.
-Avaliable choices are:
+Available choices are:
   - Chocolatey
     https://chocolatey.org/install#individual
     ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
