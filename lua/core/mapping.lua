@@ -14,7 +14,7 @@ local core_map = {
 	["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("edit: Prev search result"),
 	["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
 	["n|<Esc>"] = map_callback(function()
-			_flash_esc()
+			_flash_esc_or_noh()
 		end)
 		:with_noremap()
 		:with_silent()
