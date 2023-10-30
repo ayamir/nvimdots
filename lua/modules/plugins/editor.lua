@@ -38,7 +38,7 @@ editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
 	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
 }
--- NOTE: `flash.nvim` is a powerful plugin that can be used as a partial or complete replacement for:
+-- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
 --  > `hop.nvim`,
 --  > `wilder.nvim`
 --  > `nvim-treehopper`
