@@ -17,7 +17,7 @@ return function()
 			distance = true,
 		},
 		modes = {
-			search = { enabled = true },
+			search = { enabled = false },
 			-- options used when flash is activated through
 			-- `f`, `F`, `t`, `T`, `;` and `,` motions
 			char = {
