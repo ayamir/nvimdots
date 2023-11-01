@@ -8,4 +8,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lunarmodules/luacheck@v1
         with:
-          args: . --std luajit --globals vim _toggle_lazygit _command_panel _debugging --max-line-length 150 --no-config
+          args: . --std luajit --globals vim _toggle_lazygit _command_panel _flash_esc_or_noh _debugging --max-line-length 150 --no-config

@@ -22,14 +22,6 @@ local plug_map = {
 	-- Plugin: nvim-bufdel
 	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
 
-	-- Plugin: clever-f
-	["n|;"] = map_callback(function()
-		return et("<Plug>(clever-f-repeat-forward)")
-	end):with_expr(),
-	["n|,"] = map_callback(function()
-		return et("<Plug>(clever-f-repeat-back)")
-	end):with_expr(),
-
 	-- Plugin: comment.nvim
 	["n|gcc"] = map_callback(function()
 			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")

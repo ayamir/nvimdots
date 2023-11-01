@@ -38,10 +38,17 @@ editor["ojroques/nvim-bufdel"] = {
 	lazy = true,
 	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
 }
-editor["rhysd/clever-f.vim"] = {
+-- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
+--  > `hop.nvim`,
+--  > `wilder.nvim`
+--  > `nvim-treehopper`
+-- Considering its steep learning curve as well as backward compatibility issues...
+--  > We have no plan to remove the above plugins for the time being.
+-- But as usual, you can always tweak the plugin to your liking.
+editor["folke/flash.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.cleverf"),
+	config = require("editor.flash"),
 }
 editor["numToStr/Comment.nvim"] = {
 	lazy = true,

@@ -58,7 +58,7 @@ return function()
 			dropbar = { enabled = true, color_mode = true },
 			fern = false,
 			fidget = true,
-			flash = false,
+			flash = true,
 			gitgutter = false,
 			gitsigns = true,
 			harpoon = false,
