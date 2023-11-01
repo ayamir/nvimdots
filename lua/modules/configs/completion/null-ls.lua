@@ -8,10 +8,7 @@ return function()
 	local function formatter_args(formatter_name)
 		local ok, args = pcall(require, "user.configs.formatters." .. formatter_name)
 		if not ok then
-			ok, args = pcall(require, "completion.formatters." .. formatter_name)
-		end
-		if not ok then
-			args = nil
+			args = require("completion.formatters." .. formatter_name)
 		end
 		return args
 	end
