@@ -83,7 +83,7 @@ local gui_config = function()
 end
 
 local neovide_config = function()
-	for name, config in ipairs(settings.neovide_config) do
+	for name, config in pairs(settings.neovide_config) do
 		vim.g["neovide_" .. name] = config
 	end
 end
