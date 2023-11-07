@@ -26,7 +26,7 @@ return function()
 	set_sidebar_icons()
 
 	require("modules.utils").load_plugin("lspsaga", {
-		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
+		-- Breadcrumbs: https://nvimdev.github.io/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = true,
 			separator = " " .. icons.ui.Separator,
@@ -36,7 +36,7 @@ return function()
 			color_mode = true,
 			delay = 100,
 		},
-		-- https://dev.neovim.pro/lspsaga/callhierarchy/
+		-- Callhierarchy: https://nvimdev.github.io/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",
 			keys = {
@@ -50,7 +50,7 @@ return function()
 				close = "<Esc>",
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/codeaction/
+		-- Code Action: https://nvimdev.github.io/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
 			only_in_cursor = false,
@@ -61,7 +61,7 @@ return function()
 				exec = "<CR>",
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/diagnostic/
+		-- Diagnostics: https://nvimdev.github.io/lspsaga/diagnostic/
 		diagnostic = {
 			show_code_action = true,
 			jump_num_shortcut = true,
@@ -82,21 +82,21 @@ return function()
 				quit_in_show = { "q", "<Esc>" },
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/hover/
+		-- Hover: https://nvimdev.github.io/lspsaga/hover/
 		hover = {
 			max_width = 0.45,
 			max_height = 0.7,
 			open_link = "gl",
 			open_cmd = "silent !" .. require("core.settings").external_browser,
 		},
-		-- https://dev.neovim.pro/lspsaga/implement/
+		-- Impl: https://nvimdev.github.io/lspsaga/implement/
 		implement = {
 			enable = true,
 			sign = true,
 			virtual_text = false,
 			priority = 100,
 		},
-		-- https://dev.neovim.pro/lspsaga/lightbulb/
+		-- LightBulb: https://nvimdev.github.io/lspsaga/lightbulb/
 		lightbulb = {
 			enable = false,
 			sign = true,
@@ -104,7 +104,7 @@ return function()
 			debounce = 10,
 			sign_priority = 20,
 		},
-		-- https://dev.neovim.pro/lspsaga/rename/
+		-- Rename: https://nvimdev.github.io/lspsaga/rename/
 		rename = {
 			in_select = false,
 			auto_save = false,
@@ -116,12 +116,12 @@ return function()
 				select = "x",
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/misc/#beacon
+		-- Beacon: https://nvimdev.github.io/lspsaga/misc/#beacon
 		beacon = {
 			enable = true,
 			frequency = 12,
 		},
-		-- https://dev.neovim.pro/lspsaga/misc/#generic-ui-options
+		-- Generic UI Options: https://nvimdev.github.io/lspsaga/misc/#generic-ui-options
 		ui = {
 			border = "single", -- Can be single, double, rounded, solid, shadow.
 			devicon = true,
@@ -173,7 +173,7 @@ return function()
 				Value = { icons.kind.Value, "LspKindValue" },
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
+		-- Scrolling Keymaps: https://nvimdev.github.io/lspsaga/misc/#scrolling-keymaps
 		scroll_preview = {
 			scroll_down = "<C-d>",
 			scroll_up = "<C-u>",
