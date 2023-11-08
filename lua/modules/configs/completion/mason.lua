@@ -44,6 +44,7 @@ M.setup = function()
 			local python = is_windows and venv .. "/Scripts/python.exe" or venv .. "/bin/python"
 			local black = is_windows and venv .. "/Scripts/black.exe" or venv .. "/bin/black"
 			local ruff = is_windows and venv .. "/Scripts/ruff.exe" or venv .. "/bin/ruff"
+			local mypy = is_windows and venv .. "/Scripts/mypy.exe" or venv .. "/bin/mypy"
 
 			require("plenary.job")
 				:new({
@@ -56,12 +57,18 @@ M.setup = function()
 						"--disable-pip-version-check",
 						"python-lsp-black",
 						"python-lsp-ruff",
+						"pylsp-mypy",
+						"pylint-venv",
 						"pylsp-rope",
 					},
 					cwd = venv,
 					env = { VIRTUAL_ENV = venv },
 					on_exit = function()
-						if vim.fn.executable(black) == 1 and vim.fn.executable(ruff) == 1 then
+						if
+							vim.fn.executable(black) == 1
+							and vim.fn.executable(ruff) == 1
+							and vim.fn.executable(mypy) == 1
+						then
 							vim.notify(
 								"Finished installing pylsp plugins",
 								vim.log.levels.INFO,

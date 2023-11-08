@@ -8,29 +8,29 @@ return {
 				-- Lint
 				ruff = {
 					enabled = true,
-					select = {
-						-- enable pycodestyle
-						"E",
-						-- enable pyflakes
-						"F",
-					},
-					ignore = {
-						-- ignore E501 (line too long)
-						-- "E501",
-						-- ignore F401 (imported but unused)
-						-- "F401",
-					},
-					extendSelect = { "I" },
-					severities = {
-						-- Hint, Information, Warning, Error
-						F401 = "I",
-						E501 = "I",
-					},
+					config = "$HOME/.config/python/pyproject.toml",
 				},
 				flake8 = { enabled = false },
 				pyflakes = { enabled = false },
 				pycodestyle = { enabled = false },
+                pydocstyle = {
+                    enabled = true,
+                    convention = "google",
+                    addIgnore = {"D105","D107"},
+                },
+				pylsp_mypy = {
+					enabled = true,
+					report_progress = true,
+					live_mode = false,
+				},
 				mccabe = { enabled = false },
+				pylint = {
+					enabled = true,
+					executable = "pylint",
+					args = {
+						"--rcfile $HOME/.config/python/pylintrc",
+					},
+				},
 
 				-- Code refactor
 				rope = { enabled = true },
