@@ -12,7 +12,7 @@ return function()
 			-- max_width = {40, 0.2} means "the lesser of 40 columns or 20% of total"
 			max_width = { 40, 0.2 },
 			width = nil,
-			min_width = 10,
+			min_width = 30,
 
 			-- key-value pairs of window-local options for aerial window (e.g. winhl)
 			win_opts = {},
@@ -100,14 +100,32 @@ return function()
 		-- This can be a filetype map (see :help aerial-filetype-map)
 		-- To see all available values, see :help SymbolKind
 		filter_kind = {
+			"Array",
+			"Boolean",
 			"Class",
+			"Constant",
 			"Constructor",
 			"Enum",
+			"EnumMember",
+			"Event",
+			"Field",
+			"File",
 			"Function",
 			"Interface",
-			"Module",
+			"Key",
 			"Method",
+			"Module",
+			"Namespace",
+			"Null",
+			"Number",
+			"Object",
+			"Operator",
+			"Package",
+			"Property",
+			"String",
 			"Struct",
+			"TypeParameter",
+			"Variable",
 		},
 
 		-- Determines line highlighting mode when multiple splits are visible.
@@ -192,10 +210,10 @@ return function()
 		nerd_font = "auto",
 
 		-- Call this function when aerial attaches to a buffer.
-		on_attach = function(bufnr) end,
+		-- on_attach = function(bufnr) end,
 
 		-- Call this function when aerial first sets symbols on a buffer.
-		on_first_symbols = function(bufnr) end,
+		-- on_first_symbols = function(bufnr) end,
 
 		-- Automatically open aerial when entering supported buffers.
 		-- This can be a function (see :help aerial-open-automatic)
@@ -216,9 +234,9 @@ return function()
 		--   * symbol?: specific to the lsp backend
 		--   * syntax_tree?: specific to the treesitter backend
 		--   * match?: specific to the treesitter backend, TS query match
-		post_parse_symbol = function(bufnr, item, ctx)
-			return true
-		end,
+		-- post_parse_symbol = function(bufnr, item, ctx)
+		-- 	return true
+		-- end,
 
 		-- Invoked after all symbols have been parsed and post-processed,
 		-- allows to modify the symbol structure before final display
@@ -231,9 +249,9 @@ return function()
 		--   * lang: info about the language
 		--   * symbols?: specific to the lsp backend
 		--   * syntax_tree?: specific to the treesitter backend
-		post_add_all_symbols = function(bufnr, items, ctx)
-			return items
-		end,
+		-- post_add_all_symbols = function(bufnr, items, ctx)
+		-- 	return items
+		-- end,
 
 		-- When true, aerial will automatically close after jumping to a symbol
 		close_on_select = false,
@@ -257,9 +275,9 @@ return function()
 		},
 
 		-- Set this function to override the highlight groups for certain symbols
-		get_highlight = function(symbol, is_icon, is_collapsed)
-			-- return "MyHighlight" .. symbol.kind
-		end,
+		-- get_highlight = function(symbol, is_icon, is_collapsed)
+		-- 	-- return "MyHighlight" .. symbol.kind
+		-- end,
 
 		-- Options for opening aerial in a floating win
 		float = {
@@ -280,11 +298,11 @@ return function()
 			height = nil,
 			min_height = { 8, 0.1 },
 
-			override = function(conf, source_winid)
-				-- This is the config that will be passed to nvim_open_win.
-				-- Change values here to customize the layout
-				return conf
-			end,
+			-- override = function(conf, source_winid)
+			-- 	-- This is the config that will be passed to nvim_open_win.
+			-- 	-- Change values here to customize the layout
+			-- 	return conf
+			-- end,
 		},
 
 		-- Options for the floating nav windows
