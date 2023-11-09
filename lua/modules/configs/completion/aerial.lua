@@ -88,7 +88,7 @@ return function()
 
 		-- When true, don't load aerial until a command or function is called
 		-- Defaults to true, unless `on_attach` is provided, then it defaults to false
-		lazy_load = true,
+		lazy_load = false,
 
 		-- Disable aerial on files with this many lines
 		disable_max_lines = 10000,
@@ -260,7 +260,7 @@ return function()
 		update_events = "TextChanged,InsertLeave",
 
 		-- Show box drawing characters for the tree hierarchy
-		show_guides = false,
+		show_guides = true,
 
 		-- Customize the characters used when show_guides = true
 		guides = {
