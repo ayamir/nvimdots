@@ -25,10 +25,10 @@ completion["dnlhc/glance.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.glance"),
 }
-completion["simrat39/symbols-outline.nvim"] = {
+completion["stevearc/aerial.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
-	config = require("completion.symbols-outline"),
+	config = require("completion.aerial"),
 }
 completion["joechrisellis/lsp-format-modifications.nvim"] = {
 	lazy = true,
