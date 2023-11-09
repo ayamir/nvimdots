@@ -16,6 +16,10 @@ function mapping.lsp(buf)
 		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
 		["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
 		["n|go"] = map_cr("AerialToggle!"):with_silent():with_buffer(buf):with_desc("lsp: Toggle outline"),
+		["n|gto"] = map_cmd("<Cmd>Telescope aerial<CR>")
+			:with_silent()
+			:with_buffer(buf)
+			:with_desc("lsp: Toggle outline in Telescope"),
 		["n|g["] = map_cr("Lspsaga diagnostic_jump_prev")
 			:with_silent()
 			:with_buffer(buf)
