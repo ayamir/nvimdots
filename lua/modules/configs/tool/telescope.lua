@@ -44,6 +44,13 @@ return function()
 			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		},
 		extensions = {
+			aerial = {
+				show_lines = false,
+				show_nesting = {
+					["_"] = false, -- This key will be the default
+					lua = true, -- You can set the option for specific filetypes
+				},
+			},
 			fzf = {
 				fuzzy = false,
 				override_generic_sorter = true,
@@ -78,14 +85,6 @@ return function()
 						["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
 						["<C-cr>"] = require("telescope-undo.actions").restore,
 					},
-				},
-			},
-			aerial = {
-				show_lines = false,
-				show_nesting = {
-					["_"] = false, -- This key will be the default
-					json = true, -- You can set the option for specific filetypes
-					yaml = true,
 				},
 			},
 		},

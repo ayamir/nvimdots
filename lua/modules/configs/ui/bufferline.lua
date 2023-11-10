@@ -32,7 +32,7 @@ return function()
 					padding = 0,
 				},
 				{
-					filetype = "Outline",
+					filetype = "aerial",
 					text = "Symbol Outline",
 					text_align = "center",
 					padding = 0,

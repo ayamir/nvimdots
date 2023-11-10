@@ -20,15 +20,15 @@ completion["nvimdev/lspsaga.nvim"] = {
 	config = require("completion.lspsaga"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
-completion["dnlhc/glance.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("completion.glance"),
-}
 completion["stevearc/aerial.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
 	config = require("completion.aerial"),
+}
+completion["dnlhc/glance.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.glance"),
 }
 completion["joechrisellis/lsp-format-modifications.nvim"] = {
 	lazy = true,

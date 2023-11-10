@@ -65,6 +65,7 @@ return function()
 		exclude = {
 			filetypes = {
 				"", -- for all buffers without a file type
+				"aerial",
 				"alpha",
 				"big_file_disabled_ft",
 				"dashboard",
@@ -78,7 +79,6 @@ return function()
 				"log",
 				"markdown",
 				"NvimTree",
-				"Outline",
 				"peekaboo",
 				"startify",
 				"TelescopePrompt",
