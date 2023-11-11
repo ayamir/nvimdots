@@ -16,7 +16,7 @@ return vim.schedule_wrap(function()
 				local ok, is_large_file = pcall(vim.api.nvim_buf_get_var, bufnr, "bigfile_disable_treesitter")
 				return ok and is_large_file
 			end,
-			additional_vim_regex_highlighting = { "c", "cpp" },
+			additional_vim_regex_highlighting = false,
 		},
 		textobjects = {
 			select = {
@@ -50,6 +50,7 @@ return vim.schedule_wrap(function()
 			},
 		},
 		context_commentstring = { enable = true, enable_autocmd = false },
+		indent = { enable = true },
 		matchup = { enable = true },
 	}, false, require("nvim-treesitter.configs").setup)
 	require("nvim-treesitter.install").prefer_git = true
