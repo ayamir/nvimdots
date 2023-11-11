@@ -64,7 +64,7 @@ return function()
 	}
 	local outline = {
 		sections = mini_sections,
-		filetypes = { "Outline" },
+		filetypes = { "aerial" },
 	}
 	local diffview = {
 		sections = mini_sections,
