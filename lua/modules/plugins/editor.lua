@@ -91,23 +91,18 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
 	build = function()
 		if #vim.api.nvim_list_uis() ~= 0 then
-			vim.api.nvim_command("TSUpdate")
+			vim.api.nvim_command([[TSUpdate]])
 		end
 	end,
-	event = "BufReadPost",
+	event = "BufReadPre",
 	config = require("editor.treesitter"),
 	dependencies = {
-		{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		{ "JoosepAlviste/nvim-ts-context-commentstring" },
-		{ "mfussenegger/nvim-treehopper" },
 		{ "andymass/vim-matchup" },
+		{ "mfussenegger/nvim-treehopper" },
+		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{
-			"hiphish/rainbow-delimiters.nvim",
-			config = require("editor.rainbow_delims"),
-		},
-		{
-			"nvim-treesitter/nvim-treesitter-context",
-			config = require("editor.ts-context"),
+			"abecodes/tabout.nvim",
+			config = require("editor.tabout"),
 		},
 		{
 			"windwp/nvim-ts-autotag",
@@ -118,8 +113,16 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 			config = require("editor.colorizer"),
 		},
 		{
-			"abecodes/tabout.nvim",
-			config = require("editor.tabout"),
+			"hiphish/rainbow-delimiters.nvim",
+			config = require("editor.rainbow_delims"),
+		},
+		{
+			"nvim-treesitter/nvim-treesitter-context",
+			config = require("editor.ts-context"),
+		},
+		{
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			config = require("editor.ts-context-commentstring"),
 		},
 	},
 }
