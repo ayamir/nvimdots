@@ -3,7 +3,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui"),
 	}
 
-	require("fidget").setup({
+	require("modules.utils").load_plugin("fidget", {
 		progress = {
 			suppress_on_insert = false, -- Suppress new messages while in insert mode
 			ignore_done_already = false, -- Ignore new tasks that are already complete
