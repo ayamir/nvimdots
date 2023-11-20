@@ -28,6 +28,7 @@ return function()
 					prompt_position = "top",
 					preview_width = 0.55,
 					results_width = 0.8,
+					preview_cutoff = 1,
 				},
 				vertical = {
 					mirror = false,
@@ -88,6 +89,7 @@ return function()
 				},
 			},
 		},
+		pickers = { colorscheme = { enable_preview = true } },
 	})
 
 	require("telescope").load_extension("frecency")

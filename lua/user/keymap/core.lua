@@ -8,16 +8,8 @@ return {
 	-- ["n|<leader>d"] = map_cmd("<C-d>"):with_noremap():with_silent():with_nowait():with_desc("tool: scroll down/debug"),
 
 	-- 切换标签页
-	["n|L"] = map_cr("BufferLineCycleNext")
-		:with_noremap()
-		:with_silent()
-		:with_nowait()
-		:with_desc("buffer: Switch to next"),
-	["n|H"] = map_cr("BufferLineCyclePrev")
-		:with_noremap()
-		:with_silent()
-		:with_nowait()
-		:with_desc("buffer: Switch to prev"),
+	["n|L"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_nowait():with_desc("buffer: Switch to next"),
+	["n|H"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_nowait():with_desc("buffer: Switch to prev"),
 
 	-- 快速移动一行
 	-- Normal mode
