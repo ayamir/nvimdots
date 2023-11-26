@@ -48,17 +48,22 @@ function Lazy:load_plugins()
 
 	append_nativertp()
 
+	-- init hashtable for disabled_plugins
+	local disabled_plugins_table = {}
+	for _, name in ipairs(settings.disabled_plugins) do
+		disabled_plugins_table[name] = true
+	end
 	for _, m in ipairs(get_plugins_list()) do
 		-- require modules returned from `get_plugins_list()` function.
 		local modules = require(m:sub(0, #m - 4))
 		if type(modules) == "table" then
 			for name, conf in pairs(modules) do
-				self.modules[#self.modules + 1] = vim.tbl_extend("force", { name }, conf)
+				-- add plugin which not in disabled_plugins_table
+				if not disabled_plugins_table[name] then
+					self.modules[#self.modules + 1] = vim.tbl_extend("force", { name }, conf)
+				end
 			end
 		end
-	end
-	for _, name in ipairs(settings.disabled_plugins) do
-		self.modules[#self.modules + 1] = { name, enabled = false }
 	end
 end
 
