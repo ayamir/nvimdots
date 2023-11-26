@@ -84,6 +84,13 @@ fi
 
 It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayamir/nvimdots/wiki/Prerequisites) before starting, especially for \*nix users.
 
+- **Docker**
+
+```shell
+docker pull ayamir/nvimdots:latest
+docker run -it ayamir/nvimdots nvim
+```
+
 ## ⚙️ Configuration & Usage
 
 <h3 align="center">
