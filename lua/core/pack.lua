@@ -46,12 +46,36 @@ function Lazy:load_plugins()
 		return list
 	end
 
+	-- remove plugins in (dependencies and disabled_plugins_table) recursively
+	local function iterate_dependencies(dependencies, disabled_plugins_table)
+		for i = #dependencies, 1, -1 do
+			local dependency = dependencies[i]
+			if type(dependency) == "table" then
+				for key, value in pairs(dependency) do
+					if key == "dependencies" and type(value) == "table" then
+						iterate_dependencies(value, disabled_plugins_table)
+					elseif key == 1 and disabled_plugins_table[value] then
+						table.remove(dependencies, i)
+					end
+				end
+			elseif type(dependency) == "string" and disabled_plugins_table[dependency] then
+				table.remove(dependencies, i)
+			end
+		end
+	end
+
+	local remove_in_dependencies = function(conf, disabled_plugins_table)
+		if conf["dependencies"] ~= nil then
+			iterate_dependencies(conf["dependencies"], disabled_plugins_table)
+		end
+	end
+
 	append_nativertp()
 
 	-- init hashtable for disabled_plugins
 	local disabled_plugins_table = {}
-	for _, name in ipairs(settings.disabled_plugins) do
-		disabled_plugins_table[name] = true
+	for _, plugin in ipairs(settings.disabled_plugins) do
+		disabled_plugins_table[plugin] = true
 	end
 	for _, m in ipairs(get_plugins_list()) do
 		-- require modules returned from `get_plugins_list()` function.
@@ -60,6 +84,7 @@ function Lazy:load_plugins()
 			for name, conf in pairs(modules) do
 				-- add plugin which not in disabled_plugins_table
 				if not disabled_plugins_table[name] then
+					remove_in_dependencies(conf, disabled_plugins_table)
 					self.modules[#self.modules + 1] = vim.tbl_extend("force", { name }, conf)
 				end
 			end
