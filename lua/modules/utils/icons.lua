@@ -164,6 +164,7 @@ local data = {
 		Added = "",
 		Ghost = "󰊠",
 		ManUp = "",
+		Neovim = "",
 		Vim = "",
 	},
 	cmp = {
