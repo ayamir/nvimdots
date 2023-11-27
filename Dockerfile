@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
 RUN update-ca-certificates
 
 # Add a command to select a mirror based on a condition
-ARG use_mirror=false
+ARG USE_MIRROR=false
+ENV use_mirror=$USE_MIRROR
 RUN if [ "$use_mirror" = "true" ]; then \
     sed -i 's@http://archive.ubuntu.com/ubuntu/@https://mirrors.tuna.tsinghua.edu.cn/ubuntu/@' /etc/apt/sources.list \
     ;fi
