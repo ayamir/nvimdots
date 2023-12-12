@@ -114,7 +114,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		},
 		{
 			"hiphish/rainbow-delimiters.nvim",
-			commit = "65939c26536a05da8d6b03aceea7c26abcd92a45",
+			commit = "c1635c2429644bfd5044dff067a613952a9424b6",
 			config = require("editor.rainbow_delims"),
 		},
 		{
