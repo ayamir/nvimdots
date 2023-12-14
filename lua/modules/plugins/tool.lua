@@ -63,6 +63,10 @@ tool["gelguy/wilder.nvim"] = {
 	config = require("tool.wilder"),
 	dependencies = { "romgrk/fzy-lua-native" },
 }
+tool["zeioth/garbage-day.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
