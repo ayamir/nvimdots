@@ -242,7 +242,7 @@ function confirm_dep_inst ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty
 		$_opt_yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes","Will install $PkgName dependencies"
 		$_opt_no = New-Object System.Management.Automation.Host.ChoiceDescription "&No","Will SKIP installing $PkgName dependencies"
 
-		$USR_CHOICE = $Host.ui.PromptForChoice($_title,$_message,[System.Management.Automation.Host.ChoiceDescription[]]($_opt_yes,$_opt_no),0)
+		$USR_CHOICE = $Host.ui.PromptForChoice($_title,$_message,[System.Management.Automation.Host.ChoiceDescription[]]($_opt_yes,$_opt_no),1)
 		if ($USR_CHOICE -eq 0) {
 			return $True
 		} else {
