@@ -20,7 +20,7 @@ return function()
 		icons = {
 			breadcrumb = icons.ui.Separator,
 			separator = icons.misc.Vbar,
-			group = icons.misc.Add,
+			group = "",
 		},
 
 		window = {
@@ -31,4 +31,6 @@ return function()
 			winblend = 0,
 		},
 	})
+
+	require("modules.utils.keymap").which_key_register()
 end
