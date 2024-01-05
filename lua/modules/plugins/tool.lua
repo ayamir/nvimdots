@@ -32,7 +32,7 @@ tool["michaelb/sniprun"] = {
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
 	-- if you encountered error about no executable sniprun found.
 	build = "bash ./install.sh",
-	cmd = "SnipRun",
+	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
 	config = require("tool.sniprun"),
 }
 tool["akinsho/toggleterm.nvim"] = {
