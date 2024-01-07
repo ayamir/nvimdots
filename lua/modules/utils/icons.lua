@@ -79,6 +79,7 @@ local data = {
 		BigCircle = "",
 		BigUnfilledCircle = "",
 		BookMark = "󰃃",
+		Buffer = "󰓩",
 		Bug = "",
 		Calendar = "",
 		Check = "󰄳",
