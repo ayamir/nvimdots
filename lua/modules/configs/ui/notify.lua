@@ -6,7 +6,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui"),
 	}
 
-	notify.setup({
+	require("modules.utils").load_plugin("notify", {
 		---@usage Animation style one of { "fade", "slide", "fade_in_slide_out", "static" }
 		stages = "fade",
 		---@usage Function called when a new window is opened, use for changing win settings/config

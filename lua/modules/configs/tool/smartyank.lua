@@ -1,5 +1,5 @@
 return function()
-	require("smartyank").setup({
+	require("modules.utils").load_plugin("smartyank", {
 		highlight = {
 			enabled = false, -- highlight yanked text
 			higroup = "IncSearch", -- highlight group of yanked text

@@ -25,8 +25,8 @@ return function()
 
 	set_sidebar_icons()
 
-	require("lspsaga").setup({
-		-- Breadcrumbs: https://dev.neovim.pro/lspsaga/breadcrumbs/
+	require("modules.utils").load_plugin("lspsaga", {
+		-- Breadcrumbs: https://nvimdev.github.io/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
 			enable = true,
 			separator = " " .. icons.ui.Separator,
@@ -36,7 +36,7 @@ return function()
 			color_mode = true,
 			delay = 100,
 		},
-		-- https://dev.neovim.pro/lspsaga/callhierarchy/
+		-- Callhierarchy: https://nvimdev.github.io/lspsaga/callhierarchy/
 		callhierarchy = {
 			layout = "float",
 			keys = {
@@ -50,9 +50,10 @@ return function()
 				close = "<Esc>",
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/codeaction/
+		-- Code Action: https://nvimdev.github.io/lspsaga/codeaction/
 		code_action = {
 			num_shortcut = true,
+			only_in_cursor = false,
 			show_server_name = true,
 			extend_gitsigns = false,
 			keys = {
@@ -60,20 +61,7 @@ return function()
 				exec = "<CR>",
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/definition/
-		definition = {
-			width = 0.6,
-			height = 0.5,
-			keys = {
-				edit = "<C-c>o",
-				vsplit = "<C-c>v",
-				split = "<C-c>s",
-				tabe = "<C-c>t",
-				quit = "q",
-				close = "<C-c>q",
-			},
-		},
-		-- https://dev.neovim.pro/lspsaga/diagnostic/
+		-- Diagnostics: https://nvimdev.github.io/lspsaga/diagnostic/
 		diagnostic = {
 			show_code_action = true,
 			jump_num_shortcut = true,
@@ -94,42 +82,21 @@ return function()
 				quit_in_show = { "q", "<Esc>" },
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/finder/
-		finder = {
-			max_height = 0.5,
-			left_width = 0.3,
-			right_width = 0.3,
-			default = "def+ref+imp",
-			methods = {},
-			layout = "float",
-			filter = {},
-			silent = false,
-			keys = {
-				shuttle = "[]",
-				toggle_or_open = "<CR>",
-				vsplit = "v",
-				split = "s",
-				tabe = "t",
-				tabnew = "n",
-				quit = "q",
-				close = "<Esc>",
-			},
-		},
-		-- https://dev.neovim.pro/lspsaga/hover/
+		-- Hover: https://nvimdev.github.io/lspsaga/hover/
 		hover = {
-			max_width = 0.3,
+			max_width = 0.45,
 			max_height = 0.7,
 			open_link = "gl",
 			open_cmd = "silent !" .. require("core.settings").external_browser,
 		},
-		-- https://dev.neovim.pro/lspsaga/implement/
+		-- Impl: https://nvimdev.github.io/lspsaga/implement/
 		implement = {
 			enable = true,
 			sign = true,
 			virtual_text = false,
 			priority = 100,
 		},
-		-- https://dev.neovim.pro/lspsaga/lightbulb/
+		-- LightBulb: https://nvimdev.github.io/lspsaga/lightbulb/
 		lightbulb = {
 			enable = false,
 			sign = true,
@@ -137,24 +104,7 @@ return function()
 			debounce = 10,
 			sign_priority = 20,
 		},
-		-- https://dev.neovim.pro/lspsaga/outline/
-		outline = {
-			win_position = "right",
-			win_width = 30,
-			auto_preview = false,
-			detail = false,
-			auto_close = true,
-			close_after_jump = true,
-			layout = "normal",
-			max_height = 0.5,
-			left_width = 0.3,
-			keys = {
-				toggle_or_jump = "<CR>",
-				quit = "q",
-				jump = "o",
-			},
-		},
-		-- https://dev.neovim.pro/lspsaga/rename/
+		-- Rename: https://nvimdev.github.io/lspsaga/rename/
 		rename = {
 			in_select = false,
 			auto_save = false,
@@ -166,12 +116,12 @@ return function()
 				select = "x",
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/misc/#beacon
+		-- Beacon: https://nvimdev.github.io/lspsaga/misc/#beacon
 		beacon = {
 			enable = true,
 			frequency = 12,
 		},
-		-- https://dev.neovim.pro/lspsaga/misc/#generic-ui-options
+		-- Generic UI Options: https://nvimdev.github.io/lspsaga/misc/#generic-ui-options
 		ui = {
 			border = "single", -- Can be single, double, rounded, solid, shadow.
 			devicon = true,
@@ -223,10 +173,11 @@ return function()
 				Value = { icons.kind.Value, "LspKindValue" },
 			},
 		},
-		-- https://dev.neovim.pro/lspsaga/misc/#scrolling-keymaps
+		-- Scrolling Keymaps: https://nvimdev.github.io/lspsaga/misc/#scrolling-keymaps
 		scroll_preview = {
-			scroll_down = "<C-j>",
-			scroll_up = "<C-k>",
+			scroll_down = "<C-d>",
+			scroll_up = "<C-u>",
 		},
+		request_timeout = 3000,
 	})
 end

@@ -12,6 +12,7 @@ local data = {
 		Field = "󰇽",
 		File = "󰈙",
 		Folder = "󰉋",
+		Fragment = "",
 		Function = "󰊕",
 		Interface = "",
 		Implementation = "",
@@ -72,6 +73,7 @@ local data = {
 		Conflict = "",
 	},
 	ui = {
+		Accepted = "",
 		ArrowClosed = "",
 		ArrowOpen = "",
 		BigCircle = "",
@@ -162,6 +164,7 @@ local data = {
 		Added = "",
 		Ghost = "󰊠",
 		ManUp = "",
+		Neovim = "",
 		Vim = "",
 	},
 	cmp = {

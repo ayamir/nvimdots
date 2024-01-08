@@ -1,5 +1,5 @@
 return function()
-	require("illuminate").configure({
+	require("modules.utils").load_plugin("vim-illuminate", {
 		providers = {
 			"lsp",
 			"treesitter",
@@ -10,19 +10,18 @@ return function()
 			"DoomInfo",
 			"DressingSelect",
 			"NvimTree",
-			"Outline",
 			"TelescopePrompt",
 			"Trouble",
+			"aerial",
 			"alpha",
 			"dashboard",
 			"dirvish",
 			"fugitive",
 			"help",
-			"lsgsagaoutline",
 			"neogitstatus",
 			"norg",
 			"toggleterm",
 		},
 		under_cursor = false,
-	})
+	}, false, require("illuminate").configure)
 end

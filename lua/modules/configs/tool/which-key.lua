@@ -4,7 +4,7 @@ return function()
 		misc = require("modules.utils.icons").get("misc"),
 	}
 
-	require("which-key").setup({
+	require("modules.utils").load_plugin("which-key", {
 		plugins = {
 			presets = {
 				operators = false,
