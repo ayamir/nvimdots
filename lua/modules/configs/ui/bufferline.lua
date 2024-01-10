@@ -4,8 +4,8 @@ return function()
 	local opts = {
 		options = {
 			number = nil,
-			close_command = "BufDel %d",
-			right_mouse_command = "BufDel %d",
+			close_command = "BufDel! %d",
+			right_mouse_command = "BufDel! %d",
 			modified_icon = icons.ui.Modified,
 			buffer_close_icon = icons.ui.Close,
 			left_trunc_marker = icons.ui.Left,
