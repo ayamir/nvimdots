@@ -1,12 +1,8 @@
 return function()
 	vim.g.rustaceanvim = {
-		-- DAP configuration
-		dap = {
-			adapter = {
-				type = "executable",
-				command = "lldb-vscode",
-				name = "rt_lldb",
-			},
-		},
+		-- Disable automatic DAP configuration to avoid conflicts with previous user configs
+		dap = { adapter = false, configuration = false },
 	}
+
+	require("modules.utils").load_plugin("rustaceanvim", nil, true)
 end
