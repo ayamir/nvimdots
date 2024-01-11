@@ -154,7 +154,6 @@ local load_core = function()
 	require("core.options")
 	require("core.mapping")
 	require("keymap")
-	require("keymap.prefix")
 	require("core.event")
 	require("core.pack")
 

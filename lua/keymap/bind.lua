@@ -156,10 +156,18 @@ function bind.nvim_load_mapping(mapping)
 				local rhs = value.cmd
 				local options = value.options
 				local buf = value.buffer
+				local M = require("modules.utils.keymap")
 				if buf and type(buf) == "number" then
 					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
+					--- if begin with <leader>
+					if keymap:sub(1, #"<leader>") == "<leader>" and #keymap > #"<leader>x" then
+						M.insert_queue(keymap:sub(1, #"<leader>x"), mode, buf)
+					end
 				else
 					vim.api.nvim_set_keymap(mode, keymap, rhs, options)
+					if keymap:sub(1, #"<leader>") == "<leader>" and #keymap > #"<leader>x" then
+						M.insert_queue(keymap:sub(1, #"<leader>x"), mode, nil)
+					end
 				end
 			end
 		end
