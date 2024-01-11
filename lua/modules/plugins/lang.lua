@@ -14,10 +14,11 @@ lang["fatih/vim-go"] = {
 	build = ":GoInstallBinaries",
 	config = require("lang.vim-go"),
 }
-lang["simrat39/rust-tools.nvim"] = {
+lang["mrcjkb/rustaceanvim"] = {
 	lazy = true,
 	ft = "rust",
-	config = require("lang.rust-tools"),
+	version = "^3",
+	config = require("lang.rust"),
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
 lang["Saecki/crates.nvim"] = {
