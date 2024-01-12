@@ -226,7 +226,6 @@ function M.insert_queue(prefix_keymap, mode, buffer)
 	--- set name with icon
 	registration[prefix_keymap] = {}
 	registration[prefix_keymap]["name"] = P[prefix_keymap:sub(1, #"<leader>x")]
-	local M = require("modules.utils.keymap")
 	if not M.which_key_queue then
 		M.which_key_queue = {}
 	end
