@@ -22,6 +22,9 @@ The opened buffers are showed at the top, you can use `<A-j>`{normal} and `<A-k>
 switch between them. Also, `<A-n>`{normal}(n meaning No) can be used to switch to the
 target buffer directly.
 
+Note: For macOS, you need to remap your `<Option>`{normal} to `<Alt>`{normal} following the
+instructions in https://github.com/ayamir/nvimdots/issues/344.
+
 You can use `<C-n>`{normal} to open/close file explorer which will appear on the left.
 Now move cursor to the line of **lua** folder, press `o`{normal} to open it, repeat this
 process to **core** folder, then open **event.lua** in new buffer by press `o`{normal} too.
