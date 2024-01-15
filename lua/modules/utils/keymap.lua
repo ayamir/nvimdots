@@ -202,38 +202,22 @@ function M.replace(mapping)
 	end
 end
 
---- Register queued which-key mappings
-function M.which_key_register()
-	if M.which_key_queue then
-		local wk_avail, wk = pcall(require, "which-key")
-		if wk_avail then
-			for registration, opts in pairs(M.which_key_queue) do
-				wk.register(registration, opts)
-			end
-			M.which_key_queue = nil
-		end
-	end
-end
-
 --- Insert a prefix keymap into register queue.
-function M.insert_queue(prefix_keymap, mode, buffer)
+function M.which_key_register(prefix, mode, buffer)
 	local registration = {}
 	local options = {
 		mode = mode,
 		buffer = buffer,
 	}
-	local P = require("keymap.prefix")
-	if not P[prefix_keymap] then
+	local prefix_desc = require("keymap.prefix")
+	if not prefix_desc[prefix] then
 		return
 	end
-	--- set name with icon
-	registration[prefix_keymap] = {}
-	registration[prefix_keymap]["name"] = P[prefix_keymap:sub(1, #"<leader>x")]
-	if not M.which_key_queue then
-		M.which_key_queue = {}
-	end
-	if not M.which_key_queue[registration] then
-		M.which_key_queue[registration] = options
+	registration[prefix] = {}
+	registration[prefix]["name"] = prefix_desc[prefix:sub(1, #"<leader>x")]
+	local wk_avail, wk = pcall(require, "which-key")
+	if wk_avail then
+		wk.register(registration, options)
 	end
 end
 

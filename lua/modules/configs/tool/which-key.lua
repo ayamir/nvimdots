@@ -31,6 +31,4 @@ return function()
 			winblend = 0,
 		},
 	})
-
-	require("modules.utils.keymap").which_key_register()
 end

@@ -154,19 +154,22 @@ function bind.nvim_load_mapping(mapping)
 		if type(value) == "table" then
 			for _, mode in ipairs(vim.split(modes, "")) do
 				local rhs = value.cmd
-				local options = value.options
 				local buf = value.buffer
-				local M = require("modules.utils.keymap")
+				local options = value.options
+				local begin_with_leader = keymap:sub(1, #"<leader>") == "<leader>"
+				local grouped_keymap = #keymap > #"<leader>x"
+				local should_register = begin_with_leader and grouped_keymap
+				local prefix_to_register = keymap:sub(1, #"<leader>x")
+				local utils = require("modules.utils.keymap")
 				if buf and type(buf) == "number" then
 					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
-					--- if begin with <leader>
-					if keymap:sub(1, #"<leader>") == "<leader>" and #keymap > #"<leader>x" then
-						M.insert_queue(keymap:sub(1, #"<leader>x"), mode, buf)
+					if should_register then
+						utils.which_key_register(prefix_to_register, mode, buf)
 					end
 				else
 					vim.api.nvim_set_keymap(mode, keymap, rhs, options)
-					if keymap:sub(1, #"<leader>") == "<leader>" and #keymap > #"<leader>x" then
-						M.insert_queue(keymap:sub(1, #"<leader>x"), mode, nil)
+					if should_register then
+						utils.which_key_register(prefix_to_register, mode, nil)
 					end
 				end
 			end
