@@ -19,9 +19,9 @@ function rhs_options:new()
 			expr = false,
 			nowait = false,
 			callback = nil,
-			desc = ""
+			desc = "",
 		},
-		buffer = false
+		buffer = false,
 	}
 	setmetatable(instance, self)
 	self.__index = self

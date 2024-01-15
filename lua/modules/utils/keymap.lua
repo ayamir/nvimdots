@@ -32,7 +32,7 @@ local function get_map(mode, lhs)
 				script = map.script == 1,
 				silent = map.silent == 1,
 				nowait = map.nowait == 1,
-				buffer = true
+				buffer = true,
 			}
 		end
 	end
@@ -49,7 +49,7 @@ local function get_map(mode, lhs)
 				script = map.script == 1,
 				silent = map.silent == 1,
 				nowait = map.nowait == 1,
-				buffer = false
+				buffer = false,
 			}
 		end
 	end
@@ -63,7 +63,7 @@ local function get_map(mode, lhs)
 		script = false,
 		silent = true,
 		nowait = false,
-		buffer = false
+		buffer = false,
 	}
 end
 
@@ -102,8 +102,12 @@ local function amend(cond, mode, lhs, rhs, opts)
 	local map = get_map(mode, lhs)
 	local fallback = get_fallback(map)
 	local options = vim.deepcopy(opts) or {}
-	options.desc = table.concat({"[" .. cond, (options.desc and ": " .. options.desc or ""), "]",
-                              (map.desc and " / " .. map.desc or "")})
+	options.desc = table.concat({
+		"[" .. cond,
+		(options.desc and ": " .. options.desc or ""),
+		"]",
+		(map.desc and " / " .. map.desc or ""),
+	})
 	vim.keymap.set(mode, lhs, function()
 		rhs(fallback)
 	end, options)
@@ -216,7 +220,7 @@ function M.insert_queue(prefix_keymap, mode, buffer)
 	local registration = {}
 	local options = {
 		mode = mode,
-		buffer = buffer
+		buffer = buffer,
 	}
 	local P = require("keymap.prefix")
 	if not P[prefix_keymap] then
