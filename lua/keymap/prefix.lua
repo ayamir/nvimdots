@@ -17,6 +17,7 @@ local prefix_desc = {
 	["<leader>p"] = icons.ui_sep.Package .. "Package",
 	["<leader>s"] = icons.cmp_sep.tmux .. "Session",
 	["<leader>t"] = icons.misc_sep.LspAvailable .. "Lsp",
+	["<leader><space>"] = icons.git_sep.Git .. "Git Diff",
 }
 
 return prefix_desc

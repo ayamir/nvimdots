@@ -159,7 +159,12 @@ function bind.nvim_load_mapping(mapping)
 				local begin_with_leader = keymap:sub(1, #"<leader>") == "<leader>"
 				local grouped_keymap = #keymap > #"<leader>x"
 				local should_register = begin_with_leader and grouped_keymap
-				local prefix_to_register = keymap:sub(1, #"<leader>x")
+				local start_index, end_index = string.find(keymap:sub(#"<leader>"), "<(.-)>")
+				local prefix_length = #"<leader>x"
+				if start_index and end_index then
+					prefix_length = prefix_length + end_index - start_index
+				end
+				local prefix_to_register = keymap:sub(1, prefix_length)
 				local utils = require("modules.utils.keymap")
 				if buf and type(buf) == "number" then
 					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)

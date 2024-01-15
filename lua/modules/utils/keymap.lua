@@ -202,7 +202,10 @@ function M.replace(mapping)
 	end
 end
 
---- Insert a prefix keymap into register queue.
+---Register prefix for grouped keymap.
+---@param prefix string
+---@param mode string
+---@param buffer number|nil
 function M.which_key_register(prefix, mode, buffer)
 	local registration = {}
 	local options = {
@@ -214,7 +217,7 @@ function M.which_key_register(prefix, mode, buffer)
 		return
 	end
 	registration[prefix] = {}
-	registration[prefix]["name"] = prefix_desc[prefix:sub(1, #"<leader>x")]
+	registration[prefix]["name"] = prefix_desc[prefix]
 	local wk_avail, wk = pcall(require, "which-key")
 	if wk_avail then
 		wk.register(registration, options)
