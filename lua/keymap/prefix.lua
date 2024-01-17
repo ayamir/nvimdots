@@ -8,7 +8,6 @@ local icons = {
 --- Need to expand by hand
 local prefix_desc = {
 	["<leader>b"] = icons.ui_sep.Buffer .. "Buffer",
-	["<leader>c"] = icons.ui_sep.Character .. "Character",
 	["<leader>d"] = icons.ui_sep.Bug .. "Debug",
 	["<leader>f"] = icons.ui_sep.Telescope .. "Fuzzy Find",
 	["<leader>g"] = icons.git_sep.Git .. "Git",
@@ -16,7 +15,6 @@ local prefix_desc = {
 	["<leader>n"] = icons.ui_sep.FolderOpen .. "Nvim Tree",
 	["<leader>p"] = icons.ui_sep.Package .. "Package",
 	["<leader>s"] = icons.cmp_sep.tmux .. "Session",
-	["<leader>t"] = icons.misc_sep.LspAvailable .. "Lsp",
 }
 
 return prefix_desc
