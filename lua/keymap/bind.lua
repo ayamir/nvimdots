@@ -169,12 +169,12 @@ function bind.nvim_load_mapping(mapping)
 				if buf and type(buf) == "number" then
 					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
 					if should_register then
-						utils.which_key_register(prefix_to_register, mode, buf)
+						utils.insert_queue(prefix_to_register, mode, buf)
 					end
 				else
 					vim.api.nvim_set_keymap(mode, keymap, rhs, options)
 					if should_register then
-						utils.which_key_register(prefix_to_register, mode, nil)
+						utils.insert_queue(prefix_to_register, mode, nil)
 					end
 				end
 			end

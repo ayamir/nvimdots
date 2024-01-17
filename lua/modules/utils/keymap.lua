@@ -202,11 +202,23 @@ function M.replace(mapping)
 	end
 end
 
+function M.which_key_register()
+	if M.which_key_queue then
+		local wk_avail, wk = pcall(require, "which-key")
+		if wk_avail then
+			for registration, options in pairs(M.which_key_queue) do
+				wk.register(registration, options)
+			end
+			M.which_key_queue = nil
+		end
+	end
+end
+
 ---Register prefix for grouped keymap.
 ---@param prefix string
 ---@param mode string
 ---@param buffer number|nil
-function M.which_key_register(prefix, mode, buffer)
+function M.insert_queue(prefix, mode, buffer)
 	local registration = {}
 	local options = {
 		mode = mode,
@@ -218,9 +230,12 @@ function M.which_key_register(prefix, mode, buffer)
 	end
 	registration[prefix] = {}
 	registration[prefix]["name"] = prefix_desc[prefix]
-	local wk_avail, wk = pcall(require, "which-key")
-	if wk_avail then
-		wk.register(registration, options)
+	if not M.which_key_queue then
+		M.which_key_queue = {}
+	end
+	M.which_key_queue[registration] = options
+	if buffer ~= nil then
+		M.which_key_register()
 	end
 end
 
