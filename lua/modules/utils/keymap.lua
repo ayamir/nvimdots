@@ -234,9 +234,6 @@ function M.insert_queue(prefix, mode, buffer)
 		M.which_key_queue = {}
 	end
 	M.which_key_queue[registration] = options
-	if buffer ~= nil then
-		M.which_key_register()
-	end
 end
 
 return M
