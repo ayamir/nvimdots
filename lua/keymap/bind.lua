@@ -154,8 +154,8 @@ function bind.nvim_load_mapping(mapping)
 		if type(value) == "table" then
 			for _, mode in ipairs(vim.split(modes, "")) do
 				local rhs = value.cmd
-				local buf = value.buffer
 				local options = value.options
+				local buf = value.buffer
 				if buf and type(buf) == "number" then
 					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
 				else
