@@ -24,13 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-	group = vim.api.nvim_create_augroup("WhichKeyPrefixRegister", { clear = true }),
-	callback = function()
-		require("modules.utils.keymap").which_key_register()
-	end,
-})
-
 -- auto close NvimTree
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),

@@ -147,8 +147,6 @@ function bind.escape_termcode(cmd_string)
 	return vim.api.nvim_replace_termcodes(cmd_string, true, true, true)
 end
 
-local last_prefix_to_register = ""
-
 ---@param mapping table<string, map_rhs>
 function bind.nvim_load_mapping(mapping)
 	for key, value in pairs(mapping) do
@@ -158,30 +156,10 @@ function bind.nvim_load_mapping(mapping)
 				local rhs = value.cmd
 				local buf = value.buffer
 				local options = value.options
-				local begin_with_leader = keymap:sub(1, #"<leader>") == "<leader>"
-				local grouped_keymap = #keymap > #"<leader>x"
-				local should_register = begin_with_leader and grouped_keymap
-				local start_index, end_index = string.find(keymap:sub(#"<leader>"), "<(.-)>")
-				local prefix_length = #"<leader>x"
-				if start_index and end_index then
-					prefix_length = prefix_length + end_index - start_index
-				end
-				local prefix_to_register = keymap:sub(1, prefix_length)
-				if last_prefix_to_register ~= "" then
-					local repeat_register = last_prefix_to_register ~= prefix_to_register
-					should_register = should_register and not repeat_register
-				end
-				last_prefix_to_register = prefix_to_register
 				if buf and type(buf) == "number" then
 					vim.api.nvim_buf_set_keymap(buf, mode, keymap, rhs, options)
-					if should_register then
-						require("modules.utils.keymap").insert_queue(prefix_to_register, mode, buf)
-					end
 				else
 					vim.api.nvim_set_keymap(mode, keymap, rhs, options)
-					if should_register then
-						require("modules.utils.keymap").insert_queue(prefix_to_register, mode, nil)
-					end
 				end
 			end
 		end
