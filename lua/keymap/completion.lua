@@ -30,7 +30,7 @@ function mapping.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Next diagnostic"),
-		["n|<leader>ld"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
+		["n|<leader>lx"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Line diagnostic"),
@@ -50,11 +50,11 @@ function mapping.lsp(buf)
 		["n|gd"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 		["n|gh"] = map_cr("Glance references"):with_silent():with_buffer(buf):with_desc("lsp: Show reference"),
-		["n|<leader>ci"] = map_cr("Lspsaga incoming_calls")
+		["n|gci"] = map_cr("Lspsaga incoming_calls")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show incoming calls"),
-		["n|<leader>co"] = map_cr("Lspsaga outgoing_calls")
+		["n|gco"] = map_cr("Lspsaga outgoing_calls")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
