@@ -50,7 +50,7 @@ settings["diagnostics_level"] = "Hint"
 ---@type string[]
 settings["disabled_plugins"] = {}
 
--- Set the plugins lazy config here
+-- Set whether the plugin lazy load
 -- Example: { "olimorris/persisted.nvim", lazy = false }
 ---@type table
 settings["lazy_config"] = {}
