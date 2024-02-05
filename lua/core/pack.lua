@@ -60,6 +60,21 @@ function Lazy:load_plugins()
 	for _, name in ipairs(settings.disabled_plugins) do
 		self.modules[#self.modules + 1] = { name, enabled = false }
 	end
+
+	for _, config in ipairs(settings.lazy_config) do
+		if type(config) == "table" then
+			local plugin_name = ""
+			for key, value in pairs(config) do
+				if type(key) == "number" then
+					plugin_name = value
+				else
+					if plugin_name ~= "" then
+						self.modules[#self.modules + 1] = { plugin_name, lazy = value }
+					end
+				end
+			end
+		end
+	end
 end
 
 function Lazy:load_lazy()

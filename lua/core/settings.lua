@@ -50,6 +50,11 @@ settings["diagnostics_level"] = "Hint"
 ---@type string[]
 settings["disabled_plugins"] = {}
 
+-- Set the plugins lazy config here
+-- Example: { "olimorris/persisted.nvim", lazy = false }
+---@type table
+settings["lazy_config"] = {}
+
 -- Set it to false if you don't use nvim to open big files.
 ---@type boolean
 settings["load_big_files_faster"] = true
