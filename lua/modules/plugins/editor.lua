@@ -58,6 +58,7 @@ editor["numToStr/Comment.nvim"] = {
 editor["sindrets/diffview.nvim"] = {
 	lazy = true,
 	cmd = { "DiffviewOpen", "DiffviewClose" },
+	config = require("editor.diffview"),
 }
 editor["junegunn/vim-easy-align"] = {
 	lazy = true,
