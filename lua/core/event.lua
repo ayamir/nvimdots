@@ -18,12 +18,14 @@ local mapping = require("keymap.completion")
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
 	callback = function(event)
+		if _G._debugging then
+			return
+		end
+
 		mapping.lsp(event.buf)
-		local inlay_hints = require("lsp-inlayhints")
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
-		inlay_hints.on_attach(client, event.buf)
-		if not _G._debugging then
-			mapping.lsp(event.buf)
+		if client ~= nil and client.server_capabilities.inlayHintProvider ~= nil then
+			vim.lsp.inlay_hint.enable(event.buf, true)
 		end
 	end,
 })

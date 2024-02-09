@@ -12,13 +12,6 @@ completion["neovim/nvim-lspconfig"] = {
 			"Jint-lzxy/lsp_signature.nvim",
 			config = require("completion.lsp-signature"),
 		},
-		{
-			"lvimuser/lsp-inlayhints.nvim",
-			config = require("completion.inlay-hints"),
-			lazy = true,
-			branch = "anticonceal",
-			event = { "LspAttach" },
-		},
 	},
 }
 completion["nvimdev/lspsaga.nvim"] = {
