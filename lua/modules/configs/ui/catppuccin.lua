@@ -3,8 +3,7 @@ return function()
 	local clear = {}
 
 	require("modules.utils").load_plugin("catppuccin", {
-		flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
-		background = { light = "latte", dark = "mocha" },
+		background = { light = "latte", dark = "mocha" }, -- latte, frappe, macchiato, mocha
 		dim_inactive = {
 			enabled = false,
 			-- Dim inactive splits/windows/buffers.
@@ -137,6 +136,9 @@ return function()
 					-- For fidget
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
+
+					-- For nvim-notify
+					NotifyBackground = { bg = cp.base },
 
 					-- For nvim-tree
 					NvimTreeRootFolder = { fg = cp.pink },

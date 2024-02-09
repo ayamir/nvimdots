@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Required to count the commits
-      - uses: andstor/file-existence-action@v2
+      - uses: andstor/file-existence-action@v3
         id: check_lockfile
         with:
           files: "lazy-lock.json"

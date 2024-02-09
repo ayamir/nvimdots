@@ -75,8 +75,11 @@ end
 
 local leader_map = function()
 	vim.g.mapleader = " "
-	vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
-	vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
+	-- NOTE:
+	--  > Uncomment the following if you're using a <leader> other than <Space>, and you wish
+	--  > to disable advancing one character by pressing <Space> in normal/visual mode.
+	-- vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
+	-- vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
 end
 
 local gui_config = function()
@@ -164,9 +167,9 @@ local load_core = function()
 
 	require("core.options")
 	require("core.mapping")
-	require("keymap")
 	require("core.event")
 	require("core.pack")
+	require("keymap")
 
 	local colorscheme = settings.colorscheme
 	local background = settings.background
