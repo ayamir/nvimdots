@@ -6,7 +6,7 @@ settings["use_ssh"] = true
 
 -- Set it to false if you don't use copilot
 ---@type boolean
-settings["use_copilot"] = true
+settings["use_copilot"] = false
 
 -- Set it to false if there are no need to format on save.
 ---@type boolean
@@ -68,7 +68,7 @@ settings["colorscheme"] = "catppuccin"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
-settings["transparent_background"] = false
+settings["transparent_background"] = true
 
 -- Set background color to use here.
 -- Useful if you would like to use a colorscheme that has a light and dark variant like `edge`.
@@ -102,10 +102,10 @@ settings["server_formatting_block_list"] = {
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	"html",
-	"jsonls",
+	-- "html",
+	-- "jsonls",
 	"lua_ls",
-	"pylsp",
+	-- "pylsp",
 	-- "gopls",
 }
 
@@ -116,12 +116,12 @@ settings["lsp_deps"] = {
 ---@type string[]
 settings["null_ls_deps"] = {
 	"clang_format",
-	"gofumpt",
-	"goimports",
+	-- "gofumpt",
+	-- "goimports",
 	"prettier",
-	"shfmt",
+	-- "shfmt",
 	"stylua",
-	"vint",
+	-- "vint",
 }
 
 -- Set the Debug Adapter Protocol (DAP) clients that will be installed and configured during bootstrap here.
@@ -130,7 +130,7 @@ settings["null_ls_deps"] = {
 ---@type string[]
 settings["dap_deps"] = {
 	"codelldb", -- C-Family
-	"delve", -- Go
+	-- "delve", -- Go
 	"python", -- Python (debugpy)
 }
 
