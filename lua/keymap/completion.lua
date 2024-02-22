@@ -30,7 +30,7 @@ function mapping.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Next diagnostic"),
-		["n|<leader>lx"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
+		["n|<leader>ld"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Line diagnostic"),
@@ -38,23 +38,17 @@ function mapping.lsp(buf)
 			vim.lsp.buf.signature_help()
 		end):with_desc("lsp: Signature help"),
 		["n|gr"] = map_cr("Lspsaga rename"):with_silent():with_buffer(buf):with_desc("lsp: Rename in file range"),
-		["n|gR"] = map_cr("Lspsaga rename ++project")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Rename in project range"),
+		["n|gR"] = map_cr("Lspsaga rename ++project"):with_silent():with_buffer(buf):with_desc("lsp: Rename in project range"),
 		["n|K"] = map_cr("Lspsaga hover_doc"):with_silent():with_buffer(buf):with_desc("lsp: Show doc"),
-		["nv|ga"] = map_cr("Lspsaga code_action")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Code action for cursor"),
+		["nv|ga"] = map_cr("Lspsaga code_action"):with_silent():with_buffer(buf):with_desc("lsp: Code action for cursor"),
 		["n|gd"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 		["n|gh"] = map_cr("Glance references"):with_silent():with_buffer(buf):with_desc("lsp: Show reference"),
-		["n|gci"] = map_cr("Lspsaga incoming_calls")
+		["n|<leader>ci"] = map_cr("Lspsaga incoming_calls")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show incoming calls"),
-		["n|gco"] = map_cr("Lspsaga outgoing_calls")
+		["n|<leader>co"] = map_cr("Lspsaga outgoing_calls")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),

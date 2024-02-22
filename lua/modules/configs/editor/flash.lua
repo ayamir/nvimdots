@@ -1,16 +1,12 @@
 return function()
-	vim.api.nvim_set_hl(
-		0,
-		"FlashLabel",
-		{ underline = true, bold = true, fg = "Orange", bg = "NONE", ctermfg = "Red", ctermbg = "NONE" }
-	)
+	vim.api.nvim_set_hl(0, "FlashLabel", { underline = true, bold = true, fg = "Orange", bg = "NONE", ctermfg = "Red", ctermbg = "NONE" })
 
 	require("modules.utils").load_plugin("flash", {
 		labels = "asdfghjklqwertyuiopzxcvbnm",
 		label = {
 			-- allow uppercase labels
 			uppercase = true,
-			-- add a label for the first match in the current window.
+			-- add a label for the first match in the current windocopeFuzzyCommandSearch).
 			-- you can always jump to the first match with `<CR>`
 			current = true,
 			-- for the current window, label targets closer to the cursor first

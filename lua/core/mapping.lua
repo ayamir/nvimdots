@@ -51,9 +51,7 @@ local core_map = {
 	["c|<C-e>"] = map_cmd("<End>"):with_noremap():with_desc("edit: End"),
 	["c|<C-d>"] = map_cmd("<Del>"):with_noremap():with_desc("edit: Delete"),
 	["c|<C-h>"] = map_cmd("<BS>"):with_noremap():with_desc("edit: Backspace"),
-	["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]])
-		:with_noremap()
-		:with_desc("edit: Complete path of current file"),
+	["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]]):with_noremap():with_desc("edit: Complete path of current file"),
 	-- Visual mode
 	["v|J"] = map_cmd(":m '>+1<CR>gv=gv"):with_desc("edit: Move this line down"),
 	["v|K"] = map_cmd(":m '<-2<CR>gv=gv"):with_desc("edit: Move this line up"),
