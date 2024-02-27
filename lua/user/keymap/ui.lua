@@ -14,5 +14,5 @@ return {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
-    ["n|<leader>e"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
+	["n|<leader>e"] = map_cr("Neotree toggle"):with_noremap():with_silent(),
 }
