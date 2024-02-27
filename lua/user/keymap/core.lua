@@ -7,12 +7,22 @@ return {
 	-- Remove default keymap
 	-- ["n|<leader>nf"] = "",
 	-- ["n|<leader>nr"] = false,
-	-- Plugin: telescope
-	["n|<leader><S-cr>"] = map_callback(function()
-			_command_panel()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("tool: Toggle command panel"),
-    ["n|<leader>e"] = map_cr("NvimTreeToggle"):with_noremap():with_silent(),
+    -- ["n|<leader>E"] = map_cr("e ~/.config/nvim/init.lua"):with_noremap():with_silent(),
+
+	["n|Y"] = map_cmd("y$"),
+    ["n|D"] = map_cmd("d$"),
+    ["n|L"] = map_cmd("$"),
+    ["n|H"] = map_cmd("^"),
+    -- -- ["n|S"] = map_cr("w"),
+    ["n|S"] =map_cmd(":w<CR>"),
+    ["n|Q"] =map_cmd(":q<CR>"),
+
+    -- -- Visual
+    -- ["v|J"] = map_cmd(":m '>+1<cr>gv=gv"),
+    -- ["v|K"] = map_cmd(":m '<-2<cr>gv=gv"),
+    -- ["v|<"] = map_cmd("<gv"),
+    -- ["v|>"] = map_cmd(">gv"),
+    -- ["v|L"] = map_cmd("$"),
+    -- ["v|H"] = map_cmd("^"),
+    -- ["v|p"] = map_cmd('"_dP'),
 }
