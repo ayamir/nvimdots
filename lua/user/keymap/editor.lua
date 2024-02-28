@@ -4,6 +4,7 @@ local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
 return {
-	["n|<leader>/"] = map_cr("CommentToggle"):with_noremap():with_silent(),
-	["v|<leader>/"] = map_cr("CommentToggle"):with_noremap():with_silent(),
+
+	["n|<leader>/"] = map_cmd([[<Plug>(comment_toggle_linewise_current)]]):with_silent(),
+	["v|<leader>/"] = map_cmd([[<Plug>(comment_toggle_linewise_current)]]):with_silent(),
 }

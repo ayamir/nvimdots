@@ -11,9 +11,4 @@ editor["nvim-neo-tree/neo-tree.nvim"] = {
 	config = require("configs.editor.neo-tree"), -- Require that config
 }
 
-editor["terrortylor/nvim-comment"] = {
-	cmd = "CommentToggle",
-	config = require("configs.editor.nvim-comment"), -- Require that config
-}
-
 return editor
