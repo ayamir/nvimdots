@@ -11,4 +11,16 @@ return {
 	["v|<leader>/"] = map_cmd([[<Plug>(comment_toggle_linewise_visual)]])
 		:with_silent()
 		:with_desc("editor: Toggle comment"),
+
+	["n|<D-/>"] = map_cmd([[<Plug>(comment_toggle_linewise_current)]])
+		:with_silent()
+		:with_desc("editor: Toggle comment"),
+
+	["v|<D-/>"] = map_cmd([[<Plug>(comment_toggle_linewise_visual)]])
+		:with_silent()
+		:with_desc("editor: Toggle comment "),
+
+	["i|<D-/>"] = map_cmd([[<Plug>(comment_toggle_linewise_current)]])
+		:with_silent()
+		:with_desc("editor: Toggle comment"),
 }

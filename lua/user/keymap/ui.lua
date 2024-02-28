@@ -1,6 +1,7 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
+local map_cu = bind.map_cu
 local map_callback = bind.map_callback
 
 return {
@@ -31,4 +32,14 @@ return {
 	["n|<leader>4"] = map_cr("BufferLineGoToBuffer 4"):with_noremap():with_silent(),
 	["n|<leader>5"] = map_cr("BufferLineGoToBuffer 5"):with_noremap():with_silent(),
 	["n|<leader>6"] = map_cr("BufferLineGoToBuffer 6"):with_noremap():with_silent(),
+
+	["n|<D-v>"] = map_cmd("a<C-r>+<Esc>"):with_noremap():with_silent(),
+	["i|<D-v>"] = map_cmd("<C-r>+"):with_noremap():with_silent(),
+	["c|<D-v>"] = map_cmd("<C-r>+"):with_noremap():with_silent(),
+	["n|<D-s>"] = map_cr("w"):with_noremap():with_silent(),
+	["n|<D-t>"] = map_cr("enew"):with_noremap():with_silent(),
+	["n|<c-w>"] = map_cr("bd"):with_noremap():with_silent(),
+
+	["n|<D-}>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent(),
+	["n|<D-{>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent(),
 }
