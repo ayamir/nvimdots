@@ -22,5 +22,12 @@ local getChangeIM = function()
 		return Mac.zhCH
 	elseif mode == "v" then
 		-- 当前为 visual 模式
+		return Mac.en
+	else
+		return Mac.en
 	end
+end
+
+M.macFocuseGained = function()
+	vim.cmd(":silent :!im-select" .. " " .. getChangeIM())
 end
