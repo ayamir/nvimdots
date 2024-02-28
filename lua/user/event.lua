@@ -5,34 +5,31 @@ local definitions = {
 		-- { "BufEnter", "*",
 
 		-- auto change directory
-		{ "BufFilePre", "*", "silent! cd %:p:h" },
-		-- { "bufnr, bufwinid, bufwin", "*", "echo %:p:h " },
-
-		-- auto place to last edit
-		-- {
-		-- 	"BufReadPost",
-		-- 	"*",
-		-- 	[[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
-		-- },
+		-- { "BufEnter", "*", "silent! lcd %:p:h" },
 	},
-
-	-- vim.api.nvim_create_autocmd("LspAttach", {
-	-- 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
-	-- 	callback = function(event)
-	-- 		if not _G._debugging then
-	-- 			mapping.lsp(event.buf)
-	-- 		end
-	-- 	end,
-	-- }),
-
-	-- vim.api.nvim_create_autocmd("LspAttach", {
-	-- 	group = vim.api.nvim_create_augroup("LspKeymapLoader", { clear = true }),
-	-- 	callback = function(event)
-	-- 		if not _G._debugging then
-	-- 			mapping.lsp(event.buf)
-	-- 		end
-	-- 	end,
-	-- }),
 }
+
+-- local function set_buffer_root()
+-- 	local current_file = vim.fn.expand("%:p:h")
+-- 	local current_cwd = vim.fn.expand("%:p")
+-- 	if current_file ~= "" and current_file ~= "NvimTree_" then
+-- 		-- print(current_cwd)
+-- 		print(current_file)
+-- 	end
+-- end
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+-- 	pattern = "*",
+-- 	callback = set_buffer_root(),
+-- })
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		local current_file_dir = vim.fn.expand("%:p:h")
+-- 		vim.api.nvim_set_current_dir(current_file_dir)
+-- 		print(current_file_dir)
+-- 	end,
+-- })
 
 return definitions

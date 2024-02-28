@@ -86,7 +86,7 @@ local options = {
 	-- winblend = 10,
 	autoread = true,
 	autowrite = true,
-	autochdir = true,
+	-- autochdir = true,
 
 	undofile = true,
 	synmaxcol = 2500,
