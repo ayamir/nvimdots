@@ -11,6 +11,8 @@ return {
 
 	-- Insert
 	["i|;"] = map_cmd("<esc>"),
+	["i|<C-e>"] = map_cmd("<esc>A"),
+	["i|<C-a>"] = map_cmd("<esc>I"),
 
 	["n|Y"] = map_cmd("y$"),
 	["n|D"] = map_cmd("d$"),
