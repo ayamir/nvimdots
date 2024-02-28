@@ -34,7 +34,7 @@ completion["joechrisellis/lsp-format-modifications.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
 }
-vim.g.nonels_supress_issue58 = false
+vim.g.nonels_suppress_issue58 = false
 completion["nvimtools/none-ls.nvim"] = {
 	lazy = true,
 	commit = "793c6071621814c61a14c24cdb43e9badd88f0af",
