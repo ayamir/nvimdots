@@ -8,6 +8,12 @@ editor["nvim-neo-tree/neo-tree.nvim"] = {
 		"MunifTanjim/nui.nvim",
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
+	config = require("configs.editor.neo-tree"), -- Require that config
+}
+
+editor["terrortylor/nvim-comment"] = {
+	cmd = "CommentToggle",
+	config = require("configs.editor.nvim-comment"), -- Require that config
 }
 
 return editor

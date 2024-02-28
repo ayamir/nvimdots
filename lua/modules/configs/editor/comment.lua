@@ -9,7 +9,8 @@ return function()
 		-- LHS of toggle mappings in NORMAL mode
 		toggler = {
 			-- Line-comment toggle keymap
-			line = "gcc",
+			-- line = "gcc",
+			line = "<leader>/",
 			-- Block-comment toggle keymap
 			block = "gbc",
 		},
