@@ -13,6 +13,8 @@ return {
 	["i|;"] = map_cmd("<esc>"),
 	["i|<C-e>"] = map_cmd("<esc>A"),
 	["i|<C-a>"] = map_cmd("<esc>I"),
+	["i|<C-b>"] = map_cmd("<Left>"):with_noremap(),
+	["i|<C-f>"] = map_cmd("<Right>"):with_noremap(),
 
 	["n|Y"] = map_cmd("y$"),
 	["n|D"] = map_cmd("d$"),
