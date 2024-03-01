@@ -1,3 +1,0 @@
-local editor = {}
-
-return editor
