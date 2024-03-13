@@ -6,14 +6,6 @@ local map_callback = bind.map_callback
 local et = bind.escape_termcode
 
 local plug_map = {
-	-- Plugin: accelerate-jk
-	["n|j"] = map_callback(function()
-		return et("<Plug>(accelerated_jk_gj)")
-	end):with_expr(),
-	["n|k"] = map_callback(function()
-		return et("<Plug>(accelerated_jk_gk)")
-	end):with_expr(),
-
 	-- Plugin persisted.nvim
 	["n|<leader>ss"] = map_cu("SessionSave"):with_noremap():with_silent():with_desc("session: Save"),
 	["n|<leader>sl"] = map_cu("SessionLoad"):with_noremap():with_silent():with_desc("session: Load current"),
@@ -59,9 +51,6 @@ local plug_map = {
 	-- Plugin: diffview
 	["n|<leader>gd"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
 	["n|<leader>gD"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
-
-	-- Plugin: vim-easy-align
-	["nx|gea"] = map_cr("EasyAlign"):with_desc("edit: Align with delimiter"),
 
 	-- Plugin: hop
 	["nv|<leader>w"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("jump: Goto word"),
