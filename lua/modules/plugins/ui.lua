@@ -57,6 +57,11 @@ ui["folke/paint.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.paint"),
 }
+ui["folke/todo-comments.nvim"] = {
+	lazy = true,
+	event = { "BufReadPost" },
+	opts = {},
+}
 ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
