@@ -74,6 +74,10 @@ editor["lambdalisue/suda.vim"] = {
 	cmd = { "SudaRead", "SudaWrite" },
 	config = require("editor.suda"),
 }
+editor["tpope/vim-sleuth"] = {
+	lazy = true,
+	event = "BufReadPre",
+}
 editor["nvim-pack/nvim-spectre"] = {
 	lazy = true,
 	cmd = { "Spectre" },
