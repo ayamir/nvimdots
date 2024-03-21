@@ -4,7 +4,7 @@ return function()
 	local dap = require("dap")
 	local is_windows = require("core.global").is_windows
 	local data_dir = require("core.global").data_dir
-	local python_exe = is_windows and data_dir .. "../mason/packages/debugpy/venv/Scripts/pythonw.exe"
+	local python = is_windows and data_dir .. "../mason/packages/debugpy/venv/Scripts/pythonw.exe"
 		or data_dir .. "../mason/packages/debugpy/venv/bin/python"
 	local utils = require("modules.utils.dap")
 
@@ -25,7 +25,7 @@ return function()
 		else
 			callback({
 				type = "executable",
-				command = python_exe,
+				command = python,
 				args = { "-m", "debugpy.adapter" },
 				options = { source_filetype = "python" },
 			})
@@ -59,7 +59,7 @@ return function()
 			program = utils.input_file_path(),
 			pythonPath = function()
 				local cwd, venv = vim.fn.getcwd(), os.getenv("VIRTUAL_ENV")
-				local pythonExecutable = ""
+				local python_exe = ""
 				if
 					venv
 					and (
@@ -67,21 +67,21 @@ return function()
 						or vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1
 					)
 				then
-					pythonExecutable = is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
+					python_exe = is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
 				elseif
 					(vim.fn.executable(cwd .. "/venv/bin/python") == 1)
 					or (vim.fn.executable(cwd .. "/venv/Scripts/pythonw.exe") == 1)
 				then
-					pythonExecutable = is_windows and cwd .. "/venv/Scripts/pythonw.exe" or cwd .. "/venv/bin/python"
+					python_exe = is_windows and cwd .. "/venv/Scripts/pythonw.exe" or cwd .. "/venv/bin/python"
 				elseif
 					(vim.fn.executable(cwd .. "/.venv/bin/python") == 1)
 					or (vim.fn.executable(cwd .. "/.venv/Scripts/pythonw.exe") == 1)
 				then
-					pythonExecutable = is_windows and cwd .. "/.venv/Scripts/pythonw.exe" or cwd .. "/.venv/bin/python"
+					python_exe = is_windows and cwd .. "/.venv/Scripts/pythonw.exe" or cwd .. "/.venv/bin/python"
 				else
-					pythonExecutable = is_windows and "pythonw.exe" or "python3"
+					python_exe = is_windows and "pythonw.exe" or "python3"
 				end
-				return pythonExecutable
+				return python_exe
 			end,
 		},
 	}
