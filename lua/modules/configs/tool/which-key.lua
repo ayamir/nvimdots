@@ -32,6 +32,12 @@ return function()
 			s = {
 				name = icons.cmp.tmux .. "Session",
 			},
+			S = {
+				name = icons.ui.Search .. " Search",
+			},
+			W = {
+				name = icons.ui.Window .. " Window",
+			},
 		},
 	})
 
