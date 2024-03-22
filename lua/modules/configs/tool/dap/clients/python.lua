@@ -59,7 +59,6 @@ return function()
 			program = utils.input_file_path(),
 			pythonPath = function()
 				local cwd, venv = vim.fn.getcwd(), os.getenv("VIRTUAL_ENV")
-				local python_exe = ""
 				if
 					venv
 					and (
@@ -67,21 +66,20 @@ return function()
 						or vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1
 					)
 				then
-					python_exe = is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
+					return is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
 				elseif
 					(vim.fn.executable(cwd .. "/venv/bin/python") == 1)
 					or (vim.fn.executable(cwd .. "/venv/Scripts/pythonw.exe") == 1)
 				then
-					python_exe = is_windows and cwd .. "/venv/Scripts/pythonw.exe" or cwd .. "/venv/bin/python"
+					return is_windows and cwd .. "/venv/Scripts/pythonw.exe" or cwd .. "/venv/bin/python"
 				elseif
 					(vim.fn.executable(cwd .. "/.venv/bin/python") == 1)
 					or (vim.fn.executable(cwd .. "/.venv/Scripts/pythonw.exe") == 1)
 				then
-					python_exe = is_windows and cwd .. "/.venv/Scripts/pythonw.exe" or cwd .. "/.venv/bin/python"
+					return is_windows and cwd .. "/.venv/Scripts/pythonw.exe" or cwd .. "/.venv/bin/python"
 				else
-					python_exe = is_windows and "pythonw.exe" or "python3"
+					return is_windows and "pythonw.exe" or "python3"
 				end
-				return python_exe
 			end,
 		},
 	}
