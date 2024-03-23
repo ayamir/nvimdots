@@ -1,5 +1,12 @@
 local M = {}
 
+local severity_map = {
+	["Error"] = vim.diagnostic.severity.ERROR,
+	["Warning"] = vim.diagnostic.severity.WARN,
+	["Information"] = vim.diagnostic.severity.INFO,
+	["Hint"] = vim.diagnostic.severity.HINT,
+}
+
 M.setup = function()
 	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
 	local diagnostics_level = require("core.settings").diagnostics_level
@@ -16,7 +23,9 @@ M.setup = function()
 		signs = true,
 		underline = true,
 		virtual_text = diagnostics_virtual_text and {
-			severity_limit = diagnostics_level,
+			severity = {
+				min = severity_map[diagnostics_level],
+			},
 		} or false,
 		-- set update_in_insert to false bacause it was enabled by lspsaga
 		update_in_insert = false,
