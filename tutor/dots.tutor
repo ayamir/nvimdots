@@ -18,7 +18,7 @@ upon how much time is spent with experimentation.
 
 # Lesson 1.1: EXPLANATION OF UI
 
-The opened buffers are showed at the top, you can use `<A-j>`{normal} and `<A-k>`{normal} to
+The opened buffers are showed at the top, you can use `<A-i>`{normal} and `<A-o>`{normal} to
 switch between them. Also, `<A-n>`{normal}(n meaning No) can be used to switch to the
 target buffer directly.
 
@@ -32,27 +32,28 @@ You can press `<C-h>`{normal} and `<C-l>`{normal} to move cursor to file explore
 this buffer. Since we nolonger need the file explorer in the following sections,
 please close it.
 
-Now press `<C-w>v`{normal} to split current window vertically, then `<A-j>`{normal} switch to
-the **event.lua** buffer for the right window. You can use `<A-]>`{normal} and `<A-[>`{normal} 
+Now press `<C-w>v`{normal} to split current window vertically, then `<A-i>`{normal} switch to
+the **event.lua** buffer for the right window. You can use `<A-h>`{normal} and `<A-l>`{normal} 
 to resize the right window and ensure you can view each word of this buffer.
 Of course, the resize process can be continous by holding the key.
 
 Back to the left window, the status line is showed at the bottom of the window.
--------------------------------------------------------------------------------
-|Normal|main| 1|   󱜙 [lua_ls,null-ls]   UTF-8 LF  4|󱃪 ~/.config/nvim|4% 50:1|
--------------------------------------------------------------------------------
-   |     |     |              |              |   |   |        |           |
-   |     |     |      LSPs ---|              |   |   |        |           |
-   |     |     |                  charset ---|   |   |        |           |
-   |     |     |                   EOL format ---|   |        |           |
-   |     |     |------ git status       tab size  ---|        |           |
-   |     |----- git branch                  work directory ---|           |
-   |---- edit mode                                    cursor position ----|
+--------------------------------------------------------------------------------
+|Normal|󰢱 lua|main| 1|󱜙 [lua_ls,null-ls] UTF-8 LF  4|󱃪 ~/.config/nvim|4% 50:1|
+--------------------------------------------------------------------------------
+   |      |     |   |              |        |   |   |        |             |
+   |      |     |   |      LSPs ---|        |   |   |        |             |
+   |      |     |   |            charset ---|   |   |        |             |
+   |      |     |   |                 EOL format ---|        |             |
+   |      |     |   |------ git status tab size  ---|        |             |
+   |      |     |----- git branch          work directory ---|             |
+   |      |---- file type                                                  |
+   |---- edit mode                                     cursor position ----|
 
 You will see different content under different conditions. It will looks like
 this if you switch to the right window and move cursor to the second line.
 -------------------------------------------------------------------------------
-|Normal|main| 󰅩 autocmd                        |~/.config/nvim|utf-8|LF|1%|2:1|
+|Normal|󰢱 lua|main| 󰅩 autocmd                  |~/.config/nvim|utf-8|LF|1%|2:1|
 -------------------------------------------------------------------------------
 "󰅩 autocmd" indicates this line has a variable named "autocmd". So this part of
 status line will show you the context of your cursor position. This feature

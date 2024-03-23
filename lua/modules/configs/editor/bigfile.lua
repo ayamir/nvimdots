@@ -20,7 +20,6 @@ return function()
 		pattern = { "*" }, -- autocmd pattern
 		features = { -- features to disable
 			"lsp",
-			"illuminate",
 			"treesitter",
 			"syntax",
 			"vimopts",

@@ -2,7 +2,10 @@
 -- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 return function()
 	local dap = require("dap")
-	local debugpy = vim.fn.exepath("debugpy-adapter")
+	local is_windows = require("core.global").is_windows
+	local data_dir = require("core.global").data_dir
+	local python = is_windows and data_dir .. "../mason/packages/debugpy/venv/Scripts/pythonw.exe"
+		or data_dir .. "../mason/packages/debugpy/venv/bin/python"
 	local utils = require("modules.utils.dap")
 
 	local function is_empty(s)
@@ -22,7 +25,8 @@ return function()
 		else
 			callback({
 				type = "executable",
-				command = debugpy,
+				command = python,
+				args = { "-m", "debugpy.adapter" },
 				options = { source_filetype = "python" },
 			})
 		end
@@ -38,9 +42,10 @@ return function()
 			program = utils.input_file_path(),
 			pythonPath = function()
 				if not is_empty(vim.env.CONDA_PREFIX) then
-					return vim.env.CONDA_PREFIX .. "/bin/python"
+					return is_windows and vim.env.CONDA_PREFIX .. "/Scripts/pythonw.exe"
+						or vim.env.CONDA_PREFIX .. "/bin/python"
 				else
-					return "python3"
+					return is_windows and "pythonw.exe" or "python3"
 				end
 			end,
 		},
@@ -54,14 +59,26 @@ return function()
 			program = utils.input_file_path(),
 			pythonPath = function()
 				local cwd, venv = vim.fn.getcwd(), os.getenv("VIRTUAL_ENV")
-				if venv and vim.fn.executable(venv .. "/bin/python") == 1 then
-					return venv .. "/bin/python"
-				elseif vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-					return cwd .. "/venv/bin/python"
-				elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-					return cwd .. "/.venv/bin/python"
+				if
+					venv
+					and (
+						vim.fn.executable(venv .. "/bin/python") == 1
+						or vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1
+					)
+				then
+					return is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
+				elseif
+					(vim.fn.executable(cwd .. "/venv/bin/python") == 1)
+					or (vim.fn.executable(cwd .. "/venv/Scripts/pythonw.exe") == 1)
+				then
+					return is_windows and cwd .. "/venv/Scripts/pythonw.exe" or cwd .. "/venv/bin/python"
+				elseif
+					(vim.fn.executable(cwd .. "/.venv/bin/python") == 1)
+					or (vim.fn.executable(cwd .. "/.venv/Scripts/pythonw.exe") == 1)
+				then
+					return is_windows and cwd .. "/.venv/Scripts/pythonw.exe" or cwd .. "/.venv/bin/python"
 				else
-					return "python3"
+					return is_windows and "pythonw.exe" or "python3"
 				end
 			end,
 		},

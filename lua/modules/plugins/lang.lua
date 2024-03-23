@@ -8,7 +8,6 @@ lang["ray-x/go.nvim"] = {
 		"nvim-treesitter/nvim-treesitter",
 	},
 	ft = { "go", "gomod" },
-	event = { "CmdlineEnter" },
 	build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 	config = require("lang.go-nvim"),
 }
