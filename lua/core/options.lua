@@ -43,7 +43,7 @@ local function load_options()
 		incsearch = true,
 		infercase = true,
 		jumpoptions = "stack",
-		laststatus = 2,
+		laststatus = 3,
 		linebreak = true,
 		list = true,
 		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
