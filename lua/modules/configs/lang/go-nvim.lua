@@ -4,7 +4,7 @@ return function()
 		dap_debug_keymap = false,
 		icons = false,
 		gofmt = "gopls",
-		goimport = "gopls",
+		goimports = "gopls",
 		lsp_gofumpt = "true",
 		lsp_inlay_hints = { enable = false },
 		run_in_floaterm = true,
