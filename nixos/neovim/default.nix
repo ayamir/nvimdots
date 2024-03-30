@@ -15,6 +15,11 @@ in
           Activate "ayamir/nvimdots".
           Have a look at https://github.com/ayamir/nvimdots for details
         '';
+        bindLazyLock = mkEnableOption ''
+          Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
+          Very powerful in terms of keeping the environment consistent, but has the following side effects.
+          You cannot update it even if you run the Lazy command, because it binds read-only.
+        '';
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
           Environment variables are only visible to `nvim` and have no effect on any parent sessions.
@@ -124,6 +129,8 @@ in
           "nvim/lua".source = ../../lua;
           "nvim/snips".source = ../../snips;
           "nvim/tutor".source = ../../tutor;
+        } // lib.optionalAttrs cfg.bindLazyLock {
+          "nvim/lazy-lock.json".source = ../../lazy-lock.json;
         };
         home.packages = with pkgs; [
           ripgrep
