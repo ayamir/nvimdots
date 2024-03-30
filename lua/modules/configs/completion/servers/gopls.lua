@@ -11,6 +11,14 @@ return {
 				unusedparams = true,
 				unusewrites = true,
 			},
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
+			},
 		},
 	},
 }
