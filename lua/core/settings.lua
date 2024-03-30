@@ -213,4 +213,8 @@ settings["dashboard_image"] = {
 	[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
 }
 
+-- Set it to false if you don't  want to show inlay hint
+---@type boolean
+settings["enable_inlayhint"] = true
+
 return require("modules.utils").extend_config(settings, "user.settings")

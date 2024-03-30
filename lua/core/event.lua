@@ -23,9 +23,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		mapping.lsp(event.buf)
+		local enable_inlayhint = require("core.settings").enable_inlayhint
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client ~= nil and client.server_capabilities.inlayHintProvider ~= nil then
-			vim.lsp.inlay_hint.enable(event.buf, true)
+			vim.lsp.inlay_hint.enable(event.buf, enable_inlayhint)
 		end
 	end,
 })
