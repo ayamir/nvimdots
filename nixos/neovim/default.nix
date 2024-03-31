@@ -132,16 +132,18 @@ in
         } // lib.optionalAttrs cfg.bindLazyLock {
           "nvim/lazy-lock.json".source = ../../lazy-lock.json;
         };
-        home.packages = with pkgs; [
-          ripgrep
-        ] ++ optionals cfg.setBuildEnv [
-          nvim-depends-include
-          nvim-depends-library
-          nvim-depends-pkgconfig
-          patchelf
-        ];
-        home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
-        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " nvim";
+        home = {
+          packages = with pkgs; [
+            ripgrep
+          ] ++ optionals cfg.setBuildEnv [
+            nvim-depends-include
+            nvim-depends-library
+            nvim-depends-pkgconfig
+            patchelf
+          ];
+          extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
+          shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " nvim";
+        };
 
         programs.neovim = {
           enable = true;
@@ -173,9 +175,7 @@ in
                   exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
                 '';
               })
-              (haskellPackages.ghcWithPackages (ps: [
-                # ghcup # ghcup is broken
-              ] ++ cfg.extraHaskellPackages pkgs.haskellPackages))
+              (haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages pkgs.haskellPackages))
             ];
 
           extraPython3Packages = ps: with ps; [
