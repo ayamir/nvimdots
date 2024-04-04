@@ -52,6 +52,12 @@ tool["folke/which-key.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
+tool["gelguy/wilder.nvim"] = {
+	lazy = true,
+	event = "CmdlineEnter",
+	config = require("tool.wilder"),
+	dependencies = { "romgrk/fzy-lua-native" },
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
