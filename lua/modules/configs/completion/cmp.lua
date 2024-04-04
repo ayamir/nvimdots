@@ -156,7 +156,7 @@ return function()
 		}),
 		snippet = {
 			expand = function(args)
-				lspsnip.lsp_expand(args.body)
+				luasnip.lsp_expand(args.body)
 			end,
 		},
 		-- You should specify your *installed* sources.
