@@ -66,25 +66,6 @@ return function()
 		}
 
 	local cmp = require("cmp")
-	cmp.setup.cmdline("/", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = {
-			{ name = "buffer" },
-		},
-	})
-	cmp.setup.cmdline(":", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources({
-			{ name = "path" },
-		}, {
-			{
-				name = "cmdline",
-				option = {
-					ignore_cmds = { "Man", "!" },
-				},
-			},
-		}),
-	})
 	local luasnip = require("luasnip")
 	require("modules.utils").load_plugin("cmp", {
 		preselect = cmp.PreselectMode.Item,
@@ -166,8 +147,8 @@ return function()
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif require("luasnip").jumpable(-1) then
-					require("luasnip").jump(-1)
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
 				else
 					fallback()
 				end
@@ -175,7 +156,7 @@ return function()
 		}),
 		snippet = {
 			expand = function(args)
-				require("luasnip").lsp_expand(args.body)
+				lspsnip.lsp_expand(args.body)
 			end,
 		},
 		-- You should specify your *installed* sources.
