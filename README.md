@@ -49,6 +49,8 @@ Branch info:
 |  0.8   |         nvim 0.8         |
 |  0.7   |         nvim 0.7         |
 
+**NOTE: The 0.10 nightly branch is not stable, so don't submit issues for it. This branch is only for users pursuing new features of nvim-nightly.**
+
 </div>
 
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
