@@ -8,7 +8,6 @@ Set-StrictMode -Version 3.0
 $ErrorActionPreference = "Stop" # Exit when command fails
 
 # global-scope vars
-$REQUIRED_NVIM_VERSION_NIGHTLY = [version]'0.10'
 $REQUIRED_NVIM_VERSION = [version]'0.9.0'
 $REQUIRED_NVIM_VERSION_LEGACY = [version]'0.8.0'
 $USE_SSH = $True
@@ -21,7 +20,6 @@ $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 # env vars
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
 $env:CCPACK_MGR ??= 'unknown'
-$env:CCLONE_BRANCH_NIGHTLY ??= '0.10'
 $env:CCLONE_BRANCH ??= 'main'
 $env:CCLONE_BRANCH_LEGACY ??= '0.8'
 $env:CCLONE_ATTR ??= 'undef'
@@ -285,15 +283,13 @@ function check_nvim_version ([Parameter(Mandatory = $True)][ValidateNotNullOrEmp
 	return ($nvim_version -ge $RequiredVersionMin)
 }
 
-function clone_by_https_or_ssh ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$CloneUrl) {
-	if ((check_nvim_version -RequiredVersionMin $REQUIRED_NVIM_VERSION_NIGHTLY)) {
-		safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH_NIGHTLY" "$env:CCLONE_ATTR" $CloneUrl "$env:CCDEST_DIR" }
-	} elseif ((check_nvim_version -RequiredVersionMin $REQUIRED_NVIM_VERSION)) {
-		safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" $CloneUrl "$env:CCDEST_DIR" }
+function clone_repo ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$WithURL) {
+	if ((check_nvim_version -RequiredVersionMin $REQUIRED_NVIM_VERSION)) {
+		safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH" "$env:CCLONE_ATTR" $WithURL "$env:CCDEST_DIR" }
 	} elseif ((check_nvim_version -RequiredVersionMin $REQUIRED_NVIM_VERSION_LEGACY)) {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION)."
 		info -Msg "Automatically redirecting you to the latest compatible version..."
-		safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH_LEGACY" "$env:CCLONE_ATTR" $CloneUrl "$env:CCDEST_DIR" }
+		safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH_LEGACY" "$env:CCLONE_ATTR" $WithURL "$env:CCDEST_DIR" }
 	} else {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION_LEGACY)."
 		_abort -Msg "This Neovim distribution is no longer supported." -Type "NotImplemented" -Info_msg @"
@@ -375,9 +371,9 @@ You must install Git before installing this Nvim config. See:
 	info -Msg "Fetching in progress..."
 
 	if ($USE_SSH) {
-		clone_by_https_or_ssh 'git@github.com:ayamir/nvimdots.git'
+		clone_repo -WithURL 'git@github.com:ayamir/nvimdots.git'
 	} else {
-		clone_by_https_or_ssh 'https://github.com/ayamir/nvimdots.git'
+		clone_repo -WithURL 'https://github.com/ayamir/nvimdots.git'
 	}
 
 	safe_execute -WithCmd { Set-Location -Path "$env:CCDEST_DIR" }
