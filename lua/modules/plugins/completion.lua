@@ -46,7 +46,7 @@ completion["nvimtools/none-ls.nvim"] = {
 }
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
-	event = { "InsertEnter", "CmdlineEnter" },
+	event = "InsertEnter",
 	config = require("completion.cmp"),
 	dependencies = {
 		{
