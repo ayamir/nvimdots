@@ -94,32 +94,21 @@ in
       makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
       makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
 
-      nvim-depends-library = pkgs.buildEnv {
-        name = "nvim-depends-library";
-        paths = map lib.getLib build-dependent-pkgs;
-        extraPrefix = "/lib/nvim-depends";
-        pathsToLink = [ "/lib" ];
+      neovim-build-deps = pkgs.buildEnv {
+        name = "neovim-build-deps";
+        paths = build-dependent-pkgs;
+        extraOutputsToInstall = [ "dev" ];
+        pathsToLink = [ "/lib" "/include" ];
         ignoreCollisions = true;
       };
-      nvim-depends-include = pkgs.buildEnv {
-        name = "nvim-depends-include";
-        paths = splitString ":" (makeIncludePath build-dependent-pkgs);
-        extraPrefix = "/lib/nvim-depends/include";
-        ignoreCollisions = true;
-      };
-      nvim-depends-pkgconfig = pkgs.buildEnv {
-        name = "nvim-depends-pkgconfig";
-        paths = splitString ":" (makePkgConfigPath build-dependent-pkgs);
-        extraPrefix = "/lib/nvim-depends/pkgconfig";
-        ignoreCollisions = true;
-      };
+
       buildEnv = [
-        "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
-        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
-        "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "NIX_LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
+        ''CPATH=''${CPATH:+''${CPATH}:}${neovim-build-deps}/include''
+        ''CPLUS_INCLUDE_PATH=''${CPLUS_INCLUDE_PATH:+''${CPLUS_INCLUDE_PATH}:}:${neovim-build-deps}/include/c++/v1''
+        ''LD_LIBRARY_PATH=''${LD_LIBRARY_PATH:+''${LD_LIBRARY_PATH}:}${neovim-build-deps}/lib''
+        ''LIBRARY_PATH=''${LIBRARY_PATH:+''${LIBRARY_PATH}:}${neovim-build-deps}/lib''
+        ''NIX_LD_LIBRARY_PATH=''${NIX_LD_LIBRARY_PATH:+''${NIX_LD_LIBRARY_PATH}:}${neovim-build-deps}/lib''
+        ''PKG_CONFIG_PATH=''${PKG_CONFIG_PATH:+''${PKG_CONFIG_PATH}:}${neovim-build-deps}/include/pkgconfig''
       ];
     in
     mkIf cfg.enable
@@ -135,14 +124,9 @@ in
         home = {
           packages = with pkgs; [
             ripgrep
-          ] ++ optionals cfg.setBuildEnv [
-            nvim-depends-include
-            nvim-depends-library
-            nvim-depends-pkgconfig
-            patchelf
           ];
-          extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
-          shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " nvim";
+        } // optionalAttrs cfg.setBuildEnv {
+          shellAliases.nvim = concatStringsSep " " buildEnv + " nvim";
         };
 
         programs.neovim = {
