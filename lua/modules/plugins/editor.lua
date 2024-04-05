@@ -45,6 +45,11 @@ editor["numToStr/Comment.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("editor.comment"),
 }
+editor["sindrets/diffview.nvim"] = {
+	lazy = true,
+	cmd = { "DiffviewOpen", "DiffviewClose" },
+	config = require("editor.diffview"),
+}
 editor["echasnovski/mini.align"] = {
 	version = false,
 	config = require("editor.mini-align"),
