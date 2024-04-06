@@ -39,6 +39,7 @@ _G._toggle_lazygit = function()
 	end
 end
 
+-- TODO: Update this function to use `vim.getregion()` when v0.10 is released.
 _G._buf_vtext = function()
 	local a_orig = vim.fn.getreg("a")
 	local mode = vim.fn.mode()
