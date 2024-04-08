@@ -77,10 +77,6 @@ editor["lambdalisue/suda.vim"] = {
 }
 editor["tpope/vim-sleuth"] = {
 	lazy = true,
-	event = "BufReadPre",
-}
-editor["tpope/vim-sleuth"] = {
-	lazy = true,
 	event = { "BufNewFile", "BufReadPost", "BufFilePost" },
 }
 editor["nvim-pack/nvim-spectre"] = {
