@@ -12,7 +12,7 @@ lang["fatih/vim-go"] = {
 	lazy = true,
 	ft = "go",
 	build = ":GoInstallBinaries",
-	config = require("lang.vim-go"),
+	init = require("lang.vim-go"),
 }
 lang["mrcjkb/rustaceanvim"] = {
 	lazy = true,
