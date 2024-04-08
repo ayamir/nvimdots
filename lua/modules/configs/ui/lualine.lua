@@ -218,7 +218,7 @@ return function()
 
 		tabwidth = {
 			function()
-				return icons.ui.Tab .. vim.api.nvim_get_option_value("shiftwidth", { scope = "local" })
+				return icons.ui.Tab .. vim.api.nvim_get_option_value("tabstop", { scope = "local" })
 			end,
 			padding = 1,
 		},
