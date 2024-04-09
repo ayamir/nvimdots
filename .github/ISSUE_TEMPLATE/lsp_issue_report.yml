@@ -6,6 +6,9 @@ body:
     attributes:
       value: |
         _Before reporting:_ Search [existing issues](https://github.com/ayamir/nvimdots/issues) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
+        > [!IMPORTANT]
+        > The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. 
+        > Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
   - type: checkboxes
     id: is-latest-commit
     attributes:
