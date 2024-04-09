@@ -10,14 +10,10 @@ lang["kevinhwang91/nvim-bqf"] = {
 }
 lang["ray-x/go.nvim"] = {
 	lazy = true,
-	dependencies = { -- optional packages
-		"ray-x/guihua.lua",
-		"neovim/nvim-lspconfig",
-		"nvim-treesitter/nvim-treesitter",
-	},
-	ft = { "go", "gomod" },
-	build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
-	config = require("lang.go-nvim"),
+	ft = { "go", "gomod", "gosum" },
+	build = ":GoInstallBinaries",
+	config = require("lang.go"),
+	dependencies = { "ray-x/guihua.lua" },
 }
 lang["mrcjkb/rustaceanvim"] = {
 	lazy = true,
