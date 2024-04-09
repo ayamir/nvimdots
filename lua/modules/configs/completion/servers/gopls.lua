@@ -2,8 +2,10 @@
 return {
 	flags = { debounce_text_changes = 500 },
 	cmd = { "gopls", "-remote=auto" },
+	filetypes = { "go", "go.mod", "gowork", "gotmpl" },
 	settings = {
 		gopls = {
+			completeUnimported = true,
 			usePlaceholders = true,
 			analyses = {
 				nilness = true,
