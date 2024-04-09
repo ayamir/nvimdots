@@ -17,6 +17,7 @@ return function()
 			WARN = { icon = icons.diagnostics.Warning, color = "warning", alt = { "WARNING", "XXX" } },
 			PERF = { icon = icons.ui.Perf, alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
 			NOTE = { icon = icons.ui.Note, color = "hint", alt = { "INFO" } },
+			TEST = { icon = icons.ui.Lock, color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 		},
 		gui_style = {
 			fg = "NONE",
@@ -29,7 +30,7 @@ return function()
 			after = "",
 			comments_only = true,
 			max_line_len = 500,
-			exclude = { "big_file_disabled_ft" },
+			exclude = { "big_file_disabled_ft", "checkhealth" },
 		},
 		colors = {
 			error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
