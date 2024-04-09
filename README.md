@@ -49,7 +49,8 @@ Branch info:
 |  0.8   |         nvim 0.8         |
 |  0.7   |         nvim 0.7         |
 
-**NOTE: The 0.10 nightly branch is not stable, so don't submit issues for it. This branch is only for users pursuing new features of nvim-nightly.**
+> [!IMPORTANT]
+> The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
 </div>
 
