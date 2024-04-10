@@ -51,7 +51,7 @@ function mapping.lsp(buf)
 		["n|gd"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 		["n|gh"] = map_cr("Glance references"):with_silent():with_buffer(buf):with_desc("lsp: Show reference"),
-		["n|gi"] = map_cu("lua vim.lsp.buf.implementation()")
+		["n|gm"] = map_cr("Glance implementations")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Goto implementation"),
