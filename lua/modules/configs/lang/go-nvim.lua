@@ -8,9 +8,11 @@ return function()
 		icons = false,
 		gofmt = "gopls",
 		goimports = "gopls",
+		-- set gopls to format
+		lsp_document_formatting = true,
 		-- set gofumpt as default formatter of gopls
 		lsp_gofumpt = true,
-		lsp_document_formatting = true,
+		-- disable codelens by default
 		lsp_codelens = false,
 		-- disable inlay hints by default
 		lsp_inlay_hints = { enable = false },
@@ -18,7 +20,7 @@ return function()
 		trouble = true,
 		-- show passed test info in notify message
 		run_in_floaterm = false,
-		-- gopls config
+		-- use default gopls config provided by go.nvim
 		lsp_cfg = true,
 	})
 end
