@@ -4,7 +4,7 @@ local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
 local plug_map = {
-	["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("Formatter: Toggle format on save"),
+	["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("formatter: Toggle format on save"),
 }
 bind.nvim_load_mapping(plug_map)
 
@@ -53,7 +53,7 @@ function mapping.lsp(buf)
 		["n|gm"] = map_cr("Glance implementations")
 			:with_silent()
 			:with_buffer(buf)
-			:with_desc("lsp: Goto implementation"),
+			:with_desc("lsp: Show implementation"),
 		["n|gci"] = map_cr("Lspsaga incoming_calls")
 			:with_silent()
 			:with_buffer(buf)

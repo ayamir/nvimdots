@@ -18,7 +18,7 @@ M.setup = function()
 		virtual_text = diagnostics_virtual_text and {
 			severity_limit = diagnostics_level,
 		} or false,
-		-- set update_in_insert to false bacause it was enabled by lspsaga
+		-- set update_in_insert to false because it was enabled by lspsaga
 		update_in_insert = false,
 	})
 
@@ -38,6 +38,20 @@ M.setup = function()
 `rust_analyzer` is configured independently via `mrcjkb/rustaceanvim`. To get rid of this warning,
 please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` directory and configure
 `rust_analyzer` using the appropriate init options provided by `rustaceanvim` instead.]],
+					vim.log.levels.WARN,
+					{ title = "nvim-lspconfig" }
+				)
+			end
+			return
+		end
+		if lsp_name == "gopls" then
+			local config_exist = pcall(require, "completion.servers." .. lsp_name)
+			if config_exist then
+				vim.notify(
+					[[
+`gopls` is configured independently via `ray-x/go.nvim`. To get rid of this warning,
+please REMOVE your LSP configuration (gopls.lua) from the `servers` directory and configure
+`gopls` using the appropriate init options provided by `go.nvim` instead.]],
 					vim.log.levels.WARN,
 					{ title = "nvim-lspconfig" }
 				)

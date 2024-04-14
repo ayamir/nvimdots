@@ -19,6 +19,6 @@ return function()
 		-- show passed test info in notify message
 		run_in_floaterm = false,
 		-- gopls config
-		lsp_cfg = require("modules.configs.completion.servers.gopls"),
+		lsp_cfg = true,
 	})
 end
