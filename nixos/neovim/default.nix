@@ -71,10 +71,13 @@ in
       # Inspired from https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
       build-dependent-pkgs = with pkgs;
         [
+          # manylinux
           acl
           attr
           bzip2
           curl
+          glibc
+          libgcc.lib
           libsodium
           libssh
           libxml2
@@ -125,8 +128,9 @@ in
           packages = with pkgs; [
             ripgrep
           ];
-        } // optionalAttrs cfg.setBuildEnv {
-          shellAliases.nvim = concatStringsSep " " buildEnv + " nvim";
+          shellAliases = optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
+            nvim = concatStringsSep " " buildEnv + " nvim";
+          };
         };
 
         programs.neovim = {
@@ -135,6 +139,32 @@ in
           withNodeJs = true;
           withPython3 = true;
           withRuby = true;
+          extraWrapperArgs = optionals (cfg.setBuildEnv && (lib.versionAtLeast config.home.stateVersion "24.05")) [
+            "--suffix"
+            "CPATH"
+            ":"
+            "${neovim-build-deps}/include"
+            "--suffix"
+            "CPLUS_INCLUDE_PATH"
+            ":"
+            "${neovim-build-deps}/include/c++/v1"
+            "--suffix"
+            "LD_LIBRARY_PATH"
+            ":"
+            "${neovim-build-deps}/lib"
+            "--suffix"
+            "LIBRARY_PATH"
+            ":"
+            "${neovim-build-deps}/lib"
+            "--suffix"
+            "PKG_CONFIG_PATH"
+            ":"
+            "${neovim-build-deps}/include/pkgconfig"
+            "--suffix"
+            "NIX_LD_LIBRARY_PATH"
+            ":"
+            "${neovim-build-deps}/lib"
+          ];
 
           extraPackages = with pkgs;
             [
