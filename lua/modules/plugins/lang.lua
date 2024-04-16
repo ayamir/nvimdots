@@ -18,7 +18,7 @@ lang["mrcjkb/rustaceanvim"] = {
 	lazy = true,
 	ft = "rust",
 	version = "^3",
-	config = require("lang.rust"),
+	init = require("lang.rust"),
 	dependencies = { "nvim-lua/plenary.nvim" },
 }
 lang["Saecki/crates.nvim"] = {
