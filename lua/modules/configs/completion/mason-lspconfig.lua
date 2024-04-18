@@ -44,20 +44,6 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 			end
 			return
 		end
-		if lsp_name == "gopls" then
-			local config_exist = pcall(require, "completion.servers." .. lsp_name)
-			if config_exist then
-				vim.notify(
-					[[
-`gopls` is configured independently via `ray-x/go.nvim`. To get rid of this warning,
-please REMOVE your LSP configuration (gopls.lua) from the `servers` directory and configure
-`gopls` using the appropriate `lsp_cfg` options provided by `go.nvim` instead.]],
-					vim.log.levels.WARN,
-					{ title = "nvim-lspconfig" }
-				)
-			end
-			return
-		end
 
 		local ok, custom_handler = pcall(require, "user.configs.lsp-servers." .. lsp_name)
 		-- Use preset if there is no user definition
