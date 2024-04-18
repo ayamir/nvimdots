@@ -10,7 +10,7 @@ lang["kevinhwang91/nvim-bqf"] = {
 }
 lang["ray-x/go.nvim"] = {
 	lazy = true,
-	ft = { "go", "gomod" },
+	ft = { "go", "gomod", "gosum" },
 	build = ":GoInstallBinaries",
 	config = require("lang.go"),
 	dependencies = { "ray-x/guihua.lua" },
