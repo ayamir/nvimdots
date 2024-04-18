@@ -35,7 +35,7 @@ return {
 			usePlaceholders = true,
 			completeUnimported = true,
 			symbolMatcher = "Fuzzy",
-			buildflags = { "-tags", "integration" },
+			buildFlags = { "-tags", "integration" },
 			codelenses = {
 				generate = true,
 				gc_details = true,
