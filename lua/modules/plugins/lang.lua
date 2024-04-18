@@ -10,12 +10,10 @@ lang["kevinhwang91/nvim-bqf"] = {
 }
 lang["ray-x/go.nvim"] = {
 	lazy = true,
-	dependencies = {
-		"ray-x/guihua.lua", -- for float term, codeaction and codelens gui support
-	},
 	ft = { "go", "gomod" },
 	build = ":GoInstallBinaries",
-	config = require("lang.go-nvim"),
+	config = require("lang.go"),
+	dependencies = { "ray-x/guihua.lua" },
 }
 lang["mrcjkb/rustaceanvim"] = {
 	lazy = true,
