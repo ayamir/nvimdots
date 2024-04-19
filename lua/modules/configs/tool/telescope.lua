@@ -86,6 +86,40 @@ return function()
 					},
 				},
 			},
+			advanced_git_search = {
+				-- Browse command to open commits in browser. Default fugitive GBrowse.
+				browse_command = "GBrowse",
+				-- fugitive or diffview
+				diff_plugin = "diffview",
+				-- customize git in previewer
+				-- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
+				git_flags = { "-c", "delta.side-by-side=true" },
+				-- customize git diff in previewer
+				-- e.g. flags such as { "--raw" }
+				git_diff_flags = {},
+				-- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
+				show_builtin_git_pickers = false,
+				entry_default_author_or_date = "author", -- one of "author" or "date"
+				keymaps = {
+					-- following keymaps can be overridden
+					toggle_date_author = "<C-w>",
+					open_commit_in_browser = "<C-o>",
+					copy_commit_hash = "<C-y>",
+					show_entire_commit = "<C-e>",
+				},
+
+				-- Telescope layout setup
+				telescope_theme = {
+					function_name_1 = {
+						-- Theme options
+					},
+					function_name_2 = "dropdown",
+					-- e.g. realistic example
+					show_custom_functions = {
+						layout_config = { width = 0.4, height = 0.4 },
+					},
+				},
+			},
 		},
 	})
 
@@ -98,4 +132,5 @@ return function()
 	require("telescope").load_extension("zoxide")
 	require("telescope").load_extension("persisted")
 	require("telescope").load_extension("aerial")
+	require("telescope").load_extension("advanced_git_search")
 end
