@@ -27,7 +27,7 @@ M.setup = function()
 				min = severity_map[diagnostics_level],
 			},
 		} or false,
-		-- set update_in_insert to false bacause it was enabled by lspsaga
+		-- set update_in_insert to false because it was enabled by lspsaga
 		update_in_insert = false,
 	})
 
