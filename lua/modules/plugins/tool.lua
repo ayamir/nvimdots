@@ -98,6 +98,10 @@ tool["nvim-telescope/telescope.nvim"] = {
 				"sindrets/diffview.nvim",
 			},
 		},
+		{
+			"FabianWirth/search.nvim",
+			config = require("tool.search"),
+		},
 	},
 }
 
