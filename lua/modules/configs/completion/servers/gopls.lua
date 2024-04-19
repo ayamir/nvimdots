@@ -1,15 +1,49 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/gopls.lua
 return {
-	flags = { debounce_text_changes = 500 },
-	cmd = { "gopls", "-remote=auto" },
+	cmd = { "gopls", "-remote.debug=:0", "-remote=auto" },
+	filetypes = { "go", "gomod", "gosum", "gotmpl", "gohtmltmpl", "gotexttmpl" },
+	flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
+	capabilities = {
+		textDocument = {
+			completion = {
+				contextSupport = true,
+				dynamicRegistration = true,
+				completionItem = {
+					commitCharactersSupport = true,
+					deprecatedSupport = true,
+					preselectSupport = true,
+					insertReplaceSupport = true,
+					labelDetailsSupport = true,
+					snippetSupport = true,
+					documentationFormat = { "markdown", "plaintext" },
+					resolveSupport = {
+						properties = {
+							"documentation",
+							"details",
+							"additionalTextEdits",
+						},
+					},
+				},
+			},
+		},
+	},
 	settings = {
 		gopls = {
+			staticcheck = true,
+			semanticTokens = true,
+			noSemanticString = true,
 			usePlaceholders = true,
-			analyses = {
-				nilness = true,
-				shadow = true,
-				unusedparams = true,
-				unusewrites = true,
+			completeUnimported = true,
+			symbolMatcher = "Fuzzy",
+			buildFlags = { "-tags", "integration" },
+			codelenses = {
+				generate = true,
+				gc_details = true,
+				test = true,
+				tidy = true,
+				vendor = true,
+				regenerate_cgo = true,
+				upgrade_dependency = true,
 			},
 		},
 	},
