@@ -132,6 +132,7 @@ return function()
 			end,
 			padding = 0,
 			color = utils.gen_hl("surface1", true, true),
+			separator = { left = "", right = "" },
 		},
 
 		file_status = {
