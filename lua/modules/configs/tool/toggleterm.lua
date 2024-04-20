@@ -18,8 +18,9 @@ return function()
 			local api = require("nvim-tree.api")
 			local tree = require("nvim-tree.view")
 			if tree.is_visible() and term.direction == "horizontal" then
+				local width = vim.fn.winwidth(tree.get_winnr())
 				api.tree.toggle()
-				tree.View.width = vim.fn.winwidth(tree.get_winnr())
+				tree.View.width = width
 				api.tree.toggle(false, true)
 			end
 		end,
