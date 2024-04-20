@@ -3,16 +3,25 @@ return function()
 		-- size can be a number or function which is passed the current terminal
 		size = function(term)
 			if term.direction == "horizontal" then
-				return 15
+				return vim.o.lines * 0.40
 			elseif term.direction == "vertical" then
 				return vim.o.columns * 0.40
 			end
 		end,
-		on_open = function()
+		on_open = function(term)
 			-- Prevent infinite calls from freezing neovim.
 			-- Only set these options specific to this terminal buffer.
 			vim.api.nvim_set_option_value("foldmethod", "manual", { scope = "local" })
 			vim.api.nvim_set_option_value("foldexpr", "0", { scope = "local" })
+			-- Prevent horizontal toggleterm move nvim-tree
+			local nvimtree_api = require("nvim-tree.api")
+			local nvimtree_view = require("nvim-tree.view")
+			if nvimtree_view.is_visible() and term.direction == "horizontal" then
+				local nvimtree_width = vim.fn.winwidth(nvimtree_view.get_winnr())
+				nvimtree_api.tree.toggle()
+				nvimtree_view.View.width = nvimtree_width
+				nvimtree_api.tree.toggle(false, true)
+			end
 		end,
 		highlights = {
 			Normal = {
