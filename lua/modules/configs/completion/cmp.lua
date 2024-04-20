@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-field
 return function()
 	local icons = {
 		kind = require("modules.utils.icons").get("kind"),
