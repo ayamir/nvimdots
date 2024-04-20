@@ -120,7 +120,7 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("find: file in git project"),
+		:with_desc("find: Git related search"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 	["v|<leader>fs"] = map_callback(function()
@@ -134,7 +134,7 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("find: Session"),
+		:with_desc("find: Session, Project and Directory"),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()
