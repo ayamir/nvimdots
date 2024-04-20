@@ -18,8 +18,7 @@ return function()
 		sort_by = "name",
 		sync_root_with_cwd = true,
 		on_attach = function(bufnr)
-			local api = require("nvim-tree.api")
-			api.config.mappings.default_on_attach(bufnr)
+			require("nvim-tree.api").config.mappings.default_on_attach(bufnr)
 			vim.keymap.del("n", "<C-e>", { buffer = bufnr })
 		end,
 		view = {
