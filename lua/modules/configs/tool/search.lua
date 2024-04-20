@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-field
 return function()
 	local builtin = require("telescope.builtin")
 	local extensions = require("telescope").extensions
