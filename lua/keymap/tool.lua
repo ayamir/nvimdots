@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-field
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
@@ -89,32 +90,24 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
-	["n|<leader>u"] = map_callback(function()
+	["n|<leader>fu"] = map_callback(function()
 			require("telescope").extensions.undo.undo()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("edit: Show undo history"),
-	["n|<leader>fp"] = map_callback(function()
-			require("telescope").extensions.projects.projects({})
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Project"),
-	["n|<leader>fr"] = map_callback(function()
-			require("telescope").extensions.frecency.frecency({})
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: File by frecency"),
 	["n|<leader>fw"] = map_callback(function()
 			require("telescope").extensions.live_grep_args.live_grep_args()
 		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("find: Word in project"),
-	["n|<leader>fe"] = map_cu("Telescope oldfiles"):with_noremap():with_silent():with_desc("find: File by history"),
-	["n|<leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent():with_desc("find: File in project"),
+	["n|<leader>ff"] = map_callback(function()
+			require("search").open({ collection = "file" })
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("find: File in project"),
 	["n|<leader>fc"] = map_callback(function()
 			require("telescope.builtin").colorscheme({ enable_preview = true })
 		end)
@@ -122,14 +115,12 @@ local plug_map = {
 		:with_silent()
 		:with_desc("ui: Change colorscheme for current session"),
 	["n|<leader>bn"] = map_cu(":enew"):with_noremap():with_silent():with_desc("buffer: New"),
-	["n|<leader>fg"] = map_cu("Telescope git_files")
+	["n|<leader>fg"] = map_callback(function()
+			require("search").open({ collection = "git" })
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("find: file in git project"),
-	["n|<leader>fz"] = map_cu("Telescope zoxide list")
-		:with_noremap()
-		:with_silent()
-		:with_desc("edit: Change current direrctory by zoxide"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
 	["v|<leader>fs"] = map_callback(function()
@@ -138,7 +129,12 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("find: Selection text"),
-	["n|<leader>fd"] = map_cu("Telescope persisted"):with_noremap():with_silent():with_desc("find: Session"),
+	["n|<leader>fd"] = map_callback(function()
+			require("search").open({ collection = "workspace" })
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("find: Session"),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()
