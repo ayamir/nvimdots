@@ -17,7 +17,6 @@ return function()
 		compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 		styles = {
 			comments = { "italic" },
-			properties = { "italic" },
 			functions = { "bold" },
 			keywords = { "italic" },
 			operators = { "bold" },
@@ -28,6 +27,7 @@ return function()
 			types = {},
 			strings = {},
 			variables = {},
+			properties = {},
 		},
 		integrations = {
 			treesitter = true,
