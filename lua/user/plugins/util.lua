@@ -17,4 +17,9 @@ custom["mcookly/bidi.nvim"] = {
 	opts = {},
 }
 
+custom["max397574/better-escape.nvim"] = {
+	event = "VeryLazy",
+	opts = {},
+}
+
 return custom
