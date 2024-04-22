@@ -22,6 +22,11 @@ tool["nvim-tree/nvim-tree.lua"] = {
 	},
 	config = require("tool.nvim-tree"),
 }
+tool["ibhagwan/smartyank.nvim"] = {
+	lazy = true,
+	event = "BufReadPost",
+	config = require("tool.smartyank"),
+}
 tool["michaelb/sniprun"] = {
 	lazy = true,
 	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
@@ -51,6 +56,12 @@ tool["folke/which-key.nvim"] = {
 	lazy = true,
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
+}
+tool["gelguy/wilder.nvim"] = {
+	lazy = true,
+	event = "CmdlineEnter",
+	config = require("tool.wilder"),
+	dependencies = { "romgrk/fzy-lua-native" },
 }
 
 ----------------------------------------------------------------------

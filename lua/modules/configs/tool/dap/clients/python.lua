@@ -2,15 +2,9 @@
 -- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 return function()
 	local dap = require("dap")
-	local is_windows = require("core.global").is_windows
-	local data_dir = require("core.global").data_dir
-	local python = is_windows and data_dir .. "../mason/packages/debugpy/venv/Scripts/pythonw.exe"
-		or data_dir .. "../mason/packages/debugpy/venv/bin/python"
 	local utils = require("modules.utils.dap")
-
-	local function is_empty(s)
-		return s == nil or s == ""
-	end
+	local is_windows = require("core.global").is_windows
+	local debugpy_root = require("mason-registry").get_package("debugpy"):get_install_path()
 
 	dap.adapters.python = function(callback, config)
 		if config.request == "attach" then
@@ -25,7 +19,8 @@ return function()
 		else
 			callback({
 				type = "executable",
-				command = python,
+				command = is_windows and debugpy_root .. "/venv/Scripts/pythonw.exe"
+					or debugpy_root .. "/venv/bin/python",
 				args = { "-m", "debugpy.adapter" },
 				options = { source_filetype = "python" },
 			})
@@ -41,9 +36,9 @@ return function()
 			console = "integratedTerminal",
 			program = utils.input_file_path(),
 			pythonPath = function()
-				if not is_empty(vim.env.CONDA_PREFIX) then
-					return is_windows and vim.env.CONDA_PREFIX .. "/Scripts/pythonw.exe"
-						or vim.env.CONDA_PREFIX .. "/bin/python"
+				local venv = vim.env.CONDA_PREFIX
+				if venv then
+					return is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
 				else
 					return is_windows and "pythonw.exe" or "python3"
 				end
@@ -58,25 +53,18 @@ return function()
 			console = "integratedTerminal",
 			program = utils.input_file_path(),
 			pythonPath = function()
+				-- Prefer the venv that is defined by the designated environment variable.
 				local cwd, venv = vim.fn.getcwd(), os.getenv("VIRTUAL_ENV")
-				if
-					venv
-					and (
-						vim.fn.executable(venv .. "/bin/python") == 1
-						or vim.fn.executable(venv .. "/Scripts/pythonw.exe") == 1
-					)
-				then
-					return is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
-				elseif
-					(vim.fn.executable(cwd .. "/venv/bin/python") == 1)
-					or (vim.fn.executable(cwd .. "/venv/Scripts/pythonw.exe") == 1)
-				then
-					return is_windows and cwd .. "/venv/Scripts/pythonw.exe" or cwd .. "/venv/bin/python"
-				elseif
-					(vim.fn.executable(cwd .. "/.venv/bin/python") == 1)
-					or (vim.fn.executable(cwd .. "/.venv/Scripts/pythonw.exe") == 1)
-				then
-					return is_windows and cwd .. "/.venv/Scripts/pythonw.exe" or cwd .. "/.venv/bin/python"
+				local python = venv and (is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python") or ""
+				if vim.fn.executable(python) == 1 then
+					return python
+				end
+
+				-- Otherwise, fall back to check if there are any local venvs available.
+				venv = vim.fn.isdirectory(cwd .. "/venv") == 1 and cwd .. "/venv" or cwd .. "/.venv"
+				python = is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python"
+				if vim.fn.executable(python) == 1 then
+					return python
 				else
 					return is_windows and "pythonw.exe" or "python3"
 				end

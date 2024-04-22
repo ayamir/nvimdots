@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-field
 return function()
 	local icons = {
 		kind = require("modules.utils.icons").get("kind"),
@@ -66,26 +65,6 @@ return function()
 		}
 
 	local cmp = require("cmp")
-	cmp.setup.cmdline("/", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = {
-			{ name = "buffer" },
-		},
-	})
-	cmp.setup.cmdline(":", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources({
-			{ name = "path" },
-		}, {
-			{
-				name = "cmdline",
-				option = {
-					ignore_cmds = { "Man", "!" },
-				},
-			},
-		}),
-	})
-	local luasnip = require("luasnip")
 	require("modules.utils").load_plugin("cmp", {
 		preselect = cmp.PreselectMode.Item,
 		window = {
@@ -157,8 +136,8 @@ return function()
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_next_item()
-				elseif luasnip.expand_or_locally_jumpable() then
-					luasnip.expand_or_jump()
+				elseif require("luasnip").expand_or_locally_jumpable() then
+					require("luasnip").expand_or_jump()
 				else
 					fallback()
 				end
@@ -188,7 +167,14 @@ return function()
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
-			{ name = "buffer" },
+			{
+				name = "buffer",
+				option = {
+					get_bufnrs = function()
+						return vim.api.nvim_list_bufs()
+					end,
+				},
+			},
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
 			-- { name = "codeium" },

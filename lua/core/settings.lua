@@ -105,8 +105,8 @@ settings["lsp_deps"] = {
 	-- "html",
 	-- "jsonls",
 	"lua_ls",
-	-- "pylsp",
-	-- "gopls",
+	"pylsp",
+	"gopls",
 }
 
 -- Set the general-purpose servers that will be installed during bootstrap here.

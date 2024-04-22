@@ -132,6 +132,7 @@ return function()
 			end,
 			padding = 0,
 			color = utils.gen_hl("surface1", true, true),
+			separator = { left = "", right = "" },
 		},
 
 		file_status = {
@@ -218,7 +219,7 @@ return function()
 
 		tabwidth = {
 			function()
-				return icons.ui.Tab .. vim.api.nvim_get_option_value("shiftwidth", { scope = "local" })
+				return icons.ui.Tab .. vim.api.nvim_get_option_value("tabstop", { scope = "local" })
 			end,
 			padding = 1,
 		},

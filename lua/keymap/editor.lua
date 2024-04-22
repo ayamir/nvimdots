@@ -48,6 +48,10 @@ local plug_map = {
 		:with_noremap()
 		:with_desc("edit: Toggle comment for block with selection"),
 
+	-- Plugin: diffview.nvim
+	["n|<leader>gd"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
+	["n|<leader>gD"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
+
 	-- Plugin: hop.nvim
 	["nv|<leader>w"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("jump: Goto word"),
 	["nv|<leader>j"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("jump: Goto line"),
@@ -64,28 +68,36 @@ local plug_map = {
 	["n|<C-j>"] = map_cu("SmartCursorMoveDown"):with_silent():with_noremap():with_desc("window: Focus down"),
 	["n|<C-k>"] = map_cu("SmartCursorMoveUp"):with_silent():with_noremap():with_desc("window: Focus up"),
 	["n|<C-l>"] = map_cu("SmartCursorMoveRight"):with_silent():with_noremap():with_desc("window: Focus right"),
-	["n|<leader>Wh"] = map_cu("SmartSwapLeft"):with_silent():with_noremap():with_desc("window: Move window to left"),
-	["n|<leader>Wj"] = map_cu("SmartSwapDown"):with_silent():with_noremap():with_desc("window: Move window to down"),
-	["n|<leader>Wk"] = map_cu("SmartSwapUp"):with_silent():with_noremap():with_desc("window: Move window to up"),
-	["n|<leader>Wl"] = map_cu("SmartSwapRight"):with_silent():with_noremap():with_desc("window: Move window to right"),
+	["n|<leader>Wh"] = map_cu("SmartSwapLeft"):with_silent():with_noremap():with_desc("window: Move window leftward"),
+	["n|<leader>Wj"] = map_cu("SmartSwapDown"):with_silent():with_noremap():with_desc("window: Move window downward"),
+	["n|<leader>Wk"] = map_cu("SmartSwapUp"):with_silent():with_noremap():with_desc("window: Move window upward"),
+	["n|<leader>Wl"] = map_cu("SmartSwapRight"):with_silent():with_noremap():with_desc("window: Move window rightward"),
 
 	-- Plugin: nvim-spectre
-	["n|<leader>Ss"] = map_cmd([[<Cmd>lua require("spectre").toggle()<CR>]])
+	["n|<leader>Ss"] = map_callback(function()
+			require("spectre").toggle()
+		end)
 		:with_silent()
 		:with_noremap()
-		:with_desc("editn: Toggle search&replace panel"),
-	["n|<leader>Sp"] = map_cmd([[<Cmd>lua require("spectre").open_visual({select_word=true})<CR>]])
+		:with_desc("editn: Toggle search & replace panel"),
+	["n|<leader>Sp"] = map_callback(function()
+			require("spectre").open_visual({ select_word = true })
+		end)
 		:with_silent()
 		:with_noremap()
 		:with_desc("editn: search&replace current word (project)"),
-	["v|<leader>Sp"] = map_cmd([[<Esc><Cmd>lua require("spectre").open_visual()<CR>]])
+	["v|<leader>Sp"] = map_callback(function()
+			require("spectre").open_visual()
+		end)
 		:with_silent()
 		:with_noremap()
-		:with_desc("edit: search&replace current word (project)"),
-	["n|<leader>Sf"] = map_cmd([[<Cmd>lua require("spectre").open_file_search({select_word=true})<CR>]])
+		:with_desc("edit: search & replace current word (project)"),
+	["n|<leader>Sf"] = map_callback(function()
+			require("spectre").open_file_search({ select_word = true })
+		end)
 		:with_silent()
 		:with_noremap()
-		:with_desc("editn: search&replace current word (file)"),
+		:with_desc("editn: search & replace current word (file)"),
 
 	-- Plugin: nvim-treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
