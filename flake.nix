@@ -7,7 +7,7 @@
   inputs = { };
 
   outputs = inputs: {
-    nixosModules = {
+    homeManagerModules = {
       nvimdots = ./nixos;
     };
   };
