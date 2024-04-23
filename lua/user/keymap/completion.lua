@@ -10,6 +10,13 @@ mappings["lsp"] = function(buf)
 	return {
 		-- Example
 		["n|K"] = require("keymap.bind").map_cr("Lspsaga hover_doc"):with_buffer(buf):with_desc("lsp: Show doc"),
+
+		["n|<leader>ll"] = "",
+		["n|<leader>ll"] = require("keymap.bind")
+			.map_cr("VimtexCompile")
+			:with_silent()
+			:with_buffer(buf)
+			:with_desc("Vimtex: Compile"),
 	}
 end
 
