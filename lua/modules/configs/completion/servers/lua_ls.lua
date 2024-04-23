@@ -7,7 +7,7 @@ return {
 			},
 			diagnostics = {
 				globals = { "vim" },
-				disable = { "different-requires" },
+				disable = { "different-requires", "undefined-field" },
 			},
 			workspace = {
 				library = {

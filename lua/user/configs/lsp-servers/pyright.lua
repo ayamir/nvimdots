@@ -9,18 +9,17 @@ return {
 		python = {
 			pythonPath = vim.fn.exepath("python"),
 			analysis = {
-				ignore = { "*" },
-				-- autoImportCompletions = true,
-				-- autoSearchPaths = true,
-				-- diagnosticMode = "workspace", -- openFilesOnly, workspace
-				-- typeCheckingMode = "basic", -- off, basic, strict
-				-- useLibraryCodeForTypes = true,
-				-- diagnosticSeverityOverrides = {
-				-- 	reportGeneralTypeIssues = "none",
-				-- 	reportUnboundVariable = false,
-				-- 	strictParameterNoneValue = false,
-				-- },
-				-- stubPath = vim.fn.stdpath("data") .. "/site/lazy/python-type-stubs",
+				autoImportCompletions = true,
+				autoSearchPaths = true,
+				diagnosticMode = "workspace", -- openFilesOnly, workspace
+				typeCheckingMode = "basic", -- off, basic, strict
+				useLibraryCodeForTypes = true,
+				diagnosticSeverityOverrides = {
+					reportGeneralTypeIssues = "none",
+					reportUnboundVariable = false,
+					strictParameterNoneValue = false,
+				},
+				stubPath = vim.fn.stdpath("data") .. "/site/lazy/python-type-stubs",
 				inlayHints = {
 					functionReturnTypes = true,
 					pytestParameters = true,

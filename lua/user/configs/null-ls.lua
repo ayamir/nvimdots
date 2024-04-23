@@ -7,6 +7,9 @@ return {
 			filetypes = { "c", "cpp" },
 			extra_args = { "-style={BasedOnStyle: LLVM, IndentWidth: 2}" },
 		}),
+		btns.formatting.black.with({
+			extra_args = {},
+		}),
 		-- btns.formatting.yapf.with({
 		-- 	extra_args = {
 		-- 		"--style={based_on_style: facebook, indent_width: 4}",
