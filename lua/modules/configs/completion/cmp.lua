@@ -67,7 +67,7 @@ return function()
 
 	local cmp = require("cmp")
 	require("modules.utils").load_plugin("cmp", {
-		preselect = cmp.PreselectMode.Item,
+		preselect = cmp.PreselectMode.None,
 		window = {
 			completion = {
 				border = border("PmenuBorder"),
