@@ -77,8 +77,12 @@ tool["CoatiSoftware/vim-sourcetrail"] = {
 	end,
 }
 
-tool["typicode/bg.nvim"] = {
-	lazy = false,
+tool["rareitems/printer.nvim"] = {
+	config = function()
+		require("printer").setup({
+			keymap = "gm", -- Plugin doesn't have any keymaps by default
+		})
+	end,
 }
 
 return tool
