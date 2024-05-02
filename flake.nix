@@ -28,23 +28,44 @@
         systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
         perSystem = { pkgs, system, ... }: {
           packages = {
-            testEnv = (import ./nixos/test.nix { inherit inputs pkgs; }).activationPackage;
+            testEnv = (import ./nixos/testEnv.nix { inherit inputs pkgs; }).activationPackage;
+            check-linker = pkgs.writeShellApplication {
+              name = "check-linker";
+              text = ''
+                #shellcheck disable=SC1090
+                source <(head -n-1 "${self.packages.${system}.testEnv}/home-path/bin/nvim")
+                echo "check file under ''${XDG_DATA_HOME}/''${NVIM_APPNAME:-nvim}/mason/bin"
+                find "''${XDG_DATA_HOME}/''${NVIM_APPNAME:-nvim}/mason/bin" -type l | while read -r link; do
+                  ldd "$(readlink -f "$link")" > /dev/zero 2>&1 || continue
+                  linkers=$(ldd "$(readlink -f "$link")" | tail -n+2)
+                  echo "$linkers" | while read -r line; do
+                    [ -z "$line" ] && continue
+                    echo "$line" | grep -q "/nix/store" || printf '%s: %s do not link to /nix/store \n' "$(basename "$link")" "$line"
+                  done
+                done
+                echo "check done"
+              '';
+            };
           };
           devshells.default = {
             commands = [
               {
-                help = "neovim with nvimdots";
+                help = "neovim linked to testEnv.";
                 name = "nvim";
                 command = ''
                   ${self.packages.${system}.testEnv}/home-path/bin/nvim
                 '';
+              }
+              {
+                help = "check-linker";
+                package = self.packages.${system}.check-linker;
               }
             ];
             devshell = {
               motd = ''
                 {202}🔨 Welcome to devshell{reset}
                 Symlink configs to "''${XDG_CONFIG_HOME}"/nvimdots!
-                Seted NVIM_APPNAME=nvimdots, so neovim will put file under "\$XDG_xxx_HOME"/nvimdots.
+                And NVIM_APPNAME=nvimdots is already configured, so neovim will put file under "\$XDG_xxx_HOME"/nvimdots.
                 To uninstall, remove "\$XDG_xxx_HOME"/nvimdots.
 
                 $(type -p menu &>/dev/null && menu)
@@ -53,7 +74,7 @@
                 mkNvimDir = {
                   text = ''
                     mkdir -p "''${XDG_CONFIG_HOME}"/nvimdots
-                    for path in init.lua lua snips tutor; do
+                    for path in lazy-lock.json init.lua lua snips tutor; do
                       ln -sf "''${PWD}/''${path}" "''${XDG_CONFIG_HOME}"/nvimdots/
                     done
                   '';
