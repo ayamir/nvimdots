@@ -128,7 +128,6 @@ in
           nvim = concatStringsSep " " buildEnv + " nvim";
         };
       };
-
       programs.neovim = {
         enable = true;
 
