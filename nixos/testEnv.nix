@@ -1,10 +1,13 @@
 { inputs, pkgs, ... }:
 let
-  testSettings = {
+  testSettings = { config, ... }: {
+    warnings = [
+      "home-manager version: ${config.home.version.release}"
+    ];
     home = {
       username = "hm-user";
       homeDirectory = "/home/hm-user";
-      stateVersion = "24.05";
+      stateVersion = config.home.version.release;
     };
     xdg.enable = true;
     programs = {
