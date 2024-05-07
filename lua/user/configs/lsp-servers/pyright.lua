@@ -14,6 +14,9 @@ return {
 				diagnosticMode = "workspace", -- openFilesOnly, workspace
 				typeCheckingMode = "basic", -- off, basic, strict
 				useLibraryCodeForTypes = true,
+				extraPaths = {
+					"src",
+				},
 				diagnosticSeverityOverrides = {
 					reportGeneralTypeIssues = "none",
 					reportUnboundVariable = false,

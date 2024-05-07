@@ -4,7 +4,7 @@ local settings = {}
 -- Examples
 settings["use_ssh"] = false
 settings["use_copilot"] = false
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "catppuccin-latte"
 settings["background"] = "dark"
 settings["server_formatting_block_list"] = {
 	lua_ls = true,
@@ -38,7 +38,7 @@ end
 settings["disabled_plugins"] = {
 	"nvim-tree/nvim-tree.lua",
 	-- "akinsho/bufferline.nvim",
-	-- "zbirenbaum/neodim",
+	"zbirenbaum/neodim",
 }
 
 settings["gui_config"] = {
@@ -56,7 +56,7 @@ settings["treesitter_deps"] = {
 	"html",
 	"javascript",
 	"json",
-	"latex",
+	-- "latex",
 	"lua",
 	"make",
 	"markdown",
