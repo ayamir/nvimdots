@@ -85,4 +85,24 @@ tool["rareitems/printer.nvim"] = {
 	end,
 }
 
+tool["cathaysia/jieba_nvim"] = {
+	lazy = true,
+	ft = { "tex", "markdown" },
+	config = function()
+		local jieba = require("libjiebamove")
+
+		function _G.move_chs(isRight)
+			local row = vim.api.nvim_win_get_cursor(0)[1]
+			local col = vim.api.nvim_win_get_cursor(0)[2]
+			local content = vim.api.nvim_buf_get_lines(0, row - 1, row, 0)[1]
+			local new_pos = jieba.getPos(content, col, isRight)
+			print(new_pos)
+			vim.api.nvim_win_set_cursor(0, { row, new_pos })
+		end
+
+		vim.api.nvim_set_keymap("n", "e", ":lua move_chs(1)<CR>", {})
+		vim.api.nvim_set_keymap("n", "b", ":lua move_chs(0)<CR>", {})
+	end,
+}
+
 return tool
