@@ -1,8 +1,14 @@
 return function()
-	vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-	vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-	vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-	vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
+	local icons = {
+		diagnostics = require("modules.utils.icons").get("diagnostics"),
+		documents = require("modules.utils.icons").get("documents"),
+		git = require("modules.utils.icons").get("git"),
+		ui = require("modules.utils.icons").get("ui"),
+	}
+	-- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+	-- vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+	-- vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+	-- vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
 	local function scandir(directory)
 		local pfile = assert(io.popen(("find '%s' -mindepth 2 -maxdepth 2 -print0"):format(directory), "r"))
@@ -99,16 +105,16 @@ return function()
 				expander_highlight = "NeoTreeExpander",
 			},
 			icon = {
-				folder_closed = "",
-				folder_open = "",
-				folder_empty = "󰜌",
+				folder_closed = icons.ui.Folder,
+				folder_open = icons.ui.FolderOpen,
+				folder_empty = icons.ui.EmptyFolder,
 				-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 				-- then these will never be used.
 				default = "*",
 				highlight = "NeoTreeFileIcon",
 			},
 			modified = {
-				symbol = "[+]",
+				symbol = icons.ui.Modified,
 				highlight = "NeoTreeModified",
 			},
 			name = {
@@ -119,16 +125,16 @@ return function()
 			git_status = {
 				symbols = {
 					-- Change type
-					added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-					modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-					deleted = "✖", -- this can only be used in the git_status source
-					renamed = "󰁕", -- this can only be used in the git_status source
+					added = icons.git.Add, -- or "✚", but this is redundant info if you use git_status_colors on the name
+					modified = icons.git.Mod_alt, -- or "", but this is redundant info if you use git_status_colors on the name
+					deleted = icons.git.Remove, -- this can only be used in the git_status source
+					renamed = icons.git.Rename, -- this can only be used in the git_status source
 					-- Status type
-					untracked = "",
-					ignored = "",
-					unstaged = "󰄱",
-					staged = "",
-					conflict = "",
+					untracked = icons.git.Untracked,
+					ignored = icons.git.Ignore,
+					unstaged = icons.git.Unstaged,
+					staged = icons.git.Staged,
+					conflict = icons.git.Conflict,
 				},
 			},
 			-- If you don't want to use these columns, you can set `enabled = false` for each of them individually
@@ -155,7 +161,7 @@ return function()
 		commands = {},
 		window = {
 			position = "left",
-			width = 30,
+			width = 40,
 			mapping_options = {
 				noremap = true,
 				nowait = true,
@@ -243,7 +249,7 @@ return function()
 			follow_current_file = {
 				enabled = true, -- This will find and focus the file in the active buffer every time
 				--               -- the current file is changed while the tree is open.
-				leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 			},
 			group_empty_dirs = false, -- when true, empty folders will be grouped together
 			hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
