@@ -34,6 +34,8 @@ return function()
 	vim.g.vimtex_quickfix_mode = 0
 	-- Latex warnings to ignore
 	vim.g.vimtex_quickfix_ignore_filters = {
+		"Package fontspec Warning",
+		"Package xeCJK Warning",
 		"Command terminated with space",
 		"LaTeX Font Warning: Font shape",
 		"Package caption Warning: The option",

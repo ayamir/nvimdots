@@ -11,6 +11,6 @@ return h.make_builtin({
 	},
 	method = FORMATTING,
 	filetypes = { "tex" },
-	generator_opts = { command = "latexindent", args = { "-g=/dev/null", "-" }, to_stdin = true },
+	generator_opts = { command = "/usr/bin/latexindent", args = { "-g=/dev/null", "-" }, to_stdin = true },
 	factory = h.formatter_factory,
 })
