@@ -277,7 +277,7 @@ local function tbl_recursive_merge(dst, src)
 	for key, value in pairs(src) do
 		if type(dst[key]) == "table" and type(value) == "function" then
 			dst[key] = value(dst[key])
-		elseif type(dst[key]) == "table" and vim.tbl_islist(dst[key]) then
+		elseif type(dst[key]) == "table" and vim.tbl_islist(dst[key]) and key ~= "dashboard_image" then
 			vim.list_extend(dst[key], value)
 		elseif type(dst[key]) == "table" and type(value) == "table" and not vim.tbl_islist(dst[key]) then
 			tbl_recursive_merge(dst[key], value)
