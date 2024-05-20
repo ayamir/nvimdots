@@ -51,6 +51,9 @@ Branch info:
 
 </div>
 
+> [!IMPORTANT]
+> The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
