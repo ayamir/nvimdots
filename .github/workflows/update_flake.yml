@@ -1,0 +1,28 @@
+name: update flake.lock
+on:
+  # Scheduled update (1st of every month)
+  schedule: [{ cron: "30 02 1 * *" }]
+
+jobs:
+  update-lockfile:
+    if: github.repository_owner == 'ayamir'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to count the commits
+      - uses: cachix/install-nix-action@v26
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Run flake-update
+        run: |
+          nix flake update
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(lockfile): auto update flake.lock"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          file_pattern: "flake.lock"

@@ -64,7 +64,7 @@ return function()
 			harpoon = false,
 			headlines = false,
 			hop = true,
-			illuminate = false,
+			illuminate = true,
 			indent_blankline = { enabled = true, colored_indent_levels = false },
 			leap = false,
 			lightspeed = false,
