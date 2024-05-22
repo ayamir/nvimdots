@@ -8,7 +8,11 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
--- Set it to false if there are no need to format on save.
+-- Set it to false if you want to turn off LSP Inlay Hints
+---@type boolean
+settings["lsp_inlayhints"] = true
+
+-- Set it to false if there is no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
 
@@ -42,8 +46,8 @@ settings["diagnostics_virtual_text"] = true
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 --  > e.g. if you set this option to `Warning`, only lsp warnings and errors will be shown.
 -- NOTE: This entry only works when `diagnostics_virtual_text` is true.
----@type "Error"|"Warning"|"Information"|"Hint"
-settings["diagnostics_level"] = "Hint"
+---@type "ERROR"|"WARN"|"INFO"|"HINT"
+settings["diagnostics_level"] = "HINT"
 
 -- Set the plugins to disable here.
 -- Example: "Some-User/A-Repo"
@@ -213,9 +217,5 @@ settings["dashboard_image"] = {
 	[[⠿⠛⠛⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣯⣟⠷⢷⣿⡿⠋⠀⠀⠀⠀⣵⡀⢠⡿⠋⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
 	[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
 }
-
--- Set it to false if you don't  want to show inlay hint
----@type boolean
-settings["enable_inlayhint"] = true
 
 return require("modules.utils").extend_config(settings, "user.settings")
