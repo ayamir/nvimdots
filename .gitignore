@@ -12,6 +12,3 @@ tutor
 tutor/*
 lua/libjiebamove.so
 lua/data
-lua/user
-lua/user
-result
