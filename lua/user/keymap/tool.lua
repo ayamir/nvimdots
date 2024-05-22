@@ -2,6 +2,7 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
+local map_cu = bind.map_cu
 
 return {
 	["n|<C-n>"] = "",
@@ -14,4 +15,5 @@ return {
 	["n|<leader>hps"] = map_callback(function()
 		require("plenary.profile").stop()
 	end),
+	["n|gb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
 }
