@@ -37,8 +37,8 @@ end
 
 settings["disabled_plugins"] = {
 	"nvim-tree/nvim-tree.lua",
-	-- "akinsho/bufferline.nvim",
-	"zbirenbaum/neodim",
+	"akinsho/bufferline.nvim",
+	-- "zbirenbaum/neodim",
 }
 
 settings["gui_config"] = {
