@@ -1,6 +1,5 @@
 lua/modules/plugins/custom.lua
 lua/modules/configs/custom
-<<<<<<< HEAD
 ./lazy-lock.json
 nixos
 nixos/*
@@ -13,9 +12,6 @@ tutor
 tutor/*
 lua/libjiebamove.so
 lua/data
-||||||| 9e3beb2
 lua/user
-=======
 lua/user
 result
->>>>>>> upstream/0.10
