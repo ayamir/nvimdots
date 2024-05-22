@@ -8,9 +8,9 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
--- Set it to false if you want to turn off LSP inlay hint
+-- Set it to false if you want to turn off LSP Inlay Hints
 ---@type boolean
-settings["lsp_inlayhint"] = true
+settings["lsp_inlayhints"] = true
 
 -- Set it to false if there is no need to format on save.
 ---@type boolean
