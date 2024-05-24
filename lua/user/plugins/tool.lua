@@ -105,4 +105,9 @@ tool["cathaysia/jieba_nvim"] = {
 	end,
 }
 
+tool["windwp/nvim-autopairs"] = {
+	event = "InsertEnter",
+	config = require("user.configs.tool.autopairs"),
+}
+
 return tool
