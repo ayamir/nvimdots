@@ -110,4 +110,9 @@ tool["windwp/nvim-autopairs"] = {
 	config = require("user.configs.tool.autopairs"),
 }
 
+tool["Mr-LLLLL/cool-chunk.nvim"] = {
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("user.configs.tool.cool-chunk"),
+}
+
 return tool
