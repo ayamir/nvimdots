@@ -10,8 +10,8 @@ set -u
 DEST_DIR="${HOME}/.config/nvim"
 BACKUP_DIR="${DEST_DIR}_backup-$(date +%Y%m%dT%H%M%S)"
 CLONE_ATTR=("--progress")
-REQUIRED_NVIM_VERSION=0.9.0
-REQUIRED_NVIM_VERSION_LEGACY=0.8.0
+REQUIRED_NVIM_VERSION=0.10.0
+REQUIRED_NVIM_VERSION_LEGACY=0.9.0
 USE_SSH=1
 
 abort() {
@@ -175,7 +175,7 @@ clone_repo() {
 	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		info "Automatically redirecting you to the latest compatible version..."
-		execute "git" "clone" "-b" "0.8" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "${REQUIRED_NVIM_VERSION_LEGACY}" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION_LEGACY})."
 		abort "$(

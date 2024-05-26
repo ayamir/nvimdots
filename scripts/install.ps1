@@ -8,8 +8,8 @@ Set-StrictMode -Version 3.0
 $ErrorActionPreference = "Stop" # Exit when command fails
 
 # global-scope vars
-$REQUIRED_NVIM_VERSION = [version]'0.9.0'
-$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.8.0'
+$REQUIRED_NVIM_VERSION = [version]'0.10.0'
+$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.9.0'
 $USE_SSH = $True
 
 # package mgr vars
