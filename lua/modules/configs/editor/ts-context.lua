@@ -7,6 +7,7 @@ return function()
 		multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
 		trim_scope = "inner", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 		mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+		-- HACK: to make use of `ts-context` in `glance`, set zindex to 50.(glance zindex is 45)
 		zindex = 50,
 	})
 end
