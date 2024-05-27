@@ -37,7 +37,7 @@ end
 
 settings["disabled_plugins"] = {
 	"nvim-tree/nvim-tree.lua",
-	"akinsho/bufferline.nvim",
+	-- "akinsho/bufferline.nvim",
 	"m4xshen/autoclose.nvim",
 	-- "zbirenbaum/neodim",
 }
