@@ -3,7 +3,7 @@ local settings = {}
 
 -- Examples
 settings["use_ssh"] = false
-settings["use_copilot"] = false
+settings["use_copilot"] = true
 settings["colorscheme"] = "catppuccin"
 settings["background"] = "dark"
 settings["server_formatting_block_list"] = {
