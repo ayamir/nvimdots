@@ -110,9 +110,22 @@ tool["windwp/nvim-autopairs"] = {
 	config = require("user.configs.tool.autopairs"),
 }
 
--- tool["Mr-LLLLL/cool-chunk.nvim"] = {
--- 	event = { "CursorHold", "CursorHoldI" },
--- 	config = require("user.configs.tool.cool-chunk"),
--- }
+tool["kwkarlwang/bufresize.nvim"] = {
+	event = { "BufWinEnter", "WinEnter" },
+	config = function()
+		require("bufresize").setup({
+			register = {
+				trigger_events = { "BufWinEnter", "WinEnter" },
+				keys = {},
+			},
+			resize = {
+				trigger_events = {
+					"VimResized",
+				},
+				increment = 1,
+			},
+		})
+	end,
+}
 
 return tool
