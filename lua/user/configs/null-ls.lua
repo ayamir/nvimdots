@@ -18,5 +18,6 @@ return {
 		require("user.configs.formatters.bibtex-tidy"),
 		require("user.configs.formatters.xmlformat"),
 		require("user.configs.formatters.latexindent"),
+		require("lua.user.configs.formatters.beautysh"),
 	},
 }
