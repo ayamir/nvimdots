@@ -15,6 +15,11 @@ in
           Activate "ayamir/nvimdots".
           Have a look at https://github.com/ayamir/nvimdots for details
         '';
+        bindLazyLock = mkEnableOption ''
+          Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
+          Very powerful in terms of keeping the environment consistent, but has the following side effects.
+          You cannot update it even if you run the Lazy command, because it binds read-only.
+        '';
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
           Environment variables are only visible to `nvim` and have no effect on any parent sessions.
@@ -31,20 +36,18 @@ in
         extraHaskellPackages = mkOption {
           type = with types;
             let fromType = listOf package;
-            in
-            coercedTo fromType
+            in coercedTo fromType
               (flip warn const ''
-                Assigning a plain list to extraRPackages is deprecated.
-                    Please assign a function taking a package set as argument, so
-                        extraHaskellPackages = [ pkgs.haskellPackages.xxx ];
-                    should be
-                        extraHaskellPackages = hsPkgs: with hsPkgs; [ xxx ];
+                Assigning a plain list to extraHaskellPackages is deprecated.
+                       Please assign a function taking a package set as argument, so
+                         extraHaskellPackages = [ pkgs.haskellPackages.xxx ];
+                       should become
+                         extraHaskellPackages = ps: [ ps.xxx ];
               '')
               (functionTo fromType);
           default = _: [ ];
           defaultText = literalExpression "ps: [ ]";
-          example =
-            literalExpression "hsPkgs: with hsPkgs; [ haskell-language-server ]";
+          example = literalExpression "hsPkgs: with hsPkgs; [ mtl ]";
           description = ''
             The extra Haskell packages required for your plugins to work.
             This option accepts a function that takes a Haskell package set as an argument,
@@ -64,121 +67,134 @@ in
   config =
     let
       # Inspired from https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
-      build-dependent-pkgs = with pkgs;
-        [
-          acl
-          attr
-          bzip2
-          curl
-          libsodium
-          libssh
-          libxml2
-          openssl
-          stdenv.cc.cc
-          systemd
-          util-linux
-          xz
-          zlib
-          zstd
-          # Packages not included in `nix-ld`'s NixOSModule
-          glib
-          libcxx
-        ]
-        ++ cfg.extraDependentPackages;
+      build-dependent-pkgs = with pkgs; builtins.filter (package: !package.meta.unsupported) [
+        # manylinux
+        acl
+        attr
+        bzip2
+        curl
+        glibc
+        libsodium
+        libssh
+        libxml2
+        openssl
+        stdenv.cc.cc
+        stdenv.cc.cc.lib
+        systemd
+        util-linux
+        xz
+        zlib
+        zstd
+        # Packages not included in `nix-ld`'s NixOSModule
+        glib
+        libcxx
+      ]
+      ++ cfg.extraDependentPackages;
 
       makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
       makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
 
-      nvim-depends-library = pkgs.buildEnv {
-        name = "nvim-depends-library";
-        paths = map lib.getLib build-dependent-pkgs;
-        extraPrefix = "/lib/nvim-depends";
-        pathsToLink = [ "/lib" ];
+      neovim-build-deps = pkgs.buildEnv {
+        name = "neovim-build-deps";
+        paths = build-dependent-pkgs;
+        extraOutputsToInstall = [ "dev" ];
+        pathsToLink = [ "/lib" "/include" ];
         ignoreCollisions = true;
       };
-      nvim-depends-include = pkgs.buildEnv {
-        name = "nvim-depends-include";
-        paths = splitString ":" (makeIncludePath build-dependent-pkgs);
-        extraPrefix = "/lib/nvim-depends/include";
-        ignoreCollisions = true;
-      };
-      nvim-depends-pkgconfig = pkgs.buildEnv {
-        name = "nvim-depends-pkgconfig";
-        paths = splitString ":" (makePkgConfigPath build-dependent-pkgs);
-        extraPrefix = "/lib/nvim-depends/pkgconfig";
-        ignoreCollisions = true;
-      };
+
       buildEnv = [
-        "CPATH=${config.home.profileDirectory}/lib/nvim-depends/include"
-        "CPLUS_INCLUDE_PATH=${config.home.profileDirectory}/lib/nvim-depends/include/c++/v1"
-        "LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "NIX_LD_LIBRARY_PATH=${config.home.profileDirectory}/lib/nvim-depends/lib"
-        "PKG_CONFIG_PATH=${config.home.profileDirectory}/lib/nvim-depends/pkgconfig"
+        ''CPATH=''${CPATH:+''${CPATH}:}${neovim-build-deps}/include''
+        ''CPLUS_INCLUDE_PATH=''${CPLUS_INCLUDE_PATH:+''${CPLUS_INCLUDE_PATH}:}:${neovim-build-deps}/include/c++/v1''
+        ''LD_LIBRARY_PATH=''${LD_LIBRARY_PATH:+''${LD_LIBRARY_PATH}:}${neovim-build-deps}/lib''
+        ''LIBRARY_PATH=''${LIBRARY_PATH:+''${LIBRARY_PATH}:}${neovim-build-deps}/lib''
+        ''NIX_LD_LIBRARY_PATH=''${NIX_LD_LIBRARY_PATH:+''${NIX_LD_LIBRARY_PATH}:}${neovim-build-deps}/lib''
+        ''PKG_CONFIG_PATH=''${PKG_CONFIG_PATH:+''${PKG_CONFIG_PATH}:}${neovim-build-deps}/include/pkgconfig''
       ];
     in
-    mkIf cfg.enable
-      {
-        xdg.configFile = {
-          "nvim/init.lua".source = ../../init.lua;
-          "nvim/lua".source = ../../lua;
-          "nvim/snips".source = ../../snips;
-          "nvim/tutor".source = ../../tutor;
-        };
-        home.packages = with pkgs; [
+    mkIf cfg.enable {
+      xdg.configFile = {
+        "nvim/init.lua".source = ../../init.lua;
+        "nvim/lua".source = ../../lua;
+        "nvim/snips".source = ../../snips;
+        "nvim/tutor".source = ../../tutor;
+      } // lib.optionalAttrs cfg.bindLazyLock {
+        "nvim/lazy-lock.json".source = ../../lazy-lock.json;
+      };
+      home = {
+        packages = with pkgs; [
           ripgrep
-        ] ++ optionals cfg.setBuildEnv [
-          nvim-depends-include
-          nvim-depends-library
-          nvim-depends-pkgconfig
-          patchelf
         ];
-        home.extraOutputsToInstall = optional cfg.setBuildEnv "nvim-depends";
-        home.shellAliases.nvim = optionalString cfg.setBuildEnv (concatStringsSep " " buildEnv) + " nvim";
-
-        programs.neovim = {
-          enable = true;
-
-          withNodeJs = true;
-          withPython3 = true;
-          withRuby = true;
-
-          extraPackages = with pkgs;
-            [
-              # Dependent packages used by default plugins
-              doq
-            ]
-            ++ optionals cfg.withBuildTools [
-              cargo
-              clang
-              cmake
-              gcc
-              gnumake
-              go
-              ninja
-              pkg-config
-              yarn
-            ]
-            ++ optionals cfg.withHaskell [
-              (pkgs.writeShellApplication {
-                name = "stack";
-                text = ''
-                  exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
-                '';
-              })
-              (haskellPackages.ghcWithPackages (ps: [
-                # ghcup # ghcup is broken
-              ] ++ cfg.extraHaskellPackages pkgs.haskellPackages))
-            ];
-
-          extraPython3Packages = ps: with ps; [
-            docformatter
-            isort
-            pynvim
-          ];
-          extraLuaPackages = ls: with ls; [
-            luarocks
-          ];
+        shellAliases = optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
+          nvim = concatStringsSep " " buildEnv + " nvim";
         };
       };
+      programs.neovim = {
+        enable = true;
+
+        withNodeJs = true;
+        withPython3 = true;
+
+        extraPackages = with pkgs;
+          [
+            # Dependent packages used by default plugins
+            doq
+            tree-sitter
+          ]
+          ++ optionals cfg.withBuildTools [
+            cargo
+            clang
+            cmake
+            gcc
+            gnumake
+            go
+            lua51Packages.luarocks
+            ninja
+            pkg-config
+            yarn
+          ]
+          ++ optionals cfg.withHaskell [
+            (pkgs.writeShellApplication {
+              name = "stack";
+              text = ''
+                exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
+              '';
+            })
+            (haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
+          ];
+
+        extraPython3Packages = ps: with ps; [
+          docformatter
+          isort
+          pynvim
+        ];
+      }
+      // lib.optionalAttrs (lib.versionAtLeast config.home.stateVersion "24.05") {
+        extraWrapperArgs = lib.optionals cfg.setBuildEnv [
+          "--suffix"
+          "CPATH"
+          ":"
+          "${neovim-build-deps}/include"
+          "--suffix"
+          "CPLUS_INCLUDE_PATH"
+          ":"
+          "${neovim-build-deps}/include/c++/v1"
+          "--suffix"
+          "LD_LIBRARY_PATH"
+          ":"
+          "${neovim-build-deps}/lib"
+          "--suffix"
+          "LIBRARY_PATH"
+          ":"
+          "${neovim-build-deps}/lib"
+          "--suffix"
+          "PKG_CONFIG_PATH"
+          ":"
+          "${neovim-build-deps}/include/pkgconfig"
+          "--suffix"
+          "NIX_LD_LIBRARY_PATH"
+          ":"
+          "${neovim-build-deps}/lib"
+        ];
+      };
+    };
 }

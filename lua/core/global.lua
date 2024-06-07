@@ -1,5 +1,5 @@
 local global = {}
-local os_name = vim.loop.os_uname().sysname
+local os_name = vim.uv.os_uname().sysname
 
 function global:load_variables()
 	self.is_mac = os_name == "Darwin"

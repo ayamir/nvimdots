@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-field
 return function()
 	local icons = {
 		kind = require("modules.utils.icons").get("kind"),
@@ -67,7 +66,7 @@ return function()
 
 	local cmp = require("cmp")
 	require("modules.utils").load_plugin("cmp", {
-		preselect = cmp.PreselectMode.Item,
+		preselect = cmp.PreselectMode.None,
 		window = {
 			completion = {
 				border = border("PmenuBorder"),

@@ -45,14 +45,6 @@ return {
 				regenerate_cgo = true,
 				upgrade_dependency = true,
 			},
-			hints = {
-				assignVariableTypes = true,
-				compositeLiteralFields = true,
-				constantValues = true,
-				functionTypeParameters = true,
-				parameterNames = true,
-				rangeVariableTypes = true,
-			},
 		},
 	},
 }

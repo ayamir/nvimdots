@@ -119,21 +119,14 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("find: Git related search"),
+		:with_desc("find: file in git project"),
+	["n|<leader>fz"] = map_cu("Telescope zoxide list")
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Change current directory by zoxide"),
 	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Buffer opened"),
-	["n|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
-	["v|<leader>fs"] = map_callback(function()
-			require("telescope.builtin").grep_string({ search = _buf_vtext() })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Selection text"),
-	["n|<leader>fd"] = map_callback(function()
-			require("search").open({ collection = "workspace" })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Session, Project and Directory"),
+	["nv|<leader>fs"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("find: Current word"),
+	["n|<leader>fd"] = map_cu("Telescope persisted"):with_noremap():with_silent():with_desc("find: Session"),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()
