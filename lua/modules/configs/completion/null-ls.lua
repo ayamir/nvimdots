@@ -49,7 +49,7 @@ return function()
 	-- Setup usercmd to register/deregister available source(s)
 	local function _gen_completion()
 		local sources_cont = null_ls.get_source({
-			filetype = vim.api.nvim_get_option_value("filetype", { scope = "local" }),
+			filetype = vim.bo.filetype,
 		})
 		local completion_items = {}
 		for _, server in pairs(sources_cont) do
