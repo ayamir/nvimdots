@@ -2,7 +2,6 @@ local bind = require("keymap.bind")
 local map_callback = bind.map_callback
 
 local crates = require("crates")
-
 local crates_keymap = {
 	["n|<leader>ct"] = map_callback(function()
 			crates.toggle()

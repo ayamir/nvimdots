@@ -4,7 +4,7 @@ tool["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },
 }
--- only for fcitx5 user who uses non-English language during coding
+-- This is specifically for fcitx5 users who code in languages other than English
 -- tool["pysan3/fcitx5.nvim"] = {
 -- 	lazy = true,
 -- 	event = "BufReadPost",
@@ -14,6 +14,7 @@ tool["tpope/vim-fugitive"] = {
 tool["Bekaboo/dropbar.nvim"] = {
 	lazy = false,
 	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-fzf-native.nvim",
 	},
 }
