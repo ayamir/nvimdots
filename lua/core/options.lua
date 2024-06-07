@@ -17,8 +17,8 @@ local function load_options()
 		clipboard = "unnamedplus",
 		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
-		complete = ".,w,b,k",
-		completeopt = "menuone,noselect",
+		complete = ".,w,b,k,kspell",
+		completeopt = "menuone,noselect,popup",
 		concealcursor = "niv",
 		conceallevel = 0,
 		cursorcolumn = true,
@@ -70,6 +70,7 @@ local function load_options()
 		signcolumn = "yes",
 		smartcase = true,
 		smarttab = true,
+		smoothscroll = true,
 		splitbelow = true,
 		splitkeep = "screen",
 		splitright = true,
