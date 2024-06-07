@@ -22,7 +22,7 @@ $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
 $env:CCPACK_MGR ??= 'unknown'
 $env:CCLONE_ATTR ??= 'undef'
 $env:CCLONE_BRANCH ??= 'main'
-$env:CCLONE_BRANCH_LEGACY ??= '0.8'
+$env:CCLONE_BRANCH_LEGACY ??= '0.9'
 $env:CCDEST_DIR ??= "$env:XDG_CONFIG_HOME\nvim"
 $env:CCBACKUP_DIR = "$env:CCDEST_DIR" + "_backup-" + (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmss")
 
