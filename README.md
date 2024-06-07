@@ -42,17 +42,17 @@ Branch info:
 
 <div align="center">
 
-| Branch | Supported neovim version |
+| Branch | Supported Neovim version |
 | :----: | :----------------------: |
-|  main  |     nvim 0.9 stable      |
-|  0.10  |    nvim 0.10 nightly     |
+|  main  |     nvim 0.10 stable     |
+|  0.11  |     nvim 0.11 nightly    |
+|  0.9   |         nvim 0.9         |
 |  0.8   |         nvim 0.8         |
-|  0.7   |         nvim 0.7         |
 
 </div>
 
 > [!IMPORTANT]
-> The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+> The `0.11` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
