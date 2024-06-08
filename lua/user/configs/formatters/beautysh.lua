@@ -1,17 +1,8 @@
-local h = require("null-ls.helpers")
-local methods = require("null-ls.methods")
-
-local FORMATTING = methods.internal.FORMATTING
-
-return h.make_builtin({
+local null_ls = require("null-ls")
+local beautysh = {
 	name = "beautysh",
-	meta = {
-		url = "https://github.com/lovesegfault/beautysh",
-		description = "A Bash beautifier for the masses.",
-		notes = { "In addition to Bash, Beautysh can format csh, ksh, sh and zsh." },
-	},
-	method = FORMATTING,
+	method = null_ls.methods.FORMATTING,
 	filetypes = { "bash", "csh", "ksh", "sh", "zsh" },
-	generator_opts = { command = "beautysh", args = { "$FILENAME" }, to_temp_file = true },
-	factory = h.formatter_factory,
-})
+	generator = null_ls.formatter({ command = "beautysh", args = { "$FILENAME" }, to_temp_file = true }),
+}
+return beautysh

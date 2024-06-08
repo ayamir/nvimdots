@@ -4,7 +4,7 @@ local settings = {}
 -- Examples
 settings["use_ssh"] = false
 settings["use_copilot"] = false
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "catppuccin-latte"
 settings["background"] = "dark"
 settings["server_formatting_block_list"] = {
 	lua_ls = true,

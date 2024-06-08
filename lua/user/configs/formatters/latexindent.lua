@@ -1,16 +1,9 @@
-local h = require("null-ls.helpers")
-local methods = require("null-ls.methods")
-
-local FORMATTING = methods.internal.FORMATTING
-
-return h.make_builtin({
+local null_ls = require("null-ls")
+local latexindent = {
 	name = "latexindent",
-	meta = {
-		url = "https://github.com/cmhughes/latexindent.pl",
-		description = "A perl script for formatting LaTeX files that is generally included in major TeX distributions.",
-	},
-	method = FORMATTING,
+	method = null_ls.methods.FORMATTING,
 	filetypes = { "tex" },
-	generator_opts = { command = "/usr/bin/latexindent", args = { "-g=/dev/null", "-" }, to_stdin = true },
-	factory = h.formatter_factory,
-})
+	generator = null_ls.formatter({ command = "latexindent", args = { "-g=/dev/null", "-" }, to_stdin = true }),
+}
+-- null_ls.register(latexindent)
+return latexindent

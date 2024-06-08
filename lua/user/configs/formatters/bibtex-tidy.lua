@@ -1,21 +1,13 @@
-local h = require("null-ls.helpers")
-local methods = require("null-ls.methods")
+local null_ls = require("null-ls")
 
-local FORMATTING = methods.internal.FORMATTING
-
-return h.make_builtin({
+local bibtex_tidy = {
 	name = "bibtex-tidy",
-	meta = {
-		url = "https://github.com/FlamingTempura/bibtex-tidy",
-		description = "Tidy bibtex files.",
-		notes = {},
-	},
-	method = FORMATTING,
+	method = null_ls.methods.FORMATTING,
 	filetypes = { "bib" },
-	generator_opts = {
+	generator = null_ls.formatter({
 		command = "bibtex-tidy",
 		args = { "--curly", "-" },
 		to_stdin = true,
-	},
-	factory = h.formatter_factory,
-})
+	}),
+}
+return bibtex_tidy
