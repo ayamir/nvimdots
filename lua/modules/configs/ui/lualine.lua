@@ -265,7 +265,6 @@ return function()
 					colored = true,
 					icon_only = false,
 					icon = { align = "left" },
-					padding = { left = 2, right = 1 },
 				},
 				components.file_status,
 				vim.tbl_extend("force", components.separator, {
