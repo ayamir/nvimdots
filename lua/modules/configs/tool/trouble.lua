@@ -3,7 +3,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
-	require("trouble").setup({
+	require("modules.utils").load_plugin("trouble", {
 		auto_open = false,
 		auto_close = false,
 		auto_jump = false,
