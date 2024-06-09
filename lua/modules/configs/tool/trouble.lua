@@ -9,8 +9,9 @@ return function()
 		auto_jump = false,
 		auto_preview = true,
 		auto_refresh = true,
-		restore = true,
+		focus = false, -- do not focus the window when opened
 		follow = true,
+		restore = true,
 		icons = {
 			indent = {
 				fold_open = icons.ui.ArrowOpen,
