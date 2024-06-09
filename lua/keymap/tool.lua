@@ -63,24 +63,19 @@ local plug_map = {
 		:with_desc("git: Toggle lazygit"),
 
 	-- Plugin: trouble
-	["n|gt"] = map_cr("TroubleToggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
-	["n|<leader>ll"] = map_cr("TroubleToggle lsp_references")
-		:with_noremap()
-		:with_silent()
-		:with_desc("lsp: Show lsp references"),
-	["n|<leader>ld"] = map_cr("TroubleToggle document_diagnostics")
-		:with_noremap()
-		:with_silent()
-		:with_desc("lsp: Show document diagnostics"),
-	["n|<leader>lw"] = map_cr("TroubleToggle workspace_diagnostics")
+	["n|gt"] = map_cr("Trouble diagnostics toggle"):with_noremap():with_silent():with_desc("lsp: Toggle trouble list"),
+	["n|<leader>lw"] = map_cr("Trouble diagnostics toggle")
 		:with_noremap()
 		:with_silent()
 		:with_desc("lsp: Show workspace diagnostics"),
-	["n|<leader>lq"] = map_cr("TroubleToggle quickfix")
+	["n|<leader>lp"] = map_cr("Trouble project_diagnostics toggle")
 		:with_noremap()
 		:with_silent()
-		:with_desc("lsp: Show quickfix list"),
-	["n|<leader>lL"] = map_cr("TroubleToggle loclist"):with_noremap():with_silent():with_desc("lsp: Show loclist"),
+		:with_desc("lsp: Show project diagnostics"),
+	["n|<leader>ld"] = map_cr("Trouble diagnostics toggle filter.buf=0")
+		:with_noremap()
+		:with_silent()
+		:with_desc("lsp: Show document diagnostics"),
 
 	-- Plugin: telescope
 	["n|<C-p>"] = map_callback(function()
