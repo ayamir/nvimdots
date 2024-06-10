@@ -7,7 +7,7 @@ body:
       value: |
         _Before reporting:_ Search [existing issues](https://github.com/ayamir/nvimdots/issues) and check the [FAQ](https://github.com/ayamir/nvimdots/wiki/Issues). Thank you for helping us improve!
         > [!IMPORTANT]
-        > The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+        > The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
   - type: checkboxes
     id: is-latest-commit
     attributes:
@@ -38,7 +38,7 @@ body:
     attributes:
       label: "Neovim version"
       description: "Paste the output of `nvim --version` here"
-      placeholder: "NVIM v0.10.0-dev-873+g71ad771ea"
+      placeholder: "NVIM v0.11.0-dev-194+g6c7677e5d"
     validations:
       required: true
   - type: input
@@ -69,16 +69,16 @@ body:
       description: "Which branch are you currently on? If you are not sure, check the output of `git rev-parse --abbrev-ref HEAD`"
       options:
         - main (Default/Latest)
-        - 0.8 (Legacy)
-        - 0.7 (Deprecated)
-        - 0.10 (Nightly)
+        - 0.9 (Legacy)
+        - 0.8 (Deprecated)
+        - 0.11 (Nightly)
     validations:
       required: true
   - type: dropdown
     id: fetch-pref
     attributes:
       label: "Fetch Preferences"
-      description: "In what way do you fetch resources? If you are not sure, check the value of `use_ssh` in `lua/core/settings.lua`"
+      description: "In what way do you fetch resources? If you are not sure, check the value of `use_ssh` in `lua/user/settings.lua`"
       options:
         - SSH (use_ssh = true)
         - HTTPS (use_ssh = false)

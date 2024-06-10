@@ -121,7 +121,6 @@ end
 ---@param background string @The background color to blend with
 ---@param alpha number|string @Number between 0 and 1 for blending amount.
 function M.blend(foreground, background, alpha)
-	---@diagnostic disable-next-line: cast-local-type
 	alpha = type(alpha) == "string" and (tonumber(alpha, 16) / 0xff) or alpha
 	local bg = hex_to_rgb(background)
 	local fg = hex_to_rgb(foreground)

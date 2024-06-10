@@ -6,7 +6,7 @@ function autocmd.nvim_create_augroups(definitions)
 		vim.api.nvim_command("augroup " .. group_name)
 		vim.api.nvim_command("autocmd!")
 		for _, def in ipairs(definition) do
-			local command = table.concat(vim.iter({ "autocmd", def }):flatten(), " ")
+			local command = table.concat(vim.iter({ "autocmd", def }):flatten(math.huge):totable(), " ")
 			vim.api.nvim_command(command)
 		end
 		vim.api.nvim_command("augroup END")
@@ -127,15 +127,10 @@ function autocmd.load_autocmds()
 			{ "VimResized", "*", [[tabdo wincmd =]] },
 		},
 		ft = {
-			{ "FileType", "alpha", "set showtabline=0" },
-			{ "FileType", "markdown", "set wrap" },
-			{ "FileType", "make", "set noexpandtab shiftwidth=8 softtabstop=0" },
+			{ "FileType", "*", "setlocal formatoptions-=cro" },
+			{ "FileType", "alpha", "setlocal showtabline=0" },
+			{ "FileType", "markdown", "setlocal wrap" },
 			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
-			{
-				"FileType",
-				"*",
-				[[setlocal formatoptions-=cro]],
-			},
 			{
 				"FileType",
 				"c,cpp",

@@ -120,7 +120,7 @@ local function load_options()
 	end
 
 	for name, value in pairs(require("modules.utils").extend_config(global_local, "user.options")) do
-		vim.o[name] = value
+		vim.api.nvim_set_option_value(name, value, {})
 	end
 end
 
