@@ -10,17 +10,17 @@ return function()
 	}
 
 	local function set_sidebar_icons()
-		-- Set icons for sidebar.
-		local diagnostic_icons = {
-			Error = icons.diagnostics.Error_alt,
-			Warn = icons.diagnostics.Warning_alt,
-			Info = icons.diagnostics.Information_alt,
-			Hint = icons.diagnostics.Hint_alt,
-		}
-		for type, icon in pairs(diagnostic_icons) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl })
-		end
+		-- Set icons for sidebar
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = icons.diagnostics.Error_alt,
+					[vim.diagnostic.severity.WARN] = icons.diagnostics.Warning_alt,
+					[vim.diagnostic.severity.INFO] = icons.diagnostics.Information_alt,
+					[vim.diagnostic.severity.HINT] = icons.diagnostics.Hint_alt,
+				},
+			},
+		})
 	end
 
 	set_sidebar_icons()
