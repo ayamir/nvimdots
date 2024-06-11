@@ -113,7 +113,7 @@ return function()
 
 	local head_butt_padding = 2
 	local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding
-	local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.25))
+	local header_padding = math.max(0, math.ceil((vim.fn.winheight(0) - occu_height) * 0.25))
 	local foot_butt_padding = 1
 
 	dashboard.config.layout = {
