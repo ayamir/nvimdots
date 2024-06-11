@@ -409,7 +409,7 @@ return function()
 		},
 	}
 
-	require("ibl").setup({
+	require("modules.utils").load_plugin("ibl", {
 		enabled = true,
 		debounce = 200,
 		indent = {
