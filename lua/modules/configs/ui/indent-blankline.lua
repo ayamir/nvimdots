@@ -190,9 +190,9 @@ return function()
 			"vector_expression",
 		},
 		just = {
+			"external_command",
 			"recipe",
 			"string",
-			"external_command",
 		},
 		linkerscript = {
 			"memory_command",
@@ -414,9 +414,9 @@ return function()
 		},
 		terraform = {
 			"block",
+			"function_call",
 			"object",
 			"tuple",
-			"function_call",
 		},
 		textproto = {
 			"message_list",
