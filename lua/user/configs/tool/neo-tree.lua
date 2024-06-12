@@ -223,8 +223,8 @@ return function()
 		nesting_rules = {},
 		filesystem = {
 			filtered_items = {
-				visible = false, -- when true, they will just be displayed differently than normal items
-				hide_dotfiles = true,
+				visible = true, -- when true, they will just be displayed differently than normal items
+				hide_dotfiles = false,
 				hide_gitignored = true,
 				hide_by_name = {
 					"node_modules",
@@ -235,7 +235,6 @@ return function()
 				},
 				always_show = { -- remains visible even if other settings would normally hide it
 					".gitignored",
-					"/home/jc/dev/dotfiles/zsh/.config/",
 					-- scandir("/home/jc/dev/dotfiles"),
 				},
 				never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
