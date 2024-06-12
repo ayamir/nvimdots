@@ -13,6 +13,7 @@ tool["tpope/vim-fugitive"] = {
 -- }
 tool["Bekaboo/dropbar.nvim"] = {
 	lazy = false,
+	config = require("tool.dropbar"),
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-fzf-native.nvim",
