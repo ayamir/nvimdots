@@ -89,6 +89,12 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
+	["n|<leader>f"] = map_callback(function()
+			_telescope_collections(require("telescope.themes").get_dropdown({}))
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("tool: Show Telescope collections"),
 	["n|<leader>fu"] = map_callback(function()
 			require("telescope").extensions.undo.undo()
 		end)

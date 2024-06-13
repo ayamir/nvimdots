@@ -11,6 +11,33 @@ _G._command_panel = function()
 	})
 end
 
+_G._telescope_collections = function(opts)
+	local pickers = require("telescope.pickers")
+	local finder = require("telescope.finders")
+	local conf = require("telescope.config").values
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+	opts = opts or {}
+
+	local picker_name = { "file", "live_grep", "git", "workspace", "misc" }
+	pickers
+		.new(opts, {
+			prompt_title = "Telesscope Collections",
+			finder = finder.new_table({ results = picker_name }),
+			sorter = conf.generic_sorter(opts),
+			attach_mappings = function(bufnr)
+				actions.select_default:replace(function()
+					actions.close(bufnr)
+					local selection = action_state.get_selected_entry()
+					require("search").open({ collection = selection[1] })
+				end)
+
+				return true
+			end,
+		})
+		:find()
+end
+
 _G._flash_esc_or_noh = function()
 	local flash_active, state = pcall(function()
 		return require("flash.plugins.char").state

@@ -31,6 +31,24 @@ return function()
 					},
 				},
 			},
+			live_grep = {
+				initial_tab = 1,
+				tabs = {
+					{
+						name = "Word in project",
+						tele_func = function()
+							extensions.live_grep_args.live_grep_args()
+						end,
+					},
+					{
+						name = "Current Word",
+						tele_func = function(opts)
+							opts = opts or {}
+							builtin.grep_string(opts)
+						end,
+					},
+				},
+			},
 			git = {
 				initial_tab = 4,
 				tabs = {
@@ -64,6 +82,12 @@ return function()
 				initial_tab = 1,
 				tabs = {
 					{
+						name = "Buffers",
+						tele_func = function()
+							builtin.buffers()
+						end,
+					},
+					{
 						name = "Sessions",
 						tele_func = function()
 							extensions.persisted.persisted()
@@ -79,6 +103,23 @@ return function()
 						name = "Zoxide",
 						tele_func = function()
 							extensions.zoxide.list()
+						end,
+					},
+				},
+			},
+			misc = {
+				initial_tab = 1,
+				tabs = {
+					{
+						name = "Colorschemes",
+						tele_func = function()
+							builtin.colorscheme({ enable_preview = true })
+						end,
+					},
+					{
+						name = "Undo History",
+						tele_func = function()
+							extensions.undo.undo()
 						end,
 					},
 				},
