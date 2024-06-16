@@ -51,8 +51,9 @@ completion["hrsh7th/nvim-cmp"] = {
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
-			dependencies = { "rafamadriz/friendly-snippets" },
+			build = "make install_jsregexp",
 			config = require("completion.luasnip"),
+			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 		{ "lukas-reineke/cmp-under-comparator" },
 		{ "saadparwaiz1/cmp_luasnip" },
