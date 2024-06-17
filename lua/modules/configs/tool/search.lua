@@ -41,7 +41,7 @@ return function()
 						end,
 					},
 					{
-						name = "Current Word",
+						name = "Word under cursor",
 						tele_func = function(opts)
 							opts = opts or {}
 							builtin.grep_string(opts)
@@ -50,8 +50,14 @@ return function()
 				},
 			},
 			git = {
-				initial_tab = 4,
+				initial_tab = 1,
 				tabs = {
+					{
+						name = "Branches",
+						tele_func = function()
+							builtin.git_branches()
+						end,
+					},
 					{
 						name = "Commits",
 						tele_func = function()
@@ -59,21 +65,15 @@ return function()
 						end,
 					},
 					{
-						name = "Commits on File",
-						tele_func = function()
-							extensions.advanced_git_search.diff_commit_file()
-						end,
-					},
-					{
-						name = "Commit Content",
+						name = "Commit content",
 						tele_func = function()
 							extensions.advanced_git_search.search_log_content()
 						end,
 					},
 					{
-						name = "Branches",
+						name = "Diff current file with commit",
 						tele_func = function()
-							builtin.git_branches()
+							extensions.advanced_git_search.diff_commit_file()
 						end,
 					},
 				},
