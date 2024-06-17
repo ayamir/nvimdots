@@ -19,11 +19,11 @@ _G._telescope_collections = function(opts)
 	local action_state = require("telescope.actions.state")
 	opts = opts or {}
 
-	local picker_name = { "file", "live_grep", "git", "workspace", "misc" }
+	local collections = vim.tbl_keys(require("search.tabs").collections)
 	pickers
 		.new(opts, {
 			prompt_title = "Telescope Collections",
-			finder = finder.new_table({ results = picker_name }),
+			finder = finder.new_table({ results = collections }),
 			sorter = conf.generic_sorter(opts),
 			attach_mappings = function(bufnr)
 				actions.select_default:replace(function()
