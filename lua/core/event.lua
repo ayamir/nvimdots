@@ -3,7 +3,8 @@ local autocmd = {}
 
 function autocmd.nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
-		vim.api.nvim_command("augroup " .. group_name)
+		-- Prepend an underscore to avoid name clashes
+		vim.api.nvim_command("augroup _" .. group_name)
 		vim.api.nvim_command("autocmd!")
 		for _, def in ipairs(definition) do
 			local command = table.concat(vim.iter({ "autocmd", def }):flatten(math.huge):totable(), " ")
@@ -67,7 +68,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
-		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<CMD>close<CR>", { silent = true })
+		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<Cmd>close<CR>", { silent = true })
 	end,
 })
 
