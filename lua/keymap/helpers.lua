@@ -22,7 +22,7 @@ _G._telescope_collections = function(opts)
 	local picker_name = { "file", "live_grep", "git", "workspace", "misc" }
 	pickers
 		.new(opts, {
-			prompt_title = "Telesscope Collections",
+			prompt_title = "Telescope Collections",
 			finder = finder.new_table({ results = picker_name }),
 			sorter = conf.generic_sorter(opts),
 			attach_mappings = function(bufnr)
