@@ -161,10 +161,8 @@ local load_core = function()
 	require("core.pack")
 	require("keymap")
 
-	local colorscheme = settings.colorscheme
-	local background = settings.background
-	vim.api.nvim_command("set background=" .. background)
-	vim.api.nvim_command("colorscheme " .. colorscheme)
+	vim.api.nvim_set_option_value("background", settings.background, {})
+	vim.cmd.colorscheme(settings.colorscheme)
 end
 
 load_core()
