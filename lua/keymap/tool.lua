@@ -95,47 +95,6 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Show Telescope collections"),
-	["n|<leader>fu"] = map_callback(function()
-			require("telescope").extensions.undo.undo()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("edit: Show undo history"),
-	["n|<leader>fw"] = map_callback(function()
-			require("telescope").extensions.live_grep_args.live_grep_args()
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Word in project"),
-	["n|<leader>ff"] = map_callback(function()
-			require("search").open({ collection = "file" })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: File in project"),
-	["n|<leader>fc"] = map_callback(function()
-			require("telescope.builtin").colorscheme({ enable_preview = true })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("ui: Change colorscheme for the current session"),
-	["n|<leader>fg"] = map_callback(function()
-			require("search").open({ collection = "git" })
-		end)
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Git objects"),
-	["n|<leader>fz"] = map_cu("Telescope zoxide list")
-		:with_noremap()
-		:with_silent()
-		:with_desc("edit: Change current directory using zoxide"),
-	["nv|<leader>fs"] = map_cu("Telescope grep_string")
-		:with_noremap()
-		:with_silent()
-		:with_desc("find: Word under cursor"),
-	["n|<leader>fb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("find: Open buffer(s)"),
-	["n|<leader>fd"] = map_cu("Telescope persisted"):with_noremap():with_silent():with_desc("find: Session"),
-	["n|<leader>bn"] = map_cu("enew"):with_noremap():with_silent():with_desc("buffer: New"),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()
