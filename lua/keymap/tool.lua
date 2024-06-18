@@ -90,6 +90,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
 	["n|<leader>f"] = map_callback(function()
+			-- luacheck: globals _telescope_collections
 			_telescope_collections(require("telescope.themes").get_dropdown({}))
 		end)
 		:with_noremap()
