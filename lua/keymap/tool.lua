@@ -90,12 +90,11 @@ local plug_map = {
 		:with_silent()
 		:with_desc("tool: Toggle command panel"),
 	["n|<leader>f"] = map_callback(function()
-			-- luacheck: globals _telescope_collections
-			_telescope_collections(require("telescope.themes").get_dropdown({}))
+			_telescope_collections(require("telescope.themes").get_dropdown())
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("tool: Show Telescope collections"),
+		:with_desc("tool: Open Telescope"),
 
 	-- Plugin: dap
 	["n|<F6>"] = map_callback(function()

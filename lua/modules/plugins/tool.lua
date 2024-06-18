@@ -86,13 +86,13 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{
+			"FabianWirth/search.nvim",
+			config = require("tool.search"),
+		},
+		{
 			"ahmedkhalf/project.nvim",
 			event = { "CursorHold", "CursorHoldI" },
 			config = require("tool.project"),
-		},
-		{
-			"FabianWirth/search.nvim",
-			config = require("tool.search"),
 		},
 		{
 			"aaronhallaert/advanced-git-search.nvim",

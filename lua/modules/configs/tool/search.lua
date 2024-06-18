@@ -1,6 +1,7 @@
 return function()
 	local builtin = require("telescope.builtin")
 	local extensions = require("telescope").extensions
+
 	require("modules.utils").load_plugin("search", {
 		collections = {
 			file = {
