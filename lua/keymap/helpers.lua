@@ -11,6 +11,33 @@ _G._command_panel = function()
 	})
 end
 
+_G._telescope_collections = function(picker_type)
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+	local conf = require("telescope.config").values
+	local finder = require("telescope.finders")
+	local pickers = require("telescope.pickers")
+	picker_type = picker_type or {}
+
+	local collections = vim.tbl_keys(require("search.tabs").collections)
+	pickers
+		.new(picker_type, {
+			prompt_title = "Telescope Collections",
+			finder = finder.new_table({ results = collections }),
+			sorter = conf.generic_sorter(picker_type),
+			attach_mappings = function(bufnr)
+				actions.select_default:replace(function()
+					actions.close(bufnr)
+					local selection = action_state.get_selected_entry()
+					require("search").open({ collection = selection[1] })
+				end)
+
+				return true
+			end,
+		})
+		:find()
+end
+
 _G._flash_esc_or_noh = function()
 	local flash_active, state = pcall(function()
 		return require("flash.plugins.char").state
