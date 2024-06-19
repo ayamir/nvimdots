@@ -1,11 +1,8 @@
-lua/modules/plugins/custom.lua
-lua/modules/configs/custom
 lazy-lock.json
 nixos
 nixos/*
 scripts
 scripts/*
-lazy-lock.json
 README.md
 flake.nix
 tutor
