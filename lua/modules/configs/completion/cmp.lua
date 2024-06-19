@@ -162,28 +162,23 @@ return function()
 			{ name = "nvim_lsp", max_item_count = 350 },
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
-			{ name = "path" },
-			{ name = "treesitter" },
-			{ name = "spell" },
-			{ name = "tmux" },
-			{ name = "orgmode" },
-			{
-				name = "buffer",
-				option = {
-					get_bufnrs = function()
-						return vim.api.nvim_list_bufs()
-					end,
-				},
-			},
-			{ name = "latex_symbols" },
-			{ name = "copilot" },
+			-- { name = "path" },
+			-- { name = "treesitter" },
+			-- { name = "spell" },
+			-- { name = "tmux" },
+			-- { name = "orgmode" },
+			-- {
+			-- 	name = "buffer",
+			-- 	option = {
+			-- 		get_bufnrs = function()
+			-- 			return vim.api.nvim_list_bufs()
+			-- 		end,
+			-- 	},
+			-- },
+			-- { name = "latex_symbols" },
+			-- { name = "copilot" },
 			-- { name = "codeium" },
 			-- { name = "cmp_tabnine" },
-		},
-		experimental = {
-			ghost_text = {
-				hl_group = "Whitespace",
-			},
 		},
 	})
 end

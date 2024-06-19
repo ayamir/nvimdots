@@ -83,12 +83,6 @@ return function()
 				initial_tab = 1,
 				tabs = {
 					{
-						name = "Buffers",
-						tele_func = function()
-							builtin.buffers()
-						end,
-					},
-					{
 						name = "Sessions",
 						tele_func = function()
 							extensions.persisted.persisted()
@@ -115,6 +109,12 @@ return function()
 						name = "Colorschemes",
 						tele_func = function()
 							builtin.colorscheme({ enable_preview = true })
+						end,
+					},
+					{
+						name = "Buffers",
+						tele_func = function()
+							builtin.buffers()
 						end,
 					},
 					{
