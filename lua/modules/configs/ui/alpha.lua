@@ -77,7 +77,7 @@ return function()
 		),
 		button(
 			"space f g",
-			icons.git.Git .. "Telescope git",
+			icons.git.Git .. "Locate Git objects",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
