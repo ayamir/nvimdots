@@ -70,7 +70,7 @@ return function()
 		),
 		button(
 			"space f w",
-			icons.documents.Word .. "Telescope word",
+			icons.documents.Word .. "Find patterns",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
