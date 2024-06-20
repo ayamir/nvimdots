@@ -55,20 +55,6 @@ return function()
 			{ noremap = true, silent = true, nowait = true }
 		),
 		button(
-			"space f g",
-			icons.git.Git .. "Telescope git",
-			leader,
-			nil,
-			{ noremap = true, silent = true, nowait = true }
-		),
-		button(
-			"space f w",
-			icons.ui.FolderWithHeart .. "Telescope workspace",
-			leader,
-			nil,
-			{ noremap = true, silent = true, nowait = true }
-		),
-		button(
 			"space f f",
 			icons.documents.FileFind .. "Telescope file",
 			leader,
@@ -76,8 +62,22 @@ return function()
 			{ noremap = true, silent = true, nowait = true }
 		),
 		button(
-			"space f l",
-			icons.documents.Word .. "Telescope live_grep",
+			"space f r",
+			icons.ui.FolderWithHeart .. "Telescope rootdir",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f w",
+			icons.documents.Word .. "Telescope word",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f g",
+			icons.git.Git .. "Telescope git",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
