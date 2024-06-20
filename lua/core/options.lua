@@ -2,10 +2,10 @@ local global = require("core.global")
 
 local function load_options()
 	local global_local = {
-		-- backupdir = global.cache_dir .. "backup/",
-		-- directory = global.cache_dir .. "swap/",
-		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
-		-- viewdir = global.cache_dir .. "view/",
+		-- backupdir = global.cache_dir .. "/backup/",
+		-- directory = global.cache_dir .. "/swap/",
+		-- spellfile = global.cache_dir .. "/spell/en.uft-8.add",
+		-- viewdir = global.cache_dir .. "/view/",
 		autoindent = true,
 		autoread = true,
 		autowrite = true,
@@ -84,7 +84,7 @@ local function load_options()
 		timeoutlen = 300,
 		ttimeout = true,
 		ttimeoutlen = 0,
-		undodir = global.cache_dir .. "undo/",
+		undodir = global.cache_dir .. "/undo/",
 		undofile = true,
 		-- Please do NOT set `updatetime` to above 500, otherwise most plugins may not function correctly
 		updatetime = 200,
