@@ -56,7 +56,7 @@ return function()
 		),
 		button(
 			"space f f",
-			icons.documents.FileFind .. "Telescope file",
+			icons.documents.FileFind .. "Find files",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
