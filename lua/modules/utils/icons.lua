@@ -63,6 +63,8 @@ local data = {
 		File = "",
 		Files = "",
 		FileTree = "󰙅",
+		FileFind = "󰈞",
+		Word = "",
 		Import = "",
 		Symlink = "",
 	},

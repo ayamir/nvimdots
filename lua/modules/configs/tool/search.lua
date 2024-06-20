@@ -4,6 +4,7 @@ return function()
 
 	require("modules.utils").load_plugin("search", {
 		collections = {
+			-- Search by file name
 			file = {
 				initial_tab = 1,
 				tabs = {
@@ -30,9 +31,16 @@ return function()
 							builtin.oldfiles()
 						end,
 					},
+					{
+						name = "Buffers",
+						tele_func = function()
+							builtin.buffers()
+						end,
+					},
 				},
 			},
-			live_grep = {
+			-- Search by word
+			word = {
 				initial_tab = 1,
 				tabs = {
 					{
@@ -50,6 +58,7 @@ return function()
 					},
 				},
 			},
+			-- Search by git (branches, commits)
 			git = {
 				initial_tab = 1,
 				tabs = {
@@ -79,15 +88,10 @@ return function()
 					},
 				},
 			},
-			workspace = {
+			-- Search by rootdir name
+			rootdir = {
 				initial_tab = 1,
 				tabs = {
-					{
-						name = "Buffers",
-						tele_func = function()
-							builtin.buffers()
-						end,
-					},
 					{
 						name = "Sessions",
 						tele_func = function()
@@ -115,6 +119,12 @@ return function()
 						name = "Colorschemes",
 						tele_func = function()
 							builtin.colorscheme({ enable_preview = true })
+						end,
+					},
+					{
+						name = "Notify",
+						tele_func = function()
+							extensions.notify.notify()
 						end,
 					},
 					{
