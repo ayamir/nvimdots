@@ -63,7 +63,7 @@ return function()
 		),
 		button(
 			"space f r",
-			icons.ui.FolderWithHeart .. "Telescope rootdir",
+			icons.ui.FolderWithHeart .. "Retrieve dossiers",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
