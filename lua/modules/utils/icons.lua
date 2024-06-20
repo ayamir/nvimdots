@@ -62,11 +62,11 @@ local data = {
 		Default = "",
 		File = "",
 		Files = "",
-		FileTree = "󰙅",
 		FileFind = "󰈞",
-		Word = "",
+		FileTree = "󰙅",
 		Import = "",
 		Symlink = "",
+		Word = "",
 	},
 	git = {
 		Add = "",

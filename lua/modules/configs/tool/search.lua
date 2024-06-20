@@ -4,7 +4,7 @@ return function()
 
 	require("modules.utils").load_plugin("search", {
 		collections = {
-			-- Search by file name
+			-- Search using filenames
 			file = {
 				initial_tab = 1,
 				tabs = {
@@ -39,7 +39,7 @@ return function()
 					},
 				},
 			},
-			-- Search by word
+			-- Search using patterns
 			word = {
 				initial_tab = 1,
 				tabs = {
@@ -58,7 +58,7 @@ return function()
 					},
 				},
 			},
-			-- Search by git (branches, commits)
+			-- Search Git objects (branches, commits)
 			git = {
 				initial_tab = 1,
 				tabs = {
@@ -88,7 +88,7 @@ return function()
 					},
 				},
 			},
-			-- Search by rootdir name
+			-- Retrieve dossiers
 			rootdir = {
 				initial_tab = 1,
 				tabs = {
@@ -112,6 +112,7 @@ return function()
 					},
 				},
 			},
+			-- Miscellaneous
 			misc = {
 				initial_tab = 1,
 				tabs = {
