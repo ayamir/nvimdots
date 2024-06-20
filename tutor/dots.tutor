@@ -86,31 +86,32 @@ to the next topic, which covers the basic workflow.
 # Lesson 1.2: FIND AND SEARCH
 
 Nvimdots utilizes [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) as the primary fuzzy finder. It offers numerous
-features for finding and searching. To open the file finder under the current
-working directory, press `<leader>ff`{normal}. Then, input the keyword you wish to find and use
-`<C-p>`{normal} and `<C-n>`{normal} to navigate up and down the list of results. You can preview the
-content of the selected file in the right window and press `<Enter>`{normal} to open it
-in a new buffer.
+features for finding and searching. To open the file finder collections under the
+current working directory, press `<leader>ff`{normal}. Then, input the keyword you wish to find
+and use `<C-p>`{normal} and `<C-n>`{normal} to navigate up and down the list of results. You can
+preview the content of the selected file in the right window and press `<Enter>`{normal} to
+open it in a new buffer. You can also use `<Tab>`{normal} and `<S-Tab>`{normal} to traverse different
+tabs to find files from different locations. For example, you can use the "Frecency"
+and "Oldfiles" tabs to search from the most frequently opened and recently opened file
+lists respectively, while the "Buffers" tab can help you search file from the opened
+buffer list.
 
-Nvimdots also provide several additional search features. One commonly used keymap is
-`<leader>fr`{normal}, especially if you frequently edit files across different projects. This
-command lists files you have previously opened and sorts them by "frecency," a
-concept similar to that used in Firefox's address bar. This feature utilizes "Lua
-Bytecode" to permanently store the key-value pairs of file paths and their "frecency"
-values at **~/.local/share/nvim/file_frecency.bin**.
+You can press `<leader>fw`{normal} to search for a word in the current working directory.
+This feature utilizes [ripgrep](https://github.com/BurntSushi/ripgrep) for searching, allowing you to use it naturally as
+you would with ripgrep. As same as above, you can also use `<Tab>`{normal} and `<S-Tab>`{normal} to
+traverse the search tabs. The result displayed by the "Word under cursor" tab is
+actually all of the occurrence positions of the word under the current cursor.
 
-You can press `<leader>fw`{normal} to search for a word in the current working directory. This
-feature utilizes [ripgrep](https://github.com/BurntSushi/ripgrep) for searching, allowing you to use it naturally as you would
-with ripgrep.
-
-Nvimdots also provides project management features and integrates them seamlessly
-with telescope. Press `<leader>fp`{normal} to open the recent project list. Please refrain from
-quitting this interface; instead, you can add the current working directory to the
-project list by pressing `<C-a>`{normal}, and remove it by pressing `<C-d>`{normal}. Typically, the
-current working directory corresponds to the project directory, which is identified
-by LSP and patterns such as *.git/*. However, you have the flexibility to set your own
-patterns. Consequently, the project directory will automatically change when you
-switch to another buffer whose file belongs to a different project.
+Nvimdots also provides root directory management features and integrates them
+seamlessly with telescope. Press `<leader>fr`{normal} to open the recent root directory list.
+The first tab shows the currently saved sessions. Select a session and press `<CR>`{normal} to
+restore the corresponding root directory session. The second tab shows different projects.
+Please refrain from quitting this interface; instead, you can add the current root
+directory to the project list by pressing `<C-a>`{normal}, and remove it by pressing `<C-d>`{normal}.
+Typically, the current root directory corresponds to the project directory, which is
+identified by LSP and patterns such as *.git/*. Of course, you have the flexibility to
+set your own patterns. Consequently, the project directory will automatically change
+when you switch to another buffer whose file belongs to a different project.
 
 # Lesson 1.3: EDIT AND FORMAT
 
