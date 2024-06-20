@@ -89,7 +89,7 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("tool: Open Telescope (collections)"),
+		:with_desc("tool: Open Telescope collections"),
 	["n|<leader>ff"] = map_callback(function()
 			require("search").open({ collection = "file" })
 		end)
