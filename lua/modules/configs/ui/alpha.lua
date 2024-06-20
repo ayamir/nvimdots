@@ -84,7 +84,7 @@ return function()
 		),
 		button(
 			"space f m",
-			icons.misc.Ghost .. "Telescope misc",
+			icons.misc.Ghost .. "Miscellaneous artifacts",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
