@@ -40,7 +40,7 @@ return function()
 				},
 			},
 			-- Search using patterns
-			word = {
+			pattern = {
 				initial_tab = 1,
 				tabs = {
 					{
@@ -89,7 +89,7 @@ return function()
 				},
 			},
 			-- Retrieve dossiers
-			rootdir = {
+			dossier = {
 				initial_tab = 1,
 				tabs = {
 					{

@@ -96,8 +96,8 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Find files"),
-	["n|<leader>fw"] = map_callback(function()
-			require("search").open({ collection = "word" })
+	["n|<leader>fp"] = map_callback(function()
+			require("search").open({ collection = "pattern" })
 		end)
 		:with_noremap()
 		:with_silent()
@@ -112,8 +112,8 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Locate Git objects"),
-	["n|<leader>fr"] = map_callback(function()
-			require("search").open({ collection = "rootdir" })
+	["n|<leader>fd"] = map_callback(function()
+			require("search").open({ collection = "dossier" })
 		end)
 		:with_noremap()
 		:with_silent()

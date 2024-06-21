@@ -62,14 +62,14 @@ return function()
 			{ noremap = true, silent = true, nowait = true }
 		),
 		button(
-			"space f r",
+			"space f d",
 			icons.ui.FolderWithHeart .. "Retrieve dossiers",
 			leader,
 			nil,
 			{ noremap = true, silent = true, nowait = true }
 		),
 		button(
-			"space f w",
+			"space f p",
 			icons.documents.Word .. "Find patterns",
 			leader,
 			nil,

@@ -96,14 +96,14 @@ the "Frecency" and "Oldfiles" tabs enable searches based on the most frequently 
 recently opened files, respectively, while the "Buffers" tab facilitates searches
 among currently opened buffers.
 
-For pattern searches within the current working directory, press `<leader>`{normal}`f`{normal}`w`{normal}. This
+For pattern searches within the current working directory, press `<leader>`{normal}`f`{normal}`p`{normal}. This
 functionality leverages [ripgrep](https://github.com/BurntSushi/ripgrep) for its search capabilities, making it as intuitive
 to use as ripgrep itself. As with the "file finder collection", `<Tab>`{normal} and `<S-Tab>`{normal} can
 be used to cycle through the search tabs. The "Word under cursor" tab displays all
 instances of the word located under the current cursor position.
 
 Nvimdots also offers comprehensive dossier management, seamlessly integrated with
-Telescope. Press `<leader>`{normal}`f`{normal}`r`{normal} to access the recent dossiers list. The first tab
+Telescope. Press `<leader>`{normal}`f`{normal}`d`{normal} to access the recent dossiers list. The first tab
 presents the currently saved sessions; select a session and press `<CR>`{normal} to restore
 the corresponding session. The second tab lists various projects. Instead of exiting
 this interface, you can add the current working directory to the project list by
