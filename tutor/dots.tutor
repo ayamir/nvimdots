@@ -1,6 +1,6 @@
 # Welcome to the nvimdots Tutor
 
-Nvimdots is a [neovim](https://neovim.io/) config suite designed for extensibility, performance, and ease
+Nvimdots is a [Neovim](https://neovim.io/) config suite designed for extensibility, performance, and ease
 of use. It provides the ability to work with text files yet feels like you are
 working within an IDE environment.
 
@@ -64,7 +64,7 @@ Consequently, this segment of the status line provides insight into the context 
 your cursor position. It's important to note that this feature relies on LSP, so it
 is disabled if the corresponding LSP is not attached to the current buffer.
 
-You can press `<leader>li`{normal} to check LSP info. Upon doing so, you will notice that
+You can press `<leader>`{normal}`l`{normal}`i`{normal} to check LSP info. Upon doing so, you will notice that
 there are two active clients attached to this buffer.
 
 Now, press [go](go) to toggle the code outline, which displays all symbols defined in
@@ -85,32 +85,33 @@ to the next topic, which covers the basic workflow.
 
 # Lesson 1.2: FIND AND SEARCH
 
-Nvimdots utilizes [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) as the primary fuzzy finder. It offers numerous
-features for finding and searching. To open the file finder under the current
-working directory, press `<leader>ff`{normal}. Then, input the keyword you wish to find and use
-`<C-p>`{normal} and `<C-n>`{normal} to navigate up and down the list of results. You can preview the
-content of the selected file in the right window and press `<Enter>`{normal} to open it
-in a new buffer.
+Nvimdots utilizes [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) as the primary fuzzy finder, offering numerous
+features for efficient finding and searching. To access the "file finder collection"
+within the current working directory, press `<leader>`{normal}`f`{normal}`f`{normal}. Subsequently, enter the
+desired keyword and use `<C-p>`{normal} and `<C-n>`{normal} to navigate through the list of results. The
+content of the selected file can be previewed in the adjacent window, and pressing
+`<Enter>`{normal} will open it in a new buffer. Additionally, `<Tab>`{normal} and `<S-Tab>`{normal} allow you to
+switch between various tabs to locate files with different properties. For instance,
+the "Frecency" and "Oldfiles" tabs enable searches based on the most frequently and
+recently opened files, respectively, while the "Buffers" tab facilitates searches
+among currently opened buffers.
 
-Nvimdots also provide several additional search features. One commonly used keymap is
-`<leader>fr`{normal}, especially if you frequently edit files across different projects. This
-command lists files you have previously opened and sorts them by "frecency," a
-concept similar to that used in Firefox's address bar. This feature utilizes "Lua
-Bytecode" to permanently store the key-value pairs of file paths and their "frecency"
-values at **~/.local/share/nvim/file_frecency.bin**.
+For pattern searches within the current working directory, press `<leader>`{normal}`f`{normal}`p`{normal}. This
+functionality leverages [ripgrep](https://github.com/BurntSushi/ripgrep) for its search capabilities, making it as intuitive
+to use as ripgrep itself. As with the "file finder collection", `<Tab>`{normal} and `<S-Tab>`{normal} can
+be used to cycle through the search tabs. The "Word under cursor" tab displays all
+instances of the word located under the current cursor position.
 
-You can press `<leader>fw`{normal} to search for a word in the current working directory. This
-feature utilizes [ripgrep](https://github.com/BurntSushi/ripgrep) for searching, allowing you to use it naturally as you would
-with ripgrep.
-
-Nvimdots also provides project management features and integrates them seamlessly
-with telescope. Press `<leader>fp`{normal} to open the recent project list. Please refrain from
-quitting this interface; instead, you can add the current working directory to the
-project list by pressing `<C-a>`{normal}, and remove it by pressing `<C-d>`{normal}. Typically, the
-current working directory corresponds to the project directory, which is identified
-by LSP and patterns such as *.git/*. However, you have the flexibility to set your own
-patterns. Consequently, the project directory will automatically change when you
-switch to another buffer whose file belongs to a different project.
+Nvimdots also offers comprehensive dossier management, seamlessly integrated with
+Telescope. Press `<leader>`{normal}`f`{normal}`d`{normal} to access the recent dossiers list. The first tab
+presents the currently saved sessions; select a session and press `<CR>`{normal} to restore
+the corresponding session. The second tab lists various projects. Instead of exiting
+this interface, you can add the current working directory to the project list by
+pressing `<C-a>`{normal}, and remove it by pressing `<C-d>`{normal}. Generally, the current working
+directory corresponds to the current project's directory, identified by the LSP or
+patterns such as *.git/*. You can also define your own patterns. Consequently, the
+current working directory will automatically switch when you move to another buffer
+containing a file from a different project.
 
 # Lesson 1.3: EDIT AND FORMAT
 

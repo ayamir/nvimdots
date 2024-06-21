@@ -39,55 +39,56 @@ return function()
 	end
 
 	local leader = " "
+	local icons = {
+		documents = require("modules.utils.icons").get("documents", true),
+		git = require("modules.utils.icons").get("git", true),
+		ui = require("modules.utils.icons").get("ui", true),
+		misc = require("modules.utils.icons").get("misc", true),
+	}
+
 	dashboard.section.buttons.val = {
-		button("space f c", " Scheme change", leader, nil, {
-			noremap = true,
-			silent = true,
-			nowait = true,
-			callback = function()
-				require("telescope.builtin").colorscheme()
-			end,
-		}),
-		button("space f r", " File frecency", leader, nil, {
-			noremap = true,
-			silent = true,
-			nowait = true,
-			callback = function()
-				require("telescope").extensions.frecency.frecency({})
-			end,
-		}),
-		button("space f e", "󰋚 File history", leader, nil, {
-			noremap = true,
-			silent = true,
-			nowait = true,
-			callback = function()
-				require("telescope.builtin").oldfiles()
-			end,
-		}),
-		button("space f p", " Project find", leader, nil, {
-			noremap = true,
-			silent = true,
-			nowait = true,
-			callback = function()
-				require("telescope").extensions.projects.projects({})
-			end,
-		}),
-		button("space f f", "󰈞 File find", leader, nil, {
-			noremap = true,
-			silent = true,
-			nowait = true,
-			callback = function()
-				require("telescope.builtin").find_files()
-			end,
-		}),
-		button("space f w", " Word find", leader, nil, {
-			noremap = true,
-			silent = true,
-			nowait = true,
-			callback = function()
-				require("telescope.builtin").live_grep()
-			end,
-		}),
+		button(
+			"space f c",
+			icons.misc.Neovim .. "Telescope collections",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f f",
+			icons.documents.FileFind .. "Find files",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f d",
+			icons.ui.FolderWithHeart .. "Retrieve dossiers",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f p",
+			icons.documents.Word .. "Find patterns",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f g",
+			icons.git.Git .. "Locate Git objects",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
+		button(
+			"space f m",
+			icons.misc.Ghost .. "Miscellaneous artifacts",
+			leader,
+			nil,
+			{ noremap = true, silent = true, nowait = true }
+		),
 	}
 	dashboard.section.buttons.opts.hl = "AlphaButtons"
 
