@@ -16,15 +16,16 @@ return function()
 	}
 
 	require("modules.utils").load_plugin("bigfile", {
-		filesize = 1, -- size of the file in MiB
+		filesize = 2, -- size of the file in MiB
 		pattern = { "*" }, -- autocmd pattern
 		features = { -- features to disable
+			"indent_blankline",
 			"lsp",
-			"treesitter",
 			"syntax",
+			"treesitter",
 			"vimopts",
-			ftdetect,
 			cmp,
+			ftdetect,
 		},
 	})
 end
