@@ -4,8 +4,14 @@
 , pkgs
 , ...
 }:
-with lib; let
+let
   cfg = config.programs.neovim.nvimdots;
+  inherit (lib) flip warn const;
+  inherit (lib.attrsets) optionalAttrs;
+  inherit (lib.options) mkEnableOption mkOption mkIf literalExpression;
+  inherit (lib.strings) concatStringsSep versionOlder versionAtLeast;
+  inherit (lib.lists) optionals;
+  inherit (lib.types) listOf coercedTo package functionTo;
 in
 {
   options = {
@@ -39,9 +45,11 @@ in
           use Haskell plugins.
         '';
         extraHaskellPackages = mkOption {
-          type = with types;
-            let fromType = listOf package;
-            in coercedTo fromType
+          type =
+            let
+              fromType = listOf package;
+            in
+            coercedTo fromType
               (flip warn const ''
                 Assigning a plain list to extraHaskellPackages is deprecated.
                        Please assign a function taking a package set as argument, so
@@ -61,7 +69,7 @@ in
           '';
         };
         extraDependentPackages = mkOption {
-          type = with types; listOf package;
+          type = listOf package;
           default = [ ];
           example = literalExpression "[ pkgs.openssl ]";
           description = "Extra build depends to add `LIBRARY_PATH` and `CPATH`.";
@@ -72,32 +80,29 @@ in
   config =
     let
       # Inspired from https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
-      build-dependent-pkgs = with pkgs; builtins.filter (package: !package.meta.unsupported) [
+      build-dependent-pkgs = builtins.filter (package: !package.meta.unsupported) [
         # manylinux
-        acl
-        attr
-        bzip2
-        curl
-        glibc
-        libsodium
-        libssh
-        libxml2
-        openssl
-        stdenv.cc.cc
-        stdenv.cc.cc.lib
-        systemd
-        util-linux
-        xz
-        zlib
-        zstd
+        pkgs.acl
+        pkgs.attr
+        pkgs.bzip2
+        pkgs.curl
+        pkgs.glibc
+        pkgs.libsodium
+        pkgs.libssh
+        pkgs.libxml2
+        pkgs.openssl
+        pkgs.stdenv.cc.cc
+        pkgs.stdenv.cc.cc.lib
+        pkgs.systemd
+        pkgs.util-linux
+        pkgs.xz
+        pkgs.zlib
+        pkgs.zstd
         # Packages not included in `nix-ld`'s NixOSModule
-        glib
-        libcxx
+        pkgs.glib
+        pkgs.libcxx
       ]
       ++ cfg.extraDependentPackages;
-
-      makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
-      makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
 
       neovim-build-deps = pkgs.buildEnv {
         name = "neovim-build-deps";
@@ -128,19 +133,19 @@ in
         "nvim/lua".source = ../../lua;
         "nvim/snips".source = ../../snips;
         "nvim/tutor".source = ../../tutor;
-      } // lib.optionalAttrs cfg.bindLazyLock {
+      } // optionalAttrs cfg.bindLazyLock {
         "nvim/lazy-lock.json".source = ../../lazy-lock.json;
-      } // lib.optionalAttrs cfg.copyLazyLock {
+      } // optionalAttrs cfg.copyLazyLock {
         "nvim/lazy-lock.nix.json".source = ../../lazy-lock.json;
       };
       home = {
         packages = with pkgs; [
           ripgrep
         ];
-        shellAliases = optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
+        shellAliases = optionalAttrs (cfg.setBuildEnv && (versionOlder config.home.stateVersion "24.05")) {
           nvim = concatStringsSep " " buildEnv + " nvim";
         };
-      } // lib.optionalAttrs cfg.copyLazyLock {
+      } // optionalAttrs cfg.copyLazyLock {
         activation.lazyLockActivatioinAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configHome}/nvim/lazy-lock.nix.json > ${config.xdg.configHome}/nvim/lazy-lock.json
         '';
@@ -151,33 +156,32 @@ in
         withNodeJs = true;
         withPython3 = true;
 
-        extraPackages = with pkgs;
-          [
-            # Dependent packages used by default plugins
-            doq
-            tree-sitter
-          ]
-          ++ optionals cfg.withBuildTools [
-            cargo
-            clang
-            cmake
-            gcc
-            gnumake
-            go
-            lua51Packages.luarocks
-            ninja
-            pkg-config
-            yarn
-          ]
-          ++ optionals cfg.withHaskell [
-            (pkgs.writeShellApplication {
-              name = "stack";
-              text = ''
-                exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
-              '';
-            })
-            (haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
-          ];
+        extraPackages = [
+          # Dependent packages used by default plugins
+          pkgs.doq
+          pkgs.tree-sitter
+        ]
+        ++ optionals cfg.withBuildTools [
+          pkgs.cargo
+          pkgs.clang
+          pkgs.cmake
+          pkgs.gcc
+          pkgs.gnumake
+          pkgs.go
+          pkgs.lua51Packages.luarocks
+          pkgs.ninja
+          pkgs.pkg-config
+          pkgs.yarn
+        ]
+        ++ optionals cfg.withHaskell [
+          (pkgs.writeShellApplication {
+            name = "stack";
+            text = ''
+              exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
+            '';
+          })
+          (pkgs.haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
+        ];
 
         extraPython3Packages = ps: with ps; [
           docformatter
@@ -185,8 +189,8 @@ in
           pynvim
         ];
       }
-      // lib.optionalAttrs (lib.versionAtLeast config.home.stateVersion "24.05") {
-        extraWrapperArgs = lib.optionals cfg.setBuildEnv [
+      // optionalAttrs (versionAtLeast config.home.stateVersion "24.05") {
+        extraWrapperArgs = optionals cfg.setBuildEnv [
           "--suffix"
           "CPATH"
           ":"
