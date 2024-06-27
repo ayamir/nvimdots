@@ -8,9 +8,10 @@ let
   cfg = config.programs.neovim.nvimdots;
   inherit (lib) flip warn const;
   inherit (lib.attrsets) optionalAttrs;
-  inherit (lib.options) mkEnableOption mkOption mkIf literalExpression;
-  inherit (lib.strings) concatStringsSep versionOlder versionAtLeast;
   inherit (lib.lists) optionals;
+  inherit (lib.modules) mkIf;
+  inherit (lib.options) mkEnableOption mkOption literalExpression;
+  inherit (lib.strings) concatStringsSep versionOlder versionAtLeast;
   inherit (lib.types) listOf coercedTo package functionTo;
 in
 {
@@ -25,11 +26,13 @@ in
           Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
           Very powerful in terms of keeping the environment consistent, but has the following side effects.
           You cannot update it even if you run the Lazy command, because it binds read-only.
+          You need to remove lazy-lock.json before activation, if `mergeLazyLock` have set.
         '';
-        copyLazyLock = mkEnableOption ''
-          Copy lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
-          Achieve environmental consistency while being flexible to change., but has the following side effects.
-          `lazy-lock.json` is overridden every home-manager activation.
+        mergeLazyLock = mkEnableOption ''
+          Merge into already existing lazy-lock.json in $XDG_CONFIG_HOME/nvim every activation.
+          This will respect the package version of lazy-lock.json in the repository.
+          Achieve environmental consistency while being flexible to change.
+          You need to unlink lazy-lock.json before activation, if `bindLazyLock` have set.
         '';
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
@@ -124,8 +127,8 @@ in
     mkIf cfg.enable {
       assertions = [
         {
-          assertion = ! (cfg.bindLazyLock && cfg.copyLazyLock);
-          message = "bindLazyLock and copyLazyLock cannot be enabled at the same time.";
+          assertion = ! (cfg.bindLazyLock && cfg.mergeLazyLock);
+          message = "bindLazyLock and mergeLazyLock cannot be enabled at the same time.";
         }
       ];
       xdg.configFile = {
@@ -135,20 +138,26 @@ in
         "nvim/tutor".source = ../../tutor;
       } // optionalAttrs cfg.bindLazyLock {
         "nvim/lazy-lock.json".source = ../../lazy-lock.json;
-      } // optionalAttrs cfg.copyLazyLock {
-        "nvim/lazy-lock.nix.json".source = ../../lazy-lock.json;
+      } // optionalAttrs cfg.mergeLazyLock {
+        "nvim/lazy-lock.fixed.json" = {
+          source = ../../lazy-lock.json;
+          onChange = ''
+            if [ -f ${config.xdg.configHome}/nvim/lazy-lock.json ]; then
+              tmp=$(mktemp)
+              ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configFile."nvim/lazy-lock.fixed.json".source} > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/lazy-lock.json
+            else
+              ${pkgs.rsync}/bin/rsync --chmod 644 ${config.xdg.configFile."nvim/lazy-lock.fixed.json".source} ${config.xdg.configHome}/nvim/lazy-lock.json
+            fi
+          '';
+        };
       };
       home = {
-        packages = with pkgs; [
-          ripgrep
+        packages = [
+          pkgs.ripgrep
         ];
         shellAliases = optionalAttrs (cfg.setBuildEnv && (versionOlder config.home.stateVersion "24.05")) {
           nvim = concatStringsSep " " buildEnv + " nvim";
         };
-      } // optionalAttrs cfg.copyLazyLock {
-        activation.lazyLockActivatioinAction = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configHome}/nvim/lazy-lock.nix.json > ${config.xdg.configHome}/nvim/lazy-lock.json
-        '';
       };
       programs.neovim = {
         enable = true;
