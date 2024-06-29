@@ -1,19 +1,18 @@
 local M = {}
 
 local settings = require("core.settings")
-local format_opts = settings.format_opts
-local disabled_workspaces = format_opts.format_disabled_dirs
-local format_on_save = format_opts.format_on_save
-local format_notify = format_opts.format_notify
-local format_timeout = format_opts.format_timeout
-local format_modifications_only = format_opts.format_modifications_only
-local server_formatting_block_list = format_opts.server_formatting_block_list
+local disabled_workspaces = settings.format_disabled_dirs
+local format_on_save = settings.format_on_save
+local format_notify = settings.format_notify
+local format_modifications_only = settings.format_modifications_only
+local server_formatting_block_list = settings.server_formatting_block_list
+local format_timeout = settings.format_timeout
 
 vim.api.nvim_create_user_command("FormatToggle", function()
 	M.toggle_format_on_save()
 end, {})
 
-local block_list = require("core.settings").format_opts.formatter_block_list
+local block_list = settings.formatter_block_list
 vim.api.nvim_create_user_command("FormatterToggleFt", function(opts)
 	if block_list[opts.args] == nil then
 		vim.notify(
@@ -158,18 +157,28 @@ function M.format(opts)
 				{ title = "LSP Formatter Warning" }
 			)
 			return
-		elseif
-			format_modifications_only
-			and require("lsp-format-modifications").format_modifications(client, bufnr).success
-		then
-			if format_notify then
+		end
+
+		if format_modifications_only then
+			if client.server_capabilities.documentRangeFormattingProvider then
+				if
+					format_notify
+					and require("lsp-format-modifications").format_modifications(client, bufnr).success
+				then
+					vim.notify(
+						string.format("[LSP] Format changed lines successfully with %s!", client.name),
+						vim.log.levels.INFO,
+						{ title = "LSP Range Format Success" }
+					)
+					return
+				end
+			else
 				vim.notify(
-					string.format("[LSP] Format changed lines successfully with %s!", client.name),
-					vim.log.levels.INFO,
-					{ title = "LSP Range Format Success" }
+					string.format("[LSP] Modification only formatting is not supported by formatter [%s]!", client.name),
+					vim.log.levels.WARN,
+					{ title = "LSP Range Format Warning" }
 				)
 			end
-			return
 		end
 
 		-- Fall back to format the whole buffer (even if partial formatting failed)
