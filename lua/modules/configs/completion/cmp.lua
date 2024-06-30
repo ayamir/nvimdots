@@ -171,7 +171,7 @@ return function()
 				name = "buffer",
 				option = {
 					get_bufnrs = function()
-						return vim.api.nvim_list_bufs()
+						return vim.api.nvim_buf_line_count(0) < 7500 and vim.api.nvim_list_bufs() or {}
 					end,
 				},
 			},
