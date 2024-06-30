@@ -26,13 +26,15 @@ in
           Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
           Very powerful in terms of keeping the environment consistent, but has the following side effects.
           You cannot update it even if you run the Lazy command, because it binds read-only.
-          You need to remove lazy-lock.json before activation, if `mergeLazyLock` have set.
+          You need to remove lazy-lock.json before enabling this option if `mergeLazyLock` is set.
         '';
         mergeLazyLock = mkEnableOption ''
-          Merge into already existing lazy-lock.json in $XDG_CONFIG_HOME/nvim every activation.
-          This will respect the package version of lazy-lock.json in the repository.
-          Achieve environmental consistency while being flexible to change.
-          You need to unlink lazy-lock.json before activation, if `bindLazyLock` have set.
+          Merges the managed lazy-lock.json with the existing one under $XDG_CONFIG_HOME/nvim if its hash has changed on activation.
+          Upstream package version changes have high priority.
+          This means changes to lazy-lock.json in the config directory (likely due to installing package) will be preserved.
+          In other words, it achieves environment consistency while remaining adaptable to changes.
+          You need to unlink lazy-lock.json before enabling this option if `bindLazyLock` is set.
+          Please refer to the wiki for details on the behavior.
         '';
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
