@@ -160,15 +160,14 @@ function M.format(opts)
 		end
 
 		if format_modifications_only then
-			if
-				format_notify
-				and require("lsp-format-modifications").format_modifications(client, bufnr).success
-			then
-				vim.notify(
-					string.format("[LSP] Format changed lines successfully with %s!", client.name),
-					vim.log.levels.INFO,
-					{ title = "LSP Range Format Success" }
-				)
+			if require("lsp-format-modifications").format_modifications(client, bufnr).success then
+				if format_notify then
+					vim.notify(
+						string.format("[LSP] Format changed lines successfully with %s!", client.name),
+						vim.log.levels.INFO,
+						{ title = "LSP Range Format Success" }
+					)
+				end
 				return
 			end
 		end
