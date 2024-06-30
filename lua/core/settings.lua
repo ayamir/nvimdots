@@ -12,7 +12,7 @@ settings["use_copilot"] = true
 ---@type boolean
 settings["format_on_save"] = true
 
--- Set format timeout here (ms)
+-- Set format timeout here (in ms).
 ---@type number
 settings["format_timeout"] = 1000
 
