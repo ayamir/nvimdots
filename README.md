@@ -197,6 +197,8 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 - [ayamir](https://github.com/ayamir)
 - [Jint-lzxy](https://github.com/Jint-lzxy)
 - [CharlesChiuGit](https://github.com/CharlesChiuGit)
+- [aarnphm](https://github.com/aarnphm)
+- [misumisumi](https://github.com/misumisumi)
 
 ## 🎉 Acknowledgement
 
@@ -204,7 +206,7 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 
 ## 📜 License
 
-This Neovim configuration is released under the MIT license, which grants the following permissions:
+This Neovim configuration is released under the BSD 3-Clause license, which grants the following permissions:
 
 - Commercial use
 - Distribution
