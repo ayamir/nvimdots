@@ -8,13 +8,13 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
--- Set it to false if you want to turn off LSP Inlay Hints
----@type boolean
-settings["lsp_inlayhints"] = true
-
 -- Set it to false if there is no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
+
+-- Set format timeout here (in ms).
+---@type number
+settings["format_timeout"] = 1000
 
 -- Set it to false if the notification after formatting is annoying.
 ---@type boolean
@@ -36,6 +36,24 @@ settings["format_disabled_dirs"] = {
 	-- Example
 	"~/format_disabled_dir",
 }
+
+-- Filetypes in this list will skip lsp formatting if rhs is true.
+---@type table<string, boolean>
+settings["formatter_block_list"] = {
+	lua = false, -- example
+}
+
+-- Servers in this list will skip setting formatting capabilities if rhs is true.
+---@type table<string, boolean>
+settings["server_formatting_block_list"] = {
+	lua_ls = true,
+	tsserver = true,
+	clangd = true,
+}
+
+-- Set it to false if you want to turn off LSP Inlay Hints
+---@type boolean
+settings["lsp_inlayhints"] = true
 
 -- Set it to false if diagnostics virtual text is annoying.
 -- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
@@ -84,20 +102,6 @@ settings["background"] = "dark"
 -- This entry is IGNORED on Windows and macOS, which have their default handlers builtin.
 ---@type string
 settings["external_browser"] = "chrome-cli open"
-
--- Filetypes in this list will skip lsp formatting if rhs is true.
----@type table<string, boolean>
-settings["formatter_block_list"] = {
-	lua = false, -- example
-}
-
--- Servers in this list will skip setting formatting capabilities if rhs is true.
----@type table<string, boolean>
-settings["server_formatting_block_list"] = {
-	lua_ls = true,
-	tsserver = true,
-	clangd = true,
-}
 
 -- Set the language servers that will be installed during bootstrap here.
 -- check the below link for all the supported LSPs:
