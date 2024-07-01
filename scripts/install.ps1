@@ -8,9 +8,9 @@ Set-StrictMode -Version 3.0
 $ErrorActionPreference = "Stop" # Exit when command fails
 
 # global-scope vars
-$REQUIRED_NVIM_VERSION = [version]'0.9.0'
-$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.8.0'
 $USE_SSH = $True
+$REQUIRED_NVIM_VERSION = [version]'0.10.0'
+$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.9.0'
 
 # package mgr vars
 $choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
@@ -20,15 +20,15 @@ $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 # env vars
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
 $env:CCPACK_MGR ??= 'unknown'
-$env:CCLONE_BRANCH ??= 'main'
-$env:CCLONE_BRANCH_LEGACY ??= '0.8'
 $env:CCLONE_ATTR ??= 'undef'
+$env:CCLONE_BRANCH ??= 'main'
+$env:CCLONE_BRANCH_LEGACY ??= '0.9'
 $env:CCDEST_DIR ??= "$env:XDG_CONFIG_HOME\nvim"
 $env:CCBACKUP_DIR = "$env:CCDEST_DIR" + "_backup-" + (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmss")
 
-function _abort ([Parameter(Mandatory = $True)] [string]$Msg,[Parameter(Mandatory = $True)] [string]$Type,[Parameter(Mandatory = $False)] [string]$Info_msg) {
-	if ($Info_msg -ne $null) {
-		Write-Host $Info_msg
+function _abort ([Parameter(Mandatory = $True)] [string]$Msg,[Parameter(Mandatory = $True)] [string]$Type,[Parameter(Mandatory = $False)] [string]$ExtMsg) {
+	if ($ExtMsg -ne $null) {
+		Write-Host $ExtMsg
 	}
 	Write-Error -Message "Error: $Msg" -Category $Type
 	exit 1
@@ -58,7 +58,7 @@ function info_ext ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [str
 }
 
 function warn ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
-	Write-Host "Warning" -ForegroundColor Yellow -NoNewline; Write-Host ": $(_chomp -Str $Msg)";
+	Write-Host "Warning:" -ForegroundColor Yellow -NoNewline; Write-Host " $(_chomp -Str $Msg)";
 }
 
 function warn_ext ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [string]$Msg) {
@@ -157,7 +157,7 @@ function query_pack {
 		info -Msg "   [Detected] We'll use 'Chocolatey' as the default package mgr."
 		$env:CCPACK_MGR = 'choco'
 	} else {
-		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
+		_abort -Msg "Required executable not found." -Type "NotInstalled" -ExtMsg @'
 You must install a modern package manager before installing this Nvim config.
 Available choices are:
   - Chocolatey
@@ -292,7 +292,7 @@ function clone_repo ([Parameter(Mandatory = $True)][ValidateNotNullOrEmpty()] [s
 		safe_execute -WithCmd { git clone --progress -b "$env:CCLONE_BRANCH_LEGACY" "$env:CCLONE_ATTR" $WithURL "$env:CCDEST_DIR" }
 	} else {
 		warn -Msg "You have outdated Nvim installed (< $REQUIRED_NVIM_VERSION_LEGACY)."
-		_abort -Msg "This Neovim distribution is no longer supported." -Type "NotImplemented" -Info_msg @"
+		_abort -Msg "This Neovim distribution is no longer supported." -Type "NotImplemented" -ExtMsg @"
 You have a legacy Neovim distribution installed.
 Please make sure you have nvim v$REQUIRED_NVIM_VERSION_LEGACY installed at the very least.
 
@@ -330,7 +330,7 @@ function _main {
 
 	# Check dependencies
 	if (-not (check_in_path -WithName "nvim")) {
-		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
+		_abort -Msg "Required executable not found." -Type "NotInstalled" -ExtMsg @'
 You must install Neovim before installing this Nvim config. See:
   https://github.com/neovim/neovim/wiki/Installing-Neovim
   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
@@ -340,7 +340,7 @@ You must install Neovim before installing this Nvim config. See:
 	}
 
 	if (-not (check_in_path -WithName "git")) {
-		_abort -Msg "Required executable not found." -Type "NotInstalled" -Info_msg @'
+		_abort -Msg "Required executable not found." -Type "NotInstalled" -ExtMsg @'
 You must install Git before installing this Nvim config. See:
   https://git-scm.com/
   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯

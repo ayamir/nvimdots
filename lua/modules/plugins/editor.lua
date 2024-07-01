@@ -63,8 +63,13 @@ editor["smoka7/hop.nvim"] = {
 }
 editor["tzachar/local-highlight.nvim"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("editor.local-highlight"),
+}
+editor["brenoprata10/nvim-highlight-colors"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("editor.highlight-colors"),
 }
 editor["romainl/vim-cool"] = {
 	lazy = true,
@@ -95,7 +100,7 @@ editor["mrjones2014/smart-splits.nvim"] = {
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = true,
 	build = function()
-		if #vim.api.nvim_list_uis() ~= 0 then
+		if vim.fn.has("gui_running") == 1 then
 			vim.api.nvim_command([[TSUpdate]])
 		end
 	end,
@@ -108,10 +113,6 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		{
 			"windwp/nvim-ts-autotag",
 			config = require("editor.autotag"),
-		},
-		{
-			"NvChad/nvim-colorizer.lua",
-			config = require("editor.colorizer"),
 		},
 		{
 			"hiphish/rainbow-delimiters.nvim",

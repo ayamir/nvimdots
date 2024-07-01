@@ -3,19 +3,20 @@ local global = require("core.global")
 
 -- Create cache dir and data dirs
 local createdir = function()
-	local data_dir = {
-		global.cache_dir .. "backup",
-		global.cache_dir .. "session",
-		global.cache_dir .. "swap",
-		global.cache_dir .. "tags",
-		global.cache_dir .. "undo",
+	local data_dirs = {
+		global.cache_dir .. "/backup",
+		global.cache_dir .. "/session",
+		global.cache_dir .. "/swap",
+		global.cache_dir .. "/tags",
+		global.cache_dir .. "/undo",
 	}
 	-- Only check whether cache_dir exists, this would be enough.
 	if vim.fn.isdirectory(global.cache_dir) == 0 then
-		os.execute("mkdir -p " .. global.cache_dir)
-		for _, v in pairs(data_dir) do
-			if vim.fn.isdirectory(v) == 0 then
-				os.execute("mkdir -p " .. v)
+		---@diagnostic disable-next-line: param-type-mismatch
+		vim.fn.mkdir(global.cache_dir, "p")
+		for _, dir in pairs(data_dirs) do
+			if vim.fn.isdirectory(dir) == 0 then
+				vim.fn.mkdir(dir, "p")
 			end
 		end
 	end
@@ -135,12 +136,13 @@ You're recommended to install PowerShell for better experience.]],
 
 		local basecmd = "-NoLogo -MTA -ExecutionPolicy RemoteSigned"
 		local ctrlcmd = "-Command [console]::InputEncoding = [console]::OutputEncoding = [System.Text.Encoding]::UTF8"
-		vim.api.nvim_set_option_value("shell", vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell", {})
-		vim.api.nvim_set_option_value("shellcmdflag", string.format("%s %s;", basecmd, ctrlcmd), {})
-		vim.api.nvim_set_option_value("shellredir", "-RedirectStandardOutput %s -NoNewWindow -Wait", {})
-		vim.api.nvim_set_option_value("shellpipe", "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode", {})
-		vim.api.nvim_set_option_value("shellquote", nil, {})
-		vim.api.nvim_set_option_value("shellxquote", nil, {})
+		local set_opts = vim.api.nvim_set_option_value
+		set_opts("shell", vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell", {})
+		set_opts("shellcmdflag", string.format("%s %s;", basecmd, ctrlcmd), {})
+		set_opts("shellredir", "-RedirectStandardOutput %s -NoNewWindow -Wait", {})
+		set_opts("shellpipe", "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode", {})
+		set_opts("shellquote", "", {})
+		set_opts("shellxquote", "", {})
 	end
 end
 
@@ -160,10 +162,8 @@ local load_core = function()
 	require("core.pack")
 	require("keymap")
 
-	local colorscheme = settings.colorscheme
-	local background = settings.background
-	vim.api.nvim_command("set background=" .. background)
-	vim.api.nvim_command("colorscheme " .. colorscheme)
+	vim.api.nvim_set_option_value("background", settings.background, {})
+	vim.cmd.colorscheme(settings.colorscheme)
 end
 
 load_core()

@@ -4,15 +4,15 @@
 # Allow `[[ -n "$(command)" ]]`, `func "$(command)"`, pipes, etc.
 # shellcheck disable=SC2312
 
-set -u
+set -uo pipefail
 
-# global vars
+# global-scope vars
+REQUIRED_NVIM_VERSION=0.10.0
+REQUIRED_NVIM_VERSION_LEGACY=0.9.0
+USE_SSH=1
+CLONE_ATTR=("--progress")
 DEST_DIR="${HOME}/.config/nvim"
 BACKUP_DIR="${DEST_DIR}_backup-$(date +%Y%m%dT%H%M%S)"
-CLONE_ATTR=("--progress")
-REQUIRED_NVIM_VERSION=0.9.0
-REQUIRED_NVIM_VERSION_LEGACY=0.8.0
-USE_SSH=1
 
 abort() {
 	printf "%s\n" "$@" >&2
@@ -31,7 +31,7 @@ if [[ -n "${CI-}" && -n "${INTERACTIVE-}" ]]; then
 	abort "Cannot run force-interactive mode in CI."
 fi
 
-# string formatters
+# String formatters
 if [[ -t 1 ]]; then
 	tty_escape() { printf "\033[%sm" "$1"; }
 else
@@ -82,7 +82,7 @@ info_ext() {
 }
 
 warn() {
-	printf "${tty_yellow}Warning${tty_reset}: %s\n" "$(chomp "$1")"
+	printf "${tty_yellow}Warning:${tty_reset} %s\n" "$(chomp "$1")"
 }
 
 warn_ext() {
@@ -98,7 +98,7 @@ getc() {
 }
 
 ring_bell() {
-	# Use the shell's audible bell.
+	# Use the shell's audible bell
 	if [[ -t 1 ]]; then
 		printf "\a"
 	fi
@@ -106,13 +106,12 @@ ring_bell() {
 
 wait_for_user() {
 	local c
-	echo
+	printf "\n"
 	echo "Press ${tty_bold}RETURN${tty_reset}/${tty_bold}ENTER${tty_reset} to continue or any other key to abort..."
 	getc c
 	# we test for \r and \n because some stuff does \r instead
-	if ! [[ "${c}" == $'\r' || "${c}" == $'\n' ]]; then
-		echo "${tty_red}Aborted.${tty_reset}"
-		exit 1
+	if ! [[ "$c" == $'\r' || "$c" == $'\n' ]]; then
+		abort "${tty_red}Aborted.${tty_reset}"
 	fi
 }
 
@@ -121,9 +120,10 @@ version_ge() {
 }
 
 prompt_confirm() {
+	local choice
 	while true; do
-		read -r -p "$1 [Y/n]: " USR_CHOICE
-		case "${USR_CHOICE}" in
+		read -r -p "$1 [Y/n]: " choice
+		case "$choice" in
 		[yY][eE][sS] | [yY])
 			return 1
 			;;
@@ -131,10 +131,10 @@ prompt_confirm() {
 			return 0
 			;;
 		*)
-			if [[ -z "${USR_CHOICE}" ]]; then
+			if [[ -z "$choice" ]]; then
 				return 1
 			fi
-			printf "${tty_red}%s\n\n${tty_reset}" "Invalid input! Please enter one of: '[y/yes] / [n/no]'"
+			printf "${tty_red}%s\n\n${tty_reset}" "Input invalid! Please enter one of the following: '[y/yes]' or '[n/no]'."
 			;;
 		esac
 	done
@@ -175,7 +175,7 @@ clone_repo() {
 	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		info "Automatically redirecting you to the latest compatible version..."
-		execute "git" "clone" "-b" "0.8" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.9" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION_LEGACY})."
 		abort "$(

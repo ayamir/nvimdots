@@ -2,10 +2,10 @@ local global = require("core.global")
 
 local function load_options()
 	local global_local = {
-		-- backupdir = global.cache_dir .. "backup/",
-		-- directory = global.cache_dir .. "swap/",
-		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
-		-- viewdir = global.cache_dir .. "view/",
+		-- backupdir = global.cache_dir .. "/backup/",
+		-- directory = global.cache_dir .. "/swap/",
+		-- spellfile = global.cache_dir .. "/spell/en.uft-8.add",
+		-- viewdir = global.cache_dir .. "/view/",
 		autoindent = true,
 		autoread = true,
 		autowrite = true,
@@ -17,8 +17,8 @@ local function load_options()
 		clipboard = "unnamedplus",
 		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
-		complete = ".,w,b,k",
-		completeopt = "menuone,noselect",
+		complete = ".,w,b,k,kspell",
+		completeopt = "menuone,noselect,popup",
 		concealcursor = "niv",
 		conceallevel = 0,
 		cursorcolumn = true,
@@ -70,6 +70,7 @@ local function load_options()
 		signcolumn = "yes",
 		smartcase = true,
 		smarttab = true,
+		smoothscroll = true,
 		splitbelow = true,
 		splitkeep = "screen",
 		splitright = true,
@@ -83,7 +84,7 @@ local function load_options()
 		timeoutlen = 300,
 		ttimeout = true,
 		ttimeoutlen = 0,
-		undodir = global.cache_dir .. "undo/",
+		undodir = global.cache_dir .. "/undo/",
 		undofile = true,
 		-- Please do NOT set `updatetime` to above 500, otherwise most plugins may not function correctly
 		updatetime = 200,
@@ -120,7 +121,7 @@ local function load_options()
 	end
 
 	for name, value in pairs(require("modules.utils").extend_config(global_local, "user.options")) do
-		vim.o[name] = value
+		vim.api.nvim_set_option_value(name, value, {})
 	end
 end
 

@@ -4,13 +4,21 @@ tool["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },
 }
--- only for fcitx5 user who uses non-English language during coding
+-- This is specifically for fcitx5 users who code in languages other than English
 -- tool["pysan3/fcitx5.nvim"] = {
 -- 	lazy = true,
 -- 	event = "BufReadPost",
 -- 	cond = vim.fn.executable("fcitx5-remote") == 1,
 -- 	config = require("tool.fcitx5"),
 -- }
+tool["Bekaboo/dropbar.nvim"] = {
+	lazy = false,
+	config = require("tool.dropbar"),
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"nvim-telescope/telescope-fzf-native.nvim",
+	},
+}
 tool["nvim-tree/nvim-tree.lua"] = {
 	lazy = true,
 	cmd = {
@@ -72,18 +80,31 @@ tool["nvim-telescope/telescope.nvim"] = {
 	cmd = "Telescope",
 	config = require("tool.telescope"),
 	dependencies = {
-		{ "nvim-tree/nvim-web-devicons" },
 		{ "nvim-lua/plenary.nvim" },
+		{ "nvim-tree/nvim-web-devicons" },
+		{ "jvgrootveld/telescope-zoxide" },
 		{ "debugloop/telescope-undo.nvim" },
+		{ "nvim-telescope/telescope-frecency.nvim" },
+		{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{
+			"FabianWirth/search.nvim",
+			config = require("tool.search"),
+		},
 		{
 			"ahmedkhalf/project.nvim",
 			event = { "CursorHold", "CursorHoldI" },
 			config = require("tool.project"),
 		},
-		{ "jvgrootveld/telescope-zoxide" },
-		{ "nvim-telescope/telescope-frecency.nvim" },
-		{ "nvim-telescope/telescope-live-grep-args.nvim" },
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{
+			"aaronhallaert/advanced-git-search.nvim",
+			cmd = { "AdvancedGitSearch" },
+			dependencies = {
+				"tpope/vim-rhubarb",
+				"tpope/vim-fugitive",
+				"sindrets/diffview.nvim",
+			},
+		},
 	},
 }
 

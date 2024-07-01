@@ -7,7 +7,7 @@ body:
       value: |
         _Before requesting:_ Make sure you've read through our [Wiki: Usage](https://github.com/ayamir/nvimdots/wiki/Usage) before you start to add things to nvimdots!
         > [!IMPORTANT]
-        > The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+        > The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
   - type: checkboxes
     id: is-latest-commit
     attributes:
@@ -30,7 +30,7 @@ body:
     attributes:
       label: "Neovim version"
       description: "Paste the output of `nvim --version` here"
-      placeholder: "NVIM v0.10.0-dev-873+g71ad771ea"
+      placeholder: "NVIM v0.11.0-dev-194+g6c7677e5d"
     validations:
       required: true
   - type: dropdown
@@ -40,9 +40,9 @@ body:
       description: "This issue template mainly targets `main` branch. Check the output of `git rev-parse --abbrev-ref HEAD` if you're not sure."
       options:
         - main (Default/Latest)
-        - 0.8 (Legacy)
-        - 0.7 (Deprecated)
-        - 0.10 (Nightly)
+        - 0.9 (Legacy)
+        - 0.8 (Deprecated)
+        - 0.11 (Nightly)
     validations:
       required: true
 
