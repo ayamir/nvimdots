@@ -60,7 +60,7 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 ### 🎐 Features
 
-- **Fast.** Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
+- **Fast.** Less than **50ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
 - **Simple.** Runs out of the box.
 - **Modern.** Pure `lua` config.
 - **Modular.** Easy to customize.
