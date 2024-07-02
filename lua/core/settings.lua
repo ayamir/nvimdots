@@ -84,9 +84,8 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
 ---@type string
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "dracula-soft"
 
 -- Set it to true if your terminal has transparent background.
 ---@type boolean
@@ -174,7 +173,7 @@ settings["treesitter_deps"] = {
 -- NOTE: Currently, only the following options related to the GUI are supported. Other entries will be IGNORED.
 ---@type { font_name: string, font_size: number }
 settings["gui_config"] = {
-	font_name = "JetBrainsMono Nerd Font",
+	font_name = "FiraCode Nerd Font",
 	font_size = 12,
 }
 

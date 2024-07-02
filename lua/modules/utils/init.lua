@@ -57,7 +57,7 @@ local function init_palette()
 	end
 
 	if not palette then
-		palette = vim.g.colors_name:find("catppuccin") and require("catppuccin.palettes").get_palette()
+		palette = require("dracula").colors()
 			or {
 				rosewater = "#DC8A78",
 				flamingo = "#DD7878",
@@ -112,7 +112,7 @@ local function set_global_hl(name, foreground, background, italic)
 		fg = foreground,
 		bg = background,
 		italic = italic == true,
-		default = not vim.g.colors_name:find("catppuccin"),
+		default = not vim.g.colors_name:find("dracula-soft"),
 	})
 end
 

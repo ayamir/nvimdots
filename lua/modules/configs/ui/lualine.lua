@@ -9,51 +9,6 @@ return function()
 		ui = require("modules.utils.icons").get("ui", true),
 	}
 
-	local function custom_theme()
-		vim.api.nvim_create_autocmd("ColorScheme", {
-			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
-			pattern = "*",
-			callback = function()
-				has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
-				require("lualine").setup({ options = { theme = custom_theme() } })
-			end,
-		})
-
-		if has_catppuccin then
-			colors = require("modules.utils").get_palette()
-			local universal_bg = require("core.settings").transparent_background and "NONE" or colors.mantle
-			return {
-				normal = {
-					a = { fg = colors.lavender, bg = colors.surface0, gui = "bold" },
-					b = { fg = colors.text, bg = universal_bg },
-					c = { fg = colors.text, bg = universal_bg },
-				},
-				command = {
-					a = { fg = colors.peach, bg = colors.surface0, gui = "bold" },
-				},
-				insert = {
-					a = { fg = colors.green, bg = colors.surface0, gui = "bold" },
-				},
-				visual = {
-					a = { fg = colors.flamingo, bg = colors.surface0, gui = "bold" },
-				},
-				terminal = {
-					a = { fg = colors.teal, bg = colors.surface0, gui = "bold" },
-				},
-				replace = {
-					a = { fg = colors.red, bg = colors.surface0, gui = "bold" },
-				},
-				inactive = {
-					a = { fg = colors.subtext0, bg = universal_bg, gui = "bold" },
-					b = { fg = colors.subtext0, bg = universal_bg },
-					c = { fg = colors.subtext0, bg = universal_bg },
-				},
-			}
-		else
-			return "auto"
-		end
-	end
-
 	local conditionals = {
 		has_enough_room = function()
 			return vim.o.columns > 100
@@ -252,7 +207,7 @@ return function()
 	require("modules.utils").load_plugin("lualine", {
 		options = {
 			icons_enabled = true,
-			theme = custom_theme(),
+			theme = "dracula",
 			disabled_filetypes = { statusline = { "alpha" } },
 			component_separators = "",
 			section_separators = { left = "", right = "" },
