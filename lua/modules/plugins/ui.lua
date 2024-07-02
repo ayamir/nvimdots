@@ -65,5 +65,14 @@ ui["dstein64/nvim-scrollview"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.scrollview"),
 }
+ui["folke/noice.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	dependencies = {
+		"MunifTanjim/nui.nvim",
+		"rcarriga/nvim-notify",
+	},
+	config = require("ui.noice"),
+}
 
 return ui

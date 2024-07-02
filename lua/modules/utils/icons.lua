@@ -185,6 +185,7 @@ local data = {
 	},
 	cmp = {
 		buffer = "󰉿",
+		builtin = "",
 		latex_symbols = "",
 		luasnip = "󰃐",
 		nvim_lsp = "",

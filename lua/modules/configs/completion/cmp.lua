@@ -34,7 +34,6 @@ return function()
 			and {
 				require("copilot_cmp.comparators").prioritize,
 				require("copilot_cmp.comparators").score,
-				-- require("cmp_tabnine.compare"),
 				compare.offset, -- Items closer to cursor will have lower priority
 				compare.exact,
 				-- compare.scopes,
@@ -49,7 +48,6 @@ return function()
 				compare.order,
 			}
 		or {
-			-- require("cmp_tabnine.compare"),
 			compare.offset, -- Items closer to cursor will have lower priority
 			compare.exact,
 			-- compare.scopes,
@@ -65,6 +63,27 @@ return function()
 		}
 
 	local cmp = require("cmp")
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{
+				name = "cmdline",
+				option = {
+					ignore_cmds = { "Man", "!" },
+				},
+			},
+			{ name = "path" },
+			{ name = "buffer" },
+		}),
+	})
+	cmp.setup.cmdline("/", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = "buffer" },
+		},
+	})
+
+	local luasnip = require("luasnip")
 	require("modules.utils").load_plugin("cmp", {
 		preselect = cmp.PreselectMode.None,
 		window = {
@@ -91,21 +110,17 @@ return function()
 					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
 
 				vim_item.menu = setmetatable({
-					cmp_tabnine = "[TN]",
-					copilot = "[CPLT]",
-					buffer = "[BUF]",
-					orgmode = "[ORG]",
-					nvim_lsp = "[LSP]",
-					nvim_lua = "[LUA]",
-					path = "[PATH]",
-					tmux = "[TMUX]",
-					treesitter = "[TS]",
-					latex_symbols = "[LTEX]",
-					luasnip = "[SNIP]",
-					spell = "[SPELL]",
+					cmdline = string.format("[%s CMD]", icons.cmp.Command),
+					copilot = string.format("[%s CPLT]", icons.cmp.Copilot),
+					buffer = string.format("[%s BUF]", icons.cmp.Buffer),
+					nvim_lsp = string.format("[%s LSP]", icons.cmp.Nvim_lsp),
+					nvim_lua = string.format("[%s LUA]", icons.cmp.Nvim_lua),
+					path = string.format("[%s PATH]", icons.cmp.Path),
+					latex_symbols = string.format("[%s LTEX]", icons.cmp.Latex_symbols),
+					luasnip = string.format("[%s SNIP]", icons.cmp.Luasnip),
 				}, {
 					__index = function()
-						return "[BTN]" -- builtin/unknown source names
+						return string.format("[%s BTN]", icons.cmp.builtin)
 					end,
 				})[entry.source.name]
 
@@ -127,40 +142,30 @@ return function()
 		},
 		-- You can set mappings if you want
 		mapping = cmp.mapping.preset.insert({
-			["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-			["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+			["<CR>"] = cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace }),
+			["<C-p>"] = cmp.mapping.select_prev_item(),
+			["<C-n>"] = cmp.mapping.select_next_item(),
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
 			["<C-f>"] = cmp.mapping.scroll_docs(4),
-			["<C-w>"] = cmp.mapping.abort(),
+			["<C-w>"] = cmp.mapping.close(),
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-				elseif require("luasnip").expand_or_locally_jumpable() then
-					require("luasnip").expand_or_jump()
+					cmp.select_next_item()
+				elseif luasnip.expand_or_locally_jumpable() then
+					luasnip.expand_or_jump()
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
-					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-				elseif require("luasnip").jumpable(-1) then
-					require("luasnip").jump(-1)
+					cmp.select_prev_item()
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
 				else
 					fallback()
 				end
 			end, { "i", "s" }),
-			["<CR>"] = cmp.mapping({
-				i = function(fallback)
-					if cmp.visible() and cmp.get_active_entry() then
-						cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
-					else
-						fallback()
-					end
-				end,
-				s = cmp.mapping.confirm({ select = true }),
-				c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
-			}),
 		}),
 		snippet = {
 			expand = function(args)
@@ -173,22 +178,17 @@ return function()
 			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-			{ name = "treesitter" },
-			{ name = "spell" },
-			{ name = "tmux" },
-			{ name = "orgmode" },
 			{
 				name = "buffer",
 				option = {
 					get_bufnrs = function()
-						return vim.api.nvim_buf_line_count(0) < 7500 and vim.api.nvim_list_bufs() or {}
+						return vim.api.nvim_list_bufs()
 					end,
 				},
 			},
+			{ name = "spell", max_item_count = 5 },
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
-			-- { name = "codeium" },
-			-- { name = "cmp_tabnine" },
 		},
 		experimental = {
 			ghost_text = {
