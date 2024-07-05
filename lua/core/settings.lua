@@ -8,17 +8,7 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
-<<<<<<< HEAD
--- Set it to false if you want to turn off LSP Inlay Hints
----@type boolean
-settings["lsp_inlayhints"] = true
-
 -- Set it to false if there is no need to format on save.
-||||||| 239df82
--- Set it to false if there are no need to format on save.
-=======
--- Set it to false if there is no need to format on save.
->>>>>>> upstream/main
 ---@type boolean
 settings["format_on_save"] = true
 
@@ -233,3 +223,4 @@ settings["dashboard_image"] = {
 }
 
 return require("modules.utils").extend_config(settings, "user.settings")
+
