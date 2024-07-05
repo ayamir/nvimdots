@@ -42,6 +42,7 @@ return function()
 		log_level = "warn",
 		update_in_insert = false,
 		sources = sources,
+		default_timeout = require("core.settings").format_timeout,
 	})
 
 	require("completion.mason-null-ls").setup()
