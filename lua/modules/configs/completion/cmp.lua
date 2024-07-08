@@ -90,6 +90,7 @@ return function()
 				vim_item.kind =
 					string.format(" %s  %s", lspkind_icons[vim_item.kind] or icons.cmp.undefined, vim_item.kind or "")
 
+				-- set up labels for completion entries
 				vim_item.menu = setmetatable({
 					cmp_tabnine = "[TN]",
 					copilot = "[CPLT]",
@@ -109,10 +110,16 @@ return function()
 					end,
 				})[entry.source.name]
 
+				-- cut down long results
 				local label = vim_item.abbr
 				local truncated_label = vim.fn.strcharpart(label, 0, 80)
 				if truncated_label ~= label then
 					vim_item.abbr = truncated_label .. "..."
+				end
+
+				-- deduplicate results from nvim_lsp
+				if entry.source.name == "nvim_lsp" then
+					vim_item.dup = 0
 				end
 
 				return vim_item
