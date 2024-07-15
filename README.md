@@ -3,8 +3,8 @@
     <br>
     <a href="https://github.com/neovim/neovim/releases/tag/stable">
     <img
-        alt="NeoVim Version Capability"
-        src="https://img.shields.io/badge/Supports%20Nvim-v0.9-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
+        alt="Neovim Version Capability"
+        src="https://img.shields.io/badge/Supports%20Nvim-v0.10-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
     </a>
     <a href="https://github.com/ayamir/nvimdots/releases">
     <img
@@ -36,23 +36,23 @@
 
 ## 🪷 Introduction
 
-This repo hosts our [NeoVim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
+This repo hosts our [Neovim](https://neovim.io/) configuration for Linux [(with NixOS support)](#nixos-support), macOS, and Windows. `init.lua` is the config entry point.
 
 Branch info:
 
 <div align="center">
 
-| Branch | Supported neovim version |
+| Branch | Supported Neovim version |
 | :----: | :----------------------: |
-|  main  |     nvim 0.9 stable      |
-|  0.10  |    nvim 0.10 nightly     |
+|  main  |     nvim 0.10 stable     |
+|  0.11  |    nvim 0.11 nightly     |
+|  0.9   |         nvim 0.9         |
 |  0.8   |         nvim 0.8         |
-|  0.7   |         nvim 0.7         |
 
 </div>
 
 > [!IMPORTANT]
-> The `0.10` branch is intended for nightly neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+> The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
@@ -60,15 +60,15 @@ Chinese introduction is [here](https://zhuanlan.zhihu.com/p/382092667).
 
 ### 🎐 Features
 
-- **Fast.** Less than **30ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
-- **Simple.** Run out of the box.
+- **Fast.** Less than **50ms** to start (Depends on SSD and CPU, tested on Zephyrus G14 2022 version).
+- **Simple.** Runs out of the box.
 - **Modern.** Pure `lua` config.
 - **Modular.** Easy to customize.
 - **Powerful.** Full functionality to code.
 
 ## 🏗 How to Install
 
-Just run the following interactive bootstrap command, and you're good to go 👍
+Simply run the following interactive bootstrap command, and you should be all set 👍
 
 - **Windows** _(Note: This script REQUIRES `pwsh` > `v7.1`)_
 
@@ -197,6 +197,8 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 - [ayamir](https://github.com/ayamir)
 - [Jint-lzxy](https://github.com/Jint-lzxy)
 - [CharlesChiuGit](https://github.com/CharlesChiuGit)
+- [aarnphm](https://github.com/aarnphm)
+- [misumisumi](https://github.com/misumisumi)
 
 ## 🎉 Acknowledgement
 
@@ -204,7 +206,7 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 
 ## 📜 License
 
-This NeoVim configuration is released under the MIT license, which grants the following permissions:
+This Neovim configuration is released under the BSD 3-Clause license, which grants the following permissions:
 
 - Commercial use
 - Distribution

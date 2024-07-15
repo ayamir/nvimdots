@@ -121,7 +121,6 @@ end
 ---@param background string @The background color to blend with
 ---@param alpha number|string @Number between 0 and 1 for blending amount.
 function M.blend(foreground, background, alpha)
-	---@diagnostic disable-next-line: cast-local-type
 	alpha = type(alpha) == "string" and (tonumber(alpha, 16) / 0xff) or alpha
 	local bg = hex_to_rgb(background)
 	local fg = hex_to_rgb(foreground)
@@ -277,9 +276,9 @@ local function tbl_recursive_merge(dst, src)
 	for key, value in pairs(src) do
 		if type(dst[key]) == "table" and type(value) == "function" then
 			dst[key] = value(dst[key])
-		elseif type(dst[key]) == "table" and vim.tbl_islist(dst[key]) and key ~= "dashboard_image" then
+		elseif type(dst[key]) == "table" and vim.islist(dst[key]) and key ~= "dashboard_image" then
 			vim.list_extend(dst[key], value)
-		elseif type(dst[key]) == "table" and type(value) == "table" and not vim.tbl_islist(dst[key]) then
+		elseif type(dst[key]) == "table" and type(value) == "table" and not vim.islist(dst[key]) then
 			tbl_recursive_merge(dst[key], value)
 		else
 			dst[key] = value

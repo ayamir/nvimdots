@@ -75,7 +75,7 @@ return function()
 				loading = " " .. icons.misc.Watch,
 			},
 		},
-		src = {
+		completion = {
 			insert_closing_quote = true,
 			text = {
 				prerelease = " " .. icons.diagnostics.Warning_alt .. "pre-release ",

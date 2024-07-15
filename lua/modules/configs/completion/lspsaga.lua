@@ -10,17 +10,17 @@ return function()
 	}
 
 	local function set_sidebar_icons()
-		-- Set icons for sidebar.
-		local diagnostic_icons = {
-			Error = icons.diagnostics.Error_alt,
-			Warn = icons.diagnostics.Warning_alt,
-			Info = icons.diagnostics.Information_alt,
-			Hint = icons.diagnostics.Hint_alt,
-		}
-		for type, icon in pairs(diagnostic_icons) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl })
-		end
+		-- Set icons for sidebar
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = icons.diagnostics.Error_alt,
+					[vim.diagnostic.severity.WARN] = icons.diagnostics.Warning_alt,
+					[vim.diagnostic.severity.INFO] = icons.diagnostics.Information_alt,
+					[vim.diagnostic.severity.HINT] = icons.diagnostics.Hint_alt,
+				},
+			},
+		})
 	end
 
 	set_sidebar_icons()
@@ -28,7 +28,7 @@ return function()
 	require("modules.utils").load_plugin("lspsaga", {
 		-- Breadcrumbs: https://nvimdev.github.io/lspsaga/breadcrumbs/
 		symbol_in_winbar = {
-			enable = true,
+			enable = false,
 			separator = " " .. icons.ui.Separator,
 			hide_keyword = false,
 			show_file = false,
@@ -148,7 +148,6 @@ return function()
 				Method = { icons.kind.Method, "LspKindMethod" },
 				Module = { icons.kind.Module, "LspKindModule" },
 				Namespace = { icons.kind.Namespace, "LspKindNamespace" },
-				Number = { icons.kind.Number, "LspKindNumber" },
 				Operator = { icons.kind.Operator, "LspKindOperator" },
 				Package = { icons.kind.Package, "LspKindPackage" },
 				Property = { icons.kind.Property, "LspKindProperty" },
@@ -159,6 +158,7 @@ return function()
 				Array = { icons.type.Array, "LspKindArray" },
 				Boolean = { icons.type.Boolean, "LspKindBoolean" },
 				Null = { icons.type.Null, "LspKindNull" },
+				Number = { icons.type.Number, "LspKindNumber" },
 				Object = { icons.type.Object, "LspKindObject" },
 				String = { icons.type.String, "LspKindString" },
 				-- ccls-specific icons.

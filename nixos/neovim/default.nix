@@ -4,8 +4,15 @@
 , pkgs
 , ...
 }:
-with lib; let
+let
   cfg = config.programs.neovim.nvimdots;
+  inherit (lib) flip warn const;
+  inherit (lib.attrsets) optionalAttrs;
+  inherit (lib.lists) optionals;
+  inherit (lib.modules) mkIf;
+  inherit (lib.options) mkEnableOption mkOption literalExpression;
+  inherit (lib.strings) concatStringsSep versionOlder versionAtLeast;
+  inherit (lib.types) listOf coercedTo package functionTo;
 in
 {
   options = {
@@ -19,6 +26,15 @@ in
           Bind lazy-lock.json in your repository to $XDG_CONFIG_HOME/nvim.
           Very powerful in terms of keeping the environment consistent, but has the following side effects.
           You cannot update it even if you run the Lazy command, because it binds read-only.
+          You need to remove lazy-lock.json before enabling this option if `mergeLazyLock` is set.
+        '';
+        mergeLazyLock = mkEnableOption ''
+          Merges the managed lazy-lock.json with the existing one under $XDG_CONFIG_HOME/nvim if its hash has changed on activation.
+          Upstream package version changes have high priority.
+          This means changes to lazy-lock.json in the config directory (likely due to installing package) will be preserved.
+          In other words, it achieves environment consistency while remaining adaptable to changes.
+          You need to unlink lazy-lock.json before enabling this option if `bindLazyLock` is set.
+          Please refer to the wiki for details on the behavior.
         '';
         setBuildEnv = mkEnableOption ''
           Sets environment variables that resolve build dependencies as required by `mason.nvim` and `nvim-treesitter`
@@ -34,9 +50,11 @@ in
           use Haskell plugins.
         '';
         extraHaskellPackages = mkOption {
-          type = with types;
-            let fromType = listOf package;
-            in coercedTo fromType
+          type =
+            let
+              fromType = listOf package;
+            in
+            coercedTo fromType
               (flip warn const ''
                 Assigning a plain list to extraHaskellPackages is deprecated.
                        Please assign a function taking a package set as argument, so
@@ -56,7 +74,7 @@ in
           '';
         };
         extraDependentPackages = mkOption {
-          type = with types; listOf package;
+          type = listOf package;
           default = [ ];
           example = literalExpression "[ pkgs.openssl ]";
           description = "Extra build depends to add `LIBRARY_PATH` and `CPATH`.";
@@ -67,32 +85,29 @@ in
   config =
     let
       # Inspired from https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/nix-ld.nix
-      build-dependent-pkgs = with pkgs; builtins.filter (package: !package.meta.unsupported) [
+      build-dependent-pkgs = builtins.filter (package: !package.meta.unsupported) [
         # manylinux
-        acl
-        attr
-        bzip2
-        curl
-        glibc
-        libsodium
-        libssh
-        libxml2
-        openssl
-        stdenv.cc.cc
-        stdenv.cc.cc.lib
-        systemd
-        util-linux
-        xz
-        zlib
-        zstd
+        pkgs.acl
+        pkgs.attr
+        pkgs.bzip2
+        pkgs.curl
+        pkgs.glibc
+        pkgs.libsodium
+        pkgs.libssh
+        pkgs.libxml2
+        pkgs.openssl
+        pkgs.stdenv.cc.cc
+        pkgs.stdenv.cc.cc.lib
+        pkgs.systemd
+        pkgs.util-linux
+        pkgs.xz
+        pkgs.zlib
+        pkgs.zstd
         # Packages not included in `nix-ld`'s NixOSModule
-        glib
-        libcxx
+        pkgs.glib
+        pkgs.libcxx
       ]
       ++ cfg.extraDependentPackages;
-
-      makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
-      makeIncludePath = x: makeSearchPathOutput "dev" "include" x;
 
       neovim-build-deps = pkgs.buildEnv {
         name = "neovim-build-deps";
@@ -112,19 +127,37 @@ in
       ];
     in
     mkIf cfg.enable {
+      assertions = [
+        {
+          assertion = ! (cfg.bindLazyLock && cfg.mergeLazyLock);
+          message = "bindLazyLock and mergeLazyLock cannot be enabled at the same time.";
+        }
+      ];
       xdg.configFile = {
         "nvim/init.lua".source = ../../init.lua;
         "nvim/lua".source = ../../lua;
         "nvim/snips".source = ../../snips;
         "nvim/tutor".source = ../../tutor;
-      } // lib.optionalAttrs cfg.bindLazyLock {
+      } // optionalAttrs cfg.bindLazyLock {
         "nvim/lazy-lock.json".source = ../../lazy-lock.json;
+      } // optionalAttrs cfg.mergeLazyLock {
+        "nvim/lazy-lock.fixed.json" = {
+          source = ../../lazy-lock.json;
+          onChange = ''
+            if [ -f ${config.xdg.configHome}/nvim/lazy-lock.json ]; then
+              tmp=$(mktemp)
+              ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configFile."nvim/lazy-lock.fixed.json".source} > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/lazy-lock.json
+            else
+              ${pkgs.rsync}/bin/rsync --chmod 644 ${config.xdg.configFile."nvim/lazy-lock.fixed.json".source} ${config.xdg.configHome}/nvim/lazy-lock.json
+            fi
+          '';
+        };
       };
       home = {
-        packages = with pkgs; [
-          ripgrep
+        packages = [
+          pkgs.ripgrep
         ];
-        shellAliases = optionalAttrs (cfg.setBuildEnv && (lib.versionOlder config.home.stateVersion "24.05")) {
+        shellAliases = optionalAttrs (cfg.setBuildEnv && (versionOlder config.home.stateVersion "24.05")) {
           nvim = concatStringsSep " " buildEnv + " nvim";
         };
       };
@@ -134,33 +167,32 @@ in
         withNodeJs = true;
         withPython3 = true;
 
-        extraPackages = with pkgs;
-          [
-            # Dependent packages used by default plugins
-            doq
-            tree-sitter
-          ]
-          ++ optionals cfg.withBuildTools [
-            cargo
-            clang
-            cmake
-            gcc
-            gnumake
-            go
-            lua51Packages.luarocks
-            ninja
-            pkg-config
-            yarn
-          ]
-          ++ optionals cfg.withHaskell [
-            (pkgs.writeShellApplication {
-              name = "stack";
-              text = ''
-                exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
-              '';
-            })
-            (haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
-          ];
+        extraPackages = [
+          # Dependent packages used by default plugins
+          pkgs.doq
+          pkgs.tree-sitter
+        ]
+        ++ optionals cfg.withBuildTools [
+          pkgs.cargo
+          pkgs.clang
+          pkgs.cmake
+          pkgs.gcc
+          pkgs.gnumake
+          pkgs.go
+          pkgs.lua51Packages.luarocks
+          pkgs.ninja
+          pkgs.pkg-config
+          pkgs.yarn
+        ]
+        ++ optionals cfg.withHaskell [
+          (pkgs.writeShellApplication {
+            name = "stack";
+            text = ''
+              exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
+            '';
+          })
+          (pkgs.haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
+        ];
 
         extraPython3Packages = ps: with ps; [
           docformatter
@@ -168,8 +200,8 @@ in
           pynvim
         ];
       }
-      // lib.optionalAttrs (lib.versionAtLeast config.home.stateVersion "24.05") {
-        extraWrapperArgs = lib.optionals cfg.setBuildEnv [
+      // optionalAttrs (versionAtLeast config.home.stateVersion "24.05") {
+        extraWrapperArgs = optionals cfg.setBuildEnv [
           "--suffix"
           "CPATH"
           ":"

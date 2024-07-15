@@ -33,21 +33,21 @@
               name = "check-linker";
               text =
                 let
-                  ldd_cmd = if pkgs.stdenv.isDarwin then "otool -L" else "${pkgs.glibc.bin}/bin/ldd";
+                  ldd_cmd = if pkgs.stdenv.isDarwin then "xcrun otool -L" else "${pkgs.glibc.bin}/bin/ldd";
                 in
                 ''
                   #shellcheck disable=SC1090
-                  source <(sed -ne :1  -e 'N;1,1b1' -e 'P;D' "${self.packages.${system}.testEnv}/home-path/bin/nvim")
-                  echo "check file under ''${XDG_DATA_HOME}/''${NVIM_APPNAME:-nvim}/mason/bin"
+                  source <(sed -ne :1 -e 'N;1,1b1' -e 'P;D' "${self.packages.${system}.testEnv}/home-path/bin/nvim")
+                  echo "Checking files under ''${XDG_DATA_HOME}/''${NVIM_APPNAME:-nvim}/mason/bin..."
                   find "''${XDG_DATA_HOME}/''${NVIM_APPNAME:-nvim}/mason/bin" -type l | while read -r link; do
                     "${ldd_cmd}" "$(readlink -f "$link")" > /dev/zero 2>&1 || continue
                     linkers=$("${ldd_cmd}" "$(readlink -f "$link")" | tail -n+2)
                     echo "$linkers" | while read -r line; do
                       [ -z "$line" ] && continue
-                      echo "$line" | grep -q "/nix/store" || printf '%s: %s do not link to /nix/store \n' "$(basename "$link")" "$line"
+                      echo "$line" | grep -q "/nix/store" || printf '%s: %s does not link to /nix/store \n' "$(basename "$link")" "$line"
                     done
                   done
-                  echo "check done"
+                  echo "*** Done ***"
                 '';
             };
           };
@@ -69,7 +69,7 @@
               motd = ''
                 {202}🔨 Welcome to devshell{reset}
                 Symlink configs to "''${XDG_CONFIG_HOME}"/nvimdots!
-                And NVIM_APPNAME=nvimdots is already configured, so neovim will put file under "\$XDG_xxx_HOME"/nvimdots.
+                And NVIM_APPNAME=nvimdots is already configured, so neovim will put files under "\$XDG_xxx_HOME"/nvimdots.
                 To uninstall, remove "\$XDG_xxx_HOME"/nvimdots.
 
                 $(type -p menu &>/dev/null && menu)
