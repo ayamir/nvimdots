@@ -36,7 +36,7 @@ return {
 				rope = { enabled = true },
 
 				-- Formatting
-				black = { enabled = true },
+				black = { enabled = false },
 				pyls_isort = { enabled = false },
 				autopep8 = { enabled = false },
 				yapf = { enabled = false },
