@@ -9,14 +9,8 @@ return function()
 	require("modules.utils").load_plugin("which-key", {
 		preset = "classic",
 		delay = vim.o.timeoutlen,
-		modes = {
-			n = true,
-			i = true,
-			x = false,
-			s = false,
-			o = false,
-			t = false,
-			c = false,
+		triggers = {
+			{ "<auto>", mode = "nixso" },
 		},
 		plugins = {
 			marks = true,
