@@ -2,12 +2,12 @@ return function()
 	require("obsidian").setup({
 		workspaces = {
 			{
-				name = "personal",
-				path = "~/vaults/personal",
+				name = "Linux",
+				path = "~/Vaults/Linux",
 			},
 			{
-				name = "university",
-				path = "~/vaults/University",
+				name = "University",
+				path = "~/Vaults/University",
 			},
 		},
 		note_id_func = function(title)
