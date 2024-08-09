@@ -33,6 +33,7 @@ lang["MeanderingProgrammer/render-markdown.nvim"] = {
 	ft = "markdown",
 	config = require("lang.render-markdown"),
 	dependencies = {
+		"nvim-tree/nvim-web-devicons",
 		"nvim-treesitter/nvim-treesitter",
 	},
 }
