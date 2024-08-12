@@ -124,6 +124,18 @@ function Lazy:load_lazy()
 				reset = true, -- reset the runtime path to $VIMRUNTIME and the config directory
 				---@type string[]
 				paths = {}, -- add any custom paths here that you want to include in the rtp
+				disabled_plugins = {
+					"gzip",
+					"matchit",
+					"matchparen",
+					"netrwPlugin",
+					"tarPlugin",
+					"tohtml",
+					"tutor",
+					"zipPlugin",
+					"rplugin",
+					"spellfile",
+				},
 			},
 		},
 	}
