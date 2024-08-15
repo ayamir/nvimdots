@@ -22,14 +22,6 @@ local createdir = function()
 	end
 end
 
-local load_distribution_plugins = function()
-	-- Set this to 0 in order to disable native EditorConfig support
-	vim.g.editorconfig = 1
-
-	-- Newtrw liststyle: https://medium.com/usevim/the-netrw-style-options-3ebe91d42456
-	vim.g.netrw_liststyle = 3
-end
-
 local leader_map = function()
 	vim.g.mapleader = " "
 	-- NOTE:
@@ -104,7 +96,6 @@ end
 
 local load_core = function()
 	createdir()
-	load_distribution_plugins()
 	leader_map()
 
 	gui_config()
