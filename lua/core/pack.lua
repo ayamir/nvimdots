@@ -125,26 +125,27 @@ function Lazy:load_lazy()
 				---@type string[]
 				paths = {}, -- add any custom paths here that you want to include in the rtp
 				disabled_plugins = {
+					-- Set this to true in order to enable native EditorConfig support
+					-- WARN: Sleuth.vim already includes all the features provided by this plugin.
+					--       Do NOT enable both at the same time, or you risk breaking the entire detection system.
+					"editorconfig",
+					-- Do not load spell files
+					"spellfile",
 					-- Do not use builtin matchit.vim and matchparen.vim because we're using vim-matchup
 					"matchit",
 					"matchparen",
-					-- Do not load builtin netrw
-					"netrwPlugin",
 					-- Do not load tohtml.vim
 					"tohtml",
 					-- Do not load zipPlugin.vim, gzip.vim and tarPlugin.vim (all of these plugins are
 					-- related to reading files inside compressed containers)
 					"gzip",
 					"tarPlugin",
-					"tutor",
 					"zipPlugin",
 					-- Disable remote plugins
 					-- NOTE:
 					--  > Disabling rplugin.vim will make `wilder.nvim` complain about missing rplugins during :checkhealth,
 					--  > but since it's config doesn't require python rtp (strictly), it's fine to ignore that for now.
-					"rplugin",
-					-- Do not load spell files
-					"spellfile",
+					-- "rplugin",
 				},
 			},
 		},
