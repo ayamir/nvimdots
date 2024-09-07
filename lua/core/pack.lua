@@ -125,7 +125,7 @@ function Lazy:load_lazy()
 				---@type string[]
 				paths = {}, -- add any custom paths here that you want to include in the rtp
 				disabled_plugins = {
-					-- Set this to true in order to enable native EditorConfig support
+					-- Comment out `"editorconfig"` to enable native EditorConfig support
 					-- WARN: Sleuth.vim already includes all the features provided by this plugin.
 					--       Do NOT enable both at the same time, or you risk breaking the entire detection system.
 					"editorconfig",
