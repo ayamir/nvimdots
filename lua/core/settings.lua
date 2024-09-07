@@ -46,9 +46,9 @@ settings["formatter_block_list"] = {
 -- Servers in this list will skip setting formatting capabilities if rhs is true.
 ---@type table<string, boolean>
 settings["server_formatting_block_list"] = {
-	lua_ls = true,
-	tsserver = true,
 	clangd = true,
+	lua_ls = true,
+	ts_ls = true,
 }
 
 -- Set it to false if you want to turn off LSP Inlay Hints
