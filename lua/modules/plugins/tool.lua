@@ -1,5 +1,15 @@
 local tool = {}
 
+tool["kdheepak/lazygit.nvim"] = {
+	lazy = true,
+	cmd = {
+		"LazyGit",
+		"LazyGitConfig",
+		"LazyGitCurrentFile",
+		"LazyGitFilter",
+		"LazyGitFilterCurrentFile",
+	},
+}
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },

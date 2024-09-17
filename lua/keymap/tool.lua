@@ -10,6 +10,7 @@ local plug_map = {
 	["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
 	["n|gpl"] = map_cr("G pull"):with_noremap():with_silent():with_desc("git: Pull"),
 	["n|<leader>gG"] = map_cu("Git"):with_noremap():with_silent():with_desc("git: Open git-fugitive"),
+	["n|<leader>gl"] = map_cu("LazyGit"):with_noremap():with_silent():with_desc("LazyGit"),
 
 	-- Plugin: nvim-tree
 	["n|<C-n>"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
