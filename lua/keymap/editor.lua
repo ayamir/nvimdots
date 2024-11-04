@@ -5,14 +5,59 @@ local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 local et = bind.escape_termcode
 
+local builtin_map = {
+	-- Builtin: save & quit
+	["n|<C-s>"] = map_cu("write"):with_noremap():with_silent():with_desc("edit: Save file"),
+	["n|<C-q>"] = map_cr("wq"):with_desc("edit: Save file and quit"),
+	["n|<A-S-q>"] = map_cr("q!"):with_desc("edit: Force quit"),
+
+	-- Builtin: insert mode
+	["i|<C-u>"] = map_cmd("<C-G>u<C-U>"):with_noremap():with_desc("edit: Delete previous block"),
+	["i|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Move cursor to left"),
+	["i|<C-a>"] = map_cmd("<ESC>^i"):with_noremap():with_desc("edit: Move cursor to line start"),
+	["i|<C-s>"] = map_cmd("<Esc>:w<CR>"):with_desc("edit: Save file"),
+	["i|<C-q>"] = map_cmd("<Esc>:wq<CR>"):with_desc("edit: Save file and quit"),
+
+	-- Builtin: command mode
+	["c|<C-b>"] = map_cmd("<Left>"):with_noremap():with_desc("edit: Left"),
+	["c|<C-f>"] = map_cmd("<Right>"):with_noremap():with_desc("edit: Right"),
+	["c|<C-a>"] = map_cmd("<Home>"):with_noremap():with_desc("edit: Home"),
+	["c|<C-e>"] = map_cmd("<End>"):with_noremap():with_desc("edit: End"),
+	["c|<C-d>"] = map_cmd("<Del>"):with_noremap():with_desc("edit: Delete"),
+	["c|<C-h>"] = map_cmd("<BS>"):with_noremap():with_desc("edit: Backspace"),
+	["c|<C-t>"] = map_cmd([[<C-R>=expand("%:p:h") . "/" <CR>]])
+		:with_noremap()
+		:with_desc("edit: Complete path of current file"),
+
+	-- Builtin: visual mode
+	["v|J"] = map_cmd(":m '>+1<CR>gv=gv"):with_desc("edit: Move this line down"),
+	["v|K"] = map_cmd(":m '<-2<CR>gv=gv"):with_desc("edit: Move this line up"),
+	["v|<"] = map_cmd("<gv"):with_desc("edit: Decrease indent"),
+	["v|>"] = map_cmd(">gv"):with_desc("edit: Increase indent"),
+
+	-- Builtin: suckless
+	["n|Y"] = map_cmd("y$"):with_desc("edit: Yank text to EOL"),
+	["n|D"] = map_cmd("d$"):with_desc("edit: Delete text to EOL"),
+	["n|n"] = map_cmd("nzzzv"):with_noremap():with_desc("edit: Next search result"),
+	["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("edit: Prev search result"),
+	["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
+	["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),
+	["n|<Esc>"] = map_callback(function()
+			_flash_esc_or_noh()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("edit: Clear search highlight"),
+	["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
+}
+
+bind.nvim_load_mapping(builtin_map)
+
 local plug_map = {
-	-- Plugin persisted.nvim
+	-- Plugin: persisted.nvim
 	["n|<leader>ss"] = map_cu("SessionSave"):with_noremap():with_silent():with_desc("session: Save"),
 	["n|<leader>sl"] = map_cu("SessionLoad"):with_noremap():with_silent():with_desc("session: Load current"),
 	["n|<leader>sd"] = map_cu("SessionDelete"):with_noremap():with_silent():with_desc("session: Delete"),
-
-	-- Plugin: nvim-bufdel
-	["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
 
 	-- Plugin: comment.nvim
 	["n|gcc"] = map_callback(function()
@@ -59,20 +104,6 @@ local plug_map = {
 	["nv|<leader>c"] = map_cmd("<Cmd>HopChar1MW<CR>"):with_noremap():with_desc("jump: Goto one char"),
 	["nv|<leader>C"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("jump: Goto two chars"),
 
-	-- Plugin: smart-splits.nvim
-	["n|<A-h>"] = map_cu("SmartResizeLeft"):with_silent():with_noremap():with_desc("window: Resize -3 horizontally"),
-	["n|<A-j>"] = map_cu("SmartResizeDown"):with_silent():with_noremap():with_desc("window: Resize -3 vertically"),
-	["n|<A-k>"] = map_cu("SmartResizeUp"):with_silent():with_noremap():with_desc("window: Resize +3 vertically"),
-	["n|<A-l>"] = map_cu("SmartResizeRight"):with_silent():with_noremap():with_desc("window: Resize +3 horizontally"),
-	["n|<C-h>"] = map_cu("SmartCursorMoveLeft"):with_silent():with_noremap():with_desc("window: Focus left"),
-	["n|<C-j>"] = map_cu("SmartCursorMoveDown"):with_silent():with_noremap():with_desc("window: Focus down"),
-	["n|<C-k>"] = map_cu("SmartCursorMoveUp"):with_silent():with_noremap():with_desc("window: Focus up"),
-	["n|<C-l>"] = map_cu("SmartCursorMoveRight"):with_silent():with_noremap():with_desc("window: Focus right"),
-	["n|<leader>Wh"] = map_cu("SmartSwapLeft"):with_silent():with_noremap():with_desc("window: Move window leftward"),
-	["n|<leader>Wj"] = map_cu("SmartSwapDown"):with_silent():with_noremap():with_desc("window: Move window downward"),
-	["n|<leader>Wk"] = map_cu("SmartSwapUp"):with_silent():with_noremap():with_desc("window: Move window upward"),
-	["n|<leader>Wl"] = map_cu("SmartSwapRight"):with_silent():with_noremap():with_desc("window: Move window rightward"),
-
 	-- Plugin: nvim-spectre
 	["n|<leader>Ss"] = map_callback(function()
 			require("spectre").toggle()
@@ -102,7 +133,7 @@ local plug_map = {
 	-- Plugin: nvim-treehopper
 	["o|m"] = map_cu("lua require('tsht').nodes()"):with_silent():with_desc("jump: Operate across syntax tree"),
 
-	-- Plugin suda.vim
+	-- Plugin: suda.vim
 	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
 }
 

@@ -104,7 +104,6 @@ local load_core = function()
 	shell_config()
 
 	require("core.options")
-	require("core.mapping")
 	require("core.event")
 	require("core.pack")
 	require("keymap")
