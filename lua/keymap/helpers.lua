@@ -66,7 +66,7 @@ _G._toggle_lazygit = function()
 	end
 end
 
-_G.async_compile_and_debug = function()
+_G._async_compile_and_debug = function()
 	local file_ext = vim.fn.expand("%:e")
 	local file_path = vim.fn.expand("%:p")
 	local out_name = vim.fn.expand("%:p:h") .. "/" .. vim.fn.expand("%:t:r") .. ".out"
