@@ -102,10 +102,6 @@ _G._async_compile_and_debug = function()
 		compile_cmd = string.format("gcc -g %s -o %s", file_path, out_name)
 	elseif file_ext == "go" then
 		compile_cmd = string.format("go build -o %s %s", out_name, file_path)
-	elseif file_ext == "java" then
-		compile_cmd = string.format("javac %s", file_path)
-	elseif file_ext == "rs" then
-		compile_cmd = string.format("rustc %s -o %s", file_path, out_name)
 	else
 		require("dap").continue()
 		return
