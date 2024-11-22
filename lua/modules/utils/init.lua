@@ -29,7 +29,7 @@ local M = {}
 ---@field crust string
 ---@field none "NONE"
 
----@type nil|palette
+---@type nil|table
 local palette = nil
 
 -- Indicates if autocmd for refreshing the builtin palette has already been registered
@@ -57,8 +57,8 @@ local function init_palette()
 	end
 
 	if not palette then
-		palette = vim.g.colors_name:find("catppuccin") and require("catppuccin.palettes").get_palette()
-			or {
+		if vim.g.colors_name == nil then
+			palette = {
 				rosewater = "#DC8A78",
 				flamingo = "#DD7878",
 				mauve = "#CBA6F7",
@@ -88,6 +88,9 @@ local function init_palette()
 				mantle = "#1C1C19",
 				crust = "#161320",
 			}
+		elseif vim.g.colors_name:find("catppuccin") then
+			palette = require("catppuccin.palettes").get_palette()
+		end
 
 		palette = vim.tbl_extend("force", { none = "NONE" }, palette, require("core.settings").palette_overwrite)
 	end
