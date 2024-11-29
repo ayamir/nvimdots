@@ -56,39 +56,41 @@ local function init_palette()
 		})
 	end
 
+	local fallback_palette = {
+		rosewater = "#DC8A78",
+		flamingo = "#DD7878",
+		mauve = "#CBA6F7",
+		pink = "#F5C2E7",
+		red = "#E95678",
+		maroon = "#B33076",
+		peach = "#FF8700",
+		yellow = "#F7BB3B",
+		green = "#AFD700",
+		sapphire = "#36D0E0",
+		blue = "#61AFEF",
+		sky = "#04A5E5",
+		teal = "#B5E8E0",
+		lavender = "#7287FD",
+
+		text = "#F2F2BF",
+		subtext1 = "#BAC2DE",
+		subtext0 = "#A6ADC8",
+		overlay2 = "#C3BAC6",
+		overlay1 = "#988BA2",
+		overlay0 = "#6E6B6B",
+		surface2 = "#6E6C7E",
+		surface1 = "#575268",
+		surface0 = "#302D41",
+
+		base = "#1D1536",
+		mantle = "#1C1C19",
+		crust = "#161320",
+	}
+
 	if not palette then
-		if vim.g.colors_name == nil then
-			palette = {
-				rosewater = "#DC8A78",
-				flamingo = "#DD7878",
-				mauve = "#CBA6F7",
-				pink = "#F5C2E7",
-				red = "#E95678",
-				maroon = "#B33076",
-				peach = "#FF8700",
-				yellow = "#F7BB3B",
-				green = "#AFD700",
-				sapphire = "#36D0E0",
-				blue = "#61AFEF",
-				sky = "#04A5E5",
-				teal = "#B5E8E0",
-				lavender = "#7287FD",
-
-				text = "#F2F2BF",
-				subtext1 = "#BAC2DE",
-				subtext0 = "#A6ADC8",
-				overlay2 = "#C3BAC6",
-				overlay1 = "#988BA2",
-				overlay0 = "#6E6B6B",
-				surface2 = "#6E6C7E",
-				surface1 = "#575268",
-				surface0 = "#302D41",
-
-				base = "#1D1536",
-				mantle = "#1C1C19",
-				crust = "#161320",
-			}
-		elseif vim.g.colors_name:find("catppuccin") then
+		if vim.g.colors_name == nil or (vim.g.colors_name ~= nil and not vim.g.colors_name:find("catppuccin")) then
+			palette = fallback_palette
+		else
 			palette = require("catppuccin.palettes").get_palette()
 		end
 
