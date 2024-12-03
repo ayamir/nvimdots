@@ -32,7 +32,13 @@ local leader_map = function()
 end
 
 local gui_config = function()
-	vim.api.nvim_set_option_value("guifont", settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size, {})
+	if next(settings.gui_config) then
+		vim.api.nvim_set_option_value(
+			"guifont",
+			settings.gui_config.font_name .. ":h" .. settings.gui_config.font_size,
+			{}
+		)
+	end
 end
 
 local neovide_config = function()
