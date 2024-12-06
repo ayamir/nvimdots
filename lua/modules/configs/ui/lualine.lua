@@ -164,7 +164,7 @@ return function()
 		lsp = {
 			function()
 				local buf_ft = vim.bo.filetype
-				local clients = vim.lsp.get_clients({ buffer = vim.api.nvim_get_current_buf() })
+				local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
 				local lsp_lists = {}
 				local available_servers = {}
 				if next(clients) == nil then
