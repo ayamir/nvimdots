@@ -118,7 +118,7 @@ function M.format(opts)
 	end
 
 	local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients({ buffer = bufnr })
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
 	if opts.filter then
 		clients = opts.filter(clients)
