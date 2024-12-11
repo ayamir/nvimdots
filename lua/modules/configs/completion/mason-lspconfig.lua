@@ -66,6 +66,10 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 			--- See `clangd.lua` for example.
 			custom_handler(opts)
 		elseif type(custom_handler) == "table" then
+			local predefined_ok, predefined = pcall(require, "completion.servers." .. lsp_name)
+			if predefined_ok then
+				opts = vim.tbl_deep_extend("force", opts, predefined)
+			end
 			nvim_lsp[lsp_name].setup(vim.tbl_deep_extend("force", opts, custom_handler))
 		else
 			vim.notify(
