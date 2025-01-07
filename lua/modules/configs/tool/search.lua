@@ -1,6 +1,7 @@
 return function()
 	local builtin = require("telescope.builtin")
 	local extensions = require("telescope").extensions
+	local vim_path = require("core.global").vim_path
 
 	require("modules.utils").load_plugin("search", {
 		collections = {
@@ -12,7 +13,9 @@ return function()
 						name = "Files",
 						tele_func = function(opts)
 							opts = opts or {}
-							if vim.fn.isdirectory(".git") == 1 then
+							if vim.fn.getcwd() == vim_path then
+								builtin.find_files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
+							elseif vim.fn.isdirectory(".git") == 1 then
 								builtin.git_files(opts)
 							else
 								builtin.find_files(opts)
@@ -46,13 +49,20 @@ return function()
 					{
 						name = "Word in project",
 						tele_func = function()
-							extensions.live_grep_args.live_grep_args()
+							local opts = {}
+							if vim.fn.getcwd() == vim_path then
+								opts["additional_args"] = { "--no-ignore" }
+							end
+							extensions.live_grep_args.live_grep_args(opts)
 						end,
 					},
 					{
 						name = "Word under cursor",
 						tele_func = function(opts)
 							opts = opts or {}
+							if vim.fn.getcwd() == vim_path then
+								opts["additional_args"] = { "--no-ignore" }
+							end
 							builtin.grep_string(opts)
 						end,
 					},
