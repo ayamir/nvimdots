@@ -49,13 +49,20 @@ return function()
 					{
 						name = "Word in project",
 						tele_func = function()
-							extensions.live_grep_args.live_grep_args()
+							local opts = {}
+							if vim.fn.getcwd() == vim_path then
+								opts["additional_args"] = { "--no-ignore" }
+							end
+							extensions.live_grep_args.live_grep_args(opts)
 						end,
 					},
 					{
 						name = "Word under cursor",
 						tele_func = function(opts)
 							opts = opts or {}
+							if vim.fn.getcwd() == vim_path then
+								opts["additional_args"] = { "--no-ignore" }
+							end
 							builtin.grep_string(opts)
 						end,
 					},
