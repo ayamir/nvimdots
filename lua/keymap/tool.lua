@@ -3,6 +3,7 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
+local vim_path = require("core.global").vim_path
 require("keymap.helpers")
 
 local plug_map = {
@@ -102,7 +103,13 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Find patterns"),
-	["v|<leader>fs"] = map_cu("Telescope grep_string")
+	["v|<leader>fs"] = map_callback(function()
+			local opts = {}
+			if vim.fn.getcwd() == vim_path then
+				opts["additional_args"] = { "--no-ignore" }
+			end
+			require("telescope-live-grep-args.shortcuts").grep_visual_selection(opts)
+		end)
 		:with_noremap()
 		:with_silent()
 		:with_desc("tool: Find word under cursor"),
