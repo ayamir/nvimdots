@@ -29,5 +29,8 @@ return function()
 		left = {
 			{ ft = "NvimTree", size = { height = 0.5 } },
 		},
+		right = {
+			{ ft = "aerial", size = { width = 30 } },
+		},
 	})
 end
