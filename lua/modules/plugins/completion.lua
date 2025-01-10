@@ -21,11 +21,6 @@ completion["nvimdev/lspsaga.nvim"] = {
 	config = require("completion.lspsaga"),
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
-completion["stevearc/aerial.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("completion.aerial"),
-}
 completion["DNLHC/glance.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
