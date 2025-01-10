@@ -1,4 +1,12 @@
 return function()
+	local trouble_filter = function(_, win)
+		return vim.w[win].trouble
+			and vim.w[win].trouble.position == "right"
+			and vim.w[win].trouble.type == "split"
+			and vim.w[win].trouble.relative == "editor"
+			and not vim.w[win].trouble_preview
+	end
+
 	require("modules.utils").load_plugin("edgy", {
 		animate = {
 			enabled = true,
@@ -69,13 +77,7 @@ return function()
 				pinned = true,
 				collapsed = false,
 				open = "Trouble symbols toggle win.position=right",
-				filter = function(_, win)
-					return vim.w[win].trouble
-						and vim.w[win].trouble.position == "right"
-						and vim.w[win].trouble.type == "split"
-						and vim.w[win].trouble.relative == "editor"
-						and not vim.w[win].trouble_preview
-				end,
+				filter = trouble_filter,
 				size = {
 					height = 0.5,
 					width = 0.2,
@@ -86,13 +88,7 @@ return function()
 				pinned = true,
 				collapsed = true,
 				open = "Trouble lsp toggle win.position=right",
-				filter = function(_, win)
-					return vim.w[win].trouble
-						and vim.w[win].trouble.position == "right"
-						and vim.w[win].trouble.type == "split"
-						and vim.w[win].trouble.relative == "editor"
-						and not vim.w[win].trouble_preview
-				end,
+				filter = trouble_filter,
 				size = {
 					height = 0.3,
 					width = 0.2,
