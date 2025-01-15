@@ -34,8 +34,8 @@ return function()
 					padding = 0,
 				},
 				{
-					filetype = "aerial",
-					text = "Symbol Outline",
+					filetype = "trouble",
+					text = "LSP Outline",
 					text_align = "center",
 					padding = 0,
 				},

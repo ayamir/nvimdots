@@ -46,7 +46,7 @@ return function()
 					information = { "underline" },
 				},
 			},
-			aerial = true,
+			aerial = false,
 			alpha = false,
 			barbar = false,
 			beacon = false,
