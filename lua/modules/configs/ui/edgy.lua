@@ -91,5 +91,5 @@ return function()
 				filter = trouble_filter("right"),
 			},
 		},
-	})
+	}, false, nil, true)
 end
