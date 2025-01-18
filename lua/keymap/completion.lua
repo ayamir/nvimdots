@@ -3,15 +3,21 @@ local map_cr = bind.map_cr
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 
-local plug_map = {
-	["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("formatter: Toggle format on save"),
-	["n|<A-S-f>"] = map_cmd("<Cmd>Format<CR>"):with_noremap():with_desc("formatter: Format buffer manually"),
+local mappings = {
+	fmt = {
+		["n|<A-f>"] = map_cmd("<Cmd>FormatToggle<CR>"):with_noremap():with_desc("formatter: Toggle format on save"),
+		["n|<A-S-f>"] = map_cmd("<Cmd>Format<CR>"):with_noremap():with_desc("formatter: Format buffer manually"),
+	},
 }
-bind.nvim_load_mapping(plug_map)
+bind.nvim_load_mapping(mappings.fmt)
 
-local mapping = {}
+--- The following code allows this file to be exported ---
+---    for use with LSP lazy-loaded keymap bindings    ---
 
-function mapping.lsp(buf)
+local M = {}
+
+---@param buf integer
+function M.lsp(buf)
 	local map = {
 		-- LSP-related keymaps, ONLY effective in buffers with LSP(s) attached
 		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
@@ -83,4 +89,4 @@ function mapping.lsp(buf)
 	end
 end
 
-return mapping
+return M
