@@ -52,10 +52,12 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		end
 
 		local ok, custom_handler = pcall(require, "user.configs.lsp-servers." .. lsp_name)
+		local default_ok, default_handler = pcall(require, "completion.servers." .. lsp_name)
 		-- Use preset if there is no user definition
 		if not ok then
-			ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
+			ok, custom_handler = default_ok, default_handler
 		end
+
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
 			nvim_lsp[lsp_name].setup(opts)
@@ -66,7 +68,14 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 			--- See `clangd.lua` for example.
 			custom_handler(opts)
 		elseif type(custom_handler) == "table" then
-			nvim_lsp[lsp_name].setup(vim.tbl_deep_extend("force", opts, custom_handler))
+			nvim_lsp[lsp_name].setup(
+				vim.tbl_deep_extend(
+					"force",
+					opts,
+					type(default_handler) == "table" and default_handler or {},
+					custom_handler
+				)
+			)
 		else
 			vim.notify(
 				string.format(
