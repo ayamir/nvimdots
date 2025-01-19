@@ -8,15 +8,15 @@ local format_modifications_only = settings.format_modifications_only
 local server_formatting_block_list = settings.server_formatting_block_list
 local format_timeout = settings.format_timeout
 
-vim.api.nvim_create_user_command("FormatToggle", function()
-	M.toggle_format_on_save()
-end, {})
-
 vim.api.nvim_create_user_command("Format", function()
 	M.format({
 		timeout = format_timeout,
 		filter = M.format_filter,
 	})
+end, {})
+
+vim.api.nvim_create_user_command("FormatToggle", function()
+	M.toggle_format_on_save()
 end, {})
 
 local block_list = settings.formatter_block_list
