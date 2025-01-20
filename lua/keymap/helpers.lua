@@ -38,6 +38,30 @@ _G._telescope_collections = function(picker_type)
 		:find()
 end
 
+_G._toggle_inlayhint = function()
+	local is_enabled = vim.lsp.inlay_hint.is_enabled()
+
+	vim.lsp.inlay_hint.enable(not is_enabled)
+	vim.notify(
+		(is_enabled and "Inlay hint disabled successfully" or "Inlay hint enabled successfully"),
+		vim.log.levels.INFO,
+		{ title = "LSP Inlay Hint" }
+	)
+end
+
+local _vt_enabled = require("core.settings").diagnostics_virtual_text
+_G._toggle_diagnostic = function()
+	if vim.diagnostic.is_enabled() then
+		_vt_enabled = not _vt_enabled
+		vim.diagnostic[_vt_enabled and "show" or "hide"]()
+		vim.notify(
+			(_vt_enabled and "Virtual text is now displayed" or "Virtual text is now hidden"),
+			vim.log.levels.INFO,
+			{ title = "LSP Diagnostic" }
+		)
+	end
+end
+
 _G._flash_esc_or_noh = function()
 	local flash_active, state = pcall(function()
 		return require("flash.plugins.char").state
@@ -65,32 +89,6 @@ _G._toggle_lazygit = function()
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
 	end
 end
-
-_G._toggle_inlayhint = function()
-	if vim.lsp.inlay_hint.is_enabled() then
-		vim.lsp.inlay_hint.enable(false)
-		vim.notify("Disable inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-	else
-		vim.lsp.inlay_hint.enable(true)
-		vim.notify("Enable inlay hint successfully!", vim.log.levels.INFO, { title = "LSP Inlay Hint" })
-	end
-end
-
-local _diagnostic = 1
-_G._toggle_diagnostic = function()
-	if vim.diagnostic.is_enabled() then
-		if _diagnostic == 1 then
-			_diagnostic = 0
-			vim.diagnostic.hide()
-			vim.notify("Hide virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
-		else
-			_diagnostic = 1
-			vim.diagnostic.show()
-			vim.notify("Show virtual text successfully!", vim.log.levels.INFO, { title = "LSP Diagnostic" })
-		end
-	end
-end
-
 _G._async_compile_and_debug = function()
 	local file_ext = vim.fn.expand("%:e")
 	local file_path = vim.fn.expand("%:p")
