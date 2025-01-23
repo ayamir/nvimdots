@@ -50,6 +50,20 @@ local mappings = {
 			:with_silent()
 			:with_desc("edit: Clear search highlight"),
 		["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
+
+		-- Builtins: Lsp
+		["n|<leader>td"] = map_callback(function()
+				_toggle_diagnostic()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle global display of virtual text"),
+		["n|<leader>th"] = map_callback(function()
+				_toggle_inlayhint()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("edit: Toggle global display of inlay hints"),
 	},
 	plugins = {
 		-- Plugin: persisted.nvim
