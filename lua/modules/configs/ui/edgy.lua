@@ -10,27 +10,13 @@ return function()
 	end
 
 	require("modules.utils").load_plugin("edgy", {
-		animate = {
-			enabled = true,
-		},
-		wo = {
-			winbar = false,
-		},
-		exit_when_last = true,
 		close_when_all_hidden = true,
+		exit_when_last = true,
+		wo = { winbar = false },
 		keys = {
 			["q"] = false,
 			["Q"] = false,
-			["<c-q>"] = false,
-			["za"] = function(win)
-				win:toggle()
-			end,
-			["<A-i>"] = function(win)
-				win:next({ focus = true })
-			end,
-			["<A-o>"] = function(win)
-				win:prev({ focus = true })
-			end,
+			["<C-q>"] = false,
 			["<A-j>"] = function(win)
 				win:resize("height", -2)
 			end,
@@ -50,12 +36,12 @@ return function()
 				ft = "toggleterm",
 				size = { height = 0.3 },
 				filter = function(_, win)
-					return vim.api.nvim_win_get_config(win).relative == ""
+					return vim.w[win].relative == ""
 				end,
 			},
 			{
 				ft = "help",
-				size = { height = 20 },
+				size = { height = 0.3 },
 				filter = function(buf)
 					return vim.bo[buf].buftype == "help"
 				end,
@@ -65,20 +51,15 @@ return function()
 			{
 				ft = "NvimTree",
 				pinned = true,
-				collapsed = false,
 				open = "NvimTreeOpen",
-				size = {
-					height = 0.5,
-					width = 40,
-				},
+				size = { width = 30 },
 			},
 		},
 		right = {
 			{
 				ft = "trouble",
 				pinned = true,
-				collapsed = false,
-				size = { height = 0.6, width = 0.2 },
+				size = { height = 0.6, width = 0.3 },
 				open = "Trouble symbols toggle win.position=right",
 				filter = trouble_filter("right"),
 			},
@@ -86,7 +67,7 @@ return function()
 				ft = "trouble",
 				pinned = true,
 				collapsed = true,
-				size = { height = 0.4, width = 0.2 },
+				size = { height = 0.4, width = 0.3 },
 				open = "Trouble lsp toggle win.position=right",
 				filter = trouble_filter("right"),
 			},
