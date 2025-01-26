@@ -2,6 +2,7 @@ local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
+local map_callback = bind.map_callback
 
 local mappings = {
 	builtins = {
@@ -86,70 +87,83 @@ bind.nvim_load_mapping(mappings.plugins)
 
 local M = {}
 
-function M.gitsigns(buf)
+function M.gitsigns(bufnr)
 	local actions = require("gitsigns.actions")
 	local map = {
-		["n|]g"] = bind.map_callback(function()
-			if vim.wo.diff then
-				return "]g"
-			end
-			vim.schedule(function()
-				actions.next_hunk()
+		["n|]g"] = map_callback(function()
+				if vim.wo.diff then
+					return "]g"
+				end
+				vim.schedule(function()
+					actions.next_hunk()
+				end)
+				return "<Ignore>"
 			end)
-			return "<Ignore>"
-		end)
-			:with_buffer(buf)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_expr()
 			:with_desc("git: Goto next hunk"),
-		["n|[g"] = bind.map_callback(function()
-			if vim.wo.diff then
-				return "[g"
-			end
-			vim.schedule(function()
-				actions.prev_hunk()
+		["n|[g"] = map_callback(function()
+				if vim.wo.diff then
+					return "[g"
+				end
+				vim.schedule(function()
+					actions.prev_hunk()
+				end)
+				return "<Ignore>"
 			end)
-			return "<Ignore>"
-		end)
-			:with_buffer(buf)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_expr()
 			:with_desc("git: Goto prev hunk"),
-		["n|<leader>gs"] = bind.map_callback(function()
-			actions.stage_hunk()
-		end)
-			:with_buffer(buf)
-			:with_desc("git: Stage hunk"),
-		["v|<leader>gs"] = bind.map_callback(function()
-			actions.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-		end)
-			:with_buffer(buf)
-			:with_desc("git: Stage hunk"),
-		["n|<leader>gr"] = bind.map_callback(function()
-			actions.reset_hunk()
-		end)
-			:with_buffer(buf)
+		["n|<leader>gs"] = map_callback(function()
+				actions.stage_hunk()
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
+			:with_desc("git: Toggle staging/unstaging of hunk"),
+		["v|<leader>gs"] = map_callback(function()
+				actions.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
+			:with_desc("git: Toggle staging/unstaging of selected hunk"),
+		["n|<leader>gr"] = map_callback(function()
+				actions.reset_hunk()
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_desc("git: Reset hunk"),
-		["v|<leader>gr"] = bind.map_callback(function()
-			actions.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-		end)
-			:with_buffer(buf)
+		["v|<leader>gr"] = map_callback(function()
+				actions.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_desc("git: Reset hunk"),
-		["n|<leader>gR"] = bind.map_callback(function()
-			actions.reset_buffer()
-		end)
-			:with_buffer(buf)
+		["n|<leader>gR"] = map_callback(function()
+				actions.reset_buffer()
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_desc("git: Reset buffer"),
-		["n|<leader>gp"] = bind.map_callback(function()
-			actions.preview_hunk()
-		end)
-			:with_buffer(buf)
+		["n|<leader>gp"] = map_callback(function()
+				actions.preview_hunk()
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_desc("git: Preview hunk"),
-		["n|<leader>gb"] = bind.map_callback(function()
-			actions.blame_line({ full = true })
-		end)
-			:with_buffer(buf)
+		["n|<leader>gb"] = map_callback(function()
+				actions.blame_line({ full = true })
+			end)
+			:with_buffer(bufnr)
+			:with_noremap()
 			:with_desc("git: Blame line"),
 		-- Text objects
-		["ox|ih"] = bind.map_cu("Gitsigns select_hunk"):with_silent():with_buffer(buf),
+		["ox|ih"] = map_callback(function()
+				actions.select_hunk()
+			end)
+			:with_buffer(bufnr)
+			:with_noremap(),
 	}
 	bind.nvim_load_mapping(map)
 end
