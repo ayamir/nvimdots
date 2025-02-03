@@ -30,6 +30,7 @@ return function()
 			properties = {},
 		},
 		integrations = {
+			blink_cmp = true,
 			treesitter = true,
 			native_lsp = {
 				enabled = true,
@@ -50,7 +51,6 @@ return function()
 			alpha = false,
 			barbar = false,
 			beacon = false,
-			cmp = true,
 			coc_nvim = false,
 			dap = true,
 			dap_ui = true,
