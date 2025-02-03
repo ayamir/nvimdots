@@ -61,7 +61,6 @@ return function()
 			flash = true,
 			gitgutter = false,
 			gitsigns = true,
-			grug_far = true,
 			harpoon = false,
 			headlines = false,
 			hop = true,

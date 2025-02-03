@@ -84,10 +84,9 @@ editor["tpope/vim-sleuth"] = {
 	lazy = true,
 	event = { "BufNewFile", "BufReadPost", "BufFilePost" },
 }
-editor["MagicDuck/grug-far.nvim"] = {
+editor["nvim-pack/nvim-spectre"] = {
 	lazy = true,
-	cmd = "GrugFar",
-	config = require("editor.grug-far"),
+	cmd = "Spectre",
 }
 
 ----------------------------------------------------------------------
