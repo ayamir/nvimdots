@@ -102,27 +102,27 @@ local mappings = {
 		["nv|<leader>c"] = map_cmd("<Cmd>HopChar1MW<CR>"):with_noremap():with_desc("jump: Goto one char"),
 		["nv|<leader>C"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("jump: Goto two chars"),
 
-		-- Plugin: nvim-spectre
+		-- Plugin: grug-far
 		["n|<leader>Ss"] = map_callback(function()
-				require("spectre").toggle()
+				require("grug-far").open()
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("editn: Toggle search & replace panel"),
 		["n|<leader>Sp"] = map_callback(function()
-				require("spectre").open_visual({ select_word = true })
+				require("grug-far").open({ prefills = { search = vim.fn.expand("<cword>") } })
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("editn: search&replace current word (project)"),
 		["v|<leader>Sp"] = map_callback(function()
-				require("spectre").open_visual()
+				require("grug-far").with_visual_selection()
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("edit: search & replace current word (project)"),
 		["n|<leader>Sf"] = map_callback(function()
-				require("spectre").open_file_search({ select_word = true })
+				require("grug-far").open({ prefills = { paths = vim.fn.expand("%") } })
 			end)
 			:with_silent()
 			:with_noremap()

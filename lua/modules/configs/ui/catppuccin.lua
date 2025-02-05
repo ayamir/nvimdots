@@ -39,6 +39,7 @@ return function()
 			flash = true,
 			fzf = true,
 			gitsigns = true,
+			grug_far = true,
 			hop = true,
 			illuminate = true,
 			indent_blankline = { enabled = true, colored_indent_levels = true },
