@@ -33,7 +33,7 @@ local function get_binary_path_list(binaries)
 	return table.concat(path_list, ",")
 end
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/clangd.lua
+-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/clangd.lua
 return function(options)
 	require("lspconfig").clangd.setup({
 		on_attach = options.on_attach,
