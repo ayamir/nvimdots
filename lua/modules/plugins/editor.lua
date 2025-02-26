@@ -65,6 +65,10 @@ editor["tzachar/local-highlight.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("editor.local-highlight"),
+	dependencies = {
+		{ "folke/snacks.nvim" },
+	},
+
 }
 editor["brenoprata10/nvim-highlight-colors"] = {
 	lazy = true,
