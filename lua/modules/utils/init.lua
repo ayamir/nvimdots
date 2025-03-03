@@ -257,6 +257,15 @@ function M.gen_alpha_hl()
 	set_global_hl("AlphaFooter", colors.yellow)
 end
 
+-- Generate highlight groups for cursorword. Existing attributes will NOT be overwritten
+function M.gen_cursorword_hl()
+	local colors = M.get_palette()
+
+	-- Do not highlight `MiniCursorwordCurrent`
+	set_global_hl("MiniCursorword", nil, M.darken(colors.surface1, 0.7, colors.base))
+	set_global_hl("MiniCursorwordCurrent", nil)
+end
+
 ---Convert number (0/1) to boolean
 ---@param value number @The value to check
 ---@return boolean|nil @Returns nil if failed
