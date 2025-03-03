@@ -35,9 +35,7 @@ return {
 			completeUnimported = true,
 			symbolMatcher = "Fuzzy",
 			buildFlags = { "-tags", "integration" },
-			semanticTokenTypes = {
-				string = false,
-			},
+			semanticTokenTypes = { string = false },
 			codelenses = {
 				generate = true,
 				gc_details = true,
