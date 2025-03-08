@@ -104,7 +104,7 @@ end
 -- NOTE: If the active colorscheme isn't `catppuccin`, this function won't overwrite existing definitions
 ---Sets a global highlight group.
 ---@param name string @Highlight group name, e.g. "ErrorMsg"
----@param foreground string @The foreground color
+---@param foreground? string @The foreground color
 ---@param background? string @The background color
 ---@param italic? boolean
 local function set_global_hl(name, foreground, background, italic)
@@ -131,6 +131,24 @@ function M.blend(foreground, background, alpha)
 	end
 
 	return string.format("#%02x%02x%02x", blend_channel(1), blend_channel(2), blend_channel(3))
+end
+
+---Darken a color by blending it with the background color.
+---@param hex string @The color in hex to darken
+---@param amount number @The amount to darken the color
+---@param bg string @The background color to blend with
+---@return string @The darkened color as a hex string
+function M.darken(hex, amount, bg)
+	return M.blend(hex, bg or "#000000", math.abs(amount))
+end
+
+---Lighten a color by blending it with the foreground color.
+---@param hex string @The color in hex to lighten
+---@param amount number @The amount to lighten the color
+---@param fg string @The foreground color to blend with
+---@return string @The lightened color as a hex string
+function M.lighten(hex, amount, fg)
+	return M.blend(hex, fg or "#FFFFFF", math.abs(amount))
 end
 
 ---Get RGB highlight by highlight group
@@ -169,6 +187,7 @@ function M.extend_hl(name, def)
 	local current_def = vim.api.nvim_get_hl(0, { name = name, link = false })
 	local combined_def = vim.tbl_deep_extend("force", current_def, def)
 
+	---@diagnostic disable-next-line: param-type-mismatch
 	vim.api.nvim_set_hl(0, name, combined_def)
 end
 
@@ -236,6 +255,15 @@ function M.gen_alpha_hl()
 	set_global_hl("AlphaButtons", colors.green)
 	set_global_hl("AlphaShortcut", colors.pink, nil, true)
 	set_global_hl("AlphaFooter", colors.yellow)
+end
+
+-- Generate highlight groups for cursorword. Existing attributes will NOT be overwritten
+function M.gen_cursorword_hl()
+	local colors = M.get_palette()
+
+	-- Do not highlight `MiniCursorwordCurrent`
+	set_global_hl("MiniCursorword", nil, M.darken(colors.surface1, 0.7, colors.base))
+	set_global_hl("MiniCursorwordCurrent", nil)
 end
 
 ---Convert number (0/1) to boolean

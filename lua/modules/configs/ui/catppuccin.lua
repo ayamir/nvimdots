@@ -31,7 +31,6 @@ return function()
 		},
 		integrations = {
 			blink_cmp = true,
-			treesitter = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
@@ -80,19 +79,12 @@ return function()
 			noice = false,
 			notify = true,
 			nvimtree = true,
-			overseer = false,
-			pounce = false,
 			rainbow_delimiters = true,
 			render_markdown = true,
-			sandwich = false,
 			semantic_tokens = true,
-			symbols_outline = false,
-			telekasten = false,
 			telescope = { enabled = true, style = "nvchad" },
+			treesitter = true,
 			treesitter_context = true,
-			ts_rainbow = false,
-			vim_sneak = false,
-			vimwiki = false,
 			which_key = true,
 		},
 		color_overrides = {},
