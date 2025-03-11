@@ -1,5 +1,4 @@
 return function()
-	vim.g.maplocalleader = ","
 	require("modules.utils").load_plugin("grug-far", {
 		engine = "ripgrep",
 		engines = {
