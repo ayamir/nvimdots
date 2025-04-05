@@ -161,10 +161,7 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	local hlexists = pcall(vim.api.nvim_get_hl, 0, { name = hl_group, link = false })
 
 	if hlexists then
-		-- FIXME: Investigate why hl-StatusLine is undefined in toggleterm and remove this workaround
-		-- (@Jint-lzxy)
-		local link = vim.bo.filetype == "toggleterm"
-		local result = vim.api.nvim_get_hl(0, { name = hl_group, link = link })
+		local result = vim.api.nvim_get_hl(0, { name = hl_group, link = false })
 		if use_bg then
 			hex = result.bg and string.format("#%06x", result.bg) or "NONE"
 		else
