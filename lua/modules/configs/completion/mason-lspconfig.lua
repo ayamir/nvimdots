@@ -26,6 +26,7 @@ M.setup = function()
 				min = vim.diagnostic.severity[diagnostics_level],
 			},
 		} or false,
+		-- set update_in_insert to false because it was enabled by lspsaga
 		update_in_insert = false,
 	})
 
