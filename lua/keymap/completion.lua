@@ -82,7 +82,7 @@ function M.lsp(buf)
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle inlay hints display of current buffer"),
+			:with_desc("lsp: Toggle inlay hints display"),
 	}
 	bind.nvim_load_mapping(map)
 
