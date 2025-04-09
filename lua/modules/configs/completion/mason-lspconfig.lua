@@ -2,6 +2,7 @@ local M = {}
 
 M.setup = function()
 	local diagnostics_virtual_text = require("core.settings").diagnostics_virtual_text
+	local diagnostics_virtual_lines = require("core.settings").diagnostics_virtual_lines
 	local diagnostics_level = require("core.settings").diagnostics_level
 
 	local nvim_lsp = require("lspconfig")
@@ -12,10 +13,15 @@ M.setup = function()
 		ensure_installed = require("core.settings").lsp_deps,
 	})
 
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	vim.diagnostic.config({
 		signs = true,
 		underline = true,
 		virtual_text = diagnostics_virtual_text and {
+			severity = {
+				min = vim.diagnostic.severity[diagnostics_level],
+			},
+		} or false,
+		virtual_lines = diagnostics_virtual_lines and {
 			severity = {
 				min = vim.diagnostic.severity[diagnostics_level],
 			},
