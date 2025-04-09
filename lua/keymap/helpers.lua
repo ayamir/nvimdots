@@ -17,13 +17,13 @@ _G._flash_esc_or_noh = function()
 	end
 end
 
-_G._telescope_collections = function(picker_type)
+_G._telescope_collections = function()
 	local actions = require("telescope.actions")
 	local action_state = require("telescope.actions.state")
 	local conf = require("telescope.config").values
 	local finder = require("telescope.finders")
 	local pickers = require("telescope.pickers")
-	picker_type = picker_type or {}
+	local picker_type = require("telescope.themes").get_dropdown()
 
 	local collections = vim.tbl_keys(require("search.tabs").collections)
 	pickers
@@ -43,6 +43,7 @@ _G._telescope_collections = function(picker_type)
 		})
 		:find()
 end
+vim.api.nvim_create_user_command("TelescopeCollections", _G._telescope_collections, { nargs = 0 })
 
 _G._toggle_inlayhint = function()
 	local is_enabled = vim.lsp.inlay_hint.is_enabled()

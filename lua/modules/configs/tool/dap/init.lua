@@ -4,7 +4,6 @@ return function()
 	local mason_dap = require("mason-nvim-dap")
 
 	local icons = { dap = require("modules.utils.icons").get("dap") }
-	local colors = require("modules.utils").get_palette()
 	local mappings = require("tool.dap.dap-keymap")
 
 	-- Initialize debug hooks
@@ -24,9 +23,6 @@ return function()
 	dap.listeners.before.event_terminated["dapui_config"] = debug_terminate_cb
 	dap.listeners.before.event_exited["dapui_config"] = debug_terminate_cb
 	dap.listeners.before.disconnect["dapui_config"] = debug_terminate_cb
-
-	-- We need to override nvim-dap's default highlight groups, AFTER requiring nvim-dap for catppuccin.
-	vim.api.nvim_set_hl(0, "DapStopped", { fg = colors.green })
 
 	vim.fn.sign_define(
 		"DapBreakpoint",

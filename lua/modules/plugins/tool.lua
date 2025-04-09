@@ -4,13 +4,6 @@ tool["tpope/vim-fugitive"] = {
 	lazy = true,
 	cmd = { "Git", "G" },
 }
--- This is specifically for fcitx5 users who code in languages other than English
--- tool["pysan3/fcitx5.nvim"] = {
--- 	lazy = true,
--- 	event = "BufReadPost",
--- 	cond = vim.fn.executable("fcitx5-remote") == 1,
--- 	config = require("tool.fcitx5"),
--- }
 tool["Bekaboo/dropbar.nvim"] = {
 	lazy = false,
 	config = require("tool.dropbar"),
@@ -42,18 +35,6 @@ tool["michaelb/sniprun"] = {
 	build = "bash ./install.sh",
 	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
 	config = require("tool.sniprun"),
-}
-tool["akinsho/toggleterm.nvim"] = {
-	lazy = true,
-	cmd = {
-		"ToggleTerm",
-		"ToggleTermSetName",
-		"ToggleTermToggleAll",
-		"ToggleTermSendVisualLines",
-		"ToggleTermSendCurrentLine",
-		"ToggleTermSendVisualSelection",
-	},
-	config = require("tool.toggleterm"),
 }
 tool["folke/trouble.nvim"] = {
 	lazy = true,

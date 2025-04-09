@@ -114,8 +114,14 @@ local load_core = function()
 	require("core.pack")
 	require("keymap")
 
+	-- nvchad init
+	vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46_cache/"
+	for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+		dofile(vim.g.base46_cache .. v)
+	end
+
 	vim.api.nvim_set_option_value("background", settings.background, {})
-	vim.cmd.colorscheme(settings.colorscheme)
+	vim.cmd.colorscheme("nvchad")
 end
 
 load_core()

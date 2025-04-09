@@ -24,29 +24,38 @@ local mappings = {
 	plugins = {
 		-- Plugin: nvim-bufdel
 		["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
+		["n|<A-S-q>"] = map_callback(function()
+				require("nvchad.tabufline").closeAllBufs(false)
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("buffer: Close others"),
 
 		-- Plugin: bufferline.nvim
-		["n|<A-i>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_desc("buffer: Switch to next"),
-		["n|<A-o>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_desc("buffer: Switch to prev"),
-		["n|<A-S-i>"] = map_cr("BufferLineMoveNext")
+		["n|<A-i>"] = map_callback(function()
+				require("nvchad.tabufline").next()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("buffer: Switch to next"),
+		["n|<A-o>"] = map_callback(function()
+				require("nvchad.tabufline").prev()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("buffer: Switch to prev"),
+		["n|<A-S-i>"] = map_callback(function()
+				require("nvchad.tabufline").move_buf(1)
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("buffer: Move current to next"),
-		["n|<A-S-o>"] = map_cr("BufferLineMovePrev")
+		["n|<A-S-o>"] = map_callback(function()
+				require("nvchad.tabufline").move_buf(-1)
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("buffer: Move current to prev"),
-		["n|<leader>be"] = map_cr("BufferLineSortByExtension"):with_noremap():with_desc("buffer: Sort by extension"),
-		["n|<leader>bd"] = map_cr("BufferLineSortByDirectory"):with_noremap():with_desc("buffer: Sort by directory"),
-		["n|<A-1>"] = map_cr("BufferLineGoToBuffer 1"):with_noremap():with_silent():with_desc("buffer: Goto buffer 1"),
-		["n|<A-2>"] = map_cr("BufferLineGoToBuffer 2"):with_noremap():with_silent():with_desc("buffer: Goto buffer 2"),
-		["n|<A-3>"] = map_cr("BufferLineGoToBuffer 3"):with_noremap():with_silent():with_desc("buffer: Goto buffer 3"),
-		["n|<A-4>"] = map_cr("BufferLineGoToBuffer 4"):with_noremap():with_silent():with_desc("buffer: Goto buffer 4"),
-		["n|<A-5>"] = map_cr("BufferLineGoToBuffer 5"):with_noremap():with_silent():with_desc("buffer: Goto buffer 5"),
-		["n|<A-6>"] = map_cr("BufferLineGoToBuffer 6"):with_noremap():with_silent():with_desc("buffer: Goto buffer 6"),
-		["n|<A-7>"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent():with_desc("buffer: Goto buffer 7"),
-		["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent():with_desc("buffer: Goto buffer 8"),
-		["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
 
 		-- Plugin: smart-splits.nvim
 		["n|<A-h>"] = map_cu("SmartResizeLeft")
@@ -78,6 +87,16 @@ local mappings = {
 			:with_desc("window: Move window rightward"),
 	},
 }
+
+-- Goto buffer with <A-number>
+for i = 1, 9, 1 do
+	mappings.plugins[string.format("n|<A-%s>", i)] = map_callback(function()
+			vim.api.nvim_set_current_buf(vim.t.bufs[i])
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Goto buffer " .. tostring(i))
+end
 
 bind.nvim_load_mapping(mappings.builtins)
 bind.nvim_load_mapping(mappings.plugins)

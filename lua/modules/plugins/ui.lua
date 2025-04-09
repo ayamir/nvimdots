@@ -1,30 +1,25 @@
 local ui = {}
 
-ui["goolord/alpha-nvim"] = {
-	lazy = true,
-	event = "BufWinEnter",
-	config = require("ui.alpha"),
-}
-ui["akinsho/bufferline.nvim"] = {
-	lazy = true,
-	event = { "BufReadPre", "BufAdd", "BufNewFile" },
-	config = require("ui.bufferline"),
+ui["nvchad/ui"] = {
+	lazy = false,
+	priority = 1000,
+	config = function()
+		require("nvchad")
+	end,
+	dependencies = {
+		{
+			"nvchad/base46",
+			build = function()
+				require("base46").load_all_highlights()
+			end,
+		},
+		"nvchad/volt",
+	},
 }
 ui["folke/edgy.nvim"] = {
 	lazy = true,
 	event = { "BufReadPre", "BufAdd", "BufNewFile" },
 	config = require("ui.edgy"),
-}
-ui["Jint-lzxy/nvim"] = {
-	lazy = false,
-	branch = "refactor/syntax-highlighting",
-	name = "catppuccin",
-	config = require("ui.catppuccin"),
-}
-ui["j-hui/fidget.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("ui.fidget"),
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
@@ -39,7 +34,6 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	config = require("ui.lualine"),
 }
 ui["karb94/neoscroll.nvim"] = {
 	lazy = true,

@@ -127,12 +127,6 @@ return function()
 				initial_tab = 1,
 				tabs = {
 					{
-						name = "Colorschemes",
-						tele_func = function()
-							builtin.colorscheme({ enable_preview = true })
-						end,
-					},
-					{
 						name = "Notify",
 						tele_func = function()
 							extensions.notify.notify()
@@ -148,4 +142,24 @@ return function()
 			},
 		},
 	})
+
+	vim.api.nvim_create_user_command("TelescopeFiles", function()
+		require("search").open({ collection = "file" })
+	end, { nargs = 0 })
+
+	vim.api.nvim_create_user_command("TelescopePatterns", function()
+		require("search").open({ collection = "pattern" })
+	end, { nargs = 0 })
+
+	vim.api.nvim_create_user_command("TelescopeGit", function()
+		require("search").open({ collection = "git" })
+	end, { nargs = 0 })
+
+	vim.api.nvim_create_user_command("TelescopeDossier", function()
+		require("search").open({ collection = "dossier" })
+	end, { nargs = 0 })
+
+	vim.api.nvim_create_user_command("TelescopeMisc", function()
+		require("search").open({ collection = "misc" })
+	end, { nargs = 0 })
 end

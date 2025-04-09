@@ -64,17 +64,26 @@ local mappings = {
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
 		["t|<F5>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-		["n|<A-d>"] = map_cr("ToggleTerm direction=float")
+		["n|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
+		["i|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
+		["t|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", size = "0.8" })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle float"),
 		["n|<leader>gg"] = map_callback(function()
-				_toggle_lazygit()
+				require("nvchad.term").toggle({ pos = "float", cmd = "lazygit" })
 			end)
 			:with_noremap()
 			:with_silent()
@@ -106,7 +115,7 @@ local mappings = {
 			:with_silent()
 			:with_desc("tool: Toggle command panel"),
 		["n|<leader>fc"] = map_callback(function()
-				_telescope_collections(require("telescope.themes").get_dropdown())
+				_telescope_collections()
 			end)
 			:with_noremap()
 			:with_silent()
@@ -144,6 +153,12 @@ local mappings = {
 			:with_desc("tool: Retrieve dossiers"),
 		["n|<leader>fm"] = map_callback(function()
 				require("search").open({ collection = "misc" })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("tool: Miscellaneous"),
+		["n|<leader>ft"] = map_callback(function()
+				require("nvchad.themes").open()
 			end)
 			:with_noremap()
 			:with_silent()
