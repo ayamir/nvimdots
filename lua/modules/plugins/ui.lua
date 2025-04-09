@@ -8,7 +8,7 @@ ui["nvchad/ui"] = {
 	end,
 	dependencies = {
 		{
-			"nvchad/base46",
+			"ayamir/nvchad-base46",
 			build = function()
 				require("base46").load_all_highlights()
 			end,

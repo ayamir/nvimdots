@@ -43,7 +43,7 @@ local options = {
 		},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "catppuccin", "catppuccin-latte" },
+		theme_toggle = { "catppuccin", "catppuccin_latte" },
 	},
 	ui = {
 		cmp = {
