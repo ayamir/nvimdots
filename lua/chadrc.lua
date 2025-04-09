@@ -20,6 +20,28 @@ local options = {
 			NvDashButtons = {
 				italic = true,
 			},
+			Function = {
+				bold = true,
+			},
+			Keyword = {
+				italic = true,
+			},
+			Operator = {
+				bold = true,
+			},
+			Conditional = {
+				bold = true,
+			},
+			Loop = {
+				bold = true,
+			},
+			Boolean = {
+				italic = true,
+				bold = true,
+			},
+			Comment = {
+				italic = true,
+			},
 		},
 		integrations = {
 			"hop",
@@ -42,7 +64,7 @@ local options = {
 			"telescope",
 		},
 		changed_themes = {},
-		transparency = false,
+		transparency = require("core.settings").transparent_background,
 		theme_toggle = { "catppuccin", "catppuccin_latte" },
 	},
 	ui = {
@@ -72,14 +94,13 @@ local options = {
 			lazyload = true,
 			order = { "treeOffset", "buffers", "tabs", "btns" },
 			modules = nil,
-			bufwidth = 21,
+			bufwidth = 20,
 		},
 	},
 
 	nvdash = {
 		load_on_startup = true,
 		header = require("core.settings").dashboard_image,
-
 		buttons = {
 			{
 				txt = icons.misc.Neovim .. "Telescope collections",
