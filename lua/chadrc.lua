@@ -128,7 +128,7 @@ local options = {
 	term = {
 		base46_colors = true,
 		winopts = { number = false, relativenumber = false },
-		sizes = { sp = 0.3, vsp = 0.2, ["bo sp"] = 0.3, ["bo vsp"] = 0.2 },
+		sizes = { sp = 0.3, vsp = 0.3, ["bo sp"] = 0.3, ["bo vsp"] = 0.3 },
 		float = {
 			relative = "editor",
 			row = 0.1,
