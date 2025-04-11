@@ -45,8 +45,7 @@ _G._telescope_collections = function(picker_type)
 end
 
 _G._toggle_inlayhint = function()
-	local is_enabled = vim.lsp.inlay_hint.is_enabled()
-
+	local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
 	vim.lsp.inlay_hint.enable(not is_enabled)
 	vim.notify(
 		(is_enabled and "Inlay hint disabled successfully" or "Inlay hint enabled successfully"),
