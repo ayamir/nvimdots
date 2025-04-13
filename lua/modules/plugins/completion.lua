@@ -39,6 +39,11 @@ completion["nvimtools/none-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
+completion["ayamir/garbage-day.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.garbage-day"),
+}
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
 	event = "InsertEnter",
