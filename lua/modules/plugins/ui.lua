@@ -1,6 +1,6 @@
 local ui = {}
 
-ui["nvchad/ui"] = {
+ui["ayamir/nvchad-ui"] = {
 	lazy = false,
 	priority = 1000,
 	config = function()
