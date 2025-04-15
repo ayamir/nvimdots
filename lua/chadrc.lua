@@ -47,6 +47,7 @@ local options = {
 			"hop",
 			"treesitter",
 			"dap",
+			"cmp",
 			"blankline",
 			"edgy",
 			"grug_far",
