@@ -55,17 +55,6 @@ _G._toggle_inlayhint = function()
 end
 
 _G._toggle_virtualtext = function()
-	local _vt_enabled = require("core.settings").diagnostics_virtual_text
-	if _vt_enabled then
-		local vt_config = not vim.diagnostic.config().virtual_text
-		vim.diagnostic.config({ virtual_text = vt_config })
-		vim.notify(
-			(vt_config and "Virtual text is now displayed" or "Virtual text is now hidden"),
-			vim.log.levels.INFO,
-			{ title = "LSP Diagnostic" }
-		)
-	end
-
 	local _vl_enabled = require("core.settings").diagnostics_virtual_lines
 	if _vl_enabled then
 		local vl_config = not vim.diagnostic.config().virtual_lines
