@@ -92,7 +92,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 			config = require("tool.search"),
 		},
 		{
-			"ahmedkhalf/project.nvim",
+			"ayamir/project.nvim",
 			event = { "CursorHold", "CursorHoldI" },
 			config = require("tool.project"),
 		},

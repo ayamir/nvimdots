@@ -4,7 +4,7 @@ return function()
 		return function()
 			-- Disable on very large files
 			local line_count = vim.api.nvim_buf_line_count(0)
-			if line_count > 7500 then
+			if line_count > 15000 then
 				return nil
 			end
 
