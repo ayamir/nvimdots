@@ -39,6 +39,12 @@ completion["nvimtools/none-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
+completion["rachartier/tiny-inline-diagnostic.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	priority = 1000, -- needs to be loaded in first
+	config = require("completion.tiny-inline-diagnostic"),
+}
 completion["hrsh7th/nvim-cmp"] = {
 	lazy = true,
 	event = "InsertEnter",

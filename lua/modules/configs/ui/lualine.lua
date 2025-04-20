@@ -98,12 +98,10 @@ return function()
 			if has_catppuccin then
 				return function()
 					local guifg = colors[fg]
-					local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
-						or colors[bg]
 					local nobg = special_nobg and require("core.settings").transparent_background
 					return {
 						fg = guifg and guifg or colors.none,
-						bg = (guibg and not nobg) and guibg or colors.none,
+						bg = nobg and colors.none or ((not gen_bg and colors[bg]) or nil),
 						gui = gui and gui or nil,
 					}
 				end
