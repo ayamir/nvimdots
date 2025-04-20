@@ -55,13 +55,7 @@ settings["server_formatting_block_list"] = {
 ---@type boolean
 settings["lsp_inlayhints"] = true
 
--- Set it to false if diagnostics virtual text is annoying.
--- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
----@type boolean
-settings["diagnostics_virtual_text"] = true
-
 -- Set it to false if diagnostics virtual lines is annoying.
--- NOTE: This entry is an alternative form to `diagnostics_virtual_text`.
 ---@type boolean
 settings["diagnostics_virtual_lines"] = false
 
