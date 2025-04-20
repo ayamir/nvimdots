@@ -7,8 +7,8 @@
 set -uo pipefail
 
 # global-scope vars
-REQUIRED_NVIM_VERSION=0.10.0
-REQUIRED_NVIM_VERSION_LEGACY=0.9.0
+REQUIRED_NVIM_VERSION=0.11.0
+REQUIRED_NVIM_VERSION_LEGACY=0.10.0
 USE_SSH=1
 CLONE_ATTR=("--progress")
 DEST_DIR="${HOME}/.config/nvim"
@@ -171,11 +171,11 @@ check_nvim_version() {
 
 clone_repo() {
 	if check_nvim_version "${REQUIRED_NVIM_VERSION}"; then
-		execute "git" "clone" "-b" "main" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.11" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	elif check_nvim_version "${REQUIRED_NVIM_VERSION_LEGACY}"; then
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION})."
 		info "Automatically redirecting you to the latest compatible version..."
-		execute "git" "clone" "-b" "0.9" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
+		execute "git" "clone" "-b" "0.10" "${CLONE_ATTR[@]}" "$1" "${DEST_DIR}"
 	else
 		warn "You have outdated Nvim installed (< ${REQUIRED_NVIM_VERSION_LEGACY})."
 		abort "$(
@@ -287,7 +287,7 @@ info "Spawning Neovim and fetching plugins... (You'll be redirected shortly)"
 info "NOTE: Please make sure you have a Rust Toolchain installed ${tty_underline}via \`rustup\`${tty_reset}${tty_bold}! Otherwise, unexpected things may"
 info_ext "      happen. See: ${tty_underline}https://www.rust-lang.org/tools/install${tty_reset}."
 info_ext ""
-info "If lazy.nvim failed to fetch any plugin(s), maunally execute \`:Lazy sync\` until everything is up-to-date."
+info "If lazy.nvim failed to fetch any plugin(s), manunally execute \`:Lazy sync\` until everything is up-to-date."
 cat <<EOS
 
 Thank you for using this set of configuration!
