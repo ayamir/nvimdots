@@ -42,11 +42,7 @@ function M.lsp(buf)
 		["n|gs"] = map_callback(function()
 			vim.lsp.buf.signature_help()
 		end):with_desc("lsp: Signature help"),
-		["n|gr"] = map_cr("Lspsaga rename")
-			:with_silent()
-			:with_nowait()
-			:with_buffer(buf)
-			:with_desc("lsp: Rename in file range"),
+		["n|gr"] = map_cr("Lspsaga rename"):with_silent():with_buffer(buf):with_desc("lsp: Rename in file range"),
 		["n|gR"] = map_cr("Lspsaga rename ++project")
 			:with_silent()
 			:with_buffer(buf)
@@ -76,13 +72,13 @@ function M.lsp(buf)
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle virtual text display"),
+			:with_desc("lsp: Toggle virtual text display of current buffer"),
 		["n|<leader>lh"] = map_callback(function()
 				_toggle_inlayhint()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle inlay hints display"),
+			:with_desc("lsp: Toggle inlay hints dispaly of current buffer"),
 	}
 	bind.nvim_load_mapping(map)
 

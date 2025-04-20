@@ -18,7 +18,7 @@ local function load_options()
 		cmdheight = 1, -- 0, 1, 2
 		cmdwinheight = 5,
 		complete = ".,w,b,k,kspell",
-		completeopt = "fuzzy,menuone,noselect,popup",
+		completeopt = "menuone,noselect,popup",
 		concealcursor = "niv",
 		conceallevel = 0,
 		cursorcolumn = true,
