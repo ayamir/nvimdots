@@ -9,8 +9,8 @@ $ErrorActionPreference = "Stop" # Exit when command fails
 
 # global-scope vars
 $USE_SSH = $True
-$REQUIRED_NVIM_VERSION = [version]'0.10.0'
-$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.9.0'
+$REQUIRED_NVIM_VERSION = [version]'0.11.0'
+$REQUIRED_NVIM_VERSION_LEGACY = [version]'0.10.0'
 
 # package mgr vars
 $choco_package_matrix = @{ "gcc" = "mingw"; "git" = "git"; "nvim" = "neovim"; "make" = "make"; "sudo" = "psutils"; "node" = "nodejs"; "pip" = "python3"; "fzf" = "fzf"; "rg" = "ripgrep"; "go" = "go"; "curl" = "curl"; "wget" = "wget"; "tree-sitter" = "tree-sitter"; "ruby" = "ruby"; "rustc" = "rust-ms" }
@@ -21,8 +21,8 @@ $installer_pkg_matrix = @{ "NodeJS" = "npm"; "Python" = "pip"; "Ruby" = "gem" }
 $env:XDG_CONFIG_HOME ??= $env:LOCALAPPDATA
 $env:CCPACK_MGR ??= 'unknown'
 $env:CCLONE_ATTR ??= 'undef'
-$env:CCLONE_BRANCH ??= 'main'
-$env:CCLONE_BRANCH_LEGACY ??= '0.9'
+$env:CCLONE_BRANCH ??= '0.11'
+$env:CCLONE_BRANCH_LEGACY ??= '0.10'
 $env:CCDEST_DIR ??= "$env:XDG_CONFIG_HOME\nvim"
 $env:CCBACKUP_DIR = "$env:CCDEST_DIR" + "_backup-" + (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmss")
 
