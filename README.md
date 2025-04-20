@@ -47,7 +47,6 @@ Branch info:
 |  0.11  |     nvim 0.11 stable     |
 |  0.10  |        nvim 0.10         |
 |  0.9   |         nvim 0.9         |
-|  0.8   |         nvim 0.8         |
 
 </div>
 
