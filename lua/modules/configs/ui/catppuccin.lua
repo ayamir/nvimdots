@@ -30,6 +30,7 @@ return function()
 			properties = {},
 		},
 		integrations = {
+			aerial = true,
 			cmp = true,
 			dap = true,
 			dap_ui = true,

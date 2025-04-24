@@ -27,6 +27,12 @@ function M.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
+		["n|gto"] = map_callback(function()
+				require("telescope").extensions.aerial.aerial()
+			end)
+			:with_silent()
+			:with_buffer(buf)
+			:with_desc("lsp: Toggle outline in Telescope"),
 		["n|g["] = map_cr("Lspsaga diagnostic_jump_prev")
 			:with_silent()
 			:with_buffer(buf)

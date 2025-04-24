@@ -57,19 +57,9 @@ return function()
 		},
 		right = {
 			{
-				ft = "trouble",
+				ft = "aerial",
 				pinned = true,
-				size = { height = 0.6, width = 0.3 },
-				open = "Trouble symbols toggle win.position=right",
-				filter = trouble_filter("right"),
-			},
-			{
-				ft = "trouble",
-				pinned = true,
-				collapsed = true,
-				size = { height = 0.4, width = 0.3 },
-				open = "Trouble lsp toggle win.position=right",
-				filter = trouble_filter("right"),
+				open = "AerialToggle!",
 			},
 		},
 	})

@@ -44,6 +44,13 @@ return function()
 			buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		},
 		extensions = {
+			aerial = {
+				show_lines = false,
+				show_nesting = {
+					["_"] = false, -- This key will be the default
+					lua = true, -- You can set the option for specific filetypes
+				},
+			},
 			fzf = {
 				fuzzy = false,
 				override_generic_sorter = true,
@@ -82,6 +89,7 @@ return function()
 		},
 	})
 
+	require("telescope").load_extension("aerial")
 	require("telescope").load_extension("frecency")
 	require("telescope").load_extension("fzf")
 	require("telescope").load_extension("live_grep_args")
