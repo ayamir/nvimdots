@@ -1,14 +1,4 @@
 return function()
-	local trouble_filter = function(position)
-		return function(_, win)
-			return vim.w[win].trouble
-				and vim.w[win].trouble.position == position
-				and vim.w[win].trouble.type == "split"
-				and vim.w[win].trouble.relative == "editor"
-				and not vim.w[win].trouble_preview
-		end
-	end
-
 	require("modules.utils").load_plugin("edgy", {
 		close_when_all_hidden = true,
 		exit_when_last = true,
