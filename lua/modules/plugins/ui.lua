@@ -10,11 +10,6 @@ ui["akinsho/bufferline.nvim"] = {
 	event = { "BufReadPre", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
-ui["folke/edgy.nvim"] = {
-	lazy = true,
-	event = { "BufReadPre", "BufAdd", "BufNewFile" },
-	config = require("ui.edgy"),
-}
 ui["Jint-lzxy/nvim"] = {
 	lazy = false,
 	branch = "refactor/syntax-highlighting",

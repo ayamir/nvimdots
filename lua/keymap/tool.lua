@@ -9,12 +9,7 @@ require("keymap.helpers")
 local mappings = {
 	plugins = {
 		-- Plugin: edgy
-		["n|<C-n>"] = map_callback(function()
-				require("edgy").toggle("left")
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("filetree: Toggle"),
+		["n|<C-n>"] = map_cu("NvimTreeToggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
 
 		-- Plugin: vim-fugitive
 		["n|gps"] = map_cr("G push"):with_noremap():with_silent():with_desc("git: Push"),
