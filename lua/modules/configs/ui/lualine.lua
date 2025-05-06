@@ -1,3 +1,32 @@
+local state = { lsp_msg = "" }
+local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "" }
+vim.api.nvim_create_autocmd("LspProgress", {
+	pattern = { "begin", "report", "end" },
+	callback = function(args)
+		-- Ensure params exists before accessing its fields
+		if not args.data or not args.data.params then
+			return
+		end
+
+		local data = args.data.params.value
+		local progress = ""
+
+		if data.percentage then
+			local idx = math.max(1, math.floor(data.percentage / 10))
+			local icon = spinners[idx]
+			progress = icon .. " " .. data.percentage .. "%% "
+		end
+
+		local loaded_count = data.message and string.match(data.message, "^(%d+/%d+)") or ""
+		local str = progress .. (data.title or "") .. " " .. (loaded_count or "")
+		state.lsp_msg = data.kind == "end" and "" or str
+		vim.cmd.redrawstatus()
+	end,
+})
+
+local lsp_msg = function()
+	return vim.o.columns < 120 and "" or state.lsp_msg
+end
 return function()
 	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
@@ -179,8 +208,14 @@ return function()
 						end
 					end
 				end
+
 				return next(available_servers) == nil and icons.misc.NoActiveLsp
-					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
+					or string.format(
+						"%s[%s] %s",
+						icons.misc.LspAvailable,
+						table.concat(available_servers, ", "),
+						lsp_msg()
+					)
 			end,
 			color = utils.gen_hl("blue", true, true, nil, "bold"),
 			cond = conditionals.has_enough_room,
