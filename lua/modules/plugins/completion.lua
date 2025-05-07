@@ -6,8 +6,8 @@ completion["neovim/nvim-lspconfig"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.lsp"),
 	dependencies = {
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
+		{ "williamboman/mason.nvim", version = "1.11.0" },
+		{ "williamboman/mason-lspconfig.nvim", version = "1.32.0" },
 		{ "folke/neoconf.nvim" },
 		{
 			"Jint-lzxy/lsp_signature.nvim",
