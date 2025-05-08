@@ -34,7 +34,6 @@ return function()
 			and {
 				require("copilot_cmp.comparators").prioritize,
 				require("copilot_cmp.comparators").score,
-				-- require("cmp_tabnine.compare"),
 				compare.offset, -- Items closer to cursor will have lower priority
 				compare.exact,
 				-- compare.scopes,
@@ -49,7 +48,6 @@ return function()
 				compare.order,
 			}
 		or {
-			-- require("cmp_tabnine.compare"),
 			compare.offset, -- Items closer to cursor will have lower priority
 			compare.exact,
 			-- compare.scopes,
@@ -92,7 +90,7 @@ return function()
 
 				-- set up labels for completion entries
 				vim_item.menu = setmetatable({
-					cmp_tabnine = "[TN]",
+					codecompanion = "[CC]",
 					copilot = "[CPLT]",
 					buffer = "[BUF]",
 					orgmode = "[ORG]",
@@ -194,8 +192,7 @@ return function()
 			},
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
-			-- { name = "codeium" },
-			-- { name = "cmp_tabnine" },
+			{ name = "codecompanion" },
 		},
 		experimental = {
 			ghost_text = {
