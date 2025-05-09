@@ -8,7 +8,8 @@ return function()
 				and not vim.w[win].trouble_preview
 		end
 	end
-	require("edgy").setup({
+
+	require("modules.utils").load_plugin("edgy", {
 		close_when_all_hidden = true,
 		exit_when_last = true,
 		wo = { winbar = false },
