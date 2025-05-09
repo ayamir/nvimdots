@@ -50,9 +50,10 @@ return function()
 			{
 				ft = "toggleterm",
 				size = { height = 0.3 },
-				-- exclude floating windows
-				filter = function(buf, win)
-					return vim.api.nvim_win_get_config(win).relative == ""
+				filter = function(_, win)
+					local not_floating = vim.api.nvim_win_get_config(win).relative == ""
+					local term = require("toggleterm.terminal").get(1)
+					return not_floating and term.direction == "horizontal"
 				end,
 			},
 			{
