@@ -46,5 +46,22 @@ return function()
 				filter = trouble_filter("right"),
 			},
 		},
+		bottom = {
+			{
+				ft = "toggleterm",
+				size = { height = 0.3 },
+				-- exclude floating windows
+				filter = function(buf, win)
+					return vim.api.nvim_win_get_config(win).relative == ""
+				end,
+			},
+			{
+				ft = "help",
+				size = { height = 0.3 },
+				filter = function(buf)
+					return vim.bo[buf].buftype == "help"
+				end,
+			},
+		},
 	})
 end
