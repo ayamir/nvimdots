@@ -48,6 +48,7 @@ return function()
 			},
 		},
 		bottom = {
+			{ ft = "qf", size = { height = 0.3 } },
 			{
 				ft = "toggleterm",
 				size = { height = 0.3 },
@@ -55,6 +56,13 @@ return function()
 					local not_floating = vim.api.nvim_win_get_config(win).relative == ""
 					local term = require("toggleterm.terminal").get(1)
 					return not_floating and term.direction == "horizontal"
+				end,
+			},
+			{
+				ft = "help",
+				size = { height = 0.3 },
+				filter = function(buf)
+					return vim.bo[buf].buftype == "help"
 				end,
 			},
 		},
