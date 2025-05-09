@@ -2,13 +2,13 @@ return function()
 	local secret_key = os.getenv("CODE_COMPANION_KEY")
 
 	local available_models = {
+		"qwen/qwq-32b:free",
 		"qwen/qwen3-4b:free",
 		"deepseek/deepseek-v3-base:free",
 		"deepseek/deepseek-prover-v2:free",
 		"meta-llama/llama-4-scout:free",
-		"qwen/qwq-32b:free",
 	}
-	local default_model = "qwen/qwen3-4b:free"
+	local default_model = "qwen/qwq-32b:free"
 	local current_model = default_model
 	local function select_model()
 		local actions = require("telescope.actions")
@@ -64,6 +64,25 @@ return function()
 					},
 				})
 			end,
+		},
+		display = {
+			diff = {
+				enabled = true,
+				close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
+				layout = "vertical", -- vertical|horizontal split for default provider
+				opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
+				provider = "default", -- default|mini_diff
+			},
+			chat = {
+				window = {
+					layout = "vertical", -- float|vertical|horizontal|buffer
+					position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.plitright|vim.opt.splitbelow)
+					border = "single",
+					width = 0.25,
+					relative = "editor",
+					full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
+				},
+			},
 		},
 	})
 
