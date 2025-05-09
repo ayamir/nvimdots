@@ -56,13 +56,6 @@ return function()
 					return not_floating and term.direction == "horizontal"
 				end,
 			},
-			{
-				ft = "help",
-				size = { height = 0.3 },
-				filter = function(buf)
-					return vim.bo[buf].buftype == "help"
-				end,
-			},
 		},
 	})
 end
