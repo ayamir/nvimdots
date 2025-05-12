@@ -1,16 +1,10 @@
 return function()
 	local secret_key = os.getenv("CODE_COMPANION_KEY")
-
-	local available_models = {
-		"qwen/qwq-32b:free",
-		"qwen/qwen3-4b:free",
-		"deepseek/deepseek-v3-base:free",
-		"deepseek/deepseek-prover-v2:free",
-		"meta-llama/llama-4-scout:free",
-	}
-	local default_model = "qwen/qwq-32b:free"
+	local models = require("core.settings").chat_models
+	local default_model = models[1]
 	local current_model = default_model
-	local function select_model()
+
+	local select_model = function()
 		local actions = require("telescope.actions")
 		local action_state = require("telescope.actions.state")
 		local finder = require("telescope.finders")
@@ -21,12 +15,12 @@ return function()
 		pickers
 			.new(type, {
 				prompt_title = "(CodeCompanion) Select Model",
-				finder = finder.new_table({ results = available_models }),
+				finder = finder.new_table({ results = models }),
 				sorter = conf.generic_sorter(type),
 				attach_mappings = function(bufnr)
 					actions.select_default:replace(function()
 						actions.close(bufnr)
-						current_model = action_state.get_selected_entry()[1]
+						local model = action_state.get_selected_entry()[1]
 						vim.notify(
 							"Model selected: " .. current_model,
 							vim.log.levels.INFO,
