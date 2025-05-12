@@ -20,7 +20,7 @@ return function()
 				attach_mappings = function(bufnr)
 					actions.select_default:replace(function()
 						actions.close(bufnr)
-						local model = action_state.get_selected_entry()[1]
+						current_model = action_state.get_selected_entry()[1]
 						vim.notify(
 							"Model selected: " .. current_model,
 							vim.log.levels.INFO,
