@@ -13,8 +13,15 @@ local mappings = {
 		["n|gpl"] = map_cr("G pull"):with_noremap():with_silent():with_desc("git: Pull"),
 		["n|<leader>gG"] = map_cu("Git"):with_noremap():with_silent():with_desc("git: Open git-fugitive"),
 
+		-- Plugin: edgy
+		["n|<C-n>"] = map_callback(function()
+				require("edgy").toggle("left")
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("filetree: Toggle"),
+
 		-- Plugin: nvim-tree
-		["n|<C-n>"] = map_cu("NvimTreeToggle"):with_noremap():with_silent():with_desc("filetree: Toggle"),
 		["n|<leader>nf"] = map_cr("NvimTreeFindFile"):with_noremap():with_silent():with_desc("filetree: Find file"),
 		["n|<leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent():with_desc("filetree: Refresh"),
 
