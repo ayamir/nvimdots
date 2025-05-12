@@ -62,5 +62,10 @@ ui["dstein64/nvim-scrollview"] = {
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.scrollview"),
 }
+ui["folke/edgy.nvim"] = {
+	lazy = true,
+	event = { "VeryLazy" },
+	config = require("ui.edgy"),
+}
 
 return ui
