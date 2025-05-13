@@ -1,7 +1,0 @@
-{
-    "formatting": {
-        "command": [
-            "nixpkgs-fmt"
-        ]
-    }
-}
