@@ -141,14 +141,14 @@ in
       } // optionalAttrs cfg.bindLazyLock {
         "nvim/lazy-lock.json".source = ../../lazy-lock.json;
       } // optionalAttrs cfg.mergeLazyLock {
-        "nvim/lazy-lock.fixed.json" = {
+        "nvim/lazy-lock.nix.json" = {
           source = ../../lazy-lock.json;
           onChange = ''
             if [ -f ${config.xdg.configHome}/nvim/lazy-lock.json ]; then
               tmp=$(mktemp)
-              ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configFile."nvim/lazy-lock.fixed.json".source} > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/lazy-lock.json
+              ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${config.xdg.configFile."nvim/lazy-lock.nix.json".source} > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/lazy-lock.json
             else
-              ${pkgs.rsync}/bin/rsync --chmod 644 ${config.xdg.configFile."nvim/lazy-lock.fixed.json".source} ${config.xdg.configHome}/nvim/lazy-lock.json
+              ${pkgs.rsync}/bin/rsync --chmod 644 ${config.xdg.configFile."nvim/lazy-lock.nix.json".source} ${config.xdg.configHome}/nvim/lazy-lock.json
             fi
           '';
         };

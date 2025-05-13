@@ -20,11 +20,7 @@
         imports = [
           inputs.devshell.flakeModule
         ];
-        flake = {
-          homeManagerModules = {
-            nvimdots = ./nixos;
-          };
-        };
+        flake.homeManagerModules.default = ./nixos;
         systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
         perSystem = { pkgs, system, ... }: {
           packages = {
