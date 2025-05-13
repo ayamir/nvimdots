@@ -3,6 +3,7 @@ return function()
 	local models = require("core.settings").chat_models
 	local default_model = models[1]
 	local current_model = default_model
+	local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
 
 	local select_model = function()
 		local actions = require("telescope.actions")
@@ -38,6 +39,12 @@ return function()
 		strategies = {
 			chat = {
 				adapter = "openrouter",
+				roles = {
+					llm = function(adapter)
+						return icons.aichat.Copilot .. "CodeCompanion (" .. adapter.formatted_name .. ")"
+					end,
+					user = icons.aichat.Me .. "Me",
+				},
 			},
 			inline = {
 				adapter = "openrouter",
