@@ -1,4 +1,5 @@
 local M = require("lualine.component"):extend()
+local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
 
 M.processing = false
 M.spinner_index = 1
@@ -39,7 +40,7 @@ end
 function M:update_status()
 	if self.processing then
 		self.spinner_index = (self.spinner_index % #spinners) + 1
-		return spinners[self.spinner_index] .. " AI is thinking..."
+		return string.format("%s %s", icons.aichat.Copilot, spinners[self.spinner_index])
 	else
 		return nil
 	end
