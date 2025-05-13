@@ -80,8 +80,5 @@ return function()
 		},
 	})
 
-	vim.keymap.set({ "n", "v" }, "<leader>ck", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-	vim.keymap.set({ "n", "v" }, "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-	vim.keymap.set("v", "<leader>ca", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 	vim.keymap.set("n", "<leader>cs", select_model, { desc = "Select CodeCompanion Models" })
 end

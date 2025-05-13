@@ -66,5 +66,14 @@ return function()
 				end,
 			},
 		},
+		right = {
+			{
+				ft = "codecompanion",
+				pinned = true,
+				collapsed = false,
+				size = { width = 0.25 },
+				open = "CodeCompanionChat Toggle",
+			},
+		},
 	})
 end

@@ -1,6 +1,5 @@
 local completion = {}
 local use_copilot = require("core.settings").use_copilot
-local use_chat = require("core.settings").use_chat
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
@@ -81,13 +80,6 @@ if use_copilot then
 				config = require("completion.copilot-cmp"),
 			},
 		},
-	}
-end
-if use_chat then
-	completion["olimorris/codecompanion.nvim"] = {
-		lazy = true,
-		event = "VeryLazy",
-		config = require("completion.codecompanion"),
 	}
 end
 
