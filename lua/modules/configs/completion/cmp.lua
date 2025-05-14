@@ -90,7 +90,6 @@ return function()
 
 				-- set up labels for completion entries
 				vim_item.menu = setmetatable({
-					codecompanion = "[CC]",
 					copilot = "[CPLT]",
 					buffer = "[BUF]",
 					orgmode = "[ORG]",
@@ -192,7 +191,6 @@ return function()
 			},
 			{ name = "latex_symbols" },
 			{ name = "copilot" },
-			{ name = "codecompanion" },
 		},
 		experimental = {
 			ghost_text = {
