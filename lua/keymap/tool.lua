@@ -148,6 +148,10 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Miscellaneous"),
+		["n|<leader>fr"] = map_cr("Telescope resume")
+			:with_noremap()
+			:with_silent()
+			:with_desc("tool: Resume last search"),
 
 		-- Plugin: dap
 		["n|<F6>"] = map_callback(function()
