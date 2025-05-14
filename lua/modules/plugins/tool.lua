@@ -77,6 +77,9 @@ if use_chat then
 		lazy = true,
 		event = "VeryLazy",
 		config = require("tool.codecompanion"),
+		dependencies = {
+			{ "ravitemer/codecompanion-history.nvim" },
+		},
 	}
 end
 
