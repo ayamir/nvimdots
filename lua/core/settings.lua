@@ -8,10 +8,6 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
--- Set it to false if you don't use AI chat functionality.
----@type boolean
-settings["use_chat"] = true
-
 -- Set it to false if there is no need to format on save.
 ---@type boolean
 settings["format_on_save"] = true
@@ -223,6 +219,29 @@ settings["dashboard_image"] = {
 	[[⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣀⡆⣠⢀⣴⣏⡀⠀⠀⠀⠉⠀⠀⢀⣠⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
 	[[⠿⠛⠛⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣯⣟⠷⢷⣿⡿⠋⠀⠀⠀⠀⣵⡀⢠⡿⠋⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
 	[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
+}
+
+-- Set it to false if you don't use AI chat functionality.
+---@type boolean
+settings["use_chat"] = true
+
+-- Set the chat models here
+-- We use openrouter as chat model provider by default
+-- All available models can be found here: https://openrouter.ai/models
+--- @type string[]
+settings["chat_models"] = {
+	-- free models
+	"qwen/qwq-32b:free", -- default
+	"qwen/qwen3-4b:free",
+	"deepseek/deepseek-v3-base:free",
+	"deepseek/deepseek-prover-v2:free",
+	"meta-llama/llama-4-scout:free",
+	-- paid models
+	"openai/gpt-4o-mini",
+	"google/gemini-2.0-flash-001",
+	"google/gemini-2.5-pro-preview-03-25",
+	"anthropic/claude-3.7-sonnet",
+	"anthropic/claude-3.5-sonnet",
 }
 
 return require("modules.utils").extend_config(settings, "user.settings")

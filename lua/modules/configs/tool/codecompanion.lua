@@ -1,16 +1,11 @@
 return function()
 	local secret_key = os.getenv("CODE_COMPANION_KEY")
-
-	local available_models = {
-		"qwen/qwq-32b:free",
-		"qwen/qwen3-4b:free",
-		"deepseek/deepseek-v3-base:free",
-		"deepseek/deepseek-prover-v2:free",
-		"meta-llama/llama-4-scout:free",
-	}
-	local default_model = "qwen/qwq-32b:free"
+	local models = require("core.settings").chat_models
+	local default_model = models[1]
 	local current_model = default_model
-	local function select_model()
+	local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
+
+	local select_model = function()
 		local actions = require("telescope.actions")
 		local action_state = require("telescope.actions.state")
 		local finder = require("telescope.finders")
@@ -21,7 +16,7 @@ return function()
 		pickers
 			.new(type, {
 				prompt_title = "(CodeCompanion) Select Model",
-				finder = finder.new_table({ results = available_models }),
+				finder = finder.new_table({ results = models }),
 				sorter = conf.generic_sorter(type),
 				attach_mappings = function(bufnr)
 					actions.select_default:replace(function()
@@ -44,6 +39,12 @@ return function()
 		strategies = {
 			chat = {
 				adapter = "openrouter",
+				roles = {
+					llm = function(adapter)
+						return icons.aichat.Copilot .. "CodeCompanion (" .. adapter.formatted_name .. ")"
+					end,
+					user = icons.aichat.Me .. "Me",
+				},
 			},
 			inline = {
 				adapter = "openrouter",
@@ -84,10 +85,34 @@ return function()
 				},
 			},
 		},
+		extensions = {
+			history = {
+				enabled = true,
+				opts = {
+					-- Keymap to open history from chat buffer (default: gh)
+					keymap = "gh",
+					-- Automatically generate titles for new chats
+					auto_generate_title = true,
+					---On exiting and entering neovim, loads the last chat on opening chat
+					continue_last_chat = false,
+					---When chat is cleared with `gx` delete the chat from history
+					delete_on_clearing_chat = false,
+					-- Picker interface ("telescope", "snacks" or "default")
+					picker = "telescope",
+					---Enable detailed logging for history extension
+					enable_logging = false,
+					---Directory path to save the chats
+					dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
+					-- Save all chats by default
+					auto_save = true,
+					-- Keymap to save the current chat manually
+					save_chat_keymap = "sc",
+					-- Number of days after which chats are automatically deleted (0 to disable)
+					expiration_days = 0,
+				},
+			},
+		},
 	})
 
-	vim.keymap.set({ "n", "v" }, "<leader>ck", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-	vim.keymap.set({ "n", "v" }, "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-	vim.keymap.set("v", "<leader>ca", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 	vim.keymap.set("n", "<leader>cs", select_model, { desc = "Select CodeCompanion Models" })
 end
