@@ -72,6 +72,11 @@ tool["gelguy/wilder.nvim"] = {
 	dependencies = { "romgrk/fzy-lua-native" },
 }
 
+tool["ibhagwan/fzf-lua"] = {
+	lazy = true,
+	event = "VeryLazy",
+	config = require("tool.fzf-lua"),
+}
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
 ----------------------------------------------------------------------

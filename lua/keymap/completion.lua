@@ -25,7 +25,7 @@ function M.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
-		["n|gto"] = map_cr("Telescope lsp_document_symbols")
+		["n|gto"] = map_cr("FzfLua lsp_document_symbols")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline in Telescope"),

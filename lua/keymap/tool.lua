@@ -99,12 +99,7 @@ local mappings = {
 			:with_desc("lsp: Show document diagnostics"),
 
 		-- Plugin: telescope
-		["n|<C-p>"] = map_callback(function()
-				_command_panel()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Toggle command panel"),
+		["n|<C-p>"] = map_cr("FzfLua keymaps"):with_noremap():with_silent():with_desc("tool: Toggle command panel"),
 		["n|<leader>fc"] = map_callback(function()
 				_telescope_collections(require("telescope.themes").get_dropdown())
 			end)
@@ -124,8 +119,14 @@ local mappings = {
 			:with_silent()
 			:with_desc("tool: Find patterns"),
 		["v|<leader>fs"] = map_callback(function()
-				local opts = vim.fn.getcwd() == vim_path and { additional_args = { "--no-ignore" } } or {}
-				require("telescope-live-grep-args.shortcuts").grep_visual_selection(opts)
+				local default_opts = "--column --line-number --no-heading --color=always --smart-case"
+				local opts = vim.fn.getcwd() == vim_path and default_opts .. " --no-ignore --hidden --glob '!.git/*'"
+					or ""
+				local text = require("fzf-lua.utils").get_visual_selection()
+				require("fzf-lua").grep_project({
+					search = text,
+					rg_opts = opts,
+				})
 			end)
 			:with_noremap()
 			:with_silent()
