@@ -28,6 +28,12 @@ return function()
 						end,
 					},
 					{
+						name = "Frecency",
+						tele_func = function()
+							extensions.frecency.frecency()
+						end,
+					},
+					{
 						name = "Oldfiles",
 						tele_func = function()
 							local opts = {}
