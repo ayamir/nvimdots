@@ -8,11 +8,6 @@ return function()
 
 	require("modules.utils").load_plugin("search", {
 		prompt_position = prompt_position,
-		engine = "fzf",
-		mappings = {
-			next = "<A-i>",
-			prev = "<A-o>",
-		},
 		collections = {
 			-- Search using filenames
 			file = {
