@@ -1,9 +1,18 @@
 return function()
+	local fzf = require("fzf-lua")
 	local builtin = require("telescope.builtin")
 	local extensions = require("telescope").extensions
 	local vim_path = require("core.global").vim_path
+	local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
+	local fzf_opts = { fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" } }
 
 	require("modules.utils").load_plugin("search", {
+		prompt_position = prompt_position,
+		engine = "fzf",
+		mappings = {
+			next = "<A-i>",
+			prev = "<A-o>",
+		},
 		collections = {
 			-- Search using filenames
 			file = {
@@ -11,33 +20,32 @@ return function()
 				tabs = {
 					{
 						name = "Files",
-						tele_func = function(opts)
-							opts = opts or {}
-							if vim.fn.getcwd() == vim_path then
-								builtin.find_files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
-							elseif vim.fn.isdirectory(".git") == 1 then
-								builtin.git_files(opts)
-							else
-								builtin.find_files(opts)
-							end
-						end,
-					},
-					{
-						name = "Frecency",
 						tele_func = function()
-							extensions.frecency.frecency()
+							local opts = {}
+							opts = vim.tbl_deep_extend("force", opts, fzf_opts)
+							if vim.fn.getcwd() == vim_path then
+								fzf.files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
+							elseif vim.fn.isdirectory(".git") == 1 then
+								fzf.git_files(opts)
+							else
+								fzf.files(opts)
+							end
 						end,
 					},
 					{
 						name = "Oldfiles",
 						tele_func = function()
-							builtin.oldfiles()
+							local opts = {}
+							opts = vim.tbl_deep_extend("force", opts, fzf_opts)
+							fzf.oldfiles(opts)
 						end,
 					},
 					{
 						name = "Buffers",
 						tele_func = function()
-							builtin.buffers()
+							local opts = {}
+							opts = vim.tbl_deep_extend("force", opts, fzf_opts)
+							fzf.buffers(opts)
 						end,
 					},
 				},
@@ -50,20 +58,22 @@ return function()
 						name = "Word in project",
 						tele_func = function()
 							local opts = {}
+							opts = vim.tbl_deep_extend("force", opts, fzf_opts)
 							if vim.fn.getcwd() == vim_path then
-								opts["additional_args"] = { "--no-ignore" }
+								opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
 							end
-							extensions.live_grep_args.live_grep_args(opts)
+							fzf.live_grep(opts)
 						end,
 					},
 					{
 						name = "Word under cursor",
-						tele_func = function(opts)
-							opts = opts or {}
+						tele_func = function()
+							local opts = {}
+							opts = vim.tbl_deep_extend("force", opts, fzf_opts)
 							if vim.fn.getcwd() == vim_path then
-								opts["additional_args"] = { "--no-ignore" }
+								opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
 							end
-							builtin.grep_string(opts)
+							fzf.grep_cword(opts)
 						end,
 					},
 				},
