@@ -25,7 +25,12 @@ function M.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
-		["n|gto"] = map_cr("FzfLua lsp_document_symbols")
+		["n|gto"] = map_callback(function()
+				local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
+				require("fzf-lua").lsp_document_symbols({
+					fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
+				})
+			end)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline in Telescope"),
