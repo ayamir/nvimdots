@@ -25,7 +25,6 @@ return function()
 			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
 			layout_config = {
 				horizontal = {
-					prompt_position = "top",
 					preview_width = 0.55,
 					results_width = 0.8,
 				},
