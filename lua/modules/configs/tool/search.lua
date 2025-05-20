@@ -44,9 +44,7 @@ return function()
 					{
 						name = "Buffers",
 						tele_func = function()
-							local opts = {}
-							opts = vim.tbl_deep_extend("force", opts, fzf_opts)
-							fzf.buffers(opts)
+							builtin.buffers()
 						end,
 					},
 				},
