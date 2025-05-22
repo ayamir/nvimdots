@@ -221,4 +221,10 @@ settings["dashboard_image"] = {
 	[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
 }
 
+-- Set the search backend to use here.
+-- telescope is enough for most cases.
+-- fzf is more powerful for searching in huge repo but needs fzf binary installed.
+---@type "telescope"|"fzf"
+settings["search_backend"] = "telescope"
+
 return require("modules.utils").extend_config(settings, "user.settings")
