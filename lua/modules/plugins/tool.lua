@@ -1,4 +1,5 @@
 local tool = {}
+local settings = require("core.settings")
 
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
@@ -71,12 +72,15 @@ tool["gelguy/wilder.nvim"] = {
 	config = require("tool.wilder"),
 	dependencies = { "romgrk/fzy-lua-native" },
 }
+if settings.search_backend == "fzf" then
+	-- require fzf binary installed
+	tool["ibhagwan/fzf-lua"] = {
+		lazy = true,
+		event = "VeryLazy",
+		config = require("tool.fzf-lua"),
+	}
+end
 
-tool["ibhagwan/fzf-lua"] = {
-	lazy = true,
-	event = "VeryLazy",
-	config = require("tool.fzf-lua"),
-}
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
 ----------------------------------------------------------------------
