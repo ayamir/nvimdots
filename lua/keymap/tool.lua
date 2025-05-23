@@ -132,14 +132,21 @@ local mappings = {
 			:with_silent()
 			:with_desc("tool: Find patterns"),
 		["v|<leader>fs"] = map_callback(function()
-				local default_opts = "--column --line-number --no-heading --color=always --smart-case"
-				local opts = vim.fn.getcwd() == vim_path and default_opts .. " --no-ignore --hidden --glob '!.git/*'"
-					or ""
-				local text = require("fzf-lua.utils").get_visual_selection()
-				require("fzf-lua").grep_project({
-					search = text,
-					rg_opts = opts,
-				})
+				local search_backend = require("core.settings").search_backend
+				if search_backend == "fzf" then
+					local default_opts = "--column --line-number --no-heading --color=always --smart-case"
+					local opts = vim.fn.getcwd() == vim_path
+							and default_opts .. " --no-ignore --hidden --glob '!.git/*'"
+						or ""
+					local text = require("fzf-lua.utils").get_visual_selection()
+					require("fzf-lua").grep_project({
+						search = text,
+						rg_opts = opts,
+					})
+				else
+					local opts = vim.fn.getcwd() == vim_path and { additional_args = { "--no-ignore" } } or {}
+					require("telescope-live-grep-args.shortcuts").grep_visual_selection(opts)
+				end
 			end)
 			:with_noremap()
 			:with_silent()
