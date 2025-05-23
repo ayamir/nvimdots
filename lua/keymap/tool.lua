@@ -99,7 +99,20 @@ local mappings = {
 			:with_desc("lsp: Show document diagnostics"),
 
 		-- Plugin: telescope
-		["n|<C-p>"] = map_cr("FzfLua keymaps"):with_noremap():with_silent():with_desc("tool: Toggle command panel"),
+		["n|<C-p>"] = map_callback(function()
+				local search_backend = require("core.settings").search_backend
+				if search_backend == "fzf" then
+					local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
+					require("fzf-lua").keymaps({
+						fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
+					})
+				else
+					_command_panel()
+				end
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("tool: Toggle command panel"),
 		["n|<leader>fc"] = map_callback(function()
 				_telescope_collections(require("telescope.themes").get_dropdown())
 			end)
