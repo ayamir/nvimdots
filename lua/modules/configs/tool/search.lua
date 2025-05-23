@@ -1,6 +1,5 @@
 return function()
 	local search_backend = require("core.settings").search_backend
-	local fzf = require("fzf-lua")
 	local builtin = require("telescope.builtin")
 	local extensions = require("telescope").extensions
 	local vim_path = require("core.global").vim_path
@@ -10,6 +9,7 @@ return function()
 		if search_backend == "fzf" then
 			return function()
 				local opts = {}
+				local fzf = require("fzf-lua")
 				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
 				if vim.fn.getcwd() == vim_path then
 					fzf.files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
@@ -37,6 +37,7 @@ return function()
 		if search_backend == "fzf" then
 			return function()
 				local opts = {}
+				local fzf = require("fzf-lua")
 				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
 				fzf.oldfiles(opts)
 			end
@@ -52,6 +53,7 @@ return function()
 		if search_backend == "fzf" then
 			return function()
 				local opts = {}
+				local fzf = require("fzf-lua")
 				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
 				if vim.fn.getcwd() == vim_path then
 					opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
@@ -73,6 +75,7 @@ return function()
 		if search_backend == "fzf" then
 			return function()
 				local opts = {}
+				local fzf = require("fzf-lua")
 				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
 				if vim.fn.getcwd() == vim_path then
 					opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
