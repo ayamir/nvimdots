@@ -167,6 +167,7 @@ local data = {
 		Added = "",
 		Campass = "󰀹",
 		Code = "",
+		Chat = "󱜸",
 		Gavel = "",
 		Ghost = "󰊠",
 		Glass = "󰂖",
@@ -220,10 +221,14 @@ local data = {
 		Stopped = "",
 		Terminate = "󰝤",
 	},
+	aichat = {
+		Copilot = "",
+		Me = "",
+	},
 }
 
 ---Get a specific icon set.
----@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
+---@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"|"aichat"
 ---@param add_space? boolean @Add trailing whitespace after the icon.
 function icons.get(category, add_space)
 	if add_space then
