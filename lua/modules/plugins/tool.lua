@@ -80,6 +80,8 @@ if settings.use_chat then
 		dependencies = {
 			{ "ravitemer/codecompanion-history.nvim" },
 		},
+	}
+end
 if settings.search_backend == "fzf" then
 	-- require fzf binary installed
 	tool["ibhagwan/fzf-lua"] = {
