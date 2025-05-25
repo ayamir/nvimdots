@@ -173,6 +173,15 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Resume last search"),
+		["n|<leader>fR"] = map_callback(function()
+				local search_backend = require("core.settings").search_backend
+				if search_backend == "fzf" then
+					require("fzf-lua").resume()
+				end
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("tool: Resume last search"),
 
 		-- Plugin: dap
 		["n|<F6>"] = map_callback(function()
