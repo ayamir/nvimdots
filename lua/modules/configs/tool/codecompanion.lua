@@ -45,6 +45,16 @@ return function()
 					end,
 					user = icons.aichat.Me .. "Me",
 				},
+				keymaps = {
+					submit = {
+						modes = { n = "<CR>" },
+						description = "Submit",
+						callback = function(chat)
+							chat:apply_model(current_model)
+							chat:submit()
+						end,
+					},
+				},
 			},
 			inline = {
 				adapter = "openrouter",
