@@ -221,6 +221,7 @@ local data = {
 		Terminate = "󰝤",
 	},
 	aichat = {
+		Chat = "󱜸",
 		Copilot = "",
 		Me = "",
 	},

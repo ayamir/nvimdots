@@ -1,39 +1,9 @@
 return function()
+	local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
 	local secret_key = os.getenv("CODE_COMPANION_KEY")
 	local models = require("core.settings").chat_models
-	local default_model = models[1]
-	local current_model = default_model
-	local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
-
-	local select_model = function()
-		local actions = require("telescope.actions")
-		local action_state = require("telescope.actions.state")
-		local finder = require("telescope.finders")
-		local pickers = require("telescope.pickers")
-		local type = require("telescope.themes").get_dropdown()
-		local conf = require("telescope.config").values
-
-		pickers
-			.new(type, {
-				prompt_title = "(CodeCompanion) Select Model",
-				finder = finder.new_table({ results = models }),
-				sorter = conf.generic_sorter(type),
-				attach_mappings = function(bufnr)
-					actions.select_default:replace(function()
-						actions.close(bufnr)
-						current_model = action_state.get_selected_entry()[1]
-						vim.notify(
-							"Model selected: " .. current_model,
-							vim.log.levels.INFO,
-							{ title = "CodeCompanion" }
-						)
-					end)
-
-					return true
-				end,
-			})
-			:find()
-	end
+	local current_model = models[1]
+	vim.g.current_chat_model = current_model
 
 	require("modules.utils").load_plugin("codecompanion", {
 		strategies = {
@@ -44,6 +14,16 @@ return function()
 						return icons.aichat.Copilot .. "CodeCompanion (" .. adapter.formatted_name .. ")"
 					end,
 					user = icons.aichat.Me .. "Me",
+				},
+				keymaps = {
+					submit = {
+						modes = { n = "<CR>" },
+						description = "Submit",
+						callback = function(chat)
+							chat:apply_model(current_model)
+							chat:submit()
+						end,
+					},
 				},
 			},
 			inline = {
@@ -60,7 +40,7 @@ return function()
 					},
 					schema = {
 						model = {
-							default = current_model,
+							default = vim.g.current_chat_model,
 						},
 					},
 				})
@@ -113,6 +93,4 @@ return function()
 			},
 		},
 	})
-
-	vim.keymap.set("n", "<leader>cs", select_model, { desc = "Select CodeCompanion Models" })
 end
