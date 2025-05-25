@@ -225,25 +225,26 @@ settings["dashboard_image"] = {
 ---@type boolean
 settings["use_chat"] = true
 
--- Set the chat models here
--- We use openrouter as chat model provider by default
--- All available models can be found here: https://openrouter.ai/models
+-- Set the chat models here and use the first entry as default model.
+-- We use `openrouter` as the chat model provider by default (No vested interest).
+-- You need to register an account on openrouter and generate an api key.
+-- We read the api key by reading the env variable: `CODE_COMPANION_KEY`.
+-- All available models can be found here: https://openrouter.ai/models.
 --- @type string[]
 settings["chat_models"] = {
 	-- free models
-	"qwen/qwen-2.5-coder-32b-instruct:free", -- default
-	"qwen/qwq-32b:free",
-	"qwen/qwen3-4b:free",
-	"deepseek/deepseek-v3-base:free",
-	"deepseek/deepseek-prover-v2:free",
-	"meta-llama/llama-4-scout:free",
+	"mistralai/devstral-small:free", -- default
+	"qwen/qwen-2.5-coder-32b-instruct:free",
+	"deepseek/deepseek-chat-v3-0324:free",
+	"deepseek/deepseek-r1:free",
+	"google/gemma-3-27b-it:free",
 	-- paid models
 	"openai/codex-mini",
-	"openai/gpt-4o-mini",
+	"openai/gpt-4.1-mini",
 	"google/gemini-2.0-flash-001",
-	"google/gemini-2.5-pro-preview-03-25",
+	"google/gemini-2.5-flash-preview-05-20",
 	"anthropic/claude-3.7-sonnet",
-	"anthropic/claude-3.5-sonnet",
+	"anthropic/claude-sonnet-4",
 }
 
 -- Set the search backend to use here.
