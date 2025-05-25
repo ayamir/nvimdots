@@ -1,5 +1,5 @@
 local tool = {}
-local use_chat = require("core.settings").use_chat
+local settings = require("core.settings")
 
 tool["tpope/vim-fugitive"] = {
 	lazy = true,
@@ -53,14 +53,12 @@ tool["gelguy/wilder.nvim"] = {
 	config = require("tool.wilder"),
 	dependencies = { "romgrk/fzy-lua-native" },
 }
-if use_chat then
-	tool["olimorris/codecompanion.nvim"] = {
+if settings.search_backend == "fzf" then
+	-- require fzf binary installed
+	tool["ibhagwan/fzf-lua"] = {
 		lazy = true,
 		event = "VeryLazy",
-		config = require("tool.codecompanion"),
-		dependencies = {
-			{ "ravitemer/codecompanion-history.nvim" },
-		},
+		config = require("tool.fzf-lua"),
 	}
 end
 
@@ -80,7 +78,7 @@ tool["nvim-telescope/telescope.nvim"] = {
 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{
-			"FabianWirth/search.nvim",
+			"ayamir/search.nvim",
 			config = require("tool.search"),
 		},
 		{

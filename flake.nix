@@ -14,19 +14,22 @@
     };
   };
 
-  outputs = inputs @ { self, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; }
-      {
-        imports = [
-          inputs.devshell.flakeModule
-        ];
-        flake = {
-          homeManagerModules = {
-            nvimdots = ./nixos;
-          };
-        };
-        systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-        perSystem = { pkgs, system, ... }: {
+  outputs =
+    inputs@{ self, flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.devshell.flakeModule
+      ];
+      flake.homeManagerModules.default = ./nixos;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+      perSystem =
+        { pkgs, system, ... }:
+        {
           packages = {
             testEnv = (import ./nixos/testEnv.nix { inherit inputs pkgs; }).activationPackage;
             check-linker = pkgs.writeShellApplication {
@@ -101,5 +104,5 @@
             ];
           };
         };
-      };
+    };
 }
