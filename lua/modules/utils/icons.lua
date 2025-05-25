@@ -167,7 +167,6 @@ local data = {
 		Added = "",
 		Campass = "󰀹",
 		Code = "",
-		Chat = "󱜸",
 		Gavel = "",
 		Ghost = "󰊠",
 		Glass = "󰂖",
@@ -222,6 +221,7 @@ local data = {
 		Terminate = "󰝤",
 	},
 	aichat = {
+		Chat = "󱜸",
 		Copilot = "",
 		Me = "",
 	},
