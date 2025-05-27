@@ -72,6 +72,16 @@ tool["gelguy/wilder.nvim"] = {
 	config = require("tool.wilder"),
 	dependencies = { "romgrk/fzy-lua-native" },
 }
+if settings.use_chat then
+	tool["olimorris/codecompanion.nvim"] = {
+		lazy = true,
+		event = "VeryLazy",
+		config = require("tool.codecompanion"),
+		dependencies = {
+			{ "ravitemer/codecompanion-history.nvim" },
+		},
+	}
+end
 if settings.search_backend == "fzf" then
 	-- require fzf binary installed
 	tool["ibhagwan/fzf-lua"] = {
