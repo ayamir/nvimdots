@@ -38,8 +38,8 @@ tool["ibhagwan/smartyank.nvim"] = {
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
-	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
-	-- if you encountered error about no executable sniprun found.
+	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`
+	-- if you encounter an error about no executable sniprun found.
 	build = "bash ./install.sh",
 	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
 	config = require("tool.sniprun"),
@@ -73,7 +73,7 @@ tool["gelguy/wilder.nvim"] = {
 	dependencies = { "romgrk/fzy-lua-native" },
 }
 if settings.search_backend == "fzf" then
-	-- require fzf binary installed
+	-- requires the fzf binary to be installed
 	tool["ibhagwan/fzf-lua"] = {
 		lazy = true,
 		event = "VeryLazy",
