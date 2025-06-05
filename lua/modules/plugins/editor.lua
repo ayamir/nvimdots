@@ -113,6 +113,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		},
 		{
 			"hiphish/rainbow-delimiters.nvim",
+			submodules = false,
 			config = require("editor.rainbow_delims"),
 		},
 		{

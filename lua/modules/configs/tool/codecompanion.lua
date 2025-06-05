@@ -1,11 +1,15 @@
 return function()
 	local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
-	local secret_key = os.getenv("CODE_COMPANION_KEY")
+	local secret_key = require("core.settings").chat_api_key
+	local chat_lang = require("core.settings").chat_lang
 	local models = require("core.settings").chat_models
 	local current_model = models[1]
 	vim.g.current_chat_model = current_model
 
 	require("modules.utils").load_plugin("codecompanion", {
+		opts = {
+			language = chat_lang,
+		},
 		strategies = {
 			chat = {
 				adapter = "openrouter",

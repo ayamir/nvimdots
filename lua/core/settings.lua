@@ -225,6 +225,16 @@ settings["dashboard_image"] = {
 ---@type boolean
 settings["use_chat"] = true
 
+-- Set the language to use for AI chat response here.
+--- @type string
+settings["chat_lang"] = "English"
+
+-- Set environment variable here to read API key for AI chat.
+-- or you can set it to a command that reads the API key from your password manager.
+-- e.g. "cmd:op read op://personal/OpenAI/credential --no-new
+--- @type string
+settings["chat_api_key"] = "CODE_COMPANION_KEY"
+
 -- Set the chat models here and use the first entry as default model.
 -- We use `openrouter` as the chat model provider by default (No vested interest).
 -- You need to register an account on openrouter and generate an api key.
