@@ -83,3 +83,32 @@ _G._toggle_lazygit = function()
 		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
 	end
 end
+
+_G._select_chat_model = function()
+	local actions = require("telescope.actions")
+	local action_state = require("telescope.actions.state")
+	local finder = require("telescope.finders")
+	local pickers = require("telescope.pickers")
+	local type = require("telescope.themes").get_dropdown()
+	local conf = require("telescope.config").values
+	local models = require("core.settings").chat_models
+	local current_model = models[1]
+
+	pickers
+		.new(type, {
+			prompt_title = "(CodeCompanion) Select Model",
+			finder = finder.new_table({ results = models }),
+			sorter = conf.generic_sorter(type),
+			attach_mappings = function(bufnr)
+				actions.select_default:replace(function()
+					actions.close(bufnr)
+					current_model = action_state.get_selected_entry()[1]
+					vim.g.current_chat_model = current_model
+					vim.notify("Model selected: " .. current_model, vim.log.levels.INFO, { title = "CodeCompanion" })
+				end)
+
+				return true
+			end,
+		})
+		:find()
+end
