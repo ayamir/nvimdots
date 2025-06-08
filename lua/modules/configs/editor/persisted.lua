@@ -1,4 +1,13 @@
 return function()
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "PersistedLoadPost",
+		desc = "Fix LSP/Highlighting on auto session restore",
+		callback = function()
+			vim.defer_fn(function()
+				vim.cmd("edit")
+			end, 1)
+		end,
+	})
 	require("modules.utils").load_plugin("persisted", {
 		save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
 		autostart = true,
