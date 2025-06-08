@@ -3,9 +3,12 @@ return function()
 		pattern = "PersistedLoadPost",
 		desc = "Fix LSP/Highlighting on auto session restore",
 		callback = function()
-			vim.defer_fn(function()
-				vim.cmd("edit")
-			end, 1)
+			local bufname = vim.api.nvim_buf_get_name(0)
+			if bufname and bufname ~= "" then
+				vim.defer_fn(function()
+					vim.cmd("edit")
+				end, 1)
+			end
 		end,
 	})
 	require("modules.utils").load_plugin("persisted", {
