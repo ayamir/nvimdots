@@ -32,7 +32,7 @@
     <img
         alt="Code Size"
         src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE">
-    <a href="https://discord.gg/jAYvWRbTRU">
+    <a href="https://discord.gg/rE46YdFAUc">
     <img
         alt="Discord"
         src="https://img.shields.io/badge/Discord-nvimdots-b4befe?colorA=363A4F&logo=discord&logoColor=D9E0EE"/>
