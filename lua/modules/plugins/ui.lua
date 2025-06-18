@@ -10,21 +10,11 @@ ui["akinsho/bufferline.nvim"] = {
 	event = { "BufReadPre", "BufAdd", "BufNewFile" },
 	config = require("ui.bufferline"),
 }
-ui["folke/edgy.nvim"] = {
-	lazy = true,
-	event = { "BufReadPre", "BufAdd", "BufNewFile" },
-	config = require("ui.edgy"),
-}
 ui["Jint-lzxy/nvim"] = {
 	lazy = false,
 	branch = "refactor/syntax-highlighting",
 	name = "catppuccin",
 	config = require("ui.catppuccin"),
-}
-ui["j-hui/fidget.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("ui.fidget"),
 }
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
@@ -71,6 +61,11 @@ ui["dstein64/nvim-scrollview"] = {
 	lazy = true,
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.scrollview"),
+}
+ui["folke/edgy.nvim"] = {
+	lazy = true,
+	event = { "VeryLazy" },
+	config = require("ui.edgy"),
 }
 
 return ui

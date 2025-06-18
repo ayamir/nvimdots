@@ -55,10 +55,9 @@ settings["server_formatting_block_list"] = {
 ---@type boolean
 settings["lsp_inlayhints"] = true
 
--- Set it to false if diagnostics virtual text is annoying.
--- If disabled, you may browse lsp diagnostics using trouble.nvim (press `gt` to toggle it).
+-- Set it to false if diagnostics virtual lines is annoying.
 ---@type boolean
-settings["diagnostics_virtual_text"] = true
+settings["diagnostics_virtual_lines"] = false
 
 -- Set it to one of the values below if you want to change the visible severity level of lsp diagnostics.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
@@ -221,5 +220,47 @@ settings["dashboard_image"] = {
 	[[⠿⠛⠛⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣯⣟⠷⢷⣿⡿⠋⠀⠀⠀⠀⣵⡀⢠⡿⠋⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
 	[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⢿⣿⣿⠂⠀⠀⠀⠀⠀⢀⣽⣿⣿⣿⣿⣿⣿⣿⣍⠛⠿⣿⣿⣿⣿⣿⣿]],
 }
+
+-- Set it to false if you don't use AI chat functionality.
+---@type boolean
+settings["use_chat"] = true
+
+-- Set the language to use for AI chat response here.
+--- @type string
+settings["chat_lang"] = "English"
+
+-- Set environment variable here to read API key for AI chat.
+-- or you can set it to a command that reads the API key from your password manager.
+-- e.g. "cmd:op read op://personal/OpenAI/credential --no-new
+--- @type string
+settings["chat_api_key"] = "CODE_COMPANION_KEY"
+
+-- Set the chat models here and use the first entry as default model.
+-- We use `openrouter` as the chat model provider by default (No vested interest).
+-- You need to register an account on openrouter and generate an api key.
+-- We read the api key by reading the env variable: `CODE_COMPANION_KEY`.
+-- All available models can be found here: https://openrouter.ai/models.
+--- @type string[]
+settings["chat_models"] = {
+	-- free models
+	"mistralai/devstral-small:free", -- default
+	"qwen/qwen-2.5-coder-32b-instruct:free",
+	"deepseek/deepseek-chat-v3-0324:free",
+	"deepseek/deepseek-r1:free",
+	"google/gemma-3-27b-it:free",
+	-- paid models
+	"openai/codex-mini",
+	"openai/gpt-4.1-mini",
+	"google/gemini-2.0-flash-001",
+	"google/gemini-2.5-flash-preview-05-20",
+	"anthropic/claude-3.7-sonnet",
+	"anthropic/claude-sonnet-4",
+}
+
+-- Set the search backend to use here.
+-- telescope is enough for most cases.
+-- fzf is more powerful for searching in huge repo but needs fzf binary installed.
+---@type "telescope"|"fzf"
+settings["search_backend"] = "telescope"
 
 return require("modules.utils").extend_config(settings, "user.settings")

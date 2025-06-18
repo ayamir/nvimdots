@@ -161,10 +161,7 @@ function M.hl_to_rgb(hl_group, use_bg, fallback_hl)
 	local hlexists = pcall(vim.api.nvim_get_hl, 0, { name = hl_group, link = false })
 
 	if hlexists then
-		-- FIXME: Investigate why hl-StatusLine is undefined in toggleterm and remove this workaround
-		-- (@Jint-lzxy)
-		local link = vim.bo.filetype == "toggleterm"
-		local result = vim.api.nvim_get_hl(0, { name = hl_group, link = link })
+		local result = vim.api.nvim_get_hl(0, { name = hl_group, link = false })
 		if use_bg then
 			hex = result.bg and string.format("#%06x", result.bg) or "NONE"
 		else
@@ -320,8 +317,7 @@ end
 ---@param opts nil|table @The default config to be merged with
 ---@param vim_plugin? boolean @If this plugin is written in vimscript or not
 ---@param setup_callback? function @Add new callback if the plugin needs unusual setup function
----@param overwrite? boolean @If load user table-type config by overwriting
-function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback, overwrite)
+function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback)
 	vim_plugin = vim_plugin or false
 
 	-- Get the file name of the default config
@@ -354,11 +350,7 @@ function M.load_plugin(plugin_name, opts, vim_plugin, setup_callback, overwrite)
 			if ok then
 				-- Extend base config if the returned user config is a table
 				if type(user_config) == "table" then
-					if overwrite == true then
-						opts = vim.tbl_deep_extend("force", opts, user_config)
-					else
-						opts = tbl_recursive_merge(opts, user_config)
-					end
+					opts = tbl_recursive_merge(opts, user_config)
 					setup_callback(opts)
 				-- Replace base config if the returned user config is a function
 				elseif type(user_config) == "function" then

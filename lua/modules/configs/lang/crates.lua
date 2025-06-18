@@ -10,7 +10,6 @@ return function()
 	require("modules.utils").load_plugin("crates", {
 		smart_insert = true,
 		insert_closing_quote = true,
-		avoid_prerelease = true,
 		autoload = true,
 		autoupdate = true,
 		autoupdate_throttle = 250,
@@ -19,7 +18,6 @@ return function()
 		thousands_separator = ",",
 		notification_title = "Crates",
 		curl_args = { "-sL", "--retry", "1" },
-		disable_invalid_feature_diagnostic = false,
 		text = {
 			loading = " " .. icons.misc.Watch .. "Loading",
 			version = " " .. icons.ui.Check .. "%s",

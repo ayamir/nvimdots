@@ -4,6 +4,7 @@ return function()
 		misc = require("modules.utils.icons").get("misc"),
 		git = require("modules.utils.icons").get("git", true),
 		cmp = require("modules.utils.icons").get("cmp", true),
+		aichat = require("modules.utils.icons").get("aichat", true),
 	}
 
 	require("modules.utils").load_plugin("which-key", {
@@ -70,6 +71,7 @@ return function()
 			{ "<leader>l", group = icons.misc.LspAvailable .. " Lsp" },
 			{ "<leader>f", group = icons.ui.Telescope .. " Fuzzy Find" },
 			{ "<leader>n", group = icons.ui.FolderOpen .. " Nvim Tree" },
+			{ "<leader>c", group = icons.aichat.Chat .. " Chat" },
 		},
 	})
 end

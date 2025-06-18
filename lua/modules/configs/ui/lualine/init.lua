@@ -1,3 +1,33 @@
+local state = { lsp_msg = "" }
+local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "" }
+vim.api.nvim_create_autocmd("LspProgress", {
+	pattern = { "begin", "report", "end" },
+	callback = function(args)
+		-- Ensure params exists before accessing its fields
+		if not args.data or not args.data.params then
+			return
+		end
+
+		local data = args.data.params.value
+		local progress = ""
+
+		if data.percentage then
+			local idx = math.max(1, math.floor(data.percentage / 10))
+			local icon = spinners[idx]
+			progress = icon .. " " .. data.percentage .. "%% "
+		end
+
+		local loaded_count = data.message and string.match(data.message, "^(%d+/%d+)") or ""
+		local str = progress .. (data.title or "") .. " " .. (loaded_count or "")
+		state.lsp_msg = data.kind == "end" and "" or str
+		vim.cmd.redrawstatus()
+	end,
+})
+
+local lsp_msg = function()
+	return vim.o.columns < 120 and "" or state.lsp_msg
+end
+
 return function()
 	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
@@ -98,12 +128,10 @@ return function()
 			if has_catppuccin then
 				return function()
 					local guifg = colors[fg]
-					local guibg = gen_bg and require("modules.utils").hl_to_rgb("StatusLine", true, colors.mantle)
-						or colors[bg]
 					local nobg = special_nobg and require("core.settings").transparent_background
 					return {
 						fg = guifg and guifg or colors.none,
-						bg = (guibg and not nobg) and guibg or colors.none,
+						bg = nobg and colors.none or ((not gen_bg and colors[bg]) or nil),
 						gui = gui and gui or nil,
 					}
 				end
@@ -181,8 +209,14 @@ return function()
 						end
 					end
 				end
+
 				return next(available_servers) == nil and icons.misc.NoActiveLsp
-					or string.format("%s[%s]", icons.misc.LspAvailable, table.concat(available_servers, ", "))
+					or string.format(
+						"%s[%s] %s",
+						icons.misc.LspAvailable,
+						table.concat(available_servers, ", "),
+						lsp_msg()
+					)
 			end,
 			color = utils.gen_hl("blue", true, true, nil, "bold"),
 			cond = conditionals.has_enough_room,
@@ -309,6 +343,10 @@ return function()
 				components.lsp,
 			},
 			lualine_x = {
+				{
+					require("modules.configs.ui.lualine.components.chat_progress"),
+					color = utils.gen_hl("yellow", true, true),
+				},
 				{
 					"encoding",
 					show_bomb = true,

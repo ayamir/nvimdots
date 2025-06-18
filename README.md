@@ -1,38 +1,44 @@
 <h1 align="center">
     nvimdots
-    <br>
-    <a href="https://github.com/neovim/neovim/releases/tag/stable">
-    <img
-        alt="Neovim Version Capability"
-        src="https://img.shields.io/badge/Supports%20Nvim-v0.10-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
-    </a>
-    <a href="https://github.com/ayamir/nvimdots/releases">
-    <img
-        alt="Release"
-        src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
-    </a>
 </h1>
 
-<p align="center">
-    <a href="https://github.com/ayamir/nvimdots/stargazers">
+<div align="center">
     <img
         alt="Stars"
-        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/stars/ayamir/nvimdots?colorA=363A4F&colorB=B7BDF8&logo=adafruit&logoColor=D9E0EE">
     </a>
     <a href="https://github.com/ayamir/nvimdots/issues">
     <img
         alt="Issues"
-        src="https://img.shields.io/github/issues-raw/ayamir/nvimdots?colorA=363A4f&colorB=F5A97F&logo=github&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/issues-raw/ayamir/nvimdots?colorA=363A4f&colorB=F5A97F&logo=github&logoColor=D9E0EE">
     </a>
+    <a href="https://github.com/neovim/neovim/releases/tag/stable">
+    <img
+        alt="Neovim Version Capability"
+        src="https://img.shields.io/badge/Supports%20Nvim-v0.11-A6D895?colorA=363A4F&logo=neovim&logoColor=D9E0EE">
+    </a>
+    <a href="https://github.com/ayamir/nvimdots/releases">
+    <img
+        alt="Release"
+        src="https://img.shields.io/github/v/release/ayamir/nvimdots.svg?logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=363A4F">
+    </a>
+    <a href="https://github.com/ayamir/nvimdots/stargazers">
+    <br>
     <a href="https://github.com/ayamir/nvimdots/contributors">
     <img
         alt="Contributors"
-        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE&style=for-the-badge">
+        src="https://img.shields.io/github/contributors/ayamir/nvimdots?colorA=363A4F&colorB=B5E8E0&logo=git&logoColor=D9E0EE">
     </a>
     <img
         alt="Code Size"
-        src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE&style=for-the-badge">
-</p>
+        src="https://img.shields.io/github/languages/code-size/ayamir/nvimdots?colorA=363A4F&colorB=DDB6F2&logo=gitlfs&logoColor=D9E0EE">
+    <a href="https://discord.gg/rE46YdFAUc">
+    <img
+        alt="Discord"
+        src="https://img.shields.io/badge/Discord-nvimdots-b4befe?colorA=363A4F&logo=discord&logoColor=D9E0EE"/>
+    </a>
+    <a href="https://deepwiki.com/ayamir/nvimdots"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+</div>
 
 ## 🪷 Introduction
 
@@ -44,15 +50,11 @@ Branch info:
 
 | Branch | Supported Neovim version |
 | :----: | :----------------------: |
-|  main  |     nvim 0.10 stable     |
-|  0.11  |    nvim 0.11 nightly     |
+|  0.11  |     nvim 0.11 stable     |
+|  0.10  |        nvim 0.10         |
 |  0.9   |         nvim 0.9         |
-|  0.8   |         nvim 0.8         |
 
 </div>
-
-> [!IMPORTANT]
-> The `0.11` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 

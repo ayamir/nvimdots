@@ -3,11 +3,11 @@ local use_copilot = require("core.settings").use_copilot
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
+	event = { "BufReadPre", "BufNewFile" },
 	config = require("completion.lsp"),
 	dependencies = {
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
+		{ "mason-org/mason.nvim" },
+		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neoconf.nvim" },
 	},
 }
@@ -35,6 +35,13 @@ completion["nvimtools/none-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
+completion["rachartier/tiny-inline-diagnostic.nvim"] = {
+	lazy = true,
+	event = "VeryLazy",
+	priority = 1000, -- needs to be loaded in first
+	config = require("completion.tiny-inline-diagnostic"),
+}
+
 completion["Saghen/blink.cmp"] = {
 	lazy = true,
 	event = "InsertEnter",
@@ -49,9 +56,11 @@ completion["Saghen/blink.cmp"] = {
 			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 		"mikavilpas/blink-ripgrep.nvim",
+		"xzbdmw/colorful-menu.nvim",
 	},
 	opts_extend = { "sources.default" },
 }
+
 if use_copilot then
 	completion["zbirenbaum/copilot.lua"] = {
 		lazy = true,
