@@ -6,25 +6,68 @@ local opts = {
 	-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
 	-- See the full "keymap" documentation for information on defining your own keymap.
 	keymap = {
-		preset = "default",
-		["<C-n>"] = { "select_next", "fallback" },
+		preset = "super-tab",
+		["<Up>"] = { "select_prev", "fallback" },
+		["<Down>"] = { "select_next", "fallback" },
 		["<C-p>"] = { "select_prev", "fallback" },
+		["<C-n>"] = { "select_next", "fallback" },
 		["<CR>"] = { "accept", "fallback" },
-		["<Tab>"] = { "snippet_forward", "fallback" },
-		["<S-tab>"] = { "snippet_backward", "fallback" },
+		["<Tab>"] = {
+			function(cmp)
+				if cmp.snippet_active() then
+					return cmp.accept()
+				else
+					return cmp.select_and_accept()
+				end
+			end,
+			"snippet_forward",
+			"fallback",
+		},
+		["<S-Tab>"] = { "snippet_backward", "fallback" },
 		["<C-c>"] = { "cancel", "hide", "fallback" },
 
 		["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-		["<S-k>"] = { "scroll_documentation_up", "fallback" },
-		["<S-j>"] = { "scroll_documentation_down", "fallback" },
-		["<S-s>"] = { "show_signature", "hide_signature", "fallback" },
-		cmdline = {
-			preset = "enter",
-			["<C-n>"] = { "select_next", "fallback" },
-			["<C-p>"] = { "select_prev", "fallback" },
-			["<CR>"] = { "accept", "fallback" },
+		["<C-h>"] = { "scroll_documentation_up", "fallback" },
+		["<C-l>"] = { "scroll_documentation_down", "fallback" },
+		["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+	},
+	---@type blink.cmp.CmdlineConfig
+	cmdline = {
+		enabled = true,
+		sources = function()
+			local type = vim.fn.getcmdtype()
+			if type == "/" or type == "?" then
+				return { "buffer" }
+			end
+			if type == ":" or type == "@" then
+				return { "cmdline", "path" }
+			end
+			return {}
+		end,
+		keymap = {
+			preset = "cmdline",
+			["<Tab>"] = { "select_next", "fallback" },
+			["<S-Tab>"] = { "select_prev", "fallback" },
+			["<CR>"] = { "accept_and_enter", "fallback" },
 			["<C-c>"] = { "cancel", "hide", "fallback" },
 		},
+		completion = {
+			list = { selection = { preselect = true, auto_insert = true } },
+			menu = {
+				auto_show = true,
+				draw = {
+					columns = {
+						{ "label", "label_description", gap = 1 },
+						{ "kind_icon", "kind", gap = 1 },
+						{ "source_name" },
+					},
+				},
+			},
+			ghost_text = { enabled = true },
+		},
+	},
+	term = {
+		enabled = false,
 	},
 
 	appearance = {
@@ -38,11 +81,18 @@ local opts = {
 		accept = {
 			auto_brackets = {
 				enabled = true,
+				kind_resolution = {
+					enabled = true,
+				},
+				semantic_token_resolution = {
+					enabled = true,
+					blocked_filetypes = { "java" },
+				},
 			},
 		},
 		list = {
 			selection = {
-				preselect = false,
+				preselect = true,
 				auto_insert = false,
 			},
 		},
@@ -56,6 +106,16 @@ local opts = {
 					{ "kind_icon", "kind", gap = 1 },
 					{ "source_name" },
 				},
+				components = {
+					label = {
+						text = function(ctx)
+							return require("colorful-menu").blink_components_text(ctx)
+						end,
+						highlight = function(ctx)
+							return require("colorful-menu").blink_components_highlight(ctx)
+						end,
+					},
+				},
 			},
 		},
 		documentation = {
@@ -68,21 +128,13 @@ local opts = {
 		},
 		ghost_text = {
 			enabled = true,
+			show_with_selection = true,
+			show_with_menu = true,
 		},
 	},
 
 	sources = {
 		default = { "lazydev", "lsp", "path", "snippets", "buffer", "ripgrep" },
-		cmdline = function()
-			local type = vim.fn.getcmdtype()
-			if type == "/" or type == "?" then
-				return { "buffer" }
-			end
-			if type == ":" or type == "@" then
-				return { "cmdline", "path" }
-			end
-			return {}
-		end,
 		providers = {
 			lazydev = {
 				module = "lazydev.integrations.blink",
