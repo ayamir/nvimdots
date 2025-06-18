@@ -30,7 +30,7 @@ return function()
 			properties = {},
 		},
 		integrations = {
-			cmp = true,
+			blink_cmp = true,
 			dap = true,
 			dap_ui = true,
 			diffview = true,
@@ -40,7 +40,7 @@ return function()
 			fzf = true,
 			gitsigns = true,
 			grug_far = true,
-			hop = true,
+			hop = false,
 			indent_blankline = { enabled = true, colored_indent_levels = true },
 			lsp_saga = true,
 			lsp_trouble = true,
