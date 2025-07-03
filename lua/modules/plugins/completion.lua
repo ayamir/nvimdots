@@ -9,10 +9,6 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "mason-org/mason.nvim" },
 		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neoconf.nvim" },
-		{
-			"Jint-lzxy/lsp_signature.nvim",
-			config = require("completion.lsp-signature"),
-		},
 	},
 }
 completion["nvimdev/lspsaga.nvim"] = {
@@ -45,29 +41,26 @@ completion["rachartier/tiny-inline-diagnostic.nvim"] = {
 	priority = 1000, -- needs to be loaded in first
 	config = require("completion.tiny-inline-diagnostic"),
 }
-completion["hrsh7th/nvim-cmp"] = {
+
+completion["Saghen/blink.cmp"] = {
 	lazy = true,
 	event = "InsertEnter",
-	config = require("completion.cmp"),
+	config = require("completion.blink"),
+	version = "*",
 	dependencies = {
 		{
 			"L3MON4D3/LuaSnip",
+			version = "v2.*",
 			build = "make install_jsregexp",
 			config = require("completion.luasnip"),
 			dependencies = { "rafamadriz/friendly-snippets" },
 		},
-		{ "lukas-reineke/cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "hrsh7th/cmp-nvim-lua" },
-		{ "andersevenrud/cmp-tmux" },
-		{ "hrsh7th/cmp-path" },
-		{ "f3fora/cmp-spell" },
-		{ "hrsh7th/cmp-buffer" },
-		{ "kdheepak/cmp-latex-symbols" },
-		{ "ray-x/cmp-treesitter", commit = "c8e3a74" },
+		"mikavilpas/blink-ripgrep.nvim",
+		"xzbdmw/colorful-menu.nvim",
 	},
+	opts_extend = { "sources.default" },
 }
+
 if use_copilot then
 	completion["zbirenbaum/copilot.lua"] = {
 		lazy = true,
