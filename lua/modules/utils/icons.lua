@@ -204,6 +204,7 @@ local data = {
 		Copilot_alt = "",
 		TabNine = "",
 		cmp_tabnine = "",
+		Trae = "󰑣",
 	},
 	dap = {
 		Breakpoint = "󰝥",
