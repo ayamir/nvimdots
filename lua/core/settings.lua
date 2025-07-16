@@ -243,18 +243,17 @@ settings["chat_api_key"] = "CODE_COMPANION_KEY"
 --- @type string[]
 settings["chat_models"] = {
 	-- free models
-	"mistralai/devstral-small:free", -- default
 	"qwen/qwen-2.5-coder-32b-instruct:free",
 	"deepseek/deepseek-chat-v3-0324:free",
-	"deepseek/deepseek-r1:free",
-	"google/gemma-3-27b-it:free",
+	"deepseek/deepseek-r1-0528:free",
+	"moonshotai/kimi-k2:free",
 	-- paid models
+	"anthropic/claude-sonnet-4",
+	"anthropic/claude-3.7-sonnet",
+	"google/gemini-2.0-flash-001",
+	"google/gemini-2.5-flash",
 	"openai/codex-mini",
 	"openai/gpt-4.1-mini",
-	"google/gemini-2.0-flash-001",
-	"google/gemini-2.5-flash-preview-05-20",
-	"anthropic/claude-3.7-sonnet",
-	"anthropic/claude-sonnet-4",
 }
 
 -- Set the search backend to use here.
