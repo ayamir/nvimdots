@@ -1,10 +1,11 @@
 return function()
-	local trouble_filter = function(position)
+	local function trouble_filter(position)
 		return function(_, win)
-			return vim.w[win].trouble
-				and vim.w[win].trouble.position == position
-				and vim.w[win].trouble.type == "split"
-				and vim.w[win].trouble.relative == "editor"
+			local tw = vim.w[win].trouble
+			return tw
+				and tw.position == position
+				and tw.type == "split"
+				and tw.relative == "editor"
 				and not vim.w[win].trouble_preview
 		end
 	end
@@ -14,8 +15,8 @@ return function()
 		exit_when_last = true,
 		wo = { winbar = false },
 		keys = {
-			["q"] = false,
-			["Q"] = false,
+			q = false,
+			Q = false,
 			["<C-q>"] = false,
 			["<A-j>"] = function(win)
 				win:resize("height", -2)
@@ -43,7 +44,9 @@ return function()
 				pinned = true,
 				collapsed = false,
 				size = { height = 0.4, width = 0.15 },
-				open = "Trouble symbols toggle win.position=right",
+				open = function()
+					return vim.b.buftype == "" and "Trouble symbols toggle win.position=right"
+				end,
 				filter = trouble_filter("right"),
 			},
 		},
@@ -53,9 +56,9 @@ return function()
 				ft = "toggleterm",
 				size = { height = 0.3 },
 				filter = function(_, win)
-					local not_floating = vim.api.nvim_win_get_config(win).relative == ""
+					local cfg = vim.api.nvim_win_get_config(win)
 					local term = require("toggleterm.terminal").get(1)
-					return not_floating and term.direction == "horizontal"
+					return cfg.relative == "" and term.direction == "horizontal"
 				end,
 			},
 			{
