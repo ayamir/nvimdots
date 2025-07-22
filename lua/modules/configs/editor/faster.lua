@@ -1,5 +1,5 @@
 return function()
-	require("faster").setup({
+	require("modules.utils").load_plugin("faster", {
 		behaviours = {
 			bigfile = {
 				on = true,
