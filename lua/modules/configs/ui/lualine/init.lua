@@ -26,6 +26,10 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	end,
 })
 
+local lsp_msg = function()
+	return vim.o.columns < 120 and "" or state.lsp_msg
+end
+
 return function()
 	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
@@ -345,6 +349,10 @@ return function()
 				components.lsp,
 			},
 			lualine_x = {
+				{
+					require("modules.configs.ui.lualine.components.chat_progress"),
+					color = utils.gen_hl("yellow", true, true),
+				},
 				{
 					"encoding",
 					show_bomb = true,
