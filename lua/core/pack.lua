@@ -39,8 +39,9 @@ function Lazy:load_plugins()
 		local user_plugins_list = vim.split(fn.glob(user_config_dir .. "/plugins/*.lua"), "\n", { trimempty = true })
 		vim.list_extend(plugins_list, user_plugins_list)
 		for _, f in ipairs(plugins_list) do
-			-- aggregate the plugins from `/plugins/*.lua` and `/user/plugins/*.lua` to a plugin list of a certain field for later `require` action.
-			-- current fields contains: completion, editor, lang, tool, ui
+			-- aggregate the plugins from `plugins/*.lua` and `user/plugins/*.lua` into
+			-- a plugin list by field, for later use with `require`.
+			-- current fields include: completion, editor, lang, tool, ui
 			list[#list + 1] = f:find(modules_dir) and f:sub(#modules_dir - 6, -1) or f:sub(#user_config_dir - 3, -1)
 		end
 		return list
@@ -49,7 +50,7 @@ function Lazy:load_plugins()
 	append_nativertp()
 
 	for _, m in ipairs(get_plugins_list()) do
-		-- require modules returned from `get_plugins_list()` function.
+		-- require modules returned from the `get_plugins_list()` function.
 		local modules = require(m:sub(0, #m - 4))
 		if type(modules) == "table" then
 			for name, conf in pairs(modules) do
@@ -144,7 +145,7 @@ function Lazy:load_lazy()
 					-- Disable remote plugins
 					-- NOTE:
 					--  > Disabling rplugin.vim will make `wilder.nvim` complain about missing rplugins during :checkhealth,
-					--  > but since it's config doesn't require python rtp (strictly), it's fine to ignore that for now.
+					--  > but since its config doesn't require python rtp (strictly), it's fine to ignore that for now.
 					-- "rplugin",
 				},
 			},

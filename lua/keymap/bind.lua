@@ -10,6 +10,7 @@
 ---@field buffer boolean|number
 local rhs_options = {}
 
+---@return map_rhs
 function rhs_options:new()
 	local instance = {
 		cmd = "",
@@ -19,7 +20,6 @@ function rhs_options:new()
 			expr = false,
 			nowait = false,
 			callback = nil,
-			desc = "",
 		},
 		buffer = false,
 	}
@@ -72,10 +72,10 @@ function rhs_options:with_silent()
 	return self
 end
 
----@param description_string string
+---@param desc_string string
 ---@return map_rhs
-function rhs_options:with_desc(description_string)
-	self.options.desc = description_string
+function rhs_options:with_desc(desc_string)
+	self.options.desc = desc_string
 	return self
 end
 

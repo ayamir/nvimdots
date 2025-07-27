@@ -38,8 +38,8 @@ tool["ibhagwan/smartyank.nvim"] = {
 }
 tool["michaelb/sniprun"] = {
 	lazy = true,
-	-- You need to cd to `~/.local/share/nvim/site/lazy/sniprun/` and execute `bash ./install.sh`,
-	-- if you encountered error about no executable sniprun found.
+	-- If you see an error about a missing SnipRun executable,
+	-- run `bash ./install.sh` inside `~/.local/share/nvim/site/lazy/sniprun/`.
 	build = "bash ./install.sh",
 	cmd = { "SnipRun", "SnipReset", "SnipInfo" },
 	config = require("tool.sniprun"),
@@ -70,7 +70,7 @@ tool["gelguy/wilder.nvim"] = {
 	lazy = true,
 	event = "CmdlineEnter",
 	config = require("tool.wilder"),
-	dependencies = { "romgrk/fzy-lua-native" },
+	dependencies = "romgrk/fzy-lua-native",
 }
 if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
@@ -83,7 +83,7 @@ if settings.use_chat then
 	}
 end
 if settings.search_backend == "fzf" then
-	-- require fzf binary installed
+	-- requires the fzf binary to be installed
 	tool["ibhagwan/fzf-lua"] = {
 		lazy = true,
 		event = "VeryLazy",
@@ -145,14 +145,12 @@ tool["mfussenegger/nvim-dap"] = {
 	},
 	config = require("tool.dap"),
 	dependencies = {
+		{ "jay-babu/mason-nvim-dap.nvim" },
 		{
 			"rcarriga/nvim-dap-ui",
+			dependencies = "nvim-neotest/nvim-nio",
 			config = require("tool.dap.dapui"),
-			dependencies = {
-				"nvim-neotest/nvim-nio",
-			},
 		},
-		{ "jay-babu/mason-nvim-dap.nvim" },
 	},
 }
 

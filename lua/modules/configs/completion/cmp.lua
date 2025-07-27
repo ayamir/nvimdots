@@ -94,10 +94,8 @@ return function()
 					buffer = "[BUF]",
 					orgmode = "[ORG]",
 					nvim_lsp = "[LSP]",
-					nvim_lua = "[LUA]",
 					path = "[PATH]",
 					tmux = "[TMUX]",
-					treesitter = "[TS]",
 					latex_symbols = "[LTEX]",
 					luasnip = "[SNIP]",
 					spell = "[SPELL]",
@@ -174,10 +172,8 @@ return function()
 		-- You should specify your *installed* sources.
 		sources = {
 			{ name = "nvim_lsp", max_item_count = 350 },
-			{ name = "nvim_lua" },
 			{ name = "luasnip" },
 			{ name = "path" },
-			{ name = "treesitter" },
 			{ name = "spell" },
 			{ name = "tmux" },
 			{ name = "orgmode" },
