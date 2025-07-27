@@ -4,7 +4,7 @@ return function()
 	require("modules.utils").load_plugin("scrollview", {
 		mode = "virtual",
 		winblend = 0,
-		signs_on_startup = { "diagnostics", "folds", "marks", "search", "spell" },
+		signs_on_startup = { "folds", "marks", "search" },
 		diagnostics_error_symbol = icons.diagnostics.Error,
 		diagnostics_warn_symbol = icons.diagnostics.Warning,
 		diagnostics_info_symbol = icons.diagnostics.Information,
@@ -15,7 +15,6 @@ return function()
 			"git",
 			"notify",
 			"NvimTree",
-			"Outline",
 			"TelescopePrompt",
 			"toggleterm",
 			"undotree",

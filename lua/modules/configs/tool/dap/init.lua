@@ -16,13 +16,18 @@ return function()
 	local function debug_terminate_cb()
 		if _debugging then
 			_G._debugging = false
+		end
+	end
+	local function debug_disconnect_cb()
+		if _debugging then
+			_G._debugging = false
 			dapui.close()
 		end
 	end
 	dap.listeners.after.event_initialized["dapui_config"] = debug_init_cb
 	dap.listeners.before.event_terminated["dapui_config"] = debug_terminate_cb
 	dap.listeners.before.event_exited["dapui_config"] = debug_terminate_cb
-	dap.listeners.before.disconnect["dapui_config"] = debug_terminate_cb
+	dap.listeners.before.disconnect["dapui_config"] = debug_disconnect_cb
 
 	vim.fn.sign_define(
 		"DapBreakpoint",
@@ -74,7 +79,7 @@ return function()
 
 	require("modules.utils").load_plugin("mason-nvim-dap", {
 		ensure_installed = require("core.settings").dap_deps,
-		automatic_installation = true,
+		automatic_installation = false,
 		handlers = { mason_dap_handler },
 	})
 end

@@ -14,7 +14,6 @@ return function()
 				enabled = false,
 			},
 			filetypes = {
-				["bigfile"] = false,
 				["dap-repl"] = false,
 				["fugitive"] = false,
 				["fugitiveblame"] = false,

@@ -1,6 +1,8 @@
-local state = { lsp_msg = "" }
+local lsp_state = { progress = "" }
 local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "" }
+
 vim.api.nvim_create_autocmd("LspProgress", {
+	group = vim.api.nvim_create_augroup("LualineLspProgress", { clear = true }),
 	pattern = { "begin", "report", "end" },
 	callback = function(args)
 		-- Ensure params exists before accessing its fields
@@ -19,14 +21,10 @@ vim.api.nvim_create_autocmd("LspProgress", {
 
 		local loaded_count = data.message and string.match(data.message, "^(%d+/%d+)") or ""
 		local str = progress .. (data.title or "") .. " " .. (loaded_count or "")
-		state.lsp_msg = data.kind == "end" and "" or str
-		vim.cmd.redrawstatus()
+		lsp_state.progress = data.kind == "end" and "" or str
+		pcall(vim.cmd.redrawstatus)
 	end,
 })
-
-local lsp_msg = function()
-	return vim.o.columns < 120 and "" or state.lsp_msg
-end
 
 return function()
 	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
@@ -123,7 +121,7 @@ return function()
 		---@param special_nobg boolean @Disable guibg for transparent backgrounds?
 		---@param bg string? @Background hl group
 		---@param gui string? @GUI highlight arguments
-		---@return nil|fun():lualine_hlgrp
+		---@return fun():lualine_hlgrp|nil
 		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
 			if has_catppuccin then
 				return function()
@@ -131,7 +129,7 @@ return function()
 					local nobg = special_nobg and require("core.settings").transparent_background
 					return {
 						fg = guifg and guifg or colors.none,
-						bg = nobg and colors.none or ((not gen_bg and colors[bg]) or nil),
+						bg = nobg and colors.none or (not gen_bg and colors[bg] or nil),
 						gui = gui and gui or nil,
 					}
 				end
@@ -141,6 +139,10 @@ return function()
 			end
 		end,
 	}
+
+	local function lsp_progress()
+		return conditionals.has_enough_room() and lsp_state.progress or ""
+	end
 
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
@@ -202,7 +204,7 @@ return function()
 					local filetypes = client.config.filetypes
 					local client_name = client.name
 					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-						-- Avoid adding servers that already exists.
+						-- Avoid adding servers that already exist.
 						if not lsp_lists[client_name] then
 							lsp_lists[client_name] = true
 							table.insert(available_servers, client_name)
@@ -215,7 +217,7 @@ return function()
 						"%s[%s] %s",
 						icons.misc.LspAvailable,
 						table.concat(available_servers, ", "),
-						lsp_msg()
+						lsp_progress()
 					)
 			end,
 			color = utils.gen_hl("blue", true, true, nil, "bold"),

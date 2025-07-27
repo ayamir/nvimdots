@@ -6,7 +6,7 @@ return {
 		configurationSection = { "html", "css", "javascript" },
 		embeddedLanguages = { css = true, javascript = true },
 	},
-	settings = {},
-	single_file_support = true,
 	flags = { debounce_text_changes = 500 },
+	single_file_support = true,
+	settings = {},
 }

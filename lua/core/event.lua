@@ -1,18 +1,42 @@
--- Now use `<A-o>` or `<A-1>` to back to the `dotstutor`.
+-- Now use `<A-o>` or `<A-1>` to go back to the `dotstutor`.
 local autocmd = {}
 
-function autocmd.nvim_create_augroups(definitions)
-	for group_name, definition in pairs(definitions) do
-		-- Prepend an underscore to avoid name clashes
-		vim.api.nvim_command("augroup _" .. group_name)
-		vim.api.nvim_command("autocmd!")
-		for _, def in ipairs(definition) do
-			local command = table.concat(vim.iter({ "autocmd", def }):flatten(math.huge):totable(), " ")
-			vim.api.nvim_command(command)
+-- Autoclose NvimTree
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = vim.api.nvim_create_augroup("NvimTreeAutoClose", { clear = true }),
+	pattern = "NvimTree_*",
+	callback = function()
+		local layout = vim.api.nvim_call_function("winlayout", {})
+		if
+			layout[1] == "leaf"
+			and vim.bo[vim.api.nvim_win_get_buf(layout[2])].filetype == "NvimTree"
+			and layout[3] == nil
+		then
+			vim.api.nvim_command([[confirm quit]])
 		end
-		vim.api.nvim_command("augroup END")
-	end
-end
+	end,
+})
+
+-- Autoclose some filetype with <q>
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {
+		"qf",
+		"help",
+		"man",
+		"notify",
+		"nofile",
+		"terminal",
+		"prompt",
+		"toggleterm",
+		"copilot",
+		"startuptime",
+		"tsplayground",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<Cmd>close<CR>", { silent = true })
+	end,
+})
 
 -- Hold off on configuring anything related to the LSP until LspAttach
 local mapping = require("keymap.completion")
@@ -33,48 +57,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- auto close NvimTree
-vim.api.nvim_create_autocmd("BufEnter", {
-	group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
-	pattern = "NvimTree_*",
-	callback = function()
-		local layout = vim.api.nvim_call_function("winlayout", {})
-		if
-			layout[1] == "leaf"
-			and vim.bo[vim.api.nvim_win_get_buf(layout[2])].filetype == "NvimTree"
-			and layout[3] == nil
-		then
-			vim.api.nvim_command([[confirm quit]])
+function autocmd.nvim_create_augroups(definitions)
+	for group_name, definition in pairs(definitions) do
+		-- Prepend an underscore to avoid name clashes
+		vim.api.nvim_command("augroup _" .. group_name)
+		vim.api.nvim_command("autocmd!")
+		for _, def in ipairs(definition) do
+			local command = table.concat(vim.iter({ "autocmd", def }):flatten(math.huge):totable(), " ")
+			vim.api.nvim_command(command)
 		end
-	end,
-})
-
--- auto close some filetype with <q>
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = {
-		"qf",
-		"help",
-		"man",
-		"notify",
-		"nofile",
-		"lspinfo",
-		"terminal",
-		"prompt",
-		"toggleterm",
-		"copilot",
-		"startuptime",
-		"tsplayground",
-		"PlenaryTestPopup",
-	},
-	callback = function(event)
-		vim.bo[event.buf].buflisted = false
-		vim.api.nvim_buf_set_keymap(event.buf, "n", "q", "<Cmd>close<CR>", { silent = true })
-	end,
-})
+		vim.api.nvim_command("augroup END")
+	end
+end
 
 function autocmd.load_autocmds()
 	local definitions = {
-		lazy = {},
 		bufs = {
 			-- Reload vim config automatically
 			{
@@ -87,17 +84,21 @@ function autocmd.load_autocmds()
 				"*.vim",
 				[[nested if &l:autoread > 0 | source <afile> | echo 'source ' . bufname('%') | endif]],
 			},
+			{ "BufWritePre", "*~", "setlocal noundofile" },
 			{ "BufWritePre", "/tmp/*", "setlocal noundofile" },
-			{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
-			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
 			{ "BufWritePre", "*.tmp", "setlocal noundofile" },
 			{ "BufWritePre", "*.bak", "setlocal noundofile" },
-			-- auto place to last edit
+			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
+			{ "BufWritePre", "description", "setlocal noundofile" },
+			{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
+			-- Auto place to last edit
 			{
 				"BufReadPost",
 				"*",
 				[[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
 			},
+			-- Auto change directory
+			-- { "BufEnter", "*", "silent! lcd %:p:h" },
 			-- Auto toggle fcitx5
 			-- {"InsertLeave", "* :silent", "!fcitx5-remote -c"},
 			-- {"BufCreate", "*", ":silent !fcitx5-remote -c"},
@@ -105,7 +106,7 @@ function autocmd.load_autocmds()
 			-- {"BufLeave", "*", ":silent !fcitx5-remote -c "}
 		},
 		wins = {
-			-- Highlight current line only on focused window
+			-- Highlight current line only in focused window
 			{
 				"WinEnter,BufEnter,InsertLeave",
 				"*",
@@ -122,9 +123,9 @@ function autocmd.load_autocmds()
 				"*",
 				[[if has('nvim') | wshada | else | wviminfo! | endif]],
 			},
-			-- Check if file changed when its window is focus, more eager than 'autoread'
-			{ "FocusGained", "* checktime" },
-			-- Equalize window dimensions when resizing vim window
+			-- Check if a file has changed when its window is in focus, being more proactive than 'autoread'
+			{ "FocusGained", "*", "checktime" },
+			-- Maintain uniform window dimensions when resizing Vim windows
 			{ "VimResized", "*", [[tabdo wincmd =]] },
 		},
 		ft = {
@@ -135,17 +136,18 @@ function autocmd.load_autocmds()
 			{
 				"FileType",
 				"c,cpp",
-				"nnoremap <leader>h :ClangdSwitchSourceHeaderVSplit<CR>",
+				"nnoremap <silent> <buffer> <leader>h <Cmd>ClangdSwitchSourceHeader<CR>",
 			},
 		},
 		yank = {
 			{
 				"TextYankPost",
 				"*",
-				[[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=300})]],
+				[[silent! lua vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 300 })]],
 			},
 		},
 	}
+
 	autocmd.nvim_create_augroups(require("modules.utils").extend_config(definitions, "user.event"))
 end
 

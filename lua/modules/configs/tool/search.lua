@@ -1,119 +1,82 @@
 return function()
+	local vim_path = require("core.global").vim_path
 	local search_backend = require("core.settings").search_backend
 	local builtin = require("telescope.builtin")
 	local extensions = require("telescope").extensions
-	local vim_path = require("core.global").vim_path
-	local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
-	local fzf_opts = { fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" } }
-	local files = function()
-		if search_backend == "fzf" then
-			return function()
-				local opts = {}
-				local fzf = require("fzf-lua")
-				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
-				if vim.fn.getcwd() == vim_path then
-					fzf.files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
-				elseif vim.fn.isdirectory(".git") == 1 then
-					fzf.git_files(opts)
-				else
-					fzf.files(opts)
-				end
+	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
+	local fzf = (search_backend == "fzf") and require("fzf-lua")
+	local fzf_opts = { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
+
+	local function files()
+		local opts = fzf and vim.tbl_deep_extend("force", {}, fzf_opts) or {}
+		local cwd = vim.fn.getcwd()
+		local is_root = (cwd == vim_path)
+		local is_git = (vim.fn.isdirectory(".git") == 1)
+
+		if is_root then
+			if fzf then
+				return fzf.files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
 			end
-		else
-			return function(opts)
-				opts = opts or {}
-				if vim.fn.getcwd() == vim_path then
-					builtin.find_files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
-				elseif vim.fn.isdirectory(".git") == 1 then
-					builtin.git_files(opts)
-				else
-					builtin.find_files(opts)
-				end
-			end
+			return builtin.find_files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
 		end
+
+		if is_git then
+			if fzf then
+				return fzf.git_files(opts)
+			end
+			return builtin.git_files(opts)
+		end
+
+		if fzf then
+			return fzf.files(opts)
+		end
+		return builtin.find_files(opts)
 	end
 
-	local old_files = function()
-		if search_backend == "fzf" then
-			return function()
-				local opts = {}
-				local fzf = require("fzf-lua")
-				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
-				fzf.oldfiles(opts)
-			end
-		else
-			return function(opts)
-				opts = opts or {}
-				builtin.oldfiles(opts)
-			end
+	local function oldfiles()
+		if fzf then
+			local opts = vim.tbl_deep_extend("force", {}, fzf_opts)
+			return fzf.oldfiles(opts)
 		end
+		return builtin.oldfiles()
 	end
 
-	local word_in_project = function()
-		if search_backend == "fzf" then
-			return function()
-				local opts = {}
-				local fzf = require("fzf-lua")
-				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
-				if vim.fn.getcwd() == vim_path then
+	local function make_grep(fzf_fn, tb_fn)
+		return function()
+			local opts = fzf and vim.tbl_deep_extend("force", {}, fzf_opts) or {}
+			local cwd = vim.fn.getcwd()
+			if cwd == vim_path then
+				if fzf then
 					opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
+				else
+					opts = { additional_args = { "--no-ignore" } }
 				end
-				fzf.live_grep(opts)
 			end
-		else
-			return function(opts)
-				opts = opts or {}
-				if vim.fn.getcwd() == vim_path then
-					opts["additional_args"] = { "--no-ignore" }
-				end
-				extensions.live_grep_args.live_grep_args(opts)
+			if fzf then
+				return fzf[fzf_fn](opts)
 			end
+			return tb_fn(opts)
 		end
 	end
 
-	local word_under_cursor = function()
-		if search_backend == "fzf" then
-			return function()
-				local opts = {}
-				local fzf = require("fzf-lua")
-				opts = vim.tbl_deep_extend("force", opts, fzf_opts)
-				if vim.fn.getcwd() == vim_path then
-					opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
-				end
-				fzf.grep_cword(opts)
-			end
-		else
-			return function(opts)
-				opts = opts or {}
-				if vim.fn.getcwd() == vim_path then
-					opts["additional_args"] = { "--no-ignore" }
-				end
-				builtin.grep_string(opts)
-			end
-		end
-	end
+	local word_in_project = make_grep("live_grep", extensions.live_grep_args.live_grep_args)
+	local word_under_cursor = make_grep("grep_cword", builtin.grep_string)
 
 	require("modules.utils").load_plugin("search", {
-		prompt_position = prompt_position,
+		prompt_position = prompt_pos,
 		collections = {
 			-- Search using filenames
 			file = {
 				initial_tab = 1,
 				tabs = {
-					{
-						name = "Files",
-						tele_func = files(),
-					},
+					{ name = "Files", tele_func = files },
 					{
 						name = "Frecency",
 						tele_func = function()
 							extensions.frecency.frecency()
 						end,
 					},
-					{
-						name = "Oldfiles",
-						tele_func = old_files(),
-					},
+					{ name = "Oldfiles", tele_func = oldfiles },
 					{
 						name = "Buffers",
 						tele_func = function()
@@ -126,14 +89,8 @@ return function()
 			pattern = {
 				initial_tab = 1,
 				tabs = {
-					{
-						name = "Word in project",
-						tele_func = word_in_project(),
-					},
-					{
-						name = "Word under cursor",
-						tele_func = word_under_cursor(),
-					},
+					{ name = "Word in project", tele_func = word_in_project },
+					{ name = "Word under cursor", tele_func = word_under_cursor },
 				},
 			},
 			-- Search Git objects (branches, commits)
