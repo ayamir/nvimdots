@@ -118,9 +118,8 @@ settings["lsp_deps"] = {
 	"html",
 	"jsonls",
 	"lua_ls",
+	"pylsp",
 	"gopls",
-	"pyrefly",
-	"ruff",
 }
 
 -- General-purpose sources for none-ls to install during bootstrap.
