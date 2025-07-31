@@ -4,6 +4,8 @@ M.setup = function()
 	local diagnostics_virtual_lines = require("core.settings").diagnostics_virtual_lines
 	local diagnostics_level = require("core.settings").diagnostics_level
 	local lsp_deps = require("core.settings").lsp_deps
+	local use_python_experimental_lsp = require("core.settings").use_python_experimental_lsp
+	local python_experimental_lsp_deps = require("core.settings").python_experimental_lsp_deps
 
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 	require("modules.utils").load_plugin("mason-lspconfig", {
@@ -89,6 +91,30 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 				{ title = "nvim-lspconfig" }
 			)
 		end
+	end
+
+	--- the LSP for python should be set up differently depend on the value of `use_python_experimental_lsp`.
+	--- If both `use_python_experimental_lsp` and `python_experimental_lsp_deps` are set,
+	--- we'll use the experimental LSP with the specified dependencies.
+	--- Otherwise, default `pylsp` will be used.
+	if use_python_experimental_lsp then
+		if not python_experimental_lsp_deps or #python_experimental_lsp_deps == 0 then
+			vim.notify(
+				[[
+If you want to use the experimental Python LSP,
+please set `python_experimental_lsp_deps` in your settings.
+Fallback to default `pylsp` now.]],
+				vim.log.levels.WARN,
+				{ title = "nvim-lspconfig" }
+			)
+		else
+			mason_lsp_handler("pylsp")
+		end
+	else
+		for _, exp_py_lsp in ipairs(python_experimental_lsp_deps) do
+			mason_lsp_handler(exp_py_lsp)
+		end
+		mason_lsp_handler("ruff") -- for linting and formatting as the exp LSPs do not support it
 	end
 
 	for _, lsp in ipairs(lsp_deps) do

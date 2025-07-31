@@ -109,6 +109,22 @@ settings["search_backend"] = "telescope"
 ---@type boolean
 settings["lsp_inlayhints"] = false
 
+-- Set to true to enable python experimental LSPs, e.g. `ty`, `pyrefly`.
+-- NOTE: By setting the option to true, must set one of the following LSPs in `python_experimental_lsp_deps`,
+-- else it won't work alone, and the default `pylsp` LSP will be used.
+-- NOTE: By setting this to false, the default `pylsp` LSP will be installed and used.
+---@type boolean
+settings["use_python_experimental_lsp"] = false
+
+-- Python Experimental LSPs to install during bootstrap.
+-- NOTE: As these LSPs are experimental, they may not be stable or fully functional.
+-- NOTE: Both these LSPs don't support formatting, so `ruff` is installed for linting and formatting by default.
+---@type string[]
+settings["python_experimental_lsp_deps"] = {
+	-- "pyrefly", -- LSP from facebook
+	-- "ty", -- LSP from astral
+}
+
 -- LSPs to install during bootstrap.
 -- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
 ---@type string[]
@@ -118,7 +134,6 @@ settings["lsp_deps"] = {
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pylsp",
 	"gopls",
 }
 
