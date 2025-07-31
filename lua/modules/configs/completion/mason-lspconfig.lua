@@ -8,8 +8,34 @@ M.setup = function()
 	local python_experimental_lsp_deps = require("core.settings").python_experimental_lsp_deps
 
 	require("lspconfig.ui.windows").default_options.border = "rounded"
-	require("modules.utils").load_plugin("mason-lspconfig", {
-		ensure_installed = lsp_deps,
+	local load_plugin = require("modules.utils").load_plugin
+
+	local lsp_deps_with_python = lsp_deps
+	local has_python_experimental_lsp_deps = python_experimental_lsp_deps and #python_experimental_lsp_deps > 0
+
+	if use_python_experimental_lsp and has_python_experimental_lsp_deps then
+		-- If using experimental Python LSP, add the experimental LSPs to the list of dependencies
+		lsp_deps_with_python = vim.list_extend(lsp_deps, python_experimental_lsp_deps)
+		table.insert(lsp_deps_with_python, "ruff") -- ruff is used for linting and formatting
+	elseif use_python_experimental_lsp and not has_python_experimental_lsp_deps then
+		-- Experimental LSP desired, but dependencies are missing/empty.
+		-- Warn and fall back to pylsp.
+		vim.notify(
+			[[
+If you want to use the experimental Python LSP,
+please set `python_experimental_lsp_deps` (a table of LSP names) in your settings.
+Fallback to default `pylsp` now.]],
+			vim.log.levels.WARN,
+			{ title = "nvim-lspconfig" }
+		)
+		table.insert(lsp_deps_with_python, "pylsp")
+	else
+		-- Experimental LSP is not desired. Use default pylsp.
+		table.insert(lsp_deps_with_python, "pylsp")
+	end
+
+	load_plugin("mason-lspconfig", {
+		ensure_installed = lsp_deps_with_python,
 	})
 
 	vim.diagnostic.config({
@@ -93,31 +119,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		end
 	end
 
-	--- the LSP for python should be set up differently depend on the value of `use_python_experimental_lsp`.
-	--- If both `use_python_experimental_lsp` and `python_experimental_lsp_deps` are set,
-	--- we'll use the experimental LSP with the specified dependencies.
-	--- Otherwise, default `pylsp` will be used.
-	if use_python_experimental_lsp then
-		if not python_experimental_lsp_deps or #python_experimental_lsp_deps == 0 then
-			vim.notify(
-				[[
-If you want to use the experimental Python LSP,
-please set `python_experimental_lsp_deps` in your settings.
-Fallback to default `pylsp` now.]],
-				vim.log.levels.WARN,
-				{ title = "nvim-lspconfig" }
-			)
-		else
-			mason_lsp_handler("pylsp")
-		end
-	else
-		for _, exp_py_lsp in ipairs(python_experimental_lsp_deps) do
-			mason_lsp_handler(exp_py_lsp)
-		end
-		mason_lsp_handler("ruff") -- for linting and formatting as the exp LSPs do not support it
-	end
-
-	for _, lsp in ipairs(lsp_deps) do
+	for _, lsp in ipairs(lsp_deps_with_python) do
 		mason_lsp_handler(lsp)
 	end
 end

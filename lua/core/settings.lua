@@ -121,8 +121,8 @@ settings["use_python_experimental_lsp"] = false
 -- NOTE: Both these LSPs don't support formatting, so `ruff` is installed for linting and formatting by default.
 ---@type string[]
 settings["python_experimental_lsp_deps"] = {
-	-- "pyrefly", -- LSP from facebook
-	-- "ty", -- LSP from astral
+	-- "pyrefly",
+	-- "ty",
 }
 
 -- LSPs to install during bootstrap.
