@@ -110,7 +110,7 @@ settings["search_backend"] = "telescope"
 settings["lsp_inlayhints"] = false
 
 -- LSPs to install during bootstrap.
--- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+-- Full lsit: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 ---@type string[]
 settings["lsp_deps"] = {
 	"bashls",
@@ -259,11 +259,5 @@ settings["chat_models"] = {
 	"openai/codex-mini",
 	"openai/gpt-4.1-mini",
 }
-
--- Set the search backend to use here.
--- telescope is enough for most cases.
--- fzf is more powerful for searching in huge repo but needs fzf binary installed.
----@type "telescope"|"fzf"
-settings["search_backend"] = "telescope"
 
 return require("modules.utils").extend_config(settings, "user.settings")
