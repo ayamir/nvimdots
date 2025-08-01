@@ -19,5 +19,11 @@ return function()
 
 	pcall(require, "user.configs.lsp")
 
-	pcall(vim.cmd.LspStart) -- Start LSPs
+	-- Start LSPs
+	pcall(function()
+		local matching_configs = nvim_lsp.util.get_config_by_ft(vim.bo.filetype)
+		for _, config in ipairs(matching_configs) do
+			config.launch()
+		end
+	end)
 end
