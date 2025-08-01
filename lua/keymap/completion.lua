@@ -88,13 +88,13 @@ function M.lsp(buf)
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle virtual text display"),
+			:with_desc("lsp: Toggle virtual lines"),
 		["n|<leader>lh"] = map_callback(function()
 				_toggle_inlayhint()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("lsp: Toggle inlay hints display"),
+			:with_desc("lsp: Toggle inlay hints"),
 	}
 	bind.nvim_load_mapping(map)
 
