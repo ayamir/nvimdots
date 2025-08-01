@@ -244,20 +244,16 @@ return function()
 					pattern = { "CodeCompanionRequestStarted", "CodeCompanionRequestFinished" },
 					group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true }),
 					callback = function(args)
-						if args.match == "CodeCompanionRequestStarted" then
-							processing = true
-						elseif args.match == "CodeCompanionRequestFinished" then
-							processing = false
-						end
+						processing = (args.match == "CodeCompanionRequestStarted")
 					end,
 				})
 
 				return function()
-					if processing then
-						animation_idx = (animation_idx % #animate_chars) + 1
-						return string.format("%s %s", icons.aichat.Copilot, animate_chars[animation_idx])
+					if not processing then
+						return nil
 					end
-					return nil
+					animation_idx = animation_idx % #animate_chars + 1
+					return string.format("%s %s", icons.aichat.Copilot, animate_chars[animation_idx])
 				end
 			end)(),
 			color = utils.gen_hl("yellow", true, true),
