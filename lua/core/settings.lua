@@ -60,7 +60,7 @@ settings["diagnostics_virtual_lines"] = true
 -- Set the minimum severity level of diagnostics to display.
 -- Priority: `Error` > `Warning` > `Information` > `Hint`.
 -- For example, if set to `Warning`, only warnings and errors will be shown.
--- NOTE: This only works when `diagnostics_virtual_text` is true.
+-- NOTE: This only works when `diagnostics_virtual_lines` is true.
 ---@type "ERROR"|"WARN"|"INFO"|"HINT"
 settings["diagnostics_level"] = "HINT"
 
