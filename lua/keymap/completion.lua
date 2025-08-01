@@ -84,7 +84,7 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_virtualtext()
+				_toggle_virtuallines()
 			end)
 			:with_noremap()
 			:with_silent()
