@@ -250,7 +250,7 @@ return function()
 
 				return function()
 					if not processing then
-						return nil
+						return ""
 					end
 					animation_idx = animation_idx % #animate_chars + 1
 					return string.format("%s %s", icons.aichat.Copilot, animate_chars[animation_idx])
