@@ -4,7 +4,7 @@ return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 	local is_windows = require("core.global").is_windows
-	local debugpy_root = require("mason-registry").get_package("debugpy"):get_install_path()
+	local debugpy_root = vim.fn.expand("$MASON") .. "/packages/debugpy"
 
 	dap.adapters.python = function(callback, config)
 		if config.request == "attach" then

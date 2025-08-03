@@ -26,8 +26,7 @@ return function()
 		type = "executable",
 		command = "node",
 		args = {
-			require("mason-registry").get_package("go-debug-adapter"):get_install_path()
-				.. "/extension/dist/debugAdapter.js",
+			vim.fn.expand("$MASON") .. "/packages/go-debug-adapter" .. "/extension/dist/debugAdapter.js",
 		},
 	}
 	dap.configurations.go = {

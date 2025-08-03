@@ -1,8 +1,6 @@
 local M = {}
 
 M.setup = function()
-	local diagnostics_virtual_lines = require("core.settings").diagnostics_virtual_lines
-	local diagnostics_level = require("core.settings").diagnostics_level
 	local lsp_deps = require("core.settings").lsp_deps
 
 	require("lspconfig.ui.windows").default_options.border = "rounded"
@@ -12,14 +10,8 @@ M.setup = function()
 
 	vim.diagnostic.config({
 		signs = true,
-		underline = false,
+		underline = true,
 		virtual_text = false,
-		virtual_lines = diagnostics_virtual_lines and {
-			severity = {
-				min = vim.diagnostic.severity[diagnostics_level],
-			},
-		} or false,
-		-- set update_in_insert to false because it was enabled by lspsaga
 		update_in_insert = false,
 	})
 
