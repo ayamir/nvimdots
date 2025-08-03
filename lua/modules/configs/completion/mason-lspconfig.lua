@@ -175,7 +175,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 					:start()
 			end
 
-			vim.schedule_wrap(setup_lsp_for_package)
+			setup_lsp_for_package(pkg)
 		end)
 	)
 end
