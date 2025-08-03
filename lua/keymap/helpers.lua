@@ -55,17 +55,14 @@ _G._toggle_inlayhint = function()
 	)
 end
 
-_G._toggle_virtualtext = function()
-	local _vl_enabled = require("core.settings").diagnostics_virtual_lines
-	if _vl_enabled then
-		local vl_config = not vim.diagnostic.config().virtual_lines
-		vim.diagnostic.config({ virtual_lines = vl_config })
-		vim.notify(
-			(vl_config and "Virtual lines is now displayed" or "Virtual lines is now hidden"),
-			vim.log.levels.INFO,
-			{ title = "LSP Diagnostic" }
-		)
-	end
+_G._toggle_virtuallines = function()
+	require("tiny-inline-diagnostic").toggle()
+	vim.notify(
+		"Virtual lines are now "
+			.. (require("tiny-inline-diagnostic.diagnostic").user_toggle_state and "displayed" or "hidden"),
+		vim.log.levels.INFO,
+		{ title = "LSP Diagnostic" }
+	)
 end
 
 local _lazygit = nil
