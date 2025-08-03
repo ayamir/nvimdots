@@ -1,8 +1,6 @@
 local M = {}
 
 M.setup = function()
-	local diagnostics_virtual_lines = require("core.settings").diagnostics_virtual_lines
-	local diagnostics_level = require("core.settings").diagnostics_level
 	local lsp_deps = require("core.settings").lsp_deps
 	local use_python_experimental_lsp = require("core.settings").use_python_experimental_lsp
 	local python_experimental_lsp_deps = require("core.settings").python_experimental_lsp_deps
@@ -40,14 +38,8 @@ Fallback to default `pylsp` now.]],
 
 	vim.diagnostic.config({
 		signs = true,
-		underline = false,
+		underline = true,
 		virtual_text = false,
-		virtual_lines = diagnostics_virtual_lines and {
-			severity = {
-				min = vim.diagnostic.severity[diagnostics_level],
-			},
-		} or false,
-		-- set update_in_insert to false because it was enabled by lspsaga
 		update_in_insert = false,
 	})
 

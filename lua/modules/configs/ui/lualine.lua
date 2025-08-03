@@ -1,27 +1,41 @@
 local lsp_state = { progress = "" }
-local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "" }
+local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥", "", "" }
 
 vim.api.nvim_create_autocmd("LspProgress", {
 	group = vim.api.nvim_create_augroup("LualineLspProgress", { clear = true }),
 	pattern = { "begin", "report", "end" },
 	callback = function(args)
-		-- Ensure params exists before accessing its fields
-		if not args.data or not args.data.params then
+		-- Get the payload
+		local data = args.data and args.data.params and args.data.params.value
+		if not data then
 			return
 		end
 
-		local data = args.data.params.value
-		local progress = ""
+		-- If it's the end event, clear; else build "<spinner> XX% <title> <loaded>"
+		if data.kind == "end" then
+			lsp_state.progress = ""
+		else
+			local pct = data.percentage or 0
+			local idx = 1 + ((pct - pct % 10) / 10)
+			local spinner = spinners[idx]
 
-		if data.percentage then
-			local idx = math.max(1, math.floor(data.percentage / 10))
-			local icon = spinners[idx]
-			progress = icon .. " " .. data.percentage .. "%% "
+			local progress = ""
+			if data.message then
+				local start, stop = data.message:find("^%d+/%d+")
+				if start then
+					progress = data.message:sub(start, stop)
+				end
+			end
+
+			lsp_state.progress = spinner
+				.. " "
+				.. tostring(pct)
+				.. "%% "
+				.. (data.title or "")
+				.. (progress ~= "" and " " .. progress or "")
 		end
 
-		local loaded_count = data.message and string.match(data.message, "^(%d+/%d+)") or ""
-		local str = progress .. (data.title or "") .. " " .. (loaded_count or "")
-		lsp_state.progress = data.kind == "end" and "" or str
+		-- Redraw statusline
 		pcall(vim.cmd.redrawstatus)
 	end,
 })
@@ -35,6 +49,7 @@ return function()
 		git_nosep = require("modules.utils.icons").get("git"),
 		misc = require("modules.utils.icons").get("misc", true),
 		ui = require("modules.utils.icons").get("ui", true),
+		aichat = require("modules.utils.icons").get("aichat", true),
 	}
 
 	local function custom_theme()
@@ -121,7 +136,7 @@ return function()
 		---@param special_nobg boolean @Disable guibg for transparent backgrounds?
 		---@param bg string? @Background hl group
 		---@param gui string? @GUI highlight arguments
-		---@return fun():lualine_hlgrp|nil
+		---@return nil|fun():lualine_hlgrp
 		gen_hl = function(fg, gen_bg, special_nobg, bg, gui)
 			if has_catppuccin then
 				return function()
@@ -139,10 +154,6 @@ return function()
 			end
 		end,
 	}
-
-	local function lsp_progress()
-		return conditionals.has_enough_room() and lsp_state.progress or ""
-	end
 
 	local function diff_source()
 		local gitsigns = vim.b.gitsigns_status_dict
@@ -217,10 +228,35 @@ return function()
 						"%s[%s] %s",
 						icons.misc.LspAvailable,
 						table.concat(available_servers, ", "),
-						lsp_progress()
+						lsp_state.progress
 					)
 			end,
 			color = utils.gen_hl("blue", true, true, nil, "bold"),
+			cond = conditionals.has_enough_room,
+		},
+
+		chat_progress = {
+			(function()
+				local processing = false
+				local animate_chars = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+				local animation_idx = 1
+				vim.api.nvim_create_autocmd("User", {
+					pattern = { "CodeCompanionRequestStarted", "CodeCompanionRequestFinished" },
+					group = vim.api.nvim_create_augroup("CodeCompanionHooks", { clear = true }),
+					callback = function(args)
+						processing = (args.match == "CodeCompanionRequestStarted")
+					end,
+				})
+
+				return function()
+					if not processing then
+						return ""
+					end
+					animation_idx = animation_idx % #animate_chars + 1
+					return string.format("%s %s", icons.aichat.Copilot, animate_chars[animation_idx])
+				end
+			end)(),
+			color = utils.gen_hl("yellow", true, true),
 			cond = conditionals.has_enough_room,
 		},
 
@@ -345,10 +381,7 @@ return function()
 				components.lsp,
 			},
 			lualine_x = {
-				{
-					require("modules.configs.ui.lualine.components.chat_progress"),
-					color = utils.gen_hl("yellow", true, true),
-				},
+				components.chat_progress,
 				{
 					"encoding",
 					show_bomb = true,
