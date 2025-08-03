@@ -110,7 +110,7 @@ settings["search_backend"] = "telescope"
 settings["lsp_inlayhints"] = false
 
 -- LSPs to install during bootstrap.
--- Full lsit: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
+-- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 ---@type string[]
 settings["lsp_deps"] = {
 	"bashls",
@@ -247,16 +247,16 @@ settings["chat_api_key"] = "CODE_COMPANION_KEY"
 --- @type string[]
 settings["chat_models"] = {
 	-- free models
-	"mistralai/devstral-small:free", -- default
-	"qwen/qwen-2.5-coder-32b-instruct:free",
+	"moonshotai/kimi-k2:free", -- default
+	"qwen/qwen3-coder:free",
 	"deepseek/deepseek-chat-v3-0324:free",
 	"deepseek/deepseek-r1:free",
 	"google/gemma-3-27b-it:free",
 	-- paid models
 	"openai/codex-mini",
 	"openai/gpt-4.1-mini",
-	"google/gemini-2.0-flash-001",
-	"google/gemini-2.5-flash-preview-05-20",
+	"google/gemini-2.5-flash-lite",
+	"google/gemini-2.5-flash",
 	"anthropic/claude-3.7-sonnet",
 	"anthropic/claude-sonnet-4",
 }
