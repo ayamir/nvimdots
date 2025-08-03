@@ -1,8 +1,6 @@
 local M = {}
 
 M.setup = function()
-	require("lspconfig.ui.windows").default_options.border = "rounded"
-
 	local icons = {
 		ui = require("modules.utils.icons").get("ui", true),
 		misc = require("modules.utils.icons").get("misc", true),
