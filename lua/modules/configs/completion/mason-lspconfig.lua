@@ -81,6 +81,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 				{ title = "nvim-lspconfig" }
 			)
 		end
+		return
 	end
 
 	for _, lsp in ipairs(lsp_deps) do
