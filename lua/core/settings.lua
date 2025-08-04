@@ -110,7 +110,7 @@ settings["search_backend"] = "telescope"
 settings["lsp_inlayhints"] = false
 
 -- LSPs to install during bootstrap.
--- Full lsit: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
+-- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 ---@type string[]
 settings["lsp_deps"] = {
 	"bashls",
