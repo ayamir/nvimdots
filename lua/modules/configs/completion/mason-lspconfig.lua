@@ -84,6 +84,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 				{ title = "nvim-lspconfig" }
 			)
 		end
+		return
 	end
 
 	---A simplified mimic of <mason-lspconfig 1.x>'s `setup_handlers` callback.
