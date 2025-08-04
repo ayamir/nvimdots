@@ -110,7 +110,7 @@ settings["search_backend"] = "telescope"
 settings["lsp_inlayhints"] = false
 
 -- LSPs to install during bootstrap.
--- Full lsit: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
+-- Full list: https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/configs
 ---@type string[]
 settings["lsp_deps"] = {
 	"bashls",
@@ -247,7 +247,8 @@ settings["chat_api_key"] = "CODE_COMPANION_KEY"
 --- @type string[]
 settings["chat_models"] = {
 	-- free models
-	"qwen/qwen-2.5-coder-32b-instruct:free",
+	"moonshotai/kimi-k2:free", -- default
+	"qwen/qwen3-coder:free",
 	"deepseek/deepseek-chat-v3-0324:free",
 	"deepseek/deepseek-r1-0528:free",
 	"moonshotai/kimi-k2:free",
@@ -258,6 +259,10 @@ settings["chat_models"] = {
 	"google/gemini-2.5-flash",
 	"openai/codex-mini",
 	"openai/gpt-4.1-mini",
+	"google/gemini-2.5-flash-lite",
+	"google/gemini-2.5-flash",
+	"anthropic/claude-3.7-sonnet",
+	"anthropic/claude-sonnet-4",
 }
 
 return require("modules.utils").extend_config(settings, "user.settings")
