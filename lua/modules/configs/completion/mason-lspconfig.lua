@@ -2,10 +2,38 @@ local M = {}
 
 M.setup = function()
 	local lsp_deps = require("core.settings").lsp_deps
+	local use_python_experimental_lsp = require("core.settings").use_python_experimental_lsp
+	local python_experimental_lsp_deps = require("core.settings").python_experimental_lsp_deps
 
 	require("lspconfig.ui.windows").default_options.border = "rounded"
-	require("modules.utils").load_plugin("mason-lspconfig", {
-		ensure_installed = lsp_deps,
+	local load_plugin = require("modules.utils").load_plugin
+
+	local lsp_deps_with_python = lsp_deps
+	local has_python_experimental_lsp_deps = python_experimental_lsp_deps and #python_experimental_lsp_deps > 0
+
+	if use_python_experimental_lsp and has_python_experimental_lsp_deps then
+		-- If using experimental Python LSP, add the experimental LSPs to the list of dependencies
+		lsp_deps_with_python = vim.list_extend(lsp_deps, python_experimental_lsp_deps)
+		table.insert(lsp_deps_with_python, "ruff") -- ruff is used for linting and formatting
+	elseif use_python_experimental_lsp and not has_python_experimental_lsp_deps then
+		-- Experimental LSP desired, but dependencies are missing/empty.
+		-- Warn and fall back to pylsp.
+		vim.notify(
+			[[
+If you want to use the experimental Python LSP,
+please set `python_experimental_lsp_deps` (a table of LSP names) in your settings.
+Fallback to default `pylsp` now.]],
+			vim.log.levels.WARN,
+			{ title = "nvim-lspconfig" }
+		)
+		table.insert(lsp_deps_with_python, "pylsp")
+	else
+		-- Experimental LSP is not desired. Use default pylsp.
+		table.insert(lsp_deps_with_python, "pylsp")
+	end
+
+	load_plugin("mason-lspconfig", {
+		ensure_installed = lsp_deps_with_python,
 	})
 
 	vim.diagnostic.config({
@@ -83,7 +111,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		end
 	end
 
-	for _, lsp in ipairs(lsp_deps) do
+	for _, lsp in ipairs(lsp_deps_with_python) do
 		mason_lsp_handler(lsp)
 	end
 end
