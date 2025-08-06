@@ -274,11 +274,11 @@ return function()
 				end
 
 				if vim.bo.filetype == "python" then
-					local venv = os.getenv("CONDA_DEFAULT_ENV")
+					local venv = vim.env.CONDA_DEFAULT_ENV
 					if venv then
 						return icons.misc.PyEnv .. env_cleanup(venv)
 					end
-					venv = os.getenv("VIRTUAL_ENV")
+					venv = vim.env.VIRTUAL_ENV
 					if venv then
 						return icons.misc.PyEnv .. env_cleanup(venv)
 					end
@@ -298,7 +298,7 @@ return function()
 
 		cwd = {
 			function()
-				return icons.ui.FolderWithHeart .. utils.abbreviate_path(vim.fs.normalize(vim.fn.getcwd()))
+				return icons.ui.FolderWithHeart .. utils.abbreviate_path(vim.fs.normalize(vim.uv.cwd()))
 			end,
 			color = utils.gen_hl("subtext0", true, true, nil, "bold"),
 		},
