@@ -82,14 +82,14 @@ if settings.use_chat then
 		},
 	}
 end
-if settings.search_backend == "fzf" then
-	-- requires the fzf binary to be installed
-	tool["ibhagwan/fzf-lua"] = {
-		lazy = true,
-		event = "VeryLazy",
-		config = require("tool.fzf-lua"),
-	}
-end
+-- Needs `fzf` installed and in $PATH
+tool["ibhagwan/fzf-lua"] = {
+	lazy = true,
+	cond = (settings.search_backend == "fzf"),
+	cmd = "FzfLua",
+	config = require("tool.fzf-lua"),
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+}
 
 ----------------------------------------------------------------------
 --                        Telescope Plugins                         --
