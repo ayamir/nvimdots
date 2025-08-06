@@ -10,7 +10,8 @@ M.setup = function()
 	require("lspconfig.ui.windows").default_options.border = "rounded"
 	require("modules.utils").load_plugin("mason-lspconfig", {
 		ensure_installed = lsp_deps,
-		automatic_enable = true,
+		-- Skip auto enable because we are loading language servers lazily
+		automatic_enable = false,
 	})
 
 	vim.diagnostic.config({
@@ -56,15 +57,16 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 
 		if not ok then
 			-- Default to use factory config for server(s) that doesn't include a spec
-			vim.lsp.config(lsp_name, opts)
+			require("modules.utils").register_server(lsp_name, opts)
 		elseif type(custom_handler) == "function" then
 			-- Case where language server requires its own setup
 			-- Be sure to call `vim.lsp.config()` within the setup function.
 			-- Refer to |vim.lsp.config()| for documentation.
 			-- For an example, see `clangd.lua`.
 			custom_handler(opts)
+			vim.lsp.enable(lsp_name)
 		elseif type(custom_handler) == "table" then
-			vim.lsp.config(
+			require("modules.utils").register_server(
 				lsp_name,
 				vim.tbl_deep_extend(
 					"force",
@@ -84,7 +86,6 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 				{ title = "nvim-lspconfig" }
 			)
 		end
-		return
 	end
 
 	---A simplified mimic of <mason-lspconfig 1.x>'s `setup_handlers` callback.
