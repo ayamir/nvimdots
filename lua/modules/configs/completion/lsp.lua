@@ -18,4 +18,7 @@ return function()
 	end
 
 	pcall(require, "user.configs.lsp")
+
+	-- Start LSPs
+	pcall(vim.cmd.LspStart)
 end
