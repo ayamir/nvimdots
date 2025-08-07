@@ -1,5 +1,18 @@
 local M = {}
 
+---Setup and enable a language server in one call.
+---@param server string @Name of the language server
+---@param config? vim.lsp.Config @Optional config to apply
+function M.register_server(server, config)
+	vim.validate("server", server, "string", false)
+	vim.validate("config", config, "table", true)
+
+	if config then
+		vim.lsp.config(server, config)
+	end
+	vim.lsp.enable(server)
+end
+
 --- Function to recursively merge src into dst
 --- Unlike vim.tbl_deep_extend(), this function extends if the original value is a list
 ---@paramm dst table @Table which will be modified and appended to

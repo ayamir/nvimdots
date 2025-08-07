@@ -4,7 +4,7 @@ return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 	local is_windows = require("core.global").is_windows
-	local debugpy_root = vim.fn.expand("$MASON") .. "/packages/debugpy"
+	local debugpy_root = vim.fn.expand("$MASON/packages/debugpy")
 
 	dap.adapters.python = function(callback, config)
 		if config.request == "attach" then
@@ -54,7 +54,7 @@ return function()
 			program = utils.input_file_path(),
 			pythonPath = function()
 				-- Prefer the venv that is defined by the designated environment variable.
-				local cwd, venv = vim.fn.getcwd(), os.getenv("VIRTUAL_ENV")
+				local cwd, venv = vim.uv.cwd(), vim.env.VIRTUAL_ENV
 				local python = venv and (is_windows and venv .. "/Scripts/pythonw.exe" or venv .. "/bin/python") or ""
 				if vim.fn.executable(python) == 1 then
 					return python

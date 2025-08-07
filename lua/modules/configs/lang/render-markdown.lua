@@ -14,7 +14,7 @@ return function()
 		-- This enables hiding any added text on the line the cursor is on
 		-- This does have a performance penalty as we must listen to the 'CursorMoved' event
 		anti_conceal = { enabled = true },
-		-- The level of logs to write to file: vim.fn.stdpath('state') .. '/render-markdown.log'
+		-- The level of logs to write to file: vim.fn.stdpath("state") .. "/render-markdown.log"
 		-- Only intended to be used for plugin development / debugging
 		log_level = "error",
 	})
