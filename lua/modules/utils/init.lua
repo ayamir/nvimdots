@@ -263,6 +263,19 @@ function M.gen_cursorword_hl()
 	set_global_hl("MiniCursorwordCurrent", nil)
 end
 
+---Setup and enable a language server in one call.
+---@param server string @Name of the language server
+---@param config? vim.lsp.Config @Optional config to apply
+function M.register_server(server, config)
+	vim.validate("server", server, "string", false)
+	vim.validate("config", config, "table", true)
+
+	if config then
+		vim.lsp.config(server, config)
+	end
+	vim.lsp.enable(server)
+end
+
 ---Convert number (0/1) to boolean
 ---@param value number @The value to check
 ---@return boolean|nil @Returns nil if failed
