@@ -193,7 +193,7 @@ end
 ---@return palette
 function M.get_palette(overwrite)
 	if not overwrite then
-		return vim.deepcopy(init_palette())
+		return vim.deepcopy(init_palette(), true)
 	else
 		return vim.tbl_extend("force", init_palette(), overwrite)
 	end

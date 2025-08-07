@@ -27,7 +27,7 @@ return function()
 					any = {
 						{
 							function(item)
-								return item.filename:find(vim.fn.getcwd(), 1, true)
+								return item.filename:find(vim.uv.cwd(), 1, true)
 							end,
 						},
 					},

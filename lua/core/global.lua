@@ -10,7 +10,7 @@ function global:load_variables()
 	self.cache_dir = vim.fn.stdpath("cache")
 	self.data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
 	self.modules_dir = self.vim_path .. "/modules"
-	self.home = self.is_windows and os.getenv("USERPROFILE") or os.getenv("HOME")
+	self.home = self.is_windows and vim.env.USERPROFILE or vim.env.HOME
 end
 
 global:load_variables()
