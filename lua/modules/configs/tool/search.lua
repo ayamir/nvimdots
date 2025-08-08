@@ -2,7 +2,7 @@ return function()
 	local vim_path = require("core.global").vim_path
 	local search_backend = require("core.settings").search_backend
 	local use_fzf = search_backend == "fzf"
-	local fzf = require("fzf-lua")
+	local fzf = use_fzf and require("fzf-lua")
 	local extensions = require("telescope").extensions
 	local builtins = require("telescope.builtin")
 	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
