@@ -1,176 +1,125 @@
 return function()
 	local vim_path = require("core.global").vim_path
 	local search_backend = require("core.settings").search_backend
-	local builtin = require("telescope.builtin")
+	local use_fzf = search_backend == "fzf"
+	local fzf = require("fzf-lua")
 	local extensions = require("telescope").extensions
+	local builtins = require("telescope.builtin")
 	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
-	local fzf = (search_backend == "fzf") and require("fzf-lua")
-	local fzf_opts = { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
 
-	local function files()
-		local opts = fzf and vim.tbl_deep_extend("force", {}, fzf_opts) or {}
-		local cwd = vim.fn.getcwd()
-		local is_root = (cwd == vim_path)
-		local is_git = (vim.fn.isdirectory(".git") == 1)
+	local base_opts = use_fzf and { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
+		or {}
 
-		if is_root then
-			if fzf then
-				return fzf.files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
-			end
-			return builtin.find_files(vim.tbl_deep_extend("force", opts, { no_ignore = true }))
-		end
-
-		if is_git then
-			if fzf then
-				return fzf.git_files(opts)
-			end
-			return builtin.git_files(opts)
-		end
-
-		if fzf then
-			return fzf.files(opts)
-		end
-		return builtin.find_files(opts)
+	---Returns current directory and whether it's a Git repo root
+	---@return string @Current working directory
+	---@return boolean|nil @true if `.git` folder exists here, false if `.git` exists but isn't folder, nil if `.git` missing
+	local function get_root_info()
+		local cwd = vim.uv.cwd()
+		local stat = vim.uv.fs_stat(".git")
+		return cwd, stat and stat.type == "directory"
 	end
 
-	local function oldfiles()
-		if fzf then
-			local opts = vim.tbl_deep_extend("force", {}, fzf_opts)
-			return fzf.oldfiles(opts)
-		end
-		return builtin.oldfiles()
-	end
-
-	local function make_grep(fzf_fn, tb_fn)
+	---Creates a file search function based on backend and context
+	---@param fzf_fn string @Name of the fzf-lua function to call (e.g. "files")
+	---@param tb_fn function @Telescope builtin function to call (e.g. `builtin.find_files`)
+	---@param git_only boolean @Whether to restrict search to git tracked files only
+	---@return fun():any @A function that executes the selected search with proper options
+	local function file_searcher(fzf_fn, tb_fn, git_only)
 		return function()
-			local opts = fzf and vim.tbl_deep_extend("force", {}, fzf_opts) or {}
-			local cwd = vim.fn.getcwd()
+			local cwd, is_git = get_root_info()
+			local opts = vim.deepcopy(base_opts, true)
 			if cwd == vim_path then
-				if fzf then
-					opts = vim.tbl_deep_extend("force", opts, { no_ignore = true })
+				opts.no_ignore = true
+				return (use_fzf and fzf[fzf_fn] or tb_fn)(opts)
+			elseif git_only and is_git then
+				return (use_fzf and fzf.git_files or builtins.git_files)(opts)
+			elseif not git_only then
+				return (use_fzf and fzf[fzf_fn] or tb_fn)(opts)
+			else
+				-- fallback
+				return (use_fzf and fzf.files or builtins.find_files)(opts)
+			end
+		end
+	end
+
+	---Creates a function that performs a live grep search using the appropriate backend
+	---@param fzf_fn string @Name of the fzf-lua grep function to call (e.g. "live_grep")
+	---@param tb_fn function @Telescope builtin grep function (e.g. `builtin.grep_string`)
+	---@return fun():any @Function that runs the selected grep with proper options
+	local function grep_searcher(fzf_fn, tb_fn)
+		return function()
+			local cwd = vim.uv.cwd()
+			local opts = vim.deepcopy(base_opts, true)
+			if cwd == vim_path then
+				if use_fzf then
+					opts.no_ignore = true
 				else
 					opts = { additional_args = { "--no-ignore" } }
 				end
 			end
-			if fzf then
-				return fzf[fzf_fn](opts)
-			end
-			return tb_fn(opts)
+			return use_fzf and fzf[fzf_fn](opts) or tb_fn(opts)
 		end
 	end
 
-	local word_in_project = make_grep("live_grep", extensions.live_grep_args.live_grep_args)
-	local word_under_cursor = make_grep("grep_cword", builtin.grep_string)
+	-- Tables of pickers
+	local pickers = {
+		file = {
+			{ "Files", file_searcher("files", builtins.find_files, false) },
+			{
+				"Frecency",
+				function()
+					extensions.frecency.frecency()
+				end,
+			},
+			{ "Oldfiles", use_fzf and function()
+				fzf.oldfiles(base_opts)
+			end or builtins.oldfiles },
+			{ "Buffers", builtins.buffers },
+		},
+		pattern = {
+			{ "Word in project", grep_searcher("live_grep", extensions.live_grep_args.live_grep_args) },
+			{ "Word under cursor", grep_searcher("grep_cword", builtins.grep_string) },
+		},
+		git = {
+			{ "Branches", builtins.git_branches },
+			{ "Commits", builtins.git_commits },
+			{ "Commit content", extensions.advanced_git_search.search_log_content },
+			{ "Diff current file", extensions.advanced_git_search.diff_commit_file },
+		},
+		dossier = {
+			{ "Sessions", extensions.persisted.persisted },
+			{
+				"Projects",
+				function()
+					extensions.projects.projects()
+				end,
+			},
+			{ "Zoxide", extensions.zoxide.list },
+		},
+		misc = {
+			{
+				"Colorschemes",
+				function()
+					builtins.colorscheme({ enable_preview = true })
+				end,
+			},
+			{ "Notify", extensions.notify.notify },
+			{ "Undo History", extensions.undo.undo },
+		},
+	}
+
+	-- Build collections
+	local collections = {}
+	for kind, list in pairs(pickers) do
+		local init = { initial_tab = 1, tabs = {} }
+		for _, entry in ipairs(list) do
+			table.insert(init.tabs, { name = entry[1], tele_func = entry[2] })
+		end
+		collections[kind] = init
+	end
 
 	require("modules.utils").load_plugin("search", {
 		prompt_position = prompt_pos,
-		collections = {
-			-- Search using filenames
-			file = {
-				initial_tab = 1,
-				tabs = {
-					{ name = "Files", tele_func = files },
-					{
-						name = "Frecency",
-						tele_func = function()
-							extensions.frecency.frecency()
-						end,
-					},
-					{ name = "Oldfiles", tele_func = oldfiles },
-					{
-						name = "Buffers",
-						tele_func = function()
-							builtin.buffers()
-						end,
-					},
-				},
-			},
-			-- Search using patterns
-			pattern = {
-				initial_tab = 1,
-				tabs = {
-					{ name = "Word in project", tele_func = word_in_project },
-					{ name = "Word under cursor", tele_func = word_under_cursor },
-				},
-			},
-			-- Search Git objects (branches, commits)
-			git = {
-				initial_tab = 1,
-				tabs = {
-					{
-						name = "Branches",
-						tele_func = function()
-							builtin.git_branches()
-						end,
-					},
-					{
-						name = "Commits",
-						tele_func = function()
-							builtin.git_commits()
-						end,
-					},
-					{
-						name = "Commit content",
-						tele_func = function()
-							extensions.advanced_git_search.search_log_content()
-						end,
-					},
-					{
-						name = "Diff current file with commit",
-						tele_func = function()
-							extensions.advanced_git_search.diff_commit_file()
-						end,
-					},
-				},
-			},
-			-- Retrieve dossiers
-			dossier = {
-				initial_tab = 1,
-				tabs = {
-					{
-						name = "Sessions",
-						tele_func = function()
-							extensions.persisted.persisted()
-						end,
-					},
-					{
-						name = "Projects",
-						tele_func = function()
-							extensions.projects.projects({})
-						end,
-					},
-					{
-						name = "Zoxide",
-						tele_func = function()
-							extensions.zoxide.list()
-						end,
-					},
-				},
-			},
-			-- Miscellaneous
-			misc = {
-				initial_tab = 1,
-				tabs = {
-					{
-						name = "Colorschemes",
-						tele_func = function()
-							builtin.colorscheme({ enable_preview = true })
-						end,
-					},
-					{
-						name = "Notify",
-						tele_func = function()
-							extensions.notify.notify()
-						end,
-					},
-					{
-						name = "Undo History",
-						tele_func = function()
-							extensions.undo.undo()
-						end,
-					},
-				},
-			},
-		},
+		collections = collections,
 	})
 end
