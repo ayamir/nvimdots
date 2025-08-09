@@ -57,6 +57,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- Autojump to last edit
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function()
+		local mark = vim.api.nvim_buf_get_mark(0, '"')
+		local lcount = vim.api.nvim_buf_line_count(0)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
+
 function autocmd.nvim_create_augroups(definitions)
 	for group_name, definition in pairs(definitions) do
 		-- Prepend an underscore to avoid name clashes
@@ -91,12 +102,6 @@ function autocmd.load_autocmds()
 			{ "BufWritePre", "MERGE_MSG", "setlocal noundofile" },
 			{ "BufWritePre", "description", "setlocal noundofile" },
 			{ "BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile" },
-			-- Auto place to last edit
-			{
-				"BufReadPost",
-				"*",
-				[[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
-			},
 			-- Auto change directory
 			-- { "BufEnter", "*", "silent! lcd %:p:h" },
 			-- Auto toggle fcitx5
