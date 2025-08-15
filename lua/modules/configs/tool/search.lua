@@ -57,7 +57,7 @@ return function()
 					opts = { additional_args = { "--no-ignore" } }
 				end
 			end
-			return use_fzf and fzf[fzf_fn](opts) or tb_fn(opts)
+			return (use_fzf and fzf[fzf_fn] or tb_fn)(opts)
 		end
 	end
 
