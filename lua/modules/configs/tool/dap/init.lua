@@ -44,6 +44,10 @@ return function()
 	)
 	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
+	vim.api.nvim_create_user_command("DapUIClose", function()
+		require("dapui").close()
+	end, {})
+
 	---A handler to setup all clients defined under `tool/dap/clients/*.lua`
 	---@param config table
 	local function mason_dap_handler(config)

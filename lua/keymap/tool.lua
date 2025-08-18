@@ -185,8 +185,14 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("debug: Set breakpoint with condition"),
-		["n|<leader>dc"] = map_callback(function()
+		["n|<leader>dr"] = map_callback(function()
 				require("dap").run_to_cursor()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("debug: Run to cursor"),
+		["n|<leader>dc"] = map_callback(function()
+				require("dapui").close()
 			end)
 			:with_noremap()
 			:with_silent()
