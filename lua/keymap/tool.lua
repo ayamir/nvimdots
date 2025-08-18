@@ -244,7 +244,7 @@ for _, mode in pairs(modes) do
 		["<A-d>"] = { pos = "float", id = "FloatTerm" },
 	}) do
 		mappings.plugins[string.format("%s|%s", mode, key)] = map_callback(function()
-				if vim.fn.executable("direnv") == 1 then
+				if vim.fn.executable("direnv") == 1 and vim.loop.fs_stat(vim.uv.cwd() .. "/.envrc") ~= nil then
 					opts = vim.tbl_extend("force", opts, { cmd = "direnv allow" })
 				end
 				require("nvchad.term").toggle(opts)
