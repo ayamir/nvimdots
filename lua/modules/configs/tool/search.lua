@@ -7,7 +7,8 @@ return function()
 	local builtins = require("telescope.builtin")
 	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
 
-	local base_opts = use_fzf and { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
+	local base_opts = use_fzf
+			and { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") }, profile = "telescope" }
 		or {}
 
 	---Returns current directory and whether it's a Git repo root
