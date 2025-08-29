@@ -35,20 +35,22 @@ return function()
 			},
 		},
 		adapters = {
-			openrouter = function()
-				return require("codecompanion.adapters").extend("openai_compatible", {
-					env = {
-						url = "https://openrouter.ai/api",
-						api_key = secret_key,
-						chat_url = "/v1/chat/completions",
-					},
-					schema = {
-						model = {
-							default = vim.g.current_chat_model,
+			http = {
+				openrouter = function()
+					return require("codecompanion.adapters").extend("openai_compatible", {
+						env = {
+							url = "https://openrouter.ai/api",
+							api_key = secret_key,
+							chat_url = "/v1/chat/completions",
 						},
-					},
-				})
-			end,
+						schema = {
+							model = {
+								default = vim.g.current_chat_model,
+							},
+						},
+					})
+				end,
+			},
 		},
 		display = {
 			diff = {
