@@ -1,7 +1,7 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_callback = bind.map_callback
-require("keymap.helpers")
+local helpers = require("keymap.helpers")
 
 local mappings = {
 	fmt = {
@@ -27,7 +27,7 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
 		["n|gto"] = map_callback(function()
-				_picker("lsp_document_symbols")
+				helpers.picker("lsp_document_symbols")
 			end)
 			:with_silent()
 			:with_buffer(buf)
@@ -67,14 +67,14 @@ function M.lsp(buf)
 			:with_desc("lsp: Preview definition"),
 		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
 		["n|gh"] = map_callback(function()
-				_picker("lsp_references")
+				helpers.picker("lsp_references")
 			end)
 			:with_noremap()
 			:with_nowait()
 			:with_silent()
 			:with_desc("lsp: show finder"),
 		["n|gm"] = map_callback(function()
-				_picker("lsp_implementations")
+				helpers.picker("lsp_implementations")
 			end)
 			:with_noremap()
 			:with_nowait()
@@ -89,13 +89,13 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_virtuallines()
+				helpers.toggle_virtuallines()
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Toggle virtual lines"),
 		["n|<leader>lh"] = map_callback(function()
-				_toggle_inlayhint()
+				helpers.toggle_inlayhint()
 			end)
 			:with_noremap()
 			:with_silent()
