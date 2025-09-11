@@ -1,11 +1,3 @@
-_G._command_panel = function()
-	require("telescope.builtin").keymaps({
-		lhs_filter = function(lhs)
-			return not string.find(lhs, "Þ")
-		end,
-	})
-end
-
 _G._flash_esc_or_noh = function()
 	local flash_active, state = pcall(function()
 		return require("flash.plugins.char").state
@@ -109,4 +101,16 @@ _G._select_chat_model = function()
 			end,
 		})
 		:find()
+end
+
+_G._picker = function(method, tele_opts)
+	local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
+	local fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" }
+	if require("core.settings").search_backend == "fzf" then
+		require("fzf-lua")[method]({
+			fzf_opts = fzf_opts,
+		})
+	else
+		require("telescope.builtin")[method](tele_opts)
+	end
 end

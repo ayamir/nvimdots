@@ -100,14 +100,11 @@ local mappings = {
 
 		-- Plugin: telescope
 		["n|<C-p>"] = map_callback(function()
-				if require("core.settings").search_backend == "fzf" then
-					local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
-					require("fzf-lua").keymaps({
-						fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
-					})
-				else
-					_command_panel()
-				end
+				_picker("keymaps", {
+					lhs_filter = function(lhs)
+						return not string.find(lhs, "Þ")
+					end,
+				})
 			end)
 			:with_noremap()
 			:with_silent()
