@@ -16,11 +16,6 @@ completion["nvimdev/lspsaga.nvim"] = {
 	config = require("completion.lspsaga"),
 	dependencies = "nvim-tree/nvim-web-devicons",
 }
-completion["DNLHC/glance.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("completion.glance"),
-}
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
 	lazy = false,
 	config = require("completion.tiny-inline-diagnostic"),
