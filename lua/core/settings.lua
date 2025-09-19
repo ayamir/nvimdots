@@ -248,22 +248,13 @@ settings["chat_api_key"] = "CODE_COMPANION_KEY"
 --- @type string[]
 settings["chat_models"] = {
 	-- free models
-	"moonshotai/kimi-k2:free", -- default
-	"qwen/qwen3-coder:free",
-	"deepseek/deepseek-chat-v3-0324:free",
-	"deepseek/deepseek-r1-0528:free",
+	"deepseek/deepseek-chat-v3.1:free", -- default
 	"moonshotai/kimi-k2:free",
+	"qwen/qwen3-coder:free",
 	-- paid models
 	"anthropic/claude-sonnet-4",
-	"anthropic/claude-3.7-sonnet",
-	"google/gemini-2.0-flash-001",
-	"google/gemini-2.5-flash",
 	"openai/codex-mini",
-	"openai/gpt-4.1-mini",
-	"google/gemini-2.5-flash-lite",
 	"google/gemini-2.5-flash",
-	"anthropic/claude-3.7-sonnet",
-	"anthropic/claude-sonnet-4",
 }
 
 return require("modules.utils").extend_config(settings, "user.settings")
