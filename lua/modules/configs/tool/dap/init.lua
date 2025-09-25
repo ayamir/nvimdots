@@ -64,7 +64,7 @@ return function()
 		elseif type(custom_handler) == "function" then
 			-- Case where the protocol requires its own setup
 			-- Make sure to set
-			-- * dap.adpaters.<dap_name> = { your config }
+			-- * dap.adapters.<dap_name> = { your config }
 			-- * dap.configurations.<lang> = { your config }
 			-- See `codelldb.lua` for a concrete example.
 			custom_handler(config)
