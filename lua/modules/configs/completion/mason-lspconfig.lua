@@ -1,8 +1,6 @@
 local M = {}
 
 M.setup = function()
-	local is_windows = require("core.global").is_windows
-
 	local lsp_deps = require("core.settings").lsp_deps
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
