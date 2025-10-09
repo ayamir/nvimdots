@@ -1,7 +1,7 @@
 return function()
 	require("modules.utils").load_plugin("project", {
 		manual_mode = false,
-		detection_methods = { "lsp", "pattern" },
+		detection_methods = { "pattern" },
 		patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
 		ignore_lsp = { "null-ls", "copilot" },
 		exclude_dirs = {},
