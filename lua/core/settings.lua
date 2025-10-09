@@ -41,6 +41,7 @@ settings["server_formatting_block_list"] = {
 	clangd = true,
 	lua_ls = true,
 	ts_ls = true,
+	ruff = false, -- set to false to enable ruff formatting, see discussion #1485
 }
 
 -- Directories where formatting on save is disabled.
