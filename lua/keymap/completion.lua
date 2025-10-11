@@ -1,6 +1,7 @@
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_callback = bind.map_callback
+local helpers = require("keymap.helpers")
 
 local mappings = {
 	fmt = {
@@ -26,14 +27,7 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
 		["n|gto"] = map_callback(function()
-				if require("core.settings").search_backend == "fzf" then
-					local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
-					require("fzf-lua").lsp_document_symbols({
-						fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
-					})
-				else
-					require("telescope.builtin").lsp_document_symbols()
-				end
+				helpers.picker("lsp_document_symbols")
 			end)
 			:with_silent()
 			:with_buffer(buf)
@@ -67,13 +61,25 @@ function M.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Code action for cursor"),
-		["n|gd"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
-		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
-		["n|gh"] = map_cr("Glance references"):with_silent():with_buffer(buf):with_desc("lsp: Show reference"),
-		["n|gm"] = map_cr("Glance implementations")
+		["n|gd"] = map_cr("Lspsaga peek_definition")
 			:with_silent()
 			:with_buffer(buf)
-			:with_desc("lsp: Show implementation"),
+			:with_desc("lsp: Preview definition"),
+		["n|gD"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
+		["n|gh"] = map_callback(function()
+				helpers.picker("lsp_references")
+			end)
+			:with_noremap()
+			:with_nowait()
+			:with_silent()
+			:with_desc("lsp: show finder"),
+		["n|gm"] = map_callback(function()
+				helpers.picker("lsp_implementations")
+			end)
+			:with_noremap()
+			:with_nowait()
+			:with_silent()
+			:with_desc("lsp: show implementations"),
 		["n|gci"] = map_cr("Lspsaga incoming_calls")
 			:with_silent()
 			:with_buffer(buf)
@@ -83,13 +89,13 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_virtuallines()
+				helpers.toggle_virtuallines()
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Toggle virtual lines"),
 		["n|<leader>lh"] = map_callback(function()
-				_toggle_inlayhint()
+				helpers.toggle_inlayhint()
 			end)
 			:with_noremap()
 			:with_silent()
