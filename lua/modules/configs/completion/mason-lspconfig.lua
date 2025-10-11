@@ -7,7 +7,6 @@ M.setup = function()
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
 
-	require("lspconfig.ui.windows").default_options.border = "rounded"
 	require("modules.utils").load_plugin("mason-lspconfig", {
 		ensure_installed = lsp_deps,
 		-- Skip auto enable because we are loading language servers lazily
