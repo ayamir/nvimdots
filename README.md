@@ -206,7 +206,7 @@ It's strongly recommended to read [Wiki: Prerequisites](https://github.com/ayami
 
 - [ayamir](https://github.com/ayamir)
 - [Jint-lzxy](https://github.com/Jint-lzxy)
-- [CharlesChiuGit](https://github.com/CharlesChiuGit)
+- [charliie-dev](https://github.com/charliie-dev)
 - [aarnphm](https://github.com/aarnphm)
 - [misumisumi](https://github.com/misumisumi)
 
