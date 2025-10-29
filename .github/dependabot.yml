@@ -1,0 +1,20 @@
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    #NOTE: no need to specify `/.github/workflows` for `directory`. use `directory: "/"`
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      time: "07:00"
+    target-branch: "main"
+    commit-message:
+      prefix: "chore(ci.deps)"
+    groups:
+      actions-dependencies:
+        patterns:
+          - "*"
+    labels:
+      - "ci"
