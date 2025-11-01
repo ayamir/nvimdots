@@ -2,7 +2,7 @@
 name: "Flake.lock: update Nix dependencies (Verified)"
 on:
   schedule: 
-    - cron: 30 02 1 * * # 1st of every month
+    - cron: 00 00 1,15 * * # At 00:00 on day-of-month 1 and 15
 
 env:
   BRANCH: "main"
