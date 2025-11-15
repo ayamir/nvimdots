@@ -1,8 +1,6 @@
 local M = {}
 
 M.setup = function()
-	local is_windows = require("core.global").is_windows
-
 	local lsp_deps = require("core.settings").lsp_deps
 	local mason_registry = require("mason-registry")
 	local mason_lspconfig = require("mason-lspconfig")
@@ -118,67 +116,6 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 	for _, pkg in ipairs(mason_registry.get_installed_package_names()) do
 		setup_lsp_for_package(pkg)
 	end
-
-	-- Hook into Mason's package install event to install extra plugins for pylsp (black, ruff, rope),
-	-- then configure the installed package's LSP using setup_lsp_for_package.
-	mason_registry:on(
-		"package:install:success",
-		vim.schedule_wrap(function(pkg)
-			if pkg.name == "python-lsp-server" then
-				local venv = vim.fn.stdpath("data") .. "/mason/packages/python-lsp-server/venv"
-				local python = is_windows and venv .. "/Scripts/python.exe" or venv .. "/bin/python"
-				local black = is_windows and venv .. "/Scripts/black.exe" or venv .. "/bin/black"
-				local ruff = is_windows and venv .. "/Scripts/ruff.exe" or venv .. "/bin/ruff"
-
-				require("plenary.job")
-					:new({
-						command = python,
-						args = {
-							"-m",
-							"pip",
-							"install",
-							"-U",
-							"--disable-pip-version-check",
-							"python-lsp-black",
-							"python-lsp-ruff",
-							"pylsp-rope",
-						},
-						cwd = venv,
-						env = { VIRTUAL_ENV = venv },
-						on_exit = function()
-							if vim.fn.executable(black) == 1 and vim.fn.executable(ruff) == 1 then
-								vim.notify(
-									"Finished installing pylsp plugins",
-									vim.log.levels.INFO,
-									{ title = "[lsp] Install Status" }
-								)
-							else
-								vim.notify(
-									"Failed to install pylsp plugins. [Executable not found]",
-									vim.log.levels.ERROR,
-									{ title = "[lsp] Install Failure" }
-								)
-							end
-						end,
-						on_start = function()
-							vim.notify(
-								"Now installing pylsp plugins...",
-								vim.log.levels.INFO,
-								{ title = "[lsp] Install Status", timeout = 6000 }
-							)
-						end,
-						on_stderr = function(_, msg_stream)
-							if msg_stream then
-								vim.notify(msg_stream, vim.log.levels.ERROR, { title = "[lsp] Install Failure" })
-							end
-						end,
-					})
-					:start()
-			end
-
-			setup_lsp_for_package(pkg)
-		end)
-	)
 end
 
 return M
