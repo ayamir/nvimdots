@@ -121,7 +121,7 @@ settings["lsp_deps"] = {
 	"jsonls",
 	"lua_ls",
 	"gopls",
-	"pyrefly",
+	"zuban",
 	"ruff",
 }
 
