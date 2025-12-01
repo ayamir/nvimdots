@@ -40,6 +40,7 @@ settings["formatter_block_list"] = {
 settings["server_formatting_block_list"] = {
 	clangd = true,
 	lua_ls = true,
+	ruff = false, -- set to false to enable ruff formatting, see discussion #1485
 	ts_ls = true,
 }
 
@@ -116,11 +117,12 @@ settings["lsp_inlayhints"] = false
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
+	"gopls",
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pylsp",
-	"gopls",
+	"ruff",
+	"zuban",
 }
 
 -- General-purpose sources for none-ls to install during bootstrap.
