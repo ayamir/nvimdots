@@ -4,7 +4,7 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-require("keymap.helpers")
+local helpers = require("keymap.helpers")
 
 local mappings = {
 	plugins = {
@@ -74,7 +74,7 @@ local mappings = {
 			:with_desc("terminal: Toggle float"),
 		["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
 		["n|<leader>gg"] = map_callback(function()
-				_toggle_lazygit()
+				helpers.toggle_lazygit()
 			end)
 			:with_noremap()
 			:with_silent()
@@ -100,20 +100,17 @@ local mappings = {
 
 		-- Plugin: telescope
 		["n|<C-p>"] = map_callback(function()
-				if require("core.settings").search_backend == "fzf" then
-					local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
-					require("fzf-lua").keymaps({
-						fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" },
-					})
-				else
-					_command_panel()
-				end
+				helpers.picker("keymaps", {
+					lhs_filter = function(lhs)
+						return not string.find(lhs, "Þ")
+					end,
+				})
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Toggle command panel"),
 		["n|<leader>fc"] = map_callback(function()
-				_telescope_collections(require("telescope.themes").get_dropdown())
+				helpers.telescope_collections(require("telescope.themes").get_dropdown())
 			end)
 			:with_noremap()
 			:with_silent()
@@ -242,7 +239,7 @@ local mappings = {
 
 		--- Plugin: CodeCompanion and edgy
 		["n|<leader>cs"] = map_callback(function()
-				_select_chat_model()
+				helpers.select_chat_model()
 			end)
 			:with_noremap()
 			:with_silent()

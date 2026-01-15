@@ -1,9 +1,11 @@
+---@diagnostic disable: undefined-global
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 local et = bind.escape_termcode
+local helpers = require("keymap.helpers")
 
 local ts_to_select = require("nvim-treesitter-textobjects.select")
 local ts_to_swap = require("nvim-treesitter-textobjects.swap")
@@ -49,7 +51,7 @@ local mappings = {
 		["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
 		["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),
 		["n|<Esc>"] = map_callback(function()
-				_flash_esc_or_noh()
+				helpers.flash_esc_or_noh()
 			end)
 			:with_noremap()
 			:with_silent()
