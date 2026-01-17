@@ -75,7 +75,6 @@ tool["gelguy/wilder.nvim"] = {
 if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
 		lazy = true,
-		tag = "v17.33.0",
 		event = "VeryLazy",
 		config = require("tool.codecompanion"),
 		dependencies = {
