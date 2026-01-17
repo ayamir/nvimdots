@@ -15,7 +15,7 @@
   "cmp-under-comparator": { "branch": "master", "commit": "6857f10272c3cfe930cece2afa2406e1385bfef8" },
   "cmp_luasnip": { "branch": "master", "commit": "98d9cb5c2c38532bd9bdb481067b20fea8f32e90" },
   "codecompanion-history.nvim": { "branch": "main", "commit": "8c6ca9f998aeef89f3543343070f8562bf911fb4" },
-  "codecompanion.nvim": { "branch": "main", "commit": "e7762c68daf24c3e356401f5223eeb5217047754" },
+  "codecompanion.nvim": { "branch": "main", "commit": "e0780fa9fda504ffb89307cabcb6cbe1ce8eb60c" },
   "copilot-cmp": { "branch": "master", "commit": "15fc12af3d0109fa76b60b5cffa1373697e261d1" },
   "copilot.lua": { "branch": "master", "commit": "e78d1ffebdf6ccb6fd8be4e6898030c1cf5f9b64" },
   "crates.nvim": { "branch": "main", "commit": "ac9fa498a9edb96dc3056724ff69d5f40b898453" },
