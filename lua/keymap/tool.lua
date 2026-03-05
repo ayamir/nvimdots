@@ -239,6 +239,12 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("debug: Open REPL"),
+		["n|<leader>dC"] = map_callback(function()
+				require("dapui").close()
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("debug: close debug UI"),
 
 		--- Plugin: CodeCompanion and edgy
 		["n|<leader>cs"] = map_callback(function()
