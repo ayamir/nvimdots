@@ -93,17 +93,21 @@ editor["MagicDuck/grug-far.nvim"] = {
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
 editor["nvim-treesitter/nvim-treesitter"] = {
-	lazy = true,
+	lazy = false, -- nvim-ts cannot lazy load now
+	branch = "main",
 	build = function()
 		if #vim.api.nvim_list_uis() > 0 then
 			vim.api.nvim_command([[TSUpdate]])
 		end
 	end,
-	event = "BufReadPre",
 	config = require("editor.treesitter"),
 	dependencies = {
 		{ "mfussenegger/nvim-treehopper" },
-		{ "nvim-treesitter/nvim-treesitter-textobjects" },
+		{
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			branch = "main",
+			config = require("editor.ts-textobjects"),
+		},
 		{
 			"andymass/vim-matchup",
 			init = require("editor.matchup"),

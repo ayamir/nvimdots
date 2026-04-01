@@ -40,6 +40,7 @@ settings["formatter_block_list"] = {
 settings["server_formatting_block_list"] = {
 	clangd = true,
 	lua_ls = true,
+	ruff = false, -- set to false to enable ruff formatting, see discussion #1485
 	ts_ls = true,
 }
 
@@ -100,8 +101,9 @@ settings["background"] = "dark"
 settings["external_browser"] = "chrome-cli open"
 
 -- Set the search backend here.
--- `telescope` is sufficient for most use cases.
--- `fzf` is faster for large repositories but requires the fzf binary.
+-- `telescope` is fine for most use cases.
+-- `fzf` is faster for large repos but needs the `fzf` binary in $PATH.
+-- If missing, errors are expected until the binary is installed.
 ---@type "telescope"|"fzf"
 settings["search_backend"] = "telescope"
 
@@ -115,11 +117,12 @@ settings["lsp_inlayhints"] = false
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
+	"gopls",
 	"html",
 	"jsonls",
 	"lua_ls",
-	"pylsp",
-	"gopls",
+	"ruff",
+	"zuban",
 }
 
 -- General-purpose sources for none-ls to install during bootstrap.
@@ -157,7 +160,6 @@ settings["treesitter_deps"] = {
 	"html",
 	"javascript",
 	"json",
-	"jsonc",
 	"latex",
 	"lua",
 	"make",

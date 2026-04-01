@@ -1,9 +1,16 @@
+---@diagnostic disable: undefined-global
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
 local et = bind.escape_termcode
+local helpers = require("keymap.helpers")
+
+local ts_to_select = require("nvim-treesitter-textobjects.select")
+local ts_to_swap = require("nvim-treesitter-textobjects.swap")
+local ts_to_move = require("nvim-treesitter-textobjects.move")
+local ts_to_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
 
 local mappings = {
 	builtins = {
@@ -44,7 +51,7 @@ local mappings = {
 		["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
 		["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),
 		["n|<Esc>"] = map_callback(function()
-				_flash_esc_or_noh()
+				helpers.flash_esc_or_noh()
 			end)
 			:with_noremap()
 			:with_silent()
@@ -133,6 +140,102 @@ local mappings = {
 
 		-- Plugin: suda.vim
 		["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
+
+		-- Plugin: nvim-treesitter-textobjects
+		-- Text objects: select
+		["xo|af"] = map_callback(function()
+				ts_to_select.select_textobject("@function.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editxo: Select function.outer"),
+		["xo|if"] = map_callback(function()
+				ts_to_select.select_textobject("@function.inner", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editxo: Select function.inner"),
+		["xo|ac"] = map_callback(function()
+				ts_to_select.select_textobject("@class.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editxo: Select class.outer"),
+		["xo|ic"] = map_callback(function()
+				ts_to_select.select_textobject("@class.inner", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editoxo: Select class.inner"),
+		-- Text objects: swap
+		["n|<leader>a"] = map_callback(function()
+				ts_to_swap.swap_next("@parameter.inner")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editn: Swap parameter.inner"),
+		["n|<leader>A"] = map_callback(function()
+				ts_to_swap.swap_next("@parameter.outer")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editn: Swap parameter.outer"),
+		-- Text objects: move
+		["nxo|]["] = map_callback(function()
+				ts_to_move.goto_next_start("@function.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to next function.outer start"),
+		["nxo|]m"] = map_callback(function()
+				ts_to_move.goto_next_start("@class.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to next class.outer start"),
+		["nxo|]]"] = map_callback(function()
+				ts_to_move.goto_next_end("@function.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to next function.outer end"),
+		["nxo|]M"] = map_callback(function()
+				ts_to_move.goto_next_end("@class.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to next class.outer end"),
+		["nxo|[["] = map_callback(function()
+				ts_to_move.goto_previous_start("@function.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to previous function.outer start"),
+		["nxo|[m"] = map_callback(function()
+				ts_to_move.goto_previous_start("@class.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to previous class.outer start"),
+		["nxo|[]"] = map_callback(function()
+				ts_to_move.goto_previous_end("@function.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to previous function.outer end"),
+		["nxo|[M"] = map_callback(function()
+				ts_to_move.goto_previous_end("@class.outer", "textobjects")
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Move to previous class.outer end"),
+		-- movements repeat
+		["nxo|;"] = map_callback(function()
+				ts_to_repeat_move.repeat_last_move_next()
+			end)
+			:with_silent()
+			:with_noremap()
+			:with_desc("editnxo: Repeat last move"),
 	},
 }
 

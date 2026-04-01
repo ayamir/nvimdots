@@ -2,7 +2,7 @@ local completion = {}
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "CursorHold", "CursorHoldI" },
 	config = require("completion.lsp"),
 	dependencies = {
 		{ "mason-org/mason.nvim" },
@@ -19,11 +19,6 @@ completion["nvimdev/lspsaga.nvim"] = {
 	event = "LspAttach",
 	config = require("completion.lspsaga"),
 	dependencies = "nvim-tree/nvim-web-devicons",
-}
-completion["DNLHC/glance.nvim"] = {
-	lazy = true,
-	event = "LspAttach",
-	config = require("completion.glance"),
 }
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
 	lazy = false,

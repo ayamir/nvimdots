@@ -1,41 +1,117 @@
-name: update lockfile
+---
+name: "lazy-lock: update lazy.nvim dependencies (Verified)"
 on:
-  # Scheduled update (each day)
-  schedule: [{ cron: "30 01 * * *" }]
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    # Scheduled update (each day)
+    - cron: 30 01 * * *
+
+env:
+  BRANCH: "main"
+  COMMIT_MESSAGE: "chore(lockfile): auto update lazy-lock.json"
 
 jobs:
   update-lockfile:
     if: github.repository_owner == 'ayamir'
-    runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Required to count the commits
-      - uses: andstor/file-existence-action@v3
+
+      - name: Check if lockfile existed
+        uses: andstor/file-existence-action@v3
         id: check_lockfile
         with:
           files: "lazy-lock.json"
+
       - name: Run count-new-commits
+        id: new-commits
         run: |
-          echo "NEW_COMMIT_COUNT=$(git log --oneline --since '24 hours ago' --perl-regexp --author='^((?!github-actions).*)$' | wc -l)" >> "$GITHUB_ENV"
-      - uses: rhysd/action-setup-vim@v1
-        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+          echo "new_commit_count=$(git log --oneline --since '24 hours ago' --perl-regexp --author='^((?!github-actions).*)$' | wc -l)" >> "$GITHUB_OUTPUT"
+
+      - name: Setup neovim
+        uses: rhysd/action-setup-vim@v1
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && steps.new-commits.outputs.new_commit_count > 0 }}
         with:
           neovim: true
-      - name: Run lockfile-autoupdate
-        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+
+      - name: Run lazy update
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && steps.new-commits.outputs.new_commit_count > 0 }}
         timeout-minutes: 5
         run: |
           ./scripts/install.sh
           nvim --headless "+Lazy! update" +qa
           cp -pv "${HOME}/.config/nvim/lazy-lock.json" .
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && env.NEW_COMMIT_COUNT > 0 }}
+
+      - name: Detect modified files
+        if: ${{ steps.check_lockfile.outputs.files_exists == 'true' && steps.new-commits.outputs.new_commit_count > 0 }}
+        id: diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          # List modified (tracked) files relative to HEAD.
+          # If you only want specific patterns, add a grep here (e.g., grep -E '(^|/)lazy-lock\.json$').
+          mapfile -t changed < <(git ls-files -m --full-name)
+
+          if [ "${#changed[@]}" -eq 0 ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "changed_files=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Join into a comma-separated string for downstream steps.
+          IFS=',' read -r -a _ <<< ""
+          changed_csv="$(printf "%s," "${changed[@]}")"
+          changed_csv="${changed_csv%,}"
+
+          echo "Changed files:"
+          printf ' - %s\n' "${changed[@]}"
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "changed_files=${changed_csv}" >> "$GITHUB_OUTPUT"
+
+      - name: Commit via REST Contents API (server-signed ??Verified)
+        if: ${{ steps.diff.outputs.changed == 'true' && steps.new-commits.outputs.new_commit_count > 0 }}
+        uses: actions/github-script@v8
+        env:
+          CHANGED_FILES: ${{ steps.diff.outputs.changed_files }}
         with:
-          commit_message: "chore(lockfile): auto update lazy-lock.json"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
-          commit_author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
-          file_pattern: "lazy-lock.json"
+          script: |
+            const fs = require('fs');
+            const owner   = context.repo.owner;
+            const repo    = context.repo.repo;
+            const branch  = process.env.BRANCH;
+            const message = process.env.COMMIT_MESSAGE;
+
+            const files = (process.env.CHANGED_FILES || '')
+              .split(',')
+              .map(s => s.trim())
+              .filter(Boolean);
+
+            for (const path of files) {
+              const content = fs.readFileSync(path, { encoding: 'base64' });
+
+              // Get existing sha if the file already exists
+              let sha;
+              try {
+                const res = await github.rest.repos.getContent({ owner, repo, path, ref: branch });
+                if (!Array.isArray(res.data)) sha = res.data.sha;
+              } catch (e) {
+                if (e.status !== 404) throw e;
+              }
+
+              // NOTE: author/committer intentionally omitted to allow platform signing
+              const r = await github.rest.repos.createOrUpdateFileContents({
+                owner, repo, path, branch,
+                message,
+                content,
+                sha
+              });
+              core.info(`Committed ${path}: ${r.data.commit.sha}`);
+            }
