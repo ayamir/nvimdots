@@ -2,8 +2,7 @@ return function()
 	vim.defer_fn(function()
 		require("modules.utils").load_plugin("copilot", {
 			cmp = {
-				enabled = true,
-				method = "getCompletionsCycling",
+				enabled = false,
 			},
 			panel = {
 				-- if true, it can interfere with completions in copilot-cmp

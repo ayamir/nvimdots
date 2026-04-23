@@ -37,25 +37,28 @@ completion["nvimtools/none-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
-completion["hrsh7th/nvim-cmp"] = {
+completion["saghen/blink.cmp"] = {
 	lazy = true,
-	event = "InsertEnter",
-	config = require("completion.cmp"),
+	version = "1.*",
+	event = { "InsertEnter", "CmdlineEnter" },
+	config = require("completion.blink"),
+	opts_extend = { "sources.default" },
 	dependencies = {
+		{ "saghen/blink.compat", version = "2.*", opts = {} },
 		{
 			"L3MON4D3/LuaSnip",
 			build = "make install_jsregexp",
 			config = require("completion.luasnip"),
 			dependencies = "rafamadriz/friendly-snippets",
 		},
-		{ "lukas-reineke/cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip" },
-		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "andersevenrud/cmp-tmux" },
-		{ "hrsh7th/cmp-path" },
 		{ "f3fora/cmp-spell" },
-		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
+		{
+			"fang2hou/blink-copilot",
+			cond = require("core.settings").use_copilot,
+			specs = { "zbirenbaum/copilot.lua" },
+		},
 	},
 }
 completion["zbirenbaum/copilot.lua"] = {
@@ -64,12 +67,6 @@ completion["zbirenbaum/copilot.lua"] = {
 	cmd = "Copilot",
 	event = "InsertEnter",
 	config = require("completion.copilot"),
-	dependencies = {
-		{
-			"zbirenbaum/copilot-cmp",
-			config = require("completion.copilot-cmp"),
-		},
-	},
 }
 
 return completion
