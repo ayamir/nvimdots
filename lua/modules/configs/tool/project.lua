@@ -28,6 +28,9 @@ return function()
 		show_hidden = false,
 		silent_chdir = true,
 		scope_chdir = "global",
-		datapath = vim.fn.stdpath("data"),
+		history = {
+			save_dir = vim.fn.stdpath("data"),
+			save_file = "project_history.json",
+		},
 	})
 end
