@@ -22,19 +22,6 @@ return function()
 		table.insert(sources_default, 1, "copilot")
 	end
 
-	local border = function(hl)
-		return {
-			{ "┌", hl },
-			{ "─", hl },
-			{ "┐", hl },
-			{ "│", hl },
-			{ "┘", hl },
-			{ "─", hl },
-			{ "└", hl },
-			{ "│", hl },
-		}
-	end
-
 	require("modules.utils").load_plugin("blink.cmp", {
 		snippets = { preset = "luasnip" },
 		cmdline = { enabled = true },
@@ -99,20 +86,29 @@ return function()
 				selection = { preselect = false, auto_insert = false },
 			},
 			menu = {
-				border = border("PmenuBorder"),
+				border = "single",
 				winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:PmenuSel",
 				scrollbar = false,
 				draw = {
+					padding = { 1, 1 },
 					columns = {
-						{ "kind_icon" },
 						{ "label", "label_description", gap = 1 },
+						{ "kind_icon" },
 						{ "kind", "source_name", gap = 1 },
 					},
 					components = {
 						kind_icon = {
 							text = function(ctx)
 								local lspkind_icons = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
-								return string.format(" %s  ", lspkind_icons[ctx.kind] or icons.cmp.undefined)
+								return lspkind_icons[ctx.kind] or icons.cmp.undefined
+							end,
+						},
+						kind = {
+							text = function(ctx)
+								return ctx.kind or ""
+							end,
+							highlight = function(ctx)
+								return ctx.kind
 							end,
 						},
 						label = {
@@ -135,8 +131,8 @@ return function()
 				auto_show = true,
 				auto_show_delay_ms = 200,
 				window = {
-					border = border("CmpDocBorder"),
-					winhighlight = "Normal:CmpDoc",
+					border = "single",
+					winhighlight = "Normal:CmpDoc,FloatBorder:CmpDocBorder",
 				},
 			},
 		},
