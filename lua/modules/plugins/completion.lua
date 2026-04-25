@@ -42,7 +42,6 @@ completion["saghen/blink.cmp"] = {
 	version = "1.*",
 	event = { "InsertEnter", "CmdlineEnter" },
 	config = require("completion.blink"),
-	opts_extend = { "sources.default" },
 	dependencies = {
 		{ "saghen/blink.compat", version = "2.*", opts = {} },
 		{
@@ -57,16 +56,18 @@ completion["saghen/blink.cmp"] = {
 		{
 			"fang2hou/blink-copilot",
 			cond = require("core.settings").use_copilot,
-			specs = { "zbirenbaum/copilot.lua" },
+			dependencies = {
+				{
+					"zbirenbaum/copilot.lua",
+					lazy = true,
+					cond = require("core.settings").use_copilot,
+					cmd = "Copilot",
+					event = "InsertEnter",
+					config = require("completion.copilot"),
+				},
+			},
 		},
 	},
-}
-completion["zbirenbaum/copilot.lua"] = {
-	lazy = true,
-	cond = require("core.settings").use_copilot,
-	cmd = "Copilot",
-	event = "InsertEnter",
-	config = require("completion.copilot"),
 }
 
 return completion

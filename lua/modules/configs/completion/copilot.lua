@@ -1,15 +1,12 @@
 return function()
 	vim.defer_fn(function()
 		require("modules.utils").load_plugin("copilot", {
-			cmp = {
-				enabled = false,
-			},
 			panel = {
-				-- if true, it can interfere with completions in copilot-cmp
+				-- if true, it can interfere with completions in blink-copilot
 				enabled = false,
 			},
 			suggestion = {
-				-- if true, it can interfere with completions in copilot-cmp
+				-- if true, it can interfere with completions in blink-copilot
 				enabled = false,
 			},
 			filetypes = {
