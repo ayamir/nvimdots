@@ -9,35 +9,86 @@ return function()
 	local source_labels = {
 		copilot = "[CPLT]",
 		buffer = "[BUF]",
+		lazydev = "[LAZY]",
 		lsp = "[LSP]",
 		path = "[PATH]",
+		ripgrep = "[RG]",
 		tmux = "[TMUX]",
 		latex_symbols = "[LTEX]",
 		snippets = "[SNIP]",
 		spell = "[SPELL]",
 	}
 
-	local sources_default = { "lsp", "snippets", "path", "buffer", "spell", "tmux", "latex_symbols" }
+	local sources_default =
+		{ "lazydev", "lsp", "snippets", "path", "buffer", "ripgrep", "spell", "tmux", "latex_symbols" }
 	if use_copilot then
 		table.insert(sources_default, 1, "copilot")
 	end
 
 	require("modules.utils").load_plugin("blink.cmp", {
 		snippets = { preset = "luasnip" },
-		cmdline = { enabled = true },
+		cmdline = {
+			enabled = true,
+			sources = function()
+				local type = vim.fn.getcmdtype()
+				if type == "/" or type == "?" then
+					return { "buffer" }
+				end
+				if type == ":" or type == "@" then
+					return { "cmdline", "path" }
+				end
+				return {}
+			end,
+			completion = {
+				list = { selection = { preselect = true, auto_insert = true } },
+				menu = {
+					auto_show = true,
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind", gap = 1 },
+							{ "source_name" },
+						},
+					},
+				},
+				ghost_text = { enabled = false },
+			},
+		},
+		term = { enabled = false },
 		appearance = { nerd_font_variant = "normal" },
-		fuzzy = { implementation = "prefer_rust" },
+		fuzzy = { implementation = "prefer_rust_with_warning" },
 
 		sources = {
 			default = sources_default,
 			providers = {
 				lsp = { max_items = 350 },
+				lazydev = {
+					module = "lazydev.integrations.blink",
+					name = "LazyDev",
+					score_offset = 100,
+				},
 				buffer = {
 					opts = {
 						get_bufnrs = function()
 							return vim.api.nvim_buf_line_count(0) < 15000 and vim.api.nvim_list_bufs() or {}
 						end,
 					},
+				},
+				ripgrep = {
+					module = "blink-ripgrep",
+					name = "Ripgrep",
+					opts = {
+						prefix_min_len = 2,
+						backend = {
+							use = "ripgrep",
+							ripgrep = {
+								context_size = 5,
+								max_filesize = "1M",
+							},
+						},
+					},
+					score_offset = -15,
+					max_items = 3,
 				},
 				copilot = {
 					name = "Copilot",
@@ -80,6 +131,21 @@ return function()
 		},
 
 		completion = {
+			keyword = {
+				range = "full",
+			},
+			accept = {
+				auto_brackets = {
+					enabled = true,
+					kind_resolution = {
+						enabled = true,
+					},
+					semantic_token_resolution = {
+						enabled = true,
+						blocked_filetypes = { "java" },
+					},
+				},
+			},
 			ghost_text = { enabled = false },
 			list = {
 				max_items = 120,
@@ -113,9 +179,10 @@ return function()
 						},
 						label = {
 							text = function(ctx)
-								local label = ctx.label
-								local truncated = vim.fn.strcharpart(label, 0, 80)
-								return truncated ~= label and (truncated .. "...") or label
+								return require("colorful-menu").blink_components_text(ctx)
+							end,
+							highlight = function(ctx)
+								return require("colorful-menu").blink_components_highlight(ctx)
 							end,
 						},
 						source_name = {
@@ -130,10 +197,22 @@ return function()
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 200,
+				treesitter_highlighting = true,
 				window = {
 					border = "single",
 					winhighlight = "Normal:CmpDoc,FloatBorder:CmpDocBorder",
 				},
+			},
+		},
+		signature = {
+			enabled = true,
+			trigger = {
+				show_on_insert = true,
+			},
+			window = {
+				border = "single",
+				treesitter_highlighting = true,
+				show_documentation = true,
 			},
 		},
 	})

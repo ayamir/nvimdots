@@ -8,10 +8,6 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "mason-org/mason.nvim" },
 		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neoconf.nvim" },
-		{
-			"Jint-lzxy/lsp_signature.nvim",
-			config = require("completion.lsp-signature"),
-		},
 	},
 }
 completion["nvimdev/lspsaga.nvim"] = {
@@ -53,6 +49,8 @@ completion["saghen/blink.cmp"] = {
 		{ "andersevenrud/cmp-tmux" },
 		{ "f3fora/cmp-spell" },
 		{ "kdheepak/cmp-latex-symbols" },
+		{ "mikavilpas/blink-ripgrep.nvim" },
+		{ "xzbdmw/colorful-menu.nvim" },
 		{
 			"fang2hou/blink-copilot",
 			cond = require("core.settings").use_copilot,
@@ -68,6 +66,16 @@ completion["saghen/blink.cmp"] = {
 			},
 		},
 	},
+	opts_extend = { "sources.default" },
+}
+
+completion["folke/lazydev.nvim"] = {
+	lazy = true,
+	ft = "lua",
+	dependencies = {
+		{ "Bilal2453/luvit-meta", lazy = true },
+	},
+	config = require("completion.lazydev"),
 }
 
 return completion
