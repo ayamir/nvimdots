@@ -18,9 +18,8 @@ M.setup = function()
 		update_in_insert = false,
 	})
 
-	local blink_ok, blink = pcall(require, "blink.cmp")
 	local opts = {
-		capabilities = blink_ok and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities(),
+		capabilities = require("modules.utils").get_lsp_capabilities(),
 	}
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
