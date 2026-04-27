@@ -8,10 +8,6 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "mason-org/mason.nvim" },
 		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neoconf.nvim" },
-		{
-			"Jint-lzxy/lsp_signature.nvim",
-			config = require("completion.lsp-signature"),
-		},
 	},
 }
 completion["nvimdev/lspsaga.nvim"] = {
@@ -37,39 +33,49 @@ completion["nvimtools/none-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
-completion["hrsh7th/nvim-cmp"] = {
+completion["saghen/blink.cmp"] = {
 	lazy = true,
-	event = "InsertEnter",
-	config = require("completion.cmp"),
+	version = "1.*",
+	event = { "InsertEnter", "CmdlineEnter" },
+	config = require("completion.blink"),
 	dependencies = {
+		{ "saghen/blink.compat", version = "2.*", opts = {} },
 		{
 			"L3MON4D3/LuaSnip",
 			build = "make install_jsregexp",
 			config = require("completion.luasnip"),
 			dependencies = "rafamadriz/friendly-snippets",
 		},
-		{ "lukas-reineke/cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip" },
-		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "andersevenrud/cmp-tmux" },
-		{ "hrsh7th/cmp-path" },
 		{ "f3fora/cmp-spell" },
-		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
-	},
-}
-completion["zbirenbaum/copilot.lua"] = {
-	lazy = true,
-	cond = require("core.settings").use_copilot,
-	cmd = "Copilot",
-	event = "InsertEnter",
-	config = require("completion.copilot"),
-	dependencies = {
+		{ "mikavilpas/blink-ripgrep.nvim" },
+		{ "xzbdmw/colorful-menu.nvim" },
 		{
-			"zbirenbaum/copilot-cmp",
-			config = require("completion.copilot-cmp"),
+			"fang2hou/blink-copilot",
+			cond = require("core.settings").use_copilot,
+			dependencies = {
+				{
+					"zbirenbaum/copilot.lua",
+					lazy = true,
+					cond = require("core.settings").use_copilot,
+					cmd = "Copilot",
+					event = "InsertEnter",
+					config = require("completion.copilot"),
+				},
+			},
 		},
 	},
+	opts_extend = { "sources.default" },
+}
+
+completion["folke/lazydev.nvim"] = {
+	lazy = true,
+	ft = "lua",
+	dependencies = {
+		{ "Bilal2453/luvit-meta", lazy = true },
+	},
+	config = require("completion.lazydev"),
 }
 
 return completion
