@@ -73,6 +73,9 @@ return function()
 							return vim.api.nvim_buf_line_count(0) < 15000 and vim.api.nvim_list_bufs() or {}
 						end,
 					},
+				enabled = function()
+					return vim.bo.filetype == "lua"
+				end,
 				},
 				ripgrep = {
 					module = "blink-ripgrep",
