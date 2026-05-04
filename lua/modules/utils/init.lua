@@ -332,6 +332,12 @@ function M.extend_config(config, user_config)
 	local ok, extras = pcall(require, user_config)
 	if ok and type(extras) == "table" then
 		config = tbl_recursive_merge(config, extras)
+	elseif not ok and type(extras) == "string" and not extras:find("module .* not found") then
+		vim.notify(
+			string.format("[utils] Error loading %s: %s", user_config, extras),
+			vim.log.levels.ERROR,
+			{ title = "[utils] Runtime Error" }
+		)
 	end
 	return config
 end
