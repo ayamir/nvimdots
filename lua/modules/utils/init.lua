@@ -112,7 +112,7 @@ local function set_global_hl(name, foreground, background, italic)
 		fg = foreground,
 		bg = background,
 		italic = italic == true,
-		default = not vim.g.colors_name:find("catppuccin"),
+		default = not (vim.g.colors_name or ""):find("catppuccin"),
 	})
 end
 
@@ -306,8 +306,8 @@ end
 
 --- Function to recursively merge src into dst
 --- Unlike vim.tbl_deep_extend(), this function extends if the original value is a list
----@paramm dst table @Table which will be modified and appended to
----@paramm src table @Table from which values will be inserted
+---@param dst table @Table which will be modified and appended to
+---@param src table @Table from which values will be inserted
 ---@return table @Modified table
 local function tbl_recursive_merge(dst, src)
 	for key, value in pairs(src) do
