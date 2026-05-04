@@ -87,9 +87,6 @@ completion["saghen/blink.cmp"] = {
 completion["folke/lazydev.nvim"] = {
 	lazy = true,
 	ft = "lua",
-	dependencies = {
-		{ "Bilal2453/luvit-meta", lazy = true },
-	},
 	config = require("completion.lazydev"),
 }
 
