@@ -169,7 +169,7 @@ local opts = {
 					kind_icon = {
 						text = function(ctx)
 							local lspkind_icons = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
-							return lspkind_icons[ctx.kind] or icons.cmp.undefined
+							return icons.cmp[ctx.source_id] or lspkind_icons[ctx.kind] or icons.cmp.undefined
 						end,
 					},
 					kind = {
