@@ -182,7 +182,7 @@ function M.format(opts)
 
 		-- Fall back to format the whole buffer (even if partial formatting failed)
 		local params = vim.lsp.util.make_formatting_params(opts.formatting_options)
-		local result, err = client.request_sync("textDocument/formatting", params, timeout_ms, bufnr)
+		local result, err = client:request_sync("textDocument/formatting", params, timeout_ms, bufnr)
 		if result and result.result then
 			vim.lsp.util.apply_text_edits(result.result, bufnr, client.offset_encoding)
 			if format_notify then
