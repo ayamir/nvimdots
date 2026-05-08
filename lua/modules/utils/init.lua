@@ -112,7 +112,7 @@ local function set_global_hl(name, foreground, background, italic)
 		fg = foreground,
 		bg = background,
 		italic = italic == true,
-		default = not vim.g.colors_name:find("catppuccin"),
+		default = not (vim.g.colors_name or ""):find("catppuccin"),
 	})
 end
 
@@ -263,6 +263,16 @@ function M.gen_cursorword_hl()
 	set_global_hl("MiniCursorwordCurrent", nil)
 end
 
+---Get LSP capabilities merged with blink.cmp capabilities.
+---@return lsp.ClientCapabilities
+function M.get_lsp_capabilities()
+	return vim.tbl_deep_extend(
+		"force",
+		vim.lsp.protocol.make_client_capabilities(),
+		require("blink.cmp").get_lsp_capabilities({}, false)
+	)
+end
+
 ---Setup and enable a language server in one call.
 ---@param server string @Name of the language server
 ---@param config? vim.lsp.Config @Optional config to apply
@@ -296,8 +306,8 @@ end
 
 --- Function to recursively merge src into dst
 --- Unlike vim.tbl_deep_extend(), this function extends if the original value is a list
----@paramm dst table @Table which will be modified and appended to
----@paramm src table @Table from which values will be inserted
+---@param dst table @Table which will be modified and appended to
+---@param src table @Table from which values will be inserted
 ---@return table @Modified table
 local function tbl_recursive_merge(dst, src)
 	for key, value in pairs(src) do
@@ -322,6 +332,12 @@ function M.extend_config(config, user_config)
 	local ok, extras = pcall(require, user_config)
 	if ok and type(extras) == "table" then
 		config = tbl_recursive_merge(config, extras)
+	elseif not ok and type(extras) == "string" and not extras:find("module .* not found") then
+		vim.notify(
+			string.format("[utils] Error loading %s: %s", user_config, extras),
+			vim.log.levels.ERROR,
+			{ title = "[utils] Runtime Error" }
+		)
 	end
 	return config
 end

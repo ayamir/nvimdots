@@ -195,6 +195,7 @@ local data = {
 		tmux = "",
 		treesitter = "",
 		undefined = "",
+		ripgrep = "󱎸",
 	},
 	dap = {
 		Breakpoint = "󰝥",

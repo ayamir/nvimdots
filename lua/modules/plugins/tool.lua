@@ -66,12 +66,6 @@ tool["folke/which-key.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
-tool["gelguy/wilder.nvim"] = {
-	lazy = true,
-	event = "CmdlineEnter",
-	config = require("tool.wilder"),
-	dependencies = "romgrk/fzy-lua-native",
-}
 if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
 		lazy = true,
