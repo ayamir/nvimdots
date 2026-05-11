@@ -8,21 +8,100 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
+-- Default secret source for AI adapters. Set this to an environment variable
+-- name or a `cmd:` command, not a raw API key value.
+-- Examples:
+--   "AIAPI_KEY"
+--   "cmd:op read op://personal/OpenRouter/api-key --no-newline"
+---@type string|fun(): string
+settings["ai_api_key"] = "AI_API_KEY"
+
+-- Shared AI adapters for CodeCompanion and OpenAI-compatible edit prediction.
+-- Adapter `api_key` is optional; when omitted, `ai_api_key` is used.
+---@type table<string, table>
+settings["ai_adapters"] = {
+	openrouter = {
+		type = "openai-compatible",
+		name = "OpenRouter",
+		base_url = "https://openrouter.ai/api",
+		chat_url = "/v1/chat/completions",
+		models = {
+			"moonshotai/kimi-k2:free",
+			"qwen/qwen3-coder:free",
+			"deepseek/deepseek-chat-v3-0324:free",
+			"deepseek/deepseek-r1:free",
+			"google/gemma-3-27b-it:free",
+			"openai/codex-mini",
+			"openai/gpt-4.1-mini",
+			"google/gemini-2.5-flash-lite",
+			"google/gemini-2.5-flash",
+			"anthropic/claude-3.7-sonnet",
+			"anthropic/claude-sonnet-4",
+		},
+		default_model = "moonshotai/kimi-k2:free",
+		optional = {
+			-- Disable thinking/reasoning for OpenRouter models if needed:
+			-- reasoning = { effort = "none" },
+		},
+	},
+	opencode = {
+		type = "openai-compatible",
+		name = "Opencode",
+		base_url = "https://opencode.ai/zen/go",
+		chat_url = "/v1/chat/completions",
+		models = {
+			"deepseek-v4-flash",
+			"deepseek-v4-pro",
+			"qwen3.5-plus",
+			"qwen3.6-plus",
+			"kimi-k2.5",
+			"kimi-k2.6",
+			"mimo-v2.5",
+			"mimo-v2.5-pro",
+			"minimax-m2.7",
+			"minimax-m2.5",
+			"glm-5.1",
+		},
+		default_model = "deepseek-v4-pro",
+		optional = {
+			-- Disable thinking for DeepSeek-compatible APIs if needed:
+			-- thinking = { type = "disabled" },
+		},
+	},
+	openai = {
+		type = "builtin",
+		adapter = "openai",
+		name = "OpenAI",
+		api_key = "OPENAI_API_KEY",
+		models = { "gpt-4.1-mini", "gpt-5-mini" },
+		default_model = "gpt-4.1-mini",
+		optional = {
+			-- Disable reasoning for OpenAI reasoning models if needed:
+			-- reasoning_effort = "none",
+		},
+	},
+}
+
+-- Default CodeCompanion adapter. Must be a key in `ai_adapters`.
+-- The hyphenated key `codecompanion-adapter` is also accepted in user settings.
+---@type string
+settings["codecompanion_adapter"] = "openrouter"
+
 -- Completion prediction backend.
 -- Valid values: `copilot`, `oai-compatible`.
 -- The hyphenated key `edit-prediction-source` is also accepted in user settings.
 ---@type "copilot"|"oai-compatible"
-settings["edit_prediction_source"] = "copilot"
+settings["edit_prediction_source"] = "oai-compatible"
 
--- OpenAI-compatible chat completions endpoint for Minuet completion prediction.
--- The hyphenated key `openai-endpoint` is also accepted in user settings.
+-- Default adapter for OpenAI-compatible edit prediction. Must be a key in `ai_adapters`.
+-- The hyphenated key `pred-adapter` is also accepted in user settings.
 ---@type string
-settings["openai_endpoint"] = "https://openrouter.ai/api/v1/chat/completions"
+settings["pred_adapter"] = "opencode"
 
 -- Model used by OpenAI-compatible Minuet completion prediction.
 -- The hyphenated key `pred-model` is also accepted in user settings.
 ---@type string
-settings["pred_model"] = "deepseek/deepseek-v4-flash"
+settings["pred_model"] = "deepseek-v4-flash"
 
 -- Extra OpenAI-compatible request parameters for Minuet completion prediction.
 -- The hyphenated key `pred-optional-params` is also accepted in user settings.
@@ -36,7 +115,9 @@ settings["pred_model"] = "deepseek/deepseek-v4-flash"
 --   { max_tokens = 128 }
 ---@type table
 settings["pred_optional_params"] = {
+	top_p = 0.9,
 	max_tokens = 128,
+	{ thinking = { type = "disabled" } },
 }
 
 -- Set to false if you don't want to format on save.
