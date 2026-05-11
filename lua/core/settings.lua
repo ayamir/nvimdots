@@ -8,6 +8,37 @@ settings["use_ssh"] = true
 ---@type boolean
 settings["use_copilot"] = true
 
+-- Completion prediction backend.
+-- Valid values: `copilot`, `oai-compatible`.
+-- The hyphenated key `edit-prediction-source` is also accepted in user settings.
+---@type "copilot"|"oai-compatible"
+settings["edit_prediction_source"] = "copilot"
+
+-- OpenAI-compatible chat completions endpoint for Minuet completion prediction.
+-- The hyphenated key `openai-endpoint` is also accepted in user settings.
+---@type string
+settings["openai_endpoint"] = "https://openrouter.ai/api/v1/chat/completions"
+
+-- Model used by OpenAI-compatible Minuet completion prediction.
+-- The hyphenated key `pred-model` is also accepted in user settings.
+---@type string
+settings["pred_model"] = "deepseek/deepseek-v4-flash"
+
+-- Extra OpenAI-compatible request parameters for Minuet completion prediction.
+-- The hyphenated key `pred-optional-params` is also accepted in user settings.
+--
+-- Examples for disabling thinking/reasoning:
+--   OpenRouter: { reasoning = { effort = "none" } }
+--   OpenCode go: { thinking = { type = "disabled" } }
+--   OpenAI reasoning APIs: { reasoning_effort = "none" }
+--
+-- You may also set completion limits here, for example:
+--   { max_tokens = 128 }
+---@type table
+settings["pred_optional_params"] = {
+	max_tokens = 128,
+}
+
 -- Set to false if you don't want to format on save.
 ---@type boolean
 settings["format_on_save"] = true
@@ -234,33 +265,5 @@ settings["use_chat"] = true
 -- Set the language to use for AI chat response here.
 --- @type string
 settings["chat_lang"] = "English"
-
--- Set environment variable here to read API key for AI chat.
--- or you can set it to a command that reads the API key from your password manager.
--- e.g. "cmd:op read op://personal/OpenAI/credential --no-new
---- @type string
-settings["chat_api_key"] = "CODE_COMPANION_KEY"
-
--- Set the chat models here and use the first entry as default model.
--- We use `openrouter` as the chat model provider by default (No vested interest).
--- You need to register an account on openrouter and generate an api key.
--- We read the api key by reading the env variable: `CODE_COMPANION_KEY`.
--- All available models can be found here: https://openrouter.ai/models.
---- @type string[]
-settings["chat_models"] = {
-	-- free models
-	"moonshotai/kimi-k2:free", -- default
-	"qwen/qwen3-coder:free",
-	"deepseek/deepseek-chat-v3-0324:free",
-	"deepseek/deepseek-r1:free",
-	"google/gemma-3-27b-it:free",
-	-- paid models
-	"openai/codex-mini",
-	"openai/gpt-4.1-mini",
-	"google/gemini-2.5-flash-lite",
-	"google/gemini-2.5-flash",
-	"anthropic/claude-3.7-sonnet",
-	"anthropic/claude-sonnet-4",
-}
 
 return require("modules.utils").extend_config(settings, "user.settings")
