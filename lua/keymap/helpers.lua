@@ -53,7 +53,7 @@ M.toggle_virtuallines = function()
 	require("tiny-inline-diagnostic").toggle()
 	vim.notify(
 		"Virtual lines are now "
-			.. (require("tiny-inline-diagnostic.diagnostic").user_toggle_state and "displayed" or "hidden"),
+			.. (require("tiny-inline-diagnostic.state").user_toggle_state and "displayed" or "hidden"),
 		vim.log.levels.INFO,
 		{ title = "LSP Diagnostic" }
 	)

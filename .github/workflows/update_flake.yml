@@ -61,7 +61,7 @@ jobs:
 
       - name: Commit via REST Contents API (server-signed ??Verified)
         if: steps.diff.outputs.changed == 'true'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         env:
           CHANGED_FILES: ${{ steps.diff.outputs.changed_files }}
         with:
