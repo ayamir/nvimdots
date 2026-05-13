@@ -81,12 +81,13 @@ local opts = {
 				module = "blink-ripgrep",
 				name = "Ripgrep",
 				opts = {
-					prefix_min_len = 2,
+					prefix_min_len = 3,
 					backend = {
-						use = "ripgrep",
+						use = "gitgrep-or-ripgrep",
 						ripgrep = {
-							context_size = 5,
-							max_filesize = "1M",
+							max_filesize = "200K",
+							context_size = 3,
+							additional_rg_options = { "--max-count=5" },
 						},
 					},
 				},
