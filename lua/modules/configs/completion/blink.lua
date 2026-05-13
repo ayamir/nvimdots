@@ -84,9 +84,9 @@ local opts = {
 					prefix_min_len = 3,
 					backend = {
 						use = "gitgrep-or-ripgrep",
-						context_size = 0,
 						ripgrep = {
 							max_filesize = "200K",
+							context_size = 3,
 							additional_rg_options = { "--max-count=5" },
 						},
 					},
