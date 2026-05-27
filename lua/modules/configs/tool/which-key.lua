@@ -61,7 +61,7 @@ return function()
 			},
 		},
 		spec = {
-			{ "<leader>g", group = icons.git.Git .. "Git" },
+			{ "<leader>g", group = icons.git.Git .. "gtags&Git" },
 			{ "<leader>d", group = icons.ui.Bug .. " Debug" },
 			{ "<leader>s", group = icons.cmp.tmux .. "Session" },
 			{ "<leader>b", group = icons.ui.Buffer .. " Buffer" },

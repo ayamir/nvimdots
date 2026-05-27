@@ -18,7 +18,7 @@ return function()
 			scroll_strategy = "limit",
 			results_title = false,
 			layout_strategy = "flex",
-			path_display = { "absolute" },
+			path_display = { "filename_first", "smart" },
 			selection_strategy = "reset",
 			color_devicons = true,
 			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },

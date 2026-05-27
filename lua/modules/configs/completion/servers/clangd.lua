@@ -82,6 +82,7 @@ return function(defaults)
 			"--limit-references=1000",
 			"--limit-results=300",
 			"--pch-storage=memory",
+			"--compile-commands-dir=.",
 		},
 		on_attach = function(client, bufnr)
 			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeader", function()

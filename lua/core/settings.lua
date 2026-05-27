@@ -6,11 +6,11 @@ settings["use_ssh"] = true
 
 -- Set to false if you don't use Copilot.
 ---@type boolean
-settings["use_copilot"] = true
+settings["use_copilot"] = false
 
 -- Set to false if you don't want to format on save.
 ---@type boolean
-settings["format_on_save"] = true
+settings["format_on_save"] = false
 
 -- Format timeout in milliseconds.
 ---@type number
@@ -117,7 +117,7 @@ settings["lsp_inlayhints"] = false
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
-	"gopls",
+--	"gopls",
 	"html",
 	"jsonls",
 	"lua_ls",
@@ -160,6 +160,7 @@ settings["treesitter_deps"] = {
 	"html",
 	"javascript",
 	"json",
+	"jsonc",
 	"latex",
 	"lua",
 	"make",

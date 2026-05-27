@@ -1,0 +1,911 @@
+From 57db8b53239a501953ea65dccff88476f7e3abf9 Mon Sep 17 00:00:00 2001
+From: limingming3 <limingming3@lixiang.com>
+Date: Mon, 5 Jan 2026 18:31:04 +0800
+Subject: [PATCH] my nvim config modify for v0.11 hash:14556e3
+
+Signed-off-by: limingming3 <limingming3@lixiang.com>
+---
+ init.lua                                      |   3 -
+ init.vim                                      | 393 ++++++++++++++++++
+ lua/core/settings.lua                         |   8 +-
+ lua/keymap/editor.lua                         |   6 +-
+ lua/keymap/tool.lua                           |   6 +-
+ lua/keymap/ui.lua                             |  14 +-
+ lua/lua-setup.lua                             |  65 +++
+ .../configs/completion/servers/clangd.lua     |   1 +
+ lua/modules/configs/tool/telescope.lua        |   2 +-
+ lua/modules/configs/tool/which-key.lua        |   2 +-
+ lua/modules/configs/ui/alpha.lua              |   2 +-
+ lua/modules/plugins/tool.lua                  | 191 ++++++++-
+ 12 files changed, 669 insertions(+), 24 deletions(-)
+ delete mode 100644 init.lua
+ create mode 100644 init.vim
+ create mode 100644 lua/lua-setup.lua
+
+diff --git a/init.lua b/init.lua
+deleted file mode 100644
+index 1544509..0000000
+--- a/init.lua
++++ /dev/null
+@@ -1,3 +0,0 @@
+-if not vim.g.vscode then
+-	require("core")
+-end
+diff --git a/init.vim b/init.vim
+new file mode 100644
+index 0000000..8e7de00
+--- /dev/null
++++ b/init.vim
+@@ -0,0 +1,393 @@
++lua require("core")
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 插件列表
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++""call plug#begin('~/.local/share/nvim/plugged')
++""
++""Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
++""Plug 'christoomey/vim-tmux-navigator'
++""Plug 'tmux-plugins/vim-tmux'
++""Plug 'liuchengxu/vista.vim'
++""Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
++""Plug 'junegunn/fzf.vim'
++""Plug 'szw/vim-maximizer'
++""Plug 'inkarkat/vim-ingo-library'
++""Plug 'inkarkat/vim-mark'
++""call plug#end()
++
++" 自动检查并安装缺失的插件
++""autocmd VimEnter *
++ ""        PlugInstall | q
++""augroup END
++""augroup PlugAutoCmdGroup
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 通用设置
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++let mapleader = " "      " 定义<leader>键
++let maplocalleader = "\\"      " 定义<localleader>键
++
++" set nocompatible         " 设置不兼容原始vi模式
++filetype on              " 设置开启文件类型侦测
++filetype plugin on       " 设置加载对应文件类型的插件
++set noeb                 " 关闭错误的提示
++syntax enable            " 开启语法高亮功能
++syntax on                " 自动语法高亮
++set t_Co=256             " 开启256色支持
++set cmdheight=2          " 设置命令行的高度
++set showcmd              " select模式下显示选中的行数
++set ruler                " 总是显示光标位置
++set laststatus=2         " 总是显示状态栏
++set number               " 开启行号显示
++set cursorline           " 高亮显示当前行
++set whichwrap+=<,>,h,l   " 设置光标键跨行
++set ttimeoutlen=0        " 设置<ESC>键响应时间
++set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
++set norelativenumber     " 相对行号
++set mouse=a              " 开启鼠标
++set cursorcolumn         " 设置光标所在列高亮
++highlight CursorColumn guibg=#66ff66
++highlight cursorline guibg=#66ff66
++set colorcolumn=72
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 代码缩进和排版
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++set autoindent           " 设置自动缩进
++set cindent              " 设置使用C/C++语言的自动缩进方式
++set cinoptions=g0,:0,N-s,(0    " 设置C/C++语言的具体缩进方式
++set smartindent          " 智能的选择对其方式
++filetype indent on       " 自适应不同语言的智能缩进
++set noexpandtab            " 将制表符扩展为空格
++set tabstop=8            " 设置编辑时制表符占用空格数
++set shiftwidth=8         " 设置格式化时制表符占用空格数
++set softtabstop=8        " 设置4个空格为制表符
++set smarttab             " 在行和段开始处使用制表符
++set backspace=2          " 使用回车键正常处理indent,eol,start等
++set sidescroll=10        " 设置向右滚动字符数
++set nofoldenable         " 禁用折叠代码
++" indentLine 开启代码对齐线
++let g:indentLine_enabled = 1
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 代码补全
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++set wildmenu             " vim自身命名行模式智能补全
++set completeopt-=preview " 补全时不显示窗口，只显示补全列表
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 搜索设置
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++set hlsearch            " 高亮显示搜索结果
++set incsearch           " 开启实时搜索功能
++set ignorecase          " 搜索时大小写不敏感
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 缓存设置
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++set nobackup            " 设置不备份
++set noswapfile          " 禁止生成临时文件
++set autoread            " 文件在vim之外修改过，自动重新读入
++set autowrite           " 设置自动保存
++set confirm             " 在处理未保存或只读文件的时候，弹出确认
++set wrap
++
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++" 编码设置
++"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
++set langmenu=zh_CN.UTF-8
++set helplang=cn
++" set termencoding=utf-8
++set encoding=utf8
++set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
++
++" 编辑vimrc相关配置文件
++nnoremap <leader>e :edit ~/.config/nvim/init.vim<cr>
++
++
++" 安装、更新、删除插件
++nnoremap <leader><leader>i :PlugInstall<cr>
++nnoremap <leader><leader>u :PlugUpdate<cr>
++" nnoremap <leader><leader>c :PlugClean<cr>
++
++" 分屏窗口移动
++nnoremap <c-j> <c-w>j
++nnoremap <c-k> <c-w>k
++nnoremap <c-h> <c-w>h
++nnoremap <c-l> <c-w>l
++
++" 复制当前选中到系统剪切板
++vmap <leader><leader>y "+y
++
++" 将系统剪切板内容粘贴到vim
++nnoremap <leader><leader>p "+p
++
++" vim-easymotion
++let g:EasyMotion_smartcase = 1
++
++
++" LeaderF
++"nnoremap <leader>f :LeaderfFile .<cr>
++let g:Lf_WildIgnore = {
++            \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
++            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
++            \}
++let g:Lf_UseCache = 0
++" Leaderf Settings
++let g:Lf_DefaultMode = "NameOnly"
++" don't show the help in normal mode
++let g:Lf_HideHelp = 1
++let g:Lf_UseCache = 0
++let g:Lf_UseVersionControlTool = 0
++let g:Lf_IgnoreCurrentBufferName = 1
++" Show icons, icons are shown by default
++let g:Lf_ShowDevIcons = 1
++" For GUI vim, the icon font can be specify like this, for example
++let g:Lf_DevIconsFont = "DroidSansM Nerd Font Mono"
++let g:Lf_QuickSelect = 1
++" popup mode
++let g:Lf_WindowPosition = 'popup'
++let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
++let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
++
++unmap <leader>f
++let g:Lf_ShortcutF = '<leader>ff'
++let g:Lf_ShortcutB = '<leader>fb'
++"" for vim-mark
++unmap <Leader>n
++nmap <Leader>M <Plug>MarkToggle
++nmap <Leader>N <Plug>MarkAllClear
++nmap <Leader>mc <Plug>MarkClear
++noremap <localleader>ff :<C-U><C-R>=printf("LeaderfFile %s", "")<CR><CR>
++noremap <localleader>f. :<C-U><C-R>=printf("LeaderfFile ./ %s", "")<CR><CR>
++noremap <localleader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
++noremap <localleader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
++noremap <localleader>ft :<C-U><C-R>=printf("LeaderfBufTagAll %s", "")<CR><CR>
++noremap <localleader>fc :<C-U><C-R>=printf("Leaderf cmdHistory %s", "")<CR><CR>
++noremap <localleader>fs :<C-U><C-R>=printf("Leaderf searchHistory %s", "")<CR><CR>
++noremap <localleader>fa :<C-U><C-R>=printf("Leaderf! rg --all-buffers %s",  expand("<cword>"))<CR><CR>
++noremap <localleader>fg :<C-U><C-R>=printf("Leaderf! rg -g \"*.c\" -g \"*.h\" -g \"*.cpp\"  %s",  expand("<cword>"))<CR><CR>
++noremap <localleader>fr :<C-U><C-R>=printf("LeaderfRgInteractive %s", "")<CR><CR>
++noremap <localleader>fo :<C-U>Leaderf! rg --recall<CR>
++
++noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>zz
++noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
++" should use `Leaderf gtags --update` first
++noremap <localleader>lfu :Leaderf gtags --update<CR>
++noremap <localleader>lfh :LeaderfHistoryCmd<CR>
++let g:Lf_GtagsAutoGenerate = 1
++let g:Lf_GtagsAutoUpdate = 1
++let g:Lf_Gtagslabel = 'native-pygments'
++noremap <leader>gr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
++noremap <leader>gb :<C-U><C-R>=printf("Leaderf! gtags --by-context --auto-jump %s", expand("<cword>"))<CR><CR>
++noremap <leader>gd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
++noremap <leader>gg :<C-U><C-R>=printf("Leaderf! gtags -g %s --auto-jump", expand("<cword>"))<CR><CR>
++noremap <leader>gs :<C-U><C-R>=printf("Leaderf! gtags -s %s --auto-jump", expand("<cword>"))<CR><CR>
++noremap <leader>go :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
++noremap <leader>gn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
++noremap <leader>gp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
++
++autocmd BufRead,BufNewFile *.py,*.js,*.html,*.css,*.c,*.h call CreateCtags()
++function! CreateCtags()
++    " 检测是否存在 ctags 命令
++    if !executable('ctags')
++        echo "ctags is not installed or not in the PATH"
++        return
++    endif
++
++    " 检测当前目录下是否存在 ctags 文件
++    if ((filereadable('.tags') || filereadable('../.tags') || filereadable('../../.tags') || filereadable('../../../.tags')) && !(filereadable('tags') || filereadable('../tags') || filereadable('../../tags') || filereadable('../../../tags') || filereadable('../../../../tags')))
++	" 使用 ctags 命令生成 tags 文件
++	let l:git_root = system('git rev-parse --show-toplevel')
++	if l:git_root =~ 'Not\ a\ git\ repository'
++		echo "Not a git repository, Generating ctags file in pwd..."
++		silent! AsyncRun '!ctags -a -R --exclude=.git --exclude=log .'
++	else
++		echo "Is a git repository, Generating ctags file in git root dir..."
++		:lcd `=l:git_root`
++		silent! AsyncRun '!ctags -a -R --exclude=.git --exclude=log `=l:git_root`'
++	endif
++    endif
++endfunction
++
++" Tmux settings
++let g:tmux_navigator_no_mappings = 1
++
++noremap <silent> {Left-Mapping} :<C-U>TmuxNavigateLeft<cr>
++noremap <silent> {Down-Mapping} :<C-U>TmuxNavigateDown<cr>
++noremap <silent> {Up-Mapping} :<C-U>TmuxNavigateUp<cr>
++noremap <silent> {Right-Mapping} :<C-U>TmuxNavigateRight<cr>
++noremap <silent> {Previous-Mapping} :<C-U>TmuxNavigatePrevious<cr>
++
++"系统剪贴板同步
++"set clipboard=unnamedplus
++set clipboard=
++" 支持在Visual模式下，通过C-y复制到系统剪切板
++vnoremap <C-y> "+y
++" 支持在normal模式下，通过A-p粘贴系统剪切板  shift+insert
++nnoremap <A-p> "*p
++inoremap <A-p> "*p
++
++inoremap <A-h> <Right>
++inoremap <A-j> <Down>
++inoremap <A-k> <Up>
++inoremap <A-l> <Right>
++inoremap <A-b> <ESC>I
++inoremap <A-e> <ESC>A
++
++
++inoremap <esc> <nop>
++inoremap <up> <nop>
++inoremap <down> <nop>
++inoremap <left> <nop>
++inoremap <right> <nop>
++
++noremap <C-j> 9j
++noremap <C-k> 9k
++
++""nnoremap y "+y
++""vnoremap y "+y
++
++nmap <leader><leader>s :w<cr>
++nmap <leader>q :bd<cr>
++nmap <leader>x :qa<cr>
++nmap <leader>bn :bn<cr>
++nmap <leader>bp :bp<cr>
++inoremap jj <Esc>
++
++nmap gb :Git blame<cr>
++
++" 禁用悬浮窗口,已经在lua/user/keymap/core.lua 中配置
++" autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
++
++"vista setting
++nnoremap <silent> <leader>v :Vista!!<cr>
++let g:vista_sidebar_width = 30
++" How each level is indented and what to prepend.
++" This could make the display more compact or more spacious.
++" e.g., more compact: ["▸ ", ""]
++" Note: this option only works for the kind renderer, not the tree renderer.
++let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
++
++" Executive used when opening vista sidebar without specifying it.
++" See all the avaliable executives via `:echo g:vista#executives`.
++" ['ale', 'coc', 'ctags', 'lcn', 'nvim_lsp', 'vim_lsc', 'vim_lsp']
++let g:vista_default_executive = 'nvim_lsp'
++
++" Set the executive for some filetypes explicitly. Use the explicit executive
++" instead of the default one for these filetypes when using `:Vista` without
++" specifying the executive.
++let g:vista_executive_for = {
++  \ 'cpp': 'nvim_lsp',
++  \ 'php': 'nvim_lsp',
++  \ }
++
++" Declare the command including the executable and options used to generate ctags output
++" for some certain filetypes.The file path will be appened to your custom command.
++" For example:
++let g:vista_ctags_cmd = {
++      \ 'haskell': 'hasktags -x -o - -c',
++      \ }
++
++" To enable fzf's preview window set g:vista_fzf_preview.
++" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
++" For example:
++let g:vista_fzf_preview = ['right:50%']
++
++" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
++let g:vista#renderer#enable_icon = 1
++
++" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
++let g:vista#renderer#icons = {
++\   "function": "\uf794",
++\   "variable": "\uf71b",
++\  }
++
++" fzf
++" Initialize configuration dictionary
++let g:fzf_vim = {}
++let g:fzf_vim.command_prefix = 'Fzf'
++" This is the default option:
++"   - Preview window on the right with 50% width
++"   - CTRL-/ will toggle preview window.
++" - Note that this array is passed as arguments to fzf#vim#with_preview function.
++" - To learn more about preview window options, see `--preview-window` section of `man fzf`.
++let g:fzf_vim.preview_window = ['right,50%', 'ctrl-/']
++
++" Preview window is hidden by default. You can toggle it with ctrl-/.
++" It will show on the right with 50% width, but if the width is smaller
++" than 70 columns, it will show above the candidate list
++let g:fzf_vim.preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
++
++" Empty value to disable preview window altogether
++let g:fzf_vim.preview_window = []
++
++" fzf.vim needs bash to display the preview window.
++" On Windows, fzf.vim will first see if bash is in $PATH, then if
++" Git bash (C:\Program Files\Git\bin\bash.exe) is available.
++" If you want it to use a different bash, set this variable.
++"   let g:fzf_vim = {}
++"   let g:fzf_vim.preview_bash = 'C:\Git\bin\bash.exe
++
++" [Buffers] Jump to the existing window if possible
++let g:fzf_vim.buffers_jump = 1
++
++" [[B]Commits] Customize the options used by 'git log':
++let g:fzf_vim.commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
++
++" [Tags] Command to generate tags file
++let g:fzf_vim.tags_command = 'ctags -R'
++
++" [Commands] --expect expression for directly executing the command
++let g:fzf_vim.commands_expect = 'alt-enter,ctrl-x'
++
++" Mapping selecting mappings
++nmap <leader><tab> <plug>(fzf-maps-n)
++xmap <leader><tab> <plug>(fzf-maps-x)
++omap <leader><tab> <plug>(fzf-maps-o)
++
++" Insert mode completion
++imap <c-x><c-k> <plug>(fzf-complete-word)
++imap <c-x><c-f> <plug>(fzf-complete-path)
++imap <c-x><c-l> <plug>(fzf-complete-line)
++
++" Using Lua functions
++nnoremap <leader>ti <cmd>lua require('telescope.builtin').lsp_incoming_calls()<cr>
++nnoremap <leader>to <cmd>lua require('telescope.builtin').lsp_outgoing_calls()<cr>
++nnoremap <leader>tsd <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
++nnoremap <leader>tsw <cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>
++nnoremap <leader>tsa <cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>
++nnoremap <leader>tsb <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
++nnoremap <leader>td <cmd>lua require('telescope.builtin').lsp_definitions()<cr>
++nnoremap <leader>tr <cmd>lua require('telescope.builtin').lsp_references()<cr>
++nnoremap <leader>tm <cmd>lua require('telescope.builtin').lsp_implementations()<cr>
++nnoremap <leader>th <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
++nnoremap <leader>ta <cmd>lua require('telescope.builtin').treesitter()<cr>
++nnoremap <leader>tgg <cmd>lua require('telescope.builtin').live_grep()<cr>
++nnoremap <leader>tgw <cmd>lua require("telescope-live-grep-args.shortcuts").grep_word_under_cursor()<cr>
++nnoremap <leader>tgb <cmd>lua require("telescope-live-grep-args.shortcuts").grep_word_under_cursor_current_buffer()<cr>
++nnoremap <leader>tgv <cmd>lua require("telescope-live-grep-args.shortcuts").grep_visual_selection()<cr>
++
++nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
++nnoremap <leader>fj <cmd>lua require('telescope.builtin').jumplist()<cr>
++nnoremap <leader>fm <cmd>lua require('telescope.builtin').marks()<cr>
++nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_files()<cr>
++nnoremap <silent> <leader>ft  :Telescope ctags_outline buf=all<CR>
++set wrap
++map f <Plug>Sneak_f
++map F <Plug>Sneak_F
++map t <Plug>Sneak_t
++map T <Plug>Sneak_T
++
++nnoremap <silent><C-w>m :vertical resize 80<CR>
++
++" set
++autocmd TermEnter term://*toggleterm#*
++      \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
++
++" By applying the mappings this way you can pass a count to your
++" mapping to open a specific window.
++" For example: 2<C-t> will open terminal 2
++nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
++inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
+diff --git a/lua/core/settings.lua b/lua/core/settings.lua
+index 9e55f14..516eda9 100644
+--- a/lua/core/settings.lua
++++ b/lua/core/settings.lua
+@@ -6,11 +6,11 @@ settings["use_ssh"] = true
+ 
+ -- Set to false if you don't use Copilot.
+ ---@type boolean
+-settings["use_copilot"] = true
++settings["use_copilot"] = false
+ 
+ -- Set to false if you don't want to format on save.
+ ---@type boolean
+-settings["format_on_save"] = true
++settings["format_on_save"] = false
+ 
+ -- Format timeout in milliseconds.
+ ---@type number
+@@ -117,7 +117,7 @@ settings["lsp_inlayhints"] = false
+ settings["lsp_deps"] = {
+ 	"bashls",
+ 	"clangd",
+-	"gopls",
++--	"gopls",
+ 	"html",
+ 	"jsonls",
+ 	"lua_ls",
+@@ -160,7 +160,7 @@ settings["treesitter_deps"] = {
+ 	"html",
+ 	"javascript",
+ 	"json",
+-	"jsonc",
++	-- "jsonc",
+ 	"latex",
+ 	"lua",
+ 	"make",
+diff --git a/lua/keymap/editor.lua b/lua/keymap/editor.lua
+index 5ca3f41..564914f 100644
+--- a/lua/keymap/editor.lua
++++ b/lua/keymap/editor.lua
+@@ -97,15 +97,15 @@ local mappings = {
+ 			:with_desc("edit: Toggle comment for block with selection"),
+ 
+ 		-- Plugin: diffview.nvim
+-		["n|<leader>gd"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
+-		["n|<leader>gD"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
++		["n|<leader>d"] = map_cr("DiffviewOpen"):with_silent():with_noremap():with_desc("git: Show diff"),
++		["n|<leader><leader>D"] = map_cr("DiffviewClose"):with_silent():with_noremap():with_desc("git: Close diff"),
+ 
+ 		-- Plugin: hop.nvim
+ 		["nv|<leader>w"] = map_cmd("<Cmd>HopWordMW<CR>"):with_noremap():with_desc("jump: Goto word"),
+ 		["nv|<leader>j"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("jump: Goto line"),
+ 		["nv|<leader>k"] = map_cmd("<Cmd>HopLineMW<CR>"):with_noremap():with_desc("jump: Goto line"),
+ 		["nv|<leader>c"] = map_cmd("<Cmd>HopChar1MW<CR>"):with_noremap():with_desc("jump: Goto one char"),
+-		["nv|<leader>C"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("jump: Goto two chars"),
++		["nv|<leader>s"] = map_cmd("<Cmd>HopChar2MW<CR>"):with_noremap():with_desc("jump: Goto two chars"),
+ 
+ 		-- Plugin: grug-far
+ 		["n|<leader>Ss"] = map_callback(function()
+diff --git a/lua/keymap/tool.lua b/lua/keymap/tool.lua
+index 12bedf7..95bfe49 100644
+--- a/lua/keymap/tool.lua
++++ b/lua/keymap/tool.lua
+@@ -6,6 +6,8 @@ local map_cmd = bind.map_cmd
+ local map_callback = bind.map_callback
+ require("keymap.helpers")
+ 
++vim.keymap.set({ "n", "x" }, "<leader>sr", function() require("ssr").open() end)
++
+ local mappings = {
+ 	plugins = {
+ 		-- Plugin: vim-fugitive
+@@ -26,8 +28,8 @@ local mappings = {
+ 		["n|<leader>nr"] = map_cr("NvimTreeRefresh"):with_noremap():with_silent():with_desc("filetree: Refresh"),
+ 
+ 		-- Plugin: sniprun
+-		["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
+-		["n|<leader>r"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
++		["v|<leader>sr"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
++		["n|<leader>sr"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
+ 
+ 		-- Plugin: toggleterm
+ 		["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
+diff --git a/lua/keymap/ui.lua b/lua/keymap/ui.lua
+index 9398196..955195d 100644
+--- a/lua/keymap/ui.lua
++++ b/lua/keymap/ui.lua
+@@ -116,43 +116,43 @@ function M.gitsigns(bufnr)
+ 			:with_noremap()
+ 			:with_expr()
+ 			:with_desc("git: Goto prev hunk"),
+-		["n|<leader>gs"] = map_callback(function()
++		["n|<leader>hs"] = map_callback(function()
+ 				gitsigns.stage_hunk()
+ 			end)
+ 			:with_buffer(bufnr)
+ 			:with_noremap()
+ 			:with_desc("git: Toggle staging/unstaging of hunk"),
+-		["v|<leader>gs"] = map_callback(function()
++		["v|<leader>hs"] = map_callback(function()
+ 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+ 			end)
+ 			:with_buffer(bufnr)
+ 			:with_noremap()
+ 			:with_desc("git: Toggle staging/unstaging of selected hunk"),
+-		["n|<leader>gr"] = map_callback(function()
++		["n|<leader>hr"] = map_callback(function()
+ 				gitsigns.reset_hunk()
+ 			end)
+ 			:with_buffer(bufnr)
+ 			:with_noremap()
+ 			:with_desc("git: Reset hunk"),
+-		["v|<leader>gr"] = map_callback(function()
++		["v|<leader>hr"] = map_callback(function()
+ 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+ 			end)
+ 			:with_buffer(bufnr)
+ 			:with_noremap()
+ 			:with_desc("git: Reset hunk"),
+-		["n|<leader>gR"] = map_callback(function()
++		["n|<leader>hR"] = map_callback(function()
+ 				gitsigns.reset_buffer()
+ 			end)
+ 			:with_buffer(bufnr)
+ 			:with_noremap()
+ 			:with_desc("git: Reset buffer"),
+-		["n|<leader>gp"] = map_callback(function()
++		["n|<leader>hp"] = map_callback(function()
+ 				gitsigns.preview_hunk()
+ 			end)
+ 			:with_buffer(bufnr)
+ 			:with_noremap()
+ 			:with_desc("git: Preview hunk"),
+-		["n|<leader>gb"] = map_callback(function()
++		["n|<leader>hb"] = map_callback(function()
+ 				gitsigns.blame_line({ full = true })
+ 			end)
+ 			:with_buffer(bufnr)
+diff --git a/lua/lua-setup.lua b/lua/lua-setup.lua
+new file mode 100644
+index 0000000..6318f22
+--- /dev/null
++++ b/lua/lua-setup.lua
+@@ -0,0 +1,65 @@
++require("mason").setup()
++require("mason-lspconfig").setup()
++require("mason-lspconfig").setup {
++    ensure_installed = { "lua_ls", "clangd" },
++}
++require("mason-lspconfig").setup_handlers {
++    -- The first entry (without a key) will be the default handler
++    -- and will be called for each installed server that doesn't have
++    -- a dedicated handler.
++    function (server_name) -- default handler (optional)
++        require("lspconfig")[server_name].setup {}
++    end,
++    -- Next, you can provide a dedicated handler for specific servers.
++    -- For example, a handler override for the `rust_analyzer`:
++    ["rust_analyzer"] = function ()
++        require("rust-tools").setup {}
++    end
++}
++
++local lsp_saga = require("lspsaga")
++lsp_saga.setup({})
++require("nvim-tree").setup()
++require("telescope").load_extension "frecency"
++require("telescope").load_extension('project')
++require("telescope").load_extension('ctags_outline')
++require("indentmini").setup()
++require('nvim-spider').setup()
++require('neotags').setup()
++require("telescope-live-grep-args.shortcuts").setup()
++require("yanky").setup({
++  ring = {
++    history_length = 100,
++    storage = "shada",
++    sync_with_numbered_registers = true,
++    cancel_event = "update",
++    ignore_registers = { "_" },
++    update_register_on_cycle = false,
++    permanent_wrapper = nil,
++  },
++  system_clipboard = {
++    sync_with_ring = true,
++  },
++})
++
++require('hardline').setup {
++  bufferline = false,  -- disable bufferline
++  bufferline_settings = {
++    exclude_terminal = false,  -- don't show terminal buffers in bufferline
++    show_index = false,        -- show buffer indexes (not the actual buffer numbers) in bufferline
++  },
++  theme = 'default',   -- change theme
++  sections = {         -- define sections
++    {class = 'mode', item = require('hardline.parts.mode').get_item},
++    {class = 'high', item = require('hardline.parts.git').get_item, hide = 100},
++    {class = 'med', item = require('hardline.parts.filename').get_item},
++    '%<',
++    {class = 'med', item = '%='},
++    {class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
++    {class = 'error', item = require('hardline.parts.lsp').get_error},
++    {class = 'warning', item = require('hardline.parts.lsp').get_warning},
++    {class = 'warning', item = require('hardline.parts.whitespace').get_item},
++    {class = 'high', item = require('hardline.parts.filetype').get_item, hide = 60},
++    {class = 'mode', item = require('hardline.parts.line').get_item},
++  },
++}
+diff --git a/lua/modules/configs/completion/servers/clangd.lua b/lua/modules/configs/completion/servers/clangd.lua
+index 39dec02..6f07661 100644
+--- a/lua/modules/configs/completion/servers/clangd.lua
++++ b/lua/modules/configs/completion/servers/clangd.lua
+@@ -82,6 +82,7 @@ return function(defaults)
+ 			"--limit-references=1000",
+ 			"--limit-results=300",
+ 			"--pch-storage=memory",
++			"--compile-commands-dir=.",
+ 		},
+ 		on_attach = function(client, bufnr)
+ 			vim.api.nvim_buf_create_user_command(bufnr, "LspClangdSwitchSourceHeader", function()
+diff --git a/lua/modules/configs/tool/telescope.lua b/lua/modules/configs/tool/telescope.lua
+index 3a5d99d..4fbcb73 100644
+--- a/lua/modules/configs/tool/telescope.lua
++++ b/lua/modules/configs/tool/telescope.lua
+@@ -18,7 +18,7 @@ return function()
+ 			scroll_strategy = "limit",
+ 			results_title = false,
+ 			layout_strategy = "flex",
+-			path_display = { "absolute" },
++			path_display = { "filename_first", "smart" },
+ 			selection_strategy = "reset",
+ 			color_devicons = true,
+ 			file_ignore_patterns = { ".git/", ".cache", "build/", "%.class", "%.pdf", "%.mkv", "%.mp4", "%.zip" },
+diff --git a/lua/modules/configs/tool/which-key.lua b/lua/modules/configs/tool/which-key.lua
+index 1bb8e2f..e1a2822 100644
+--- a/lua/modules/configs/tool/which-key.lua
++++ b/lua/modules/configs/tool/which-key.lua
+@@ -61,7 +61,7 @@ return function()
+ 			},
+ 		},
+ 		spec = {
+-			{ "<leader>g", group = icons.git.Git .. "Git" },
++			{ "<leader>g", group = icons.git.Git .. "gtags&Git" },
+ 			{ "<leader>d", group = icons.ui.Bug .. " Debug" },
+ 			{ "<leader>s", group = icons.cmp.tmux .. "Session" },
+ 			{ "<leader>b", group = icons.ui.Buffer .. " Buffer" },
+diff --git a/lua/modules/configs/ui/alpha.lua b/lua/modules/configs/ui/alpha.lua
+index befcbd2..f2f4823 100644
+--- a/lua/modules/configs/ui/alpha.lua
++++ b/lua/modules/configs/ui/alpha.lua
+@@ -2,7 +2,7 @@ return function()
+ 	local dashboard = require("alpha.themes.dashboard")
+ 	require("modules.utils").gen_alpha_hl()
+ 
+-	dashboard.section.header.val = require("core.settings").dashboard_image
++	--dashboard.section.header.val = require("core.settings").dashboard_image
+ 	dashboard.section.header.opts.hl = "AlphaHeader"
+ 
+ 	local function button(sc, txt, leader_txt, keybind, keybind_opts)
+diff --git a/lua/modules/plugins/tool.lua b/lua/modules/plugins/tool.lua
+index 82ccf51..51d5bf5 100644
+--- a/lua/modules/plugins/tool.lua
++++ b/lua/modules/plugins/tool.lua
+@@ -76,10 +76,19 @@ if settings.use_chat then
+ 	tool["olimorris/codecompanion.nvim"] = {
+ 		lazy = true,
+ 		tag = "v17.33.0",
+-		event = "VeryLazy",
++		-- event = "VeryLazy",
++	-- 不要使用 event = "VeryLazy"，改为在需要时加载，或者延迟加载
++		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
++		keys = {
++		  { "<leader>a", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" } },
++		  { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" } },
++		},
+ 		config = require("tool.codecompanion"),
+ 		dependencies = {
+-			{ "ravitemer/codecompanion-history.nvim" },
++			{
++				"nvim-lua/plenary.nvim",
++				"nvim-treesitter/nvim-treesitter",
++				"ravitemer/codecompanion-history.nvim" },
+ 		},
+ 	}
+ end
+@@ -106,6 +115,7 @@ tool["nvim-telescope/telescope.nvim"] = {
+ 		{ "debugloop/telescope-undo.nvim" },
+ 		{ "nvim-telescope/telescope-frecency.nvim" },
+ 		{ "nvim-telescope/telescope-live-grep-args.nvim" },
++		{ "fcying/telescope-ctags-outline.nvim"},
+ 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+ 		{
+ 			"ayamir/search.nvim",
+@@ -155,4 +165,181 @@ tool["mfussenegger/nvim-dap"] = {
+ 	},
+ }
+ 
++
++tool["Yggdroot/LeaderF"] = {
++	lazy = false,
++	run = ':LeaderfInstallCExtension',
++}
++
++tool["christoomey/vim-tmux-navigator"] = {
++	lazy = false,
++}
++
++tool["tmux-plugins/vim-tmux"] = {
++	lazy = false,
++}
++
++tool["skywind3000/asyncrun.vim"] = {
++	lazy = false,
++}
++
++tool["liuchengxu/vista.vim"] = {
++	lazy = false,
++}
++
++tool["junegunn/fzf"] = {
++	lazy = false,
++	run = function()
++        -- 使用 fzf-nvim 包中的安装函数来安装 fzf 二进制文件
++        vim.fn['fzf#install']()
++        end
++}
++
++tool["inkarkat/vim-mark"] = {
++	lazy = false,
++	dependencies = { "inkarkat/vim-ingo-library" },
++}
++
++tool["c0r73x/neotags.lua"] = {
++	lazy = false,
++	config = function()
++--	插件加载后调用 toggle 函数
++		require('neotags').toggle()
++	end,
++}
++
++tool["cshuaimin/ssr.nvim"] = {
++	lazy = false,
++	  module = "ssr",
++  -- Calling setup is optional.
++  config = function()
++    require("ssr").setup {
++      border = "rounded",
++      min_width = 50,
++      min_height = 5,
++      max_width = 120,
++      max_height = 25,
++      adjust_window = true,
++      keymaps = {
++        close = "q",
++        next_match = "n",
++        prev_match = "N",
++        replace_confirm = "<cr>",
++        replace_all = "<leader><cr>",
++      },
++    }
++  end
++}
++
++tool["jeffkreeftmeijer/vim-numbertoggle"] = {
++	lazy = false,
++}
++
++tool["justinmk/vim-sneak"] = {
++	lazy = false,
++}
++
++tool["gbprod/yanky.nvim"] = {
++	lazy = false,
++}
++
++tool["szw/vim-maximizer"] = {
++	lazy = false,
++}
++tool['Wansmer/symbol-usage.nvim'] = {
++	lazy = false,
++	event = 'BufReadPre', -- 在LspAttach之前运行，如果使用的是nvim 0.9。对于0.10，使用'LspAttach'
++	config = function()
++		require('symbol-usage').setup()
++	end
++}
++
++tool["linrongbin16/fzfx.nvim"] = {
++	dependencies = { "nvim-tree/nvim-web-devicons", 'junegunn/fzf' },
++
++		    -- specify version to avoid break changes
++		    -- version = 'v5.*',
++
++		    config = function()
++			      require("fzfx").setup()
++		    end,
++
++}
++
++-- Lua
++tool['abecodes/tabout.nvim'] = {
++    lazy = false,
++    config = function()
++      require('tabout').setup {
++        tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
++        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
++        act_as_tab = true, -- shift content if tab out is not possible
++        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
++        default_tab = '<C-t>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
++        default_shift_tab = '<C-d>', -- reverse shift default action,
++        enable_backwards = true, -- well ...
++        completion = false, -- if the tabkey is used in a completion pum
++        tabouts = {
++          { open = "'", close = "'" },
++          { open = '"', close = '"' },
++          { open = '`', close = '`' },
++          { open = '(', close = ')' },
++          { open = '[', close = ']' },
++          { open = '{', close = '}' }
++        },
++        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
++        exclude = {} -- tabout will ignore these filetypes
++      }
++    end,
++    dependencies = { -- These are optional
++      "nvim-treesitter/nvim-treesitter",
++      "L3MON4D3/LuaSnip",
++      "hrsh7th/nvim-cmp"
++    },
++    opt = true,  -- Set this to true if the plugin is optional
++    event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
++    priority = 1000,
++}
++
++--tool["smoka7/multicursors.nvim"] = {
++--    event = "VeryLazy",
++--    dependencies = {
++--        'nvimtools/hydra.nvim',
++--    },
++--	lazy = false,
++--    opts = {},
++--    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
++--    keys = {
++--            {
++--                mode = { 'v', 'n' },
++--                '<C-m>',
++--                '<cmd>MCstart<cr>',
++--                desc = 'Create a selection for selected text or word under the cursor',
++--            },
++--        },
++--}
++
++tool["chrisgrieser/nvim-spider"] = {
++	lazy = false,
++	keys = {
++		{
++			"w",
++			"<cmd>lua require('spider').motion('w')<CR>",
++			mode = { "n", "o", "x" },
++		},
++
++		{
++			"b",
++			"<cmd>lua require('spider').motion('b')<CR>",
++			mode = { "n", "o", "x" },
++		},
++		{
++			"e",
++			"<cmd>lua require('spider').motion('e')<CR>",
++			mode = { "n", "o", "x" },
++		},
++
++	},
++}
++
+ return tool
+-- 
+2.50.1
+
