@@ -9,8 +9,12 @@ return function()
 			end
 
 			-- Disable on parser error
+			local parser = vim.treesitter.get_parser()
+			if not parser then
+				return nil
+			end
 			local errors = 200
-			vim.treesitter.get_parser():for_each_tree(function(lt)
+			parser:for_each_tree(function(lt)
 				if lt:root():has_error() and errors >= 0 then
 					errors = errors - 1
 				end
