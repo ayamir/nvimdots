@@ -9,11 +9,11 @@ settings["use_ssh"] = true
 settings["use_copilot"] = true
 
 -- Default secret source for AI adapters. Set this to an environment variable
--- name or a `cmd:` command, not a raw API key value.
 -- Examples:
---   "AIAPI_KEY"
---   "cmd:op read op://personal/OpenRouter/api-key --no-newline"
----@type string|fun(): string
+--   "AI_API_KEY"
+-- Recommended way of setting this environment variable, e.g.:
+-- export AI_API_KEY=$(rbw get --field "API key" opencode\ go)
+---@type string
 settings["ai_api_key"] = "AI_API_KEY"
 
 -- Shared AI adapters for CodeCompanion and OpenAI-compatible edit prediction.
@@ -52,14 +52,8 @@ settings["ai_adapters"] = {
 		models = {
 			"deepseek-v4-flash",
 			"deepseek-v4-pro",
-			"qwen3.5-plus",
-			"qwen3.6-plus",
-			"kimi-k2.5",
 			"kimi-k2.6",
-			"mimo-v2.5",
 			"mimo-v2.5-pro",
-			"minimax-m2.7",
-			"minimax-m2.5",
 			"glm-5.1",
 		},
 		default_model = "deepseek-v4-pro",
