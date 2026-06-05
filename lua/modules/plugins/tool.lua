@@ -69,7 +69,15 @@ tool["folke/which-key.nvim"] = {
 if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
 		lazy = true,
-		event = "VeryLazy",
+		cmd = {
+			"CodeCompanion",
+			"CodeCompanionActions",
+			"CodeCompanionChat",
+			"CodeCompanionCLI",
+			"CodeCompanionCmd",
+			"CodeCompanionHistory",
+			"CodeCompanionSummaries",
+		},
 		config = require("tool.codecompanion"),
 		dependencies = {
 			{ "ravitemer/codecompanion-history.nvim" },
