@@ -1,9 +1,45 @@
 return function()
 	local icons = { aichat = require("modules.utils.icons").get("aichat", true) }
-	local secret_key = require("core.settings").chat_api_key
-	local chat_lang = require("core.settings").chat_lang
-	local models = require("core.settings").chat_models
-	local current_model = models[1]
+	local settings = require("core.settings")
+	local ai = require("modules.utils.ai")
+	local chat_lang = settings.chat_lang
+	local current_model = ai.get_codecompanion_default_model()
+	local codecompanion_adapter = ai.get_codecompanion_adapter_name()
+	local http_adapters = {}
+
+	for name, adapter_config in pairs(settings.ai_adapters or {}) do
+		local adapter_key = name
+		local adapter = adapter_config
+
+		http_adapters[adapter_key] = function()
+			local adapter_name = adapter.adapter
+				or (adapter.type == "openai-compatible" and "openai_compatible")
+				or adapter_key
+			local models = ai.get_adapter_models(adapter)
+			local opts = {
+				env = {
+					api_key = ai.get_adapter_api_key(adapter),
+				},
+				schema = {
+					model = {
+						default = vim.g.current_chat_model or ai.get_adapter_default_model(adapter),
+					},
+				},
+			}
+
+			if #models > 0 then
+				opts.schema.model.choices = models
+			end
+
+			if adapter.type == "openai-compatible" then
+				opts.env.url = adapter.base_url
+				opts.env.chat_url = adapter.chat_url or "/v1/chat/completions"
+			end
+
+			return require("codecompanion.adapters").extend(adapter_name, opts)
+		end
+	end
+
 	vim.g.current_chat_model = current_model
 
 	require("modules.utils").load_plugin("codecompanion", {
@@ -12,7 +48,7 @@ return function()
 		},
 		strategies = {
 			chat = {
-				adapter = "openrouter",
+				adapter = codecompanion_adapter,
 				roles = {
 					llm = function(adapter)
 						return icons.aichat.Copilot .. "CodeCompanion (" .. adapter.formatted_name .. ")"
@@ -30,29 +66,14 @@ return function()
 				},
 			},
 			inline = {
-				adapter = "openrouter",
+				adapter = codecompanion_adapter,
 			},
 			cmd = {
-				adapter = "openrouter",
+				adapter = codecompanion_adapter,
 			},
 		},
 		adapters = {
-			http = {
-				openrouter = function()
-					return require("codecompanion.adapters").extend("openai_compatible", {
-						env = {
-							url = "https://openrouter.ai/api",
-							api_key = secret_key,
-							chat_url = "/v1/chat/completions",
-						},
-						schema = {
-							model = {
-								default = vim.g.current_chat_model,
-							},
-						},
-					})
-				end,
-			},
+			http = http_adapters,
 		},
 		display = {
 			diff = {

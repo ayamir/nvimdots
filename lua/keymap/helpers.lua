@@ -83,8 +83,9 @@ M.select_chat_model = function()
 	local pickers = require("telescope.pickers")
 	local type = require("telescope.themes").get_dropdown()
 	local conf = require("telescope.config").values
-	local models = require("core.settings").chat_models
-	local current_model = models[1]
+	local ai = require("modules.utils.ai")
+	local models = ai.get_codecompanion_models()
+	local current_model = vim.g.current_chat_model or ai.get_codecompanion_default_model()
 
 	pickers
 		.new(type, {
