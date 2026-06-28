@@ -4,7 +4,7 @@
     <a href="https://github.com/neovim/neovim/releases/tag/stable">
     <img
         alt="Neovim Version Capability"
-        src="https://img.shields.io/badge/Supports%20Nvim-v0.11-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
+        src="https://img.shields.io/badge/Supports%20Nvim-v0.12-A6D895?style=for-the-badge&colorA=363A4F&logo=neovim&logoColor=D9E0EE">
     </a>
     <a href="https://github.com/ayamir/nvimdots/releases">
     <img
@@ -54,15 +54,15 @@ Branch info:
 
 | Branch | Supported Neovim version |
 | :----: | :----------------------: |
-|  main  |     nvim 0.11 stable     |
-|  0.12  |    nvim 0.12 nightly     |
+|  0.13  |    nvim 0.13 nightly     |
+|  main  |     nvim 0.12 stable     |
+|  0.11  |        nvim 0.11         |
 |  0.10  |        nvim 0.10         |
-|  0.9   |         nvim 0.9         |
 
 </div>
 
 > [!IMPORTANT]
-> The `0.12` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
+> The `0.13` branch is intended for nightly Neovim builds and is **not** stable. It typically harbors subtle issues scattered throughout. Therefore, refrain from submitting issues if you happen to encounter them. They will be closed directly unless a viable solution is proposed or included.
 
 We currently manage plugins using [lazy.nvim](https://github.com/folke/lazy.nvim).
 
