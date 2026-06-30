@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 })
 
 return function()
-	local has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
+	local has_catppuccin = (vim.g.colors_name or ""):find("catppuccin") ~= nil
 	local colors = require("modules.utils").get_palette()
 	local icons = {
 		diagnostics = require("modules.utils.icons").get("diagnostics", true),
@@ -57,7 +57,7 @@ return function()
 			group = vim.api.nvim_create_augroup("LualineColorScheme", { clear = true }),
 			pattern = "*",
 			callback = function()
-				has_catppuccin = vim.g.colors_name:find("catppuccin") ~= nil
+				has_catppuccin = (vim.g.colors_name or ""):find("catppuccin") ~= nil
 				require("lualine").setup({ options = { theme = custom_theme() } })
 			end,
 		})
