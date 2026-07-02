@@ -4,14 +4,28 @@ return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 
-	if not require("mason-registry").is_installed("go-debug-adapter") then
+	-- Mason is optional here: guard the registry require so a Mason-less setup
+	-- degrades gracefully (no auto-install) instead of hard-erroring, mirroring the
+	-- discovery-first guarding in `python.lua`. Only auto-install when the binary is
+	-- neither Mason-installed nor already on $PATH, so a system-provided
+	-- go-debug-adapter is used as-is (and configured this session) instead of
+	-- triggering a redundant Mason install and deferring to the next launch.
+	local has_registry, registry = pcall(require, "mason-registry")
+	if has_registry and not registry.is_installed("go-debug-adapter") and vim.fn.exepath("go-debug-adapter") == "" then
+		-- get_package throws when the name isn't in the registry (registry skew).
+		-- Guard it so that turns into a clear, actionable error the resolver's pcall
+		-- can surface, rather than a generic "missing" with the install path skipped.
+		local ok, go_dbg = pcall(registry.get_package, "go-debug-adapter")
+		if not ok then
+			error("go-debug-adapter is not in the Mason registry (registry outdated?); run :MasonUpdate")
+		end
+
 		vim.notify(
 			"Automatically installing `go-debug-adapter` for go debugging",
 			vim.log.levels.INFO,
 			{ title = "nvim-dap" }
 		)
 
-		local go_dbg = require("mason-registry").get_package("go-debug-adapter")
 		go_dbg:install():once(
 			"closed",
 			vim.schedule_wrap(function()
@@ -20,11 +34,25 @@ return function()
 				end
 			end)
 		)
+		-- The install was just kicked off (user informed via the INFO notification
+		-- above); its binary won't be on $PATH until it finishes. Configure on the
+		-- next launch rather than erroring below and being flagged "missing" while
+		-- it's already installing.
+		return
 	end
 
+	-- Reached only when Mason is absent or go-debug-adapter is already installed.
+	-- Resolve it on $PATH; if it isn't there, error out instead of configuring an
+	-- empty command. The resolver in `tool/dap/init.lua` runs this under pcall, so
+	-- throwing lets it mark `delve` as missing rather than silently leaving Go
+	-- debugging broken.
+	local command = vim.fn.exepath("go-debug-adapter")
+	if command == "" then
+		error("go-debug-adapter not found on $PATH; install it via Mason or your package manager")
+	end
 	dap.adapters.go = {
 		type = "executable",
-		command = vim.fn.exepath("go-debug-adapter"), -- Find go-debug-adapter on $PATH
+		command = command,
 	}
 	dap.configurations.go = {
 		{

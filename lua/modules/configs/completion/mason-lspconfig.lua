@@ -2,14 +2,12 @@ local M = {}
 
 M.setup = function()
 	local lsp_deps = require("core.settings").lsp_deps
-	local mason_registry = require("mason-registry")
-	local mason_lspconfig = require("mason-lspconfig")
-
-	require("modules.utils").load_plugin("mason-lspconfig", {
-		ensure_installed = lsp_deps,
-		-- Skip auto enable because we are loading language servers lazily
-		automatic_enable = false,
-	})
+	-- Mason is an optional installer backend: guard its requires so a Mason-less
+	-- setup still resolves servers from $PATH instead of hard-erroring here.
+	local has_registry, mason_registry = pcall(require, "mason-registry")
+	local has_mlsp, mason_lspconfig = pcall(require, "mason-lspconfig")
+	local mason_ok = has_registry and has_mlsp
+	local tools = require("modules.utils.tools")
 
 	vim.diagnostic.config({
 		signs = true,
@@ -81,37 +79,94 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		end
 	end
 
-	---A simplified mimic of <mason-lspconfig 1.x>'s `setup_handlers` callback.
-	---Invoked for each Mason package (name or `Package` object) to configure its language server.
-	---@param pkg string|{name: string} Either the package name (string) or a Package object
-	local function setup_lsp_for_package(pkg)
-		-- First try to grab the builtin mappings
-		local mappings = mason_lspconfig.get_mappings().package_to_lspconfig
-		-- If empty or nil, build it by hand
-		if not mappings or vim.tbl_isempty(mappings) then
-			mappings = {}
+	-- Map lspconfig server name -> Mason package name (only when Mason is present).
+	-- Used to tell whether a server has a Mason package at all, and to drive
+	-- installs. Build by hand if the builtin map is unavailable.
+	local lspconfig_to_package = {}
+	if mason_ok then
+		local mappings = mason_lspconfig.get_mappings()
+		lspconfig_to_package = (mappings and mappings.lspconfig_to_package) or {}
+		if vim.tbl_isempty(lspconfig_to_package) then
 			for _, spec in ipairs(mason_registry.get_all_package_specs()) do
-				local lspconfig = vim.tbl_get(spec, "neovim", "lspconfig")
-				if lspconfig then
-					mappings[spec.name] = lspconfig
+				local server = vim.tbl_get(spec, "neovim", "lspconfig")
+				if server then
+					lspconfig_to_package[server] = spec.name
 				end
 			end
 		end
 
-		-- Figure out the package name and lookup
-		local name = type(pkg) == "string" and pkg or pkg.name
-		local srv = mappings[name]
-		if not srv then
-			return
+		-- Load mason-lspconfig for the lspconfig integration only. Installs are
+		-- driven explicitly below (discovery-first) so they degrade gracefully where
+		-- Mason can't help (BSD/NixOS/...), instead of being gated on the installed set.
+		require("modules.utils").load_plugin("mason-lspconfig", {
+			ensure_installed = {},
+			-- Skip auto enable because we are loading language servers lazily
+			automatic_enable = false,
+		})
+	end
+
+	---Resolve a server's launch binary for the $PATH probe. Prefer an explicit
+	---`cmd` from the manual spec (user override, then repo default under
+	---`completion/servers/`), then fall back to nvim-lspconfig's default `cmd`.
+	---This way a server defined only via a local spec (with no nvim-lspconfig
+	---entry) is still discoverable on $PATH.
+	---@param name string
+	---@return string|nil
+	local function server_binary(name)
+		for _, module in ipairs({ "user.configs.lsp-servers." .. name, "completion.servers." .. name }) do
+			local ok, spec = pcall(require, module)
+			if ok and type(spec) == "table" and type(spec.cmd) == "table" then
+				return spec.cmd[1]
+			end
 		end
-
-		-- Invoke the handler
-		mason_lsp_handler(srv)
+		local ok, config = pcall(function()
+			return vim.lsp.config[name]
+		end)
+		if ok and type(config) == "table" and type(config.cmd) == "table" then
+			return config.cmd[1]
+		end
+		return nil
 	end
 
-	for _, pkg in ipairs(mason_registry.get_installed_package_names()) do
-		setup_lsp_for_package(pkg)
+	-- Discovery-first resolution per desired server:
+	--   1. Mason-installed OR binary already on $PATH -> configure now.
+	--   2. Not available but Mason ships a package    -> install, configure next launch.
+	--   3. No Mason package and not on $PATH           -> ask the user to install it.
+	local collector = tools.missing_collector("LSP")
+
+	for _, name in ipairs(lsp_deps) do
+		local pkg_name = mason_ok and lspconfig_to_package[name] or nil
+		local installed = pkg_name ~= nil and mason_registry.is_installed(pkg_name)
+		local binary = server_binary(name)
+		local on_path = binary ~= nil and vim.fn.executable(binary) == 1
+
+		if installed or on_path then
+			-- Guard the handler: a user/server spec that errors during setup would
+			-- otherwise abort the whole loop (skipping the remaining servers and
+			-- collector.done()). Degrade by marking just that server.
+			if not pcall(mason_lsp_handler, name) then
+				collector.mark(name)
+			end
+		elseif pkg_name ~= nil then
+			local ok, pkg = pcall(mason_registry.get_package, pkg_name)
+			if ok then
+				collector.track(pkg, name, function()
+					return pkg:is_installed() or (binary ~= nil and vim.fn.executable(binary) == 1)
+				end)
+			else
+				-- The server maps to a Mason package the registry doesn't have
+				-- (stale mapping / registry skew). The lookup that failed was for
+				-- `pkg_name`, so record that (annotated with the server) rather than
+				-- `name` — otherwise the warning wrongly implicates the user's
+				-- lsp_deps entry when the mapping/registry is at fault.
+				collector.mark_unknown(pkg_name == name and name or (pkg_name .. " (for " .. name .. ")"))
+			end
+		else
+			collector.mark(name)
+		end
 	end
+
+	collector.done()
 end
 
 return M

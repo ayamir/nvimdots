@@ -4,7 +4,41 @@ return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 	local is_windows = require("core.global").is_windows
-	local debugpy_root = vim.fn.expand("$MASON/packages/debugpy")
+	-- Resolve Mason's install root via the settings API (nil when Mason isn't
+	-- available), not the $MASON env var alone — it's only set as a side effect of
+	-- mason.setup() and may not be exported.
+	local mason_root = require("modules.utils.tools").mason_root()
+	local debugpy_root = mason_root and (mason_root .. "/packages/debugpy") or nil
+
+	-- Resolve the debugpy adapter command discovery-first: prefer Mason's managed
+	-- venv, then a `debugpy-adapter` on $PATH, then a system python running the
+	-- debugpy module. This keeps python debugging working without Mason (BSD/NixOS),
+	-- where the hard-coded Mason path would otherwise point at a missing directory.
+	local function debugpy_command()
+		if debugpy_root then
+			local mason_python = is_windows and debugpy_root .. "/venv/Scripts/pythonw.exe"
+				or debugpy_root .. "/venv/bin/python"
+			if vim.fn.executable(mason_python) == 1 then
+				return mason_python, { "-m", "debugpy.adapter" }
+			end
+		end
+		if vim.fn.executable("debugpy-adapter") == 1 then
+			return "debugpy-adapter", {}
+		end
+		-- Last resort: a python interpreter on $PATH that can run debugpy. Probe
+		-- candidates rather than hard-coding one, so we don't hand nvim-dap a
+		-- command that isn't installed (e.g. pythonw.exe is often absent on a
+		-- Windows box that only has python.exe / python).
+		local candidates = is_windows and { "pythonw.exe", "python.exe", "python" } or { "python3", "python" }
+		for _, py in ipairs(candidates) do
+			if vim.fn.executable(py) == 1 then
+				return py, { "-m", "debugpy.adapter" }
+			end
+		end
+		-- None resolved; return the conventional interpreter name so a failure at
+		-- least names a real command rather than a windowless-only pythonw.exe.
+		return candidates[#candidates], { "-m", "debugpy.adapter" }
+	end
 
 	dap.adapters.python = function(callback, config)
 		if config.request == "attach" then
@@ -17,11 +51,11 @@ return function()
 				options = { source_filetype = "python" },
 			})
 		else
+			local command, args = debugpy_command()
 			callback({
 				type = "executable",
-				command = is_windows and debugpy_root .. "/venv/Scripts/pythonw.exe"
-					or debugpy_root .. "/venv/bin/python",
-				args = { "-m", "debugpy.adapter" },
+				command = command,
+				args = args,
 				options = { source_filetype = "python" },
 			})
 		end
