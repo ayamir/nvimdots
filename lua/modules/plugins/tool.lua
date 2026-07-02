@@ -148,6 +148,10 @@ tool["mfussenegger/nvim-dap"] = {
 	config = require("tool.dap"),
 	dependencies = {
 		{ "jay-babu/mason-nvim-dap.nvim" },
+		-- mason.nvim is command-lazy; declare it here so it's on the runtimepath
+		-- before this config's discovery-first resolver runs, otherwise Mason
+		-- support hinges on plugin load order (the mason-registry require can fail).
+		{ "mason-org/mason.nvim" },
 		{
 			"rcarriga/nvim-dap-ui",
 			dependencies = "nvim-neotest/nvim-nio",
