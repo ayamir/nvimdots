@@ -66,22 +66,21 @@ tool["folke/which-key.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("tool.which-key"),
 }
-tool["gelguy/wilder.nvim"] = {
-	lazy = true,
-	event = "CmdlineEnter",
-	config = require("tool.wilder"),
-	dependencies = "romgrk/fzy-lua-native",
-}
 if settings.use_chat then
 	tool["olimorris/codecompanion.nvim"] = {
 		lazy = true,
-		tag = "v17.33.0",
-		-- event = "VeryLazy",
-	-- 不要使用 event = "VeryLazy"，改为在需要时加载，或者延迟加载
-		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionActions" },
+		--tag = "v17.33.0",
 		keys = {
 		  { "<leader>a", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" } },
 		  { "<leader>at", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" } },
+		cmd = {
+			"CodeCompanion",
+			"CodeCompanionActions",
+			"CodeCompanionChat",
+			"CodeCompanionCLI",
+			"CodeCompanionCmd",
+			"CodeCompanionHistory",
+			"CodeCompanionSummaries",
 		},
 		config = require("tool.codecompanion"),
 		dependencies = {

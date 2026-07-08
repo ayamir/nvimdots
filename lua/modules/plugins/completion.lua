@@ -1,4 +1,22 @@
 local completion = {}
+local settings = require("core.settings")
+
+local edit_prediction_source = settings["edit-prediction-source"] or settings.edit_prediction_source
+local use_copilot_prediction = settings.use_copilot and edit_prediction_source == "copilot"
+local use_minuet_prediction = edit_prediction_source == "oai-compatible"
+
+completion["mason-org/mason.nvim"] = {
+	lazy = true,
+	cmd = {
+		"Mason",
+		"MasonInstall",
+		"MasonUninstall",
+		"MasonUninstallAll",
+		"MasonUpdate",
+		"MasonLog",
+	},
+	config = require("completion.mason").setup,
+}
 
 completion["neovim/nvim-lspconfig"] = {
 	lazy = true,
@@ -8,10 +26,6 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "mason-org/mason.nvim" },
 		{ "mason-org/mason-lspconfig.nvim" },
 		{ "folke/neoconf.nvim" },
-		{
-			"Jint-lzxy/lsp_signature.nvim",
-			config = require("completion.lsp-signature"),
-		},
 	},
 }
 completion["nvimdev/lspsaga.nvim"] = {
@@ -21,7 +35,9 @@ completion["nvimdev/lspsaga.nvim"] = {
 	dependencies = "nvim-tree/nvim-web-devicons",
 }
 completion["rachartier/tiny-inline-diagnostic.nvim"] = {
-	lazy = false,
+	lazy = true,
+	event = "VeryLazy",
+	priority = 1000,
 	config = require("completion.tiny-inline-diagnostic"),
 }
 completion["joechrisellis/lsp-format-modifications.nvim"] = {
@@ -37,39 +53,51 @@ completion["nvimtools/none-ls.nvim"] = {
 		"jay-babu/mason-null-ls.nvim",
 	},
 }
-completion["hrsh7th/nvim-cmp"] = {
+completion["saghen/blink.cmp"] = {
 	lazy = true,
-	event = "InsertEnter",
-	config = require("completion.cmp"),
+	version = "1.*",
+	event = { "VeryLazy", "InsertEnter", "CmdlineEnter" },
+	config = require("completion.blink"),
 	dependencies = {
+		{ "saghen/blink.compat", version = "2.*", opts = {} },
 		{
 			"L3MON4D3/LuaSnip",
 			build = "make install_jsregexp",
 			config = require("completion.luasnip"),
 			dependencies = "rafamadriz/friendly-snippets",
 		},
-		{ "lukas-reineke/cmp-under-comparator" },
-		{ "saadparwaiz1/cmp_luasnip" },
-		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "andersevenrud/cmp-tmux" },
-		{ "hrsh7th/cmp-path" },
 		{ "f3fora/cmp-spell" },
-		{ "hrsh7th/cmp-buffer" },
 		{ "kdheepak/cmp-latex-symbols" },
-	},
-}
-completion["zbirenbaum/copilot.lua"] = {
-	lazy = true,
-	cond = require("core.settings").use_copilot,
-	cmd = "Copilot",
-	event = "InsertEnter",
-	config = require("completion.copilot"),
-	dependencies = {
+		{ "mikavilpas/blink-ripgrep.nvim" },
+		{ "xzbdmw/colorful-menu.nvim" },
 		{
-			"zbirenbaum/copilot-cmp",
-			config = require("completion.copilot-cmp"),
+			"milanglacier/minuet-ai.nvim",
+			cond = use_minuet_prediction,
+			config = require("completion.minuet"),
+		},
+		{
+			"fang2hou/blink-copilot",
+			cond = use_copilot_prediction,
+			dependencies = {
+				{
+					"zbirenbaum/copilot.lua",
+					lazy = true,
+					cond = use_copilot_prediction,
+					cmd = "Copilot",
+					event = "InsertEnter",
+					config = require("completion.copilot"),
+				},
+			},
 		},
 	},
+	opts_extend = { "sources.default" },
+}
+
+completion["folke/lazydev.nvim"] = {
+	lazy = true,
+	ft = "lua",
+	config = require("completion.lazydev"),
 }
 
 return completion
