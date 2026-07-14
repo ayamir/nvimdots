@@ -87,7 +87,13 @@ M.setup = function()
 		deps = null_ls_deps,
 		registry = mason_ok and mason_registry or nil,
 		package_of = function(source)
-			return mason_ok and source_map.getPackageFromNullLs(source) or nil
+			-- `mason_ok` only proves the module loaded; guard the private function too
+			-- so a mason-null-ls version that renames it degrades to $PATH resolution
+			-- instead of throwing out of the resolver.
+			if not mason_ok or type(source_map.getPackageFromNullLs) ~= "function" then
+				return nil
+			end
+			return source_map.getPackageFromNullLs(source)
 		end,
 		binaries_of = function(source)
 			local binary = info(source).binary
