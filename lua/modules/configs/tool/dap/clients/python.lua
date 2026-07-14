@@ -69,11 +69,13 @@ return function()
 				options = { source_filetype = "python" },
 			})
 		else
-			-- Resolve debugpy lazily, on the launch path only: an `attach` session uses
-			-- the server adapter above and needs no local debugpy, so validating at
-			-- config load would wrongly make remote attach impossible. Still fail fast
-			-- here with a clear error (never a guessed / empty command) when a launch is
-			-- actually requested and debugpy can't be resolved.
+			-- Gate debugpy on the launch path: an `attach` session uses the server
+			-- adapter above and needs no local debugpy, so a failed resolution must
+			-- never block attach. (The availability check at the end of this file also
+			-- probes at config load, but only after the adapter is registered — its
+			-- error() surfaces the missing tool without unregistering anything.) Fail
+			-- fast here with a clear error (never a guessed / empty command) when a
+			-- launch is actually requested and debugpy can't be resolved.
 			local command, args = debugpy_command()
 			if not command then
 				error(
@@ -139,8 +141,11 @@ return function()
 	-- erroring here lets the shared resolver surface `python` in the aggregated
 	-- missing-tool warning (or fall back to installing debugpy via Mason), while
 	-- remote attach — which needs no local debugpy — keeps working with what was
-	-- registered above. The successful probe is cached, so this shares its cost
-	-- with the first launch instead of adding to it.
+	-- registered above. This intentionally runs the discovery probe at config load —
+	-- that is the price of config-time self-validation, bounded by DAP config itself
+	-- being lazy (first dap command, not editor startup). On success the result is
+	-- cached and reused by the first launch; on failure it stays uncached so a
+	-- debugpy installed mid-session is picked up without reconfiguring.
 	if not debugpy_command() then
 		error(
 			"debugpy not found: no Mason venv, `debugpy-adapter`, or python with the debugpy\n"
