@@ -22,20 +22,10 @@ M.setup = function()
 	---A handler to setup all servers defined under `completion/servers/*.lua`
 	---@param lsp_name string
 	local function mason_lsp_handler(lsp_name)
-		-- rust_analyzer is configured using mrcjkb/rustaceanvim
-		-- warn users if they have set it up manually
+		-- rust_analyzer is configured using mrcjkb/rustaceanvim; never configure it
+		-- here (the stray-config warning is issued unconditionally in setup below,
+		-- since this handler only runs for `lsp_deps` entries).
 		if lsp_name == "rust_analyzer" then
-			local config_exist = pcall(require, "completion.servers." .. lsp_name)
-			if config_exist then
-				vim.notify(
-					[[
-`rust_analyzer` is configured independently via `mrcjkb/rustaceanvim`. To get rid of this warning,
-please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` directory and configure
-`rust_analyzer` using the appropriate init options provided by `rustaceanvim` instead.]],
-					vim.log.levels.WARN,
-					{ title = "nvim-lspconfig" }
-				)
-			end
 			return
 		end
 
@@ -79,6 +69,24 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		end
 	end
 
+	-- rust_analyzer is configured independently via mrcjkb/rustaceanvim; a stray
+	-- manual spec is a misconfiguration regardless of whether rust_analyzer is in
+	-- `lsp_deps` (the resolver below only visits deps entries, so the old
+	-- inside-the-handler warning would never fire for the common case).
+	for _, module in ipairs({ "user.configs.lsp-servers.rust_analyzer", "completion.servers.rust_analyzer" }) do
+		if pcall(require, module) then
+			vim.notify(
+				[[
+`rust_analyzer` is configured independently via `mrcjkb/rustaceanvim`. To get rid of this warning,
+please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` directory and configure
+`rust_analyzer` using the appropriate init options provided by `rustaceanvim` instead.]],
+				vim.log.levels.WARN,
+				{ title = "nvim-lspconfig" }
+			)
+			break
+		end
+	end
+
 	if mason_ok then
 		-- Load mason-lspconfig for the lspconfig integration only. Installs are
 		-- driven by the shared resolver (discovery-first) so they degrade gracefully
@@ -106,50 +114,54 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		return lspconfig_to_package[name]
 	end
 
-	---Resolve a server's launch binary for the $PATH probe. Prefer an explicit
-	---`cmd` from the manual spec (user override, then repo default under
-	---`completion/servers/`), then fall back to nvim-lspconfig's default `cmd`.
-	---Returns nil when the spec only exposes a function `cmd` (or no `cmd`): the
-	---binary can't be probed statically, so resolution falls through to the
-	---`has_local_config` path, which configures the server and lets it resolve its
-	---own command, rather than wrongly flagging it missing.
+	---Probe a server's manual spec once and cache the result, so the resolver's
+	---predicates (binaries_of / has_local_config) don't re-require the same modules
+	---for every call (mirrors mason-null-ls.lua's info() cache). `binary` prefers an
+	---explicit `cmd` from the manual spec (user override, then repo default under
+	---`completion/servers/`), then nvim-lspconfig's default `cmd`; it stays nil when
+	---only a function `cmd` (or none) exists — such a spec resolves its own command
+	---at launch, so it becomes the `has_local_config` fallback instead.
+	local server_info_cache = {}
 	---@param name string
-	---@return string|nil
-	local function server_binary(name)
+	---@return { has_module: boolean, binary: string|nil }
+	local function server_info(name)
+		local cached = server_info_cache[name]
+		if cached then
+			return cached
+		end
+		local info = { has_module = false, binary = nil }
 		for _, module in ipairs({ "user.configs.lsp-servers." .. name, "completion.servers." .. name }) do
 			local ok, spec = pcall(require, module)
-			if ok and type(spec) == "table" and type(spec.cmd) == "table" then
-				return spec.cmd[1]
+			if ok then
+				info.has_module = true
+				if info.binary == nil and type(spec) == "table" and type(spec.cmd) == "table" then
+					info.binary = spec.cmd[1]
+				end
 			end
 		end
-		local ok, config = pcall(function()
-			return vim.lsp.config[name]
-		end)
-		if ok and type(config) == "table" and type(config.cmd) == "table" then
-			return config.cmd[1]
+		if info.binary == nil then
+			local ok, config = pcall(function()
+				return vim.lsp.config[name]
+			end)
+			if ok and type(config) == "table" and type(config.cmd) == "table" then
+				info.binary = config.cmd[1]
+			end
 		end
-		return nil
+		server_info_cache[name] = info
+		return info
 	end
 
 	---Should a manual spec be treated as a resolution fallback (configure now even
 	---though the $PATH probe found nothing)? Only when the launch binary can't be
-	---probed statically — i.e. `server_binary` returned nil (a function/absent `cmd`
-	---that resolves itself at launch). When the binary *is* known (e.g. shuck's
-	---`cmd = { "shuck" }`), the $PATH check already decides availability; configuring
-	---anyway would silently enable a server whose binary is missing instead of
-	---surfacing it in the aggregated warning.
+	---probed statically — a function/absent `cmd` that resolves itself at launch.
+	---When the binary *is* known (e.g. shuck's `cmd = { "shuck" }`), the $PATH check
+	---already decides availability; configuring anyway would silently enable a
+	---server whose binary is missing instead of surfacing it in the warning.
 	---@param name string
 	---@return boolean
 	local function has_local_config(name)
-		if server_binary(name) ~= nil then
-			return false
-		end
-		for _, module in ipairs({ "user.configs.lsp-servers." .. name, "completion.servers." .. name }) do
-			if pcall(require, module) then
-				return true
-			end
-		end
-		return false
+		local info = server_info(name)
+		return info.binary == nil and info.has_module
 	end
 
 	tools.resolve({
@@ -158,7 +170,7 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		registry = mason_ok and mason_registry or nil,
 		package_of = package_of,
 		binaries_of = function(name)
-			local binary = server_binary(name)
+			local binary = server_info(name).binary
 			return binary and { binary } or {}
 		end,
 		has_local_config = has_local_config,

@@ -1,6 +1,9 @@
--- https://github.com/vscode-langservers/vscode-html-languageserver-bin
+-- https://github.com/hrsh7th/vscode-langservers-extracted
 return {
-	cmd = { "html-languageserver", "--stdio" },
+	-- `html-languageserver` is the deprecated bin name; both Mason and current
+	-- distro packages ship `vscode-html-language-server`, which is also what the
+	-- resolver's $PATH probe must look for on Mason-less setups.
+	cmd = { "vscode-html-language-server", "--stdio" },
 	filetypes = { "html" },
 	init_options = {
 		configurationSection = { "html", "css", "javascript" },
