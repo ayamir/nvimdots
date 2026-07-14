@@ -51,20 +51,30 @@ function M.find_executable(names)
 	if type(names) == "string" then
 		names = { names }
 	end
+	-- Mirror any_executable's input hygiene: exepath() throws on non-string and
+	-- empty-string arguments (E1174/E1175), so returning nil / skipping bad
+	-- entries keeps a malformed call resolving as "not found" instead of erroring.
+	if type(names) ~= "table" then
+		return nil
+	end
 	for _, name in ipairs(names) do
-		local path = vim.fn.exepath(name)
-		if path ~= "" then
-			return path
+		if type(name) == "string" and name ~= "" then
+			local path = vim.fn.exepath(name)
+			if path ~= "" then
+				return path
+			end
 		end
 	end
 	local root = M.mason_root()
 	if root then
 		for _, name in ipairs(names) do
-			-- exepath() on an absolute candidate validates executability and resolves
-			-- the extension on Windows (mason bin shims are `<name>.cmd` there).
-			local path = vim.fn.exepath(root .. "/bin/" .. name)
-			if path ~= "" then
-				return path
+			if type(name) == "string" and name ~= "" then
+				-- exepath() on an absolute candidate validates executability and resolves
+				-- the extension on Windows (mason bin shims are `<name>.cmd` there).
+				local path = vim.fn.exepath(root .. "/bin/" .. name)
+				if path ~= "" then
+					return path
+				end
 			end
 		end
 	end
@@ -87,7 +97,19 @@ function M.exepath_or_error(names, hint)
 	if path then
 		return path
 	end
-	error(string.format("%s not found on $PATH; %s", table.concat(names, "/"), hint), 0)
+	-- Render only well-formed entries (find_executable skipped the rest):
+	-- table.concat throws on tables/booleans/nil holes, which would replace the
+	-- actionable message below with an unrelated concat error.
+	local shown = {}
+	if type(names) == "table" then
+		for _, name in ipairs(names) do
+			if type(name) == "string" and name ~= "" then
+				shown[#shown + 1] = name
+			end
+		end
+	end
+	local label = #shown > 0 and table.concat(shown, "/") or "<invalid executable spec>"
+	error(string.format("%s not found on $PATH; %s", label, hint), 0)
 end
 
 ---Create a collector that aggregates tools which could not be set up automatically
