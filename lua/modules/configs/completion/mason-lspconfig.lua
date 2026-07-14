@@ -2,14 +2,12 @@ local M = {}
 
 M.setup = function()
 	local lsp_deps = require("core.settings").lsp_deps
-	local mason_registry = require("mason-registry")
-	local mason_lspconfig = require("mason-lspconfig")
-
-	require("modules.utils").load_plugin("mason-lspconfig", {
-		ensure_installed = lsp_deps,
-		-- Skip auto enable because we are loading language servers lazily
-		automatic_enable = false,
-	})
+	-- Mason is an optional installer backend: guard its requires so a Mason-less
+	-- setup still resolves servers from $PATH instead of hard-erroring here.
+	local has_registry, mason_registry = pcall(require, "mason-registry")
+	local has_mlsp, mason_lspconfig = pcall(require, "mason-lspconfig")
+	local mason_ok = has_registry and has_mlsp
+	local tools = require("modules.utils.tools")
 
 	vim.diagnostic.config({
 		signs = true,
@@ -81,37 +79,91 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		end
 	end
 
-	---A simplified mimic of <mason-lspconfig 1.x>'s `setup_handlers` callback.
-	---Invoked for each Mason package (name or `Package` object) to configure its language server.
-	---@param pkg string|{name: string} Either the package name (string) or a Package object
-	local function setup_lsp_for_package(pkg)
-		-- First try to grab the builtin mappings
-		local mappings = mason_lspconfig.get_mappings().package_to_lspconfig
-		-- If empty or nil, build it by hand
-		if not mappings or vim.tbl_isempty(mappings) then
-			mappings = {}
-			for _, spec in ipairs(mason_registry.get_all_package_specs()) do
-				local lspconfig = vim.tbl_get(spec, "neovim", "lspconfig")
-				if lspconfig then
-					mappings[spec.name] = lspconfig
-				end
+	if mason_ok then
+		-- Load mason-lspconfig for the lspconfig integration only. Installs are
+		-- driven by the shared resolver (discovery-first) so they degrade gracefully
+		-- where Mason can't help (BSD/NixOS/...), instead of being gated on the
+		-- installed set.
+		require("modules.utils").load_plugin("mason-lspconfig", {
+			ensure_installed = {},
+			-- Skip auto enable because we are loading language servers lazily
+			automatic_enable = false,
+		})
+	end
+
+	-- lspconfig server name -> Mason package name. Resolved lazily on first use so
+	-- it is read *after* the resolver's registry refresh, when `get_mappings()`
+	-- returns a fully populated map (fresh-bootstrap fix). nil when Mason absent.
+	local lspconfig_to_package = nil
+	local function package_of(name)
+		if not mason_ok then
+			return nil
+		end
+		if lspconfig_to_package == nil then
+			local mappings = mason_lspconfig.get_mappings()
+			lspconfig_to_package = (mappings and mappings.lspconfig_to_package) or {}
+		end
+		return lspconfig_to_package[name]
+	end
+
+	---Resolve a server's launch binary for the $PATH probe. Prefer an explicit
+	---`cmd` from the manual spec (user override, then repo default under
+	---`completion/servers/`), then fall back to nvim-lspconfig's default `cmd`.
+	---Returns nil when the spec only exposes a function `cmd` (or no `cmd`): the
+	---binary can't be probed statically, so resolution falls through to the
+	---`has_local_config` path, which configures the server and lets it resolve its
+	---own command, rather than wrongly flagging it missing.
+	---@param name string
+	---@return string|nil
+	local function server_binary(name)
+		for _, module in ipairs({ "user.configs.lsp-servers." .. name, "completion.servers." .. name }) do
+			local ok, spec = pcall(require, module)
+			if ok and type(spec) == "table" and type(spec.cmd) == "table" then
+				return spec.cmd[1]
 			end
 		end
-
-		-- Figure out the package name and lookup
-		local name = type(pkg) == "string" and pkg or pkg.name
-		local srv = mappings[name]
-		if not srv then
-			return
+		local ok, config = pcall(function()
+			return vim.lsp.config[name]
+		end)
+		if ok and type(config) == "table" and type(config.cmd) == "table" then
+			return config.cmd[1]
 		end
-
-		-- Invoke the handler
-		mason_lsp_handler(srv)
+		return nil
 	end
 
-	for _, pkg in ipairs(mason_registry.get_installed_package_names()) do
-		setup_lsp_for_package(pkg)
+	---Should a manual spec be treated as a resolution fallback (configure now even
+	---though the $PATH probe found nothing)? Only when the launch binary can't be
+	---probed statically — i.e. `server_binary` returned nil (a function/absent `cmd`
+	---that resolves itself at launch). When the binary *is* known (e.g. shuck's
+	---`cmd = { "shuck" }`), the $PATH check already decides availability; configuring
+	---anyway would silently enable a server whose binary is missing instead of
+	---surfacing it in the aggregated warning.
+	---@param name string
+	---@return boolean
+	local function has_local_config(name)
+		if server_binary(name) ~= nil then
+			return false
+		end
+		for _, module in ipairs({ "user.configs.lsp-servers." .. name, "completion.servers." .. name }) do
+			if pcall(require, module) then
+				return true
+			end
+		end
+		return false
 	end
+
+	tools.resolve({
+		title = "LSP",
+		deps = lsp_deps,
+		registry = mason_ok and mason_registry or nil,
+		package_of = package_of,
+		binaries_of = function(name)
+			local binary = server_binary(name)
+			return binary and { binary } or {}
+		end,
+		has_local_config = has_local_config,
+		configure = mason_lsp_handler,
+	})
 end
 
 return M
