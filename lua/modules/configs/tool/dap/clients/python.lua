@@ -80,7 +80,8 @@ return function()
 			if not command then
 				error(
 					"debugpy not found: no Mason venv, `debugpy-adapter`, or python with the debugpy\n"
-						.. "module on $PATH; install debugpy via Mason (`:Mason`) or your package manager"
+						.. "module on $PATH; install debugpy via Mason (`:Mason`) or your package manager",
+					0
 				)
 			end
 			callback({
