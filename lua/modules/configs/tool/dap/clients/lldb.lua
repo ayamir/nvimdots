@@ -3,9 +3,17 @@ return function()
 	local dap = require("dap")
 	local utils = require("modules.utils.dap")
 
+	-- Self-validate the binary so the shared resolver (which pcalls this config)
+	-- surfaces `lldb` in the aggregated missing-tool warning instead of registering
+	-- an adapter with an empty command that only fails at debug time.
+	local command = vim.fn.exepath("lldb-vscode")
+	if command == "" then
+		error("lldb-vscode not found on $PATH; install it via your package manager (ships with LLVM/lldb)")
+	end
+
 	dap.adapters.lldb = {
 		type = "executable",
-		command = vim.fn.exepath("lldb-vscode"), -- Find lldb-vscode on $PATH
+		command = command,
 	}
 	dap.configurations.c = {
 		{

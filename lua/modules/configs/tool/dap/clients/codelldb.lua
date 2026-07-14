@@ -4,11 +4,19 @@ return function()
 	local utils = require("modules.utils.dap")
 	local is_windows = require("core.global").is_windows
 
+	-- Config-time self-validation: error out when codelldb isn't on $PATH so the
+	-- resolver in `tool/dap/init.lua` (which pcalls this config) surfaces `codelldb`
+	-- in the aggregated missing-tool warning — instead of registering an adapter
+	-- with an empty command that only fails once a debug session starts.
+	local command = vim.fn.exepath("codelldb")
+	if command == "" then
+		error("codelldb not found on $PATH; install it via Mason or your package manager")
+	end
 	dap.adapters.codelldb = {
 		type = "server",
 		port = "${port}",
 		executable = {
-			command = vim.fn.exepath("codelldb"), -- Find codelldb on $PATH
+			command = command,
 			args = { "--port", "${port}" },
 			detached = is_windows and false or true,
 		},
