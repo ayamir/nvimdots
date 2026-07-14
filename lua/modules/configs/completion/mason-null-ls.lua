@@ -55,12 +55,23 @@ M.setup = function()
 	---prettier with custom filetypes/args), which run before this resolver.
 	---@param source string
 	---@param builtins table[]
-	local function register(source, builtins)
+	---@param binary string|nil @The command the builtin spawns (from resolve_source).
+	local function register(source, builtins, binary)
 		if null_ls.is_registered(source) then
 			return
 		end
+		-- A Mason install with PATH integration disabled (`PATH = "skip"`) leaves
+		-- the binary resolvable only inside Mason's bin dir: the resolver deems the
+		-- source available (`is_installed()`), but none-ls would spawn the bare
+		-- command name and fail. Rewrite the command to the absolute path
+		-- find_executable resolves (it probes Mason's bin dir after $PATH); when
+		-- the bare name already works — or nothing resolves — register untouched.
+		local command = nil
+		if binary and vim.fn.executable(binary) ~= 1 then
+			command = tools.find_executable(binary)
+		end
 		for _, builtin in ipairs(builtins) do
-			null_ls.register(builtin)
+			null_ls.register(command and builtin.with({ command = command }) or builtin)
 		end
 	end
 
@@ -108,7 +119,8 @@ M.setup = function()
 			return #i.builtins > 0 and i.binary == nil
 		end,
 		configure = function(source)
-			register(source, info(source).builtins)
+			local i = info(source)
+			register(source, i.builtins, i.binary)
 		end,
 	})
 end
