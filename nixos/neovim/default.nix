@@ -126,12 +126,12 @@ in
       };
 
       buildEnv = [
-        ''CPATH=''${CPATH:+''${CPATH}:}${neovim-build-deps}/include''
-        ''CPLUS_INCLUDE_PATH=''${CPLUS_INCLUDE_PATH:+''${CPLUS_INCLUDE_PATH}:}:${neovim-build-deps}/include/c++/v1''
-        ''LD_LIBRARY_PATH=''${LD_LIBRARY_PATH:+''${LD_LIBRARY_PATH}:}${neovim-build-deps}/lib''
-        ''LIBRARY_PATH=''${LIBRARY_PATH:+''${LIBRARY_PATH}:}${neovim-build-deps}/lib''
-        ''NIX_LD_LIBRARY_PATH=''${NIX_LD_LIBRARY_PATH:+''${NIX_LD_LIBRARY_PATH}:}${neovim-build-deps}/lib''
-        ''PKG_CONFIG_PATH=''${PKG_CONFIG_PATH:+''${PKG_CONFIG_PATH}:}${neovim-build-deps}/include/pkgconfig''
+        "CPATH=\${CPATH:+\${CPATH}:}${neovim-build-deps}/include"
+        "CPLUS_INCLUDE_PATH=\${CPLUS_INCLUDE_PATH:+\${CPLUS_INCLUDE_PATH}:}:${neovim-build-deps}/include/c++/v1"
+        "LD_LIBRARY_PATH=\${LD_LIBRARY_PATH:+\${LD_LIBRARY_PATH}:}${neovim-build-deps}/lib"
+        "LIBRARY_PATH=\${LIBRARY_PATH:+\${LIBRARY_PATH}:}${neovim-build-deps}/lib"
+        "NIX_LD_LIBRARY_PATH=\${NIX_LD_LIBRARY_PATH:+\${NIX_LD_LIBRARY_PATH}:}${neovim-build-deps}/lib"
+        "PKG_CONFIG_PATH=\${PKG_CONFIG_PATH:+\${PKG_CONFIG_PATH}:}${neovim-build-deps}/include/pkgconfig"
       ];
     in
     mkIf cfg.enable {
@@ -141,33 +141,32 @@ in
           message = "bindLazyLock and mergeLazyLock cannot be enabled at the same time.";
         }
       ];
-      xdg.configFile =
-        {
-          "nvim/init.lua".source = ../../init.lua;
-          "nvim/lua".source = ../../lua;
-          "nvim/snips".source = ../../snips;
-          "nvim/tutor".source = ../../tutor;
-        }
-        // optionalAttrs cfg.bindLazyLock {
-          "nvim/lazy-lock.json".source = ../../lazy-lock.json;
-        }
-        // optionalAttrs cfg.mergeLazyLock {
-          "nvim/lazy-lock.nix.json" = {
-            source = ../../lazy-lock.json;
-            onChange = ''
-              if [ -f ${config.xdg.configHome}/nvim/lazy-lock.json ]; then
-                tmp=$(mktemp)
-                ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${
-                  config.xdg.configFile."nvim/lazy-lock.nix.json".source
-                } > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/lazy-lock.json
-              else
-                ${pkgs.rsync}/bin/rsync --chmod 644 ${
-                  config.xdg.configFile."nvim/lazy-lock.nix.json".source
-                } ${config.xdg.configHome}/nvim/lazy-lock.json
-              fi
-            '';
-          };
+      xdg.configFile = {
+        "nvim/init.lua".source = ../../init.lua;
+        "nvim/lua".source = ../../lua;
+        "nvim/snips".source = ../../snips;
+        "nvim/tutor".source = ../../tutor;
+      }
+      // optionalAttrs cfg.bindLazyLock {
+        "nvim/lazy-lock.json".source = ../../lazy-lock.json;
+      }
+      // optionalAttrs cfg.mergeLazyLock {
+        "nvim/lazy-lock.nix.json" = {
+          source = ../../lazy-lock.json;
+          onChange = ''
+            if [ -f ${config.xdg.configHome}/nvim/lazy-lock.json ]; then
+              tmp=$(mktemp)
+              ${pkgs.jq}/bin/jq -r -s '.[0] * .[1]' ${config.xdg.configHome}/nvim/lazy-lock.json ${
+                config.xdg.configFile."nvim/lazy-lock.nix.json".source
+              } > "''${tmp}" && mv "''${tmp}" ${config.xdg.configHome}/nvim/lazy-lock.json
+            else
+              ${pkgs.rsync}/bin/rsync --chmod 644 ${
+                config.xdg.configFile."nvim/lazy-lock.nix.json".source
+              } ${config.xdg.configHome}/nvim/lazy-lock.json
+            fi
+          '';
         };
+      };
       home = {
         packages = [
           pkgs.ripgrep
@@ -176,75 +175,70 @@ in
           nvim = concatStringsSep " " buildEnv + " nvim";
         };
       };
-      programs.neovim =
-        {
-          enable = true;
+      programs.neovim = {
+        enable = true;
 
-          withNodeJs = true;
-          withPython3 = true;
+        withNodeJs = true;
+        withPython3 = true;
 
-          extraPackages =
-            [
-              # Dependent packages used by default plugins
-              pkgs.doq
-              pkgs.tree-sitter
-            ]
-            ++ optionals cfg.withBuildTools [
-              pkgs.cargo
-              pkgs.clang
-              pkgs.cmake
-              pkgs.gcc
-              pkgs.gnumake
-              pkgs.go
-              pkgs.lua51Packages.luarocks
-              pkgs.ninja
-              pkgs.pkg-config
-              pkgs.yarn
-            ]
-            ++ optionals cfg.withHaskell [
-              (pkgs.writeShellApplication {
-                name = "stack";
-                text = ''
-                  exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
-                '';
-              })
-              (pkgs.haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
-            ];
+        extraPackages = [
+          # Dependent packages used by default plugins
+          pkgs.tree-sitter
+        ]
+        ++ optionals cfg.withBuildTools [
+          pkgs.cargo
+          pkgs.clang
+          pkgs.cmake
+          pkgs.gcc
+          pkgs.gnumake
+          pkgs.go
+          pkgs.luaPackages.luarocks
+          pkgs.ninja
+          pkgs.pkg-config
+          pkgs.yarn
+        ]
+        ++ optionals cfg.withHaskell [
+          (pkgs.writeShellApplication {
+            name = "stack";
+            text = ''
+              exec "${pkgs.stack}/bin/stack" "--extra-include-dirs=${config.home.profileDirectory}/lib/nvim-depends/include" "--extra-lib-dirs=${config.home.profileDirectory}/lib/nvim-depends/lib" "$@"
+            '';
+          })
+          (pkgs.haskellPackages.ghcWithPackages (ps: cfg.extraHaskellPackages ps))
+        ];
 
-          extraPython3Packages =
-            ps: with ps; [
-              docformatter
-              isort
-              pynvim
-            ];
-        }
-        // optionalAttrs (versionAtLeast config.home.stateVersion "24.05") {
-          extraWrapperArgs = optionals cfg.setBuildEnv [
-            "--suffix"
-            "CPATH"
-            ":"
-            "${neovim-build-deps}/include"
-            "--suffix"
-            "CPLUS_INCLUDE_PATH"
-            ":"
-            "${neovim-build-deps}/include/c++/v1"
-            "--suffix"
-            "LD_LIBRARY_PATH"
-            ":"
-            "${neovim-build-deps}/lib"
-            "--suffix"
-            "LIBRARY_PATH"
-            ":"
-            "${neovim-build-deps}/lib"
-            "--suffix"
-            "PKG_CONFIG_PATH"
-            ":"
-            "${neovim-build-deps}/include/pkgconfig"
-            "--suffix"
-            "NIX_LD_LIBRARY_PATH"
-            ":"
-            "${neovim-build-deps}/lib"
+        extraPython3Packages =
+          ps: with ps; [
+            pynvim
           ];
-        };
+      }
+      // optionalAttrs (versionAtLeast config.home.stateVersion "24.05") {
+        extraWrapperArgs = optionals cfg.setBuildEnv [
+          "--suffix"
+          "CPATH"
+          ":"
+          "${neovim-build-deps}/include"
+          "--suffix"
+          "CPLUS_INCLUDE_PATH"
+          ":"
+          "${neovim-build-deps}/include/c++/v1"
+          "--suffix"
+          "LD_LIBRARY_PATH"
+          ":"
+          "${neovim-build-deps}/lib"
+          "--suffix"
+          "LIBRARY_PATH"
+          ":"
+          "${neovim-build-deps}/lib"
+          "--suffix"
+          "PKG_CONFIG_PATH"
+          ":"
+          "${neovim-build-deps}/include/pkgconfig"
+          "--suffix"
+          "NIX_LD_LIBRARY_PATH"
+          ":"
+          "${neovim-build-deps}/lib"
+        ];
+      };
     };
 }
