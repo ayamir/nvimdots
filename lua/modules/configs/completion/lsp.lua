@@ -1,21 +1,11 @@
 return function()
 	require("completion.neoconf").setup()
+	-- All servers — including ones without a Mason package (dartls, say) — are
+	-- resolved discovery-first from the single `lsp_deps` list inside
+	-- mason-lspconfig.setup: a server whose manual spec names its binary is
+	-- probed on $PATH and configured when present, so no per-server
+	-- `vim.fn.executable(...)` special case is needed here.
 	require("completion.mason-lspconfig").setup()
-
-	local opts = {
-		capabilities = require("modules.utils").get_lsp_capabilities(),
-	}
-	-- Configure LSPs that are not supported by `mason.nvim` but are available in `nvim-lspconfig`.
-	-- First call |vim.lsp.config()|, then |vim.lsp.enable()| (or use `register_server`, see below)
-	-- to ensure the language server is properly configured and starts automatically.
-	if vim.fn.executable("dart") == 1 then
-		local ok, _opts = pcall(require, "user.configs.lsp-servers.dartls")
-		if not ok then
-			_opts = require("completion.servers.dartls")
-		end
-		local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
-		require("modules.utils").register_server("dartls", final_opts)
-	end
 
 	pcall(require, "user.configs.lsp")
 

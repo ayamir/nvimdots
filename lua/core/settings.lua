@@ -223,6 +223,10 @@ settings["lsp_inlayhints"] = false
 settings["lsp_deps"] = {
 	"bashls",
 	"clangd",
+	-- Servers without a Mason package resolve straight from $PATH via their
+	-- manual spec under `completion/servers/` — list them here like any other
+	-- server (e.g. dartls: the `dart` executable ships the language server).
+	-- "dartls",
 	"gopls",
 	"html",
 	"jsonls",
