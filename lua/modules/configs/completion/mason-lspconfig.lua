@@ -174,6 +174,38 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 		return info.binary == nil and info.has_module
 	end
 
+	---Mirror the none-ls `PATH = "skip"` handling (see mason-null-ls.lua): a
+	---Mason-installed server counts as available (`is_installed()`) even when its
+	---binary is only resolvable inside Mason's bin dir, so the handler above would
+	---register a bare `cmd[1]` that lspconfig later fails to spawn. After the
+	---handler runs, rewrite the *registered* config's `cmd[1]` to the absolute
+	---path find_executable resolves (it probes Mason's bin dir after $PATH).
+	---Checked against the registered cmd — not the cached spec probe — so user
+	---overrides and lspconfig defaults are covered alike; function `cmd`s (which
+	---resolve themselves at launch) and already-spawnable names are left alone.
+	---@param name string
+	local function rewrite_cmd_off_path(name)
+		local ok, config = pcall(function()
+			return vim.lsp.config[name]
+		end)
+		if not ok or type(config) ~= "table" or type(config.cmd) ~= "table" then
+			return
+		end
+		local binary = config.cmd[1]
+		if type(binary) ~= "string" or binary == "" or vim.fn.executable(binary) == 1 then
+			return
+		end
+		local path = tools.find_executable(binary)
+		if not path then
+			return
+		end
+		local cmd = vim.deepcopy(config.cmd)
+		cmd[1] = path
+		-- Lists are replaced wholesale (not index-merged) by the deep-extend in
+		-- vim.lsp.config(), so the full rewritten cmd is passed back.
+		vim.lsp.config(name, { cmd = cmd })
+	end
+
 	tools.resolve({
 		title = "LSP",
 		deps = lsp_deps,
@@ -184,7 +216,10 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 			return binary and { binary } or {}
 		end,
 		has_local_config = has_local_config,
-		configure = mason_lsp_handler,
+		configure = function(name)
+			mason_lsp_handler(name)
+			rewrite_cmd_off_path(name)
+		end,
 	})
 end
 
