@@ -9,13 +9,10 @@ return function()
 	-- separate go-debug-adapter. This keeps Go debugging working wherever `dlv` is
 	-- available (system or Mason) and matches how `tool/dap/init.lua` resolves the
 	-- `delve` Mason package (bin `dlv`), so discovery/install and configuration agree
-	-- on a single binary. The resolver runs this under pcall, so erroring when `dlv`
-	-- is absent lets it mark `delve` as missing (with this message) instead of
-	-- configuring an adapter that can't launch.
-	local command = vim.fn.exepath("dlv")
-	if command == "" then
-		error("delve (dlv) not found on $PATH; install delve via Mason or your package manager")
-	end
+	-- on a single binary. `dlv` is resolved lazily on the spawn path only: a remote
+	-- `attach` connects to an already-running `dlv dap` and needs no local binary,
+	-- so the adapter must be registered even when `dlv` is absent (the availability
+	-- check at the end of this file surfaces that case without unregistering).
 
 	---Spawn `dlv dap` as a server adapter, binding to the port nvim-dap allocates.
 	---A function adapter (over a static table) so a remote `attach` config can
@@ -33,6 +30,12 @@ return function()
 				port = tonumber(config.port) or 38697,
 			})
 		else
+			-- Resolve lazily so a dlv installed after config load (a finished Mason
+			-- install, say) is picked up without reconfiguring.
+			local command = require("modules.utils.tools").find_executable("dlv")
+			if not command then
+				error("delve (dlv) not found on $PATH; install delve via Mason or your package manager", 0)
+			end
 			callback({
 				type = "server",
 				port = "${port}",
@@ -112,4 +115,16 @@ return function()
 			stopOnEntry = false,
 		},
 	}
+
+	-- Availability check LAST, after the adapter and configurations are registered:
+	-- erroring here lets the shared resolver surface `delve` in the aggregated
+	-- missing-tool warning (or fall back to a Mason install), while remote attach —
+	-- which needs no local dlv — keeps working with what was registered above.
+	if not require("modules.utils.tools").find_executable("dlv") then
+		error(
+			"delve (dlv) not found on $PATH; local `dlv dap` launch is unavailable until installed"
+				.. " (remote attach still works)",
+			0
+		)
+	end
 end

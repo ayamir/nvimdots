@@ -14,17 +14,28 @@ return function()
 	-- venv, then a `debugpy-adapter` on $PATH, then a system python running the
 	-- debugpy module. This keeps python debugging working without Mason (BSD/NixOS),
 	-- where the hard-coded Mason path would otherwise point at a missing directory.
-	-- Returns nil when nothing resolves (no guessing).
+	-- Returns nil when nothing resolves (no guessing). Only a *successful*
+	-- resolution is cached: the import probe below shells out (blocking), so
+	-- repeating it on every launch would stall the UI — while a failure must stay
+	-- re-probeable so a debugpy installed mid-session is picked up next launch.
+	local resolved
 	local function debugpy_command()
+		if resolved then
+			return resolved.command, resolved.args
+		end
+		local function found(command, args)
+			resolved = { command = command, args = args }
+			return command, args
+		end
 		if debugpy_root then
 			local mason_python = is_windows and debugpy_root .. "/venv/Scripts/pythonw.exe"
 				or debugpy_root .. "/venv/bin/python"
 			if vim.fn.executable(mason_python) == 1 then
-				return mason_python, { "-m", "debugpy.adapter" }
+				return found(mason_python, { "-m", "debugpy.adapter" })
 			end
 		end
 		if vim.fn.executable("debugpy-adapter") == 1 then
-			return "debugpy-adapter", {}
+			return found("debugpy-adapter", {})
 		end
 		-- Last resort: a python interpreter on $PATH that can run debugpy. Probe
 		-- candidates rather than hard-coding one, so we don't hand nvim-dap a
@@ -40,7 +51,7 @@ return function()
 			if vim.fn.executable(py) == 1 then
 				vim.fn.system({ py, "-c", "import debugpy" })
 				if vim.v.shell_error == 0 then
-					return py, { "-m", "debugpy.adapter" }
+					return found(py, { "-m", "debugpy.adapter" })
 				end
 			end
 		end
@@ -123,4 +134,18 @@ return function()
 			end,
 		},
 	}
+
+	-- Availability check LAST, after the adapter and configurations are registered:
+	-- erroring here lets the shared resolver surface `python` in the aggregated
+	-- missing-tool warning (or fall back to installing debugpy via Mason), while
+	-- remote attach — which needs no local debugpy — keeps working with what was
+	-- registered above. The successful probe is cached, so this shares its cost
+	-- with the first launch instead of adding to it.
+	if not debugpy_command() then
+		error(
+			"debugpy not found: no Mason venv, `debugpy-adapter`, or python with the debugpy\n"
+				.. "module on $PATH; local launch is unavailable until installed (remote attach still works)",
+			0
+		)
+	end
 end

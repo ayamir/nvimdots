@@ -114,6 +114,11 @@ return function()
 		adapters_map = map_or_empty("mason-nvim-dap.mappings.adapters", {})
 		configs_map = map_or_empty("mason-nvim-dap.mappings.configurations", {})
 		filetypes_map = map_or_empty("mason-nvim-dap.mappings.filetypes", {})
+		-- The module may load while the field we index is renamed/removed (the require
+		-- guard can't see that); normalize so package_of/binaries_of below never index nil.
+		if type(source_map.nvim_dap_to_package) ~= "table" then
+			source_map.nvim_dap_to_package = {}
+		end
 	end
 
 	---Does an explicit client config exist for this adapter (system-resolved)?
@@ -160,9 +165,21 @@ return function()
 			return source_map.nvim_dap_to_package[name]
 		end,
 		binaries_of = function(name, pkg)
-			return pkg ~= nil and tools.package_binaries(pkg, source_map.nvim_dap_to_package[name] or name) or {}
+			if pkg ~= nil then
+				return tools.package_binaries(pkg, source_map.nvim_dap_to_package[name] or name)
+			end
+			-- No Package object (Mason absent, or the mapping points at a package the
+			-- registry doesn't know): probe the mapped package name / adapter name
+			-- directly, so an adapter provided by the system is still discovered
+			-- instead of being misreported as an unknown name.
+			return { source_map.nvim_dap_to_package[name] or name }
 		end,
 		has_local_config = has_client_config,
+		-- Client configs self-validate (error() when their binary can't be resolved),
+		-- so the resolver lets an existing config try before falling back to a Mason
+		-- install — e.g. python resolves debugpy from a venv/system interpreter that
+		-- the $PATH probe can't see.
+		validates_config = true,
 		configure = configure_adapter,
 	})
 end

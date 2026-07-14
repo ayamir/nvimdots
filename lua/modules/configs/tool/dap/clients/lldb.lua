@@ -5,11 +5,13 @@ return function()
 
 	-- Self-validate the binary so the shared resolver (which pcalls this config)
 	-- surfaces `lldb` in the aggregated missing-tool warning instead of registering
-	-- an adapter with an empty command that only fails at debug time.
-	local command = vim.fn.exepath("lldb-vscode")
-	if command == "" then
-		error("lldb-vscode not found on $PATH; install it via your package manager (ships with LLVM/lldb)")
-	end
+	-- an adapter with an empty command that only fails at debug time. LLVM 15
+	-- renamed the DAP binary `lldb-vscode` -> `lldb-dap`; probe the current name
+	-- first and keep the old one for distros still shipping it.
+	local command = require("modules.utils.tools").exepath_or_error(
+		{ "lldb-dap", "lldb-vscode" },
+		"install it via your package manager (ships with LLVM/lldb)"
+	)
 
 	dap.adapters.lldb = {
 		type = "executable",

@@ -7,18 +7,18 @@ return function()
 	-- Config-time self-validation: error out when codelldb isn't on $PATH so the
 	-- resolver in `tool/dap/init.lua` (which pcalls this config) surfaces `codelldb`
 	-- in the aggregated missing-tool warning — instead of registering an adapter
-	-- with an empty command that only fails once a debug session starts.
-	local command = vim.fn.exepath("codelldb")
-	if command == "" then
-		error("codelldb not found on $PATH; install it via Mason or your package manager")
-	end
+	-- with an empty command that only fails once a debug session starts. Every
+	-- codelldb branch (launch and attach) spawns the local binary, so unlike
+	-- delve/python there is no adapter worth registering without it.
+	local command =
+		require("modules.utils.tools").exepath_or_error("codelldb", "install it via Mason or your package manager")
 	dap.adapters.codelldb = {
 		type = "server",
 		port = "${port}",
 		executable = {
 			command = command,
 			args = { "--port", "${port}" },
-			detached = is_windows and false or true,
+			detached = not is_windows,
 		},
 	}
 	dap.configurations.c = {
