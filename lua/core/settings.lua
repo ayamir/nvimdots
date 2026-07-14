@@ -225,8 +225,9 @@ settings["lsp_deps"] = {
 	"clangd",
 	-- Servers without a Mason package resolve straight from $PATH via their
 	-- manual spec under `completion/servers/` — list them here like any other
-	-- server (e.g. dartls: the `dart` executable ships the language server).
-	-- "dartls",
+	-- server. dartls needs no entry: it is auto-added whenever the `dart`
+	-- executable (which ships the language server) is on $PATH; listing it
+	-- here explicitly instead surfaces the missing-tool warning when absent.
 	"gopls",
 	"html",
 	"jsonls",

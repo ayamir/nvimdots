@@ -1,10 +1,12 @@
 return function()
 	require("completion.neoconf").setup()
-	-- All servers — including ones without a Mason package (dartls, say) — are
-	-- resolved discovery-first from the single `lsp_deps` list inside
+	-- All servers — including ones without a Mason package — are resolved
+	-- discovery-first from the single `lsp_deps` list inside
 	-- mason-lspconfig.setup: a server whose manual spec names its binary is
 	-- probed on $PATH and configured when present, so no per-server
-	-- `vim.fn.executable(...)` special case is needed here.
+	-- `vim.fn.executable(...)` special case is needed here (dartls keeps its
+	-- historical auto-enable — it is injected into the list there whenever
+	-- `dart` is on $PATH).
 	require("completion.mason-lspconfig").setup()
 
 	pcall(require, "user.configs.lsp")

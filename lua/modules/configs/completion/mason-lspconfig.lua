@@ -2,6 +2,16 @@ local M = {}
 
 M.setup = function()
 	local lsp_deps = require("core.settings").lsp_deps
+	-- dartls ships inside the Dart SDK (no Mason package), so its availability is
+	-- keyed on the `dart` executable: auto-add it when `dart` is on $PATH — same
+	-- auto-enable behavior as the historical inline check in `lsp.lua`, but routed
+	-- through the shared resolver like every other server. Copy-on-inject keeps
+	-- the shared settings table unmutated; an explicit "dartls" entry in
+	-- `lsp_deps` still works (and forces the missing-tool warning when `dart`
+	-- is absent).
+	if vim.fn.executable("dart") == 1 and not vim.tbl_contains(lsp_deps, "dartls") then
+		lsp_deps = vim.list_extend({ "dartls" }, lsp_deps)
+	end
 	-- Mason is an optional installer backend: guard its requires so a Mason-less
 	-- setup still resolves servers from $PATH instead of hard-erroring here.
 	local has_registry, mason_registry = pcall(require, "mason-registry")
