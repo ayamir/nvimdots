@@ -65,8 +65,19 @@ return function()
 			-- mason-nvim-dap is available.
 			if has_mason_dap then
 				mason_dap.default_setup(config)
+				return
 			end
-			return
+			-- No client config and no mason-nvim-dap to provide a default: nothing can
+			-- register this adapter. error() (level 0, no position prefix) so the shared
+			-- resolver — which pcalls configure — reports it in the aggregated warning
+			-- instead of treating a silent return as a successful setup.
+			error(
+				string.format(
+					"no client config under `tool/dap/clients/%s.lua` and mason-nvim-dap is unavailable for a default setup",
+					dap_name
+				),
+				0
+			)
 		elseif type(custom_handler) == "function" then
 			-- Case where the protocol requires its own setup
 			-- Make sure to set
