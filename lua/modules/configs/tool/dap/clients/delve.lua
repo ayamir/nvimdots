@@ -24,9 +24,11 @@ return function()
 			callback({
 				type = "server",
 				host = config.host or "127.0.0.1",
-				-- Coerce to a number (and default to an integer): nvim-dap tonumber()s the
-				-- port itself, but a non-numeric user `config.port` would otherwise reach
-				-- the socket connect as-is; this guarantees an integer or the default.
+				-- nvim-dap asserts tonumber(adapter.port) before its socket connect, so
+				-- a non-numeric port could never reach the connect as-is; this coercion
+				-- is about accepting a string user `config.port` and supplying delve's
+				-- default 38697 when the value is absent or non-numeric (instead of
+				-- tripping that assert with a less actionable message).
 				port = tonumber(config.port) or 38697,
 			})
 		else
