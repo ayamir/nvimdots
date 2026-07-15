@@ -98,12 +98,17 @@ M.setup = function()
 		-- just to probe existence would run its module-level code for the side
 		-- effects. Neovim keeps package.path in sync with 'runtimepath' (see
 		-- :h lua-package-path), so searchpath sees the same modules require would.
-		if package.searchpath(module, package.path) then
+		-- The found path names the offending file directly, so the guidance is
+		-- right for a user override as well as a repo preset.
+		local path = package.searchpath(module, package.path)
+		if path then
 			vim.notify(
-				[[
-`rust_analyzer` is configured independently via `mrcjkb/rustaceanvim`. To get rid of this warning,
-please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` directory and configure
-`rust_analyzer` using the appropriate init options provided by `rustaceanvim` instead.]],
+				string.format(
+					"`rust_analyzer` is configured independently via `mrcjkb/rustaceanvim`. To get rid of this warning,\n"
+						.. "please REMOVE the conflicting spec at `%s`\n"
+						.. "and configure `rust_analyzer` using the appropriate init options provided by `rustaceanvim` instead.",
+					path
+				),
 				vim.log.levels.WARN,
 				{ title = "nvim-lspconfig" }
 			)
