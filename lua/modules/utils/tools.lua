@@ -557,11 +557,40 @@ function M.resolve(spec)
 		-- Fresh (never-bootstrapped) setup: wait for refresh() to download the
 		-- package specs. It calls back from a fast event context when it actually
 		-- updates; defer to the main loop only then.
+		--
+		-- refresh() only calls back on completion or failure — a *stalled*
+		-- transfer (hung network on a first-ever launch) fires neither, and
+		-- resolution would then never run: nothing gets configured and nothing is
+		-- surfaced, for the whole session. Arm a deadline that reports the deps as
+		-- unresolved instead of staying silent; `settled` makes callback and
+		-- deadline mutually exclusive (a refresh completing after the deadline is
+		-- dropped — the warning already told the user, and a relaunch retries).
+		local settled = false
+		local function on_refreshed()
+			if settled then
+				return
+			end
+			settled = true
+			run()
+		end
+		vim.defer_fn(function()
+			if settled then
+				return
+			end
+			settled = true
+			for _, name in ipairs(spec.deps) do
+				collector.mark(
+					type(name) == "string" and name or tostring(name),
+					"Mason registry refresh did not complete (cannot resolve or install)"
+				)
+			end
+			collector.done()
+		end, 300000)
 		registry.refresh(function()
 			if vim.in_fast_event() then
-				vim.schedule(run)
+				vim.schedule(on_refreshed)
 			else
-				run()
+				on_refreshed()
 			end
 		end)
 	else
