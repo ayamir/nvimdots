@@ -154,8 +154,21 @@ please REMOVE your LSP configuration (rust_analyzer.lua) from the `servers` dire
 			return cached
 		end
 		local info = { has_module = false, binary = nil }
-		for _, module in ipairs({ "user.configs.lsp-servers." .. name, "completion.servers." .. name }) do
-			local ok, spec = pcall(require, module)
+		local user_ok, user_spec = pcall(require, "user.configs.lsp-servers." .. name)
+		if user_ok then
+			info.has_module = true
+			if type(user_spec) == "table" and type(user_spec.cmd) == "table" then
+				info.binary = user_spec.cmd[1]
+			end
+		end
+		-- Load the repo preset only when it can inform this probe: when there is no
+		-- user override (existence and the binary must come from the preset), or
+		-- when a table-form override carries no cmd (the preset is the merge base
+		-- that may). A function-form override replaces the preset wholesale
+		-- (mason_lsp_handler never reads it), so requiring it here would run the
+		-- preset's module-level code for a spec that cannot be used.
+		if not user_ok or (type(user_spec) == "table" and info.binary == nil) then
+			local ok, spec = pcall(require, "completion.servers." .. name)
 			if ok then
 				info.has_module = true
 				if info.binary == nil and type(spec) == "table" and type(spec.cmd) == "table" then
