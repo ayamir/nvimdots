@@ -542,13 +542,17 @@ function M.resolve(spec)
 
 	local function run()
 		local visited = {}
-		for _, name in ipairs(spec.deps) do
+		-- maxn, not ipairs (see any_executable): a nil hole from a conditional
+		-- entry (`cond and "foo" or nil`) must skip that slot, not end resolution
+		-- for every dep after it.
+		for i = 1, table.maxn(spec.deps) do
+			local name = spec.deps[i]
 			-- Dedup (a name listed twice would double-install/configure and double up
 			-- the "Installing N tool(s)" list) and isolate: one dep's failure — a
 			-- non-string entry, or a subsystem callback tripping on plugin-version
 			-- drift (a renamed mapping field, say) — must not abort resolution of the
 			-- remaining deps or suppress the aggregated warning.
-			if not visited[name] then
+			if name ~= nil and not visited[name] then
 				visited[name] = true
 				local ok, err = pcall(resolve_one, name)
 				if not ok then
@@ -598,8 +602,8 @@ function M.resolve(spec)
 				return
 			end
 			settled = true
-			for _, name in ipairs(spec.deps) do
-				collector.mark(name, "Mason registry refresh did not complete (cannot resolve or install)")
+			for i = 1, table.maxn(spec.deps) do
+				collector.mark(spec.deps[i], "Mason registry refresh did not complete (cannot resolve or install)")
 			end
 			collector.done()
 		end, 300000)
