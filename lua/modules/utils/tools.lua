@@ -143,11 +143,20 @@ function M.missing_collector(title)
 	local pending = 0
 	local flushed = false
 
-	-- Record a name into a bucket once: ignore non-strings/empties and de-duplicate
-	-- (across both buckets) so the aggregated notification stays stable regardless
-	-- of how callers invoke it.
+	-- Record a name into a bucket once, de-duplicated across both buckets so the
+	-- aggregated notification stays stable regardless of how callers invoke it.
+	-- A non-string name (a malformed deps entry: a number, a nested table) is
+	-- coerced via tostring() so it is still surfaced as a config error instead of
+	-- silently vanishing from the warning; nil and empty strings stay ignored
+	-- (nothing meaningful to render).
+	local function normalize(name)
+		if name == nil or name == "" then
+			return nil
+		end
+		return type(name) == "string" and name or tostring(name)
+	end
 	local function record(bucket, name)
-		if type(name) ~= "string" or name == "" or seen[name] then
+		if name == nil or seen[name] then
 			return false
 		end
 		seen[name] = true
@@ -155,12 +164,13 @@ function M.missing_collector(title)
 		return true
 	end
 	local function add(name, reason)
+		name = normalize(name)
 		if record(missing, name) and type(reason) == "string" and reason ~= "" then
 			reasons[name] = reason
 		end
 	end
 	local function add_unknown(name)
-		record(unknown, name)
+		record(unknown, normalize(name))
 	end
 
 	local function render(name)
@@ -532,7 +542,7 @@ function M.resolve(spec)
 				visited[name] = true
 				local ok, err = pcall(resolve_one, name)
 				if not ok then
-					collector.mark(type(name) == "string" and name or tostring(name), strip_position(err))
+					collector.mark(name, strip_position(err))
 				end
 			end
 		end
@@ -579,10 +589,7 @@ function M.resolve(spec)
 			end
 			settled = true
 			for _, name in ipairs(spec.deps) do
-				collector.mark(
-					type(name) == "string" and name or tostring(name),
-					"Mason registry refresh did not complete (cannot resolve or install)"
-				)
+				collector.mark(name, "Mason registry refresh did not complete (cannot resolve or install)")
 			end
 			collector.done()
 		end, 300000)

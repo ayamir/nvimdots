@@ -84,7 +84,12 @@ M.setup = function()
 	-- `lsp_deps` (the resolver below only visits deps entries, so the old
 	-- inside-the-handler warning would never fire for the common case).
 	for _, module in ipairs({ "user.configs.lsp-servers.rust_analyzer", "completion.servers.rust_analyzer" }) do
-		if pcall(require, module) then
+		-- Presence check WITHOUT executing the module: a stray spec should be
+		-- reported even when it errors at load (especially then), and requiring it
+		-- just to probe existence would run its module-level code for the side
+		-- effects. Neovim keeps package.path in sync with 'runtimepath' (see
+		-- :h lua-package-path), so searchpath sees the same modules require would.
+		if package.searchpath(module, package.path) then
 			vim.notify(
 				[[
 `rust_analyzer` is configured independently via `mrcjkb/rustaceanvim`. To get rid of this warning,
