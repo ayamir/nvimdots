@@ -32,7 +32,11 @@ function M.any_executable(names)
 	if type(names) ~= "table" then
 		return false
 	end
-	for _, name in ipairs(names) do
+	-- Iterate to maxn, not ipairs: ipairs stops at the first nil, so a sparse
+	-- list (e.g. `{ cond and "foo" or nil, "bar" }`) would silently truncate the
+	-- search and misclassify an available tool as missing.
+	for i = 1, table.maxn(names) do
+		local name = names[i]
 		if type(name) == "string" and name ~= "" and vim.fn.executable(name) == 1 then
 			return true
 		end
@@ -57,7 +61,10 @@ function M.find_executable(names)
 	if type(names) ~= "table" then
 		return nil
 	end
-	for _, name in ipairs(names) do
+	-- maxn, not ipairs — see any_executable: a nil hole must not end the probe.
+	local last = table.maxn(names)
+	for i = 1, last do
+		local name = names[i]
 		if type(name) == "string" and name ~= "" then
 			local path = vim.fn.exepath(name)
 			if path ~= "" then
@@ -67,7 +74,8 @@ function M.find_executable(names)
 	end
 	local root = M.mason_root()
 	if root then
-		for _, name in ipairs(names) do
+		for i = 1, last do
+			local name = names[i]
 			if type(name) == "string" and name ~= "" then
 				-- exepath() on an absolute candidate validates executability and resolves
 				-- the extension on Windows (mason bin shims are `<name>.cmd` there).
@@ -99,10 +107,12 @@ function M.exepath_or_error(names, hint)
 	end
 	-- Render only well-formed entries (find_executable skipped the rest):
 	-- table.concat throws on tables/booleans/nil holes, which would replace the
-	-- actionable message below with an unrelated concat error.
+	-- actionable message below with an unrelated concat error. maxn, not ipairs,
+	-- so entries after a nil hole still render (matching the probe above).
 	local shown = {}
 	if type(names) == "table" then
-		for _, name in ipairs(names) do
+		for i = 1, table.maxn(names) do
+			local name = names[i]
 			if type(name) == "string" and name ~= "" then
 				shown[#shown + 1] = name
 			end
