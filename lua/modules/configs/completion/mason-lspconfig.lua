@@ -40,7 +40,16 @@ M.setup = function()
 		end
 
 		local ok, custom_handler = pcall(require, "user.configs.lsp-servers." .. lsp_name)
-		local default_ok, default_handler = pcall(require, "completion.servers." .. lsp_name)
+		-- Load the repo preset only when it can actually be used: as the spec when
+		-- there is no user override, or as the merge base under a table-form
+		-- override. A function-form override replaces the preset wholesale, so
+		-- requiring it would only run the preset's module-level code (vim.fn.expand
+		-- & co.) for nothing — and could surface preset-load errors the override
+		-- deliberately avoids.
+		local default_ok, default_handler = false, nil
+		if not ok or type(custom_handler) == "table" then
+			default_ok, default_handler = pcall(require, "completion.servers." .. lsp_name)
+		end
 		-- Use preset if there is no user definition
 		if not ok then
 			ok, custom_handler = default_ok, default_handler
