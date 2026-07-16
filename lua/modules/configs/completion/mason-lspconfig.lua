@@ -19,6 +19,26 @@ M.setup = function()
 	local mason_ok = has_registry and has_mlsp
 	local tools = require("modules.utils.tools")
 
+	---Locate a module file on the search paths require() uses, WITHOUT executing
+	---it. package.searchpath alone is not enough: `user.*` modules live under a
+	---runtimepath `lua/` dir and are found by Neovim's runtimepath loader, not
+	---package.path — while `completion.servers.*` is the reverse (reachable only
+	---through the package.path entries core/pack.lua appends). Probe both.
+	---@param module string
+	---@return string|nil
+	local function module_path(module)
+		local path = package.searchpath(module, package.path)
+		if path then
+			return path
+		end
+		local base = "lua/" .. module:gsub("%.", "/")
+		local hits = vim.api.nvim_get_runtime_file(base .. ".lua", false)
+		if #hits == 0 then
+			hits = vim.api.nvim_get_runtime_file(base .. "/init.lua", false)
+		end
+		return hits[1]
+	end
+
 	vim.diagnostic.config({
 		signs = true,
 		underline = true,
@@ -96,11 +116,9 @@ M.setup = function()
 		-- Presence check WITHOUT executing the module: a stray spec should be
 		-- reported even when it errors at load (especially then), and requiring it
 		-- just to probe existence would run its module-level code for the side
-		-- effects. Neovim keeps package.path in sync with 'runtimepath' (see
-		-- :h lua-package-path), so searchpath sees the same modules require would.
-		-- The found path names the offending file directly, so the guidance is
-		-- right for a user override as well as a repo preset.
-		local path = package.searchpath(module, package.path)
+		-- effects. The found path names the offending file directly, so the
+		-- guidance is right for a user override as well as a repo preset.
+		local path = module_path(module)
 		if path then
 			vim.notify(
 				string.format(
@@ -159,12 +177,31 @@ M.setup = function()
 			return cached
 		end
 		local info = { has_module = false, binary = nil }
+		---A spec file that exists but throws at load is a broken config, not a
+		---missing one: count it as a module and surface the load error
+		---(server_info is cached, so once per server).
+		---@param module string
+		---@param err any @The pcall error for the failed require.
+		---@return boolean @Whether the module file exists on the search paths.
+		local function report_broken_spec(module, err)
+			if not module_path(module) then
+				return false
+			end
+			vim.notify(
+				string.format("Failed to load `%s`:\n%s", module, err),
+				vim.log.levels.ERROR,
+				{ title = "nvim-lspconfig" }
+			)
+			return true
+		end
 		local user_ok, user_spec = pcall(require, "user.configs.lsp-servers." .. name)
 		if user_ok then
 			info.has_module = true
 			if type(user_spec) == "table" and type(user_spec.cmd) == "table" then
 				info.binary = user_spec.cmd[1]
 			end
+		elseif report_broken_spec("user.configs.lsp-servers." .. name, user_spec) then
+			info.has_module = true
 		end
 		-- Load the repo preset only when it can inform this probe: when there is no
 		-- user override (existence and the binary must come from the preset), or
@@ -179,6 +216,8 @@ M.setup = function()
 				if info.binary == nil and type(spec) == "table" and type(spec.cmd) == "table" then
 					info.binary = spec.cmd[1]
 				end
+			elseif report_broken_spec("completion.servers." .. name, spec) then
+				info.has_module = true
 			end
 		end
 		if info.binary == nil then
