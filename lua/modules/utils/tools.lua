@@ -362,9 +362,12 @@ function M.missing_collector(title)
 end
 
 ---Collect the executable name(s) a Mason package provides, from its spec.
----Falls back to the package name when the spec declares no `bin` table.
+---When the spec declares no `bin` table, falls back to the package's own name
+---(`pkg.name`) before the caller-supplied name: the caller's subsystem name can
+---differ from the package name (adapter `python` -> package `debugpy`), and the
+---package name is the better probe for what an install would provide.
 ---@param pkg table @A mason-registry Package object.
----@param fallback string @Name to use when `pkg.spec.bin` is absent.
+---@param fallback string @Last-resort name when even `pkg.name` is absent.
 ---@return string[]
 function M.package_binaries(pkg, fallback)
 	local bins = {}
@@ -374,7 +377,7 @@ function M.package_binaries(pkg, fallback)
 		end
 	end
 	if #bins == 0 then
-		bins = { fallback }
+		bins = { type(pkg.name) == "string" and pkg.name or fallback }
 	end
 	return bins
 end

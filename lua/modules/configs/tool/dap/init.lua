@@ -177,7 +177,10 @@ return function()
 		end,
 		binaries_of = function(name, pkg)
 			if pkg ~= nil then
-				return tools.package_binaries(pkg, source_map.nvim_dap_to_package[name] or name)
+				-- package_binaries prefers pkg.name when the spec declares no bin table,
+				-- so the adapter name is only the last resort (adapter != package name,
+				-- e.g. python -> debugpy).
+				return tools.package_binaries(pkg, name)
 			end
 			-- No Package object (Mason absent, or the mapping points at a package the
 			-- registry doesn't know): probe the mapped package name / adapter name
