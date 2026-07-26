@@ -1,4 +1,3 @@
-local vim_path = require("core.global").vim_path
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
@@ -127,23 +126,23 @@ local mappings = {
 			:with_silent()
 			:with_desc("lsp: Show document diagnostics"),
 
-		-- Plugin: telescope
+		-- Plugin: snacks
 		["n|<C-p>"] = map_callback(function()
 				helpers.picker("keymaps", {
-					lhs_filter = function(lhs)
-						return not string.find(lhs, "Þ")
-					end,
+					global = true,
+					["local"] = true,
+					plugs = false,
 				})
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Toggle command panel"),
 		["n|<leader>fc"] = map_callback(function()
-				helpers.telescope_collections(require("telescope.themes").get_dropdown())
+				helpers.search_collections()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Open Telescope collections"),
+			:with_desc("tool: Open search collections"),
 		["n|<leader>ff"] = map_callback(function()
 				require("search").open({ collection = "file" })
 			end)
@@ -157,18 +156,12 @@ local mappings = {
 			:with_silent()
 			:with_desc("tool: Find patterns"),
 		["v|<leader>fs"] = map_callback(function()
-				local is_config = vim.uv.cwd() == vim_path
-				if require("core.settings").search_backend == "fzf" then
-					require("fzf-lua").grep_project({
-						search = require("fzf-lua.utils").get_visual_selection(),
-						rg_opts = "--column --line-number --no-heading --color=always --smart-case"
-							.. (is_config and " --no-ignore --hidden --glob '!.git/*'" or ""),
-					})
-				else
-					require("telescope-live-grep-args.shortcuts").grep_visual_selection(
-						is_config and { additional_args = { "--no-ignore" } } or {}
-					)
-				end
+				local visual = require("snacks").picker.util.visual()
+				require("search").open({
+					collection = "pattern",
+					tab_name = "Word in project",
+					default_text = visual and visual.text or "",
+				})
 			end)
 			:with_noremap()
 			:with_silent()
@@ -191,14 +184,14 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Miscellaneous"),
-		["n|<leader>fr"] = map_cr("Telescope resume")
+		["n|<leader>fr"] = map_callback(function()
+				require("snacks").picker.resume()
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Resume last search"),
 		["n|<leader>fR"] = map_callback(function()
-				if require("core.settings").search_backend == "fzf" then
-					require("fzf-lua").resume()
-				end
+				require("snacks").picker.resume()
 			end)
 			:with_noremap()
 			:with_silent()

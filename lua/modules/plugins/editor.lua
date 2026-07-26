@@ -19,13 +19,6 @@ editor["m4xshen/autoclose.nvim"] = {
 	event = "InsertEnter",
 	config = require("editor.autoclose"),
 }
-editor["pteroctopus/faster.nvim"] = {
-	lazy = true,
-	cmd = "Faster",
-	event = { "BufReadPre", "BufNewFile" },
-	cond = require("core.settings").load_big_files_faster,
-	config = require("editor.faster"),
-}
 -- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
 --  > `hop.nvim`,
 --  > `wilder.nvim`

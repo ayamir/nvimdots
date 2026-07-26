@@ -27,11 +27,11 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
 		["n|gto"] = map_callback(function()
-				helpers.picker("lsp_document_symbols")
+				helpers.picker("lsp_symbols")
 			end)
 			:with_silent()
 			:with_buffer(buf)
-			:with_desc("lsp: Toggle outline in Telescope"),
+			:with_desc("lsp: Toggle outline in picker"),
 		["n|g["] = map_cr("Lspsaga diagnostic_jump_prev")
 			:with_silent()
 			:with_buffer(buf)

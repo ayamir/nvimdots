@@ -162,23 +162,13 @@ function M.toggle_transparency()
 end
 
 function M.picker(opts)
-	local actions = require("telescope.actions")
-	local action_set = require("telescope.actions.set")
-	local action_state = require("telescope.actions.state")
-	local conf = require("telescope.config").values
-	local finders = require("telescope.finders")
-	local pickers = require("telescope.pickers")
-	local previewers = require("telescope.previewers")
-
 	opts = opts or {}
-	local original = require("nvconfig").base46.theme
+	local original = opts.initial_theme or require("nvconfig").base46.theme
+	opts.initial_theme = nil
 	local confirmed = false
-	local source_bufnr = vim.api.nvim_get_current_buf()
-
-	local function selected_theme()
-		local entry = action_state.get_selected_entry()
-		return entry and (entry.value or entry[1])
-	end
+	local user_confirm = opts.confirm
+	local user_on_change = opts.on_change
+	local user_on_close = opts.on_close
 
 	local function preview(theme)
 		if theme then
@@ -186,66 +176,56 @@ function M.picker(opts)
 		end
 	end
 
-	local previewer = previewers.new_buffer_previewer({
-		define_preview = function(self)
-			local lines = vim.api.nvim_buf_get_lines(source_bufnr, 0, -1, false)
-			vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
-			local ft = (vim.filetype.match({ buf = source_bufnr }) or "diff"):match("%w+")
-			require("telescope.previewers.utils").highlighter(self.state.bufnr, ft)
+	local items = vim.tbl_map(function(theme)
+		return { text = theme }
+	end, M.list())
+	table.sort(items, function(a, b)
+		if a.text == original then
+			return true
+		elseif b.text == original then
+			return false
+		end
+		return a.text < b.text
+	end)
+
+	return require("snacks").picker.pick(vim.tbl_extend("force", opts, {
+		title = opts.title or opts.prompt_title or "NvChad Base46 Themes",
+		items = items,
+		format = function(item)
+			return { { item.text } }
 		end,
-	})
-
-	pickers
-		.new(opts, {
-			prompt_title = opts.prompt_title or "NvChad Base46 Themes",
-			previewer = previewer,
-			finder = finders.new_table({ results = M.list() }),
-			sorter = conf.generic_sorter(opts),
-			attach_mappings = function(prompt_bufnr)
-				vim.schedule(function()
-					if not vim.api.nvim_buf_is_valid(prompt_bufnr) then
-						return
-					end
-
-					vim.api.nvim_create_autocmd("TextChangedI", {
-						buffer = prompt_bufnr,
-						callback = function()
-							preview(selected_theme())
-						end,
-					})
-				end)
-
-				actions.move_selection_previous:replace(function()
-					action_set.shift_selection(prompt_bufnr, -1)
-					preview(selected_theme())
-				end)
-
-				actions.move_selection_next:replace(function()
-					action_set.shift_selection(prompt_bufnr, 1)
-					preview(selected_theme())
-				end)
-
-				actions.select_default:replace(function()
-					local theme = selected_theme()
-					if theme then
-						confirmed = true
-						M.apply(theme, { persist = true })
-					end
-					actions.close(prompt_bufnr)
-				end)
-
-				actions.close:enhance({
-					post = function()
-						if not confirmed then
-							M.apply(original, { notify = false })
-						end
-					end,
-				})
-
-				return true
-			end,
-		})
-		:find()
+		layout = opts.layout or {
+			preview = false,
+			preset = "select",
+		},
+		on_change = function(picker, item)
+			if item then
+				preview(item.text)
+			end
+			if user_on_change then
+				user_on_change(picker, item)
+			end
+		end,
+		on_close = function(picker)
+			if not confirmed then
+				M.apply(original, { notify = false })
+			end
+			if user_on_close then
+				user_on_close(picker)
+			end
+		end,
+		confirm = function(picker, item, action)
+			if item then
+				confirmed = true
+				M.apply(item.text, { persist = true })
+			end
+			if user_confirm then
+				user_confirm(picker, item, action)
+				return
+			end
+			picker:close()
+		end,
+	}))
 end
 
 function M.tabufline_btns()
@@ -258,7 +238,7 @@ end
 function M.setup()
 	pcall(vim.api.nvim_del_user_command, "NvChadThemePicker")
 	vim.api.nvim_create_user_command("NvChadThemePicker", function()
-		M.picker(require("telescope.themes").get_dropdown())
+		M.picker()
 	end, { desc = "Pick NvChad Base46 theme" })
 
 	pcall(vim.api.nvim_del_user_command, "NvChadThemeToggle")

@@ -4,10 +4,10 @@ local icons = require("modules.utils.icons")
 
 local nvdash_buttons = {
 	{
-		txt = icons.get("misc", true).Neovim .. "Telescope collections",
+		txt = icons.get("misc", true).Neovim .. "Search collections",
 		keys = "<leader>fc",
 		display_keys = "space f c",
-		cmd = "lua require('keymap.helpers').telescope_collections(require('telescope.themes').get_dropdown())",
+		cmd = "lua require('keymap.helpers').search_collections()",
 	},
 	{
 		txt = icons.get("documents", true).FileFind .. "Find files",

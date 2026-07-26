@@ -11,32 +11,8 @@ M.flash_esc_or_noh = function()
 	end
 end
 
-M.telescope_collections = function(opts)
-	local tabs = require("search.tabs")
-	local actions = require("telescope.actions")
-	local state = require("telescope.actions.state")
-	local pickers = require("telescope.pickers")
-	local finders = require("telescope.finders")
-	local conf = require("telescope.config").values
-	local collections = vim.tbl_keys(tabs.collections)
-
-	-- build and launch picker
-	opts = opts or {}
-	pickers
-		.new(opts, {
-			prompt_title = "Telescope Collections",
-			finder = finders.new_table({ results = collections }),
-			sorter = conf.generic_sorter(opts),
-			attach_mappings = function(bufnr)
-				actions.select_default:replace(function()
-					actions.close(bufnr)
-					local selection = state.get_selected_entry()
-					require("search").open({ collection = selection[1] })
-				end)
-				return true
-			end,
-		})
-		:find()
+M.search_collections = function()
+	require("search").collections()
 end
 
 M.toggle_inlayhint = function()
@@ -72,45 +48,34 @@ M.toggle_lazygit = function()
 end
 
 M.select_chat_model = function()
-	local actions = require("telescope.actions")
-	local action_state = require("telescope.actions.state")
-	local finder = require("telescope.finders")
-	local pickers = require("telescope.pickers")
-	local type = require("telescope.themes").get_dropdown()
-	local conf = require("telescope.config").values
 	local ai = require("modules.utils.ai")
 	local models = ai.get_codecompanion_models()
-	local current_model = vim.g.current_chat_model or ai.get_codecompanion_default_model()
+	local items = vim.tbl_map(function(model)
+		return { text = model }
+	end, models)
 
-	pickers
-		.new(type, {
-			prompt_title = "(CodeCompanion) Select Model",
-			finder = finder.new_table({ results = models }),
-			sorter = conf.generic_sorter(type),
-			attach_mappings = function(bufnr)
-				actions.select_default:replace(function()
-					actions.close(bufnr)
-					current_model = action_state.get_selected_entry()[1]
-					vim.g.current_chat_model = current_model
-					vim.notify("Model selected: " .. current_model, vim.log.levels.INFO, { title = "CodeCompanion" })
-				end)
-
-				return true
-			end,
-		})
-		:find()
+	require("snacks").picker.pick({
+		title = "(CodeCompanion) Select Model",
+		items = items,
+		format = function(item)
+			return { { item.text } }
+		end,
+		layout = {
+			preview = false,
+			preset = "select",
+		},
+		confirm = function(picker, item)
+			picker:close()
+			if item then
+				vim.g.current_chat_model = item.text
+				vim.notify("Model selected: " .. item.text, vim.log.levels.INFO, { title = "CodeCompanion" })
+			end
+		end,
+	})
 end
 
-M.picker = function(method, tele_opts)
-	local prompt_position = require("telescope.config").values.layout_config.horizontal.prompt_position
-	local fzf_opts = { ["--layout"] = prompt_position == "top" and "reverse" or "default" }
-	if require("core.settings").search_backend == "fzf" then
-		require("fzf-lua")[method]({
-			fzf_opts = fzf_opts,
-		})
-	else
-		require("telescope.builtin")[method](tele_opts)
-	end
+M.picker = function(method, opts)
+	require("snacks").picker[method](opts)
 end
 
 return M

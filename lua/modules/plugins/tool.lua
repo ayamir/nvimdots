@@ -17,7 +17,6 @@ tool["Bekaboo/dropbar.nvim"] = {
 	config = require("tool.dropbar"),
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"nvim-telescope/telescope-fzf-native.nvim",
 	},
 }
 tool["nvim-tree/nvim-tree.lua"] = {
@@ -72,49 +71,37 @@ if settings.use_chat then
 		},
 	}
 end
--- Needs `fzf` installed and in $PATH
-tool["ibhagwan/fzf-lua"] = {
-	lazy = true,
-	cond = (settings.search_backend == "fzf"),
-	cmd = "FzfLua",
-	config = require("tool.fzf-lua"),
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-}
-
-----------------------------------------------------------------------
---                        Telescope Plugins                         --
-----------------------------------------------------------------------
-tool["nvim-telescope/telescope.nvim"] = {
-	lazy = true,
-	cmd = "Telescope",
-	config = require("tool.telescope"),
+tool["ayamir/search.nvim"] = {
+	lazy = false,
+	dir = vim.fn.stdpath("data") .. "/site/lazy/search.nvim",
+	config = function()
+		require("search").setup(require("tool.search").options())
+	end,
 	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-tree/nvim-web-devicons" },
-		{ "jvgrootveld/telescope-zoxide" },
-		{ "debugloop/telescope-undo.nvim" },
-		{ "nvim-telescope/telescope-frecency.nvim" },
-		{ "nvim-telescope/telescope-live-grep-args.nvim" },
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-		{
-			"ayamir/search.nvim",
-			config = require("tool.search"),
-		},
-		{
-			"DrKJeff16/project.nvim",
-			event = { "CursorHold", "CursorHoldI" },
-			config = require("tool.project"),
-		},
-		{
-			"aaronhallaert/advanced-git-search.nvim",
-			cmd = { "AdvancedGitSearch" },
-			dependencies = {
-				"tpope/vim-rhubarb",
-				"tpope/vim-fugitive",
-				"sindrets/diffview.nvim",
-			},
-		},
+		"folke/snacks.nvim",
 	},
+}
+tool["aaronhallaert/advanced-git-search.nvim"] = {
+	lazy = true,
+	cmd = { "AdvancedGitSearch" },
+	config = function()
+		require("advanced_git_search.snacks").setup({
+			diff_plugin = "diffview",
+			git_flags = { "-c", "delta.side-by-side=true" },
+			entry_default_author_or_date = "author",
+		})
+	end,
+	dependencies = {
+		"folke/snacks.nvim",
+		"tpope/vim-rhubarb",
+		"tpope/vim-fugitive",
+		"sindrets/diffview.nvim",
+	},
+}
+tool["DrKJeff16/project.nvim"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("tool.project"),
 }
 
 ----------------------------------------------------------------------

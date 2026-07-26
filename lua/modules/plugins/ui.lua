@@ -4,6 +4,11 @@ local settings = require("core.settings")
 ui["nvim-lua/plenary.nvim"] = {
 	lazy = true,
 }
+ui["folke/snacks.nvim"] = {
+	lazy = false,
+	priority = 1000,
+	config = require("ui.snacks"),
+}
 ui["ayamir/nvchad-base46"] = {
 	lazy = false,
 	cond = settings.colorscheme == "nvchad",
@@ -61,26 +66,11 @@ ui["lewis6991/gitsigns.nvim"] = {
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.gitsigns"),
 }
-ui["lukas-reineke/indent-blankline.nvim"] = {
-	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("ui.indent-blankline"),
-}
 ui["nvim-lualine/lualine.nvim"] = {
 	lazy = true,
 	cond = settings.colorscheme ~= "nvchad",
 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
 	config = require("ui.lualine"),
-}
-ui["karb94/neoscroll.nvim"] = {
-	lazy = true,
-	event = { "CursorHold", "CursorHoldI" },
-	config = require("ui.neoscroll"),
-}
-ui["rcarriga/nvim-notify"] = {
-	lazy = true,
-	event = "VeryLazy",
-	config = require("ui.notify"),
 }
 ui["folke/paint.nvim"] = {
 	lazy = true,
