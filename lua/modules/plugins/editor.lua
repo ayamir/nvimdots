@@ -20,7 +20,9 @@ editor["m4xshen/autoclose.nvim"] = {
 	config = require("editor.autoclose"),
 }
 editor["pteroctopus/faster.nvim"] = {
-	lazy = false,
+	lazy = true,
+	cmd = "Faster",
+	event = { "BufReadPre", "BufNewFile" },
 	cond = require("core.settings").load_big_files_faster,
 	config = require("editor.faster"),
 }
@@ -89,7 +91,8 @@ editor["MagicDuck/grug-far.nvim"] = {
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
 editor["nvim-treesitter/nvim-treesitter"] = {
-	lazy = false, -- nvim-ts cannot lazy load now
+	lazy = true,
+	event = { "BufReadPost", "BufNewFile" },
 	branch = "main",
 	build = function()
 		if #vim.api.nvim_list_uis() > 0 then
