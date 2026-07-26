@@ -187,9 +187,69 @@ settings["load_big_files_faster"] = true
 settings["palette_overwrite"] = {}
 
 -- Set the colorscheme here.
--- Valid options: `catppuccin`, `catppuccin-latte`, `catppuccin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`.
+-- Valid options include `catppuccin`, `catppuccin-latte`, `catppuccin-mocha`,
+-- `catppuccin-frappe`, `catppuccin-macchiato`, and `nvchad`.
 ---@type string
-settings["colorscheme"] = "catppuccin"
+settings["colorscheme"] = "nvchad"
+
+-- NvChad Base46 and UI options used when `colorscheme` is set to `nvchad`.
+-- Full Base46 theme list lives in `base46.themes`.
+---@type table
+settings["nvchad"] = {
+	theme = "rosepine-dawn",
+	theme_toggle = { "rosepine-dawn", "rosepine" },
+	nvdash = {
+		load_on_startup = false,
+	},
+	ui = {
+		statusline = {
+			enabled = true,
+			theme = "default",
+			separator_style = "default",
+		},
+		tabufline = {
+			enabled = true,
+			lazyload = false,
+		},
+	},
+	term = {
+		base46_colors = true,
+		winopts = { number = false, relativenumber = false },
+		sizes = { sp = 0.3, vsp = 0.3, ["bo sp"] = 0.3, ["bo vsp"] = 0.3 },
+		float = {
+			relative = "editor",
+			row = 0.1,
+			col = 0.1,
+			width = 0.8,
+			height = 0.8,
+			border = "single",
+		},
+	},
+	integrations = {
+		"blankline",
+		"hop",
+		"bookmarks",
+		"blink",
+		"treesitter",
+		"dap",
+		"edgy",
+		"grug_far",
+		"mason",
+		"lsp",
+		"lspsaga",
+		"whichkey",
+		"trouble",
+		"git",
+		"devicons",
+		"todo",
+		"tiny-inline-diagnostic",
+		"diffview",
+		"flash",
+		"notify",
+		"rainbowdelimiters",
+		"render-markdown",
+	},
+}
 
 -- Set to true if your terminal supports a transparent background.
 ---@type boolean

@@ -3,6 +3,7 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
+local settings = require("core.settings")
 
 local mappings = {
 	builtins = {
@@ -22,32 +23,6 @@ local mappings = {
 		["n|to"] = map_cr("tabonly"):with_noremap():with_silent():with_desc("tab: Only keep current tab"),
 	},
 	plugins = {
-		-- Plugin: nvim-bufdel
-		["n|<A-q>"] = map_cr("BufDel"):with_noremap():with_silent():with_desc("buffer: Close current"),
-
-		-- Plugin: bufferline.nvim
-		["n|<A-i>"] = map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_desc("buffer: Switch to next"),
-		["n|<A-o>"] = map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_desc("buffer: Switch to prev"),
-		["n|<A-S-i>"] = map_cr("BufferLineMoveNext")
-			:with_noremap()
-			:with_silent()
-			:with_desc("buffer: Move current to next"),
-		["n|<A-S-o>"] = map_cr("BufferLineMovePrev")
-			:with_noremap()
-			:with_silent()
-			:with_desc("buffer: Move current to prev"),
-		["n|<leader>be"] = map_cr("BufferLineSortByExtension"):with_noremap():with_desc("buffer: Sort by extension"),
-		["n|<leader>bd"] = map_cr("BufferLineSortByDirectory"):with_noremap():with_desc("buffer: Sort by directory"),
-		["n|<A-1>"] = map_cr("BufferLineGoToBuffer 1"):with_noremap():with_silent():with_desc("buffer: Goto buffer 1"),
-		["n|<A-2>"] = map_cr("BufferLineGoToBuffer 2"):with_noremap():with_silent():with_desc("buffer: Goto buffer 2"),
-		["n|<A-3>"] = map_cr("BufferLineGoToBuffer 3"):with_noremap():with_silent():with_desc("buffer: Goto buffer 3"),
-		["n|<A-4>"] = map_cr("BufferLineGoToBuffer 4"):with_noremap():with_silent():with_desc("buffer: Goto buffer 4"),
-		["n|<A-5>"] = map_cr("BufferLineGoToBuffer 5"):with_noremap():with_silent():with_desc("buffer: Goto buffer 5"),
-		["n|<A-6>"] = map_cr("BufferLineGoToBuffer 6"):with_noremap():with_silent():with_desc("buffer: Goto buffer 6"),
-		["n|<A-7>"] = map_cr("BufferLineGoToBuffer 7"):with_noremap():with_silent():with_desc("buffer: Goto buffer 7"),
-		["n|<A-8>"] = map_cr("BufferLineGoToBuffer 8"):with_noremap():with_silent():with_desc("buffer: Goto buffer 8"),
-		["n|<A-9>"] = map_cr("BufferLineGoToBuffer 9"):with_noremap():with_silent():with_desc("buffer: Goto buffer 9"),
-
 		-- Plugin: smart-splits.nvim
 		["n|<A-h>"] = map_cu("SmartResizeLeft")
 			:with_silent()
@@ -78,6 +53,126 @@ local mappings = {
 			:with_desc("window: Move window rightward"),
 	},
 }
+
+if settings.colorscheme == "nvchad" then
+	local function listed_tab_buffers()
+		local bufs = vim.t.bufs
+		if not bufs then
+			bufs = vim.tbl_filter(function(bufnr)
+				return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted
+			end, vim.api.nvim_list_bufs())
+		end
+
+		return vim.tbl_filter(function(bufnr)
+			return vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted
+		end, bufs)
+	end
+
+	local function sort_buffers(key_fn)
+		local bufs = listed_tab_buffers()
+		table.sort(bufs, function(left, right)
+			local left_key = key_fn(left)
+			local right_key = key_fn(right)
+			if left_key == right_key then
+				return vim.api.nvim_buf_get_name(left) < vim.api.nvim_buf_get_name(right)
+			end
+			return left_key < right_key
+		end)
+
+		vim.t.bufs = bufs
+		vim.cmd("redrawtabline")
+	end
+
+	local function goto_buf(index)
+		return map_callback(function()
+				local bufnr = vim.t.bufs and vim.t.bufs[index]
+				if bufnr then
+					require("nvchad.tabufline").goto_buf(bufnr)
+				end
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("buffer: Goto buffer " .. tostring(index))
+	end
+
+	mappings.plugins["n|<A-i>"] = map_callback(function()
+			require("nvchad.tabufline").next()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Switch to next")
+	mappings.plugins["n|<A-o>"] = map_callback(function()
+			require("nvchad.tabufline").prev()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Switch to prev")
+	mappings.plugins["n|<A-S-i>"] = map_callback(function()
+			require("nvchad.tabufline").move_buf(1)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Move current to next")
+	mappings.plugins["n|<A-S-o>"] = map_callback(function()
+			require("nvchad.tabufline").move_buf(-1)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Move current to prev")
+	mappings.plugins["n|<A-q>"] = map_callback(function()
+			require("nvchad.tabufline").close_buffer()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Close current")
+	mappings.plugins["n|<A-S-q>"] = map_callback(function()
+			require("nvchad.tabufline").closeAllBufs(false)
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("buffer: Close other tabs")
+	mappings.plugins["n|<leader>be"] = map_callback(function()
+			sort_buffers(function(bufnr)
+				return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":e")
+			end)
+		end)
+		:with_noremap()
+		:with_desc("buffer: Sort by extension")
+	mappings.plugins["n|<leader>bd"] = map_callback(function()
+			sort_buffers(function(bufnr)
+				return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":p:h")
+			end)
+		end)
+		:with_noremap()
+		:with_desc("buffer: Sort by directory")
+
+	for i = 1, 9 do
+		mappings.plugins[string.format("n|<A-%s>", i)] = goto_buf(i)
+	end
+else
+	mappings.plugins["n|<A-i>"] =
+		map_cr("BufferLineCycleNext"):with_noremap():with_silent():with_desc("buffer: Switch to next")
+	mappings.plugins["n|<A-o>"] =
+		map_cr("BufferLineCyclePrev"):with_noremap():with_silent():with_desc("buffer: Switch to prev")
+	mappings.plugins["n|<A-S-i>"] =
+		map_cr("BufferLineMoveNext"):with_noremap():with_silent():with_desc("buffer: Move current to next")
+	mappings.plugins["n|<A-S-o>"] =
+		map_cr("BufferLineMovePrev"):with_noremap():with_silent():with_desc("buffer: Move current to prev")
+	mappings.plugins["n|<A-q>"] = map_cr("bdelete"):with_noremap():with_silent():with_desc("buffer: Close current")
+	mappings.plugins["n|<A-S-q>"] =
+		map_cr("BufferLineCloseOthers"):with_noremap():with_silent():with_desc("buffer: Close other tabs")
+	mappings.plugins["n|<leader>be"] =
+		map_cr("BufferLineSortByExtension"):with_noremap():with_desc("buffer: Sort by extension")
+	mappings.plugins["n|<leader>bd"] =
+		map_cr("BufferLineSortByDirectory"):with_noremap():with_desc("buffer: Sort by directory")
+
+	for i = 1, 9 do
+		mappings.plugins[string.format("n|<A-%s>", i)] = map_cr("BufferLineGoToBuffer " .. tostring(i))
+			:with_noremap()
+			:with_silent()
+			:with_desc("buffer: Goto buffer " .. tostring(i))
+	end
+end
 
 bind.nvim_load_mapping(mappings.builtins)
 bind.nvim_load_mapping(mappings.plugins)

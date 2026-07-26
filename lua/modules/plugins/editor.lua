@@ -24,10 +24,6 @@ editor["pteroctopus/faster.nvim"] = {
 	cond = require("core.settings").load_big_files_faster,
 	config = require("editor.faster"),
 }
-editor["ojroques/nvim-bufdel"] = {
-	lazy = true,
-	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
-}
 -- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
 --  > `hop.nvim`,
 --  > `wilder.nvim`

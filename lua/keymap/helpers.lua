@@ -59,20 +59,15 @@ M.toggle_virtuallines = function()
 	)
 end
 
-local _lazygit = nil
 M.toggle_lazygit = function()
 	if vim.fn.executable("lazygit") == 1 then
-		if not _lazygit then
-			_lazygit = require("toggleterm.terminal").Terminal:new({
-				cmd = "lazygit",
-				direction = "float",
-				close_on_exit = true,
-				hidden = true,
-			})
-		end
-		_lazygit:toggle()
+		require("nvchad.term").runner({
+			id = "LazyGit",
+			pos = "float",
+			cmd = "lazygit",
+		})
 	else
-		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
+		vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "NvChad term" })
 	end
 end
 

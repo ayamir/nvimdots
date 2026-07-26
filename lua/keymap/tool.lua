@@ -29,50 +29,79 @@ local mappings = {
 		["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
 		["n|<leader>r"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
 
-		-- Plugin: toggleterm
 		["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
-		["n|<C-\\>"] = map_cr("ToggleTerm direction=horizontal")
+		["n|<C-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "sp", id = "HorizontalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["i|<C-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
+		["i|<C-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "sp", id = "HorizontalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["t|<C-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>")
+		["t|<C-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "sp", id = "HorizontalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["n|<A-\\>"] = map_cr("ToggleTerm direction=vertical")
+		["n|<A-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["i|<A-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+		["i|<A-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["t|<A-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>")
+		["t|<A-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["n|<F5>"] = map_cr("ToggleTerm direction=vertical")
+		["n|<F5>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["i|<F5>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+		["i|<F5>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["t|<F5>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-		["n|<A-d>"] = map_cr("ToggleTerm direction=float")
+		["t|<F5>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle vertical"),
+		["n|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
+		["i|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
+		["t|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle float"),
 		["n|<leader>gg"] = map_callback(function()
 				helpers.toggle_lazygit()
 			end)
