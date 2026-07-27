@@ -72,8 +72,8 @@ if settings.use_chat then
 	}
 end
 tool["ayamir/search.nvim"] = {
-	lazy = false,
-	dir = vim.fn.stdpath("data") .. "/site/lazy/search.nvim",
+	lazy = true,
+	branch = "refactor/snack",
 	config = function()
 		require("search").setup(require("tool.search").options())
 	end,
