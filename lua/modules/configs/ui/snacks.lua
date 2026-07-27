@@ -87,12 +87,12 @@ return function()
 						border = "top",
 						title = " {title} {live} {flags}",
 						title_pos = "left",
+						{ win = "input", height = 1, border = "top" },
 						{
 							box = "horizontal",
 							{ win = "list", border = "none" },
 							{ win = "preview", title = "{preview}", width = 0.55, border = "left" },
 						},
-						{ win = "input", height = 1, border = "bottom" },
 					},
 				},
 				nvimdots_search = {
