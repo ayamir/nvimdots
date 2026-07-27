@@ -196,10 +196,10 @@ settings["colorscheme"] = "nvchad"
 -- Full Base46 theme list lives in `base46.themes`.
 ---@type table
 settings["nvchad"] = {
-	theme = "rosepine-dawn",
-	theme_toggle = { "rosepine-dawn", "rosepine" },
+	theme = "catppuccin-latte",
+	theme_toggle = { "catppuccin-latte", "catppuccin" },
 	nvdash = {
-		load_on_startup = false,
+		load_on_startup = true,
 	},
 	ui = {
 		statusline = {
