@@ -184,6 +184,9 @@ local overrides = {
 			Boolean = { italic = true, bold = true },
 			Comment = { italic = true },
 		},
+		hl_add = vim.tbl_deep_extend("force", {
+			SnacksPickerListCursorLine = { bg = "pmenu_bg", fg = "black" },
+		}, nvchad.hl_add or {}),
 		integrations = nvchad.integrations,
 	},
 	nvdash = vim.tbl_deep_extend("force", {
