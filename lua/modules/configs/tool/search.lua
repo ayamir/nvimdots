@@ -124,9 +124,12 @@ local function nvchad_theme_opts(current)
 	local theme = require("modules.utils.nvchad_theme")
 	local original = current
 	local confirmed = false
-	local items = prefer_current_item(vim.tbl_map(function(name)
-		return { text = name }
-	end, theme.list()), current)
+	local items = prefer_current_item(
+		vim.tbl_map(function(name)
+			return { text = name }
+		end, theme.list()),
+		current
+	)
 
 	return {
 		title = "NvChad Base46 Themes",
