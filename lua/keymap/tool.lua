@@ -190,12 +190,6 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Resume last search"),
-		["n|<leader>fR"] = map_callback(function()
-				require("snacks").picker.resume()
-			end)
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Resume last search"),
 
 		-- Plugin: dap
 		["n|<F6>"] = map_callback(function()
