@@ -66,7 +66,7 @@ return function()
 		},
 		notify = { enabled = true },
 		quickfile = { enabled = true },
-		scroll = { enabled = true },
+		scroll = { enabled = false },
 		picker = {
 			enabled = true,
 			prompt = icons.ui.Telescope .. " ",
