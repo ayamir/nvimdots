@@ -4,6 +4,7 @@ return function()
 		ui = require("modules.utils.icons").get("ui"),
 	}
 	local settings = require("core.settings")
+	local snacks = require("snacks")
 
 	require("modules.utils").load_plugin("snacks", {
 		bigfile = {
@@ -15,14 +16,14 @@ return function()
 					vim.cmd([[NoMatchParen]])
 				end
 
-				Snacks.util.wo(0, {
+				snacks.util.wo(0, {
 					conceallevel = 0,
 					foldenable = false,
 					foldmethod = "manual",
 					list = false,
 					statuscolumn = "",
 				})
-				Snacks.util.bo(ctx.buf, {
+				snacks.util.bo(ctx.buf, {
 					swapfile = false,
 					undofile = false,
 					undolevels = -1,
