@@ -38,15 +38,8 @@ return function()
 		},
 		indent = {
 			enabled = true,
-			indent = {
-				char = "│",
-				priority = 2,
-			},
 			scope = {
 				enabled = true,
-				char = "┃",
-				priority = 1000,
-				underline = false,
 			},
 			animate = { enabled = false },
 		},
