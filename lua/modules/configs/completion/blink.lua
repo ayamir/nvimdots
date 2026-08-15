@@ -8,6 +8,41 @@ local edit_prediction_source = settings["edit-prediction-source"] or settings.ed
 local use_copilot = settings.use_copilot and edit_prediction_source == "copilot"
 local use_minuet = edit_prediction_source == "oai-compatible"
 
+local function nvchad_blink_menu()
+	local ui = require("nvconfig").ui.cmp
+	local atom_styled = ui.style == "atom" or ui.style == "atom_colored"
+	local menu_cols = (atom_styled or ui.icons_left) and { { "kind_icon" }, { "label" }, { "kind" } }
+		or { { "label" }, { "kind_icon" }, { "kind" } }
+
+	local components = {
+		kind_icon = {
+			text = function(ctx)
+				local lspkind_icons = require("nvchad.icons.lspkind")
+				local icon = lspkind_icons[ctx.kind] or "󰈚"
+				return atom_styled and (" " .. icon .. " ") or icon
+			end,
+		},
+		kind = {
+			highlight = function(ctx)
+				return atom_styled and "comment" or ctx.kind
+			end,
+		},
+	}
+
+	return {
+		scrollbar = false,
+		border = atom_styled and "none" or "single",
+		draw = {
+			padding = { atom_styled and 0 or 1, 1 },
+			columns = menu_cols,
+			components = components,
+		},
+		components = components,
+	}
+end
+
+local nvchad_menu = nvchad_blink_menu()
+
 local source_labels = {
 	copilot = "[CPLT]",
 	minuet = "[AI]",
@@ -170,31 +205,20 @@ local opts = {
 			selection = { preselect = false, auto_insert = false },
 		},
 		menu = {
-			border = "single",
-			winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:PmenuSel",
-			scrollbar = false,
-			draw = {
-				padding = { 1, 1 },
-				columns = {
-					{ "label", "label_description", gap = 1 },
-					{ "kind_icon" },
-					{ "kind", "source_name", gap = 1 },
-				},
+			border = nvchad_menu.border,
+			scrollbar = nvchad_menu.scrollbar,
+			draw = vim.tbl_deep_extend("force", vim.deepcopy(nvchad_menu.draw), {
 				components = {
-					kind_icon = {
+					kind_icon = vim.tbl_deep_extend("force", vim.deepcopy(nvchad_menu.components.kind_icon), {
 						text = function(ctx)
-							local lspkind_icons = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
-							return icons.cmp[ctx.source_id] or lspkind_icons[ctx.kind] or icons.cmp.undefined
+							return icons.cmp[ctx.source_id] or nvchad_menu.components.kind_icon.text(ctx)
 						end,
-					},
-					kind = {
+					}),
+					kind = vim.tbl_deep_extend("force", vim.deepcopy(nvchad_menu.components.kind), {
 						text = function(ctx)
-							return ctx.kind or ""
+							return ("%s %s"):format(ctx.kind or "", source_labels[ctx.source_id] or "[BTN]")
 						end,
-						highlight = function(ctx)
-							return ctx.kind
-						end,
-					},
+					}),
 					label = {
 						text = function(ctx)
 							return require("colorful-menu").blink_components_text(ctx)
@@ -203,14 +227,8 @@ local opts = {
 							return require("colorful-menu").blink_components_highlight(ctx)
 						end,
 					},
-					source_name = {
-						text = function(ctx)
-							return source_labels[ctx.source_id] or "[BTN]"
-						end,
-						highlight = "Comment",
-					},
 				},
-			},
+			}),
 		},
 		documentation = {
 			auto_show = true,

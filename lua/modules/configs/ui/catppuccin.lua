@@ -37,11 +37,9 @@ return function()
 			dropbar = { enabled = true, color_mode = true },
 			fidget = true,
 			flash = true,
-			fzf = true,
 			gitsigns = true,
 			grug_far = true,
 			hop = true,
-			indent_blankline = { enabled = true, colored_indent_levels = true },
 			lsp_saga = true,
 			lsp_trouble = true,
 			markdown = true,
@@ -62,12 +60,11 @@ return function()
 					information = { "underline" },
 				},
 			},
-			notify = true,
 			nvimtree = true,
 			rainbow_delimiters = true,
 			render_markdown = true,
 			semantic_tokens = true,
-			telescope = { enabled = true, style = "nvchad" },
+			snacks = true,
 			treesitter = true,
 			treesitter_context = true,
 			which_key = true,
@@ -95,9 +92,9 @@ return function()
 					-- For mason.nvim
 					MasonNormal = { link = "NormalFloat" },
 
-					-- For indent-blankline
-					IblIndent = { fg = cp.surface0 },
-					IblScope = { fg = cp.surface2, style = { "bold" } },
+					-- For snacks.nvim indent
+					SnacksIndent = { fg = cp.surface0 },
+					SnacksIndentScope = { fg = cp.surface2, style = { "bold" } },
 
 					-- For nvim-cmp and wilder.nvim
 					Pmenu = { fg = cp.overlay2, bg = transparent_background and cp.none or cp.base },
@@ -115,9 +112,6 @@ return function()
 					FidgetTask = { bg = cp.none, fg = cp.surface2 },
 					FidgetTitle = { fg = cp.blue, style = { "bold" } },
 
-					-- For nvim-notify
-					NotifyBackground = { bg = cp.base },
-
 					-- For nvim-tree
 					NvimTreeRootFolder = { fg = cp.pink },
 					NvimTreeIndentMarker = { fg = cp.surface2 },
@@ -125,12 +119,6 @@ return function()
 					-- For trouble.nvim
 					TroubleNormal = { bg = transparent_background and cp.none or cp.base },
 					TroubleNormalNC = { bg = transparent_background and cp.none or cp.base },
-
-					-- For telescope.nvim
-					TelescopeMatching = { fg = cp.lavender },
-					TelescopeResultsDiffAdd = { fg = cp.green },
-					TelescopeResultsDiffChange = { fg = cp.yellow },
-					TelescopeResultsDiffDelete = { fg = cp.red },
 
 					-- For glance.nvim
 					GlanceWinBarFilename = { fg = cp.subtext1, style = { "bold" } },

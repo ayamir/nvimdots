@@ -19,15 +19,6 @@ editor["m4xshen/autoclose.nvim"] = {
 	event = "InsertEnter",
 	config = require("editor.autoclose"),
 }
-editor["pteroctopus/faster.nvim"] = {
-	lazy = false,
-	cond = require("core.settings").load_big_files_faster,
-	config = require("editor.faster"),
-}
-editor["ojroques/nvim-bufdel"] = {
-	lazy = true,
-	cmd = { "BufDel", "BufDelAll", "BufDelOthers" },
-}
 -- NOTE: `flash.nvim` is a powerful plugin that can be used as partial or complete replacements for:
 --  > `hop.nvim`,
 --  > `wilder.nvim`
@@ -93,7 +84,8 @@ editor["MagicDuck/grug-far.nvim"] = {
 --                  :treesitter related plugins                    --
 ----------------------------------------------------------------------
 editor["nvim-treesitter/nvim-treesitter"] = {
-	lazy = false, -- nvim-ts cannot lazy load now
+	lazy = true,
+	event = { "BufReadPost", "BufNewFile" },
 	branch = "main",
 	build = function()
 		if #vim.api.nvim_list_uis() > 0 then

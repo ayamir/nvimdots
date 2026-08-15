@@ -28,6 +28,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		"terminal",
 		"prompt",
 		"toggleterm",
+		"NvTerm_sp",
+		"NvTerm_vsp",
+		"NvTerm_float",
 		"copilot",
 		"startuptime",
 		"tsplayground",
@@ -143,7 +146,11 @@ function autocmd.load_autocmds()
 		},
 		ft = {
 			{ "FileType", "*", "setlocal formatoptions-=cro" },
-			{ "FileType", "alpha", "setlocal showtabline=0" },
+			{
+				"FileType",
+				"alpha",
+				[[lua if require("core.settings").colorscheme ~= "nvchad" then vim.o.showtabline = 0 end]],
+			},
 			{ "FileType", "markdown", "setlocal wrap" },
 			{ "FileType", "dap-repl", "lua require('dap.ext.autocompl').attach()" },
 			{

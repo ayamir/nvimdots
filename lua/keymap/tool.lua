@@ -1,4 +1,3 @@
-local vim_path = require("core.global").vim_path
 local bind = require("keymap.bind")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
@@ -29,50 +28,79 @@ local mappings = {
 		["v|<leader>r"] = map_cr("SnipRun"):with_noremap():with_silent():with_desc("tool: Run code by range"),
 		["n|<leader>r"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
 
-		-- Plugin: toggleterm
 		["t|<Esc><Esc>"] = map_cmd([[<C-\><C-n>]]):with_noremap():with_silent(), -- switch to normal mode in terminal.
-		["n|<C-\\>"] = map_cr("ToggleTerm direction=horizontal")
+		["n|<C-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "sp", id = "HorizontalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["i|<C-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=horizontal<CR>")
+		["i|<C-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "sp", id = "HorizontalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["t|<C-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>")
+		["t|<C-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "sp", id = "HorizontalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle horizontal"),
-		["n|<A-\\>"] = map_cr("ToggleTerm direction=vertical")
+		["n|<A-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["i|<A-\\>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+		["i|<A-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["t|<A-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>")
+		["t|<A-\\>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["n|<F5>"] = map_cr("ToggleTerm direction=vertical")
+		["n|<F5>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["i|<F5>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=vertical<CR>")
+		["i|<F5>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle vertical"),
-		["t|<F5>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
-		["n|<A-d>"] = map_cr("ToggleTerm direction=float")
+		["t|<F5>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "vsp", id = "VerticalTerm" })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle vertical"),
+		["n|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
+		["i|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("terminal: Toggle float"),
-		["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
+		["t|<A-d>"] = map_callback(function()
+				require("nvchad.term").toggle({ pos = "float", id = "FloatTerm" })
+			end)
+			:with_noremap()
+			:with_silent()
+			:with_desc("terminal: Toggle float"),
 		["n|<leader>gg"] = map_callback(function()
 				helpers.toggle_lazygit()
 			end)
@@ -98,23 +126,23 @@ local mappings = {
 			:with_silent()
 			:with_desc("lsp: Show document diagnostics"),
 
-		-- Plugin: telescope
+		-- Plugin: snacks
 		["n|<C-p>"] = map_callback(function()
 				helpers.picker("keymaps", {
-					lhs_filter = function(lhs)
-						return not string.find(lhs, "Þ")
-					end,
+					global = true,
+					["local"] = true,
+					plugs = false,
 				})
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Toggle command panel"),
 		["n|<leader>fc"] = map_callback(function()
-				helpers.telescope_collections(require("telescope.themes").get_dropdown())
+				helpers.search_collections()
 			end)
 			:with_noremap()
 			:with_silent()
-			:with_desc("tool: Open Telescope collections"),
+			:with_desc("tool: Open search collections"),
 		["n|<leader>ff"] = map_callback(function()
 				require("search").open({ collection = "file" })
 			end)
@@ -128,18 +156,12 @@ local mappings = {
 			:with_silent()
 			:with_desc("tool: Find patterns"),
 		["v|<leader>fs"] = map_callback(function()
-				local is_config = vim.uv.cwd() == vim_path
-				if require("core.settings").search_backend == "fzf" then
-					require("fzf-lua").grep_project({
-						search = require("fzf-lua.utils").get_visual_selection(),
-						rg_opts = "--column --line-number --no-heading --color=always --smart-case"
-							.. (is_config and " --no-ignore --hidden --glob '!.git/*'" or ""),
-					})
-				else
-					require("telescope-live-grep-args.shortcuts").grep_visual_selection(
-						is_config and { additional_args = { "--no-ignore" } } or {}
-					)
-				end
+				local visual = require("snacks").picker.util.visual()
+				require("search").open({
+					collection = "pattern",
+					tab_name = "Word in project",
+					default_text = visual and visual.text or "",
+				})
 			end)
 			:with_noremap()
 			:with_silent()
@@ -162,14 +184,8 @@ local mappings = {
 			:with_noremap()
 			:with_silent()
 			:with_desc("tool: Miscellaneous"),
-		["n|<leader>fr"] = map_cr("Telescope resume")
-			:with_noremap()
-			:with_silent()
-			:with_desc("tool: Resume last search"),
-		["n|<leader>fR"] = map_callback(function()
-				if require("core.settings").search_backend == "fzf" then
-					require("fzf-lua").resume()
-				end
+		["n|<leader>fr"] = map_callback(function()
+				require("snacks").picker.resume()
 			end)
 			:with_noremap()
 			:with_silent()

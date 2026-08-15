@@ -79,7 +79,7 @@ local shell_config = function()
 Failed to setup terminal config
 
 PowerShell is either not installed, missing from PATH, or not executable;
-cmd.exe will be used instead for `:!` (shell bang) and toggleterm.nvim.
+cmd.exe will be used instead for shell commands and terminal buffers.
 
 You're recommended to install PowerShell for better experience.]],
 				vim.log.levels.WARN,
@@ -100,6 +100,18 @@ You're recommended to install PowerShell for better experience.]],
 	end
 end
 
+local theme_config = function()
+	vim.api.nvim_set_option_value("background", settings.background, {})
+
+	if settings.colorscheme == "nvchad" then
+		vim.g.base46_cache = vim.fn.stdpath("data") .. "/base46/"
+	end
+end
+
+local load_colorscheme = function()
+	vim.cmd.colorscheme(settings.colorscheme)
+end
+
 local load_core = function()
 	createdir()
 	leader_map()
@@ -108,14 +120,14 @@ local load_core = function()
 	neovide_config()
 	clipboard_config()
 	shell_config()
+	theme_config()
 
 	require("core.options")
 	require("core.event")
 	require("core.pack")
 	require("keymap")
 
-	vim.api.nvim_set_option_value("background", settings.background, {})
-	vim.cmd.colorscheme(settings.colorscheme)
+	load_colorscheme()
 end
 
 load_core()
