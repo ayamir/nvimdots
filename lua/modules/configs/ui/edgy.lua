@@ -54,15 +54,6 @@ return function()
 		bottom = {
 			{ ft = "qf", size = { height = 0.3 } },
 			{
-				ft = "toggleterm",
-				size = { height = 0.3 },
-				filter = function(_, win)
-					local cfg = vim.api.nvim_win_get_config(win)
-					local term = require("toggleterm.terminal").get(1)
-					return cfg.relative == "" and term and term.direction == "horizontal"
-				end,
-			},
-			{
 				ft = "help",
 				size = { height = 0.3 },
 				filter = function(buf)

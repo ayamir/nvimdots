@@ -1,125 +1,284 @@
-return function()
-	local vim_path = require("core.global").vim_path
-	local search_backend = require("core.settings").search_backend
-	local use_fzf = search_backend == "fzf"
-	local fzf = use_fzf and require("fzf-lua")
-	local extensions = require("telescope").extensions
-	local builtins = require("telescope.builtin")
-	local prompt_pos = require("telescope.config").values.layout_config.horizontal.prompt_position
+local M = {}
 
-	local base_opts = use_fzf and { fzf_opts = { ["--layout"] = (prompt_pos == "top" and "reverse" or "default") } }
-		or {}
+local vim_path = require("core.global").vim_path
 
-	---Returns current directory and whether it's a Git repo root
-	---@return string @Current working directory
-	---@return boolean|nil @true if `.git` folder exists here, false if `.git` exists but isn't folder, nil if `.git` missing
-	local function get_root_info()
-		local cwd = vim.uv.cwd()
-		local stat = vim.uv.fs_stat(".git")
-		return cwd, stat and stat.type == "directory"
+local project_patterns = {
+	".bzr",
+	".csproj",
+	".git",
+	".github",
+	".hg",
+	".nvim.lua",
+	".pre-commit-config.yaml",
+	".pre-commit-config.yml",
+	".sln",
+	".svn",
+	"Makefile",
+	"Pipfile",
+	"_darcs",
+	"package.json",
+	"pyproject.toml",
+}
+
+local function is_config_dir()
+	return vim.uv.cwd() == vim_path
+end
+
+local function is_git_dir()
+	local stat = vim.uv.fs_stat(".git")
+	return stat and stat.type == "directory"
+end
+
+local function file_opts(opts)
+	return vim.tbl_deep_extend("force", is_config_dir() and { ignored = true, hidden = true } or {}, opts or {})
+end
+
+local function grep_opts(opts)
+	return vim.tbl_deep_extend("force", is_config_dir() and { ignored = true, hidden = true } or {}, opts or {})
+end
+
+local function source_tab(name, source, opts)
+	return {
+		name = name,
+		source = source,
+		source_opts = opts,
+	}
+end
+
+local function dynamic_source_tab(name, source, opts_fn, picker_opts)
+	return {
+		name = name,
+		source = source,
+		dynamic_opts = opts_fn,
+		picker_opts = picker_opts,
+	}
+end
+
+local function files_source()
+	if is_config_dir() then
+		return "files", file_opts()
+	elseif is_git_dir() then
+		return "git_files", {}
+	end
+	return "files", {}
+end
+
+local function advanced_git_search(method)
+	return function(opts)
+		return require("modules.utils.advanced_git_search_snacks")[method](opts)
+	end
+end
+
+local function current_colorscheme_name()
+	if require("core.settings").colorscheme == "nvchad" then
+		return require("nvconfig").base46.theme
+	end
+	return vim.g.colors_name
+end
+
+local function prefer_current_item(items, current)
+	if not current or current == "" then
+		return items
 	end
 
-	---Creates a file search function based on backend and context
-	---@param fzf_fn string @Name of the fzf-lua function to call (e.g. "files")
-	---@param tb_fn function @Telescope builtin function to call (e.g. `builtin.find_files`)
-	---@param git_only boolean @Whether to restrict search to git tracked files only
-	---@return fun():any @A function that executes the selected search with proper options
-	local function file_searcher(fzf_fn, tb_fn, git_only)
-		return function()
-			local cwd, is_git = get_root_info()
-			local opts = vim.deepcopy(base_opts, true)
-			if cwd == vim_path then
-				opts.no_ignore = true
-				return (use_fzf and fzf[fzf_fn] or tb_fn)(opts)
-			elseif git_only and is_git then
-				return (use_fzf and fzf.git_files or builtins.git_files)(opts)
-			elseif not git_only then
-				return (use_fzf and fzf[fzf_fn] or tb_fn)(opts)
-			else
-				-- fallback
-				return (use_fzf and fzf.files or builtins.find_files)(opts)
-			end
+	table.sort(items, function(a, b)
+		if a.text == current then
+			return true
+		elseif b.text == current then
+			return false
 		end
+		return a.text < b.text
+	end)
+	return items
+end
+
+local function restore_snacks_colorscheme_preview(picker)
+	local state = picker and picker.preview and picker.preview.state
+	if not (state and state.colorscheme) then
+		return
 	end
 
-	---Creates a function that performs a live grep search using the appropriate backend
-	---@param fzf_fn string @Name of the fzf-lua grep function to call (e.g. "live_grep")
-	---@param tb_fn function @Telescope builtin grep function (e.g. `builtin.grep_string`)
-	---@return fun():any @Function that runs the selected grep with proper options
-	local function grep_searcher(fzf_fn, tb_fn)
-		return function()
-			local cwd = vim.uv.cwd()
-			local opts = vim.deepcopy(base_opts, true)
-			if cwd == vim_path then
-				if use_fzf then
-					opts.no_ignore = true
-				else
-					opts = { additional_args = { "--no-ignore" } }
-				end
+	pcall(vim.cmd.colorscheme, state.colorscheme)
+	if state.background then
+		vim.o.background = state.background
+	end
+	state.colorscheme = nil
+end
+
+local function snacks_colorscheme_opts(current)
+	local finder = require("snacks.picker.config").finder("vim_colorschemes")
+	local items = prefer_current_item(finder({}, {
+		filter = { cwd = vim.uv.cwd() },
+	}) or {}, current)
+
+	return {
+		finder = function()
+			return items
+		end,
+		sort = require("snacks.picker.sort").idx(),
+		on_tab_leave = restore_snacks_colorscheme_preview,
+	}
+end
+
+local function nvchad_theme_opts(current)
+	local theme = require("modules.utils.nvchad_theme")
+	local original = current
+	local confirmed = false
+	local items = prefer_current_item(
+		vim.tbl_map(function(name)
+			return { text = name }
+		end, theme.list()),
+		current
+	)
+
+	return {
+		title = "NvChad Base46 Themes",
+		finder = function()
+			return items
+		end,
+		format = function(item)
+			return { { item.text } }
+		end,
+		sort = require("snacks.picker.sort").idx(),
+		on_change = function(_, item)
+			if item then
+				theme.apply(item.text, { notify = false })
 			end
-			return (use_fzf and fzf[fzf_fn] or tb_fn)(opts)
-		end
-	end
+		end,
+		on_tab_leave = function()
+			if not confirmed then
+				theme.apply(original, { notify = false })
+			end
+		end,
+		on_close = function()
+			if not confirmed then
+				theme.apply(original, { notify = false })
+			end
+		end,
+		confirm = function(picker, item)
+			if item then
+				confirmed = true
+				theme.apply(item.text, { persist = true })
+			end
+			picker:close()
+		end,
+	}
+end
 
-	-- Tables of pickers
-	local pickers = {
-		file = {
-			{ "Files", file_searcher("files", builtins.find_files, false) },
-			{
-				"Frecency",
-				function()
-					extensions.frecency.frecency()
-				end,
+local function colorschemes_source()
+	local current = current_colorscheme_name()
+	if require("core.settings").colorscheme == "nvchad" then
+		return "nvimdots_nvchad_themes", nvchad_theme_opts(current)
+	end
+	return "colorschemes", snacks_colorscheme_opts(current)
+end
+
+local function persisted_sessions(opts)
+	local persisted = require("persisted")
+	local items = vim.tbl_map(function(session)
+		local name = vim.fn.fnamemodify(session, ":t:r")
+		local dir, branch = unpack(vim.split(name, "@@", { plain = true }))
+		dir = (dir or name):gsub("%%", "/")
+		if jit.os:find("Windows") then
+			dir = dir:gsub("^(%w)/", "%1:/")
+		end
+		return {
+			text = branch and (dir .. " (" .. branch .. ")") or dir,
+			file = session,
+			session = session,
+			dir = dir,
+		}
+	end, persisted.list())
+
+	return require("snacks").picker.pick(vim.tbl_deep_extend("force", {
+		title = "Sessions",
+		items = items,
+		format = "file",
+		confirm = function(picker_obj, item)
+			picker_obj:close()
+			if item then
+				vim.fn.chdir(item.dir)
+				persisted.load({ session = item.session })
+			end
+		end,
+	}, opts or {}))
+end
+
+function M.options()
+	return {
+		prompt_position = "top",
+		tab_title = { target = "window" },
+		picker_opts = {
+			auto_close = false,
+			layout = { preset = "nvimdots_search" },
+		},
+		collection_order = { "file", "pattern", "git", "dossier", "misc" },
+		collection_labels = {
+			file = "Files",
+			pattern = "Patterns",
+			git = "Git",
+			dossier = "Dossiers",
+			misc = "Miscellaneous",
+		},
+		collections = {
+			file = {
+				initial_tab = 1,
+				tabs = {
+					{
+						name = "Files",
+						source = files_source,
+						dynamic_opts = function()
+							local _, opts = files_source()
+							return opts
+						end,
+					},
+					dynamic_source_tab("Frecency", "smart", file_opts),
+					source_tab("Oldfiles", "recent"),
+					source_tab("Buffers", "buffers"),
+				},
 			},
-			{ "Oldfiles", use_fzf and function()
-				fzf.oldfiles(base_opts)
-			end or builtins.oldfiles },
-			{ "Buffers", builtins.buffers },
-		},
-		pattern = {
-			{ "Word in project", grep_searcher("live_grep", extensions.live_grep_args.live_grep_args) },
-			{ "Word under cursor", grep_searcher("grep_cword", builtins.grep_string) },
-		},
-		git = {
-			{ "Branches", builtins.git_branches },
-			{ "Commits", builtins.git_commits },
-			{ "Commit content", extensions.advanced_git_search.search_log_content },
-			{ "Diff current file", extensions.advanced_git_search.diff_commit_file },
-		},
-		dossier = {
-			{ "Sessions", extensions.persisted.persisted },
-			{
-				"Projects",
-				function()
-					extensions.projects.projects()
-				end,
+			pattern = {
+				initial_tab = 1,
+				tabs = {
+					dynamic_source_tab("Word in project", "grep", grep_opts, { live = true }),
+					dynamic_source_tab("Word under cursor", "grep_word", grep_opts, { live = true }),
+				},
 			},
-			{ "Zoxide", extensions.zoxide.list },
-		},
-		misc = {
-			{
-				"Colorschemes",
-				function()
-					builtins.colorscheme({ enable_preview = true })
-				end,
+			git = {
+				initial_tab = 1,
+				tabs = {
+					source_tab("Branches", "git_branches"),
+					source_tab("Commits", "git_log"),
+					{
+						name = "Commit content",
+						picker = advanced_git_search("search_log_content"),
+						picker_opts = { live = true },
+					},
+					{
+						name = "Diff current file",
+						picker = advanced_git_search("diff_commit_file"),
+						picker_opts = { live = true },
+					},
+				},
 			},
-			{ "Notify", extensions.notify.notify },
-			{ "Undo History", extensions.undo.undo },
+			dossier = {
+				initial_tab = 1,
+				tabs = {
+					{ name = "Sessions", picker = persisted_sessions },
+					source_tab("Projects", "projects", { patterns = project_patterns }),
+					source_tab("Zoxide", "zoxide"),
+				},
+			},
+			misc = {
+				initial_tab = 1,
+				tabs = {
+					{ name = "Colorschemes", source = colorschemes_source },
+					source_tab("Notify", "notifications"),
+					source_tab("Undo History", "undo"),
+				},
+			},
 		},
 	}
-
-	-- Build collections
-	local collections = {}
-	for kind, list in pairs(pickers) do
-		local init = { initial_tab = 1, tabs = {} }
-		for _, entry in ipairs(list) do
-			table.insert(init.tabs, { name = entry[1], tele_func = entry[2] })
-		end
-		collections[kind] = init
-	end
-
-	require("modules.utils").load_plugin("search", {
-		prompt_position = prompt_pos,
-		collections = collections,
-	})
 end
+
+return M

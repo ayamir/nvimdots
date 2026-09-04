@@ -17,6 +17,9 @@ return function()
 			"NvimTree",
 			"TelescopePrompt",
 			"toggleterm",
+			"NvTerm_sp",
+			"NvTerm_vsp",
+			"NvTerm_float",
 			"undotree",
 		},
 	})

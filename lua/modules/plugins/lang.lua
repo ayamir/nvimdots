@@ -4,9 +4,6 @@ lang["kevinhwang91/nvim-bqf"] = {
 	lazy = true,
 	ft = "qf",
 	config = require("lang.bqf"),
-	dependencies = {
-		{ "junegunn/fzf", build = ":call fzf#install()" },
-	},
 }
 lang["ray-x/go.nvim"] = {
 	lazy = true,

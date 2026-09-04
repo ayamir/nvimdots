@@ -19,6 +19,9 @@ return function()
 			"Outline",
 			"TelescopePrompt",
 			"toggleterm",
+			"NvTerm_sp",
+			"NvTerm_vsp",
+			"NvTerm_float",
 			"undotree",
 		},
 		exclude_buftypes = {

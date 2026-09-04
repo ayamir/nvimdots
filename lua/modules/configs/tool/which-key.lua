@@ -69,7 +69,7 @@ return function()
 			{ "<leader>W", group = icons.ui.Window .. " Window" },
 			{ "<leader>p", group = icons.ui.Package .. " Package" },
 			{ "<leader>l", group = icons.misc.LspAvailable .. " Lsp" },
-			{ "<leader>f", group = icons.ui.Telescope .. " Fuzzy Find" },
+			{ "<leader>f", group = icons.ui.Search .. " Find" },
 			{ "<leader>n", group = icons.ui.FolderOpen .. " Nvim Tree" },
 			{ "<leader>c", group = icons.aichat.Chat .. " Chat" },
 		},
