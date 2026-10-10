@@ -64,7 +64,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = require("core.settings").treesitter_deps,
 	callback = function(args)
-		vim.treesitter.start(args.buf)
+		-- 缺 parser 时优雅降级, 不破坏 FileType 链
+		pcall(vim.treesitter.start, args.buf)
 	end,
 })
 
