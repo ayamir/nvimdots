@@ -96,7 +96,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = false, -- nvim-ts cannot lazy load now
 	branch = "main",
 	build = function()
-		if #vim.api.nvim_list_uis() > 0 then
+		if #vim.api.nvim_list_uis() > 0 and require("modules.utils.treesitter").can_build_parsers() then
 			vim.api.nvim_command([[TSUpdate]])
 		end
 	end,

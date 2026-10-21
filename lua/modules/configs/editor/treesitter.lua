@@ -3,5 +3,10 @@ return vim.schedule_wrap(function()
 
 	require("modules.utils").load_plugin("nvim-treesitter", {})
 
-	require("nvim-treesitter").install(require("core.settings").treesitter_deps)
+	local ts = require("modules.utils.treesitter")
+	if ts.can_build_parsers() then
+		require("nvim-treesitter").install(require("core.settings").treesitter_deps)
+	else
+		ts.notify_unbuildable()
+	end
 end)
