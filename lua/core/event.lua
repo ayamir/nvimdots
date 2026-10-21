@@ -57,11 +57,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Start treesitter for installed parsers
+-- Start treesitter for filetypes whose language has an installed parser
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = require("core.settings").treesitter_deps,
 	callback = function(args)
-		vim.treesitter.start(args.buf)
+		-- `FileType` fires with filetype names, which do not always match parser names (`sh` -> `bash`).
+		local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+		if lang and #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) > 0 then
+			vim.treesitter.start(args.buf, lang)
+		end
 	end,
 })
 
