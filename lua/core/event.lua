@@ -57,12 +57,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Start treesitter for filetypes whose language has an installed parser
+-- Start treesitter for filetypes whose language has a loadable parser
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		-- `FileType` fires with filetype names, which do not always match parser names (`sh` -> `bash`).
 		local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
-		if lang and #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) > 0 then
+		if not lang then
+			return
+		end
+		-- `language.add()` finds the parser the way `treesitter.start()` does, but raises for a parser file
+		-- it cannot load (corrupt, or built for another ABI): skip that language instead of erroring on
+		-- every buffer of the filetype.
+		local ok, loaded = pcall(vim.treesitter.language.add, lang)
+		if ok and loaded then
 			vim.treesitter.start(args.buf, lang)
 		end
 	end,
